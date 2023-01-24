@@ -6,6 +6,14 @@ import { Button } from 'reactstrap';
 
 const HomePage = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
+   
+    function select(){
+        document.getElementById("select-question-service").style.display='block';
+    }
+    function back(){
+        document.getElementById("select-question-service").style.display='none';
+    }
+
     return (
         <React.Fragment>
 
@@ -16,7 +24,7 @@ const HomePage = () => {
                        
                     <div className="select-field">
                         <div className="select-button1">
-                        <Button color="success" outline className="shadow-none" onMouseOver={}><a href='pages-study-field'>studyfield1</a></Button>
+                        <Button color="success" outline className="shadow-none" onMouseOver={select} onMouseOut={back}><a href='pages-study-field'>studyfield1</a></Button>
                           
                         </div>
                         <div className="select-button2">
@@ -32,19 +40,19 @@ const HomePage = () => {
                         <Button color="success" outline className="shadow-none"><a href='pages-question-service'>studyfield1</a></Button>
                         </div>
                         <div className='select-detail'>
-                            <div className='select-study-field'>
+                            <div className='select-study-field'id='select-study-field'>
                             <h6>title</h6>
                           <p>detaildetaildetaildetaildeta</p>
                             </div>
-                            <div className='select-company-introduction'>
+                            <div className='select-company-introduction'id='select-company-introduction'>
                             <h6>title</h6>
                           <p>detaildetaildetaildetaildeta</p>
                             </div>
-                            <div className='select-data-service'>
+                            <div className='select-data-service' id='select-data-service'>
                             <h6>title</h6>
                           <p>detaildetaildetaildetaildeta</p>
                             </div>
-                            <div className='select-question-service'>
+                            <div className='select-question-service'id='select-question-service'>
                             <h6>title</h6>
                           <p>detaildetaildetaildetaildeta</p>
                             </div>
