@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from '../../Landing/navbar';
 import Footer from '../../Landing/footer';
-const QuestionService = () => {
+import MineSidebar from '../../../Components/Common/MineSidebar';
+const Mine = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
     return (
         <React.Fragment>
@@ -18,6 +19,11 @@ const QuestionService = () => {
                                 <span>adding score 1000</span>
                             </div>
                         </div>
+                        <div className="row mt-lg-5 pt-5">
+                            <MineSidebar />
+                        </div>
+                        
+
                     </div>
 
                 </section>
@@ -27,4 +33,4 @@ const QuestionService = () => {
     );
 };
 
-export default QuestionService;
+export default Mine;

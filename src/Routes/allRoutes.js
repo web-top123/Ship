@@ -193,12 +193,9 @@ import PolarCharts from "../pages/Charts/ApexCharts/PolarCharts";
 import ChartsJs from "../pages/Charts/ChartsJs/index";
 import Echarts from "../pages/Charts/ECharts/index";
 
-//Question Service
-import QuestionService from "../pages/Pages/QuestionService/index"
-
-
 //Home Page
 import HomePage from "../pages/Pages/HomePage/index"
+import Mine from "../pages/Pages/Mine/index"
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -397,8 +394,9 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
-  { path: "/pages-question-service", component: QuestionService},
-  { path: "/pages-home-page", component: HomePage}
+  { path: "/pages-home-page", component: HomePage},
+  { path: "/pages-mine", component: Mine}
+
 ];
 
 export { authProtectedRoutes, publicRoutes };
