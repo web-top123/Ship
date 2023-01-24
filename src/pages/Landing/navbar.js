@@ -62,25 +62,22 @@ const Navbar = () => {
                             id="navbar-example"
                         >
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="#hero">Home</NavLink>
+                                <NavLink className="fs-14" href="/">First</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="#services">Services</NavLink>
+                                <NavLink className="fs-14" href="pages-software">Software</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="#features">Features</NavLink>
+                                <NavLink className="fs-14" href="pages-question-service">Question Service</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="#plans">Plans</NavLink>
+                                <NavLink className="fs-14" href="pages-study-field">Study Field</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="#reviews">Reviews</NavLink>
+                                <NavLink className="fs-14" href="pages-business-introduction">Business Introduction</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="#team">Team</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="fs-14" href="#contact">Contact</NavLink>
+                                <NavLink className="fs-14" href="pages-ship-data">Ship Data</NavLink>
                             </li>
                         </Scrollspy>
 
