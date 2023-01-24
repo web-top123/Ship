@@ -195,6 +195,10 @@ import Echarts from "../pages/Charts/ECharts/index";
 
 //Question Service
 import QuestionService from "../pages/Pages/QuestionService/index"
+
+
+//Home Page
+import HomePage from "../pages/Pages/HomePage/index"
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -393,8 +397,8 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
-  { path: "/pages-question-service", component: QuestionService}
-
+  { path: "/pages-question-service", component: QuestionService},
+  { path: "/pages-home-page", component: HomePage}
 ];
 
 export { authProtectedRoutes, publicRoutes };
