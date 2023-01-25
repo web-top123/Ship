@@ -161,3 +161,11 @@ body {
 .nav-pills .nav-link {
   background-color: white;
 }
+.wrap-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1;
+}
