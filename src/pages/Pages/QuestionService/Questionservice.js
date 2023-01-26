@@ -59,7 +59,7 @@ const QuestionService = () => {
                                     <a href="#">id123 Robert </a>
                                 </div>
                             </div>
-                            <div className="card mt-3 py-3 px-3 card-body text-center">
+                            <div className="card mt-5 py-3 px-3 card-body text-center">
                                 <div className="notification-pan">
                                     <span className="badge bg-secondary p-3">Notification</span>
                                 </div>
