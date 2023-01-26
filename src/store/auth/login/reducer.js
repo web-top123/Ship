@@ -9,20 +9,24 @@ import {
 const initialState = {
   error: "",
   loading: false,
+  username: ""
 };
 
 const login = (state = initialState, action) => {
+  console.log("loggg",action);
   switch (action.type) {
     case LOGIN_USER:
       state = {
         ...state,
         loading: true,
+        
       };
       break;
     case LOGIN_SUCCESS:
       state = {
         ...state,
         loading: false,
+        username: action.payload.username 
       };
       break;
     case LOGOUT_USER:

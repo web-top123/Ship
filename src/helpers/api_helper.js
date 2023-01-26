@@ -68,6 +68,7 @@ class APIClient {
    * post given data to url
    */
   create = (url, data) => {
+    console.log("axios url", url);
     return axios.post(url, data);
   };
   /**

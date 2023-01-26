@@ -36,7 +36,6 @@ let users = [
     email: "admin@themesbrand.com",
   },
 ];
-
 const fakeBackend = () => {
   // This sets the mock adapter on the default instance
   const mock = new MockAdapter(axios, { onNoMatch: "passthrough" });

@@ -1,7 +1,22 @@
 import React, { useState } from 'react';
 import classnames from "classnames";
-import { Card, CardBody, Col, Container, Nav, NavItem, NavLink, Row, TabContent, TabPane } from "reactstrap";
+import { Label, CardBody, Col, Input, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table, CardHeader } from "reactstrap";
+import { FormGrid, Gutters, VerticalForm, HorizontalForm, HorizontalFormLabelSizing, ColumnSizing, AutoSizing, InlineForms, FloatingLabels } from '../../pages/Forms/FormLayouts/FormlayoutsCode';
+import { BaseExample, CardTableExample, PaginationExample, SearchExample, SortingExample, LoadingStateExample, FixedHeaderExample, HiddenColumnsExample } from '../../pages/Tables/GridTables/GridTablesData';
+import Flatpickr from "react-flatpickr";
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccess } from '../../store/actions';
+import PreviewCardHeader from '../../Components/Common/PreviewCardHeader';
+// import avatar3 from "../../assets/images/users/avatar-1.jpg";
+import avatar1 from "../../assets/images/users/avatar-1.jpg";
+import avatar2 from "../../assets/images/users/avatar-2.jpg";
+import avatar3 from "../../assets/images/users/avatar-3.jpg";
+import avatar4 from "../../assets/images/users/avatar-4.jpg";
+
 const MineSidebar = () => {
+    const state = useSelector(state => state);
+    console.log(state);
     // Vertical Nav Tabs
     const [verticalTab, setverticalTab] = useState("1");
     const toggleVertical = (tab) => {
@@ -9,7 +24,6 @@ const MineSidebar = () => {
             setverticalTab(tab);
         }
     };
-
     return (
         <React.Fragment>
             <Col xxl={12}>
@@ -20,7 +34,6 @@ const MineSidebar = () => {
                                 <NavLink
                                     style={{ cursor: "pointer" }}
                                     className={classnames({
-
                                         "mb-2": true,
                                         "text-center": true,
                                         active: verticalTab === "1",
@@ -94,7 +107,7 @@ const MineSidebar = () => {
                                     }}
                                     id="v-pills-scorehistory-tab"
                                 >
-                                    
+
                                     Score Management
                                 </NavLink>
                             </NavItem>
@@ -140,54 +153,289 @@ const MineSidebar = () => {
                             id="v-pills-tabContent"
                         >
                             <TabPane tabId="1" id="v-pills-home">
-                                <div className="d-flex mb-2">
-                                    <div className="flex-shrink-0">
+                                <CardBody className='pt-0'>
+                                    <div className="live-preview">
+                                        <form action="#">
+                                            <Row className="mb-3">
+                                                <Col lg={3} >
+                                                    <Label htmlFor="identifierInput" className="form-label">Identifier</Label>
+                                                </Col>
+                                                <Col lg={9} >
+                                                    <Input type="text" className="form-control" id="identifierInput" placeholder="Enter your Identififer" />
+                                                </Col>
+                                            </Row>
+                                            <Row className="mb-3">
+                                                <Col lg={3} >
+                                                    <Label htmlFor="leaveemails" className="form-label">Email Address</Label>
+                                                </Col>
+                                                <Col lg={9} >
+                                                    <Input type="email" className="form-control" id="leaveemails" placeholder="Enter your email" />
+                                                </Col>
+                                            </Row>
+                                            <Row className="mb-3">
+                                                <Col lg={3} >
+                                                    <Label htmlFor="nameinput" className="form-label">Name</Label>
+                                                </Col>
+                                                <Col lg={9} >
+                                                    <Input type="url" className="form-control" id="username" placeholder="Enter your url" />
+                                                </Col>
+                                            </Row>
+                                            <Row className="mb-3">
+                                                <Col lg={3} >
+                                                    <Label htmlFor="mankind" className="form-label">Man / Woman</Label>
+                                                </Col>
+                                                <Col lg={9} >
+                                                    <select type="number" className="form-select" id="mankind" >
+                                                        <option value="man" selected>Man</option>
+                                                        <option value="woman">Woman</option>
+                                                    </select>
+                                                </Col>
+                                            </Row>
+                                            <Row className="mb-3">
+                                                <Col lg={3} >
+                                                    <Label htmlFor="birthday" className="form-label">Birthday</Label>
+                                                </Col>
+                                                <Col lg={9} >
+                                                    <Flatpickr
+                                                        className="form-control"
+                                                        options={{
+                                                            dateFormat: "d M, Y"
+                                                        }}
+                                                    />
+                                                </Col>
+                                            </Row>
+
+                                            <div className="text-end">
+                                                <button type="submit" className="btn btn-primary">Save</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div className="flex-grow-1">
-                                        <p className="mb-0">You always want to make sure that your fonts work well together and try to limit the number of fonts you use to three or less. Experiment and play around with the fonts that you already have in the software you’re working with reputable font websites.</p>
+                                    <div className="d-none code-view">
+                                        <pre className="language-markup" style={{ "height": "375px" }}>
+                                            <code>
+                                                <HorizontalForm />
+                                            </code>
+                                        </pre>
                                     </div>
-                                </div>
-                                <p className="mb-0">
-                                    This may be the most commonly encountered tip I received from the designers I spoke with. They highly encourage that you use different fonts in one design, but do not over-exaggerate and go overboard.
-                                </p>
+                                </CardBody>
                             </TabPane>
                             <TabPane tabId="2" id="v-pills-profile">
-                                <div className="d-flex mb-2">
-                                    <div className="flex-shrink-0">
+                                <CardBody>
+                                    <div id="table-gridjs">
+                                        <BaseExample />
                                     </div>
-                                    <div className="flex-grow-1">
-                                        <p className="mb-0"> I also decreased the transparency in the text so that the mountains come through the text, bringing the quote truly to life. Make sure that the placement of your text is pleasing to look at, and you try to achieve symmetry for this effect.</p>
-                                    </div>
-                                </div>
-                                <p className="mb-0">
-                                    You've probably heard that opposites attract. The same is true for fonts. Don't be afraid to combine font styles that are different but complementary. You can always play around with the text that is overlaid on an image.
-                                </p>
-
+                                </CardBody>
                             </TabPane>
                             <TabPane tabId="3" id="v-pills-messages">
-                                <div className="d-flex mb-2">
-                                    <div className="flex-shrink-0">
-                                    </div>
-                                    <div className="flex-grow-1">
-                                        <p className="mb-0">In this image, you can see that the line height has been reduced significantly, and the size was brought up exponentially. Experiment and play around with the fonts that you already have in the software you’re working with reputable font websites.</p>
-                                    </div>
-                                </div>
-                                <p className="mb-0">
-                                    They highly encourage that you use different fonts in one design, but do not over-exaggerate and go overboard This may be the most commonly encountered tip I received from the designers I spoke with.
-                                </p>
-                            </TabPane>
+                                <div className="table-responsive">
+                                    <b>Passed Test</b>
+                                    <Table className="align-middle table-nowrap mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Sort</th>
+                                                <th scope="col">Level</th>
+                                                <th scope="col">Testing Problem Counter</th>
+                                                <th scope="col">Passed Counter</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><Link to="#" className="fw-medium">1</Link></th>
+                                                <td>Electric</td>
+                                                <td>1 Level</td>
+                                                <td>20</td>
+                                                <td>16</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"><Link to="#" className="fw-medium">2</Link></th>
+                                                <td>Ship</td>
+                                                <td>2 Level</td>
+                                                <td>30</td>
+                                                <td>15</td>
+                                            </tr>
 
+                                        </tbody>
+                                    </Table>
+                                </div>
+                                <div className="table-responsive pt-5">
+                                    <b>Progressing Test</b>
+                                    <Table className="align-middle table-nowrap mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Sort</th>
+                                                <th scope="col">Level</th>
+                                                <th scope="col">Last Testing Problem</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><Link to="#" className="fw-medium">1</Link></th>
+                                                <td>Electric</td>
+                                                <td>1 Level</td>
+                                                <td>Control method of Ship</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </div>
+                            </TabPane>
+                            {/* Purchase history */}
                             <TabPane tabId="4" id="v-pills-settings">
-                                <div className="d-flex mb-2">
-                                    <div className="flex-shrink-0">
-                                    </div>
-                                    <div className="flex-grow-1">
-                                        <p className="mb-0">When designing, the goal is to draw someone’s attention and portray to them what you’re trying to say. You can make a big statement by using little tricks, like this one. Use contrasting fonts. you can use a bold sanserif font with a cursive.</p>
+                                <div className="mb-2">
+                                    <p>Total purchaing count: 11</p>
+                                    <div className="d-flex align-items-center">
+                                        <label className="mb-0 pe-2">Sort:</label>
+                                        <select className="form-select" aria-label=".form-select-sm" style={{ width: "100px" }}>
+                                            <option defaultValue="1">One</option>
+                                            <option Value="2">Two</option>
+                                            <option Value="3">Three</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <p className="mb-0">
-                                    If you’re using multiple elements, make sure that your principal object is larger than the others, as the eye of your viewer will automatically be drawn to the larger of the two objects.
-                                </p>
+                                <Table className="align-middle table-nowrap mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Purchase Score</th>
+                                            <th className="sort" data-sort="action"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><Link to="#" className="fw-medium">1</Link></th>
+                                            <td>Electric</td>
+                                            <td>2022.1.3</td>
+                                            <td>10000</td>
+                                            <td>
+                                                <div className="d-flex gap-2">
+                                                    <div className="edit">
+                                                        <button className="btn btn-sm btn-success edit-item-btn"
+                                                            data-bs-toggle="modal" data-bs-target="#showModal">Detail</button>
+                                                    </div>
+                                                    <div className="remove">
+                                                        <button className="btn btn-sm btn-danger remove-item-btn">Download</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><Link to="#" className="fw-medium">2</Link></th>
+                                            <td>Physical</td>
+                                            <td>2022.2.3</td>
+                                            <td>500</td>
+                                            <td>
+                                                <div className="d-flex gap-2">
+                                                    <div className="edit">
+                                                        <button className="btn btn-sm btn-success edit-item-btn"
+                                                            data-bs-toggle="modal" data-bs-target="#showModal">Detail</button>
+                                                    </div>
+                                                    <div className="remove">
+                                                        <button className="btn btn-sm btn-danger remove-item-btn">Download</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                            </TabPane>
+                            <TabPane tabId="5" id="v-pills-score-manage">
+                                <div className="mb-2">
+                                    <div className='pb-5'>
+                                        <span className='px-2'>no free score charge</span>
+                                        <span className='px-2'>no freescore move</span>
+                                        <span className='px-2'>score charge</span>
+                                        <span className='px-2'>socre move</span>
+                                    </div>
+                                    <div id="score-manage-field">
+                                        <div className="mt-4 md-0 d-flex">
+                                            <span>Sign mode:</span>
+                                            <div className="form-check mb-2 me-3">
+                                                <Input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                                <Label className="form-check-label" htmlFor="flexRadioDefault1">
+                                                    Part1 Wallet
+                                                </Label>
+                                            </div>
+                                            <div className="form-check me-3">
+                                                <Input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" defaultChecked />
+                                                <Label className="form-check-label" htmlFor="flexRadioDefault2">
+                                                    Part2 Wallet
+                                                </Label>
+                                            </div>
+                                            <div className="form-check me-3">
+                                                <Input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" defaultChecked />
+                                                <Label className="form-check-label" htmlFor="flexRadioDefault3">
+                                                    Part3 Wallet
+                                                </Label>
+                                            </div>
+                                        </div>
+                                        <div className="mt-4 mt-3 md-0 d-flex">
+                                            <span>Currency Kind:</span>
+                                            <div className="form-check mb-2 me-3">
+                                                <Input className="form-check-input" type="radio" name="flexRadioCurrency" id="flexRadioCurrency1" />
+                                                <Label className="form-check-label" htmlFor="flexRadioCurrency1">
+                                                    Country
+                                                </Label>
+                                            </div>
+                                            <div className="form-check me-3">
+                                                <Input className="form-check-input" type="radio" name="flexRadioCurrency" id="flexRadioCurrency2" defaultChecked />
+                                                <Label className="form-check-label" htmlFor="flexRadioCurrency2">
+                                                    Abroad
+                                                </Label>
+                                            </div>
+                                        </div>
+                                        <div className="mt-4 mt-3 md-0 d-flex">
+                                            <span>Charging Score: </span>
+                                            <Input type="text" className="form-control" id="charing-score" placeholder="" style={{width: "120px"}} />
+                                        </div>
+                                        <div className="mt-4 mt-3 md-0 d-flex">
+                                            <span>Receive Identifier: </span>
+                                            <Input type="text" className="form-control" id="receive-identifier" placeholder="" style={{width: "120px"}} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" className="btn btn-primary">
+                                    Charge
+                                </button>
+
+                            </TabPane>
+                            <TabPane tabId="6" id="v-pill-image-icon">
+                                <div className="mb-2">
+                                    <CardHeader className="card-header bg-trans pt-0">
+                                        <h4 className="card-title mb-0">Image Icon Selection</h4>
+                                    </CardHeader>
+                                </div>
+                                <div>
+                                <div className="mt-4 md-0 px-5 card-header bg-trans img-select">
+                                    <div className='d-flex justify-content-between pb-3'>
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar2} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />                 
+                                    </div>
+                                    <div className='d-flex justify-content-between pb-3'>
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar2} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />                 
+                                    </div>
+                                    <div className='d-flex justify-content-between pb-3'>
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
+                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />                 
+                                    </div>
+                                    
+                                </div>
+                                <div className="text-end pt-5">
+                                    <button type="submit" className="btn btn-primary">Purchase</button>
+                                </div>
+                                </div>
                             </TabPane>
                         </TabContent>
                     </Col>

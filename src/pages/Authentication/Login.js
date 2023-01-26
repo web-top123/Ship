@@ -105,8 +105,7 @@ const Login = (props) => {
                                 <Card className="mt-4">
                                     <CardBody className="p-4">
                                         <div className="text-center mt-2">
-                                            <h5 className="text-primary">Welcome Back !</h5>
-                                            <p className="text-muted">Sign in to continue to Velzon.</p>
+                                            <h5 className="text-primary">Welcome Signin !</h5>
                                         </div>
                                         <div className="p-2 mt-4">
                                             <Form
@@ -168,47 +167,6 @@ const Login = (props) => {
 
                                                 <div className="mt-4">
                                                     <Button color="success" className="btn btn-success w-100" type="submit">Sign In</Button>
-                                                </div>
-
-                                                <div className="mt-4 text-center">
-                                                    <div className="signin-other-title">
-                                                        <h5 className="fs-13 mb-4 title">Sign In with</h5>
-                                                    </div>
-                                                    <div>
-                                                        <FacebookLogin
-                                                            appId={facebook.APP_ID}
-                                                            autoLoad={false}
-                                                            callback={facebookResponse}
-                                                            render={renderProps => (
-                                                                <Button color="primary"
-                                                                    className="btn-icon me-1"
-                                                                    onClick={renderProps.onClick}
-                                                                >
-                                                                    <i className="ri-facebook-fill fs-16" />
-                                                                </Button>
-                                                            )}
-                                                        />
-                                                        <GoogleLogin
-                                                            clientId={
-                                                                google.CLIENT_ID ? google.CLIENT_ID : ""
-                                                            }
-                                                            render={renderProps => (
-                                                                <Button color="danger"
-                                                                    to="#"
-                                                                    className="btn-icon me-1"
-                                                                    onClick={renderProps.onClick}
-                                                                >
-                                                                    <i className="ri-google-fill fs-16" />
-                                                                </Button>
-                                                            )}
-                                                            onSuccess={googleResponse}
-                                                            onFailure={() => {
-
-                                                            }}
-                                                        />
-                                                        <Button color="dark" className="btn-icon"><i className="ri-github-fill fs-16"></i></Button>{" "}
-                                                        <Button color="info" className="btn-icon"><i className="ri-twitter-fill fs-16"></i></Button>
-                                                    </div>
                                                 </div>
                                             </Form>
                                         </div>

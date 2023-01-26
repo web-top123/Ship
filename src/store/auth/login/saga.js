@@ -17,6 +17,7 @@ const fireBaseBackend = getFirebaseBackend();
 function* loginUser({ payload: { user, history } }) {
   try {
     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
+      console.log("firebase");
       const response = yield call(
         fireBaseBackend.loginUser,
         user.email,
@@ -24,6 +25,7 @@ function* loginUser({ payload: { user, history } }) {
       );
       yield put(loginSuccess(response));
     } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
+      console.log("jwt");
       const response = yield call(postJwtLogin, {
         email: user.email,
         password: user.password,
@@ -31,6 +33,7 @@ function* loginUser({ payload: { user, history } }) {
       localStorage.setItem("authUser", JSON.stringify(response));
       yield put(loginSuccess(response));
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
+      console.log("fake");
       const response = yield call(postFakeLogin, {
         email: user.email,
         password: user.password,
@@ -38,7 +41,7 @@ function* loginUser({ payload: { user, history } }) {
       localStorage.setItem("authUser", JSON.stringify(response));
       yield put(loginSuccess(response));
     }
-    history.push("/dashboard");
+    history.push("/pages-mine");
   } catch (error) {
     yield put(apiError(error));
   }

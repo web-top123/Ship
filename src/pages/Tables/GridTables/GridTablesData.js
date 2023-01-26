@@ -2,16 +2,16 @@ import React from 'react';
 import { Grid, _ } from 'gridjs-react';
 
 const data = [
-    ["01", "Jonathan", "jonathan@example.com", "Senior Implementation Architect", "Hauck Inc", "Holy See"],
-    ["02", "Harold", "harold@example.com", "Forward Creative Coordinator", "Metz Inc", "Iran"],
-    ["03", "Shannon", "shannon@example.com", "Legacy Functionality Associate", "Zemlak Group", "South Georgia"],
-    ["04", "Robert", "robert@example.com", "Product Accounts Technician", "Hoeger", "San Marino"],
-    ["05", "Noel", "noel@example.com", "Customer Data Director", "Howell - Rippin", "Germany"],
-    ["06", "Traci", "traci@example.com", "Corporate Identity Director", "Koelpin - Goldner", "Vanuatu"],
-    ["07", "Kerry", "kerry@example.com", "Lead Applications Associate", "Feeney, Langworth and Tremblay", "Niger"],
-    ["08", "Patsy", "patsy@example.com", "Dynamic Assurance Director", "Streich Group", "Niue"],
-    ["09", "Cathy", "cathy@example.com", "Customer Data Director", "Ebert, Schamberger and Johnston", "Mexico"],
-    ["10", "Tyrone", "tyrone@example.com", "Senior Response Liaison", "Raynor, Rolfson and Daugherty", "Qatar"],
+    ["01", "Engineer", "1 level", "Senior Implementation Architect", "2023.1.03", "40"],
+    ["02", "Engineer", "2 level", "Forward Creative Coordinator", "2023.1.03", "40"],
+    ["03", "Engineer", "1 level", "Legacy Functionality Associate", "2023.1.03", "40"],
+    ["04", "Engineer", "1 level", "Product Accounts Technician", "2023.1.03", "40"],
+    ["05", "Engineer", "2 level", "Customer Data Director", "2023.1.03", "40"],
+    ["06", "Engineer", "1 level", "Corporate Identity Director", "2023.1.03", "40"],
+    ["07", "Engineer", "1 level", "Lead Applications Associate", "2023.1.03", "40"],
+    ["08", "Engineer", "3 level", "Dynamic Assurance Director", "2023.1.03", "40"],
+    ["09", "Engineer", "1 level", "Customer Data Director", "2023.1.03", "40"],
+    ["10", "Engineer", "1 level", "Senior Response Liaison", "2023.1.03", "40"],
 ];
 
 const data1 = [
@@ -42,29 +42,37 @@ const data2 = [
 
 // Base Example
 const BaseExample = () => {
+    const[pagination, setPaginiation] = React.useState("6");
+
+    const selectSetPaginiation = (pageValue) => {
+        setPaginiation(pageValue)
+    };
     return (
         <React.Fragment>
+            <select className="form-select table-per-page" onChange={(e)=> selectSetPaginiation(e.target.value)}>
+                <option value="6">6</option>
+                <option value="10">10</option>
+            </select>
             <Grid
                 data={data}
                 columns={[{
                     name: 'ID',
-                    formatter: (cell) => _(<span className="fw-semibold">{cell}</span>)
+                    formatter: (cell) => _(<span className="fw-semibold">{cell}</span>),
                 },
-                    "Name",
+                    "Sort",
                 {
-                    name: 'Email',
-                    formatter: (cell) => _(<a href="/#"> {cell} </a>)
+                    name: 'Level',
                 },
-                    "Position", "Company", "Country",
+                    "Title", "Browser Date",
                 {
-                    name: 'Actions',
-                    width: '120px',
-                    formatter: (cell) => _(<a href='/#' className='text-reset text-decoration-underline'> Details </a>)
-                },
+                    name: "Count",
+                    width: 60
+                }
                 ]}
                 search={true}
                 sort={true}
-                pagination={{ enabled: true, limit: 5, }}
+                resizable = {true}
+                pagination={{ enabled: true, limit: pagination, }}
             />
         </React.Fragment>
     );

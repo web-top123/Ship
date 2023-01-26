@@ -356,6 +356,8 @@ const authProtectedRoutes = [
   { path: "/pages-search-results", component: SearchResults },
 
 
+  // Mine Pages
+  // { path: "/pages-mine", component: Mine},
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name
   {
@@ -397,7 +399,8 @@ const publicRoutes = [
   { path: "/landing", component: Index },
   { path: "/pages-home-page", component: HomePage},
   { path: "/pages-study-field", component: StudyField},
-  { path: "/pages-mine", component: Mine}
+  { path: "/pages-mine", component: Mine},
+  { path: "/pages-mine", component: Mine},
 
 ];
 

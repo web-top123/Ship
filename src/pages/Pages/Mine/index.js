@@ -7,26 +7,26 @@ const Mine = () => {
     return (
         <React.Fragment>
 
-            <div className="layout-wrapper landing">
+            <div className="layout-wrapper landing wrap-container ">
                 <Navbar />
-                <section className="section pb-0 hero-section" id="hero">
-                    <div className="bg-overlay bg-overlay-pattern"></div>
-                    <div className='container'>
-                        <div className="pages-mine-bread d-flex justify-content-between">
-                            <h2>My page</h2>
-                            <div className="mine-score-banner">
-                                <span className="pe-2">current free score 2000</span>
-                                <span>adding score 1000</span>
+                <main>
+                    <section className="section pb-0 hero-section" id="hero">
+                        <div className="bg-overlay bg-overlay-pattern"></div>
+                        <div className='container py-5'>
+                            <div className="pages-mine-bread d-flex justify-content-between">
+                                <h4>My page</h4>
+                                <div className="mine-score-banner">
+                                    <span className="pe-2"><b>current free score</b> 2000</span>
+                                    <span><b>adding score</b> 1000</span>
+                                </div>
+                            </div>
+                            <div className="row mt-lg-5 pt-5">
+                                <MineSidebar />
                             </div>
                         </div>
-                        <div className="row mt-lg-5 pt-5">
-                            <MineSidebar />
-                        </div>
-                        
-
-                    </div>
-
-                </section>
+                    </section>
+                </main>
+                
                 <Footer />
             </div>
         </React.Fragment>
