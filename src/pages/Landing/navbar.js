@@ -65,6 +65,9 @@ const Navbar = () => {
                                 <NavLink className="fs-14" href="pages-home-page">First</NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink className="fs-14" href="pages-mine">mine</NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink className="fs-14" href="pages-software">Software</NavLink>
                             </li>
                             <li className="nav-item">
