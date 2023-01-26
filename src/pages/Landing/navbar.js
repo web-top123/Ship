@@ -62,7 +62,7 @@ const Navbar = () => {
                             id="navbar-example"
                         >
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="/">First</NavLink>
+                                <NavLink className="fs-14" href="pages-home-page">First</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="fs-14" href="pages-software">Software</NavLink>
@@ -74,10 +74,13 @@ const Navbar = () => {
                                 <NavLink className="fs-14" href="pages-study-field">Study Field</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="pages-business-introduction">Business Introduction</NavLink>
+                                <NavLink className="fs-14" href="pages-company-introduction">Company introduction</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="pages-ship-data">Ship Data</NavLink>
+                                <NavLink className="fs-14" href="view-data-page">Ship Data</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="fs-14" href="test-test-page">Test Page</NavLink>
                             </li>
                         </Scrollspy>
 
