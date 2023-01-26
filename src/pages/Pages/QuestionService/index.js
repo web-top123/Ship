@@ -8,8 +8,7 @@ import Services from './services';
 import Features from './features';
 import Plans from './plans';
 import Faqs from './faq';
-import Tabs from './tabs';
-// import Reviews from './reviews';
+import Reviews from './reviews';
 import Counter from './counter';
 import WorkProcess from './workProcess';
 import Team from './team';
@@ -21,26 +20,24 @@ const HomePage = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
     return (
         <React.Fragment>
-
+{/* 
             <div className="layout-wrapper landing">
                 <Navbar />
-              
                 <Home />
                 <Client />
                 <Services />
-                <Tabs />
                 <Features />
                 <Plans />
                 <Faqs />
-                {/* <Reviews /> */}
+                <Reviews />
                 <Counter />
                 <WorkProcess />
                 <Team />
                 <Contact />
                 <Cta />
                 <Footer />
-            </div>
-          
+            </div> */}
+            <div>Hello</div>
         </React.Fragment>
     );
 };
