@@ -194,7 +194,6 @@ import ChartsJs from "../pages/Charts/ChartsJs/index";
 import Echarts from "../pages/Charts/ECharts/index";
 
 //Question Service
-import QuestionService from "../pages/Pages/QuestionService/index";
 import TestPage from "../pages/Pages/Test/TestPage";
 import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
 //Home Page
@@ -401,7 +400,6 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
-  { path: "/pages-question-service", component: QuestionService},
   { path: "/test-test-page", component: TestPage},
   { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-home-page", component: HomePage},
