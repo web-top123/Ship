@@ -13,7 +13,7 @@ import DashboardProject from "../pages/DashboardProject";
 // Email box
 import MailInbox from "../pages/EmailInbox";
 
-//CHat
+//Chat
 import Chat from "../pages/Chat";
 import Calendar from "../pages/Calendar";
 
@@ -194,7 +194,10 @@ import ChartsJs from "../pages/Charts/ChartsJs/index";
 import Echarts from "../pages/Charts/ECharts/index";
 
 //Question Service
-import QuestionService from "../pages/Pages/QuestionService/index"
+import QuestionService from "../pages/Pages/QuestionService/index";
+import TestPage from "../pages/Pages/Test/TestPage";
+import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -393,7 +396,9 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
-  { path: "/pages-question-service", component: QuestionService}
+  { path: "/pages-question-service", component: QuestionService},
+  { path: "/test-test-page", component: TestPage},
+  { path: "/view-data-page", component: ViewDataPage},
 
 ];
 

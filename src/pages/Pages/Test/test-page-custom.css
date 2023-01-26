@@ -1,0 +1,67 @@
+.test-problem, .test-solution{
+    font-size: 1.5vw;
+    padding: 3% 5% 0 5%;
+    display: inline-flex;
+    color: white;
+}
+.test-problem :first-child, .test-solution :first-child{
+    padding-right: 10px;
+    color: rgb(247, 181, 190);
+}
+.test-roll-caption{
+    text-align: center;
+    font-size: 2.5vw;
+    padding: 10% 0 0 0;
+    color: rgb(247, 181, 190);
+}
+.test-detail{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0 15%;
+}
+.test-field-img{
+    padding: 0 10%;
+}
+.f-3{
+    font-size: 1.5vw;
+}
+.purchase-setting-header{
+    background-color: #4b38b3;
+}
+.purchase-setting-header h5{
+    color: white;
+    position: relative;
+    left: 194px;
+    bottom: 10px;
+}
+.purchase-setting-header h5 button{
+    color: white;
+    position: relative;
+    left: 175px;
+}
+.purchase-pro-setting, .purchase-button-group{
+    margin: 0 100px;
+}
+.purchase-pro-setting p{
+    display: inline;
+    float: right;
+    margin: 0;
+}
+.purchase-pro-setting span{
+    float: left;
+}
+.purchase-border-bottom{
+    border-bottom: 1px solid dotted #4b38b3;
+}
+.self-item-center td span, .self-item-center th span{
+    justify-content: center !important;
+    display: flex;
+}
+.ri-user-line{
+    background-color: rgb(123 120 126);
+    font-size: 2.5vw;
+    border-radius: 25px;
+    color: #e9e8e8;
+}

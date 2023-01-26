@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MetaTags from 'react-meta-tags';
-import { Card, CardBody, Col, Container, Nav, NavItem, NavLink, Row, TabContent, TabPane, UncontrolledTooltip } from "reactstrap";
+import { Card, CardBody, Col, Container, Nav, NavItem, Row, NavLink, TabContent, TabPane, UncontrolledTooltip } from "reactstrap";
 import { Link } from 'react-router-dom';
 import classnames from "classnames";
 
