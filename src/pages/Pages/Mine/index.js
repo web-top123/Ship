@@ -12,7 +12,7 @@ const Mine = () => {
                 <main>
                     <section className="section pb-0 hero-section" id="hero">
                         <div className="bg-overlay bg-overlay-pattern"></div>
-                        <div className='container'>
+                        <div className='container py-5'>
                             <div className="pages-mine-bread d-flex justify-content-between">
                                 <h4>My page</h4>
                                 <div className="mine-score-banner">
@@ -23,10 +23,7 @@ const Mine = () => {
                             <div className="row mt-lg-5 pt-5">
                                 <MineSidebar />
                             </div>
-                            
-
                         </div>
-
                     </section>
                 </main>
                 

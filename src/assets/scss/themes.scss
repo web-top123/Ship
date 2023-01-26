@@ -169,3 +169,21 @@ body {
 main {
   flex: 1;
 }
+.table-per-page {
+    position: absolute;
+    right: 40px;
+    width: 78px;
+    z-index: 30;
+}
+#score-manage-field span {
+  width: 180px
+}
+.bg-trans {
+  background: transparent;
+}
+.img-select .avatar-xl:hover {
+  position: relative;
+  transform: translateY(-2px);
+  z-index: 1;
+  cursor: pointer;
+}

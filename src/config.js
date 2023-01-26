@@ -7,4 +7,5 @@ module.exports = {
   facebook: {
     APP_ID: "",
   },
+  API_URL:"http://10.10.12.155:8080/"
 }
