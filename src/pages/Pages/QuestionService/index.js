@@ -1,30 +1,45 @@
 import React from 'react';
-import Navbar from '../../Landing/navbar';
-import Footer from '../../Landing/footer';
-const QuestionService = () => {
+import MetaTags from 'react-meta-tags';
+
+import Navbar from './navbar';
+import Home from './home';
+import Client from './client';
+import Services from './services';
+import Features from './features';
+import Plans from './plans';
+import Faqs from './faq';
+import Reviews from './reviews';
+import Counter from './counter';
+import WorkProcess from './workProcess';
+import Team from './team';
+import Contact from './contact';
+import Cta from './cta';
+import Footer from './footer';
+
+const HomePage = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
     return (
         <React.Fragment>
-
+{/* 
             <div className="layout-wrapper landing">
                 <Navbar />
-                <section className="section pb-0 hero-section" id="hero">
-                    <div className="bg-overlay bg-overlay-pattern"></div>
-                    <div className='container'>
-                        <div className="pages-mine-bread d-flex justify-content-between">
-                            <h2>My page</h2>
-                            <div className="mine-score-banner">
-                                <span className="pe-2">current free score 2000</span>
-                                <span>adding score 1000</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
+                <Home />
+                <Client />
+                <Services />
+                <Features />
+                <Plans />
+                <Faqs />
+                <Reviews />
+                <Counter />
+                <WorkProcess />
+                <Team />
+                <Contact />
+                <Cta />
                 <Footer />
-            </div>
+            </div> */}
+            <div>Hello</div>
         </React.Fragment>
     );
 };
 
-export default QuestionService;
+export default HomePage;

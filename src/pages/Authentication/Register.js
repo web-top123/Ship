@@ -18,6 +18,10 @@ import { Link } from "react-router-dom";
 import logoLight from "../../assets/images/logo-light.png";
 import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
 
+
+//Import Flatepicker
+import Flatpickr from "react-flatpickr";
+
 const Register = () => {
     const dispatch = useDispatch();
 
@@ -137,7 +141,31 @@ const Register = () => {
                                                         Please enter username
                                                     </div>
                                                 </div>
+                                                <div className="mb-2">
+                                                    <Label htmlFor="Gender" className="form-label">Gender <span className="text-danger">*</span></Label>
 
+                                                    <br></br>
+                                                    <Row>
+                                                        <Col lg={6}><Input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                                            <Label className="form-check-label" for="flexRadioDefault1">Male</Label></Col>
+                                                        <Col lg={6}>  <Input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                                            <Label className="form-check-label" for="flexRadioDefault1">Female</Label></Col>
+                                                    </Row>
+
+
+                                                    <hr style={{marginTop:"5px"}} ></hr>
+                                                </div>
+                                                <div className="mb-2">
+                                                <Label htmlFor="birthday" className="form-label">Birthday <span className="text-danger">*</span></Label>
+                                                    <Flatpickr
+                                                        className="form-control"
+                                                        options={{
+                                                            dateFormat: "Y-m-d",
+                                                            defaultDate: ["2022-01-20"]
+                                                        }}
+                                                    />
+
+                                                </div>
                                                 <div className="mb-2">
                                                     <Label htmlFor="userpassword" className="form-label">Password <span className="text-danger">*</span></Label>
                                                     <Input
@@ -156,6 +184,26 @@ const Register = () => {
                                                     ) : null}
                                                     <div className="invalid-feedback">
                                                         Please enter password
+                                                    </div>
+                                                </div>
+                                                <div className="mb-2">
+                                                    <Label htmlFor="userpassword" className="form-label">Confirm Password <span className="text-danger">*</span></Label>
+                                                    <Input
+                                                        name="confirmpassword"
+                                                        type="password"
+                                                        placeholder="Enter Confirm Password"
+                                                        onChange={validation.handleChange}
+                                                        onBlur={validation.handleBlur}
+                                                        value={validation.values.confirmpassword || ""}
+                                                        invalid={
+                                                            validation.touched.confirmpassword && validation.errors.confirmpassword ? true : false
+                                                        }
+                                                    />
+                                                    {validation.touched.confrimpassword && validation.errors.confirmpassword ? (
+                                                        <FormFeedback type="invalid"><div>{validation.errors.confirmpassword}</div></FormFeedback>
+                                                    ) : null}
+                                                    <div className="invalid-feedback">
+                                                        Please enter confirm password
                                                     </div>
                                                 </div>
 

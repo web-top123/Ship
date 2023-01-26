@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 
-//import images
+import {
+    loginUser,
+    loginSuccess
+    // resetValue
+} from "../../store/actions";
+// import images
 import avatar1 from "../../assets/images/users/avatar-1.jpg";
 
 const ProfileDropdown = () => {
