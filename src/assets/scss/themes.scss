@@ -187,3 +187,58 @@ main {
   z-index: 1;
   cursor: pointer;
 }
+.navbar-landing, .bread-banner {
+  height: 80px;
+}
+.bread-banner {
+  position: relative;
+  margin-top: 80px;
+}
+.question-table th.gridjs-th, .question-table td.gridjs-td{
+  border-top: 0px solid;
+  border-left: 0px solid;
+  border-right: 0px solid;
+}
+.question-table .gridjs-wrapper {
+  border: 0px;
+}
+.question-table thead {
+  display: none;
+}
+.question-table .avatar-xl {
+  width: 90px;
+  height: 90px;
+}
+.question-table tr:first-child {
+  border-top: 1px solid var(--vz-border-color);
+}
+.question-table [data-column-id="namedetail"] {
+  width:10%
+}
+.question-table [data-column-id="vote"] {
+  width:5%
+}
+.question-article-sel a{
+  font-size: 0.8rem;
+  border : 1px solid #dedede;
+  padding: 3px; 
+  width: 200px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 600;
+  color: black
+}
+.question-vot-sel a {
+  font-size: 0.8rem;
+  width: 200px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 600;
+  color: black
+}
+.notification-pan {
+  transform: translateY(-32px);
+}
+.notification-question-g .card {
+  border: 1px solid rgba(0, 0, 0, 0.125)
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classnames from "classnames";
-import { Label, CardBody, Col, Input, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table, CardHeader } from "reactstrap";
+import { Button, Label, CardBody, Col, Input, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table, CardHeader } from "reactstrap";
 import { FormGrid, Gutters, VerticalForm, HorizontalForm, HorizontalFormLabelSizing, ColumnSizing, AutoSizing, InlineForms, FloatingLabels } from '../../pages/Forms/FormLayouts/FormlayoutsCode';
 import { BaseExample, CardTableExample, PaginationExample, SearchExample, SortingExample, LoadingStateExample, FixedHeaderExample, HiddenColumnsExample } from '../../pages/Tables/GridTables/GridTablesData';
 import Flatpickr from "react-flatpickr";
@@ -13,8 +13,10 @@ import avatar1 from "../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../assets/images/users/avatar-3.jpg";
 import avatar4 from "../../assets/images/users/avatar-4.jpg";
+import { useQuill } from "react-quilljs";
 
 const MineSidebar = () => {
+    const { quillRef } = useQuill();
     const state = useSelector(state => state);
     console.log(state);
     // Vertical Nav Tabs
@@ -388,11 +390,11 @@ const MineSidebar = () => {
                                         </div>
                                         <div className="mt-4 mt-3 md-0 d-flex">
                                             <span>Charging Score: </span>
-                                            <Input type="text" className="form-control" id="charing-score" placeholder="" style={{width: "120px"}} />
+                                            <Input type="text" className="form-control" id="charing-score" placeholder="" style={{ width: "120px" }} />
                                         </div>
                                         <div className="mt-4 mt-3 md-0 d-flex">
                                             <span>Receive Identifier: </span>
-                                            <Input type="text" className="form-control" id="receive-identifier" placeholder="" style={{width: "120px"}} />
+                                            <Input type="text" className="form-control" id="receive-identifier" placeholder="" style={{ width: "120px" }} />
                                         </div>
                                     </div>
                                 </div>
@@ -408,34 +410,62 @@ const MineSidebar = () => {
                                     </CardHeader>
                                 </div>
                                 <div>
-                                <div className="mt-4 md-0 px-5 card-header bg-trans img-select">
-                                    <div className='d-flex justify-content-between pb-3'>
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar2} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />                 
+                                    <div className="mt-4 md-0 px-5 card-header bg-trans img-select">
+                                        <div className='d-flex justify-content-between pb-3'>
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar2} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                        </div>
+                                        <div className='d-flex justify-content-between pb-3'>
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar2} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                        </div>
+                                        <div className='d-flex justify-content-between pb-3'>
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
+                                            <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
+                                        </div>
                                     </div>
-                                    <div className='d-flex justify-content-between pb-3'>
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar2} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />                 
+                                    <div className="text-end pt-5">
+                                        <button type="submit" className="btn btn-primary">Purchase</button>
                                     </div>
-                                    <div className='d-flex justify-content-between pb-3'>
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
-                                        <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />                 
+                                </div>
+                            </TabPane>
+                            <TabPane tabId="7" id="v-pill-opinion-box">
+                                <div className="opinion-wraper d-flex">
+                                    <span>Opinion Content</span>
+                                    <div>
+                                        <div className="snow-editor" style={{ height: 300 }}>
+                                            <div ref={quillRef} />
+                                        </div> 
+                                        <div className='pt-5 d-flex justify-content-between align-items-center'>
+                                          <span>Contact number: +191223123</span>
+                                          <Button color="primary" className="btn-label right"> <i className="ri-user-smile-line label-icon align-middle fs-16 ms-2"></i> Attach File </Button>
+                                        </div>  
+                                        <div className="d-flex justify-content-between pt-4">
+                                            <div>
+                                                <Button color="primary" data-bs-toggle="button" aria-pressed="false" className='me-2'>
+                                                    Grammar Checking
+                                                </Button>
+                                                <Button color="primary" data-bs-toggle="button" aria-pressed="false">
+                                                    Save in Box
+                                                </Button>      
+                                            </div>
+                                            
+                                            <Button color="primary" data-bs-toggle="button" aria-pressed="false">
+                                                Vote
+                                            </Button>
+                                        </div>           
                                     </div>
-                                    
                                 </div>
-                                <div className="text-end pt-5">
-                                    <button type="submit" className="btn btn-primary">Purchase</button>
-                                </div>
-                                </div>
+                                
                             </TabPane>
                         </TabContent>
                     </Col>

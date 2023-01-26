@@ -193,13 +193,19 @@ import PolarCharts from "../pages/Charts/ApexCharts/PolarCharts";
 import ChartsJs from "../pages/Charts/ChartsJs/index";
 import Echarts from "../pages/Charts/ECharts/index";
 
-//Question Service
+//Mine Page
+import Mine from "../pages/Pages/Mine/Mine"
+
+//QuestionService PAge
+import QuestionService from "../pages/Pages/QuestionService/Questionservice"
+
 import TestPage from "../pages/Pages/Test/TestPage";
 import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
+
 //Home Page
 import HomePage from "../pages/Pages/HomePage/index"
 import StudyField from  "../pages/Pages/StudyField/index"
-import Mine from "../pages/Pages/Mine/index"
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -357,12 +363,6 @@ const authProtectedRoutes = [
   { path: "/pages-pricing", component: Pricing },
   { path: "/pages-sitemap", component: SiteMap },
   { path: "/pages-search-results", component: SearchResults },
-
-
-  // Mine Pages
-  // { path: "/pages-mine", component: Mine},
-  // this route should be at the end of all other routes
-  // eslint-disable-next-line react/display-name
   {
     path: "/",
     exact: true,
@@ -405,7 +405,7 @@ const publicRoutes = [
   { path: "/pages-home-page", component: HomePage},
   { path: "/pages-study-field", component: StudyField},
   { path: "/pages-mine", component: Mine},
-  { path: "/pages-mine", component: Mine},
+  { path: "/pages-question-service", component: QuestionService},
 
 ];
 

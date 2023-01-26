@@ -6,14 +6,13 @@ const Mine = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
     return (
         <React.Fragment>
-
             <div className="layout-wrapper landing wrap-container ">
-                <Navbar />
+                <Navbar />  
                 <main>
                     <section className="section pb-0 hero-section" id="hero">
                         <div className="bg-overlay bg-overlay-pattern"></div>
-                        <div className='container py-5'>
-                            <div className="pages-mine-bread d-flex justify-content-between">
+                        <div className='container py-2'>
+                            <div className="pages-mine-bread d-flex justify-content-around">
                                 <h4>My page</h4>
                                 <div className="mine-score-banner">
                                     <span className="pe-2"><b>current free score</b> 2000</span>
