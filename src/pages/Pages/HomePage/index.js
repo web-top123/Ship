@@ -1,7 +1,5 @@
 import React from 'react';
 import MetaTags from 'react-meta-tags';
-
-import Navbar from './navbar';
 import Home from './home';
 import Client from './client';
 import Services from './services';
@@ -21,10 +19,7 @@ const HomePage = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
     return (
         <React.Fragment>
-
             <div className="layout-wrapper landing">
-                <Navbar />
-              
                 <Home />
                 <Client />
                 <Services />
