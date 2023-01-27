@@ -367,6 +367,12 @@ const authProtectedRoutes = [
     exact: true,
     component: () => <Redirect to="/dashboard" />,
   },
+  { path: "/pages-mine", component: Mine},
+  { path: "/test-test-page", component: TestPage},
+  { path: "/view-data-page", component: ViewDataPage},
+  { path: "/pages-home-page", component: HomePage},
+  { path: "/pages-study-field", component: StudyField},
+  { path: "/pages-question-service", component: QuestionService},
 ];
 
 const publicRoutes = [
@@ -399,12 +405,6 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
-  { path: "/test-test-page", component: TestPage},
-  { path: "/view-data-page", component: ViewDataPage},
-  { path: "/pages-home-page", component: HomePage},
-  { path: "/pages-study-field", component: StudyField},
-  { path: "/pages-question-service", component: QuestionService},
-  { path: "/pages-mine", component: Mine},
 ];
 
 export { authProtectedRoutes, publicRoutes };
