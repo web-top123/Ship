@@ -207,7 +207,7 @@ main {
 }
 .question-table .avatar-xl {
   width: 90px;
-  height: 90px;
+  height: auto;
 }
 .question-table tr:first-child {
   border-top: 1px solid var(--vz-border-color);
@@ -241,4 +241,10 @@ main {
 }
 .notification-question-g .card {
   border: 1px solid rgba(0, 0, 0, 0.125)
+}
+.new-article-modal .sort {
+  width: 40%
+}
+.new-article-modal .form-label {
+  width: 80px;
 }

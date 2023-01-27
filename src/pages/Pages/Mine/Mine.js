@@ -6,6 +6,7 @@ const Mine = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
     return (
         <React.Fragment>
+
             <div className="layout-wrapper landing wrap-container ">
                 <Navbar />  
                 <main>

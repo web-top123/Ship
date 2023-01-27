@@ -404,8 +404,8 @@ const publicRoutes = [
   { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-home-page", component: HomePage},
   { path: "/pages-study-field", component: StudyField},
-  { path: "/pages-mine", component: Mine},
   { path: "/pages-question-service", component: QuestionService},
+  { path: "/pages-mine", component: Mine},
 
 ];
 
