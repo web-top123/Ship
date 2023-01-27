@@ -136,6 +136,8 @@ const EcommerceProducts = (props) => {
     setProductList(filteredProducts);
   };
 
+ 
+  
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
 
@@ -272,6 +274,8 @@ const EcommerceProducts = (props) => {
     []
   );
   document.title = "Products | Velzon - React Admin & Dashboard Template";
+  console.log("produdct", {productList});
+  console.log("column", {columns});
   return (
     <div className="page-content">
       <DeleteModal
