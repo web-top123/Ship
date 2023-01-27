@@ -1,5 +1,8 @@
 import React from 'react';
 import { Grid, _ } from 'gridjs-react';
+import avatar1 from "../../../assets/images/users/avatar-1.jpg";
+import avatar2 from "../../../assets/images/users/avatar-2.jpg";
+import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 
 const data = [
     ["01", "Engineer", "1 level", "Senior Implementation Architect", "2023.1.03", "40"],
@@ -12,6 +15,19 @@ const data = [
     ["08", "Engineer", "3 level", "Dynamic Assurance Director", "2023.1.03", "40"],
     ["09", "Engineer", "1 level", "Customer Data Director", "2023.1.03", "40"],
     ["10", "Engineer", "1 level", "Senior Response Liaison", "2023.1.03", "40"],
+];
+
+const article = [
+    [[avatar1,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
+    [[avatar3,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
+    [[avatar2,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
+    [[avatar1,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
+    [[avatar3,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
+    [[avatar1,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
+    [[avatar1,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
+    [[avatar3,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
+    [[avatar1,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
+    [[avatar2,"Manager", "(Man 24 yrs old)"], ["6", "4", "7"], ["Describe the policy about the article vote", "new", "2012.22.4", "science center", "Many artists and professional writers make the mistake of thinking that creativity is something that comes to you. Like the creative spark is lightning, and all an artist can do is sit in wait. This, of course, is ridiculous. Serious artists understand that books are written, and articles are published as a result of discipline. That means that creative powers are not ethereal and impossible to understand. You can work your “creative muscles” just like any other mental skills. As such, you can use the random letter generator to help. Have the system generate anywhere from 5-10 letters per day, and then go in and create a unique sentence for each letter."]], 
 ];
 
 const data1 = [
@@ -67,6 +83,57 @@ const BaseExample = () => {
                 {
                     name: "Count",
                     width: 60
+                }
+                ]}
+                search={true}
+                sort={true}
+                resizable = {true}
+                pagination={{ enabled: true, limit: pagination, }}
+            />
+        </React.Fragment>
+    );
+};
+
+// Article Data
+const ArticleData = () => {
+    const[pagination, setPaginiation] = React.useState("4");
+
+    const selectSetPaginiation = (pageValue) => {
+        setPaginiation(pageValue)
+    };
+    return (
+        <React.Fragment>
+            <select className="form-select table-per-page" onChange={(e)=> selectSetPaginiation(e.target.value)}>
+                <option value="4">4</option>
+                <option value="6">6</option>
+            </select>
+            <Grid
+                data={article}
+                columns={[{
+                    name: "namedetail",
+                    formatter: (cell) => _(<div className="d-flex flex-column align-items-center">
+                        <img className="img-thumbnail rounded-circle avatar-xl" src={cell[0]} />
+                        <span>{cell[1]}</span>
+                        <span>{cell[2]}</span>
+                        </div>),
+                        width:"30px"
+                },
+                {
+                    name: 'vote',
+                    formatter: (cell) => _(<div className="d-flex flex-column align-items-center">
+                        <div className='d-flex align-items-center'><i className="bx bx-like pe-1"></i><span>{cell[0]}</span></div>
+                        <div className='d-flex align-items-center'><i className="bx bx-message pe-1"></i><span>{cell[1]}</span></div>
+                        <div className='d-flex align-items-center'><i className="bx bx-message-dots pe-1"></i><span>{cell[2]}</span></div>
+                        </div>)
+                },
+                {
+                    name: "content",
+                    formatter: (cell) => _(<div>
+                        <div className='d-flex justify-content-between'>
+                            <div className="d-flex"><h4 className="pe-3">{cell[0]}</h4><div><span className="badge bg-secondary p-2">{cell[1]}</span></div></div>
+                        <div><span className="pe-2">{cell[2]}</span><span>{cell[3]}</span></div></div>
+                        <p>{cell[4]}</p>
+                    </div>)
                 }
                 ]}
                 search={true}
@@ -208,4 +275,4 @@ const HiddenColumnsExample = () => {
 
 
 
-export { BaseExample, CardTableExample, PaginationExample, SearchExample, SortingExample, LoadingStateExample, FixedHeaderExample, HiddenColumnsExample };
+export { ArticleData, BaseExample, CardTableExample, PaginationExample, SearchExample, SortingExample, LoadingStateExample, FixedHeaderExample, HiddenColumnsExample };
