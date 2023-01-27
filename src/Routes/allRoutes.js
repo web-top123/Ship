@@ -212,6 +212,9 @@ import StudyField4 from  "../pages/Pages/StudyField/index4";
 import StudyField5 from  "../pages/Pages/StudyField/index5";
 import StudyField6 from  "../pages/Pages/StudyField/index6";
 import StudyField7 from  "../pages/Pages/StudyField/index7";
+import Mine from "../pages/Pages/Mine/index"
+import HomePage from "../pages/Pages/HomePage/index"
+import StudyField from  "../pages/Pages/StudyField/index"
 
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
@@ -418,6 +421,7 @@ const publicRoutes = [
   { path: "/pages-study-field5", component: StudyField5},
   { path: "/pages-study-field6", component: StudyField6},
   { path: "/pages-study-field7", component: StudyField7},
+  { path: "/pages-mine", component: Mine},
   { path: "/pages-question-service", component: QuestionService},
   { path: "/pages-mine", component: Mine},
 
