@@ -203,6 +203,7 @@ import TestPage from "../pages/Pages/Test/TestPage";
 import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
 
 //Home Page
+<<<<<<< HEAD
 import HomePage from "../pages/Pages/HomePage/index";
 import StudyField from  "../pages/Pages/StudyField/index";
 import StudyField1 from  "../pages/Pages/StudyField/index1";
@@ -213,6 +214,11 @@ import StudyField5 from  "../pages/Pages/StudyField/index5";
 import StudyField6 from  "../pages/Pages/StudyField/index6";
 import StudyField7 from  "../pages/Pages/StudyField/index7";
 
+=======
+import HomePage from "../pages/Pages/HomePage/index"
+import StudyField from  "../pages/Pages/StudyField/index"
+import Mine from "../pages/Pages/Mine/index"
+>>>>>>> parent of 7dbf6ff (d)
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -411,6 +417,7 @@ const publicRoutes = [
   { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-home-page", component: HomePage},
   { path: "/pages-study-field", component: StudyField},
+<<<<<<< HEAD
   { path: "/pages-study-field1", component: StudyField1},
   { path: "/pages-study-field2", component: StudyField2},
   { path: "/pages-study-field3", component: StudyField3},
@@ -419,6 +426,9 @@ const publicRoutes = [
   { path: "/pages-study-field6", component: StudyField6},
   { path: "/pages-study-field7", component: StudyField7},
   { path: "/pages-question-service", component: QuestionService},
+=======
+  { path: "/pages-mine", component: Mine},
+>>>>>>> parent of 7dbf6ff (d)
   { path: "/pages-mine", component: Mine},
 
 ];

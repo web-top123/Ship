@@ -1,7 +1,7 @@
 import React from 'react';
 import MetaTags from 'react-meta-tags';
 
-import Navbar from '../../Landing/navbar';
+import Navbar from './navbar';
 import Home from './home';
 import Client from './client';
 import Services from './services';

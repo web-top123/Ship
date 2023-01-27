@@ -23,8 +23,8 @@ const Tabs = () =>{
            
                 <Card>
                                 <CardBody>
-                                  <div style={{padding:"0 200px"}}>
-                                    <Row >
+                                  
+                                    <Row>
                                         <Col md={3}>
                                             <Nav pills className="flex-column" id="v-pills-tab">
                                                 <NavItem>
@@ -154,7 +154,6 @@ const Tabs = () =>{
                                             </TabContent>
                                         </Col>
                                     </Row>
-                                    </div>
                                 </CardBody>
                             </Card>
               
