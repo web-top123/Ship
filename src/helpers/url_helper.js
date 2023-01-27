@@ -1,7 +1,18 @@
 //REGISTER
-export const POST_FAKE_REGISTER = "/post-fake-register";
+export const POST_JWT_REGISTER = "/api/auth/signup";
+
 
 //LOGIN
+export const POST_JWT_LOGIN = "/api/auth/signin";
+
+
+
+
+
+
+
+
+export const POST_FAKE_REGISTER = "/post-fake-register";
 export const POST_FAKE_LOGIN = "/api/auth/signin";
 // export const POST_FAKE_LOGIN = "/post-fake-login";
 export const POST_FAKE_JWT_LOGIN = "/post-jwt-login";
