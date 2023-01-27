@@ -181,11 +181,16 @@ main {
 .bg-trans {
   background: transparent;
 }
-.img-select .avatar-xl:hover {
+.my-img-select  .avatar-xl:hover {
   position: relative;
   transform: translateY(-2px);
   z-index: 1;
   cursor: pointer;
+  transition: all 0.2s;
+}
+.my-img-select .avatar-xl{
+  width: 5rem;
+  height: auto;
 }
 .navbar-landing, .bread-banner {
   height: 80px;

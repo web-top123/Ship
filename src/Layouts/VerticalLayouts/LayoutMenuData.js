@@ -506,6 +506,12 @@ const Navdata = () => {
                     parentId: "pages",
                 },
                 {
+                    id: "mine",
+                    label: "My Page",
+                    link: "/pages-mine",
+                    parentId: "pages",
+                },
+                {
                     id: "profile",
                     label: "Profile",
                     link: "/#",

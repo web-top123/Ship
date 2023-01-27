@@ -6,11 +6,11 @@ const MyScore = () => {
         <React.Fragment>
             <TabPane tabId="5" id="v-pills-score-manage">
                 <div className="mb-2">
-                    <div className='pb-5'>
-                        <span className='px-2'>no free score charge</span>
-                        <span className='px-2'>no freescore move</span>
-                        <span className='px-2'>score charge</span>
-                        <span className='px-2'>socre move</span>
+                    <div className='d-flex gap-3'>
+                        <h4 className="card-title flex-grow-1">No Free Charge</h4>
+                        <h4 className="card-title flex-grow-1">No Free Score More</h4>
+                        <h4 className="card-title flex-grow-1">Score Charge</h4>
+                        <h4 className="card-title flex-grow-1">Score Move</h4>
                     </div>
                     <div id="score-manage-field">
                         <div className="mt-4 md-0 d-flex">
@@ -59,9 +59,11 @@ const MyScore = () => {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-primary">
-                    Charge
-                </button>
+                <div className="d-flex justify-content-end">
+                    <button type="submit" className="btn btn-primary">
+                        Charge
+                    </button>
+                </div>
             </TabPane>
         </React.Fragment>
     )

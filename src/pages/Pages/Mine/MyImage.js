@@ -10,12 +10,12 @@ const Mine = () => {
         <React.Fragment>
             <TabPane tabId="6" id="v-pill-image-icon">
                 <div className="mb-2">
-                    <CardHeader className="card-header bg-trans pt-0">
-                        <h4 className="card-title mb-0">Image Icon Selection</h4>
-                    </CardHeader>
+                    <div className="ps-0">
+                        <h4 className="card-title flex-grow-1">Image Icon Selection</h4>
+                    </div>
                 </div>
                 <div>
-                    <div className="mt-4 md-0 px-5 card-header bg-trans img-select">
+                    <div className="mt-4 md-0 px-5 my-img-select">
                         <div className='d-flex justify-content-between pb-3'>
                             <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar1} />
                             <img className="img-thumbnail rounded-circle avatar-xl" alt="200x200" src={avatar3} />
