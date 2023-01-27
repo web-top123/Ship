@@ -232,6 +232,19 @@ const TableContainer = ({
       </div>
 
       <Row className="justify-content-md-end justify-content-center align-items-center pe-2 m-0">
+      <Col md="2">
+          <select
+            className="form-select"
+            value={pageSize}
+            onChange={onChangeInSelect}
+          >
+            {[5,10, 20, 30, 40, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>
+        </Col>
         <Col className="col-md-auto">
           <div className="d-flex gap-1">
             <Button
