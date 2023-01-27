@@ -197,8 +197,15 @@ import Echarts from "../pages/Charts/ECharts/index";
 import TestPage from "../pages/Pages/Test/TestPage";
 import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
 //Home Page
-import HomePage from "../pages/Pages/HomePage/index"
-import StudyField from  "../pages/Pages/StudyField/index"
+import HomePage from "../pages/Pages/HomePage/index";
+import StudyField from  "../pages/Pages/StudyField/index";
+import StudyField1 from  "../pages/Pages/StudyField/index1";
+import StudyField2 from  "../pages/Pages/StudyField/index2";
+import StudyField3 from  "../pages/Pages/StudyField/index3";
+import StudyField4 from  "../pages/Pages/StudyField/index4";
+import StudyField5 from  "../pages/Pages/StudyField/index5";
+import StudyField6 from  "../pages/Pages/StudyField/index6";
+import StudyField7 from  "../pages/Pages/StudyField/index7";
 import Mine from "../pages/Pages/Mine/index"
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
@@ -404,6 +411,13 @@ const publicRoutes = [
   { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-home-page", component: HomePage},
   { path: "/pages-study-field", component: StudyField},
+  { path: "/pages-study-field1", component: StudyField1},
+  { path: "/pages-study-field2", component: StudyField2},
+  { path: "/pages-study-field3", component: StudyField3},
+  { path: "/pages-study-field4", component: StudyField4},
+  { path: "/pages-study-field5", component: StudyField5},
+  { path: "/pages-study-field6", component: StudyField6},
+  { path: "/pages-study-field7", component: StudyField7},
   { path: "/pages-mine", component: Mine},
   { path: "/pages-mine", component: Mine},
 
