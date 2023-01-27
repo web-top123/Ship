@@ -35,6 +35,13 @@ export const postJwtRegister = (url, data) => {
 };
 
 
+/**
+   * Returns the authenticated user
+   */
+export const getAuthenticatedUser = () => {
+  if (!localStorage.getItem("authUser")) return null;
+  return JSON.parse(localStorage.getItem("authUser"));
+};
 
 
 
