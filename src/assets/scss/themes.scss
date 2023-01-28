@@ -227,7 +227,7 @@ main {
   font-size: 0.8rem;
   border : 1px solid #dedede;
   padding: 3px; 
-  width: 200px;
+  width: 80%;
   margin-bottom: 10px;
   text-align: center;
   font-weight: 600;
@@ -252,4 +252,49 @@ main {
 }
 .new-article-modal .form-label {
   width: 80px;
+}
+.blog-table-content thead {
+  display: none;
+}
+.boder-bot-none {
+  border-bottom: 0px;
+}
+.blog-content-wrapper .author-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.blog-content-wrapper .blog-detail-img-wrap {
+  width: 112px;
+}
+.blog-content-wrapper .blog-detail-img {
+  width: 100%;
+  height: auto;
+}
+.blog-content-wrapper .blog-content {
+  width: 70%;
+}
+.blog-content-wrapper .blog-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(41, 41, 41, 1);
+}
+.blog-content-wrapper .blog-detail {
+  font-size: 16px;
+  font-weight: 400;
+}
+.blog-table-content td {
+  padding-bottom: 30px;
+  border-top: 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.blog-table-content tbody {
+  border: 0px !important;
+}
+.realted-topic button {
+  margin: 10px 4px;
+}
+.blog-table-content tbody > tr:last-child td {
+  border-bottom: 0px;
 }

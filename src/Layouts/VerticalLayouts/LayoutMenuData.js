@@ -512,6 +512,18 @@ const Navdata = () => {
                     parentId: "pages",
                 },
                 {
+                    id: "questionservice",
+                    label: "Question Service",
+                    link: "/pages-question-service",
+                    parentId: "pages",
+                },
+                {
+                    id: "blogservice",
+                    label: "Blog Service",
+                    link: "/pages-blog-service",
+                    parentId: "pages",
+                },
+                {
                     id: "profile",
                     label: "Profile",
                     link: "/#",

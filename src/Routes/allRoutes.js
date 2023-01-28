@@ -194,10 +194,13 @@ import ChartsJs from "../pages/Charts/ChartsJs/index";
 import Echarts from "../pages/Charts/ECharts/index";
 
 //Mine Page
-import Mine from "../pages/Pages/Mine/Mine"
+import Mine from "../pages/Pages/Mine/Mine";
 
 //QuestionService PAge
-import QuestionService from "../pages/Pages/QuestionService/Questionservice"
+import QuestionService from "../pages/Pages/QuestionService/Questionservice";
+
+// BlogService Page
+import BlogService from "../pages/Pages/BlogService/BlogService"
 
 import TestPage from "../pages/Pages/Test/TestPage";
 import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
@@ -373,6 +376,8 @@ const authProtectedRoutes = [
   { path: "/pages-home-page", component: HomePage},
   { path: "/pages-study-field", component: StudyField},
   { path: "/pages-question-service", component: QuestionService},
+  { path: "/pages-blog-service", component: BlogService},
+
 ];
 
 const publicRoutes = [
