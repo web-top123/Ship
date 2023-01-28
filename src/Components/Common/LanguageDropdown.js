@@ -32,12 +32,6 @@ const LanguageDropdown = () => {
         <React.Fragment>
             <Dropdown isOpen={isLanguageDropdown} toggle={toggleLanguageDropdown} className="ms-1 topbar-head-dropdown header-item">
                 <DropdownToggle className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle  shadow-none" tag="button">
-                    <img
-                        src={get(languages, `${selectedLang}.flag`)}
-                        alt="Header Language"
-                        height="20"
-                        className="rounded"
-                    />
                 </DropdownToggle>
                 <DropdownMenu className="notify-item language py-2">
                     {map(Object.keys(languages), key => (

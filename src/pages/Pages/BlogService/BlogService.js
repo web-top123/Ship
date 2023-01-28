@@ -32,9 +32,9 @@ const BlogService = () => {
 
                 filteredBlogs = BlogDataList.filter((product) => product.type == type);
             }
-            if (type == 'published') {setBlogDataPublisedFilter(filteredBlogs);}
+            if (type == 'published') {setBlogDataPublisedFilter(filteredBlogs);setBlogDataList(filteredBlogs);}
             if (type == 'all') {setBlogDataList(filteredBlogs);}
-            if (type == 'draft') {setBlogDataDraftFilter(BlogDataDraftFilter);}
+            if (type == 'draft') {setBlogDataDraftFilter(BlogDataDraftFilter);setBlogDataList(filteredBlogs);}
             // setBlogDataList(filteredBlogs);
         }
     };
