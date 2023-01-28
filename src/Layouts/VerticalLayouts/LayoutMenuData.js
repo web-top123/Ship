@@ -108,6 +108,10 @@ const Navdata = () => {
             history.push("/landing");
             // document.body.classList.add('twocolumn-panel');
         }
+        if (iscurrentState === 'blogservice') {
+            history.push("/pages-blog-service");
+            // document.body.classList.add('twocolumn-panel');
+        }
     }, [
         history,
         iscurrentState,
@@ -129,6 +133,16 @@ const Navdata = () => {
         {
             label: "Menu",
             isHeader: true,
+        },
+        {
+            id: "blogservice",
+            label: "Blog Service",
+            icon: "ri-rocket-line",
+            link: "/pages-blog-service",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('blogservice');
+            }
         },
         {
             id: "dashboard",
