@@ -50,22 +50,23 @@ import { Link } from "react-router-dom";
 
 const EcommerceProducts = (props) => {
 
-
-
-
-
-
   // product cart
   const [productLists, setproductLists] = useState(shoppingCart);
-
-
-
-
-
   const columns = useMemo(() => columnsData, []);
 
 
+  //modal
+  const [modal_togFirst, setmodal_togFirst] = useState(false);
 
+  function tog_togFirst() {
+    setmodal_togFirst(!modal_togFirst);
+  }
+
+  const [modal_togSecond, setmodal_togSecond] = useState(false);
+
+  function tog_togSecond() {
+    setmodal_togSecond(!modal_togSecond);
+  }
 
 
 
@@ -73,6 +74,157 @@ const EcommerceProducts = (props) => {
 
   return (
     <div className="page-content">
+
+
+
+
+
+
+
+
+      <Modal
+        isOpen={modal_togFirst}
+        toggle={() => {
+          tog_togFirst();
+        }}
+        id="firstmodal"
+        centered
+      >
+        <ModalHeader>
+          Modal 1
+          <Button
+            type="button"
+            className="btn-close"
+            onClick={() => {
+              setmodal_togFirst(false);
+            }}
+            aria-label="Close"
+          >
+          </Button>
+        </ModalHeader>
+        <ModalBody className="text-center p-5">
+
+
+          <CardBody>
+            <Row className="gy-3">
+              <div className="col-sm-5">
+                <div className="avatar-lg bg-light rounded p-1">
+                  <img
+                    src={product10}
+                    alt=""
+                    className="img-fluid d-block"
+                  />
+                </div>
+              </div>
+              <div className="col-sm-7">
+                <div className="row">
+                  <div className="col-sm-4">
+                    <h5 className="fs-13">
+                      Title :
+                    </h5>
+                  </div>
+                  <div className="col-sm-8">
+                    <h5 className="fs-15">
+                      Mobile App
+                    </h5>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4">
+                    <h5 className="fs-13">
+                      Date :
+                    </h5>
+                  </div>
+                  <div className="col-sm-8">
+                    <h5 className="fs-13">
+                      xxx-xxx-xxx
+                    </h5>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4">
+                    <h5 className="fs-13">
+                    Request:
+                    </h5>
+                  </div>
+                  <div className="col-sm-8">
+                    <h5 className="fs-13">
+                      This app run in all device of Android 8.1 
+                    </h5>
+                  </div>
+                </div>
+              </div>
+
+
+              {/* <div className="col-sm-auto">
+                                <div className="text-lg-end">
+                                  <p className="text-muted mb-1">Item Price:</p>
+                                  <h5 className="fs-14">
+                                    $
+                                    <span id="ticket_price" className="product-price">
+                                      {cartItem.price}
+                                    </span>
+                                  </h5>
+                                </div>
+                              </div> */}
+            </Row>
+            <Row className="pt-3">
+              <div className="col-sm-3">
+              <h5 className="fs-13">
+                      Description :
+                    </h5>
+              </div>
+              <div className="col-sm-9">
+              <h5 className="fs-13">
+                      This is the course app that describe about the course of students.
+                    </h5>
+              </div>
+            </Row>
+          </CardBody>
+
+        </ModalBody>
+      </Modal>
+      <Modal
+        isOpen={modal_togSecond}
+        toggle={() => {
+          tog_togSecond();
+        }}
+        id="secondmodal"
+        centered
+      >
+        <ModalHeader>
+          Modal 2
+          <Button
+            type="button"
+            className="btn-close"
+            onClick={() => {
+              setmodal_togSecond(false);
+            }}
+            aria-label="Close"
+          ></Button>
+        </ModalHeader>
+        <ModalBody className="text-center p-5">
+          <lord-icon
+            src="https://cdn.lordicon.com/zpxybbhl.json"
+            trigger="loop"
+            colors="primary:#405189,secondary:#0ab39c"
+            style={{ width: "150px", height: "150px" }}>
+          </lord-icon>
+          <div className="mt-4 pt-3">
+            <h4 className="mb-3">Follow-Up Email</h4>
+            <p className="text-muted mb-4">Hide this modal and show the first with the button below Automatically Send your invitees a follow -Up email.</p>
+            <div className="hstack gap-2 justify-content-center">
+              <Button className="btn btn-soft-danger" onClick={() => { tog_togFirst(); tog_togSecond(false); }}>
+                Back to First
+              </Button>
+              <Button color="light" onClick={() => tog_togSecond(false)}>Close</Button>
+            </div>
+          </div>
+        </ModalBody>
+      </Modal>
+
+
+
 
 
       <Container fluid>
@@ -220,28 +372,29 @@ const EcommerceProducts = (props) => {
                   {productLists.map((cartItem, key) => (
                     <React.Fragment key={cartItem.id}>
                       <Col lg={4}>
-                        <Card className="product">
-                          <CardBody>
-                            <Row className="gy-3">
-                              <div className="col-sm-6">
-                                <div className="avatar-lg bg-light rounded p-1">
-                                  <img
-                                    src={cartItem.img}
-                                    alt=""
-                                    className="img-fluid d-block"
-                                  />
+                        <Card className="product" onClick={() => tog_togFirst()}>
+                          <Link
+
+                            className="text-dark"
+                          >
+                            <CardBody>
+                              <Row className="gy-3">
+                                <div className="col-sm-6">
+                                  <div className="avatar-lg bg-light rounded p-1">
+                                    <img
+                                      src={cartItem.img}
+                                      alt=""
+                                      className="img-fluid d-block"
+                                    />
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-sm-6">
-                                <h5 className="pt-4 fs-20 text-truncate">
-                                  <Link
-                                    to="/ecommerce-product-detail"
-                                    className="text-dark"
-                                  >
+                                <div className="col-sm-6">
+                                  <h5 className="pt-4 fs-20 text-truncate">
+
                                     {cartItem.name}
-                                  </Link>
-                                </h5>
-                                {/* <ul className="list-inline text-muted">
+
+                                  </h5>
+                                  {/* <ul className="list-inline text-muted">
                                   <li className="list-inline-item">
                                     Color :{" "}
                                     <span className="fw-medium">
@@ -255,8 +408,8 @@ const EcommerceProducts = (props) => {
                                 </ul> */}
 
 
-                              </div>
-                              {/* <div className="col-sm-auto">
+                                </div>
+                                {/* <div className="col-sm-auto">
                                 <div className="text-lg-end">
                                   <p className="text-muted mb-1">Item Price:</p>
                                   <h5 className="fs-14">
@@ -267,9 +420,9 @@ const EcommerceProducts = (props) => {
                                   </h5>
                                 </div>
                               </div> */}
-                            </Row>
-                          </CardBody>
-
+                              </Row>
+                            </CardBody>
+                          </Link>
                           <div className="card-footer">
                             <div className="row align-items-center gy-3">
 
@@ -289,7 +442,7 @@ const EcommerceProducts = (props) => {
                                 <div className="d-flex align-items-center gap-2 text-muted">
                                   <div>Rate:</div>
                                   <h5 className="fs-14 mb-0">
-                                   
+
                                     <span className="product-line-price">
                                       {" "}
                                       {cartItem.total}
@@ -305,12 +458,12 @@ const EcommerceProducts = (props) => {
                   ))}
                 </Row>
                 <TabPane tabId="2" id="v-pills-browser">
-                    <TableContainer
-                        columns={columns}
-                        data={shoppingCart}
-                     
-                    />
-            </TabPane>
+                  <TableContainer
+                    columns={columns}
+                    data={shoppingCart}
+
+                  />
+                </TabPane>
               </div>
             </div>
           </div>
