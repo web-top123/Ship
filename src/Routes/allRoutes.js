@@ -203,6 +203,7 @@ import QuestionService from "../pages/Pages/QuestionService/Questionservice";
 import BlogService from "../pages/Pages/BlogService/BlogService"
 
 import TestPage from "../pages/Pages/Test/TestPage";
+import TestPageStart from "../pages/Pages/Test/TestpageStart";
 import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
 
 import HomePage from "../pages/Pages/HomePage/index";
@@ -414,6 +415,9 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
+  { path: "/test-test-page", component: TestPage},
+  { path: "/test-test-page-start", component: TestPageStart},
+  { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-home-page", component: HomePage},
 ];
 

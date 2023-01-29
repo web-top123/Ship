@@ -79,11 +79,11 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <NavLink className="fs-14" href="pages-company-introduction">Company introduction</NavLink>
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-item"> 
                                 <NavLink className="fs-14" href="view-data-page">Ship Data</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="fs-14" href="test-test-page">Test Page</NavLink>
+                                <NavLink className="fs-14" href="test-test-page-start">Test Page</NavLink>
                             </li>
                         </Scrollspy>
 
