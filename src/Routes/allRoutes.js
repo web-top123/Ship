@@ -383,6 +383,7 @@ const authProtectedRoutes = [
   { path: "/pages-question-service", component: QuestionService},
   { path: "/pages-blog-service", component: BlogService},
   { path: "/pages-blog-service/detail", component: BlogServiceDetail},
+  { path: "/view-data-page", component: ViewDataPage},
 ];
 
 const publicRoutes = [

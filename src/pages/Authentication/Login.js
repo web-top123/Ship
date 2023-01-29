@@ -118,18 +118,22 @@ const Login = (props) => {
 
                                                 <div className="mb-3">
                                                     <Label htmlFor="email" className="form-label">Email</Label>
-                                                    <Input
-                                                        name="email"
-                                                        className="form-control"
-                                                        placeholder="Enter email"
-                                                        type="email"
-                                                        onChange={validation.handleChange}
-                                                        onBlur={validation.handleBlur}
-                                                        value={validation.values.email || ""}
-                                                        invalid={
-                                                            validation.touched.email && validation.errors.email ? true : false
-                                                        }
-                                                    />
+                                                    <div className="input-group">
+                                                        <Input
+                                                            name="email"
+                                                            className="form-control"
+                                                            placeholder="Enter email"
+                                                            type="email"
+                                                            onChange={validation.handleChange}
+                                                            onBlur={validation.handleBlur}
+                                                            value={validation.values.email || ""}
+                                                            invalid={
+                                                                validation.touched.email && validation.errors.email ? true : false
+                                                            }
+                                                            aria-describedby="button-addon2"
+                                                        />
+                                                        <button className="btn btn-success shadow-none" type="button" id="button-addon2"><i className=" ri-key-2-line label-icon align-middle fs-16 me-2"></i> Cert</button>
+                                                    </div>
                                                     {validation.touched.email && validation.errors.email ? (
                                                         <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
                                                     ) : null}

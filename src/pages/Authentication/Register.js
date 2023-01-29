@@ -52,7 +52,7 @@ const Register = () => {
     useEffect(() => {
         dispatch(apiError(""));
     }, [dispatch]);
-    document.title = "Basic SignUp | Velzon - React Admin & Dashboard Template";
+    document.title = "SignUp";
     return (
         <React.Fragment>
             <ParticlesAuth>
@@ -67,7 +67,7 @@ const Register = () => {
                                             <img src={logoLight} alt="" height="20" />
                                         </Link>
                                     </div>
-                                    <p className="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
+                                    <p className="mt-3 fs-15 fw-medium">Ship management</p>
                                 </div>
                             </Col>
                         </Row>
@@ -79,7 +79,7 @@ const Register = () => {
                                     <CardBody className="p-4">
                                         <div className="text-center mt-2">
                                             <h5 className="text-primary">Create New Account</h5>
-                                            <p className="text-muted">Get your free velzon account now</p>
+                                            {/* <p className="text-muted">Get your free velzon account now</p> */}
                                         </div>
                                         <div className="p-2 mt-4">
                                             <Form
@@ -101,19 +101,24 @@ const Register = () => {
 
                                                 <div className="mb-3">
                                                     <Label htmlFor="useremail" className="form-label">Email <span className="text-danger">*</span></Label>
-                                                    <Input
-                                                        id="email"
-                                                        name="email"
-                                                        className="form-control"
-                                                        placeholder="Enter email address"
-                                                        type="email"
-                                                        onChange={validation.handleChange}
-                                                        onBlur={validation.handleBlur}
-                                                        value={validation.values.email || ""}
-                                                        invalid={
-                                                            validation.touched.email && validation.errors.email ? true : false
-                                                        }
-                                                    />
+                                                    <div className="input-group">
+                                                        <Input
+                                                            id="email"
+                                                            name="email"
+                                                            className="form-control"
+                                                            placeholder="Enter email address"
+                                                            type="email"
+                                                            onChange={validation.handleChange}
+                                                            onBlur={validation.handleBlur}
+                                                            value={validation.values.email || ""}
+                                                            invalid={
+                                                                validation.touched.email && validation.errors.email ? true : false
+                                                            }
+                                                            aria-describedby="button-addon2"
+                                                        />
+                                                        <button className="btn btn-success shadow-none" type="button" id="button-addon2"><i className=" ri-key-2-line label-icon align-middle fs-16 me-2"></i> Cert</button>
+
+                                                    </div>
                                                     {validation.touched.email && validation.errors.email ? (
                                                         <FormFeedback type="invalid"><div>{validation.errors.email}</div></FormFeedback>
                                                     ) : null}
@@ -145,7 +150,7 @@ const Register = () => {
                                                     <Label htmlFor="Gender" className="form-label">Gender <span className="text-danger">*</span></Label>
 
                                                     <br></br>
-                                                    <Row>
+                                                    <Row className="px-4">
                                                         <Col lg={6}><Input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
                                                             <Label className="form-check-label" for="flexRadioDefault1">Male</Label></Col>
                                                         <Col lg={6}>  <Input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
@@ -153,10 +158,12 @@ const Register = () => {
                                                     </Row>
 
 
-                                                    <hr style={{marginTop:"5px"}} ></hr>
+                                                    
                                                 </div>
+                                                <br></br>
+                                                {/* <hr style={{ marginTop: "5px" }} ></hr> */}
                                                 <div className="mb-2">
-                                                <Label htmlFor="birthday" className="form-label">Birthday <span className="text-danger">*</span></Label>
+                                                    <Label htmlFor="birthday" className="form-label">Birthday <span className="text-danger">*</span></Label>
                                                     <Flatpickr
                                                         className="form-control"
                                                         options={{
@@ -207,16 +214,16 @@ const Register = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="mb-4">
+                                                {/* <div className="mb-4">
                                                     <p className="mb-0 fs-12 text-muted fst-italic">By registering you agree to the Velzon
                                                         <Link to="#" className="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</Link></p>
-                                                </div>
+                                                </div> */}
 
                                                 <div className="mt-4">
                                                     <button className="btn btn-success w-100" type="submit">Sign Up</button>
                                                 </div>
 
-                                                <div className="mt-4 text-center">
+                                                {/* <div className="mt-4 text-center">
                                                     <div className="signin-other-title">
                                                         <h5 className="fs-13 mb-4 title text-muted">Create account with</h5>
                                                     </div>
@@ -227,7 +234,7 @@ const Register = () => {
                                                         <button type="button" className="btn btn-dark btn-icon waves-effect waves-light"><i className="ri-github-fill fs-16"></i></button>{" "}
                                                         <button type="button" className="btn btn-info btn-icon waves-effect waves-light"><i className="ri-twitter-fill fs-16"></i></button>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                             </Form>
                                         </div>
                                     </CardBody>
