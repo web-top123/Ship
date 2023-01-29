@@ -137,7 +137,7 @@ const Navdata = () => {
         {
             id: "blogservice",
             label: "Blog Service",
-            icon: "ri-rocket-line",
+            icon: "ri-questionnaire-line",
             link: "/pages-blog-service",
             click: function (e) {
                 e.preventDefault();
@@ -145,9 +145,19 @@ const Navdata = () => {
             }
         },
         {
+            id: "testservice",
+            label: "Test",
+            icon: "ri-customer-service-2-line",
+            link: "/test-test-page-start",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('testservice');
+            }
+        },
+        {
             id: "studyservice",
             label: "Study",
-            icon: "ri-rocket-line",
+            icon: "ri-book-open-line",
             link: "/pages-study-field",
             click: function (e) {
                 e.preventDefault();
@@ -157,7 +167,7 @@ const Navdata = () => {
         {
             id: "softwareservice",
             label: "Software",
-            icon: "ri-rocket-line",
+            icon: "ri-apps-line",
             link: "/pages-software",
             click: function (e) {
                 e.preventDefault();
@@ -167,7 +177,7 @@ const Navdata = () => {
         {
             id: "introductionservice",
             label: "Introduction",
-            icon: "ri-rocket-line",
+            icon: "ri-map-pin-user-line",
             link: "/pages-company-introduction",
             click: function (e) {
                 e.preventDefault();
