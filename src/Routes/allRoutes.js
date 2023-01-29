@@ -371,7 +371,7 @@ const authProtectedRoutes = [
   {
     path: "/",
     exact: true,
-    component: () => <Redirect to="/dashboard" />,
+    component: () => <Redirect to="/pages-profile-settings" />,
   },
   { path: "/pages-mine", component: Mine},
   { path: "/test-test-page", component: TestPage},
@@ -384,6 +384,7 @@ const authProtectedRoutes = [
 ];
 
 const publicRoutes = [
+  
     // Authentication Page
     { path: "/logout", component: Logout },
     { path: "/login", component: Login },
