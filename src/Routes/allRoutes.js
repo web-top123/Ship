@@ -380,6 +380,7 @@ const authProtectedRoutes = [
   { path: "/pages-software", component: Software},
   { path: "/pages-question-service", component: QuestionService},
   { path: "/pages-blog-service", component: BlogService},
+  { path: "/pages-home-page", component: HomePage},
 
 ];
 
