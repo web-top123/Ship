@@ -278,11 +278,11 @@ main {
 .blog-content-wrapper .blog-title {
   font-size: 22px;
   font-weight: 700;
-  color: rgba(41, 41, 41, 1);
 }
 .blog-content-wrapper .blog-detail {
   font-size: 16px;
   font-weight: 400;
+  color: var(--vz-body-color);
 }
 .blog-table-content td {
   padding-bottom: 30px;

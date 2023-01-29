@@ -1,7 +1,6 @@
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
-
 const columnsBlogData = [
     {
         Header: "Content",
@@ -16,10 +15,12 @@ const columnsBlogData = [
                 <span className="publish-date">{purchase.row.original.content[2]} days ago</span>
            </div>
            <div className="pt-3 d-flex justify-content-between">
-                <div className="blog-content">
-                        <h3 className="blog-title">{purchase.row.original.content[3]}</h3>
-                        <p className="blog-detail">{purchase.row.original.content[4]}</p>
-                </div>
+                <a href={window.location.href+"/detail"}>
+                    <div className="blog-content">
+                            <h3 className="blog-title">{purchase.row.original.content[3]}</h3>
+                            <p className="blog-detail">{purchase.row.original.content[4]}</p>
+                    </div>
+                </a>
                 <div className="blog-detail-img-wrap">
                     <img className="blog-detail-img" src={purchase.row.original.content[5]} />
                 </div>
