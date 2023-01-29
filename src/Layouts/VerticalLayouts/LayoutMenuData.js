@@ -175,6 +175,16 @@ const Navdata = () => {
             }
         },
         {
+            id: "dataservice",
+            label: "Data",
+            icon: "ri-database-line",
+            link: "/view-data-page",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('dataservice');
+            }
+        },
+        {
             id: "introductionservice",
             label: "Introduction",
             icon: "ri-map-pin-user-line",
