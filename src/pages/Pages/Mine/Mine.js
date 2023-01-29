@@ -14,7 +14,7 @@ import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 
 const Mine = () => {
-    document.title = "Landing | Velzon - React Admin & Dashboard Template";
+    document.title = "My Profile";
 
     const [verticalTab, setverticalTab] = useState("1");
     const toggleVertical = (tab) => {

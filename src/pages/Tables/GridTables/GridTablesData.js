@@ -94,10 +94,6 @@ const ArticleData = () => {
     };
     return (
         <React.Fragment>
-            <select className="form-select table-per-page" onChange={(e)=> selectSetPaginiation(e.target.value)}>
-                <option value="4">4</option>
-                <option value="6">6</option>
-            </select>
             <Grid
                 data={article}
                 columns={[{
@@ -130,7 +126,7 @@ const ArticleData = () => {
                 search={true}
                 sort={true}
                 resizable = {true}
-                pagination={{ enabled: true, limit: pagination, }}
+                pagination={{ enabled: true, limit: 4, }}
             />
         </React.Fragment>
     );

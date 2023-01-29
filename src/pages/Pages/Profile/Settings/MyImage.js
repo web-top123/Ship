@@ -1,9 +1,9 @@
 import React from 'react';
 import { CardHeader, TabPane } from "reactstrap";
 
-import avatar1 from "../../../assets/images/users/avatar-1.jpg";
-import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-import avatar3 from "../../../assets/images/users/avatar-3.jpg";
+import avatar1 from "../../../../assets/images/users/avatar-1.jpg";
+import avatar2 from "../../../../assets/images/users/avatar-2.jpg";
+import avatar3 from "../../../../assets/images/users/avatar-3.jpg";
 
 const Mine = () => {
     return (
