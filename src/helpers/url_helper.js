@@ -6,7 +6,21 @@ export const POST_JWT_REGISTER = "/api/auth/signup";
 export const POST_JWT_LOGIN = "/api/auth/signin";
 
 
+// My pages
+export const GET_MY_INFORMATION = "/api/myInfo/get_one";
+export const PUT_SAVE_MY_INFORMATION = "/api/myInfo/update";
+export const GET_FIND_BROWSER_HISTORY = "/api/browseHistory/findBrowseHistoriesById";
+export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/dataPurchaseHistory/finddataPurchaseHistoyById";
 
+// Test page
+
+export const GET_ALL_QA = "/api/question/findAll";
+export const GET_FIND_QUESTION = "/api/question/findQuestionById";
+
+// Ship Data page
+export const GET_ALL_SHIP = "/api/data/findAll";
+export const GET_SHIP_BY_CATEGORY = "/api/data/findDataCategoryById";
+export const GET_SHIP_DETAIL = "/api/data/get_one";
 
 
 

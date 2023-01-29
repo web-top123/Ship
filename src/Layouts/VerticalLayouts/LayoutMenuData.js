@@ -145,6 +145,36 @@ const Navdata = () => {
             }
         },
         {
+            id: "studyservice",
+            label: "Study",
+            icon: "ri-rocket-line",
+            link: "/pages-study-field",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('studyservice');
+            }
+        },
+        {
+            id: "softwareservice",
+            label: "Software",
+            icon: "ri-rocket-line",
+            link: "/pages-software",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('softwareservice');
+            }
+        },
+        {
+            id: "introductionservice",
+            label: "Introduction",
+            icon: "ri-rocket-line",
+            link: "/pages-company-introduction",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('introductionservice');
+            }
+        },
+        {
             id: "dashboard",
             label: "Dashboards",
             icon: "ri-dashboard-2-line",
