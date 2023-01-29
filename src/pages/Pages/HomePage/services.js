@@ -31,7 +31,7 @@ const Services = () => {
                                     <div className="avatar-sm icon-effect">
                                         <div className="avatar-title bg-transparent text-success rounded-circle">
                                             {/* <i className="ri-pencil-ruler-2-line fs-36"></i> */}
-                                          <img src={studyfield}style={{width:"40px"}}></img>
+                                          <img alt="" src={studyfield} style={{width:"40px"}}></img>
                                             
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@ const Services = () => {
                                     <div className="avatar-sm icon-effect">
                                         <div className="avatar-title bg-transparent text-success rounded-circle">
                                             {/* <i className="ri-palette-line fs-36"></i> */}
-                                            <img src={questionservice}style={{width:"40px"}}></img>
+                                            <img alt="" src={questionservice}style={{width:"40px"}}></img>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@ const Services = () => {
                                     <div className="avatar-sm icon-effect">
                                         <div className="avatar-title bg-transparent text-success rounded-circle">
                                             {/* <i className="ri-lightbulb-flash-line fs-36"></i> */}
-                                            <img src={dataservice}style={{width:"40px"}}></img>
+                                            <img alt="" src={dataservice}style={{width:"40px"}}></img>
                                         </div>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@ const Services = () => {
                                     <div className="avatar-sm icon-effect">
                                         <div className="avatar-title bg-transparent text-success rounded-circle">
                                             {/* <i className="ri-customer-service-line fs-36"></i> */}
-                                            <img src={software}style={{width:"40px"}}></img>
+                                            <img alt="" src={software}style={{width:"40px"}}></img>
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@ const Services = () => {
                                     <div className="avatar-sm icon-effect">
                                         <div className="avatar-title bg-transparent text-success rounded-circle">
                                             {/* <i className="ri-stack-line fs-36"></i> */}
-                                            <img src={testfield}style={{width:"30px"}}></img>
+                                            <img alt="" src={testfield}style={{width:"30px"}}></img>
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@ const Services = () => {
                                     <div className="avatar-sm icon-effect">
                                         <div className="avatar-title bg-transparent text-success rounded-circle">
                                             {/* <i className="ri-settings-2-line fs-36"></i> */}
-                                            <img src={mypage}style={{width:"40px"}}></img>
+                                            <img alt="" src={mypage}style={{width:"40px"}}></img>
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +152,7 @@ const Services = () => {
                                     <div className="avatar-sm icon-effect">
                                         <div className="avatar-title bg-transparent text-success rounded-circle">
                                             {/* <i className="ri-slideshow-line fs-36"></i> */}
-                                            <img src={companyintroduction}style={{width:"40px"}}></img>
+                                            <img alt="" src={companyintroduction}style={{width:"40px"}}></img>
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@ const Services = () => {
                                     <div className="avatar-sm icon-effect">
                                         <div className="avatar-title bg-transparent text-success rounded-circle">
                                             {/* <i className="ri-google-fill fs-36"></i> */}
-                                            <img src={help}style={{width:"40px"}}></img>
+                                            <img alt=""  src={help}style={{width:"40px"}}></img>
                                         </div>
                                     </div>
                                 </div>
