@@ -44,14 +44,6 @@ const Settings = () => {
                                 <div className="p-2">
                                     <h3 className="text-white mb-1">Anna Adame</h3>
                                     <p className="text-white-75">Owner & Founder</p>
-                                    <div className="hstack text-white-50 gap-1">
-                                        <div className="me-2"><i
-                                            className="ri-map-pin-user-line me-1 text-white-75 fs-16 align-middle"></i>California,
-                                            United States</div>
-                                        <div><i
-                                            className="ri-building-line me-1 text-white-75 fs-16 align-middle"></i>Themesbrand
-                                        </div>
-                                    </div>
                                 </div>
                             </Col>
 
@@ -59,14 +51,14 @@ const Settings = () => {
                                 <Row className="text text-white-50 text-center">
                                     <Col lg={6} xs={4}>
                                         <div className="p-2">
-                                            <h4 className="text-white mb-1">24.3K</h4>
-                                            <p className="fs-14 mb-0">Followers</p>
+                                            <h4 className="text-white mb-1">2000</h4>
+                                            <p className="fs-14 mb-0">Current Free Score</p>
                                         </div>
                                     </Col>
                                     <Col lg={6} xs={4}>
                                         <div className="p-2">
-                                            <h4 className="text-white mb-1">1.3K</h4>
-                                            <p className="fs-14 mb-0">Following</p>
+                                            <h4 className="text-white mb-1">1000</h4>
+                                            <p className="fs-14 mb-0">Adding Score</p>
                                         </div>
                                     </Col>
                                 </Row>
@@ -75,26 +67,6 @@ const Settings = () => {
                     </div>
                     <Row>
                         <Col xxl={3}>
-                            <Card>
-                                <CardBody>
-                                    <div className="d-flex align-items-center mb-5">
-                                        <div className="flex-grow-1">
-                                            <h5 className="card-title mb-0">Complete Your Profile</h5>
-                                        </div>
-                                        <div className="flex-shrink-0">
-                                            <Link to="#" className="badge bg-light text-primary fs-12"><i
-                                                className="ri-edit-box-line align-bottom me-1"></i> Edit</Link>
-                                        </div>
-                                    </div>
-                                    <div className="progress animated-progress custom-progress progress-label">
-                                        <div className="progress-bar bg-danger" role="progressbar" style={{ "width": "30%" }}
-                                            aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-                                            <div className="label">30%</div>
-                                        </div>
-                                    </div>
-                                </CardBody>
-                            </Card>
-
                             <Card>
                                 <CardBody>
                                     <h5 className="card-title mb-3">Info</h5>
@@ -128,7 +100,7 @@ const Settings = () => {
                                 </CardBody>
                             </Card>
 
-                            <Card>
+                            {/* <Card>
                                 <CardBody>
                                     <div className="d-flex align-items-center mb-4">
                                         <div className="flex-grow-1">
@@ -176,7 +148,7 @@ const Settings = () => {
                                             placeholder="" defaultValue="" />
                                     </div>
                                 </CardBody>
-                            </Card>
+                            </Card> */}
                         </Col>
 
                         <Col xxl={9}>

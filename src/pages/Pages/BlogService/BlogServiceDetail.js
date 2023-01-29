@@ -12,7 +12,9 @@ import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 import { size } from 'lodash';
 
-const BlogService = () => {
+import {BlogDetailData} from './TestBlogDetail'
+
+const BlogServiceDetail = () => {
     document.title = "Blog Service";
     const columnsBlog = useMemo(() => columnsBlogData, []);
 
@@ -45,92 +47,15 @@ const BlogService = () => {
         <React.Fragment>
             <div className="page-content">
                 <Container fluid>
-                    <BreadCrumb title="Blog Service" />
+                    <BreadCrumb title="Blog Detail" />
                     <Row>
                         <Col xl={9} lg={8}>
                             <Card>
-                                <CardHeader className=''>
-                                    <Nav
-                                        className="nav-tabs-custom card-header-tabs border-bottom-0"
-                                        role="tablist"
-                                    >
-                                        <NavItem>
-                                            <NavLink
-                                                className={classnames(
-                                                    { active: activeTab === "1" },
-                                                    "fw-semibold"
-                                                )}
-                                                onClick={() => {
-                                                    toggleTab("1", "all");
-                                                }}
-                                                href="#"
-                                            >
-                                                All{" "}
-                                                <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
-                                                    {BlogDataListFilter.length}
-                                                </span>
-                                            </NavLink>
-                                        </NavItem>
-                                        <NavItem>
-                                            <NavLink
-                                                className={classnames(
-                                                    { active: activeTab === "2" },
-                                                    "fw-semibold"
-                                                )}
-                                                onClick={() => {
-                                                    toggleTab("2", "published");
-                                                }}
-                                                href="#"
-                                            >
-                                                Published{" "}
-                                                <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
-                                                    {BlogDataPublisedFilter.length}
-                                                </span>
-                                            </NavLink>
-                                        </NavItem>
-                                        <NavItem>
-                                            <NavLink
-                                                className={classnames(
-                                                    { active: activeTab === "3" },
-                                                    "fw-semibold"
-                                                )}
-                                                onClick={() => {
-                                                    toggleTab("3", "draft");
-                                                }}
-                                                href="#"
-                                            >
-                                                Draft{" "}
-                                                <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
-                                                    {BlogDataDraftFilter.length}
-                                                </span>
-                                            </NavLink>
-                                        </NavItem>
-                                    </Nav>
-                                </CardHeader>
-                                <CardBody>
-                                    <TabContent className="text-muted blog-table-content">
-                                        <TabPane>
-                                            <div
-                                                id="table-product-list-all"
-                                                className="table-card gridjs-border-none pb-2"
-                                            >
-                                                <TableContainer
-                                                    columns={columnsBlog}
-                                                    data={BlogDataListFilter}
-                                                    isGlobalFilter={false}
-                                                    isGlobalSearch={true}
-                                                    isAddUserList={false}
-                                                    customPageSize={10}
-                                                    divClass="table-responsive mb-1"
-                                                    tableClass="mb-0 table-borderless"
-                                                    theadClass="table-light text-muted"
-                                                />
-                                            </div>
-                                        </TabPane>
-
-                                    </TabContent>
+                                <CardBody className='px-5 py-5'>
+                                    <h4>{BlogDetailData.title}</h4>
+                                    {BlogDetailData.content}
                                 </CardBody>
-
+                                 
                             </Card>
                         </Col>
                         <Col xl={3} lg={4}>
@@ -216,4 +141,4 @@ const BlogService = () => {
     );
 };
 
-export default BlogService;
+export default BlogServiceDetail;
