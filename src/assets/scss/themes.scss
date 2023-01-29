@@ -303,3 +303,13 @@ main {
   margin-right: -1.5rem;
   margin-top: -2rem;
 }
+.boder-b-x {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125)
+}
+// blog detail
+.blog-detail-rtable-content td {
+  border-bottom: 0px;
+}
+.blog-detail-rtable-content thead, .blog-detail-rtable-content th {
+  background: transparent !important;
+}
