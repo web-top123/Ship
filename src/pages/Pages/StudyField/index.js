@@ -23,6 +23,11 @@ import {
 
 } from "reactstrap";
 import classnames from "classnames";
+
+import TreeView, { flattenTree } from "react-accessible-treeview";
+import { IoMdArrowDropright } from "react-icons/io";
+import cx from "classnames";
+
 // import { Col, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink, Row, TabPane, TabContent, UncontrolledDropdown, UncontrolledTooltip, UncontrolledCollapse, ButtonGroup, Button, UncontrolledButtonDropdown, Modal, ModalBody, ModalHeader, Input, Progress, Card, CardHeader, CardBody, Alert } from 'reactstrap';
 
 // RangeSlider
@@ -53,6 +58,69 @@ const SingleOptions = [
   { value: '4 star', label: '4 star' },
 ];
 
+const folder = {
+  name: "",
+  children: [
+    {
+      name: "Fruits",
+      children: [
+        { name: "Avocados" },
+        { name: "Bananas" },
+        { name: "Berries" },
+        { name: "Oranges" },
+        { name: "Pears" },
+      ],
+    },
+    {
+      name: "Drinks",
+      children: [
+        { name: "Apple Juice" },
+        { name: "Chocolate" },
+        { name: "Coffee" },
+        {
+          name: "Tea",
+          children: [
+            { name: "Black Tea" },
+            { name: "Green Tea" },
+            { name: "Red Tea" },
+            { name: "Matcha" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "Vegetables",
+      children: [
+        { name: "Beets" },
+        { name: "Carrots" },
+        { name: "Celery" },
+        { name: "Lettuce" },
+        { name: "Onions" },
+      ],
+    },
+  ],
+};
+
+const data = flattenTree(folder);
+
+
+
+const ArrowIcon = ({ isOpen, className }) => {
+  const baseClass = "arrow";
+  const classes = cx(
+    baseClass,
+    { [`${baseClass}--closed`]: !isOpen },
+    { [`${baseClass}--open`]: isOpen },
+    className
+  );
+  return <IoMdArrowDropright className={classes} />;
+};
+
+
+
+
+
+
 const EcommerceProducts = (props) => {
   const dispatch = useDispatch();
 
@@ -65,6 +133,8 @@ const EcommerceProducts = (props) => {
   const [activeTab, setActiveTab] = useState("1");
   const [selectedMulti, setselectedMulti] = useState(null);
   const [product, setProduct] = useState(null);
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [expandedIds, setExpandedIds] = useState();
 
   function handleMulti(selectedMulti) {
     setselectedMulti(selectedMulti);
@@ -147,9 +217,9 @@ const EcommerceProducts = (props) => {
   function tog_togFirst() {
     setmodal_togFirst(!modal_togFirst);
     setTitle();
-    
+
     // setmodal_togFirst(false);
-   
+
     // console.log("aaaaaaa",ref.current);
   }
   const [modal_togSecond, setmodal_togSecond] = useState(false);
@@ -172,9 +242,9 @@ const EcommerceProducts = (props) => {
   const onClickDelete = (product) => {
     setProduct(product);
     setDeleteModal(true);
-    
+
   };
- 
+
   const handleDeleteOrder = () => {
     if (product.id) {
       dispatch(deleteProducts(product));
@@ -195,7 +265,7 @@ const EcommerceProducts = (props) => {
         Cell: (product) => (
           <>
             <div className="d-flex align-items-center" onClick={tog_togFirst}>
-             
+
               <div className="flex-grow-1">
                 <h5 className="fs-14 mb-1">
                   <Link
@@ -206,7 +276,7 @@ const EcommerceProducts = (props) => {
                     {product.row.original.name}
                   </Link>
                 </h5>
-                
+
               </div>
             </div>
           </>
@@ -227,7 +297,7 @@ const EcommerceProducts = (props) => {
         Header: "Rate",
         accessor: "rating",
         filterable: false
-      
+
       },
 
 
@@ -276,7 +346,7 @@ const EcommerceProducts = (props) => {
             <Button className="btn btn-warning " onClick={() => { tog_togSecond(); tog_togFirst(false); }}>
               Buy
             </Button>
-           
+
 
           </div>
         </ModalBody>
@@ -388,118 +458,43 @@ const EcommerceProducts = (props) => {
                     <p className="text-muted text-uppercase fs-12 fw-medium mb-2">
                       Products
                     </p>
-                    <ul className="list-unstyled mb-0">
-                      <li>
-                        <Link to="#" className="d-flex py-1">
-                          <div className="flex-grow-1">
-                            <h5 className="fs-13 mb-0">All</h5>
+                    <TreeView
+                      data={data}
+                      className="basic"
+                      aria-label="Controlled expanded node tree"
+                      expandedIds={expandedIds}
+                      defaultExpandedIds={[1]}
+                      nodeRenderer={({
+                        element,
+                        isBranch,
+                        isExpanded,
+                        isDisabled,
+                        getNodeProps,
+                        level,
+                        handleExpand,
+                      }) => {
+                        return (
+                          <div
+                            {...getNodeProps({ onClick: handleExpand })}
+                            style={{
+                              marginLeft: 40 * (level - 1),
+                              opacity: isDisabled ? 0.5 : 1,
+                            }}
+                          >
+                            {isBranch && <ArrowIcon isOpen={isExpanded} />}
+                            <span className="name">
+                              {element.name}-{element.id}
+                            </span>
                           </div>
-                        </Link>
-                      </li>
-                      <li>
-                        <a
-                          className="d-flex py-1"
-                          data-bs-toggle="collapse"
-                          href="#filterlist-mobiles_software"
-                          role="button"
-                          aria-expanded="true"
-                          aria-controls="filterlist-mobiles_software"
-                        >
-                          <div className="flex-grow-1">
-                            <h5 className="fs-13 mb-0">Mobiles Software</h5>
-                          </div>
-                          <div className="flex-shrink-0 ms-2">
-                            <span className="badge bg-light text-muted">5</span>
-                          </div>
-                        </a>
+                        );
+                      }}
+                    />
 
-                        <div className="collapse show" id="filterlist-mobiles_software">
-                          <ul className="ps-4">
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Study
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Common sense
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Game
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Tool
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Service
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-
-
-                      <li>
-                        <a
-                          className="d-flex py-1"
-                          data-bs-toggle="collapse"
-                          href="#filterlist-computer"
-                          role="button"
-                          aria-expanded="false"
-                          aria-controls="filterlist-computer"
-                        >
-                          <div className="flex-grow-1">
-                            <h5 className="fs-13 mb-0">Computer</h5>
-                          </div>
-                          <div className="flex-shrink-0 ms-2">
-                            <span className="badge bg-light text-muted">5</span>
-                          </div>
-                        </a>
-
-                        <div className="collapse show" id="filterlist-computer">
-                          <ul className="ps-4">
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Video
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Audio
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Image
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Gaming
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Tablets
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-
-
-                    </ul>
                   </div>
                 </div>
 
-              
-                
+
+
               </div>
             </Card>
           </Col>
@@ -509,7 +504,7 @@ const EcommerceProducts = (props) => {
               <div className="card">
                 <div className="card-header border-0">
                   <div className="row g-4">
-                   
+
                   </div>
                 </div>
 
@@ -554,10 +549,10 @@ const EcommerceProducts = (props) => {
                             </span>
                           </NavLink>
                         </NavItem>
-                       
+
                       </Nav>
                     </div>
-                   
+
                   </div>
                 </div>
 

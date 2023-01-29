@@ -9396,6 +9396,11 @@ raw-body@2.4.3:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-accessible-treeview@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/react-accessible-treeview/-/react-accessible-treeview-2.3.1.tgz#84a46c6b0457f1ce4ba9d4115cdd402287b74640"
+  integrity sha512-rVTGAJuN0SIl1Ind4jgGLVrU15GQZCzdVbJsJYihIFOMDEJ9L8T+O0m0zh6ro911cfM8VKFnbnJ9PGR5dkvPzA==
+
 react-apexcharts@^1.3.9:
   version "1.3.9"
   resolved "https://registry.npmjs.org/react-apexcharts/-/react-apexcharts-1.3.9.tgz"
@@ -9591,6 +9596,11 @@ react-i18next@^11.15.3:
     "@babel/runtime" "^7.14.5"
     html-escaper "^2.0.2"
     html-parse-stringify "^3.0.1"
+
+react-icons@^4.7.1:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.7.1.tgz#0f4b25a5694e6972677cb189d2a72eabea7a8345"
+  integrity sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==
 
 react-image-lightbox@^5.1.4:
   version "5.1.4"
