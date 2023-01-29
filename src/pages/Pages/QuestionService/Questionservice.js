@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from '../../Landing/navbar';
 import Footer from '../../Landing/footer';
-import { Button, Modal, ModalHeader, ModalBody, Label, CardBody, Col, Input, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table, CardHeader } from "reactstrap";
+import { Container, Button, Modal, ModalHeader, ModalBody, Label, CardBody, Col, Input, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table, CardHeader } from "reactstrap";
 import { ArticleData, BaseExample, CardTableExample, PaginationExample, SearchExample, SortingExample, LoadingStateExample, FixedHeaderExample, HiddenColumnsExample } from '../../../pages/Tables/GridTables/GridTablesData';
 import { Link } from "react-router-dom";
 import Select from "react-select";
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 const SingleOptions = [
     { value: 'Eelectric', label: 'Eelectric' },
@@ -27,19 +28,10 @@ const QuestionService = () => {
 
     return (
         <React.Fragment>
-            <div className="layout-wrapper landing wrap-container ">
-                <Navbar />
-                <div className="bread-banner">
-                    <div className="bg-overlay bg-overlay-pattern"></div>
-                    <div className="container d-flex justify-content-between">
-                        <h4>Question Service</h4>
-                        <Button color="primary" onClick={() => tog_newarticle()}>
-                            New Article Add
-                        </Button>
-                    </div>
-                </div>
-                <main>
-                    <div className="container-fluid px-5 py-3">
+            <div className="page-content">
+                <Container fluid>
+                    <BreadCrumb title="Question Service" />
+                    <div className="py-3">
                         <Row>
                             <Col md={10}>
                                 <div className="pb-0 question-table" id="">
@@ -89,9 +81,7 @@ const QuestionService = () => {
                             </Col>
                         </Row>
                     </div>
-
-                </main>
-                <Footer />
+                </Container>
             </div>
             <Modal
                 size="xl"

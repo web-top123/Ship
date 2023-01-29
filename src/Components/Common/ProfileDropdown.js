@@ -10,12 +10,16 @@ import {
 // import images
 import avatar1 from "../../assets/images/users/avatar-1.jpg";
 
+import { getAuthenticatedUser } from '../../helpers/fakebackend_helper';
+
 const ProfileDropdown = () => {
     //Dropdown Toggle
     const [isProfileDropdown, setIsProfileDropdown] = useState(false);
     const toggleProfileDropdown = () => {
         setIsProfileDropdown(!isProfileDropdown);
     };
+
+    const userAuth = getAuthenticatedUser();
     return (
         <React.Fragment>
             <Dropdown isOpen={isProfileDropdown} toggle={toggleProfileDropdown} className="ms-sm-3 header-item topbar-user">
@@ -24,8 +28,8 @@ const ProfileDropdown = () => {
                         <img className="rounded-circle header-profile-user" src={avatar1}
                             alt="Header Avatar" />
                         <span className="text-start ms-xl-2">
-                            <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna Adame</span>
-                            <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
+                            <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{userAuth.username}</span>
+                            {/* <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"></span> */}
                         </span>
                     </span>
                 </DropdownToggle>

@@ -194,10 +194,13 @@ import ChartsJs from "../pages/Charts/ChartsJs/index";
 import Echarts from "../pages/Charts/ECharts/index";
 
 //Mine Page
-import Mine from "../pages/Pages/Mine/Mine"
+import Mine from "../pages/Pages/Mine/Mine";
 
 //QuestionService PAge
-import QuestionService from "../pages/Pages/QuestionService/Questionservice"
+import QuestionService from "../pages/Pages/QuestionService/Questionservice";
+
+// BlogService Page
+import BlogService from "../pages/Pages/BlogService/BlogService"
 
 import TestPage from "../pages/Pages/Test/TestPage";
 import TestPageStart from "../pages/Pages/Test/TestpageStart";
@@ -205,6 +208,8 @@ import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
 
 import HomePage from "../pages/Pages/HomePage/index";
 import StudyField from  "../pages/Pages/StudyField/index";
+import Software from  "../pages/Pages/Software/index";
+import CompanyIntroduction from  "../pages/Pages/CompanyIntroduction/index";
 
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
@@ -368,6 +373,15 @@ const authProtectedRoutes = [
     exact: true,
     component: () => <Redirect to="/dashboard" />,
   },
+  { path: "/pages-mine", component: Mine},
+  { path: "/test-test-page", component: TestPage},
+  { path: "/view-data-page", component: ViewDataPage},
+  { path: "/pages-study-field", component: StudyField},
+  { path: "/pages-company-introduction", component: CompanyIntroduction},
+  { path: "/pages-software", component: Software},
+  { path: "/pages-question-service", component: QuestionService},
+  { path: "/pages-blog-service", component: BlogService},
+
 ];
 
 const publicRoutes = [
@@ -376,7 +390,7 @@ const publicRoutes = [
     { path: "/login", component: Login },
     { path: "/forgot-password", component: ForgetPasswordPage },
     { path: "/register", component: Register },
-  
+    
 
   //AuthenticationInner pages
   { path: "/auth-signin-basic", component: BasicSignIn },
@@ -404,9 +418,6 @@ const publicRoutes = [
   { path: "/test-test-page-start", component: TestPageStart},
   { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-home-page", component: HomePage},
-  { path: "/pages-study-field", component: StudyField},
-  { path: "/pages-question-service", component: QuestionService},
-  { path: "/pages-mine", component: Mine},
 ];
 
 export { authProtectedRoutes, publicRoutes };
