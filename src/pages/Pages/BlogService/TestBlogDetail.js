@@ -1,10 +1,11 @@
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
-const BlogDetailData= 
-    {
-        title: "Functional Programming Is Great. But It Ain’t Magic",
-        content: `'An increasing annoyance in my day-to-day job as a coach and trainer is what I call FPF, or “Functional Programming Fanaticism”. Typically, it emanates from people who’ve recently discovered FP in the last few years and have yet to realize that — like all programming innovations since the 1940s — it doesn’t actually solve all the problems for us.
+const BlogDetailData =
+{
+    user_name: 'Thanesh Pannirselvam',  
+    title: "Functional Programming Is Great. But It Ain’t Magic",
+    content: `An increasing annoyance in my day-to-day job as a coach and trainer is what I call FPF, or “Functional Programming Fanaticism”. Typically, it emanates from people who’ve recently discovered FP in the last few years and have yet to realize that — like all programming innovations since the 1940s — it doesn’t actually solve all the problems for us.
 
         Putting aside the widely-held perception that functional programs can be considerably less easy to understand, even for experienced FP-ers, (and this is no small consideration when you realize that trying to understand program code is where programmers spend at least half our time), there is the question of side effects.
         
@@ -24,7 +25,44 @@ const BlogDetailData=
         
         Just as workflow frameworks don’t decide what should happen in your workflows, functional programs don’t decide how your application should handle side-effects. The best they can do is give you the tools to realize the decisions you make.
         
-        What I’m seeing, though, (and this was case when we were all prostrating before the Great Workflow Ju Ju In The Sky a decade or so ago), is that teams mistakenly lean on the technology, believing through some kind of magic that it will handle these scenarios for them. But, like all computer programs, they will only do exactly what we tell them to.`
+        What I’m seeing, though, (and this was case when we were all prostrating before the Great Workflow Ju Ju In The Sky a decade or so ago), is that teams mistakenly lean on the technology, believing through some kind of magic that it will handle these scenarios for them. But, like all computer programs, they will only do exactly what we tell them to.`,
+    user_img: avatar3,
+    date: 'Jan26',
+    thumb: '40',
+    message: '34',
+    reply_message: '40',
+    user_response: [{
+        img: avatar2 ,
+        name: "robert032",
+        content: 'You have to THINK ABOUT HOW YOUR SOFTWARE SHOULD HANDLE CONCURRENT SCENARIOS from the user’s perspective. In non-FP work, we seek to make concurrent systems more reliable and more, well, concurrent, by strictly limiting and localizing concurrent access to shared data.'
+    },
+    {
+        img: avatar3,
+        name: "robert033",
+        content: 'You have to THINK ABOUT HOW YOUR SOFTWARE SHOULD HANDLE CONCURRENT SCENARIOS from the user’s perspective. In non-FP work, we seek to make concurrent systems more reliable and more, well, concurrent, by strictly limiting and localizing concurrent access to shared data.'
+    },
+    {
+        img: avatar1,
+        name: "Jhon032",
+        content: 'You have to THINK ABOUT HOW YOUR SOFTWARE SHOULD HANDLE CONCURRENT SCENARIOS from the user’s perspective. In non-FP work, we seek to make concurrent systems more reliable and more, well, concurrent, by strictly limiting and localizing concurrent access to shared data.'
     }
+    ]
+}
 
-export  { BlogDetailData }
+const columnsReplyMessageData = [
+    {
+        Header: "Reply Message",
+        accessor: "content",
+        filterable: false,
+        Cell: (purchase) => (<>
+            <div className="blog-content-wrapper">
+                <div>
+                    <img className="author-img" src={purchase.row.original.img} />
+                    <span style={{"font-size":"13px"}} className="author-name">{purchase.row.original.name}</span>
+                    <div className="publish-date pt-2">{purchase.row.original.content}</div>
+                </div>
+            </div>
+        </>)
+    },
+]
+export { BlogDetailData, columnsReplyMessageData}

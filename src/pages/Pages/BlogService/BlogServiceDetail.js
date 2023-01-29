@@ -12,36 +12,13 @@ import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 import { size } from 'lodash';
 
-import {BlogDetailData} from './TestBlogDetail'
+import {BlogDetailData, columnsReplyMessageData} from './TestBlogDetail'
 
 const BlogServiceDetail = () => {
     document.title = "Blog Service";
-    const columnsBlog = useMemo(() => columnsBlogData, []);
+    const columnsReplyMessage = useMemo(() => columnsReplyMessageData, []);
 
-    const [BlogDataListFilter, setBlogDataList] = useState(BlogDataList);
-    const [BlogDataPublisedFilter, setBlogDataPublisedFilter] = useState([]);
-    const [BlogDataDraftFilter, setBlogDataDraftFilter] = useState([]);
-
-    const [activeTab, setActiveTab] = useState("1");
-
-    const toggleTab = (tab, type) => {
-        if (activeTab !== tab) {
-            setActiveTab(tab);
-            let filteredBlogs = BlogDataList;
-            if (type !== "all") {
-                filteredBlogs.map((product) => console.log(product))
-                filteredBlogs = BlogDataList.filter((product) => product.type == type);
-            }
-            if (type == 'published') {setBlogDataPublisedFilter(filteredBlogs);setBlogDataList(filteredBlogs);}
-            if (type == 'all') {setBlogDataList(filteredBlogs);}
-            if (type == 'draft') {setBlogDataDraftFilter(BlogDataDraftFilter);setBlogDataList(filteredBlogs);}
-            // setBlogDataList(filteredBlogs);
-        }
-    };
-
-    useEffect(() => {
-        setBlogDataList(BlogDataListFilter);
-    }, [BlogDataListFilter]);
+    const [BlogDetailDataFilter, setBlogDataList] = useState(BlogDetailData.user_response);
 
     return (
         <React.Fragment>
@@ -51,9 +28,48 @@ const BlogServiceDetail = () => {
                     <Row>
                         <Col xl={9} lg={8}>
                             <Card>
-                                <CardBody className='px-5 py-5'>
-                                    <h4>{BlogDetailData.title}</h4>
+                                <CardBody className='px-5 py-5 blog-user-detail'>
+                                    <div className='d-flex justify-content-between'>
+                                        <div className='d-flex mb-4'>
+                                            <div style={{"width":"48px"}} className="me-3">
+                                                <img src = {BlogDetailData.user_img} style={{"width":"100%","border-radius":"50%"}}/>    
+                                            </div>
+                                            <div>
+                                                <h5>{BlogDetailData.user_name}</h5>
+                                                <span>{BlogDetailData.date}</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <i className="bx bx-like pe-1"></i><span className="pe-3">{BlogDetailData.thumb}</span>
+                                            <i className="bx bx-message pe-1"></i><span className="pe-3">{BlogDetailData.message}</span>
+                                            <i className="bx bx-message-dots pe-1"></i><span className="pe-3">{BlogDetailData.reply_message}</span>
+                                        </div>
+                                    </div>
+                                    <h4 className='mb-4'>{BlogDetailData.title}</h4>
                                     {BlogDetailData.content}
+                                    <div className='pt-4'>
+                                        <TabContent className="text-muted blog-detail-rtable-content">
+                                            <TabPane>
+                                                <div
+                                                    id="table-product-list-all"
+                                                    className="table-card gridjs-border-none pb-2"
+                                                >
+                                                    <TableContainer
+                                                        columns={columnsReplyMessage}
+                                                        data={BlogDetailDataFilter}
+                                                        isGlobalFilter={false}
+                                                        isGlobalSearch={true}
+                                                        isAddUserList={false}
+                                                        customPageSize={10}
+                                                        divClass="table-responsive mb-1"
+                                                        tableClass="mb-0 table-borderless"
+                                                        theadClass="table-light text-muted"
+                                                    />
+                                                </div>
+                                            </TabPane>
+
+                                    </TabContent>
+                                    </div>
                                 </CardBody>
                                  
                             </Card>
