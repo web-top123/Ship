@@ -92,7 +92,7 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
                     >
 
                         Score Management
-                    </NavLink>
+                    </NavLink>z
                 </NavItem>
                 <NavItem>
                     <NavLink

@@ -16,13 +16,13 @@ const MyBrowser = () => {
                     <TableContainer
                         columns={columns}
                         data={dataList}
-                        // isGlobalFilter={false}
-                        // isGlobalSearch = {true}
-                        // isAddUserList={false}
-                        // customPageSize={10}
-                        // divClass="table-responsive mb-1"
-                        // tableClass="mb-0 table-borderless"
-                        // theadClass="table-light text-muted"
+                        isGlobalFilter={false}
+                        isGlobalSearch = {true}
+                        isAddUserList={false}
+                        customPageSize={10}
+                        divClass="table-responsive mb-1"
+                        tableClass="mb-0 table-borderless"
+                        theadClass="table-light text-muted"
                     />
             </TabPane>
         </React.Fragment>
