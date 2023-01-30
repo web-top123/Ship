@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Label, CardBody, Col, Input, Row, TabPane, Form } from "reactstrap";
 import Flatpickr from "react-flatpickr";
-import { getGetMyInformation, getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
+import { getGetMyInformation, getAuthenticatedUser, putSaveMyInformation, updateAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfile } from '../../../../store/actions';
 
@@ -12,39 +12,28 @@ import { useFormik } from "formik";
 
 const MyInformation = () => {
 
-    const validation = useFormik({
-        // enableReinitialize : use this flag when initial values needs to be changed
-        enableReinitialize: true,
 
-        initialValues: {
-            // email: "Smith@gmail.com" || '',
-            // password: "12345678" || '',
-        },
-        validationSchema: Yup.object({
-            // email: Yup.string().required("Please Enter Your Email"),
-            // password: Yup.string().required("Please Enter Your Password"),
-        }),
-        onSubmit: (values) => {
-            // dispatch(loginUser(values, props.history));
-            console.log("values", values)
-        }
-    });
+    const [myInformation, setMyInformation] = useState({ birthday: '', username: '', name: '', email: '' });
+    // const [, setMyInformation] = useState("");
 
-    const dispatch = useDispatch();
-
-    const [myInformation, setMyInformation] = useState([])
-    // dispatch(editProfile);
-    const user = JSON.parse(localStorage.getItem('authUser'));
-    console.log("userid", user.id)
 
     useEffect(() => {
-        dispatch(getProfile(user));
-        // setMyInformation(profile);
-        console.log("myInformation", myInformation)
-
+        var user = getAuthenticatedUser();
+        console.log(user);
+        getGetMyInformation(user.id).then(res => {
+            setMyInformation(res);
+        })
     }, []);
 
-    const profile = useSelector(state => state.Profile.success)
+    const saveMyInformation = () => {
+        var user = getAuthenticatedUser();
+        console.log(user);
+        putSaveMyInformation(user.id, myInformation);
+        if (user.username != myInformation.username) {
+            updateAuthenticatedUser({ ...user, ...{ username: myInformation.username } });
+            window.location.reload()
+        }
+    }
 
 
 
@@ -53,7 +42,7 @@ const MyInformation = () => {
             <Form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    validation.handleSubmit();
+                    saveMyInformation();
                     return false;
                 }}
                 action="#">
@@ -64,7 +53,7 @@ const MyInformation = () => {
                                 Identifier
                             </Label>
                             <Input type="text" className="form-control" id="identifierInput"
-                                placeholder="Enter your identifier" value={profile.username}  onChange={validation.handleChange} invalid={false} />
+                                placeholder="Enter your identifier" value={myInformation.username} onChange={e => { setMyInformation({ ...myInformation, ...{ username: e.target.value } }) }} />
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -73,7 +62,7 @@ const MyInformation = () => {
                                 Name
                             </Label>
                             <Input type="text" className="form-control" id="nameInput"
-                                placeholder="Enter your name" value={profile.name} />
+                                placeholder="Enter your name" value={myInformation.name} />
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -81,14 +70,13 @@ const MyInformation = () => {
                             <Label htmlFor="emailInput" className="form-label">Email
                                 Address</Label>
                             <Input type="email" className="form-control" id="emailInput"
-                                placeholder="Enter your email"
-                                value={myInformation.email} onChange={validation.handleChange} />
+                                placeholder="Enter your email" value={myInformation.email} />
                         </div>
                     </Col>
                     <Col lg={6}>
                         <div className="mb-3">
                             <Label htmlFor="skillsInput" className="form-label">Man/Woman</Label>
-                            <select id="genderslection" className="form-select mb-3" defaultValue={myInformation.gender} onChange={validation.handleChange}>
+                            <select id="genderslection" className="form-select mb-3" >
                                 <option value="Male">Male</option>
                                 <option value="Femail">Female</option>
                             </select>
@@ -104,8 +92,7 @@ const MyInformation = () => {
                                 options={{
                                     dateFormat: "d M, Y"
                                 }}
-                                value={myInformation.birthday}
-                                onChange={validation.handleChange}
+
                             />
                         </div>
                     </Col>
