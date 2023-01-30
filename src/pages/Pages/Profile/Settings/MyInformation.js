@@ -32,19 +32,21 @@ const MyInformation = () => {
 
     const dispatch = useDispatch();
 
-    const [myInformation, setMyInformation] = useState([])
+    
     // dispatch(editProfile);
     const user = JSON.parse(localStorage.getItem('authUser'));
     console.log("userid", user.id)
+    const  { crmmyinformation }  = useSelector((state) =>({crmmyinformation: state.Profile.myinformation} ))
 
     useEffect(() => {
         dispatch(getProfile(user));
-        // setMyInformation(profile);
-        console.log("myInformation", myInformation)
-
     }, []);
 
-    const profile = useSelector(state => state.Profile.success)
+    useEffect(()=>{
+        setMyInformation(crmmyinformation)
+    },[crmmyinformation])
+    const [myInformation, setMyInformation] = useState([])
+    console.log("myInformation", myInformation)
 
 
 
@@ -64,7 +66,7 @@ const MyInformation = () => {
                                 Identifier
                             </Label>
                             <Input type="text" className="form-control" id="identifierInput"
-                                placeholder="Enter your identifier" value={profile.username}  onChange={validation.handleChange} invalid={false} />
+                                placeholder="Enter your identifier" value={myInformation.name}  invalid={false} />
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -73,7 +75,7 @@ const MyInformation = () => {
                                 Name
                             </Label>
                             <Input type="text" className="form-control" id="nameInput"
-                                placeholder="Enter your name" value={profile.name} />
+                                placeholder="Enter your name" value={myInformation.name} />
                         </div>
                     </Col>
                     <Col lg={6}>

@@ -3,6 +3,7 @@ import { PROFILE_ERROR, PROFILE_SUCCESS, EDIT_PROFILE, RESET_PROFILE_FLAG, GET_P
 const initialState = {
   error: "",
   success: "",
+  myinformation:null,
 };
 
 const profile = (state = initialState, action) => {
@@ -11,10 +12,10 @@ const profile = (state = initialState, action) => {
       state = { ...state };
       break;
     case GET_PROFILE:
-      state = {...state, success: action.payload}
+      state = {...state }
       break;
     case PROFILE_SUCCESS:
-      state = { ...state, success: action.payload };
+      state = { ...state, myinformation: action.payload };
       break;
     case PROFILE_ERROR:
       state = { ...state, error: action.payload };
