@@ -12,8 +12,11 @@ import MyOpinion from './MyOpinion'
 import { Col, Container, Row, Card, CardBody,TabContent } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
+import { getAuthenticatedUser} from '../../../helpers/fakebackend_helper';
+
 
 const Mine = () => {
+    console.log("id information", getAuthenticatedUser());
     document.title = "My Profile";
 
     const [verticalTab, setverticalTab] = useState("1");

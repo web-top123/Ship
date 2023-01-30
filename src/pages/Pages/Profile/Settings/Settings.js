@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState,useEffect } from 'react';
 import { Card, CardBody, CardHeader, Col, Container, Form, Input, Label, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table } from 'reactstrap';
 import classnames from "classnames";
 import MetaTags from 'react-meta-tags';
@@ -10,6 +9,7 @@ import MyPurchase from './MyPurchase';
 import MyScore from './MyScore';
 import MyImage from './MyImage';
 import MyOpinion from './MyOpinion';
+import MyInformation from './MyInformation';
 //import images
 import progileBg from '../../../../assets/images/profile-bg.jpg';
 import avatar1 from '../../../../assets/images/users/avatar-1.jpg';
@@ -99,56 +99,6 @@ const Settings = () => {
                                     </div>
                                 </CardBody>
                             </Card>
-
-                            {/* <Card>
-                                <CardBody>
-                                    <div className="d-flex align-items-center mb-4">
-                                        <div className="flex-grow-1">
-                                            <h5 className="card-title mb-0">Portfolio</h5>
-                                        </div>
-                                        <div className="flex-shrink-0">
-                                            <Link to="#" className="badge bg-light text-primary fs-12"><i
-                                                className="ri-add-fill align-bottom me-1"></i> Add</Link>
-                                        </div>
-                                    </div>
-                                    <div className="mb-3 d-flex">
-                                        <div className="avatar-xs d-block flex-shrink-0 me-3">
-                                            <span className="avatar-title rounded-circle fs-16 bg-dark text-light">
-                                                <i className="ri-github-fill"></i>
-                                            </span>
-                                        </div>
-                                        <Input type="email" className="form-control" id="gitUsername" placeholder=""
-                                            defaultValue="" />
-                                    </div>
-                                    <div className="mb-3 d-flex">
-                                        <div className="avatar-xs d-block flex-shrink-0 me-3">
-                                            <span className="avatar-title rounded-circle fs-16 bg-primary">
-                                                <i className="ri-global-fill"></i>
-                                            </span>
-                                        </div>
-                                        <Input type="text" className="form-control" id="websiteInput"
-                                            placeholder="" defaultValue="" />
-                                    </div>
-                                    <div className="mb-3 d-flex">
-                                        <div className="avatar-xs d-block flex-shrink-0 me-3">
-                                            <span className="avatar-title rounded-circle fs-16 bg-success">
-                                                <i className="ri-dribbble-fill"></i>
-                                            </span>
-                                        </div>
-                                        <Input type="text" className="form-control" id="dribbleName" placeholder=""
-                                            defaultValue="" />
-                                    </div>
-                                    <div className="d-flex">
-                                        <div className="avatar-xs d-block flex-shrink-0 me-3">
-                                            <span className="avatar-title rounded-circle fs-16 bg-danger">
-                                                <i className="ri-pinterest-fill"></i>
-                                            </span>
-                                        </div>
-                                        <Input type="text" className="form-control" id="pinterestName"
-                                            placeholder="" defaultValue="" />
-                                    </div>
-                                </CardBody>
-                            </Card> */}
                         </Col>
 
                         <Col xxl={9}>
@@ -167,7 +117,7 @@ const Settings = () => {
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="#"
+                                            <NavLink
                                                 className={classnames({ active: activeTab === "2" })}
                                                 onClick={() => {
                                                     tabChange("2");
@@ -178,7 +128,7 @@ const Settings = () => {
                                             </NavLink>
                                         </NavItem>
                                         <NavItem >
-                                            <NavLink to="#"
+                                            <NavLink
                                                 className={classnames({ active: activeTab === "3" })}
                                                 onClick={() => {
                                                     tabChange("3");
@@ -189,7 +139,7 @@ const Settings = () => {
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="#"
+                                            <NavLink
                                                 className={classnames({ active: activeTab === "4" })}
                                                 onClick={() => {
                                                     tabChange("4");
@@ -200,7 +150,7 @@ const Settings = () => {
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="#"
+                                            <NavLink
                                                 className={classnames({ active: activeTab === "5" })}
                                                 onClick={() => {
                                                     tabChange("5");
@@ -211,7 +161,7 @@ const Settings = () => {
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="#"
+                                            <NavLink
                                                 className={classnames({ active: activeTab === "6" })}
                                                 onClick={() => {
                                                     tabChange("6");
@@ -222,7 +172,7 @@ const Settings = () => {
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="#"
+                                            <NavLink
                                                 className={classnames({ active: activeTab === "7" })}
                                                 onClick={() => {
                                                     tabChange("7");
@@ -237,77 +187,7 @@ const Settings = () => {
                                 <CardBody className="p-4">
                                     <TabContent activeTab={activeTab}>
                                         <TabPane tabId="1">
-                                            <Form>
-                                                <Row>
-                                                    <Col lg={6}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="identifierInput" className="form-label">
-                                                                Identifier
-                                                            </Label>
-                                                            <Input type="text" className="form-control" id="identifierInput"
-                                                                placeholder="Enter your identifier" defaultValue="king1234" />
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={6}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="nameInput" className="form-label">
-                                                                Name
-                                                            </Label>
-                                                            <Input type="text" className="form-control" id="nameInput"
-                                                                placeholder="Enter your name" defaultValue="Robert Jon" />
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={6}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="phonenumberInput" className="form-label">Phone
-                                                                Number</Label>
-                                                            <Input type="text" className="form-control"
-                                                                id="phonenumberInput"
-                                                                placeholder="Enter your phone number"
-                                                                defaultValue="+(1) 987 6543" />
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={6}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="emailInput" className="form-label">Email
-                                                                Address</Label>
-                                                            <Input type="email" className="form-control" id="emailInput"
-                                                                placeholder="Enter your email"
-                                                                defaultValue="daveadame@velzon.com" />
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={12}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="skillsInput" className="form-label">Man/Woman</Label>
-                                                            <select className="form-select mb-3">
-                                                                <option value="kindman">Man</option>
-                                                                <option value="kindwoman">Woman</option>
-                                                            </select>
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={12}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="BirthdaydatInput" className="form-label">
-                                                                Birthday
-                                                            </Label>
-                                                            <Flatpickr
-                                                                className="form-control"
-                                                                options={{
-                                                                    dateFormat: "d M, Y"
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={12}>
-                                                        <div className="hstack gap-2 justify-content-end">
-                                                            <button type="button"
-                                                                className="btn btn-primary">Updates</button>
-                                                            <button type="button"
-                                                                className="btn btn-soft-success shadow-none">Cancel</button>
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                            </Form>
+                                            <MyInformation />
                                         </TabPane>
 
                                         <TabPane tabId="2" className='full-tab-table'>

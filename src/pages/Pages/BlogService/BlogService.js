@@ -26,12 +26,12 @@ const BlogService = () => {
         if (activeTab !== tab) {
             setActiveTab(tab);
             let filteredBlogs = BlogDataList;
-            if (type !== "all") {
+            if (type !== "trending") {
                 filteredBlogs.map((product) => console.log(product))
                 filteredBlogs = BlogDataList.filter((product) => product.type == type);
             }
-            if (type == 'published') {setBlogDataPublisedFilter(filteredBlogs);setBlogDataList(filteredBlogs);}
-            if (type == 'all') {setBlogDataList(filteredBlogs);}
+            if (type == 'date') {setBlogDataPublisedFilter(filteredBlogs);setBlogDataList(filteredBlogs);}
+            if (type == 'trending') {setBlogDataList(filteredBlogs);}
             if (type == 'draft') {setBlogDataDraftFilter(BlogDataDraftFilter);setBlogDataList(filteredBlogs);}
             // setBlogDataList(filteredBlogs);
         }
@@ -61,11 +61,11 @@ const BlogService = () => {
                                                     "fw-semibold"
                                                 )}
                                                 onClick={() => {
-                                                    toggleTab("1", "all");
+                                                    toggleTab("1", "trending");
                                                 }}
                                                 href="#"
                                             >
-                                                All{" "}
+                                                Trending{" "}
                                                 <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
                                                     {BlogDataListFilter.length}
                                                 </span>
@@ -78,11 +78,11 @@ const BlogService = () => {
                                                     "fw-semibold"
                                                 )}
                                                 onClick={() => {
-                                                    toggleTab("2", "published");
+                                                    toggleTab("2", "date");
                                                 }}
                                                 href="#"
                                             >
-                                                Published{" "}
+                                                Date{" "}
                                                 <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
                                                     {BlogDataPublisedFilter.length}
                                                 </span>

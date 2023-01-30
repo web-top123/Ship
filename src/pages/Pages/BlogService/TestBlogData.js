@@ -49,14 +49,14 @@ const BlogDataList = [
         content: [avatar1, "Mohamed Aboelez", "2", "Functional Programming Is Great. But It Ain’t Magic",
             "It’s not magic, folks. It’s just code. An increasing annoyance in my day-to-day job as a coach and trainer is what I call FPF, or “Functional Programming Fanaticism”. Typically, it emanates from people who’ve",
             avatar2, 'programming', "30", "40", "50"],
-        type: "published"
+        type: "dating"
     },
     {
         id: "2",
         content: [avatar2, "Mohamed Aboelez", "2", "Functional Programming Is Great. But It Ain’t Magic",
             "It’s not magic, folks. It’s just code. An increasing annoyance in my day-to-day job as a coach and trainer is what I call FPF, or “Functional Programming Fanaticism”. Typically, it emanates from people who’ve",
             avatar3, 'programming', "30", "40", "50"],
-        type: "published"
+        type: "dating"
     },
     {
         id: "3",
@@ -84,14 +84,14 @@ const BlogDataList = [
         content: [avatar3, "Mohamed Aboelez", "2", "Functional Programming Is Great. But It Ain’t Magic",
             "It’s not magic, folks. It’s just code. An increasing annoyance in my day-to-day job as a coach and trainer is what I call FPF, or “Functional Programming Fanaticism”. Typically, it emanates from people who’ve",
             avatar1, 'programming', "30", "40", "50"],
-        type: "published"
+        type: "dating"
     },
     {
         id: "7",
         content: [avatar2, "Mohamed Aboelez", "2", "Functional Programming Is Great. But It Ain’t Magic",
             "It’s not magic, folks. It’s just code. An increasing annoyance in my day-to-day job as a coach and trainer is what I call FPF, or “Functional Programming Fanaticism”. Typically, it emanates from people who’ve",
             avatar2, 'programming', "30", "40", "50"],
-        type: "published"
+        type: "dating"
     },
     {
         id: "8",

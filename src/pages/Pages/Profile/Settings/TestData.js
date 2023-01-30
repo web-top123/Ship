@@ -1,3 +1,4 @@
+
 const columnsData = [
     {
         Header: "ID",
@@ -252,24 +253,7 @@ const columnsPurchaseData = [
         Header: "Purchase Score",
         accessor: "score",
         filterable: false,
-    },
-    {
-        Header: "",
-        accessor: "action",
-        filterable: false,
-        Cell: (purchase) => (<>
-        <div className="d-flex gap-4">
-            <div className="edit">
-                <button className="btn btn-sm btn-success edit-item-btn"
-                    data-bs-toggle="modal" data-bs-target="#showModal">{purchase.row.original.action[0]}</button>
-            </div>
-            <div className="remove">
-                <button className="btn btn-sm btn-danger remove-item-btn">{purchase.row.original.action[1]}</button>
-            </div>
-        </div>
-
-        </>)
-    },
+    }
 ]
 const PurchaseDataList = [
     {
@@ -277,64 +261,55 @@ const PurchaseDataList = [
         title: "electric",
         date: "2022.1.3",
         score: "1000",
-        action: ["Detail", "Download"]
     },
     {
         id: "2",
         title: "Math",
         date: "2022.1.3",
         score: "1000",
-        action: ["Detail", "Download"]
     },
     {
         id: "3",
         title: "Physical",
         date: "2012.1.3",
         score: "1400",
-        action: ["Detail", "Download"]
     },
     {
         id: "4",
         title: "electric",
         date: "2022.1.3",
         score: "1000",
-        action: ["Detail", "Download"]
     },
     {
         id: "5",
         title: "electric",
         date: "2022.1.3",
         score: "1000",
-        action: ["Detail", "Download"]
     },
     {
         id: "6",
         title: "electric",
         date: "2022.1.3",
         score: "1000",
-        action: ["Detail", "Download"]
     },
     {
         id: "7",
         title: "electric",
         date: "2022.1.3",
         score: "1000",
-        action: ["Detail", "Download"]
     },
     {
         id: "8",
         title: "electric",
         date: "2022.1.3",
         score: "1000",
-        action: ["Detail", "Download"]
     },
     {
         id: "9",
         title: "electric",
         date: "2022.1.3",
         score: "1000",
-        action: ["Detail", "Download"]
-    },
+    }
 ]
 const columnsBlogData = [
     {
@@ -437,7 +412,6 @@ const BlogDataList = [
         title: "electric",
         date: "2022.1.3",
         score: "1000",
-        action: ["Detail", "Download"]
     },
 ]
 export { columnsData, dataList, columnsTestData, TestDataList, columnsProcessData, ProcessDataList, columnsPurchaseData, PurchaseDataList, columnsBlogData, BlogDataList }

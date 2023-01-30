@@ -1,4 +1,4 @@
-import { PROFILE_ERROR, PROFILE_SUCCESS, EDIT_PROFILE, RESET_PROFILE_FLAG } from "./actionTypes";
+import { PROFILE_ERROR, PROFILE_SUCCESS, EDIT_PROFILE, RESET_PROFILE_FLAG, GET_PROFILE } from "./actionTypes";
 
 const initialState = {
   error: "",
@@ -9,6 +9,9 @@ const profile = (state = initialState, action) => {
   switch (action.type) {
     case EDIT_PROFILE:
       state = { ...state };
+      break;
+    case GET_PROFILE:
+      state = {...state, success: action.payload}
       break;
     case PROFILE_SUCCESS:
       state = { ...state, success: action.payload };

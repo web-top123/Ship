@@ -9,8 +9,8 @@ export const POST_JWT_LOGIN = "/api/auth/signin";
 // My pages
 export const GET_MY_INFORMATION = "/api/myInfo/get_one";
 export const PUT_SAVE_MY_INFORMATION = "/api/myInfo/update";
-export const GET_FIND_BROWSER_HISTORY = "/api/browseHistory/findBrowseHistoriesById";
-export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/dataPurchaseHistory/finddataPurchaseHistoyById";
+export const GET_FIND_BROWSER_HISTORY = "/api/browseHistory/findBrowseHistoryById";
+export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/browseHistory/findBrowseHistoryById";
 
 // Test page
 
@@ -37,8 +37,9 @@ export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";
 export const SOCIAL_LOGIN = "/social-login";
 
 //PROFILE
-export const POST_EDIT_JWT_PROFILE = "/post-jwt-profile";
+export const POST_EDIT_JWT_PROFILE = "";
 export const POST_EDIT_PROFILE = "/post-fake-profile";
+export const GET_MY_PROFILE = "/api/browseHistory/findBrowseHistoryById"
 
 //CALENDER
 export const GET_EVENTS = "/events";
