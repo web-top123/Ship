@@ -19,6 +19,10 @@ const ProfileDropdown = () => {
         setIsProfileDropdown(!isProfileDropdown);
     };
 
+    const { username } = useSelector(state => ({
+        username: state.Login.username,
+    }));
+
     const userAuth = getAuthenticatedUser();
     return (
         <React.Fragment>

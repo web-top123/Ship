@@ -61,7 +61,9 @@ export const getAuthenticatedUser = () => {
   return JSON.parse(localStorage.getItem("authUser"));
 };
 
-
+export const updateAuthenticatedUser = (user) => {
+  localStorage.setItem("authUser", JSON.stringify(user));
+};
 
 
 // Gets the logged in user data from local session
@@ -108,11 +110,11 @@ export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
 export const postFakeForgetPwd = data => api.create(url.POST_FAKE_PASSWORD_FORGET, data);
 
 // Edit profile
-export const postJwtProfile = data => api.create(url.POST_EDIT_JWT_PROFILE+"/"+data.id, data);
+export const postJwtProfile = data => api.create(url.POST_EDIT_JWT_PROFILE + "/" + data.id, data);
 
 // Browser My Inoformation
 
-export const getJwtMyProfile = data => api.get(url.GET_MY_PROFILE+"/"+data.id, data);
+export const getJwtMyProfile = data => api.get(url.GET_MY_PROFILE + "/" + data.id, data);
 
 export const postFakeProfile = data => api.create(url.POST_EDIT_PROFILE, data);
 
