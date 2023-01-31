@@ -24,20 +24,6 @@ const MyTest = () => {
                         theadClass="text-muted"
                     />
                 </div>
-                <div className="table-responsive pt-5">
-                    <h4 className="card-title flex-grow-1">Progressing Test</h4>
-                    <TableContainer
-                        columns={columnsProcess}
-                        data={ProcessDataList}
-                        isGlobalFilter={false}
-                        isGlobalSearch = {true}
-                        isAddUserList={false}
-                        customPageSize={10}
-                        divClass="table-responsive mb-1"
-                        tableClass="mb-0 table-borderless"
-                        theadClass="text-muted"
-                    />
-                </div>
             </TabPane>
         </React.Fragment>
     )

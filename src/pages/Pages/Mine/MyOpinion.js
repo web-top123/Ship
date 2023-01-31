@@ -19,9 +19,6 @@ const MyOpinion = () => {
                                         <Button color="primary" data-bs-toggle="button" aria-pressed="false" className='me-2'>
                                             Grammar Checking
                                         </Button>
-                                        <Button color="primary" data-bs-toggle="button" aria-pressed="false" className='me-2'>
-                                            Save in Box
-                                        </Button>
                                         <Button color="primary" data-bs-toggle="button" aria-pressed="false">
                                             Vote
                                         </Button>

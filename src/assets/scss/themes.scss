@@ -265,11 +265,9 @@ main {
   border-radius: 50%;
   margin-right: 6px;
 }
-.blog-content-wrapper .blog-detail-img-wrap {
-  width: 112px;
-}
+
 .blog-content-wrapper .blog-detail-img {
-  width: 100%;
+  width: 112px;
   height: auto;
 }
 .blog-content-wrapper .blog-content {
@@ -292,7 +290,7 @@ main {
 .blog-table-content tbody {
   border: 0px !important;
 }
-.realted-topic button {
+.realted-topic a {
   margin: 10px 4px;
 }
 .blog-table-content tbody > tr:last-child td {
@@ -312,4 +310,9 @@ main {
 }
 .blog-detail-rtable-content thead, .blog-detail-rtable-content th {
   background: transparent !important;
+}
+.new-article-add-btn {
+  position: absolute;
+  right: 10px;
+  top: 6px;
 }

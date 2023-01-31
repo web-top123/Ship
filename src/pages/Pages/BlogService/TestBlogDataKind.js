@@ -10,14 +10,14 @@ const columnsBlogData = [
         Cell: (purchase) => (<>
             <div className="blog-content-wrapper">
                 <div>
-                    <Link to = {"/pages-blog-service/article-man"} style={{"display":"inline-block"}}><img className="author-img" src={purchase.row.original.content[0]} /></Link>
+                    <img className="author-img" src={purchase.row.original.content[0]} />
                     <span className="author-name">{purchase.row.original.content[1]}</span>
                     <span>.</span>
                     <span className="publish-date">{purchase.row.original.content[2]} days ago</span>
                 </div>
                 <div className="pt-3 d-flex justify-content-between">
 
-                    <Link to={'/pages-blog-service/detail'}>
+                    <Link to={'detail'}>
                         <div className="blog-content">
                             <h3 className="blog-title">{purchase.row.original.content[3]}</h3>
                             <p className="blog-detail">{purchase.row.original.content[4]}</p>

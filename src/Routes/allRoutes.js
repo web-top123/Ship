@@ -201,6 +201,8 @@ import QuestionService from "../pages/Pages/QuestionService/Questionservice";
 
 // BlogService Page
 import BlogService from "../pages/Pages/BlogService/BlogService"
+import ArticleKind from "../pages/Pages/BlogService/ArticleKind"
+import ArticleMan from "../pages/Pages/BlogService/ArticleMan"
 import BlogServiceDetail from "../pages/Pages/BlogService/BlogServiceDetail"
 
 import TestPage from "../pages/Pages/Test/TestPage";
@@ -382,6 +384,8 @@ const authProtectedRoutes = [
   { path: "/pages-software", component: Software},
   { path: "/pages-question-service", component: QuestionService},
   { path: "/pages-blog-service", component: BlogService},
+  { path: "/pages-blog-service/article-kind", component: ArticleKind},
+  { path: "/pages-blog-service/article-man", component: ArticleMan},
   { path: "/pages-blog-service/detail", component: BlogServiceDetail},
   { path: "/view-data-page", component: ViewDataPage},
 ];

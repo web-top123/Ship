@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Col, Container, Row, Card, CardBody, TabContent, Nav, NavItem, NavLink, CardHeader, TabPane } from "reactstrap";
+import { Col, Container, Row, Card, CardBody, TabContent, Nav, NavItem, NavLink, CardHeader, TabPane, Button } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { columnsBlogData, BlogDataList } from './TestBlogData';
 import { useMemo } from "react";
@@ -11,7 +11,7 @@ import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 import { size } from 'lodash';
-
+import { Link, BrowserRouter } from 'react-router-dom';
 import {BlogDetailData, columnsReplyMessageData} from './TestBlogDetail'
 
 const BlogServiceDetail = () => {
@@ -28,6 +28,18 @@ const BlogServiceDetail = () => {
                     <Row>
                         <Col xl={9} lg={8}>
                             <Card>
+                                <CardHeader>
+                                    <div className='d-flex justify-content-between'>
+                                        <div>
+                                            <Link className="btn btn-primary" data-bs-toggle="button" aria-pressed="false" to={"/pages-blog-service"}>Go listing</Link>
+                                        </div>
+                                        <div className='pe-5 d-flex align-items-center'>
+                                        <i className="las la-angle-left" style={{"font-size": "25px"}}></i> <Link className="btn btn-primary ms-1 me-5" data-bs-toggle="button" aria-pressed="false" to={"#"}>Advertise</Link>
+                                        <Link className="btn btn-primary ms-5 me-1" data-bs-toggle="button" aria-pressed="false" to={'#'}>Trending</Link><i className="las la-angle-right" style={{"font-size": "25px"}}></i>
+                                        </div>
+                                    </div>
+                                    
+                                </CardHeader>
                                 <CardBody className='px-5 py-5 blog-user-detail'>
                                     <div className='d-flex justify-content-between'>
                                         <div className='d-flex mb-4'>
@@ -79,15 +91,15 @@ const BlogServiceDetail = () => {
                                 <CardBody>
                                     <h4 className='mb-sm-0'>Realted Topics</h4>
                                     <div className="realted-topic d-flex flex-wrap">
-                                        <button className="rounded-pill btn btn-light tags me-4">Software</button>
-                                        <button className="rounded-pill btn btn-light tags me-4">Java</button>
-                                        <button className="rounded-pill btn btn-light tags me-4">Ship</button>
-                                        <button className="rounded-pill btn btn-light tags me-4">Ship Control</button>
-                                        <button className="rounded-pill btn btn-light tags me-4">Machine Learning</button>
-                                        <button className="rounded-pill btn btn-light tags me-4">Ship Control</button>
-                                        <button className="rounded-pill btn btn-light tags me-4">Data</button>
-                                        <button className="rounded-pill btn btn-light tags me-4">Electric Engineering</button>
-                                        <button className="rounded-pill btn btn-light tags me-4">Boat Shipping</button>
+                                        <Link className="rounded-pill btn btn-light tags me-4" to={'/pages-blog-service/article-kind'}>Software</Link>
+                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Java</Link>
+                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Ship</Link>
+                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Ship Control</Link>
+                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Machine Learning</Link>
+                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Ship Control</Link>
+                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Data</Link>
+                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Electric Engineering</Link>
+                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Boat Shipping</Link>
                                     </div>
                                     <div className='Top Writers'>
 
@@ -95,56 +107,49 @@ const BlogServiceDetail = () => {
                                 </CardBody>
                                 <CardBody>
                                     <h4 className='mb-sm-0 pb-4'>Top Writers</h4>
-                                    <div className="top-writers d-flex align-items-center pt-2">
+                                    <div className="top-writers d-flex align-items-center pt-4">
                                         <div className='d-flex me-2'>
                                             <div className='me-2'>
                                                 <img style={{ "width": "32px", "height":"auto", "border-radius":"50%"}} src={avatar1} />
                                             </div>
                                             <div>
-                                                <h6 style={{"font-size":"16px"}}>JavinPaul</h6>
-                                                <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tip Follow...</p>
+                                            <Link to={'/pages-blog-service/article-man'}><h6 style={{"font-size":"16px"}}>JavinPaul</h6></Link>
                                             </div>
                                         </div>
-                                        <button className="rounded-pill btn btn-success"> Follow </button>
                                     </div>
 
-                                    <div className="top-writers d-flex align-items-center pt-2">
+                                    <div className="top-writers d-flex align-items-center pt-4">
                                         <div className='d-flex me-2'>
                                             <div className='me-2'>
                                                 <img style={{ "width": "32px", "height":"auto", "border-radius":"50%"}} src={avatar3} />
                                             </div>
                                             <div>
-                                                <h6 style={{"font-size":"16px"}}>JavinPaul</h6>
-                                                <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tip Follow...</p>
+                                                <Link to={'/pages-blog-service/article-man'}><h6 style={{"font-size":"16px"}}>JavinPaul</h6></Link>
                                             </div>
                                         </div>
-                                        <button className="rounded-pill btn btn-success"> Follow </button>
                                     </div>
 
-                                    <div className="top-writers d-flex align-items-center pt-2">
+                                    <div className="top-writers d-flex align-items-center pt-4">
                                         <div className='d-flex me-2'>
                                             <div className='me-2'>
                                                 <img style={{ "width": "32px", "height":"auto", "border-radius":"50%"}} src={avatar2} />
                                             </div>
                                             <div>
-                                                <h6 style={{"font-size":"16px"}}>JavinPaul</h6>
-                                                <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tip Follow...</p>
+                                            <Link to={'/pages-blog-service/article-man'}><h6 style={{"font-size":"16px"}}>JavinPaul</h6></Link>
                                             </div>
                                         </div>
-                                        <button className="rounded-pill btn btn-success"> Follow </button>
                                     </div>
 
-                                    <div className="top-writers d-flex align-items-center pt-2">
+                                    <div className="top-writers d-flex align-items-center pt-4">
                                         <div className='d-flex me-2'>
                                             <div className='me-2'>
                                                 <img style={{ "width": "32px", "height":"auto", "border-radius":"50%"}} src={avatar1} />
                                             </div>
                                             <div>
-                                                <h6 style={{"font-size":"16px"}}>JavinPaul</h6>
-                                                <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tip Follow...</p>
+                                            <Link to={'/pages-blog-service/article-man'}><h6 style={{"font-size":"16px"}}>JavinPaul</h6></Link>
+                                                {/* <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tip Follow...</p> */}
                                             </div>
                                         </div>
-                                        <button className="rounded-pill btn btn-success"> Follow </button>
                                     </div>
 
                                 </CardBody>
