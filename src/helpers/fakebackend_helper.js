@@ -35,6 +35,24 @@ export const postJwtRegister = (url, data) => {
 };
 
 
+
+
+// My page
+export const getGetMyInformation = id => api.get(url.GET_MY_INFORMATION + '/' + id);
+export const putSaveMyInformation = (id, data) => api.update(url.PUT_SAVE_MY_INFORMATION + '/' + id, data);
+export const getFindBrowseHistoriesById = id => api.get(url.GET_FIND_BROWSER_HISTORY + '/' + id);
+export const getFindDataPurchaseHistoyById = id => api.get(url.GET_FIND_DATA_PURCHASE_HISTORY + '/' + id);
+
+// Test page
+export const getGetAllQA = () => api.get(url.GET_ALL_QA);
+export const getGetQuestionById = id => api.get(url.GET_FIND_QUESTION + '/' + id);
+
+// Ship Data page
+export const getGetAllShipData = () => api.get(url.GET_ALL_SHIP);
+export const getGetShipCategoryById = id => api.get(url.GET_SHIP_BY_CATEGORY + '/' + id);
+export const getGetShipDetail = id => api.get(url.GET_SHIP_DETAIL + '/' + id);
+
+
 /**
    * Returns the authenticated user
    */
@@ -43,7 +61,9 @@ export const getAuthenticatedUser = () => {
   return JSON.parse(localStorage.getItem("authUser"));
 };
 
-
+export const updateAuthenticatedUser = (user) => {
+  localStorage.setItem("authUser", JSON.stringify(user));
+};
 
 
 // Gets the logged in user data from local session
@@ -90,7 +110,11 @@ export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
 export const postFakeForgetPwd = data => api.create(url.POST_FAKE_PASSWORD_FORGET, data);
 
 // Edit profile
-export const postJwtProfile = data => api.create(url.POST_EDIT_JWT_PROFILE, data);
+export const postJwtProfile = data => api.create(url.POST_EDIT_JWT_PROFILE + "/" + data.id, data);
+
+// Browser My Inoformation
+
+export const getJwtMyProfile = data => api.get(url.GET_MY_PROFILE + "/" + data.id, data);
 
 export const postFakeProfile = data => api.create(url.POST_EDIT_PROFILE, data);
 

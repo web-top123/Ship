@@ -201,6 +201,9 @@ import QuestionService from "../pages/Pages/QuestionService/Questionservice";
 
 // BlogService Page
 import BlogService from "../pages/Pages/BlogService/BlogService"
+import ArticleKind from "../pages/Pages/BlogService/ArticleKind"
+import ArticleMan from "../pages/Pages/BlogService/ArticleMan"
+import BlogServiceDetail from "../pages/Pages/BlogService/BlogServiceDetail"
 
 import TestPage from "../pages/Pages/Test/TestPage";
 import TestPageStart from "../pages/Pages/Test/TestpageStart";
@@ -373,7 +376,7 @@ const authProtectedRoutes = [
   {
     path: "/",
     exact: true,
-    component: () => <Redirect to="/dashboard" />,
+    component: () => <Redirect to="/pages-profile-settings" />,
   },
   { path: "/pages-mine", component: Mine},
   { path: "/test-test-page", component: TestPage},
@@ -383,16 +386,18 @@ const authProtectedRoutes = [
   { path: "/pages-software", component: Software},
   { path: "/pages-question-service", component: QuestionService},
   { path: "/pages-blog-service", component: BlogService},
-
-  
   //view ship data  
   { path: "/new-data-vote", component: NewDataVote},
   { path: "/view-data-page", component: ViewDataPage},
   { path: "/view-ship-data", component: ViewShipData},
-
+  { path: "/pages-blog-service/article-kind", component: ArticleKind},
+  { path: "/pages-blog-service/article-man", component: ArticleMan},
+  { path: "/pages-blog-service/detail", component: BlogServiceDetail},
+  { path: "/view-data-page", component: ViewDataPage},
 ];
 
 const publicRoutes = [
+  
     // Authentication Page
     { path: "/logout", component: Logout },
     { path: "/login", component: Login },

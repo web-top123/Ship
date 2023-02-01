@@ -1,18 +1,13 @@
-import React, { useEffect, useState, useMemo } from "react";
-import MetaTags from 'react-meta-tags';
-import product10 from "./assets/images2.jpeg";
+import classnames from "classnames";
+import React, { useState } from "react";
+
 import {
   Container,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownItem,
-  DropdownMenu,
   Nav,
   NavItem,
   NavLink,
   TabContent,
   TabPane,
-  UncontrolledCollapse,
   Modal, ModalBody, ModalHeader,
   Row,
   Card,
@@ -20,140 +15,50 @@ import {
   Col,
   Input,
   Button,
-
+  CardBody,
 } from "reactstrap";
-import classnames from "classnames";
-// import { Col, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink, Row, TabPane, TabContent, UncontrolledDropdown, UncontrolledTooltip, UncontrolledCollapse, ButtonGroup, Button, UncontrolledButtonDropdown, Modal, ModalBody, ModalHeader, Input, Progress, Card, CardHeader, CardBody, Alert } from 'reactstrap';
 
-// RangeSlider
-import Nouislider from "nouislider-react";
-import "nouislider/distribute/nouislider.css";
-import DeleteModal from "../../../Components/Common/DeleteModal";
-
+//Title
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import TableContainer from "../../../Components/Common/TableContainer";
-import { Rating, Published, Price } from "./EcommerceProductCol";
-//Import data
-import { productsData } from "./Data";
 
-//Import actions
-import { getProducts as onGetProducts, deleteProducts } from "../../../store/ecommerce/action";
-import { isEmpty } from "lodash";
-import Select from "react-select";
+//data
+import { shoppingCart } from "../../../common/data/ecommerce";
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-const SingleOptions = [
-  { value: 'Watches', label: 'Watches' },
-  { value: 'Headset', label: 'Headset' },
-  { value: 'Sweatshirt', label: 'Sweatshirt' },
-  { value: '20% off', label: '20% off' },
-  { value: '4 star', label: '4 star' },
-];
-
-const EcommerceProducts = (props) => {
-  const dispatch = useDispatch();
-
-  const { products } = useSelector((state) => ({
-    products: state.Ecommerce.products,
-  }));
+//treeview
+import TreeView, { flattenTree } from "react-accessible-treeview";
+import { IoMdArrowDropright } from "react-icons/io";
+import cx from "classnames";
 
 
-  const [productList, setProductList] = useState([]);
-  const [activeTab, setActiveTab] = useState("1");
-  const [selectedMulti, setselectedMulti] = useState(null);
-  const [product, setProduct] = useState(null);
 
-  function handleMulti(selectedMulti) {
-    setselectedMulti(selectedMulti);
-  }
 
-  useEffect(() => {
-    if (products && !products.length) {
-      dispatch(onGetProducts());
-    }
-  }, [dispatch, products]);
 
-  useEffect(() => {
-    setProductList(products);
-  }, [products]);
 
-  useEffect(() => {
-    dispatch(onGetProducts());
-  }, [dispatch]);
 
-  useEffect(() => {
-    if (!isEmpty(products)) setProductList(products);
-  }, [products]);
 
-  const toggleTab = (tab, type) => {
-    if (activeTab !== tab) {
-      setActiveTab(tab);
-      let filteredProducts = productsData;
-      if (type !== "all") {
-        filteredProducts = productsData.filter((product) => product.type === type);
-      }
-      setProductList(filteredProducts);
-    }
-  };
 
-  const onUpdate = (render, handle, value) => {
-    setProductList(
-      productsData.filter(
-        (product) => product.price >= value[0] && product.price <= value[1],
-      )
-    );
-  };
 
-  const [ratingvalues, setRatingvalues] = useState([]);
-  /*
-  on change rating checkbox method
-  */
-  const onChangeRating = value => {
-    setProductList(productsData.filter(product => product.rating >= value));
 
-    var modifiedRating = [...ratingvalues];
-    modifiedRating.push(value);
-    setRatingvalues(modifiedRating);
-  };
+const Software = () => {
 
-  const onUncheckMark = (value) => {
-    var modifiedRating = [...ratingvalues];
-    const modifiedData = (modifiedRating || []).filter(x => x !== value);
-    /*
-    find min values
-    */
-    var filteredProducts = productsData;
-    if (modifiedData && modifiedData.length && value !== 1) {
-      var minValue = Math.min(...modifiedData);
-      if (minValue && minValue !== Infinity) {
-        filteredProducts = productsData.filter(
-          product => product.rating >= minValue
-        );
-        setRatingvalues(modifiedData);
-      }
-    } else {
-      filteredProducts = productsData;
-    }
-    setProductList(filteredProducts);
-  };
-  //Modal
-  const [description, setDescription] = useState("Composition and Characteristics of Ship Power GridComposition and Characteristics of Ship Power GridComposition and Characteristics of Ship Power GridComposition and Characteristics of Ship Power GridComposition and Characteristics of Ship Power GridComposition and Characteristics of Ship Power GridComposition and Characteristics of Ship Power GridComposition and Characteristics of Ship Power GridComposition and Characteristics of Ship Power Grid");
 
-  const [title, setTitle] = useState("Composition and Characteristics of Ship Power Grid");
-  const [modal_togFirst, setmodal_togFirst] = useState(false);
-  function tog_togFirst() {
-    setmodal_togFirst(!modal_togFirst);
-    setTitle("dddd")
-    // console.log("aaaaaaa",ref.current);
-  }
-  const [modal_togSecond, setmodal_togSecond] = useState(false);
-  function tog_togSecond() {
-    setmodal_togSecond(!modal_togSecond);
-  }
+  // Data
+  const [productLists, setproductLists] = useState(shoppingCart);
+ 
+  //product detail
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [request, setRequest] = useState("");
+  const [description, setDescription] = useState("");
+  const [rate, setRate] = useState("");
+  const [price, setPrice] = useState("");
+  const [img, setImg] = useState("");
 
+
+  //modal
   // Border Top Nav Justified Tabs
   const [topBorderjustifyTab, settopBorderjustifyTab] = useState("1");
   const topBorderJustifytoggle = (tab) => {
@@ -162,91 +67,94 @@ const EcommerceProducts = (props) => {
     }
   };
 
+  //modal first
+  const [modal_togFirst, setmodal_togFirst] = useState(false);
+  function tog_togFirst(value) {
+    setTitle(value.name);
+    setDate(value.id);
+    setRequest(value.name);
+    setDescription(value.name);
+    setRate(value.name);
+    setPrice(value.name);
+    setImg(value.img);
+    setmodal_togFirst(!modal_togFirst);
 
-  //delete order
-  const [deleteModal, setDeleteModal] = useState(false);
+  }
 
-  const onClickDelete = (product) => {
-    setProduct(product);
-    setDeleteModal(true);
-  };
+  //modal second
+  const [modal_togSecond, setmodal_togSecond] = useState(false);
 
-  const handleDeleteOrder = () => {
-    if (product.id) {
-      dispatch(deleteProducts(product));
-      setDeleteModal(false);
-    }
-  };
+  function tog_togSecond() {
+    setmodal_togSecond(!modal_togSecond);
+  }
 
-  const columns = useMemo(
-    () => [
+  //treeview
+  const folder = {
+    name: "",
+    children: [
       {
-        Header: "#",
-        Cell: (product) => {
-          return <div>{product.row.original.id}</div>;
-        },
+        name: "Fruits",
+        children: [
+          { name: "Avocados" },
+          { name: "Bananas" },
+          { name: "Berries" },
+          { name: "Oranges" },
+          { name: "Pears" },
+        ],
       },
       {
-        Header: "Product",
-        Cell: (product) => (
-          <>
-            <div className="d-flex align-items-center" onClick={tog_togFirst}>
-              <div className="flex-shrink-0 me-3">
-                <div className="avatar-sm bg-light rounded p-1">
-                  <img
-                    src={product.row.original.image}
-                    alt=""
-                    className="img-fluid d-block"
-                  />
-                </div>
-              </div>
-              <div className="flex-grow-1">
-                <h5 className="fs-14 mb-1">
-                  <Link
-                    // to="/apps-ecommerce-product-details"
-                    className="text-dark"
-                  >
-                    {" "}
-                    {product.row.original.name}
-                  </Link>
-                </h5>
-                <p className="text-muted mb-0">
-                  Category :{" "}
-                  <span className="fw-medium">
-                    {" "}
-                    {product.row.original.category}
-                  </span>
-                </p>
-              </div>
-            </div>
-          </>
-        ),
+        name: "Drinks",
+        children: [
+          { name: "Apple Juice" },
+          { name: "Chocolate" },
+          { name: "Coffee" },
+          {
+            name: "Tea",
+            children: [
+              { name: "Black Tea" },
+              { name: "Green Tea" },
+              { name: "Red Tea" },
+              { name: "Matcha" },
+            ],
+          },
+        ],
       },
       {
-        Header: "Price",
-        accessor: "price",
-        filterable: false,
-        Cell: (cellProps) => {
-          return <Price {...cellProps} />;
-        },
+        name: "Vegetables",
+        children: [
+          { name: "Beets" },
+          { name: "Carrots" },
+          { name: "Celery" },
+          { name: "Lettuce" },
+          { name: "Onions" },
+        ],
       },
-
-      {
-        Header: "Rating",
-        accessor: "rating",
-        filterable: false,
-        Cell: (cellProps) => {
-          return <Rating {...cellProps} />;
-        },
-      },
-
-
     ],
-    []
-  );
-  document.title = "Products | Velzon - React Admin & Dashboard Template";
-  console.log("produdct", { productList });
-  console.log("column", { columns });
+  };
+  const data = flattenTree(folder);
+  const ArrowIcon = ({ isOpen, className }) => {
+    const baseClass = "arrow";
+    const classes = cx(
+      baseClass,
+      { [`${baseClass}--closed`]: !isOpen },
+      { [`${baseClass}--open`]: isOpen },
+      className
+    );
+
+    return <IoMdArrowDropright className={classes} />;
+  };
+
+
+  const [expandedIds, setExpandedIds] = useState();
+
+
+
+
+
+
+
+
+
   return (
     <div className="page-content">
       <Modal
@@ -257,40 +165,108 @@ const EcommerceProducts = (props) => {
         id="firstmodal"
         centered
       >
-        <ModalHeader>
 
-          <Button
+        <Row>
+          <div className="col-sm-10"></div>
+          <div className="col-sm-2 pt-4"> <Button
             type="button"
-            className="btn-close"
+            className="btn-close "
             onClick={() => {
               setmodal_togFirst(false);
             }}
-            aria-label="Close"
+
           >
-          </Button>
-        </ModalHeader>
-        <ModalBody className="text-center">
+          </Button></div>
+        </Row>
+        <ModalBody className=" p-2">
+          <CardBody>
+            <Row className="gy-3">
+              <div className="col-sm-5">
+                <div className="avatar-xl bg-light rounded p-1">
+                  <img
+                    src={img}
+                    alt=""
+                    className="img-fluid d-block"
+                  />
+                </div>
+              </div>
+              <div className="col-sm-7">
+                <div className="row">
+                  <div className="col-sm-4">
+                    <h5 className="fs-13">
+                      Title :
+                    </h5>
+                  </div>
+                  <div className="col-sm-8">
+                    <h5 className="fs-15">
+                      {title}
+                    </h5>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4">
+                    <h5 className="fs-13">
+                      Date :
+                    </h5>
+                  </div>
+                  <div className="col-sm-8">
+                    <h5 className="fs-13">
+                      {date}
+                    </h5>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4">
+                    <h5 className="fs-13">
+                      Request:
+                    </h5>
+                  </div>
+                  <div className="col-sm-8">
+                    <h5 className="fs-13">
+                      {request}                    </h5>
+                  </div>
+                </div>
+              </div>
 
-          <div className=" pt-4">
-            <Row>
-              <Col lg={3}>Title:</Col>
-              <Col lg={9}> <h4>{title}</h4></Col>
+
+
             </Row>
-            <Row>
-              <Col lg={3}>Description</Col>
-              <Col lg={9}> <p className="text-muted"> {description}</p></Col>
+
+            <Row className="pt-3">
+              <div className="col-sm-3">
+                <h5 className="fs-12">
+                  Description :
+                </h5>
+              </div>
+              <div className="col-sm-9">
+                <h5 className="fs-12">
+                  {description}     </h5>
+              </div>
             </Row>
 
+            <Row>
+              <div className="col-sm-1"></div>
+              <div className="col-sm-5 text-center">
+                Rate : {rate}
+              </div>
+              <div className="col-sm-5">
+                Price : {price}
+              </div>
+              <div className="col-sm-1"></div>
+            </Row>
 
-
-            <Button className="btn btn-warning m-3" onClick={() => { tog_togSecond(); tog_togFirst(false); }}>
-              Buy
-            </Button>
-            
-
-          </div>
+            <Row className="pt-4">
+              <div className="col-sm-6 text-center">
+                <Button color="light" onClick={() => { tog_togSecond(); tog_togFirst(false); }}>Buy</Button>
+              </div>
+              <div className="col-sm-6 text-center">
+                <Button color="primary">Download</Button>
+              </div>
+            </Row>
+          </CardBody>
         </ModalBody>
       </Modal>
+
       <Modal
         isOpen={modal_togSecond}
         toggle={() => {
@@ -305,23 +281,24 @@ const EcommerceProducts = (props) => {
             type="button"
             className="btn-close"
             onClick={() => {
-              setmodal_togSecond(false);
+              setmodal_togFirst(false);
             }}
-            aria-label="Close"
-
           >
 
           </Button>
         </ModalHeader>
+
         <div className="modal-body text-center">
           <div className=" ">
             <h4 className="mb-4">You can purchase with real or free score</h4>
+
             <Nav tabs className="nav nav-tabs nav-border-top nav-border-top-primary mb-3">
               <NavItem>
                 <NavLink style={{ cursor: "pointer" }} className={classnames({ active: topBorderjustifyTab === "1", })} onClick={() => { topBorderJustifytoggle("1"); }} >
                   Real score
                 </NavLink>
               </NavItem>
+
               <NavItem>
                 <NavLink style={{ cursor: "pointer" }} className={classnames({ active: topBorderjustifyTab === "2", })} onClick={() => { topBorderJustifytoggle("2"); }} >
                   Free score
@@ -335,9 +312,11 @@ const EcommerceProducts = (props) => {
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
                     <span>current: </span><p>100 Won</p>
                   </div><br /><hr />
+
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p style={{ position: "relative", top: "-3px" }}><Input type="number" id="basiInput purchase-input-sl" style={{ width: "30px", display: "inline", direction: "rtl", padding: "3px" }} />100 Won</p>
+                    <span>pay: </span><p>100 Won</p>
                   </div><br /><hr />
+
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
                     <span>real valance: </span><p>none</p>
                   </div><br /><hr /><br />
@@ -349,20 +328,25 @@ const EcommerceProducts = (props) => {
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
                     <span>current: </span><p>100 Won</p>
                   </div><br /><hr />
+
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p style={{ position: "relative", top: "-3px" }}><Input type="number" id="basiInput purchase-input-sl" style={{ width: "30px", display: "inline", direction: "rtl", padding: "3px" }} />100 Won</p>
+                    <span>pay: </span><p>100 Won</p>
                   </div><br /><hr />
+
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
                     <span>free valance: </span><p>none</p>
                   </div><br /><hr /><br />
+
                 </div>
               </TabPane>
             </TabContent>
+
             <div className='purchase-button-group mb-5'>
-              <Button color="warning" onClick={() => { tog_togSecond(false); }} style={{ float: "left" }}>
+              <Button color="primary" onClick={() => { tog_togSecond(false); }} style={{ float: "left" }}>
                 buy
               </Button>
-              <Button color="success" onClick={() => { }} style={{ float: "right" }}>
+
+              <Button color="primary" onClick={() => { }} style={{ float: "right" }}>
                 charging score
               </Button>
             </div><br /><br />
@@ -376,633 +360,193 @@ const EcommerceProducts = (props) => {
         <Row>
           <Col xl={3} lg={4}>
             <Card>
-              <CardHeader >
+              <div className="accordion accordion-flush ">
+                <div className="card-body border-bottom">
+                  <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
+                    Categories
+                  </p>
 
-
-                <div className="filter-choices-input">
-                  <Select
-                    value={selectedMulti}
-                    isMulti={true}
-                    onChange={() => {
-                      handleMulti();
+                  <TreeView
+                    data={data}
+                    className="basic p-2"
+                    aria-label="Controlled expanded node tree"
+                    expandedIds={expandedIds}
+                    defaultExpandedIds={[1]}
+                    nodeRenderer={({
+                      element,
+                      isBranch,
+                      isExpanded,
+                      isDisabled,
+                      getNodeProps,
+                      level,
+                      handleExpand,
+                    }) => {
+                      return (
+                        <div
+                          {...getNodeProps({ onClick: handleExpand })}
+                          style={{
+                            marginLeft: 20 * (level - 1),
+                            opacity: isDisabled ? 0.5 : 1,
+                          }}
+                        >
+                          {isBranch && <ArrowIcon isOpen={isExpanded} />}
+                          <span className="name">
+                            {element.name}-{element.id}
+                          </span>
+                        </div>
+                      );
                     }}
-                    options={SingleOptions}
                   />
                 </div>
-              </CardHeader>
-
-              <div className="accordion accordion-flush">
-                <div className="card-body border-bottom">
-                  <div>
-                    <p className="text-muted text-uppercase fs-12 fw-medium mb-2">
-                      Products
-                    </p>
-                    <ul className="list-unstyled mb-0">
-                      <li>
-                        <Link to="#" className="d-flex py-1">
-                          <div className="flex-grow-1">
-                            <h5 className="fs-13 mb-0">All</h5>
-                          </div>
-                        </Link>
-                      </li>
-                      <li>
-                        <a
-                          className="d-flex py-1"
-                          data-bs-toggle="collapse"
-                          href="#filterlist-mobiles_software"
-                          role="button"
-                          aria-expanded="true"
-                          aria-controls="filterlist-mobiles_software"
-                        >
-                          <div className="flex-grow-1">
-                            <h5 className="fs-13 mb-0">Mobiles Software</h5>
-                          </div>
-                          <div className="flex-shrink-0 ms-2">
-                            <span className="badge bg-light text-muted">5</span>
-                          </div>
-                        </a>
-
-                        <div className="collapse show" id="filterlist-mobiles_software">
-                          <ul className="ps-4">
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Study
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Common sense
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Game
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Tool
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Service
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-
-
-                      <li>
-                        <a
-                          className="d-flex py-1"
-                          data-bs-toggle="collapse"
-                          href="#filterlist-computer"
-                          role="button"
-                          aria-expanded="false"
-                          aria-controls="filterlist-computer"
-                        >
-                          <div className="flex-grow-1">
-                            <h5 className="fs-13 mb-0">Computer</h5>
-                          </div>
-                          <div className="flex-shrink-0 ms-2">
-                            <span className="badge bg-light text-muted">5</span>
-                          </div>
-                        </a>
-
-                        <div className="collapse show" id="filterlist-computer">
-                          <ul className="ps-4">
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Video
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Audio
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Image
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Gaming
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="#" className="d-block py-1 text-muted">
-                                Tablets
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-
-
-                    </ul>
-                  </div>
-                </div>
 
                 <div className="card-body border-bottom">
-                  <p className="text-muted text-uppercase text-center fs-12 fw-medium mb-5">
+                  <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Fashion Software
                   </p>
-                  <img src={product10}></img>
 
-                  {/* <Nouislider
-                    range={{ min: 0, max: 600 }}
-                    tooltips={true}
-                    start={[100, 500]}
-                    connect
-                    onSlide={onUpdate}
-                  /> */}
+                  <div className="p-3">{productLists.map((cartItem, key) => (
+                    <React.Fragment key={cartItem.id}>
+                      <Card className="product" onClick={() => tog_togFirst(cartItem)}>
+                        <Link
+                          className="text-dark"
+                        >
+                          <CardBody>
+                            <Row className="gy-3">
+                              <div className="col-sm-6">
+                                <div className="avatar-lg bg-light rounded p-1">
+                                  <img
+                                    src={cartItem.img}
+                                    alt=""
+                                    className="img-fluid d-block"
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="col-sm-6">
+                                <h5 className="pt-4 fs-20 text-truncate">
+                                  {cartItem.name}
+                                </h5>
+                              </div>
+                            </Row>
+                          </CardBody>
+
+                          <div className="card-footer">
+                            <div className="row align-items-center gy-3">
+                              <div className="col-sm-6">
+                                <div className="d-flex align-items-center gap-2 text-muted">
+                                  <div>Price:</div>
+
+                                  <h5 className="fs-12 mb-0">
+                                    <span className="product-line-price">
+                                      {" "}
+                                      {cartItem.total}
+                                    </span>
+                                  </h5>
+                                </div>
+                              </div>
+
+                              <div className="col-sm-6">
+                                <div className="d-flex align-items-center gap-2 text-muted">
+                                  <div>Rate:</div>
+
+                                  <h5 className="fs-12 mb-0">
+                                    <span className="product-line-price">
+                                      {" "}
+                                      {cartItem.total}
+                                    </span>
+                                  </h5>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </Card>
+
+                    </React.Fragment>
+                  ))}
+                  </div>
                 </div>
-                {/* 
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button
-                      className="accordion-button bg-transparent shadow-none"
-                      type="button"
-                      id="flush-headingBrands"
-                    >
-                      <span className="text-muted text-uppercase fs-12 fw-medium">
-                        Brands
-                      </span>{" "}
-                      <span className="badge bg-success rounded-pill align-middle ms-1">
-                        2
-                      </span>
-                    </button>
-                  </h2>
-                  <UncontrolledCollapse
-                    toggler="#flush-headingBrands"
-                  >
-                    <div
-                      id="flush-collapseBrands"
-                      className="accordion-collapse collapse show"
-                      aria-labelledby="flush-headingBrands"
-                    >
-                      <div className="accordion-body text-body pt-0">
-                        <div className="search-box search-box-sm">
-                          <input
-                            type="text"
-                            className="form-control bg-light border-0"
-                            placeholder="Search Brands..."
-                          />
-                          <i className="ri-search-line search-icon"></i>
-                        </div>
-                        <div className="d-flex flex-column gap-2 mt-3">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productBrandRadio5"
-                              defaultChecked
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productBrandRadio5"
-                            >
-                              Boat
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productBrandRadio4"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productBrandRadio4"
-                            >
-                              OnePlus
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productBrandRadio3"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productBrandRadio3"
-                            >
-                              Realme
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productBrandRadio2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productBrandRadio2"
-                            >
-                              Sony
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productBrandRadio1"
-                              defaultChecked
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productBrandRadio1"
-                            >
-                              JBL
-                            </label>
-                          </div>
-
-                          <div>
-                            <button
-                              type="button"
-                              className="btn btn-link text-decoration-none text-uppercase fw-medium p-0"
-                            >
-                              1,235 More
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </UncontrolledCollapse>
-                </div>
-
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button
-                      className="accordion-button bg-transparent shadow-none collapsed"
-                      type="button"
-                      id="flush-headingDiscount"
-                    >
-                      <span className="text-muted text-uppercase fs-12 fw-medium">
-                        Discount
-                      </span>{" "}
-                      <span className="badge bg-success rounded-pill align-middle ms-1">
-                        1
-                      </span>
-                    </button>
-                  </h2>
-                  <UncontrolledCollapse toggler="#flush-headingDiscount">
-                    <div
-                      id="flush-collapseDiscount"
-                      className="accordion-collapse collapse show"
-                    >
-                      <div className="accordion-body text-body pt-1">
-                        <div className="d-flex flex-column gap-2">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productdiscountRadio6"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productdiscountRadio6"
-                            >
-                              50% or more
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productdiscountRadio5"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productdiscountRadio5"
-                            >
-                              40% or more
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productdiscountRadio4"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productdiscountRadio4"
-                            >
-                              30% or more
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productdiscountRadio3"
-                              defaultChecked
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productdiscountRadio3"
-                            >
-                              20% or more
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productdiscountRadio2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productdiscountRadio2"
-                            >
-                              10% or more
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productdiscountRadio1"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productdiscountRadio1"
-                            >
-                              Less than 10%
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </UncontrolledCollapse>
-                </div>
-
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button
-                      className="accordion-button bg-transparent shadow-none collapsed"
-                      type="button"
-                      id="flush-headingRating"
-                    >
-                      <span className="text-muted text-uppercase fs-12 fw-medium">
-                        Rating
-                      </span>{" "}
-                      <span className="badge bg-success rounded-pill align-middle ms-1">
-                        1
-                      </span>
-                    </button>
-                  </h2>
-
-                  <UncontrolledCollapse toggler="#flush-headingRating">
-                    <div
-                      id="flush-collapseRating"
-                      className="accordion-collapse collapse show"
-                      aria-labelledby="flush-headingRating"
-                    >
-                      <div className="accordion-body text-body">
-                        <div className="d-flex flex-column gap-2">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productratingRadio4"
-                              onChange={e => {
-                                if (e.target.checked) {
-                                  onChangeRating(4);
-                                } else {
-                                  onUncheckMark(4);
-                                }
-                              }}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productratingRadio4"
-                            >
-                              <span className="text-muted">
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star"></i>
-                              </span>{" "}
-                              4 & Above
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productratingRadio3"
-                              onChange={e => {
-                                if (e.target.checked) {
-                                  onChangeRating(3);
-                                } else {
-                                  onUncheckMark(3);
-                                }
-                              }}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productratingRadio3"
-                            >
-                              <span className="text-muted">
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star"></i>
-                                <i className="mdi mdi-star"></i>
-                              </span>{" "}
-                              3 & Above
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productratingRadio2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productratingRadio2"
-                              onChange={e => {
-                                if (e.target.checked) {
-                                  onChangeRating(2);
-                                } else {
-                                  onUncheckMark(2);
-                                }
-                              }}
-                            >
-                              <span className="text-muted">
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star"></i>
-                                <i className="mdi mdi-star"></i>
-                                <i className="mdi mdi-star"></i>
-                              </span>{" "}
-                              2 & Above
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="productratingRadio1"
-                              onChange={e => {
-                                if (e.target.checked) {
-                                  onChangeRating(1);
-                                } else {
-                                  onUncheckMark(1);
-                                }
-                              }}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="productratingRadio1"
-                            >
-                              <span className="text-muted">
-                                <i className="mdi mdi-star text-warning"></i>
-                                <i className="mdi mdi-star"></i>
-                                <i className="mdi mdi-star"></i>
-                                <i className="mdi mdi-star"></i>
-                                <i className="mdi mdi-star"></i>
-                              </span>{" "}
-                              1
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </UncontrolledCollapse>
-                </div> */}
               </div>
             </Card>
           </Col>
 
           <div className="col-xl-9 col-lg-8">
-            <div>
-              <div className="card">
-                <div className="card-header border-0">
-                  <div className="row g-4">
-                    {/* <div className="col-sm-auto">
-                      <div>
-                        <Link
-                          to="/apps-ecommerce-add-product"
-                          className="btn btn-success"
-                        >
-                          <i className="ri-add-line align-bottom me-1"></i> Add
-                          Product
-                        </Link>
-                      </div>
-                    </div> */}
-                    {/* <div className="col-sm">
-                      <div className="d-flex justify-content-sm-end">
-                        <div className="search-box ms-2">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search Products..."
-                          />
-                          <i className="ri-search-line search-icon"></i>
-                        </div>
-                      </div>
-                    </div> */}
-                  </div>
-                </div>
+            <div className="card">
+              <CardHeader >
+                <Row>
+                  <div className="col-sm-6"></div>
 
-                <div className="card-header">
-                  <div className="row align-items-center">
-                    <div className="col">
-                      <Nav
-                        className="nav-tabs-custom card-header-tabs border-bottom-0"
-                        role="tablist"
-                      >
-                        <NavItem>
-                          <NavLink
-                            className={classnames(
-                              { active: activeTab === "1" },
-                              "fw-semibold"
-                            )}
-                            onClick={() => {
-                              toggleTab("1", "all");
-                            }}
-                            href="#"
-                          >
-                            All{" "}
-                            <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
-                              12
-                            </span>
-                          </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink
-                            className={classnames(
-                              { active: activeTab === "2" },
-                              "fw-semibold"
-                            )}
-                            onClick={() => {
-                              toggleTab("2", "unpublished");
-                            }}
-                            href="#"
-                          >
-                            Published{" "}
-                            <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
-                              5
-                            </span>
-                          </NavLink>
-                        </NavItem>
-                       
-                      </Nav>
+                  <div className="col-sm-6">
+                    <div className="filter-choices-input">
+                      <Input placeholder={"Search..."} />
                     </div>
-                   
                   </div>
-                </div>
+                </Row>
+              </CardHeader>
 
-                <div className="card-body">
-                  <TabContent className="text-muted">
-                    <TabPane>
-                      <div
-                        id="table-product-list-all"
-                        className="table-card gridjs-border-none pb-2"
-                      >
-                        {productList && productList !== "" ? (
-                          <TableContainer
-                            columns={columns}
-                            data={productList}
-                            isGlobalFilter={false}
-                            isAddUserList={false}
-                            customPageSize={10}
-                            divClass="table-responsive mb-1"
-                            tableClass="mb-0 table-borderless"
-                            theadClass="table-light text-muted"
-                          />
-                        ) : (
-                          <div className="py-4 text-center">
-                            <div>
-                              <lord-icon
-                                src="https://cdn.lordicon.com/msoeawqm.json"
-                                trigger="loop"
-                                colors="primary:#405189,secondary:#0ab39c"
-                                style={{ width: "72px", height: "72px" }}
-                              ></lord-icon>
-                            </div>
+              <Row className="p-3">
+                {productLists.map((cartItem, key) => (
+                  <React.Fragment key={cartItem.id}>
+                    <Col lg={4}>
+                      <Card className="product" onClick={() => tog_togFirst(cartItem)}>
+                        <Link
+                          className="text-dark"
+                        >
+                          <CardBody>
+                            <Row className="gy-3">
+                              <div className="col-sm-6">
+                                <div className="avatar-lg bg-light rounded p-1">
+                                  <img
+                                    src={cartItem.img}
+                                    alt=""
+                                    className="img-fluid d-block"
+                                  />
+                                </div>
+                              </div>
 
-                            <div className="mt-4">
-                              <h5>Sorry! No Result Found</h5>
+                              <div className="col-sm-6">
+                                <h5 className="pt-4 fs-20 text-truncate">
+                                  {cartItem.name}
+                                </h5>
+                              </div>
+                            </Row>
+                          </CardBody>
+
+                          <div className="card-footer">
+                            <div className="row align-items-center gy-3">
+                              <div className="col-sm-6">
+                                <div className="d-flex align-items-center gap-2 text-muted">
+                                  <div>Price:</div>
+
+                                  <h5 className="fs-12 mb-0">
+                                    <span className="product-line-price">
+                                      {" "}
+                                      {cartItem.total}
+                                    </span>
+                                  </h5>
+                                </div>
+                              </div>
+
+                              <div className="col-sm-6">
+                                <div className="d-flex align-items-center gap-2 text-muted">
+                                  <div>Rate:</div>
+
+                                  <h5 className="fs-12 mb-0">
+                                    <span className="product-line-price">
+                                      {" "}
+                                      {cartItem.total}
+                                    </span>
+                                  </h5>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        )}
-                      </div>
-                    </TabPane>
-                  </TabContent>
-                </div>
-              </div>
+                        </Link>
+                      </Card>
+                    </Col>
+                  </React.Fragment>
+                ))}
+              </Row>
             </div>
           </div>
         </Row>
@@ -1011,4 +555,14 @@ const EcommerceProducts = (props) => {
   );
 };
 
-export default EcommerceProducts;
+export default Software;
+
+
+
+
+
+
+
+
+
+

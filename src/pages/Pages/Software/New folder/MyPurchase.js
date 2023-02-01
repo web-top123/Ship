@@ -16,8 +16,8 @@ const MyPurchase = () => {
                         <label className="mb-0 pe-2">Sort:</label>
                         <select className="form-select" aria-label=".form-select-sm" style={{ width: "100px" }}>
                             <option defaultValue="1">One</option>
-                            <option Value="2">Two</option>
-                            <option Value="3">Three</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
                         </select>
                     </div>
                 </div>

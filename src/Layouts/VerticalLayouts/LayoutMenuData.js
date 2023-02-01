@@ -137,11 +137,61 @@ const Navdata = () => {
         {
             id: "blogservice",
             label: "Blog Service",
-            icon: "ri-rocket-line",
+            icon: "ri-questionnaire-line",
             link: "/pages-blog-service",
             click: function (e) {
                 e.preventDefault();
                 setIscurrentState('blogservice');
+            }
+        },
+        {
+            id: "testservice",
+            label: "Test",
+            icon: "ri-customer-service-2-line",
+            link: "/test-test-page-start",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('testservice');
+            }
+        },
+        {
+            id: "studyservice",
+            label: "Study",
+            icon: "ri-book-open-line",
+            link: "/pages-study-field",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('studyservice');
+            }
+        },
+        {
+            id: "softwareservice",
+            label: "Software",
+            icon: "ri-apps-line",
+            link: "/pages-software",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('softwareservice');
+            }
+        },
+        {
+            id: "dataservice",
+            label: "Data",
+            icon: "ri-database-line",
+            link: "/view-data-page",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('dataservice');
+            }
+        },
+        {
+            id: "introductionservice",
+            label: "Introduction",
+            icon: "ri-map-pin-user-line",
+            link: "/pages-company-introduction",
+            click: function (e) {
+                e.preventDefault();
+                setIscurrentState('introductionservice');
             }
         },
         {

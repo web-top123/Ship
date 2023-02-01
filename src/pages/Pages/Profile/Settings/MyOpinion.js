@@ -19,11 +19,8 @@ const MyOpinion = () => {
                                         <Button color="primary" data-bs-toggle="button" aria-pressed="false" className='me-2'>
                                             Grammar Checking
                                         </Button>
-                                        <Button color="primary" data-bs-toggle="button" aria-pressed="false" className='me-2'>
-                                            Save in Box
-                                        </Button>
                                         <Button color="primary" data-bs-toggle="button" aria-pressed="false">
-                                            Vote
+                                            Contribution
                                         </Button>
                                     </div>
                                     <Button color="primary" className="btn-label right"><i className="ri-file-upload-line label-icon align-middle fs-16 ms-2"></i> Attach File </Button>

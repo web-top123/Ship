@@ -1,10 +1,16 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route,BrowserRouter, Routes, useLocation } from "react-router-dom";
 
 import { useProfile } from "../Components/Hooks/UserHooks";
 
 const AuthProtected = (props) => {
   const { userProfile, loading } = useProfile();
+
+  const location = useLocation();
+
+  // The current location.
+  // console.log("lll,", location,userProfile, loading);
+
 
   /*
     redirect is un-auth access protected routes via url
@@ -12,7 +18,7 @@ const AuthProtected = (props) => {
 
   if (!userProfile && loading) {
     return (
-      <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
+      <Redirect to={{ pathname: "/pages-home-page", state: { from: props.location } }} />
     );
   }
 

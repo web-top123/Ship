@@ -48,8 +48,7 @@ const NotificationDropdown = () => {
                                 </div>
                             </Row>
                         </div>
-
-                        <div className="px-2 pt-2">
+                        {/* <div className="px-2 pt-2">
                             <Nav className="nav-tabs dropdown-tabs nav-tabs-custom">
                                 <NavItem>
                                     <NavLink
@@ -79,7 +78,7 @@ const NotificationDropdown = () => {
                                     </NavLink>
                                 </NavItem>
                             </Nav>
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -189,7 +188,7 @@ const NotificationDropdown = () => {
 
                         </TabPane>
 
-                        <TabPane tabId="2" className="py-2 ps-2">
+                        {/* <TabPane tabId="2" className="py-2 ps-2">
                             <SimpleBar style={{ maxHeight: "300px" }} className="pe-2">
                                 <div className="text-reset notification-item d-block dropdown-item">
                                     <div className="d-flex">
@@ -293,7 +292,7 @@ const NotificationDropdown = () => {
                             <div className="text-center pb-5 mt-2">
                                 <h6 className="fs-18 fw-semibold lh-base">Hey! You have no any notifications </h6>
                             </div>
-                        </TabPane>
+                        </TabPane> */}
                     </TabContent>
                 </DropdownMenu>
             </Dropdown>

@@ -6,12 +6,6 @@ const MyScore = () => {
         <React.Fragment>
             <TabPane tabId="5" id="v-pills-score-manage">
                 <div className="mb-2">
-                    <div className='d-flex gap-3'>
-                        <h4 className="card-title flex-grow-1">No Free Charge</h4>
-                        <h4 className="card-title flex-grow-1">No Free Score More</h4>
-                        <h4 className="card-title flex-grow-1">Score Charge</h4>
-                        <h4 className="card-title flex-grow-1">Score Move</h4>
-                    </div>
                     <div id="score-manage-field">
                         <div className="mt-4 md-0 d-flex">
                             <span>Sign mode:</span>
@@ -42,12 +36,12 @@ const MyScore = () => {
                                     Country
                                 </Label>
                             </div>
-                            <div className="form-check me-3">
+                            {/* <div className="form-check me-3">
                                 <Input className="form-check-input" type="radio" name="flexRadioCurrency" id="flexRadioCurrency2" defaultChecked />
                                 <Label className="form-check-label" htmlFor="flexRadioCurrency2">
                                     Abroad
                                 </Label>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="mt-4 mt-3 md-0 d-flex">
                             <span>Charging Score: </span>
@@ -60,8 +54,11 @@ const MyScore = () => {
                     </div>
                 </div>
                 <div className="d-flex justify-content-end">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="" className="btn btn-primary me-3">
                         Charge
+                    </button>
+                    <button type="" className="btn btn-primary">
+                        Move
                     </button>
                 </div>
             </TabPane>

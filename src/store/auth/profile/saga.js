@@ -1,7 +1,7 @@
 import { takeEvery, fork, put, all, call } from "redux-saga/effects"
 
 // Login Redux States
-import { EDIT_PROFILE } from "./actionTypes"
+import { EDIT_PROFILE, GET_PROFILE} from "./actionTypes"
 import { profileSuccess, profileError } from "./actions"
 
 //Include Both Helper File with needed methods
@@ -9,6 +9,7 @@ import { getFirebaseBackend } from "../../../helpers/firebase_helper"
 import {
   postFakeProfile,
   postJwtProfile,
+  getJwtMyProfile,
 } from "../../../helpers/fakebackend_helper"
 
 const fireBaseBackend = getFirebaseBackend()
@@ -23,9 +24,9 @@ function* editProfile({ payload: { user } }) {
       )
       yield put(profileSuccess(response))
     } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
-      const response = yield call(postJwtProfile, "/post-jwt-profile", {
+      const response = yield call(postJwtProfile, {
         username: user.username,
-        idx: user.idx,
+        id: user.id,
       })
       yield put(profileSuccess(response))
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
@@ -39,8 +40,24 @@ function* editProfile({ payload: { user } }) {
     yield put(profileError(error))
   }
 }
+
+function* getProfile({payload: {user}}) {
+  try {
+    if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
+      const response = yield call(getJwtMyProfile, {
+        id: user.id
+      })
+      yield put(profileSuccess(response))
+    }
+  } catch (error) {
+    yield put(profileError(error))
+  }
+
+}
+
 export function* watchProfile() {
   yield takeEvery(EDIT_PROFILE, editProfile)
+  yield takeEvery(GET_PROFILE, getProfile)
 }
 
 function* ProfileSaga() {
