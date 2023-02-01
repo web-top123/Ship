@@ -113,12 +113,6 @@
 .test-problems-detail{
     position: relative;
 }
-/* .display-change-content{  
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    top: 44%;
-} */
 .display-change-detail{
     position: relative;
     height: 150%;
@@ -127,4 +121,39 @@
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+/* view data page */
+.all-data-list tr, .all-data-list td{
+    align-self: center;
+    text-align: center;
+}
+.all-data-list td p{
+    margin-top: 27px;
+    border-right: 1px solid lightgrey;
+}
+.all-data-list td:last-child p{
+    border: none;
+}
+.all-data-list td{
+    padding: 10px 0;
+}
+.all-data-list tr{
+    border-bottom:  1px solid lightgrey;
+}
+.img-item{
+    height: 20px;
+}
+.img-item img{
+    position: relative;
+    top: -30px;
+}
+
+.overflow-hidden{
+    overflow: hidden;
+}
+
+.tbody-style{
+    position: relative;
+    top: 20px;
 }

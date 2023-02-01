@@ -210,6 +210,8 @@ import HomePage from "../pages/Pages/HomePage/index";
 import StudyField from  "../pages/Pages/StudyField/index";
 import Software from  "../pages/Pages/Software/index";
 import CompanyIntroduction from  "../pages/Pages/CompanyIntroduction/index";
+import ViewShipData from "../pages/Pages/ViewShipData/ViewShipData";
+import NewDataVote from "../pages/Pages/ViewShipData/NewDataVote";
 
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
@@ -382,6 +384,12 @@ const authProtectedRoutes = [
   { path: "/pages-question-service", component: QuestionService},
   { path: "/pages-blog-service", component: BlogService},
 
+  
+  //view ship data  
+  { path: "/new-data-vote", component: NewDataVote},
+  { path: "/view-data-page", component: ViewDataPage},
+  { path: "/view-ship-data", component: ViewShipData},
+
 ];
 
 const publicRoutes = [
@@ -392,7 +400,7 @@ const publicRoutes = [
     { path: "/register", component: Register },
     
 
-  //AuthenticationInner pages
+  //AuthenticationInner pages 
   { path: "/auth-signin-basic", component: BasicSignIn },
   { path: "/auth-signin-cover", component: CoverSignIn },
   { path: "/auth-signup-basic", component: BasicSignUp },
@@ -414,9 +422,8 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
-  { path: "/test-test-page", component: TestPage},
   { path: "/test-test-page-start", component: TestPageStart},
-  { path: "/view-data-page", component: ViewDataPage},
+
   { path: "/pages-home-page", component: HomePage},
 ];
 

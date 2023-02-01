@@ -65,8 +65,9 @@ const TableContainer = ({
   customPageSize,
   tableClass,
   theadClass,
+  tbodyClass,
   thClass,
-  divClass
+  divClass,
 }) => {
   const {
     getTableProps,
@@ -210,7 +211,7 @@ const TableContainer = ({
             ))}
           </thead>
 
-          <tbody {...getTableBodyProps()}>
+          <tbody className={tbodyClass} {...getTableBodyProps()}>
             {page.map((row) => {
               prepareRow(row);
               return (
