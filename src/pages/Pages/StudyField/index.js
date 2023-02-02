@@ -78,40 +78,40 @@ const Software = () => {
     const fetchData = async () => {
       const result = await getStudy();
       setstudyData(result);
-    var nodes = [];
-    var toplevelNodes = [];
-    var lookupList = {};
-    console.log("dsssssssssssss",result.length);
-    for (var i = 0; i < result.length; i++) {
+      var nodes = [];
+      var toplevelNodes = [];
+      var lookupList = {};
+      console.log("dsssssssssssss", result);
+      for (var i = 0; i < result.length; i++) {
         var n = {
-            id: result[i].id,
-            name: result[i].title,
-            parent_id: ((result[i].parentId == 0) ? null : result[i].parentId),
-            children: []
-            };
+          id: result[i].id,
+          name: result[i].title,
+          parent_id: ((result[i].parentId == 0) ? null : result[i].parentId),
+          children: []
+        };
         lookupList[n.id] = n;
         nodes.push(n);
         if (n.parent_id == null) {
-            toplevelNodes.push(n);
+          toplevelNodes.push(n);
         }
-    }
-    
-    for (var i = 0; i < nodes.length; i++) {
-      var n = nodes[i];
-      if (!(n.parent_id == null)) {
-          lookupList[n.parent_id].children = lookupList[n.parent_id].children.concat([n]);
       }
-    }
-    
-    var folder = {
-      name: "",
-      children: toplevelNodes,
-    };
+
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        if (!(n.parent_id == null)) {
+          lookupList[n.parent_id].children = lookupList[n.parent_id].children.concat([n]);
+        }
+      }
+
+      var folder = {
+        name: "",
+        children: toplevelNodes,
+      };
+
+      console.log("cate",folder);
+      setCategory(folder);
 
 
-    setCategory(folder);
-
-  
 
     };
 
@@ -190,198 +190,6 @@ const Software = () => {
   }
 
   //treeview
-  const folder1 = {
-    name: "",
-    children: [
-      {
-        name: "Fruits",
-        children: [
-          { name: "Avocados" },
-          { name: "Bananas" },
-          { name: "Berries" },
-          { name: "Oranges" },
-          { name: "Pears" },
-        ],
-      },
-      {
-        name: "Drinks",
-        children: [
-          { name: "Apple Juice" },
-          { name: "Chocolate" },
-          { name: "Coffee" },
-          {
-            name: "Tea",
-            children: [
-              { name: "Black Tea" },
-              { name: "Green Tea" },
-              { name: "Red Tea" },
-              { name: "Matcha" },
-            ],
-          },
-        ],
-      },
-      {
-        name: "Vegetables",
-        children: [
-          { name: "Beets" },
-          { name: "Carrots" },
-          { name: "Celery" },
-          { name: "Lettuce" },
-          { name: "Onions" },
-        ],
-      },
-    ],
-  };
-  const folder2 = {
-    name: "",
-    children: [
-      {
-        name: "Fruits",
-        children: [
-          {
-            name: "Avocados",
-            children: [
-              { name: "Black Tea" },
-              { name: "Green Tea" },
-              { name: "Red Tea" },
-              { name: "Matcha" },
-            ]
-          },
-          { name: "Bananas" },
-          { name: "Berries" },
-          { name: "Oranges" },
-          { name: "Pears" },
-        ],
-      },
-      {
-        name: "Drinks",
-        children: [
-          { name: "Apple Juice" },
-          { name: "Chocolate" },
-          { name: "Coffee" },
-          {
-            name: "Tea",
-            children: [
-              { name: "Black Tea" },
-              { name: "Green Tea" },
-              { name: "Red Tea" },
-              { name: "Matcha" },
-            ],
-          },
-        ],
-      },
-      {
-        name: "Vegetables",
-        children: [
-          { name: "Beets" },
-          { name: "Carrots" },
-          { name: "Celery" },
-          { name: "Lettuce" },
-          { name: "Onions" },
-        ],
-      },
-    ],
-  };
-  const folder3 = {
-    name: "",
-    children: [
-      {
-        name: "Fruits",
-        children: [
-          {
-            name: "Avocados",
-            children: [
-              { name: "Black Tea" },
-              { name: "Green Tea" },
-              { name: "Red Tea" },
-              { name: "Matcha" },
-            ]
-          },
-          { name: "Bananas" },
-          { name: "Berries" },
-          { name: "Oranges" },
-          { name: "Pears" },
-        ],
-      },
-      {
-        name: "Drinks",
-        children: [
-          { name: "Apple Juice" },
-          { name: "Chocolate" },
-          { name: "Coffee" },
-          {
-            name: "Tea",
-            children: [
-              { name: "Black Tea" },
-              { name: "Green Tea" },
-              { name: "Red Tea" },
-              { name: "Matcha" },
-            ],
-          },
-        ],
-      },
-      {
-        name: "Vegetables",
-        children: [
-          { name: "Beets" },
-          { name: "Carrots" },
-          { name: "Celery" },
-          { name: "Lettuce" },
-          { name: "Onions" },
-        ],
-      },
-    ],
-  };
-  const folder4 = {
-    name: "",
-    children: [
-      {
-        name: "Fruits",
-        children: [
-          {
-            name: "Avocados",
-            children: [
-              { name: "Black Tea" },
-              { name: "Green Tea" },
-              { name: "Red Tea" },
-              { name: "Matcha" },
-            ]
-          },
-          { name: "Bananas" },
-          { name: "Berries" },
-          { name: "Oranges" },
-          { name: "Pears" },
-        ],
-      },
-      {
-        name: "Drinks",
-        children: [
-          { name: "Apple Juice" },
-          { name: "Chocolate" },
-          { name: "Coffee" },
-          {
-            name: "Tea",
-            children: [
-              { name: "Black Tea" },
-              { name: "Green Tea" },
-              { name: "Red Tea" },
-              { name: "Matcha" },
-            ],
-          },
-        ],
-      },
-      {
-        name: "Vegetables",
-        children: [
-          { name: "Beets" },
-          { name: "Carrots" },
-          { name: "Celery" },
-          { name: "Lettuce" },
-          { name: "Onions" },
-        ],
-      },
-    ],
-  };
 
   //data folder
   const [category, setCategory] = useState([]);
@@ -557,7 +365,7 @@ const Software = () => {
       </Modal>
 
       <Container fluid>
-        <BreadCrumb title="Software" pageTitle="Ecommerce" />
+        <BreadCrumb title="Study" pageTitle="Study" />
 
         <Row>
           <Col xl={3} lg={4}>
@@ -601,7 +409,9 @@ const Software = () => {
                           }}
                         >
                           {isBranch && <ArrowIcon isOpen={isExpanded} />}
-                          <span className="name" onClick={() => tog_togFirst(element)}>
+                          <span className="name" onClick={() => {
+                            // tog_togFirst(element)
+                            }}>
                             {element.name}-{element.id}
                           </span>
                         </div>

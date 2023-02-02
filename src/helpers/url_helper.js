@@ -124,5 +124,5 @@ export const UPDATE_CUSTOMER = "/update/customer";
 export const DELETE_CUSTOMER = "/delete/customer";
 
 //studyfield
-export const GET_STUDY = "/api/data/findAll";
+export const GET_STUDY = "/api/campus/findAll";
 
