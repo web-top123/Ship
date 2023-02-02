@@ -178,7 +178,7 @@ const Navdata = () => {
             id: "dataservice",
             label: "Data",
             icon: "ri-database-line",
-            link: "/view-data-page",
+            link: "/view-ship-data",
             click: function (e) {
                 e.preventDefault();
                 setIscurrentState('dataservice');

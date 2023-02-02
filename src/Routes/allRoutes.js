@@ -207,7 +207,7 @@ import BlogServiceDetail from "../pages/Pages/BlogService/BlogServiceDetail"
 
 import TestPage from "../pages/Pages/Test/TestPage";
 import TestPageStart from "../pages/Pages/Test/TestpageStart";
-import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
+import ViewShipData from "../pages/Pages/ViewShipData/ViewShipData";
 
 import HomePage from "../pages/Pages/HomePage/index";
 import StudyDetail from "../pages/Pages/StudyField/detail";
@@ -379,7 +379,6 @@ const authProtectedRoutes = [
   },
   { path: "/pages-mine", component: Mine},
   { path: "/test-test-page", component: TestPage},
-  { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-study-field", component: StudyField},
   { path: "/pages-company-introduction", component: CompanyIntroduction},
   { path: "/pages-software", component: Software},
@@ -388,7 +387,7 @@ const authProtectedRoutes = [
   { path: "/pages-blog-service/article-kind", component: ArticleKind},
   { path: "/pages-blog-service/article-man", component: ArticleMan},
   { path: "/pages-blog-service/detail", component: BlogServiceDetail},
-  { path: "/view-data-page", component: ViewDataPage},
+  { path: "/view-ship-data", component: ViewShipData},
   { path: "/pages-study-detail", component: StudyDetail},
 ];
 
@@ -425,7 +424,6 @@ const publicRoutes = [
   { path: "/landing", component: Index },
   { path: "/test-test-page", component: TestPage},
   { path: "/test-test-page-start", component: TestPageStart},
-  { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-home-page", component: HomePage},
  
 ];

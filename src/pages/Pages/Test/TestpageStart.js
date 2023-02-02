@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, CardBody, CardHeader, Col, Container, Row, Input, Modal, ModalHeader,  Nav, NavItem, NavLink, TabContent, TabPane, UncontrolledTooltip  } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Label, Col, Container, Row, Input, Modal, ModalHeader,  Nav, NavItem, NavLink, TabContent, TabPane, UncontrolledTooltip  } from 'reactstrap';
 import "./test-page-custom.css";
 
 import { Link } from 'react-router-dom';
@@ -42,17 +42,43 @@ const TestPage = () => {
                                     <Col lg={12}>
                                         <h2 className="m-5">Select Your Roll Below Items</h2>
                                         <div className="d-flex flex-wrap gap-2">
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Caption </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Engineer manager </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Vice-caption </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Bosun </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Vice-E.manager </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Sailer </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Communicator </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Bosun member </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Engineer </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Electircian </Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Sub-Enginner </Button>
+                                            <div className="live-preview">
+                                                <div className="hstack gap-2 flex-wrap">
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption1"/>
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption1">Caption</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption2" />
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption2">Engineer manager</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption3"/>
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption3">Vice-caption</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption4" />
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption4">Bosun</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption5"/>
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption5">Vice-E.manager</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption6" />
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption6">Sailor</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption7"/>
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption7">Communicator</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption8" />
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption8">Bosun member</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption9" />
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption9">Engineer</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption10"/>
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption10">Electircian</Label>
+
+                                                    <Input type="radio" className="btn-check" name="optios" id="ption11" />
+                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption11">2nd Engineer</Label>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </Col>
                                 </Row>
@@ -60,14 +86,19 @@ const TestPage = () => {
                                     <Col lg={12}>
                                         <h2 className="m-5">Select Your Roll Degree</h2>
                                         <div className="d-flex flex-wrap gap-2">
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Engineer 1st degree</Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Engineer 2nd degree</Button>
-                                            <Button className="btn-soft-secondary shadow-none" size='lg'> Engineer 3rd degree</Button>
+                                            <Input type="radio" className="btn-check" name="options" id="option1"/>
+                                            <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="option1" size='lg'> Caption </Label>
+
+                                            <Input type="radio" className="btn-check" name="options" id="option2"/>
+                                            <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="option2" size='lg'> Engineer manager </Label>
+
+                                            <Input type="radio" className="btn-check" name="options" id="option3"/>
+                                            <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="option3" size='lg'> Vice-caption </Label>
                                         </div>
                                     </Col>
                                 </Row>
                                 <div className='align-self-center purchase-button-group'>
-                                    <NavLink href="landing" className=' d-inline'>
+                                    <NavLink href="/" className=' d-inline'>
                                         <Button className="btn-success shadow-none me-4" size='lg'> Back </Button>
                                     </NavLink>
                                     <Button className="btn-success shadow-none me-4" size='lg' onClick={() => tog_togFirst()}>Purchase</Button>
