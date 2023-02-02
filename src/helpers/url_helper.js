@@ -122,3 +122,7 @@ export const GET_CUSTOMERS = "/customers";
 export const ADD_NEW_CUSTOMER = "/add/customer";
 export const UPDATE_CUSTOMER = "/update/customer";
 export const DELETE_CUSTOMER = "/delete/customer";
+
+//studyfield
+export const GET_STUDY = "/api/data/findAll";
+
