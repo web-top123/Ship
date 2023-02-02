@@ -208,6 +208,8 @@ import BlogServiceDetail from "../pages/Pages/BlogService/BlogServiceDetail"
 import TestPage from "../pages/Pages/Test/TestPage";
 import TestPageStart from "../pages/Pages/Test/TestpageStart";
 import ViewShipData from "../pages/Pages/ViewShipData/ViewShipData";
+import NewDataVote from "../pages/Pages/ViewShipData/NewDataVote";
+
 
 import HomePage from "../pages/Pages/HomePage/index";
 import StudyDetail from "../pages/Pages/StudyField/detail";
@@ -388,6 +390,7 @@ const authProtectedRoutes = [
   { path: "/pages-blog-service/article-man", component: ArticleMan},
   { path: "/pages-blog-service/detail", component: BlogServiceDetail},
   { path: "/view-ship-data", component: ViewShipData},
+  { path: "/new-data-vote", component: NewDataVote},
   { path: "/pages-study-detail", component: StudyDetail},
 ];
 
