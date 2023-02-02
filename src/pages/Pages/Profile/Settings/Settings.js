@@ -43,7 +43,6 @@ const Settings = () => {
                             <Col>
                                 <div className="p-2">
                                     <h3 className="text-white mb-1">Anna Adame</h3>
-                                    <p className="text-white-75">Owner & Founder</p>
                                 </div>
                             </Col>
 
@@ -66,7 +65,7 @@ const Settings = () => {
                         </Row>
                     </div>
                     <Row>
-                        <Col xxl={3}>
+                        {/* <Col xxl={3}>
                             <Card>
                                 <CardBody>
                                     <h5 className="card-title mb-3">Info</h5>
@@ -99,9 +98,9 @@ const Settings = () => {
                                     </div>
                                 </CardBody>
                             </Card>
-                        </Col>
+                        </Col> */}
 
-                        <Col xxl={9}>
+                        <Col xxl={12}>
                             <Card className="">
                                 <CardHeader>
                                     <Nav className="nav-tabs-custom rounded card-header-tabs border-bottom-0"
