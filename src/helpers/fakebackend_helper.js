@@ -284,3 +284,7 @@ export const deleteMail = forId => api.delete(url.DELETE_MAIL, { headers: { forI
 
 //product
 export const deleteProducts = product => api.delete(url.DELETE_PRODUCT, { headers: { product } });
+
+//studyfield
+
+export const getStudy = study => api.get(url.GET_STUDY);

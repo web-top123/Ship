@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Container,
@@ -37,8 +37,22 @@ import cx from "classnames";
 //selection category
 import Select from "react-select";
 
+import { getStudy } from '../../../helpers/fakebackend_helper';
 
+// const [myInformation, setmyInformation] = useState([])
+// useEffect(() => {
+//     // Create function inside useEffect so that the function is only
+//     // created everytime the useEffect runs and not every render.
+//     const fetchData = async () => {
+//         const result = await getFindBrowseHistoriesById(userId);
 
+//         console.log(result);
+//     };
+
+//     //Run data fetching function.
+//     fetchData();
+// }, []);
+// import { getFindBrowseHistoriesById, getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
 
 
 
@@ -47,21 +61,93 @@ import Select from "react-select";
 
 const Software = () => {
 
+
+  const [studyData, setstudyData] = useState([]);
+
+
+  //  useEffect(() => {
+  //   fetch(`http://10.10.12.75:8080/api/data/findAll`)
+  //     .then((response) => response.json())
+  //     .then((actualData) => setstudyData(actualData));
+  // }, []);
+
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getStudy();
+      setstudyData(result);
+    var nodes = [];
+    var toplevelNodes = [];
+    var lookupList = {};
+    console.log("dsssssssssssss",result.length);
+    for (var i = 0; i < result.length; i++) {
+        var n = {
+            id: result[i].id,
+            name: result[i].title,
+            parent_id: ((result[i].parentId == 0) ? null : result[i].parentId),
+            children: []
+            };
+        lookupList[n.id] = n;
+        nodes.push(n);
+        if (n.parent_id == null) {
+            toplevelNodes.push(n);
+        }
+    }
+    
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      if (!(n.parent_id == null)) {
+          lookupList[n.parent_id].children = lookupList[n.parent_id].children.concat([n]);
+      }
+    }
+    
+    var folder = {
+      name: "",
+      children: toplevelNodes,
+    };
+
+
+    setCategory(folder);
+
+  
+
+    };
+
+    //Run data fetching function.
+    fetchData();
+  }, []);
+  //   useEffect(() => {
+
+  //  console.log("aaaaaaaaaaaaaa");
+  // }, []);
+
+
+
+
+
   //selection category
   const [selectedSingle, setSelectedSingle] = useState(null);
-  function handleSelectSingle(selectedSingle) {
-    setSelectedSingle(selectedSingle);
+  function handleSelectSingle(value) {
+    if (selectedSingle != value) {
+      setCategory(value);
+    }
+    setSelectedSingle(value);
+
+    // setCategory(selectedSingle);
+
   }
   const SingleOptions = [
-    { value: 'Choices 1', label: 'Choices 1' },
-    { value: 'Choices 2', label: 'Choices 2' },
-    { value: 'Choices 3', label: 'Choices 3' },
-    { value: 'Choices 4', label: 'Choices 4' }
+    { value: 'folder1', label: 'Choices 1' },
+    { value: 'folder2', label: 'Choices 2' },
+    { value: 'folder3', label: 'Choices 3' },
+    { value: 'folder4', label: 'Choices 4' }
   ];
 
   // Data
   const [productLists, setproductLists] = useState(sellersList);
-  const [studyData, setstudyData] = useState(productsData);
+
 
   //product detail
   const [title, setTitle] = useState("");
@@ -104,7 +190,49 @@ const Software = () => {
   }
 
   //treeview
-  const folder = {
+  const folder1 = {
+    name: "",
+    children: [
+      {
+        name: "Fruits",
+        children: [
+          { name: "Avocados" },
+          { name: "Bananas" },
+          { name: "Berries" },
+          { name: "Oranges" },
+          { name: "Pears" },
+        ],
+      },
+      {
+        name: "Drinks",
+        children: [
+          { name: "Apple Juice" },
+          { name: "Chocolate" },
+          { name: "Coffee" },
+          {
+            name: "Tea",
+            children: [
+              { name: "Black Tea" },
+              { name: "Green Tea" },
+              { name: "Red Tea" },
+              { name: "Matcha" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Vegetables",
+        children: [
+          { name: "Beets" },
+          { name: "Carrots" },
+          { name: "Celery" },
+          { name: "Lettuce" },
+          { name: "Onions" },
+        ],
+      },
+    ],
+  };
+  const folder2 = {
     name: "",
     children: [
       {
@@ -154,7 +282,114 @@ const Software = () => {
       },
     ],
   };
-  const data = flattenTree(folder);
+  const folder3 = {
+    name: "",
+    children: [
+      {
+        name: "Fruits",
+        children: [
+          {
+            name: "Avocados",
+            children: [
+              { name: "Black Tea" },
+              { name: "Green Tea" },
+              { name: "Red Tea" },
+              { name: "Matcha" },
+            ]
+          },
+          { name: "Bananas" },
+          { name: "Berries" },
+          { name: "Oranges" },
+          { name: "Pears" },
+        ],
+      },
+      {
+        name: "Drinks",
+        children: [
+          { name: "Apple Juice" },
+          { name: "Chocolate" },
+          { name: "Coffee" },
+          {
+            name: "Tea",
+            children: [
+              { name: "Black Tea" },
+              { name: "Green Tea" },
+              { name: "Red Tea" },
+              { name: "Matcha" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Vegetables",
+        children: [
+          { name: "Beets" },
+          { name: "Carrots" },
+          { name: "Celery" },
+          { name: "Lettuce" },
+          { name: "Onions" },
+        ],
+      },
+    ],
+  };
+  const folder4 = {
+    name: "",
+    children: [
+      {
+        name: "Fruits",
+        children: [
+          {
+            name: "Avocados",
+            children: [
+              { name: "Black Tea" },
+              { name: "Green Tea" },
+              { name: "Red Tea" },
+              { name: "Matcha" },
+            ]
+          },
+          { name: "Bananas" },
+          { name: "Berries" },
+          { name: "Oranges" },
+          { name: "Pears" },
+        ],
+      },
+      {
+        name: "Drinks",
+        children: [
+          { name: "Apple Juice" },
+          { name: "Chocolate" },
+          { name: "Coffee" },
+          {
+            name: "Tea",
+            children: [
+              { name: "Black Tea" },
+              { name: "Green Tea" },
+              { name: "Red Tea" },
+              { name: "Matcha" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Vegetables",
+        children: [
+          { name: "Beets" },
+          { name: "Carrots" },
+          { name: "Celery" },
+          { name: "Lettuce" },
+          { name: "Onions" },
+        ],
+      },
+    ],
+  };
+
+  //data folder
+  const [category, setCategory] = useState([]);
+  // const changeFolder=()=>{
+  //   setCategory(folder2)
+  // }
+
+  const data = flattenTree(category);
   const ArrowIcon = ({ isOpen, className }) => {
     const baseClass = "arrow";
     const classes = cx(
@@ -222,7 +457,7 @@ const Software = () => {
 
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="light" onClick={() => { tog_togSecond(); tog_togFirst(false); }}>Buy</Button>
+                <Button color="light" onClick={() => { tog_togSecond(); tog_togFirst(false); }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
                 <Button color="primary" onClick={() => {
@@ -309,8 +544,8 @@ const Software = () => {
             </TabContent>
 
             <div className='purchase-button-group mb-5'>
-              <Button color="primary" onClick={() => { tog_togSecond(false); }} style={{ float: "left" }}>
-                buy
+              <Button color="primary" onClick={() => { tog_togSecond(false); }} style={{ float: "left" }} href="pages-study-detail">
+                Buy
               </Button>
 
               <Button color="primary" onClick={() => { }} style={{ float: "right" }}>
@@ -366,7 +601,7 @@ const Software = () => {
                           }}
                         >
                           {isBranch && <ArrowIcon isOpen={isExpanded} />}
-                          <span className="name"  onClick={() => tog_togFirst(element)}>
+                          <span className="name" onClick={() => tog_togFirst(element)}>
                             {element.name}-{element.id}
                           </span>
                         </div>
@@ -389,7 +624,7 @@ const Software = () => {
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
                               <div className="flex-shrink-0 me-3">
-                                <img src={cartItem.img} className="avatar-sm rounded-circle shadow bg-light" alt="..."></img>
+                                <img src={cartItem.img} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
                               </div>
                               <div className="flex-grow-1">
                                 <h5 className="fs-14">{cartItem.color}</h5>
@@ -453,14 +688,14 @@ const Software = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {productLists.map((cartItem, key) => (
+                      {studyData.map((cartItem, key) => (
                         <React.Fragment key={cartItem.id}>
                           <tr >
                             <td className="fw-medium" style={{ border: "none" }}>{cartItem.id}</td>
-                            <td className="text-truncate" style={{ "border": "none", "width": "65%" }} onClick={() => tog_togFirst(cartItem)}><Link><div>{cartItem.name}</div></Link></td>
-                            <td style={{ border: "none" }}>{cartItem.stock}</td>
-                            <td style={{ border: "none" }}>{cartItem.chartdata[1]}</td>
-                            <td style={{ border: "none" }}>{cartItem.chartdata[2]}</td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "65%" }} onClick={() => tog_togFirst(cartItem)}><Link><div>{cartItem.title}</div></Link></td>
+                            <td style={{ border: "none" }}>{cartItem.id}</td>
+                            <td style={{ border: "none" }}>{cartItem.id}</td>
+                            <td style={{ border: "none" }}>{cartItem.id}</td>
 
                           </tr>
                         </React.Fragment>
@@ -513,7 +748,6 @@ const Software = () => {
 };
 
 export default Software;
-
 
 
 

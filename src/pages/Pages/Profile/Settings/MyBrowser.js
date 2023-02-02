@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { columnsData, dataList } from './TestData'
 import { useMemo } from "react";
 
-const userId = getAuthenticatedUser().id;
+// const userId = getAuthenticatedUser().id;
 
 
 const MyBrowser = () => {

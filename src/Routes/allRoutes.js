@@ -210,6 +210,7 @@ import TestPageStart from "../pages/Pages/Test/TestpageStart";
 import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
 
 import HomePage from "../pages/Pages/HomePage/index";
+import StudyDetail from "../pages/Pages/StudyField/detail";
 import StudyField from  "../pages/Pages/StudyField/index";
 import Software from  "../pages/Pages/Software/index";
 import CompanyIntroduction from  "../pages/Pages/CompanyIntroduction/index";
@@ -388,6 +389,7 @@ const authProtectedRoutes = [
   { path: "/pages-blog-service/article-man", component: ArticleMan},
   { path: "/pages-blog-service/detail", component: BlogServiceDetail},
   { path: "/view-data-page", component: ViewDataPage},
+  { path: "/pages-study-detail", component: StudyDetail},
 ];
 
 const publicRoutes = [
@@ -425,6 +427,7 @@ const publicRoutes = [
   { path: "/test-test-page-start", component: TestPageStart},
   { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-home-page", component: HomePage},
+ 
 ];
 
 export { authProtectedRoutes, publicRoutes };
