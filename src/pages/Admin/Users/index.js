@@ -18,15 +18,11 @@ import DeleteModal from "../../../Components/Common/DeleteModal";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import TableContainer from "../../../Components/Common/TableContainer";
 
-//Import actions
-import { getUsers as onGetUsers, deleteUser } from "../../../store/admin/users/action";
-import { isEmpty } from "lodash";
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getUsers } from "../../../helpers/fakebackend_helper";
+import { getUsers, deleteUser } from "../../../helpers/fakebackend_helper";
 
 const Users = (props) => {
   // const dispatch = useDispatch();
@@ -38,10 +34,14 @@ const Users = (props) => {
 
   const [userList, setUserList] = useState([]);
   useEffect(() => {
+    getUserList();
+  }, []);
+
+  const getUserList = () => {
     getUsers().then(res => {
       setUserList(res);
     })
-  }, []);
+  }
 
   // useEffect(() => {
   //   if (users && !users.length) {
@@ -63,16 +63,22 @@ const Users = (props) => {
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
+  const [currentID, setCurrentID] = useState(false);
 
   const onClickDelete = (user) => {
+    setCurrentID(user.id);
     // setUser(user);
     setDeleteModal(true);
   };
 
-  const handleDeleteOrder = (user) => {
-    if (user.id) {
-      // dispatch(deleteUser(user));
-      setDeleteModal(false);
+  const handleDeleteUser = () => {
+    if (currentID) {
+      deleteUser(currentID).then(res => {
+        if (res == 1) {
+          getUserList();
+          setDeleteModal(false);
+        }
+      })
     }
   };
 
@@ -138,7 +144,6 @@ const Users = (props) => {
       {
         Header: "Action",
         Cell: (cellProps) => {
-          console.log(cellProps);
           return (
             <UncontrolledDropdown>
               <DropdownToggle
@@ -183,7 +188,7 @@ const Users = (props) => {
     <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteOrder}
+        onDeleteClick={handleDeleteUser}
         onCloseClick={() => setDeleteModal(false)}
       />
 
