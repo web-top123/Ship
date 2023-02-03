@@ -77,6 +77,8 @@ const Users = (props) => {
         if (res == 1) {
           getUserList();
           setDeleteModal(false);
+        } else {
+          setDeleteModal(false);
         }
       })
     }
