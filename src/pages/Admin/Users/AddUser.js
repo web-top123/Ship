@@ -32,7 +32,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-
+import { addNewUser } from "../../../helpers/fakebackend_helper";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
@@ -47,6 +47,15 @@ const AddUser = (props) => {
   const [selectedGroup, setselectedGroup] = useState(null);
   const [selectedStatus, setselectedStatus] = useState(null);
   const [selectedVisibility, setselectedVisibility] = useState(null);
+
+  const [user, setUser] = useState({
+    username: '',
+    name: '',
+    email: '',
+    gender: 'male',
+    birthday: '',
+    password: '',
+  });
 
 
   function handleAcceptedFiles(files) {
@@ -112,12 +121,12 @@ const AddUser = (props) => {
   const gender = [
     {
       options: [
-        { label: "Male", value: "Male" },
-        { label: "Female", value: "Female" },
+        { label: "Male", value: "male" },
+        { label: "Female", value: "female" },
       ],
     },
   ];
-  document.title = "Add User | Velzon - React Admin & Dashboard Template";
+  document.title = "Add User";
   return (
     <div className="page-content">
       <Container fluid>
@@ -138,42 +147,98 @@ const AddUser = (props) => {
                       className="form-control"
                       id="product-title-input"
                       placeholder="Enter name"
+                      value={user.name}
+                      onChange={e => {
+                        setUser({ ...user, ...{ name: e.target.value } })
+                      }}
                     />
                   </div>
                   <Row>
-                        <Col lg={6}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="manufacturer-brand-input"
-                            >
-                              Username
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="manufacturer-brand-input"
-                              placeholder="Enter Username"
-                            />
-                          </div>
-                        </Col>
-                        <Col lg={6}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="manufacturer-brand-input"
-                            >
-                              Email
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="manufacturer-brand-input"
-                              placeholder="Enter Email"
-                            />
-                          </div>
-                        </Col>
-                      </Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Username
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter Username"
+                          value={user.username}
+                          onChange={e => {
+                            setUser({ ...user, ...{ username: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Email
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter Email"
+                          value={user.email}
+                          onChange={e => {
+                            setUser({ ...user, ...{ email: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col lg={6}>
+                      <div>
+                        <Label
+                          htmlFor="choices-publish-visibility-input"
+                          className="form-label"
+                        >
+                          Select Gender
+                        </Label>
+
+                        <Select
+                          value={{ value: user.gender, label: user.gender == 'male' ? 'Male' : 'Female' }}
+                          onChange={(e) => {
+                            console.log(e);
+                            setUser({ ...user, ...{ gender: e.value } })
+                          }}
+                          options={gender}
+                          name="choices-publish-visibility-input"
+                          classNamePrefix="select2-selection form-select"
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div>
+                        <label
+                          htmlFor="datepicker-publish-input"
+                          className="form-label"
+                        >
+                          Input Date Of Birth
+                        </label>
+                        <Flatpickr
+                          className="form-control"
+                          id="datepicker-publish-input"
+                          options={{
+                            altInput: true,
+                            altFormat: "F j, Y",
+                            mode: "single",
+                            dateFormat: "d.m.y",
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
                 </CardBody>
               </Card>
 
@@ -196,66 +261,19 @@ const AddUser = (props) => {
               </Card>
 
               <div className="text-end mb-3">
-                <button type="submit" className="btn btn-success w-sm">
+                <button type="submit" className="btn btn-success w-sm" onClick={e => {
+                  e.preventDefault();
+                  addNewUser(user).then(res=>{
+                    console.log(res);
+                  })
+                  
+                }}>
                   Submit
                 </button>
               </div>
             </form>
           </Col>
-          <Col lg={4}>
-            <Card>
-              <CardHeader>
-                <h5 className="card-title mb-0">Gender</h5>
-              </CardHeader>
-              <CardBody>
-                <div>
-                  <Label
-                    htmlFor="choices-publish-visibility-input"
-                    className="form-label"
-                  >
-                    Select Gender
-                  </Label>
 
-                  <Select
-                    value={selectedVisibility}
-                    onChange={() => {
-                      handleSelectVisibility();
-                    }}
-                    options={gender}
-                    name="choices-publish-visibility-input"
-                    classNamePrefix="select2-selection form-select"
-                  />
-                </div>
-              </CardBody>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <h5 className="card-title mb-0">Birthday</h5>
-              </CardHeader>
-
-              <CardBody>
-                <div>
-                  <label
-                    htmlFor="datepicker-publish-input"
-                    className="form-label"
-                  >
-                    Input Date Of Birth
-                  </label>
-                  <Flatpickr
-                    className="form-control"
-                    id="datepicker-publish-input"
-                    options={{
-                      altInput: true,
-                      altFormat: "F j, Y",
-                      mode: "single",
-                      dateFormat: "d.m.y",
-                    }}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
         </Row>
       </Container>
     </div>

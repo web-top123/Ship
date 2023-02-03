@@ -26,46 +26,52 @@ import { isEmpty } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { getUsers } from "../../../helpers/fakebackend_helper";
+
 const Users = (props) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const { users } = useSelector((state) => ({
-    users: state.User.userList,
-  }));
-
+  // const { users } = useSelector((state) => ({
+  //   users: state.User.userList,
+  // }));
+  // const [user, setUser] = useState(null);
 
   const [userList, setUserList] = useState([]);
-  const [user, setUser] = useState(null);
-
   useEffect(() => {
-    if (users && !users.length) {
-      dispatch(onGetUsers());
-    }
-  }, [dispatch, users]);
+    getUsers().then(res => {
+      setUserList(res);
+    })
+  }, []);
 
-  useEffect(() => {
-    setUserList(users);
-  }, [users]);
+  // useEffect(() => {
+  //   if (users && !users.length) {
+  //     dispatch(onGetUsers());
+  //   }
+  // }, [dispatch, users]);
 
-  useEffect(() => {
-    dispatch(onGetUsers());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   setUserList(users);
+  // }, [users]);
 
-  useEffect(() => {
-    if (!isEmpty(users)) setUserList(users);
-  }, [users]);
-  
+  // useEffect(() => {
+  //   dispatch(onGetUsers());
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (!isEmpty(users)) setUserList(users);
+  // }, [users]);
+
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
 
   const onClickDelete = (user) => {
-    setUser(user);
+    // setUser(user);
     setDeleteModal(true);
   };
 
-  const handleDeleteOrder = () => {
+  const handleDeleteOrder = (user) => {
     if (user.id) {
-      dispatch(deleteUser(user));
+      // dispatch(deleteUser(user));
       setDeleteModal(false);
     }
   };
@@ -117,7 +123,7 @@ const Users = (props) => {
       {
         Header: "Email",
         accessor: "email",
-        filterable: false,  
+        filterable: false,
       },
       {
         Header: "Gender",
@@ -132,6 +138,7 @@ const Users = (props) => {
       {
         Header: "Action",
         Cell: (cellProps) => {
+          console.log(cellProps);
           return (
             <UncontrolledDropdown>
               <DropdownToggle
@@ -142,12 +149,12 @@ const Users = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href="admin-user-details">
+                <DropdownItem href={"admin-user-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
                 </DropdownItem>
 
-                <DropdownItem href="admin-add-user">
+                <DropdownItem href={"admin-add-user/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -171,9 +178,7 @@ const Users = (props) => {
     ],
     []
   );
-  document.title = "Users | Velzon - React Admin & Dashboard Template";
-  console.log("produdct", {userList});
-  console.log("column", {columns});
+  document.title = "Users";
   return (
     <div className="page-content">
       <DeleteModal
