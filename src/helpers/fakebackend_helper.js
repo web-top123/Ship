@@ -288,3 +288,16 @@ export const deleteProducts = product => api.delete(url.DELETE_PRODUCT, { header
 //studyfield
 
 export const getStudy = study => api.get(url.GET_STUDY);
+
+
+// get Users
+export const getUsers = () => api.get(url.GET_USERS);
+
+// add USER
+export const addNewUser = customer => api.create(url.ADD_NEW_USER, customer);
+
+// update USER
+export const updateOneUser = customer => api.update(url.UPDATE_USER, customer);
+
+// delete USER
+export const deleteUser = customer => api.delete(url.DELETE_USER, { headers: { customer } });

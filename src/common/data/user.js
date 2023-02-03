@@ -23,7 +23,7 @@ import company6 from "../../assets/images/companies/img-6.png";
 import company7 from "../../assets/images/companies/img-7.png";
 import company8 from "../../assets/images/companies/img-8.png";
 
-const productsData = [
+const usersData = [
   {
     id: 1,
     image: product1,
@@ -760,4 +760,4 @@ const productsReview = [
   },
 ];
 
-export { productsData, productDetailsWidgets, reviews, orders, productDetails, customerList, shoppingCart, orderSummary, sellersList, revenueWidgets, productsReview };
+export { usersData };

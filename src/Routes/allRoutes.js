@@ -217,6 +217,11 @@ import StudyField from  "../pages/Pages/StudyField/index";
 import Software from  "../pages/Pages/Software/index";
 import CompanyIntroduction from  "../pages/Pages/CompanyIntroduction/index";
 
+// User Pages
+import Users from "../pages/Admin/Users/index";
+import UserDetail from "../pages/Admin/Users/UserDetail";
+import AddUser from "../pages/Admin/Users/AddUser";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -392,6 +397,12 @@ const authProtectedRoutes = [
   { path: "/view-ship-data", component: ViewShipData},
   { path: "/new-data-vote", component: NewDataVote},
   { path: "/pages-study-detail", component: StudyDetail},
+
+  // Admin
+  // Users
+  { path: "/admin-users", component: Users },
+  { path: "/admin-user-details", component: UserDetail },
+  { path: "/admin-add-user", component: AddUser },
 ];
 
 const publicRoutes = [

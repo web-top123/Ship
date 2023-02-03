@@ -38,6 +38,9 @@ import Invoice from "./invoice/reducer";
 //Mailbox
 import Mailbox from "./mailbox/reducer";
 
+//Users
+import User from "./admin/users/reducer";
+
 const rootReducer = combineReducers({
     // public
     Layout,
@@ -55,7 +58,9 @@ const rootReducer = combineReducers({
     Tickets,
     Crm,
     Invoice,
-    Mailbox
+    Mailbox,
+
+    User,
 });
 
 export default rootReducer;

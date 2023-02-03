@@ -25,6 +25,7 @@ import {
   deals,
   invoiceTable,
   mailbox,
+  usersData,
 } from "../../common/data";
 
 let users = [
@@ -900,6 +901,25 @@ const fakeBackend = () => {
       });
     });
   });
+
+
+  // mock.onGet(url.GET_USERS).reply(() => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       if (usersData) {
+  //         // Passing fake JSON data as response
+  //         resolve([200, usersData]);
+  //       } else {
+  //         reject([400, "Cannot get products"]);
+  //       }
+  //     });
+  //   });
+  // });
+
+  axios.get(url.GET_USERS).then(response => {
+    console.log(response);
+  })
+
 };
 
 export default fakeBackend;
