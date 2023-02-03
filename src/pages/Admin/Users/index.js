@@ -101,7 +101,7 @@ const Users = (props) => {
               <div className="flex-grow-1">
                 <h5 className="fs-14 mb-1">
                   <Link
-                    to="/admin-user-details"
+                    to={"/admin-user-details/" + user.row.original.id}
                     className="text-dark"
                   >
                     {" "}

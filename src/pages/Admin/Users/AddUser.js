@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import {
   Card,
@@ -20,11 +20,17 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import classnames from "classnames";
 import Dropzone from "react-dropzone";
-import { Link } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 
 // Import React FilePond
 import { registerPlugin } from "react-filepond";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 import Flatpickr from "react-flatpickr";
 import Select from "react-select";
 // Import FilePond styles
@@ -32,21 +38,13 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewUser } from "../../../helpers/fakebackend_helper";
+import { addNewUser, getUser, updateOneUser } from "../../../helpers/fakebackend_helper";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const AddUser = (props) => {
-  const [customActiveTab, setcustomActiveTab] = useState("1");
-  const toggleCustom = (tab) => {
-    if (customActiveTab !== tab) {
-      setcustomActiveTab(tab);
-    }
-  };
+  let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
-  const [selectedGroup, setselectedGroup] = useState(null);
-  const [selectedStatus, setselectedStatus] = useState(null);
-  const [selectedVisibility, setselectedVisibility] = useState(null);
 
   const [user, setUser] = useState({
     username: '',
@@ -57,6 +55,14 @@ const AddUser = (props) => {
     password: '',
   });
 
+  useEffect(() => {
+    if (id) {
+      getUser(id).then(res => {
+        setUser(res);
+      })
+    }
+  }, []);
+
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -66,18 +72,6 @@ const AddUser = (props) => {
       })
     );
     setselectedFiles(files);
-  }
-
-  function handleSelectGroup(selectedGroup) {
-    setselectedGroup(selectedGroup);
-  }
-
-  function handleSelectStatus(selectedStatus) {
-    setselectedStatus(selectedStatus);
-  }
-
-  function handleSelectVisibility(selectedVisibility) {
-    setselectedVisibility(selectedVisibility);
   }
 
   /**
@@ -93,31 +87,6 @@ const AddUser = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const productCategory = [
-    {
-      options: [
-        { label: "All", value: "All" },
-        { label: "Appliances", value: "Appliances" },
-        { label: "Fashion", value: "Fashion" },
-        { label: "Electronics", value: "Electronics" },
-        { label: "Grocery", value: "Grocery" },
-        { label: "Home & Furniture", value: "Home_Furniture" },
-        { label: "Kids", value: "Kids" },
-        { label: "Mobiles", value: "Mobiles" },
-      ],
-    },
-  ];
-
-  const productStatus = [
-    {
-      options: [
-        { label: "Draft", value: "Draft" },
-        { label: "Published", value: "Published" },
-        { label: "Scheduled", value: "Scheduled" },
-      ],
-    },
-  ];
-
   const gender = [
     {
       options: [
@@ -126,12 +95,12 @@ const AddUser = (props) => {
       ],
     },
   ];
-  document.title = "Add User";
+  document.title = id ? "Edit User" : "Add User";
   return (
     <div className="page-content">
       <Container fluid>
 
-        <BreadCrumb title="Add User" pageTitle="Ecommerce" />
+        <BreadCrumb title={id ? "Edit User" : "Add User"} pageTitle="Admin User" />
 
         <Row>
           <Col lg={8}>
@@ -263,12 +232,17 @@ const AddUser = (props) => {
               <div className="text-end mb-3">
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {
                   e.preventDefault();
-                  addNewUser(user).then(res=>{
-                    console.log(res);
-                  })
-                  
+                  if (id) {
+                    updateOneUser(id, user).then(res => {
+                      console.log(res);
+                    })
+                  } else {
+                    addNewUser(user).then(res => {
+                      console.log(res);
+                    })
+                  }
                 }}>
-                  Submit
+                  {id ? "Update" : "Add"}
                 </button>
               </div>
             </form>

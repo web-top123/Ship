@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import {
   Card,
   CardBody,
@@ -14,8 +14,15 @@ import {
   TabContent,
   TabPane,
 } from "reactstrap";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import { addNewUser, getUser, updateOneUser } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -32,11 +39,11 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
-import { Link } from "react-router-dom";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
 const UserReview = (props) => {
+
   return (
     <React.Fragment>
       <li className="py-2">
@@ -111,11 +118,23 @@ function UserDetail(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
 
-  const [ssize, setssize] = useState(false);
-  const [msize, setmsize] = useState(false);
-  const [lsize, setlsize] = useState(false);
-  const [xlsize, setxlsize] = useState(false);
   const [customActiveTab, setcustomActiveTab] = useState("1");
+  let { id } = useParams();
+  const [user, setUser] = useState({
+    username: '',
+    name: '',
+    email: '',
+    gender: 'male',
+    birthday: '',
+    password: '',
+  });
+  useEffect(() => {
+    if (id) {
+      getUser(id).then(res => {
+        setUser(res);
+      })
+    }
+  }, []);
   const toggleCustom = tab => {
     if (customActiveTab !== tab) {
       setcustomActiveTab(tab);
@@ -228,28 +247,7 @@ function UserDetail(props) {
                     <div className="mt-xl-0 mt-5">
                       <div className="d-flex">
                         <div className="flex-grow-1">
-                          <h4>Name</h4>
-                          {/* <div className="hstack gap-3 flex-wrap">
-                            <div>
-                              <Link to="#" className="text-primary d-block">
-                                Tommy Hilfiger
-                              </Link>
-                            </div>
-                            <div className="vr"></div>
-                            <div className="text-muted">
-                              Seller :{" "}
-                              <span className="text-body fw-medium">
-                                Zoetic Fashion
-                              </span>
-                            </div>
-                            <div className="vr"></div>
-                            <div className="text-muted">
-                              Published :{" "}
-                              <span className="text-body fw-medium">
-                                26 Mar, 2021
-                              </span>
-                            </div>
-                          </div> */}
+                          <h4>{user.name}</h4>
                         </div>
                         <div className="flex-shrink-0">
                           <div>
@@ -261,7 +259,13 @@ function UserDetail(props) {
                                 setttop(!ttop);
                               }}
                             >
-                              Edit
+                              <Link
+                                to="/admin-add-user"
+                                className="btn btn-success"
+                              >
+                                <i className="ri-add-line align-bottom me-1"></i> Add
+                                Edit
+                              </Link>
                             </Tooltip>
                             <a
                               href="apps-ecommerce-add-product"
@@ -358,19 +362,19 @@ function UserDetail(props) {
                                     <th scope="row" style={{ width: "200px" }}>
                                       Username
                                     </th>
-                                    <td>T-Shirt</td>
+                                    <td>{user.username}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">Email</th>
-                                    <td>Tommy Hilfiger</td>
+                                    <td>{user.email}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">Gender</th>
-                                    <td>Blue</td>
+                                    <td>{user.gender == 'male' ? 'Male' : 'Female'}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">Birthday</th>
-                                    <td>Cotton</td>
+                                    <td>{user.birthday}</td>
                                   </tr>
                                   {/* <tr>
                                     <th scope="row">Weight</th>

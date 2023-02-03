@@ -128,6 +128,7 @@ export const GET_STUDY = "/api/campus/findAll";
 
 // Users
 export const GET_USERS = "/api/user/getAllUsers";
+export const GET_USER = "/api/user/get";
 export const ADD_NEW_USER = "/api/user/create";
-export const UPDATE_USER = "/update/user";
+export const UPDATE_USER = "/api/user/update";
 export const DELETE_USER = "/delete/user";

@@ -401,8 +401,9 @@ const authProtectedRoutes = [
   // Admin
   // Users
   { path: "/admin-users", component: Users },
-  { path: "/admin-user-details", component: UserDetail },
+  { path: "/admin-user-details/:id", component: UserDetail },
   { path: "/admin-add-user", component: AddUser },
+  { path: "/admin-add-user/:id", component: AddUser },
 ];
 
 const publicRoutes = [
