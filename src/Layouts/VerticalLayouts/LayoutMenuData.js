@@ -36,8 +36,9 @@ const Navdata = () => {
     const [isVerification, setIsVerification] = useState(false);
     const [isError, setIsError] = useState(false);
 
-    // Pages
+    // Admin
     const [isUser, setIsUser] = useState(false);
+    const [isNotification, setIsNotification] = useState(false);
 
     // Charts
     const [isApex, setIsApex] = useState(false);
@@ -161,6 +162,22 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "List", link: "/admin-users", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-user", parentId: "admin" },
+                    ]
+                },
+                {
+                    id: "admin-notification",
+                    label: "Notification",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsNotification(!isNotification);
+                    },
+                    parentId: "admin",
+                    stateVariables: isNotification,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-notifications", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-notification", parentId: "admin" },
                     ]
                 },
             ],

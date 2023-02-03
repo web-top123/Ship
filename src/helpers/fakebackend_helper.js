@@ -303,3 +303,20 @@ export const updateOneUser = (id, customer) => api.update(url.UPDATE_USER + '/' 
 
 // delete USER
 export const deleteUser = id => api.delete(url.DELETE_USER + '/' + id);
+
+
+// ----------- Notificaiton --------------
+
+// get Notifications
+export const getNotifications = () => api.get(url.GET_NOTIFICATIONS);
+
+export const getNotification = (id) => api.get(url.GET_NOTIFICATION + '/' + id);
+
+// add NOTIFICATION
+export const addNewNotification = customer => api.create(url.ADD_NEW_NOTIFICATION, customer);
+
+// update NOTIFICATION
+export const updateOneNotification = (id, customer) => api.update(url.UPDATE_NOTIFICATION + '/' + id, customer);
+
+// delete NOTIFICATION
+export const deleteNotification = id => api.delete(url.DELETE_NOTIFICATION + '/' + id);

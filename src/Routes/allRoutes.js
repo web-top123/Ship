@@ -217,10 +217,17 @@ import StudyField from  "../pages/Pages/StudyField/index";
 import Software from  "../pages/Pages/Software/index";
 import CompanyIntroduction from  "../pages/Pages/CompanyIntroduction/index";
 
-// User Pages
+
+  // Admin Page
+// User Section
 import Users from "../pages/Admin/Users/index";
 import UserDetail from "../pages/Admin/Users/UserDetail";
 import AddUser from "../pages/Admin/Users/AddUser";
+
+// Notification Section
+import Notifications from "../pages/Admin/Notifications/index";
+import NotificationDetail from "../pages/Admin/Notifications/NotificationDetail";
+import AddNotification from "../pages/Admin/Notifications/AddNotification";
 
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
@@ -404,6 +411,12 @@ const authProtectedRoutes = [
   { path: "/admin-user-details/:id", component: UserDetail },
   { path: "/admin-add-user", component: AddUser },
   { path: "/admin-add-user/:id", component: AddUser },
+
+  // Notifications
+  { path: "/admin-notifications", component: Notifications },
+  { path: "/admin-notification-details/:id", component: NotificationDetail },
+  { path: "/admin-add-notification", component: AddNotification },
+  { path: "/admin-add-notification/:id", component: AddNotification },
 ];
 
 const publicRoutes = [
