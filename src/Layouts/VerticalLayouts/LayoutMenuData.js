@@ -7,7 +7,7 @@ const Navdata = () => {
     const [isDashboard, setIsDashboard] = useState(false);
     const [isApps, setIsApps] = useState(false);
     const [isAuth, setIsAuth] = useState(false);
-    const [isPages, setIsPages] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [isBaseUi, setIsBaseUi] = useState(false);
     const [isAdvanceUi, setIsAdvanceUi] = useState(false);
     const [isForms, setIsForms] = useState(false);
@@ -37,7 +37,7 @@ const Navdata = () => {
     const [isError, setIsError] = useState(false);
 
     // Pages
-    const [isProfile, setIsProfile] = useState(false);
+    const [isUser, setIsUser] = useState(false);
 
     // Charts
     const [isApex, setIsApex] = useState(false);
@@ -73,8 +73,8 @@ const Navdata = () => {
         if (iscurrentState !== 'Auth') {
             setIsAuth(false);
         }
-        if (iscurrentState !== 'Pages') {
-            setIsPages(false);
+        if (iscurrentState !== 'Admin') {
+            setIsAdmin(false);
         }
         if (iscurrentState !== 'BaseUi') {
             setIsBaseUi(false);
@@ -118,7 +118,7 @@ const Navdata = () => {
         isDashboard,
         isApps,
         isAuth,
-        isPages,
+        isAdmin,
         isBaseUi,
         isAdvanceUi,
         isForms,
@@ -133,6 +133,37 @@ const Navdata = () => {
         {
             label: "Menu",
             isHeader: true,
+        },
+        {
+            id: "admin",
+            label: "Admin",
+            icon: "bx bx-file",
+            link: "/#",
+            click: function (e) {
+                e.preventDefault();
+                setIsAdmin(!isAdmin);
+                setIscurrentState('Admin');
+                updateIconSidebar(e);
+            },
+            stateVariables: isAdmin,
+            subItems: [
+                {
+                    id: "admin-user",
+                    label: "User",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsUser(!isUser);
+                    },
+                    parentId: "admin",
+                    stateVariables: isUser,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-users", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-user", parentId: "admin" },
+                    ]
+                },
+            ],
         },
         {
             id: "blogservice",
@@ -548,70 +579,6 @@ const Navdata = () => {
                         { id: 4, label: "500", link: "/auth-500" },
                     ]
                 },
-            ],
-        },
-        {
-            id: "pages",
-            label: "Pages",
-            icon: "ri-pages-line",
-            link: "/#",
-            click: function (e) {
-                e.preventDefault();
-                setIsPages(!isPages);
-                setIscurrentState('Pages');
-                updateIconSidebar(e);
-            },
-            stateVariables: isPages,
-            subItems: [
-                {
-                    id: "starter",
-                    label: "starter",
-                    link: "/pages-starter",
-                    parentId: "pages",
-                },
-                {
-                    id: "mine",
-                    label: "My Page",
-                    link: "/pages-mine",
-                    parentId: "pages",
-                },
-                {
-                    id: "questionservice",
-                    label: "Question Service",
-                    link: "/pages-question-service",
-                    parentId: "pages",
-                },
-                {
-                    id: "blogservice",
-                    label: "Blog Service",
-                    link: "/pages-blog-service",
-                    parentId: "pages",
-                },
-                {
-                    id: "profile",
-                    label: "Profile",
-                    link: "/#",
-                    isChildItem: true,
-                    click: function (e) {
-                        e.preventDefault();
-                        setIsProfile(!isProfile);
-                    },
-                    parentId: "pages",
-                    stateVariables: isProfile,
-                    childItems: [
-                        { id: 1, label: "Simple Page", link: "/pages-profile", parentId: "pages" },
-                        { id: 2, label: "Settings", link: "/pages-profile-settings", parentId: "pages" },
-                    ]
-                },
-                { id: "team", label: "Team", link: "/pages-team", parentId: "pages" },
-                { id: "timeline", label: "Timeline", link: "/pages-timeline", parentId: "pages" },
-                { id: "faqs", label: "FAQs", link: "/pages-faqs", parentId: "pages" },
-                { id: "pricing", label: "Pricing", link: "/pages-pricing", parentId: "pages" },
-                { id: "gallery", label: "Gallery", link: "/pages-gallery", parentId: "pages" },
-                { id: "maintenance", label: "Maintenance", link: "/pages-maintenance", parentId: "pages" },
-                { id: "comingSoon", label: "Coming Soon", link: "/pages-coming-soon", parentId: "pages" },
-                { id: "sitemap", label: "Sitemap", link: "/pages-sitemap", parentId: "pages" },
-                { id: "searchResults", label: "Search Results", link: "/pages-search-results", parentId: "pages" },
             ],
         },
         {
