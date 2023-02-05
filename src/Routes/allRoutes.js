@@ -207,14 +207,27 @@ import BlogServiceDetail from "../pages/Pages/BlogService/BlogServiceDetail"
 
 import TestPage from "../pages/Pages/Test/TestPage";
 import TestPageStart from "../pages/Pages/Test/TestpageStart";
-import ViewDataPage from "../pages/Pages/ViewData/ViewDataPage";
+
 
 import HomePage from "../pages/Pages/HomePage/index";
+import StudyDetail from "../pages/Pages/StudyField/detail";
 import StudyField from  "../pages/Pages/StudyField/index";
 import Software from  "../pages/Pages/Software/index";
 import CompanyIntroduction from  "../pages/Pages/CompanyIntroduction/index";
 import ViewShipData from "../pages/Pages/ViewShipData/ViewShipData";
 import NewDataVote from "../pages/Pages/ViewShipData/NewDataVote";
+
+
+  // Admin Page
+// User Section
+import Users from "../pages/Admin/Users/index";
+import UserDetail from "../pages/Admin/Users/UserDetail";
+import AddUser from "../pages/Admin/Users/AddUser";
+
+// Notification Section
+import Notifications from "../pages/Admin/Notifications/index";
+import NotificationDetail from "../pages/Admin/Notifications/NotificationDetail";
+import AddNotification from "../pages/Admin/Notifications/AddNotification";
 
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
@@ -380,7 +393,6 @@ const authProtectedRoutes = [
   },
   { path: "/pages-mine", component: Mine},
   { path: "/test-test-page", component: TestPage},
-  { path: "/view-data-page", component: ViewDataPage},
   { path: "/pages-study-field", component: StudyField},
   { path: "/pages-company-introduction", component: CompanyIntroduction},
   { path: "/pages-software", component: Software},
@@ -388,12 +400,26 @@ const authProtectedRoutes = [
   { path: "/pages-blog-service", component: BlogService},
   //view ship data  
   { path: "/new-data-vote", component: NewDataVote},
-  { path: "/view-data-page", component: ViewDataPage},
   { path: "/view-ship-data", component: ViewShipData},
   { path: "/pages-blog-service/article-kind", component: ArticleKind},
   { path: "/pages-blog-service/article-man", component: ArticleMan},
   { path: "/pages-blog-service/detail", component: BlogServiceDetail},
-  { path: "/view-data-page", component: ViewDataPage},
+  { path: "/view-ship-data", component: ViewShipData},
+  { path: "/new-data-vote", component: NewDataVote},
+  { path: "/pages-study-detail", component: StudyDetail},
+
+  // Admin
+  // Users
+  { path: "/admin-users", component: Users },
+  { path: "/admin-user-details/:id", component: UserDetail },
+  { path: "/admin-add-user", component: AddUser },
+  { path: "/admin-add-user/:id", component: AddUser },
+
+  // Notifications
+  { path: "/admin-notifications", component: Notifications },
+  { path: "/admin-notification-details/:id", component: NotificationDetail },
+  { path: "/admin-add-notification", component: AddNotification },
+  { path: "/admin-add-notification/:id", component: AddNotification },
 ];
 
 const publicRoutes = [
@@ -428,8 +454,8 @@ const publicRoutes = [
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
   { path: "/test-test-page-start", component: TestPageStart},
-
   { path: "/pages-home-page", component: HomePage},
+ 
 ];
 
 export { authProtectedRoutes, publicRoutes };

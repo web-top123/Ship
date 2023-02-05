@@ -68,6 +68,11 @@ import {
 
 import { crmcontacts, companies, leads, deals } from "./crm";
 
+//Ecommerce
+import {
+  usersData,
+} from "./user";
+
 export {
   topPages,
   crmWidgets,
@@ -137,5 +142,7 @@ export {
   icoWidgetsList,
   ticketsWidgets,
   ticketsTable,
-  otherWidgets2
+  otherWidgets2,
+
+  usersData
 };

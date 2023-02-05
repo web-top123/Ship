@@ -136,7 +136,8 @@ const NewDataVote = (props) => {
   return (
 
     <div className="page-content">
-      <Container fluid>
+
+      <Container>
         <BreadCrumb title="Create Product" pageTitle="Ecommerce" />
         <form>
           <div style={{width: '30%'}}>
@@ -644,7 +645,8 @@ const NewDataVote = (props) => {
                       <Button color="primary" className="ms-3 me-3" onClick={() => { tog_togFirst(); tog_togSecond(false); }}>
                           Confirm again
                       </Button>
-                      <NavLink href="test-test-page" className=' d-inline'>
+
+                      <NavLink href="view-ship-data" className=' d-inline'>
                           <Button color="primary" className="ms-3" onClick={() => tog_togSecond(false)}>Yes</Button>
                       </NavLink>
                       <Button color="primary" className="me-3" onClick={() => tog_togSecond(false)}>No</Button>

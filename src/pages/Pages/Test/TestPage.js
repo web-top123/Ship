@@ -247,7 +247,7 @@ const TestPage = () => {
                                                         </TabPane>
                                                         <TabPane tabId={2}>
                                                             <div className="d-flex align-items-start gap-3 mt-4 display-change-button">
-                                                                <Link to="/landing">
+                                                                <Link to="/">
                                                                     <button
                                                                         type="button"
                                                                         className="btn btn-primary btn-label right ms-auto nexttab btn-lg" 

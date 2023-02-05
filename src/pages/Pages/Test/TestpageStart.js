@@ -98,7 +98,7 @@ const TestPage = () => {
                                     </Col>
                                 </Row>
                                 <div className='align-self-center purchase-button-group'>
-                                    <NavLink href="landing" className=' d-inline'>
+                                    <NavLink href="/" className=' d-inline'>
                                         <Button className="btn-success shadow-none me-4" size='lg'> Back </Button>
                                     </NavLink>
                                     <Button className="btn-success shadow-none me-4" size='lg' onClick={() => tog_togFirst()}>Purchase</Button>

@@ -122,3 +122,20 @@ export const GET_CUSTOMERS = "/customers";
 export const ADD_NEW_CUSTOMER = "/add/customer";
 export const UPDATE_CUSTOMER = "/update/customer";
 export const DELETE_CUSTOMER = "/delete/customer";
+
+//studyfield
+export const GET_STUDY = "/api/campus/findAll";
+
+// Users
+export const GET_USERS = "/api/user/getAllUsers";
+export const GET_USER = "/api/user/get";
+export const ADD_NEW_USER = "/api/user/create";
+export const UPDATE_USER = "/api/user/update";
+export const DELETE_USER = "/api/user/delete";
+
+// Notifications
+export const GET_NOTIFICATIONS = "/api/notifications/get_All";
+export const GET_NOTIFICATION = "/api/notifications/get";
+export const ADD_NEW_NOTIFICATION = "/api/notifications/create";
+export const UPDATE_NOTIFICATION = "/api/notifications/update";
+export const DELETE_NOTIFICATION = "/api/notifications/delete";

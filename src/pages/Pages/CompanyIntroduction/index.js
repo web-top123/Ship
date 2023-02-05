@@ -1,13 +1,22 @@
 import React from 'react';
 import Home from './home';
+
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { Card, CardBody, Col, Container, Row, } from 'reactstrap';
 const CompanyIntroduction = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
-    return (                                                                        
+    return (    
+        <div className="page-content">                                                                    
         <React.Fragment>
-            
-            <div className="page-content">
-               <Home></Home>
+            <Container fluid>
+        <BreadCrumb title="Introduction" pageTitle="Ecommerce" />
+           
+                <Row>
+                    <Home></Home>
+                  
+                    
+                </Row>
+               
                <Row>
                         <Col lg={12}>
                             <Card>
@@ -76,9 +85,10 @@ const CompanyIntroduction = () => {
                             </Card>
                         </Col>
                     </Row>
-            </div>
-          
+           
+          </Container>
         </React.Fragment>
+        </div>
     );
 };
 

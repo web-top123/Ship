@@ -284,3 +284,39 @@ export const deleteMail = forId => api.delete(url.DELETE_MAIL, { headers: { forI
 
 //product
 export const deleteProducts = product => api.delete(url.DELETE_PRODUCT, { headers: { product } });
+
+//studyfield
+
+export const getStudy = study => api.get(url.GET_STUDY);
+
+
+// get Users
+export const getUsers = () => api.get(url.GET_USERS);
+
+export const getUser = (id) => api.get(url.GET_USER + '/' + id);
+
+// add USER
+export const addNewUser = customer => api.create(url.ADD_NEW_USER, customer);
+
+// update USER
+export const updateOneUser = (id, customer) => api.update(url.UPDATE_USER + '/' + id, customer);
+
+// delete USER
+export const deleteUser = id => api.delete(url.DELETE_USER + '/' + id);
+
+
+// ----------- Notificaiton --------------
+
+// get Notifications
+export const getNotifications = () => api.get(url.GET_NOTIFICATIONS);
+
+export const getNotification = (id) => api.get(url.GET_NOTIFICATION + '/' + id);
+
+// add NOTIFICATION
+export const addNewNotification = customer => api.create(url.ADD_NEW_NOTIFICATION, customer);
+
+// update NOTIFICATION
+export const updateOneNotification = (id, customer) => api.update(url.UPDATE_NOTIFICATION + '/' + id, customer);
+
+// delete NOTIFICATION
+export const deleteNotification = id => api.delete(url.DELETE_NOTIFICATION + '/' + id);

@@ -30,7 +30,7 @@ const columnsBlogData = [
 
                 </div>
                 <div>
-                    <button className="rounded-pill btn btn-light tags me-4">{purchase.row.original.content[6]}</button>
+                    <Link to={'/pages-blog-service/article-kind'} className="rounded-pill btn btn-light tags me-4">{purchase.row.original.content[6]}</Link>
                     <i className="bx bx-like pe-1"></i><span className="pe-3">{purchase.row.original.content[7]}</span>
                     <i className="bx bx-message pe-1"></i><span className="pe-3">{purchase.row.original.content[8]}</span>
                 </div>

@@ -192,6 +192,9 @@ main {
   width: 5rem;
   height: auto;
 }
+.my-img-select .img-buy {
+    border: 3px solid var(--vz-topnav-item-color-active);
+}
 .navbar-landing, .bread-banner {
   height: 80px;
 }

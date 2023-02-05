@@ -40,6 +40,10 @@ import invoiceSaga from "./invoice/saga";
 
 //mailbox
 import mailboxSaga from "./mailbox/saga";
+
+//users
+import userSaga from "./admin/users/saga";
+
 export default function* rootSaga() {
   yield all([
     //public
@@ -58,5 +62,6 @@ export default function* rootSaga() {
     fork(crmSaga),
     fork(invoiceSaga),
     fork(mailboxSaga),
+    fork(userSaga),
   ]);
 }
