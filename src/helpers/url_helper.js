@@ -153,3 +153,38 @@ export const GET_PROGRAMCATEGORY = "/api/program/category/get_one";
 export const ADD_NEW_PROGRAMCATEGORY = "/api/program/category/create";
 export const UPDATE_PROGRAMCATEGORY = "/api/program/category/update";
 export const DELETE_PROGRAMCATEGORY = "/api/program/category/delete";
+
+//SUGGESTION
+export const GET_SUGGESTIONS = "/api/suggestions/get_All";
+export const GET_SUGGESTION = "/api/suggestions/get_one";
+export const ADD_NEW_SUGGESTION = "/api/suggestions/create";
+export const UPDATE_SUGGESTION = "/api/suggestions/update";
+export const DELETE_SUGGESTION = "/api/suggestions/delete";
+
+// Articles
+export const GET_ARTICLES = "/api/article/get_All";
+export const GET_ARTICLE = "/api/article/get_one";
+export const ADD_NEW_ARTICLE = "/api/article/create";
+export const UPDATE_ARTICLE = "/api/article/update";
+export const DELETE_ARTICLE = "/api/article/delete";
+
+// ArticleCategory
+export const GET_ARTICLECATEGORIES = "/api/article/category/get_All";
+export const GET_ARTICLECATEGORY = "/api/article/category/get_one";
+export const ADD_NEW_ARTICLECATEGORY = "/api/article/category/create";
+export const UPDATE_ARTICLECATEGORY = "/api/article/category/update";
+export const DELETE_ARTICLECATEGORY = "/api/article/category/delete";
+
+// Datas
+export const GET_DATAS = "/api/data/get_All";
+export const GET_DATA = "/api/data/get_one";
+export const ADD_NEW_DATA = "/api/data/create";
+export const UPDATE_DATA = "/api/data/update";
+export const DELETE_DATA = "/api/data/delete";
+
+// DataCategories
+export const GET_DATACATEGORIES = "/api/data/category/get_All";
+export const GET_DATACATEGORY = "/api/data/category/get_one";
+export const ADD_NEW_DATACATEGORY = "/api/data/category/create";
+export const UPDATE_DATACATEGORY = "/api/data/category/update";
+export const DELETE_DATACATEGORY = "/api/data/category/delete";

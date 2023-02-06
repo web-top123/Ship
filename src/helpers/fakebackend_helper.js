@@ -350,3 +350,80 @@ export const updateOneProgramCategory = (id, customer) => api.update(url.UPDATE_
 
 // delete PROGRAMCATEGORY
 export const deleteProgramCategory = id => api.delete(url.DELETE_PROGRAMCATEGORY + '/' + id);
+
+//---------------Suggestion-----------//
+
+// get Suggestions
+export const getSuggestions = () => api.get(url.GET_SUGGESTIONS);
+
+export const getSuggestion = (id) => api.get(url.GET_SUGGESTION + '/' + id);
+
+// add SUGGESTION
+export const addNewSuggestion = customer => api.create(url.ADD_NEW_SUGGESTION, customer);
+
+// update SUGGESTION
+export const updateOneSuggestion = (id, customer) => api.update(url.UPDATE_SUGGESTION + '/' + id, customer);
+
+// delete SUGGESTION
+export const deleteSuggestion = id => api.delete(url.DELETE_SUGGESTION + '/' + id);
+
+// ----------- Article --------------
+
+// get Articles
+export const getArticles = () => api.get(url.GET_ARTICLES);
+export const getArticle = (id) => api.get(url.GET_ARTICLE + '/' + id);
+
+// add ARTICLE
+export const addNewArticle = customer => api.create(url.ADD_NEW_ARTICLE, customer);
+
+// update ARTICLE
+export const updateOneArticle = (id, customer) => api.update(url.UPDATE_ARTICLE + '/' + id, customer);
+
+// delete ARTICLE
+export const deleteArticle = id => api.delete(url.DELETE_ARTICLE + '/' + id);
+
+// ----------- ArticleCategory --------------
+
+// get ArticleCategories
+export const getArticleCategories = () => api.get(url.GET_ARTICLECATEGORIES);
+
+export const getArticleCategory = (id) => api.get(url.GET_ARTICLECATEGORY + '/' + id);
+
+// add ARTICLECATEGORY
+export const addNewArticleCategory = customer => api.create(url.ADD_NEW_ARTICLECATEGORY, customer);
+
+// update ARTICLECATEGORY
+export const updateOneArticleCategory = (id, customer) => api.update(url.UPDATE_ARTICLECATEGORY + '/' + id, customer);
+
+// delete ARTICLECATEGORY
+export const deleteArticleCategory = id => api.delete(url.DELETE_ARTICLECATEGORY + '/' + id);
+
+//-----------Data-----------
+// get Datas
+export const getDatas = () => api.get(url.GET_DATAS);
+
+export const getData = (id) => api.get(url.GET_DATA + '/' + id);
+
+// add DATA
+export const addNewData = customer => api.create(url.ADD_NEW_DATA, customer);
+
+// update DATA
+export const updateOneData = (id, customer) => api.update(url.UPDATE_DATA + '/' + id, customer);
+
+// delete DATA
+export const deleteData = id => api.delete(url.DELETE_DATA + '/' + id);
+
+//-----------DataCategory-----------
+// get DataCategories
+export const getDataCategories = () => api.get(url.GET_DATACATEGORIES);
+
+export const getDataCategory = (id) => api.get(url.GET_DATACATEGORY + '/' + id);
+
+// add DATACATEGORY
+export const addNewDataCategory = customer => api.create(url.ADD_NEW_DATACATEGORY, customer);
+
+// update DATACATEGORY
+export const updateOneDataCategory = (id, customer) => api.update(url.UPDATE_DATACATEGORY + '/' + id, customer);
+
+// delete DATACATEGORY
+export const deleteDataCategory = id => api.delete(url.DELETE_DATACATEGORY + '/' + id);
