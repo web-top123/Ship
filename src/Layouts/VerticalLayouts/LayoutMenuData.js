@@ -48,6 +48,9 @@ const Navdata = () => {
 
     const [isData, setIsData] = useState(false);
     const [isDataCategory, setIsDataCategory] = useState(false);
+
+    const [isCampus, setIsCampus] = useState(false);
+    const [isCampusCategory, setIsCampusCategory] = useState(false);
     // Charts
     const [isApex, setIsApex] = useState(false);
 
@@ -308,17 +311,49 @@ const Navdata = () => {
                             isChildItem: true,
                             click: function (e) {
                                 e.preventDefault();
-                                setIsData(!isData);
+                                setIsDataCategory(!isDataCategory);
                             },
                             parentId: "admin",
-                            stateVariables: isData,
+                            stateVariables: isDataCategory,
                             childItems: [
                                 { id: 1, label: "List", link: "/admin-dataCategories", parentId: "admin" },
                                 { id: 2, label: "Create", link: "/admin-add-dataCategory", parentId: "admin" },
                             ]
                         },
                     ]
-                },                
+                }, 
+                {
+                    id: "admin-campus",
+                    label: "Campus",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsCampus(!isCampus);
+                    },
+                    parentId: "admin",
+                    stateVariables: isCampus,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-campuses", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-campus", parentId: "admin" },
+                        {
+                            id: "admin-campusCategory",
+                            label: "Category",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsCampusCategory(!isCampusCategory);
+                            },
+                            parentId: "admin",
+                            stateVariables: isCampusCategory,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-campusCategories", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-campusCategory", parentId: "admin" },
+                            ]
+                        },
+                    ]
+                },                               
             ]
         },
 

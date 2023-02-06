@@ -1,5 +1,15 @@
 import React, { useEffect, useState, useMemo } from "react";
-import {  Container,  UncontrolledDropdown,  DropdownToggle,  DropdownItem,  DropdownMenu,  TabContent,  TabPane,  Row,} from "reactstrap";
+
+import {
+  Container,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownMenu,
+  TabContent,
+  TabPane,
+  Row,
+} from "reactstrap";
 
 // RangeSlider
 import "nouislider/distribute/nouislider.css";
@@ -8,62 +18,46 @@ import DeleteModal from "../../../Components/Common/DeleteModal";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import TableContainer from "../../../Components/Common/TableContainer";
 
+
 //redux
 import { Link } from "react-router-dom";
-import { getArticles, deleteArticle } from "../../../helpers/fakebackend_helper";
 
-const Articles = (props) => {
+import { getCampusCategories, deleteCampusCategory } from "../../../helpers/fakebackend_helper";
+
+const CampusCategories = (props) => {
   // const dispatch = useDispatch();
 
-  // const { articles } = useSelector((state) => ({
-  //   articles: state.Article.articleList,
+  // const { CampusCategorys } = useSelector((state) => ({
+  //   CampusCategorys: state.CampusCategory.CampusCategoryList,
   // }));
-  // const [article, setArticle] = useState(null);
+  // const [CampusCategory, setCampusCategory] = useState(null);
 
-  const [articleList, setArticleList] = useState([]);
+  const [CampusCategoryList, setCampusCategoryList] = useState([]);
   useEffect(() => {
-    getArticleList();
+    getCampusCategoryList();
   }, []);
 
-  const getArticleList = () => {
-    getArticles().then(res => {
-      setArticleList(res);
+  const getCampusCategoryList = () => {
+    getCampusCategories().then(res => {
+      setCampusCategoryList(res);
     })
   }
-
-  // useEffect(() => {
-  //   if (articles && !articles.length) {
-  //     dispatch(onGetArticles());
-  //   }
-  // }, [dispatch, articles]);
-
-  // useEffect(() => {
-  //   setArticleList(articles);
-  // }, [articles]);
-
-  // useEffect(() => {
-  //   dispatch(onGetArticles());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!isEmpty(articles)) setArticleList(articles);
-  // }, [articles]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (article) => {
-    setCurrentID(article.id);
-    // setArticle(article);
+  const onClickDelete = (CampusCategory) => {
+    setCurrentID(CampusCategory.id);
+    // setCampusCategory(CampusCategory);
     setDeleteModal(true);
   };
 
-  const handleDeleteArticle = () => {
+  const handleDeleteCampusCategory = () => {
     if (currentID) {
-      deleteArticle(currentID).then(res => {
+      deleteCampusCategory(currentID).then(res => {
         if (res === 1) {
-          getArticleList();
+          getCampusCategoryList();
           setDeleteModal(false);
         } else {
           setDeleteModal(false);
@@ -81,55 +75,42 @@ const Articles = (props) => {
         },
       },
       {
-        Header: "Name",
-        accessor: "name",
+        Header: "Title",
+        Cell: (CampusCategory) => (
+          <>
+            <div className="d-flex align-items-center">
+              <div className="flex-shrink-0 me-3">
+                <div className="avatar-sm bg-light rounded p-1">
+                  <img
+                    src={CampusCategory.row.original.image}
+                    alt=""
+                    className="img-fluid d-block"
+                  />
+                </div>
+              </div>
+              <div className="flex-grow-1">
+                <h5 className="fs-14 mb-1">
+                  <Link
+                    to={"/admin-CampusCategory-details/" + CampusCategory.row.original.id}
+                    className="text-dark"
+                  >
+                    {" "}
+                    {CampusCategory.row.original.title}
+                  </Link>
+                </h5>
+              </div>
+            </div>
+          </>
+        ),
+        accessor: "title",
         filterable: false,
       },
       {
-        Header: "Description",
+        Header: "Dscription",
         accessor: "description",
         filterable: false,
       },
-      {
-        Header: "Contact_number",
-        accessor: "contact_number",
-        filterable: false,
-      },
-      {
-        Header: "Date",
-        accessor: "date",
-        filterable: false,
-      },
-      {
-        Header: "Source",
-        accessor: "source",
-        filterable: false,
-      },
-      {
-        Header: "Recommends",
-        accessor: "recommends",
-        filterable: false,
-      },
-      {
-        Header: "Attach_url",
-        accessor: "attach_url",
-        filterable: false,
-      },
-      {
-        Header: "Oppositions",
-        accessor: "oppositions",
-        filterable: false,
-      },
-      {
-        Header: "Browingcount",
-        accessor: "browingcount",
-        filterable: false,
-      },
-      {
-        Header: "ArticleCatetoryId",
-        accessor: "articleCategoryId",
-        filterable: false,
-      },
+      
       {
         Header: "Action",
         Cell: (cellProps) => {
@@ -143,12 +124,12 @@ const Articles = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-article-details/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-CampusCategory-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
                 </DropdownItem>
 
-                <DropdownItem href={"admin-add-article/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-add-CampusCategory/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -157,8 +138,8 @@ const Articles = (props) => {
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const articleData = cellProps.row.original;
-                    onClickDelete(articleData);
+                    const CampusCategoryData = cellProps.row.original;
+                    onClickDelete(CampusCategoryData);
                   }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -172,17 +153,17 @@ const Articles = (props) => {
     ],
     []
   );
-  document.title = "Articles";
+  document.title = "CampusCategories";
   return (
-    <div className="page-content" style={{overflow:"hidden"}}>
+    <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteArticle}
+        onDeleteClick={handleDeleteCampusCategory}
         onCloseClick={() => setDeleteModal(false)}
       />
 
       <Container fluid>
-        <BreadCrumb title="Articles" pageTitle="Admin" />
+        <BreadCrumb title="CampusCategories" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -193,11 +174,11 @@ const Articles = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-article"
+                          to="/admin-add-CampusCategory"
                           className="btn btn-success"
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Add
-                          Article
+                          CampusCategory
                         </Link>
                       </div>
                     </div>
@@ -207,7 +188,7 @@ const Articles = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Articles..."
+                            placeholder="Search CampusCategories..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -223,12 +204,12 @@ const Articles = (props) => {
                         id="table-product-list-all"
                         className="table-card gridjs-border-none pb-2"
                       >
-                        {articleList && articleList !== "" ? (
+                        {CampusCategoryList && CampusCategoryList !== "" ? (
                           <TableContainer
                             columns={columns}
-                            data={articleList}
+                            data={CampusCategoryList}
                             isGlobalFilter={false}
-                            isAddArticleList={false}
+                            isAddCampusCategoryList={false}
                             customPageSize={10}
                             divClass="table-responsive mb-1"
                             tableClass="mb-0 table-borderless"
@@ -263,4 +244,4 @@ const Articles = (props) => {
   );
 };
 
-export default Articles;
+export default CampusCategories;

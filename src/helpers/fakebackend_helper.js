@@ -442,3 +442,33 @@ export const updateOneDataCategory = (id, customer) => api.update(url.UPDATE_DAT
 
 // delete DATACATEGORY
 export const deleteDataCategory = id => api.delete(url.DELETE_DATACATEGORY + '/' + id);
+
+
+// get Campuses
+export const getCampuses = () => api.get(url.GET_CAMPUSES);
+export const getCampus = (id) => api.get(url.GET_CAMPUS + '/' + id);
+
+// add CAMPUS
+export const addNewCampus = customer => api.create(url.ADD_NEW_CAMPUS, customer);
+
+// update CAMPUS
+export const updateOneCampus = (id, customer) => api.update(url.UPDATE_CAMPUS + '/' + id, customer);
+
+// delete CAMPUS
+export const deleteCampus = id => api.delete(url.DELETE_CAMPUS + '/' + id);
+
+// ----------- CampusCategory --------------
+
+// get CampusCategories
+export const getCampusCategories = () => api.get(url.GET_CAMPUSCATEGORIES);
+
+export const getCampusCategory = (id) => api.get(url.GET_CAMPUSCATEGORY + '/' + id);
+
+// add CAMPUSCATEGORY
+export const addNewCampusCategory = customer => api.create(url.ADD_NEW_CAMPUSCATEGORY, customer);
+
+// update CAMPUSCATEGORY
+export const updateOneCampusCategory = (id, customer) => api.update(url.UPDATE_CAMPUSCATEGORY + '/' + id, customer);
+
+// delete CAMPUSCATEGORY
+export const deleteCampusCategory = id => api.delete(url.DELETE_CAMPUSCATEGORY + '/' + id);

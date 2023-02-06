@@ -195,3 +195,17 @@ export const GET_DATACATEGORY = "/api/data/category/get_one";
 export const ADD_NEW_DATACATEGORY = "/api/data/category/create";
 export const UPDATE_DATACATEGORY = "/api/data/category/update";
 export const DELETE_DATACATEGORY = "/api/data/category/delete";
+
+// Campuses
+export const GET_CAMPUSES = "/api/campus/get_All";
+export const GET_CAMPUS = "/api/campus/get_one";
+export const ADD_NEW_CAMPUS = "/api/campus/create";
+export const UPDATE_CAMPUS = "/api/campus/update";
+export const DELETE_CAMPUS = "/api/campus/delete";
+
+// CampusCategories
+export const GET_CAMPUSCATEGORIES = "/api/campus/category/get_All";
+export const GET_CAMPUSCATEGORY = "/api/campus/category/get_one";
+export const ADD_NEW_CAMPUSCATEGORY = "/api/campus/category/create";
+export const UPDATE_CAMPUSCATEGORY = "/api/campus/category/update";
+export const DELETE_CAMPUSCATEGORY = "/api/campus/category/delete";

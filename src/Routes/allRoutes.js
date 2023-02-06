@@ -270,6 +270,16 @@ import DataCategories from "../pages/Admin/DataCategories/index";
 import DataCategoryDetail from "../pages/Admin/DataCategories/DataCategoryDetail";
 import AddDataCategory from "../pages/Admin/DataCategories/AddDataCategory";
 
+// Campus Section
+import Campuses from "../pages/Admin/Campus/index";
+import CampusDetail from "../pages/Admin/Campus/CampusDetail";
+import AddCampus from "../pages/Admin/Campus/AddCampus";
+
+// CampusCategory Section
+import CampusCategories from "../pages/Admin/CampusCategories/index";
+import CampusCategoryDetail from "../pages/Admin/CampusCategories/CampusCategoryDetail";
+import AddCampusCategory from "../pages/Admin/CampusCategories/AddCampusCategory";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -446,10 +456,10 @@ const authProtectedRoutes = [
   { path: "/pages-blog-service/article-man", component: ArticleMan },
   { path: "/pages-blog-service/detail", component: BlogServiceDetail },
 
-  { path: "/view-ship-data", component: ViewShipData},
-  { path: "/ship-details", component: ShipDetails},
-  { path: "/new-data-vote", component: NewDataVote},
-  { path: "/pages-study-detail", component: StudyDetail},
+  { path: "/view-ship-data", component: ViewShipData },
+  { path: "/ship-details", component: ShipDetails },
+  { path: "/new-data-vote", component: NewDataVote },
+  { path: "/pages-study-detail", component: StudyDetail },
 
   // Admin
   // Users
@@ -500,7 +510,7 @@ const authProtectedRoutes = [
   { path: "/admin-comment-details/:id", component: CommentDetail },
   { path: "/admin-add-comment", component: AddComment },
   { path: "/admin-add-comment/:id", component: AddComment },
-  
+
   // Datas
   { path: "/admin-datas", component: Datas },
   { path: "/admin-data-details/:id", component: DataDetail },
@@ -512,6 +522,19 @@ const authProtectedRoutes = [
   { path: "/admin-dataCategory-details/:id", component: DataCategoryDetail },
   { path: "/admin-add-dataCategory", component: AddDataCategory },
   { path: "/admin-add-dataCategory/:id", component: AddDataCategory },
+
+  // Campuses
+  { path: "/admin-campuses", component: Campuses },
+  { path: "/admin-campus-details/:id", component: CampusDetail },
+  { path: "/admin-add-campus", component: AddCampus },
+  { path: "/admin-add-campus/:id", component: AddCampus },
+
+  // CampusCategory
+  { path: "/admin-campusCategories", component: CampusCategories },
+  { path: "/admin-campusCategory-details/:id", component: CampusCategoryDetail },
+  { path: "/admin-add-campusCategory", component: AddCampusCategory },
+  { path: "/admin-add-campusCategory/:id", component: AddCampusCategory },
+
 ];
 
 const publicRoutes = [

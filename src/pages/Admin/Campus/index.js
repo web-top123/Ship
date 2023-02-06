@@ -1,5 +1,15 @@
 import React, { useEffect, useState, useMemo } from "react";
-import {  Container,  UncontrolledDropdown,  DropdownToggle,  DropdownItem,  DropdownMenu,  TabContent,  TabPane,  Row,} from "reactstrap";
+
+import {
+  Container,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownMenu,
+  TabContent,
+  TabPane,
+  Row,
+} from "reactstrap";
 
 // RangeSlider
 import "nouislider/distribute/nouislider.css";
@@ -8,62 +18,38 @@ import DeleteModal from "../../../Components/Common/DeleteModal";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import TableContainer from "../../../Components/Common/TableContainer";
 
+
 //redux
 import { Link } from "react-router-dom";
-import { getArticles, deleteArticle } from "../../../helpers/fakebackend_helper";
 
-const Articles = (props) => {
-  // const dispatch = useDispatch();
+import { getCampuses, deleteCampus } from "../../../helpers/fakebackend_helper";
 
-  // const { articles } = useSelector((state) => ({
-  //   articles: state.Article.articleList,
-  // }));
-  // const [article, setArticle] = useState(null);
-
-  const [articleList, setArticleList] = useState([]);
+const Campuses = (props) => {
+  const [campusList, setCampusList] = useState([]);
   useEffect(() => {
-    getArticleList();
+    getCampusList();
   }, []);
 
-  const getArticleList = () => {
-    getArticles().then(res => {
-      setArticleList(res);
+  const getCampusList = () => {
+    getCampuses().then(res => {
+      setCampusList(res);
     })
   }
-
-  // useEffect(() => {
-  //   if (articles && !articles.length) {
-  //     dispatch(onGetArticles());
-  //   }
-  // }, [dispatch, articles]);
-
-  // useEffect(() => {
-  //   setArticleList(articles);
-  // }, [articles]);
-
-  // useEffect(() => {
-  //   dispatch(onGetArticles());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!isEmpty(articles)) setArticleList(articles);
-  // }, [articles]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (article) => {
-    setCurrentID(article.id);
-    // setArticle(article);
+  const onClickDelete = (campus) => {
+    setCurrentID(campus.id);
     setDeleteModal(true);
   };
 
-  const handleDeleteArticle = () => {
+  const handleDeleteCampus = () => {
     if (currentID) {
-      deleteArticle(currentID).then(res => {
+      deleteCampus(currentID).then(res => {
         if (res === 1) {
-          getArticleList();
+          getCampusList();
           setDeleteModal(false);
         } else {
           setDeleteModal(false);
@@ -91,18 +77,8 @@ const Articles = (props) => {
         filterable: false,
       },
       {
-        Header: "Contact_number",
-        accessor: "contact_number",
-        filterable: false,
-      },
-      {
-        Header: "Date",
-        accessor: "date",
-        filterable: false,
-      },
-      {
-        Header: "Source",
-        accessor: "source",
+        Header: "Browses",
+        accessor: "browses",
         filterable: false,
       },
       {
@@ -111,23 +87,13 @@ const Articles = (props) => {
         filterable: false,
       },
       {
-        Header: "Attach_url",
-        accessor: "attach_url",
+        Header: "Cost",
+        accessor: "cost",
         filterable: false,
       },
       {
-        Header: "Oppositions",
-        accessor: "oppositions",
-        filterable: false,
-      },
-      {
-        Header: "Browingcount",
-        accessor: "browingcount",
-        filterable: false,
-      },
-      {
-        Header: "ArticleCatetoryId",
-        accessor: "articleCategoryId",
+        Header: "CampusCatetoryId",
+        accessor: "campusCategoryId",
         filterable: false,
       },
       {
@@ -143,12 +109,12 @@ const Articles = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-article-details/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-campus-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
                 </DropdownItem>
 
-                <DropdownItem href={"admin-add-article/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-add-campus/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -157,8 +123,8 @@ const Articles = (props) => {
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const articleData = cellProps.row.original;
-                    onClickDelete(articleData);
+                    const campusData = cellProps.row.original;
+                    onClickDelete(campusData);
                   }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -172,17 +138,17 @@ const Articles = (props) => {
     ],
     []
   );
-  document.title = "Articles";
+  document.title = "Campuses";
   return (
-    <div className="page-content" style={{overflow:"hidden"}}>
+    <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteArticle}
+        onDeleteClick={handleDeleteCampus}
         onCloseClick={() => setDeleteModal(false)}
       />
 
       <Container fluid>
-        <BreadCrumb title="Articles" pageTitle="Admin" />
+        <BreadCrumb title="Campuses" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -193,11 +159,11 @@ const Articles = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-article"
+                          to="/admin-add-campus"
                           className="btn btn-success"
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Add
-                          Article
+                          Campus
                         </Link>
                       </div>
                     </div>
@@ -207,7 +173,7 @@ const Articles = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Articles..."
+                            placeholder="Search Campuses..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -223,12 +189,12 @@ const Articles = (props) => {
                         id="table-product-list-all"
                         className="table-card gridjs-border-none pb-2"
                       >
-                        {articleList && articleList !== "" ? (
+                        {campusList && campusList !== "" ? (
                           <TableContainer
                             columns={columns}
-                            data={articleList}
+                            data={campusList}
                             isGlobalFilter={false}
-                            isAddArticleList={false}
+                            isAddCampusList={false}
                             customPageSize={10}
                             divClass="table-responsive mb-1"
                             tableClass="mb-0 table-borderless"
@@ -263,4 +229,4 @@ const Articles = (props) => {
   );
 };
 
-export default Articles;
+export default Campuses;
