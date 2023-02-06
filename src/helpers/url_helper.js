@@ -160,3 +160,17 @@ export const GET_SUGGESTION = "/api/suggestions/get_one";
 export const ADD_NEW_SUGGESTION = "/api/suggestions/create";
 export const UPDATE_SUGGESTION = "/api/suggestions/update";
 export const DELETE_SUGGESTION = "/api/suggestions/delete";
+
+// Articles
+export const GET_ARTICLES = "/api/article/get_All";
+export const GET_ARTICLE = "/api/article/get_one";
+export const ADD_NEW_ARTICLE = "/api/article/create";
+export const UPDATE_ARTICLE = "/api/article/update";
+export const DELETE_ARTICLE = "/api/article/delete";
+
+// ArticleCategory
+export const GET_ARTICLECATEGORIES = "/api/article/category/get_All";
+export const GET_ARTICLECATEGORY = "/api/article/category/get_one";
+export const ADD_NEW_ARTICLECATEGORY = "/api/article/category/create";
+export const UPDATE_ARTICLECATEGORY = "/api/article/category/update";
+export const DELETE_ARTICLECATEGORY = "/api/article/category/delete";

@@ -366,3 +366,34 @@ export const updateOneSuggestion = (id, customer) => api.update(url.UPDATE_SUGGE
 
 // delete SUGGESTION
 export const deleteSuggestion = id => api.delete(url.DELETE_SUGGESTION + '/' + id);
+
+// ----------- Article --------------
+
+// get Articles
+export const getArticles = () => api.get(url.GET_ARTICLES);
+export const getArticle = (id) => api.get(url.GET_ARTICLE + '/' + id);
+
+// add ARTICLE
+export const addNewArticle = customer => api.create(url.ADD_NEW_ARTICLE, customer);
+
+// update ARTICLE
+export const updateOneArticle = (id, customer) => api.update(url.UPDATE_ARTICLE + '/' + id, customer);
+
+// delete ARTICLE
+export const deleteArticle = id => api.delete(url.DELETE_ARTICLE + '/' + id);
+
+// ----------- ArticleCategory --------------
+
+// get ArticleCategories
+export const getArticleCategories = () => api.get(url.GET_ARTICLECATEGORIES);
+
+export const getArticleCategory = (id) => api.get(url.GET_ARTICLECATEGORY + '/' + id);
+
+// add ARTICLECATEGORY
+export const addNewArticleCategory = customer => api.create(url.ADD_NEW_ARTICLECATEGORY, customer);
+
+// update ARTICLECATEGORY
+export const updateOneArticleCategory = (id, customer) => api.update(url.UPDATE_ARTICLECATEGORY + '/' + id, customer);
+
+// delete ARTICLECATEGORY
+export const deleteArticleCategory = id => api.delete(url.DELETE_ARTICLECATEGORY + '/' + id);
