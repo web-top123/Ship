@@ -195,3 +195,10 @@ export const GET_DATACATEGORY = "/api/data/category/get_one";
 export const ADD_NEW_DATACATEGORY = "/api/data/category/create";
 export const UPDATE_DATACATEGORY = "/api/data/category/update";
 export const DELETE_DATACATEGORY = "/api/data/category/delete";
+
+//Avatar
+export const GET_AVATARS = "/api/avatar/get_All";
+export const GET_AVATAR = "/api/avatar/get_one";
+export const ADD_NEW_AVATAR = "/api/avatar/create";
+export const UPDATE_AVATAR = "/api/avatar/update";
+export const DELETE_AVATAR = "/api/avatar/delete";

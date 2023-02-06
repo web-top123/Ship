@@ -270,6 +270,11 @@ import DataCategories from "../pages/Admin/DataCategories/index";
 import DataCategoryDetail from "../pages/Admin/DataCategories/DataCategoryDetail";
 import AddDataCategory from "../pages/Admin/DataCategories/AddDataCategory";
 
+// Avatar Section
+import Avatars from "../pages/Admin/Avatars/index";
+import AvatarDetail from "../pages/Admin/Avatars/AvatarDetail";
+import AddAvatar from "../pages/Admin/Avatars/AddAvatar";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -512,6 +517,12 @@ const authProtectedRoutes = [
   { path: "/admin-dataCategory-details/:id", component: DataCategoryDetail },
   { path: "/admin-add-dataCategory", component: AddDataCategory },
   { path: "/admin-add-dataCategory/:id", component: AddDataCategory },
+
+  // Avatars
+  { path: "/admin-avatars", component: Avatars },
+  { path: "/admin-avatar-details/:id", component: AvatarDetail },
+  { path: "/admin-add-avatar", component: AddAvatar },
+  { path: "/admin-add-avatar/:id", component: AddAvatar },
 ];
 
 const publicRoutes = [
