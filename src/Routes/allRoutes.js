@@ -254,6 +254,16 @@ import ArticleCategories from "../pages/Admin/ArticleCategories/index";
 import ArticleCategoryDetail from "../pages/Admin/ArticleCategories/ArticleCategoryDetail";
 import AddArticleCategory from "../pages/Admin/ArticleCategories/AddArticleCategory";
 
+// Data Section
+import Datas from "../pages/Admin/Datas/index";
+import DataDetail from "../pages/Admin/Datas/DataDetail";
+import AddData from "../pages/Admin/Datas/AddData";
+
+// DataCategory Section
+import DataCategories from "../pages/Admin/DataCategories/index";
+import DataCategoryDetail from "../pages/Admin/DataCategories/DataCategoryDetail";
+import AddDataCategory from "../pages/Admin/DataCategories/AddDataCategory";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -477,6 +487,18 @@ const authProtectedRoutes = [
   { path: "/admin-articleCategory-details/:id", component: ArticleCategoryDetail },
   { path: "/admin-add-articleCategory", component: AddArticleCategory },
   { path: "/admin-add-articleCategory/:id", component: AddArticleCategory },
+  
+  // Datas
+  { path: "/admin-datas", component: Datas },
+  { path: "/admin-data-details/:id", component: DataDetail },
+  { path: "/admin-add-data", component: AddData },
+  { path: "/admin-add-data/:id", component: AddData },
+
+  // DataCategory
+  { path: "/admin-dataCategories", component: DataCategories },
+  { path: "/admin-dataCategory-details/:id", component: DataCategoryDetail },
+  { path: "/admin-add-dataCategory", component: AddDataCategory },
+  { path: "/admin-add-dataCategory/:id", component: AddDataCategory },
 ];
 
 const publicRoutes = [

@@ -174,3 +174,17 @@ export const GET_ARTICLECATEGORY = "/api/article/category/get_one";
 export const ADD_NEW_ARTICLECATEGORY = "/api/article/category/create";
 export const UPDATE_ARTICLECATEGORY = "/api/article/category/update";
 export const DELETE_ARTICLECATEGORY = "/api/article/category/delete";
+
+// Datas
+export const GET_DATAS = "/api/data/get_All";
+export const GET_DATA = "/api/data/get_one";
+export const ADD_NEW_DATA = "/api/data/create";
+export const UPDATE_DATA = "/api/data/update";
+export const DELETE_DATA = "/api/data/delete";
+
+// DataCategories
+export const GET_DATACATEGORIES = "/api/data/category/get_All";
+export const GET_DATACATEGORY = "/api/data/category/get_one";
+export const ADD_NEW_DATACATEGORY = "/api/data/category/create";
+export const UPDATE_DATACATEGORY = "/api/data/category/update";
+export const DELETE_DATACATEGORY = "/api/data/category/delete";
