@@ -239,6 +239,11 @@ import ProgramCategories from "../pages/Admin/ProgramCategories/index";
 import ProgramCategoryDetail from "../pages/Admin/ProgramCategories/ProgramCategoryDetail";
 import AddProgramCategory from "../pages/Admin/ProgramCategories/AddProgramCategory";
 
+// Suggestion Section
+import Suggestions from "../pages/Admin/Suggestions/index";
+import SuggestionDetail from "../pages/Admin/Suggestions/SuggestionDetail";
+import AddSuggestion from "../pages/Admin/Suggestions/AddSuggestion";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -444,6 +449,12 @@ const authProtectedRoutes = [
   { path: "/admin-programCategory-details/:id", component: ProgramCategoryDetail },
   { path: "/admin-add-programCategory", component: AddProgramCategory },
   { path: "/admin-add-programCategory/:id", component: AddProgramCategory },
+
+  //Suggestion
+  { path: "/admin-suggestions", component: Suggestions },
+  { path: "/admin-suggestion-details/:id", component: SuggestionDetail },
+  { path: "/admin-add-suggestion", component: AddSuggestion },
+  { path: "/admin-add-suggestion/:id", component: AddSuggestion },
 ];
 
 const publicRoutes = [

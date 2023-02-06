@@ -153,3 +153,10 @@ export const GET_PROGRAMCATEGORY = "/api/program/category/get_one";
 export const ADD_NEW_PROGRAMCATEGORY = "/api/program/category/create";
 export const UPDATE_PROGRAMCATEGORY = "/api/program/category/update";
 export const DELETE_PROGRAMCATEGORY = "/api/program/category/delete";
+
+//SUGGESTION
+export const GET_SUGGESTIONS = "/api/suggestions/get_All";
+export const GET_SUGGESTION = "/api/suggestions/get_one";
+export const ADD_NEW_SUGGESTION = "/api/suggestions/create";
+export const UPDATE_SUGGESTION = "/api/suggestions/update";
+export const DELETE_SUGGESTION = "/api/suggestions/delete";

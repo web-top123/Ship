@@ -350,3 +350,19 @@ export const updateOneProgramCategory = (id, customer) => api.update(url.UPDATE_
 
 // delete PROGRAMCATEGORY
 export const deleteProgramCategory = id => api.delete(url.DELETE_PROGRAMCATEGORY + '/' + id);
+
+//---------------Suggestion-----------//
+
+// get Suggestions
+export const getSuggestions = () => api.get(url.GET_SUGGESTIONS);
+
+export const getSuggestion = (id) => api.get(url.GET_SUGGESTION + '/' + id);
+
+// add SUGGESTION
+export const addNewSuggestion = customer => api.create(url.ADD_NEW_SUGGESTION, customer);
+
+// update SUGGESTION
+export const updateOneSuggestion = (id, customer) => api.update(url.UPDATE_SUGGESTION + '/' + id, customer);
+
+// delete SUGGESTION
+export const deleteSuggestion = id => api.delete(url.DELETE_SUGGESTION + '/' + id);

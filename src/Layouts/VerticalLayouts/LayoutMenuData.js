@@ -41,6 +41,7 @@ const Navdata = () => {
     const [isNotification, setIsNotification] = useState(false);
     const [isProgram, setIsProgram] = useState(false);
     const [isProgramCategory, setIsProgramCategory] = useState(false);
+    const [isSuggestion, setIsSuggestion] = useState(false);
     // Charts
     const [isApex, setIsApex] = useState(false);
 
@@ -213,6 +214,22 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "CategoryList", link: "/admin-programCategories", parentId: "admin" },
                         { id: 2, label: "CategoryCreate", link: "/admin-add-programCategory", parentId: "admin" },
+                    ]
+                },
+                {
+                    id: "admin-suggestion",
+                    label: "Suggestion",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) { 
+                        e.preventDefault();
+                        setIsSuggestion(!isSuggestion);
+                    },
+                    parentId: "admin",
+                    stateVariables: isSuggestion,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-suggestions", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-suggestion", parentId: "admin" },
                     ]
                 },
             ],
