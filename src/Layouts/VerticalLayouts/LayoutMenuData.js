@@ -253,39 +253,38 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "List", link: "/admin-articles", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-article", parentId: "admin" },
-
-                    ]
-                },
-                {
-                    id: "admin-articleCategory",
-                    label: "ArticleCategory",
-                    link: "/#",
-                    isChildItem: true,
-                    click: function (e) {
-                        e.preventDefault();
-                        setIsArticleCategory(!isArticleCategory);
-                    },
-                    parentId: "admin",
-                    stateVariables: isArticleCategory,
-                    childItems: [
-                        { id: 1, label: "CategoryList", link: "/admin-articleCategories", parentId: "admin" },
-                        { id: 2, label: "CategoryCreate", link: "/admin-add-articleCategory", parentId: "admin" },
-                    ]
-                },
-                {
-                    id: "admin-comment",
-                    label: "Comment",
-                    link: "/#",
-                    isChildItem: true,
-                    click: function (e) {
-                        e.preventDefault();
-                        setIsComment(!isComment);
-                    },
-                    parentId: "admin",
-                    stateVariables: isComment,
-                    childItems: [
-                        { id: 1, label: "CommentList", link: "/admin-comments", parentId: "admin" },
-                        { id: 2, label: "CommentCreate", link: "/admin-add-comment", parentId: "admin" },
+                        {
+                            id: "admin-articleCategory",
+                            label: "Category",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsArticleCategory(!isArticleCategory);
+                            },
+                            parentId: "admin",
+                            stateVariables: isArticleCategory,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-articleCategories", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-articleCategory", parentId: "admin" },
+                            ]
+                        },
+                        {
+                            id: "admin-comment",
+                            label: "Comment",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsComment(!isComment);
+                            },
+                            parentId: "admin",
+                            stateVariables: isComment,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-comments", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-comment", parentId: "admin" },
+                            ]
+                        },
                     ]
                 },
                 {
@@ -301,25 +300,25 @@ const Navdata = () => {
                     stateVariables: isData,
                     childItems: [
                         { id: 1, label: "List", link: "/admin-datas", parentId: "admin" },
-                        { id: 2, label: "Create", link: "/admin-add-data", parentId: "admin" },]
-                },
-
-                {
-                    id: "admin-dataCategory",
-                    label: "Category",
-                    link: "/#",
-                    isChildItem: true,
-                    click: function (e) {
-                        e.preventDefault();
-                        setIsData(!isData);
-                    },
-                    parentId: "admin",
-                    stateVariables: isData,
-                    childItems: [
-                        { id: 1, label: "List", link: "/admin-dataCategories", parentId: "admin" },
-                        { id: 2, label: "Create", link: "/admin-add-dataCategory", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-data", parentId: "admin" },
+                        {
+                            id: "admin-dataCategory",
+                            label: "Category",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsData(!isData);
+                            },
+                            parentId: "admin",
+                            stateVariables: isData,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-dataCategories", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-dataCategory", parentId: "admin" },
+                            ]
+                        },
                     ]
-                },
+                },                
             ]
         },
 
