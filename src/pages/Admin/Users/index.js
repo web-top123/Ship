@@ -25,12 +25,6 @@ import { Link } from "react-router-dom";
 import { getUsers, deleteUser } from "../../../helpers/fakebackend_helper";
 
 const Users = (props) => {
-  // const dispatch = useDispatch();
-
-  // const { users } = useSelector((state) => ({
-  //   users: state.User.userList,
-  // }));
-  // const [user, setUser] = useState(null);
 
   const [userList, setUserList] = useState([]);
   useEffect(() => {

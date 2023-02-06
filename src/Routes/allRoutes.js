@@ -215,6 +215,7 @@ import StudyField from "../pages/Pages/StudyField/index";
 import Software from "../pages/Pages/Software/index";
 import CompanyIntroduction from "../pages/Pages/CompanyIntroduction/index";
 import ViewShipData from "../pages/Pages/ViewShipData/ViewShipData";
+import ShipDetails from "../pages/Pages/ViewShipData/ShipDetails";
 import NewDataVote from "../pages/Pages/ViewShipData/NewDataVote";
 
 
@@ -255,9 +256,19 @@ import ArticleCategoryDetail from "../pages/Admin/ArticleCategories/ArticleCateg
 import AddArticleCategory from "../pages/Admin/ArticleCategories/AddArticleCategory";
 
 // Comment Section
-import Comments from "../pages/Admin/Comment/index";
-import CommentDetail from "../pages/Admin/Comment/CommentDetail";
-import AddComment from "../pages/Admin/Comment/AddComment";
+import Comments from "../pages/Admin/Comments/index";
+import CommentDetail from "../pages/Admin/Comments/CommentDetail";
+import AddComment from "../pages/Admin/Comments/AddComment";
+
+// Data Section
+import Datas from "../pages/Admin/Datas/index";
+import DataDetail from "../pages/Admin/Datas/DataDetail";
+import AddData from "../pages/Admin/Datas/AddData";
+
+// DataCategory Section
+import DataCategories from "../pages/Admin/DataCategories/index";
+import DataCategoryDetail from "../pages/Admin/DataCategories/DataCategoryDetail";
+import AddDataCategory from "../pages/Admin/DataCategories/AddDataCategory";
 
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
@@ -435,9 +446,10 @@ const authProtectedRoutes = [
   { path: "/pages-blog-service/article-man", component: ArticleMan },
   { path: "/pages-blog-service/detail", component: BlogServiceDetail },
 
-  { path: "/view-ship-data", component: ViewShipData },
-  { path: "/new-data-vote", component: NewDataVote },
-  { path: "/pages-study-detail", component: StudyDetail },
+  { path: "/view-ship-data", component: ViewShipData},
+  { path: "/ship-details", component: ShipDetails},
+  { path: "/new-data-vote", component: NewDataVote},
+  { path: "/pages-study-detail", component: StudyDetail},
 
   // Admin
   // Users
@@ -488,6 +500,18 @@ const authProtectedRoutes = [
   { path: "/admin-comment-details/:id", component: CommentDetail },
   { path: "/admin-add-comment", component: AddComment },
   { path: "/admin-add-comment/:id", component: AddComment },
+  
+  // Datas
+  { path: "/admin-datas", component: Datas },
+  { path: "/admin-data-details/:id", component: DataDetail },
+  { path: "/admin-add-data", component: AddData },
+  { path: "/admin-add-data/:id", component: AddData },
+
+  // DataCategory
+  { path: "/admin-dataCategories", component: DataCategories },
+  { path: "/admin-dataCategory-details/:id", component: DataCategoryDetail },
+  { path: "/admin-add-dataCategory", component: AddDataCategory },
+  { path: "/admin-add-dataCategory/:id", component: AddDataCategory },
 ];
 
 const publicRoutes = [

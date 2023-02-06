@@ -46,6 +46,8 @@ const Navdata = () => {
     const [isArticleCategory, setIsArticleCategory] = useState(false);
     const [isComment, setIsComment] = useState(false);
 
+    const [isData, setIsData] = useState(false);
+    const [isDataCategory, setIsDataCategory] = useState(false);
     // Charts
     const [isApex, setIsApex] = useState(false);
 
@@ -200,32 +202,33 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "List", link: "/admin-programs", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-program", parentId: "admin" },
+                        {
+                            id: "admin-programCategory",
+                            label: "Category",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsProgramCategory(!isProgramCategory);
+                            },
+                            parentId: "admin",
+                            stateVariables: isProgramCategory,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-programCategories", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-programCategory", parentId: "admin" },
+                            ]
+                        },
                         // { id: 3, label: "Category_List", link: "/admin-programCategoy", parentId: "admin" },
                         // { id: 4, label: "Category_Create", link: "/admin-add-programCategory", parentId: "admin" },
                     ]
                 },
-                {
-                    id: "admin-programCategory",
-                    label: "ProgramCategory",
-                    link: "/#",
-                    isChildItem: true,
-                    click: function (e) {
-                        e.preventDefault();
-                        setIsProgramCategory(!isProgramCategory);
-                    },
-                    parentId: "admin",
-                    stateVariables: isProgramCategory,
-                    childItems: [
-                        { id: 1, label: "CategoryList", link: "/admin-programCategories", parentId: "admin" },
-                        { id: 2, label: "CategoryCreate", link: "/admin-add-programCategory", parentId: "admin" },
-                    ]
-                },
+
                 {
                     id: "admin-suggestion",
                     label: "Suggestion",
                     link: "/#",
                     isChildItem: true,
-                    click: function (e) { 
+                    click: function (e) {
                         e.preventDefault();
                         setIsSuggestion(!isSuggestion);
                     },
@@ -250,7 +253,7 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "List", link: "/admin-articles", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-article", parentId: "admin" },
-                        
+
                     ]
                 },
                 {
@@ -282,11 +285,44 @@ const Navdata = () => {
                     stateVariables: isComment,
                     childItems: [
                         { id: 1, label: "CommentList", link: "/admin-comments", parentId: "admin" },
-                        { id: 2, label: "CommentCreate", link: "/admin-add-Comment", parentId: "admin" },
+                        { id: 2, label: "CommentCreate", link: "/admin-add-comment", parentId: "admin" },
                     ]
                 },
-            ],
+                {
+                    id: "admin-data",
+                    label: "Data",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsData(!isData);
+                    },
+                    parentId: "admin",
+                    stateVariables: isData,
+                    childItems: [
+                        { id: 1, label: "DataList", link: "/admin-datas", parentId: "admin" },
+                        { id: 2, label: "DataCreate", link: "/admin-add-data", parentId: "admin" },]
+                },
+
+                {
+                    id: "admin-dataCategory",
+                    label: "Category",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsData(!isData);
+                    },
+                    parentId: "admin",
+                    stateVariables: isData,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-dataCategories", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-dataCategory", parentId: "admin" },
+                    ]
+                },
+            ]
         },
+
         {
             id: "blogservice",
             label: "Blog Service",

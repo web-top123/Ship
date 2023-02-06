@@ -412,3 +412,33 @@ export const updateOneComment = (id, customer) => api.update(url.UPDATE_COMMENT 
 
 // delete COMMENT
 export const deleteComment = id => api.delete(url.DELETE_COMMENT + '/' + id);
+
+//-----------Data-----------
+// get Datas
+export const getDatas = () => api.get(url.GET_DATAS);
+
+export const getData = (id) => api.get(url.GET_DATA + '/' + id);
+
+// add DATA
+export const addNewData = customer => api.create(url.ADD_NEW_DATA, customer);
+
+// update DATA
+export const updateOneData = (id, customer) => api.update(url.UPDATE_DATA + '/' + id, customer);
+
+// delete DATA
+export const deleteData = id => api.delete(url.DELETE_DATA + '/' + id);
+
+//-----------DataCategory-----------
+// get DataCategories
+export const getDataCategories = () => api.get(url.GET_DATACATEGORIES);
+
+export const getDataCategory = (id) => api.get(url.GET_DATACATEGORY + '/' + id);
+
+// add DATACATEGORY
+export const addNewDataCategory = customer => api.create(url.ADD_NEW_DATACATEGORY, customer);
+
+// update DATACATEGORY
+export const updateOneDataCategory = (id, customer) => api.update(url.UPDATE_DATACATEGORY + '/' + id, customer);
+
+// delete DATACATEGORY
+export const deleteDataCategory = id => api.delete(url.DELETE_DATACATEGORY + '/' + id);

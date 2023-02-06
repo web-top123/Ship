@@ -176,8 +176,22 @@ export const UPDATE_ARTICLECATEGORY = "/api/article/category/update";
 export const DELETE_ARTICLECATEGORY = "/api/article/category/delete";
 
 // Comments
-export const GET_COMMENTS = "/api/comment/get_AllComments";
-export const GET_COMMENT = "/api/comment/get_one";
+export const GET_COMMENTS = "/api/comment/get_All";
+export const GET_COMMENT = "/api/comment/getOneComment";
 export const ADD_NEW_COMMENT = "/api/comment/create";
 export const UPDATE_COMMENT = "/api/comment/update";
 export const DELETE_COMMENT = "/api/comment/delete";
+
+// Datas
+export const GET_DATAS = "/api/data/get_All";
+export const GET_DATA = "/api/data/get_one";
+export const ADD_NEW_DATA = "/api/data/create";
+export const UPDATE_DATA = "/api/data/update";
+export const DELETE_DATA = "/api/data/delete";
+
+// DataCategories
+export const GET_DATACATEGORIES = "/api/data/category/get_All";
+export const GET_DATACATEGORY = "/api/data/category/get_one";
+export const ADD_NEW_DATACATEGORY = "/api/data/category/create";
+export const UPDATE_DATACATEGORY = "/api/data/category/update";
+export const DELETE_DATACATEGORY = "/api/data/category/delete";
