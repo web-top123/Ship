@@ -176,7 +176,7 @@ export const UPDATE_ARTICLECATEGORY = "/api/article/category/update";
 export const DELETE_ARTICLECATEGORY = "/api/article/category/delete";
 
 // Datas
-export const GET_DATAS = "/api/data/get_All";
+export const GET_DATAS = "/api/data/findAll";
 export const GET_DATA = "/api/data/get_one";
 export const ADD_NEW_DATA = "/api/data/create";
 export const UPDATE_DATA = "/api/data/update";

@@ -282,8 +282,8 @@ const Navdata = () => {
                     parentId: "admin",
                     stateVariables: isData,
                     childItems: [
-                        { id: 1, label: "DataList", link: "/admin-datas", parentId: "admin" },
-                        { id: 2, label: "DataCreate", link: "/admin-add-data", parentId: "admin" },
+                        { id: 1, label: "List", link: "/admin-datas", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-data", parentId: "admin" },
 
                         {
                             id: "admin-dataCategory",
