@@ -209,3 +209,10 @@ export const GET_CAMPUSCATEGORY = "/api/campus/category/get_one";
 export const ADD_NEW_CAMPUSCATEGORY = "/api/campus/category/create";
 export const UPDATE_CAMPUSCATEGORY = "/api/campus/category/update";
 export const DELETE_CAMPUSCATEGORY = "/api/campus/category/delete";
+
+//Avatar
+export const GET_AVATARS = "/api/avatar/get_All";
+export const GET_AVATAR = "/api/avatar/get_one";
+export const ADD_NEW_AVATAR = "/api/avatar/create";
+export const UPDATE_AVATAR = "/api/avatar/update";
+export const DELETE_AVATAR = "/api/avatar/delete";

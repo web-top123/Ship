@@ -280,6 +280,11 @@ import CampusCategories from "../pages/Admin/CampusCategories/index";
 import CampusCategoryDetail from "../pages/Admin/CampusCategories/CampusCategoryDetail";
 import AddCampusCategory from "../pages/Admin/CampusCategories/AddCampusCategory";
 
+// Avatar Section
+import Avatars from "../pages/Admin/Avatars/index";
+import AvatarDetail from "../pages/Admin/Avatars/AvatarDetail";
+import AddAvatar from "../pages/Admin/Avatars/AddAvatar";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -535,6 +540,12 @@ const authProtectedRoutes = [
   { path: "/admin-add-campusCategory", component: AddCampusCategory },
   { path: "/admin-add-campusCategory/:id", component: AddCampusCategory },
 
+
+  // Avatars
+  { path: "/admin-avatars", component: Avatars },
+  { path: "/admin-avatar-details/:id", component: AvatarDetail },
+  { path: "/admin-add-avatar", component: AddAvatar },
+  { path: "/admin-add-avatar/:id", component: AddAvatar },
 ];
 
 const publicRoutes = [

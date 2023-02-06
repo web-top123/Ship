@@ -413,6 +413,21 @@ export const updateOneComment = (id, customer) => api.update(url.UPDATE_COMMENT 
 // delete COMMENT
 export const deleteComment = id => api.delete(url.DELETE_COMMENT + '/' + id);
 
+//-----------Avatar-----------
+// get Avatars
+export const getAvatars = () => api.get(url.GET_AVATARS);
+
+export const getAvatar = (id) => api.get(url.GET_AVATAR + '/' + id);
+
+// add AVATAR
+export const addNewAvatar = customer => api.create(url.ADD_NEW_AVATAR, customer);
+
+// update AVATAR
+export const updateOneAvatar = (id, customer) => api.update(url.UPDATE_AVATAR + '/' + id, customer);
+
+// delete AVATAR
+export const deleteAvatar = id => api.delete(url.DELETE_AVATAR + '/' + id);
+
 //-----------Data-----------
 // get Datas
 export const getDatas = () => api.get(url.GET_DATAS);

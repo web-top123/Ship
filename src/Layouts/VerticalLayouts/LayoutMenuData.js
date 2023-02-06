@@ -45,6 +45,7 @@ const Navdata = () => {
     const [isArticle, setIsArticle] = useState(false);
     const [isArticleCategory, setIsArticleCategory] = useState(false);
     const [isComment, setIsComment] = useState(false);
+    const [isAvatar, setIsAvatar] = useState(false);
 
     const [isData, setIsData] = useState(false);
     const [isDataCategory, setIsDataCategory] = useState(false);
@@ -240,6 +241,22 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "List", link: "/admin-suggestions", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-suggestion", parentId: "admin" },
+                    ]
+                },
+                {
+                    id: "admin-avatar",
+                    label: "Avatar",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsAvatar(!isAvatar);
+                    },
+                    parentId: "admin",
+                    stateVariables: isAvatar,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-avatars", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-avatar", parentId: "admin" },
                     ]
                 },
                 {
