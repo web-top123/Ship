@@ -392,7 +392,7 @@ const authProtectedRoutes = [
     component: () => <Redirect to="/pages-profile-settings" />,
   },
   { path: "/pages-mine", component: Mine},
-  { path: "/test-test-page", component: TestPage},
+  { path: "/test-test-page-start", component: TestPageStart},
   { path: "/pages-study-field", component: StudyField},
   { path: "/pages-company-introduction", component: CompanyIntroduction},
   { path: "/pages-software", component: Software},
@@ -404,6 +404,7 @@ const authProtectedRoutes = [
   { path: "/pages-blog-service/article-kind", component: ArticleKind},
   { path: "/pages-blog-service/article-man", component: ArticleMan},
   { path: "/pages-blog-service/detail", component: BlogServiceDetail},
+
   { path: "/view-ship-data", component: ViewShipData},
   { path: "/new-data-vote", component: NewDataVote},
   { path: "/pages-study-detail", component: StudyDetail},
@@ -453,7 +454,7 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
-  { path: "/test-test-page-start", component: TestPageStart},
+  { path: "/test-test-page", component: TestPage},
   { path: "/pages-home-page", component: HomePage},
  
 ];

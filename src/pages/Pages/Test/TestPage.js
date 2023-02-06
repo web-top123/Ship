@@ -102,47 +102,6 @@ const TestPage = () => {
                                         <div className="live-preview">
                                             <div className='test-page-item'>
                                                 <h2 className='test-roll-caption pb-2'>Sailor (1st degree)</h2><hr />
-                                                {/* <Row className='test-problems-detail'>
-                                                    <Col lg={7} className="p-4 pb-0 mt-4">
-                                                        <div style={{ position: 'relative' }}>
-                                                            <img src={macImg} alt="Mac " className="img-fluid test-field-img" />
-                                                        </div>
-                                                    </Col>
-
-                                                    <Col lg={5}>
-                                                        <div className="p-4 pb-0 margin-top-custom">
-                                                            <Row>
-                                                                <Col lg={12}>
-                                                                    <div className="live-preview mt-2 mt-2">
-                                                                        <div className="d-flex flex-wrap gap-2">
-                                                                            <Button className="btn-soft-primary mt-2 w-100 shadow-none f-3"> Save and printing </Button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="live-preview mt-2">
-                                                                        <div className="d-flex flex-wrap gap-2">
-                                                                            <Button className="btn-soft-primary mt-2 w-100 shadow-none f-3"> In first printing and then saving </Button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="live-preview mt-2">
-                                                                        <div className="d-flex flex-wrap gap-2">
-                                                                            <Button className="btn-soft-primary mt-2 w-100 shadow-none f-3"> In first saving and then printing </Button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="live-preview mt-2">
-                                                                        <div className="d-flex flex-wrap gap-2">
-                                                                            <Button className="btn-soft-primary mt-2 w-100 shadow-none f-3"> Not saving, only printing </Button>
-                                                                        </div>
-                                                                    </div>
-                                                                </Col>
-                                                            </Row>
-                                                        </div>
-                                                    </Col>
-                                                    <div className="live-preview">
-                                                        <div className="d-flex flex-wrap gap-2 align-items-end justify-content-end">
-                                                            <Button color="success" className="w-lg y mt-4 f-3" size='lg'>Confirm score</Button>
-                                                        </div>
-                                                    </div>
-                                                </Row> */}
                                                 <Form action="#" className='display-change-content'>
                                                     <TabContent activeTab={activeTab} className='display-change-detail'>
                                                         <TabPane tabId={1} id="pills-bill-info">

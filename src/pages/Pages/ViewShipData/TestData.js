@@ -133,7 +133,7 @@ const columnsShipData = [
         accessor: "photo",
         filterable: false,
         Cell: (purchase) => (<p className="img-item">
-            <img src={purchase.row.original.photo} width="100px"/>
+            <img src={purchase.row.original.photo} alt=" " width="100px"/>
         </p>)
     },
     {
@@ -487,7 +487,7 @@ const columnsProductData = [
         accessor: "photo",
         filterable: false,
         Cell: (purchase) => (<p className="img-item">
-            <img src={purchase.row.original.photo} width="100px"/>
+            <img src={purchase.row.original.photo} alt=" " width="100px"/>
         </p>)
     },
     {
@@ -633,7 +633,7 @@ const columnsGoodsData = [
         accessor: "photo",
         filterable: false,
         Cell: (purchase) => (<p className="img-item">
-            <img src={purchase.row.original.photo} width="100px"/>
+            <img src={purchase.row.original.photo} alt=" " width="100px"/>
         </p>)
     },
     {
