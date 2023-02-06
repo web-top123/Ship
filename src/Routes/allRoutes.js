@@ -254,6 +254,11 @@ import ArticleCategories from "../pages/Admin/ArticleCategories/index";
 import ArticleCategoryDetail from "../pages/Admin/ArticleCategories/ArticleCategoryDetail";
 import AddArticleCategory from "../pages/Admin/ArticleCategories/AddArticleCategory";
 
+// Comment Section
+import Comments from "../pages/Admin/Comment/index";
+import CommentDetail from "../pages/Admin/Comment/CommentDetail";
+import AddComment from "../pages/Admin/Comment/AddComment";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -477,6 +482,12 @@ const authProtectedRoutes = [
   { path: "/admin-articleCategory-details/:id", component: ArticleCategoryDetail },
   { path: "/admin-add-articleCategory", component: AddArticleCategory },
   { path: "/admin-add-articleCategory/:id", component: AddArticleCategory },
+
+  // Comments
+  { path: "/admin-comments", component: Comments },
+  { path: "/admin-comment-details/:id", component: CommentDetail },
+  { path: "/admin-add-comment", component: AddComment },
+  { path: "/admin-add-comment/:id", component: AddComment },
 ];
 
 const publicRoutes = [

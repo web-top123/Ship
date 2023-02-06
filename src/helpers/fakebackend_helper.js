@@ -397,3 +397,18 @@ export const updateOneArticleCategory = (id, customer) => api.update(url.UPDATE_
 
 // delete ARTICLECATEGORY
 export const deleteArticleCategory = id => api.delete(url.DELETE_ARTICLECATEGORY + '/' + id);
+
+//-----------Comment-----------
+// get Comments
+export const getComments = () => api.get(url.GET_COMMENTS);
+
+export const getComment = (id) => api.get(url.GET_COMMENT + '/' + id);
+
+// add COMMENT
+export const addNewComment = customer => api.create(url.ADD_NEW_COMMENT, customer);
+
+// update COMMENT
+export const updateOneComment = (id, customer) => api.update(url.UPDATE_COMMENT + '/' + id, customer);
+
+// delete COMMENT
+export const deleteComment = id => api.delete(url.DELETE_COMMENT + '/' + id);

@@ -174,3 +174,10 @@ export const GET_ARTICLECATEGORY = "/api/article/category/get_one";
 export const ADD_NEW_ARTICLECATEGORY = "/api/article/category/create";
 export const UPDATE_ARTICLECATEGORY = "/api/article/category/update";
 export const DELETE_ARTICLECATEGORY = "/api/article/category/delete";
+
+// Comments
+export const GET_COMMENTS = "/api/comment/get_AllComments";
+export const GET_COMMENT = "/api/comment/get_one";
+export const ADD_NEW_COMMENT = "/api/comment/create";
+export const UPDATE_COMMENT = "/api/comment/update";
+export const DELETE_COMMENT = "/api/comment/delete";

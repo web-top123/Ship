@@ -44,6 +44,8 @@ const Navdata = () => {
     const [isSuggestion, setIsSuggestion] = useState(false);
     const [isArticle, setIsArticle] = useState(false);
     const [isArticleCategory, setIsArticleCategory] = useState(false);
+    const [isComment, setIsComment] = useState(false);
+
     // Charts
     const [isApex, setIsApex] = useState(false);
 
@@ -265,6 +267,22 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "CategoryList", link: "/admin-articleCategories", parentId: "admin" },
                         { id: 2, label: "CategoryCreate", link: "/admin-add-articleCategory", parentId: "admin" },
+                    ]
+                },
+                {
+                    id: "admin-comment",
+                    label: "Comment",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsComment(!isComment);
+                    },
+                    parentId: "admin",
+                    stateVariables: isComment,
+                    childItems: [
+                        { id: 1, label: "CommentList", link: "/admin-comments", parentId: "admin" },
+                        { id: 2, label: "CommentCreate", link: "/admin-add-Comment", parentId: "admin" },
                     ]
                 },
             ],
