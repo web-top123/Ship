@@ -139,3 +139,17 @@ export const GET_NOTIFICATION = "/api/notifications/get";
 export const ADD_NEW_NOTIFICATION = "/api/notifications/create";
 export const UPDATE_NOTIFICATION = "/api/notifications/update";
 export const DELETE_NOTIFICATION = "/api/notifications/delete";
+
+// Programs
+export const GET_PROGRAMS = "/api/program/get_All";
+export const GET_PROGRAM = "/api/program/get_one";
+export const ADD_NEW_PROGRAM = "/api/program/create";
+export const UPDATE_PROGRAM = "/api/program/update";
+export const DELETE_PROGRAM = "/api/program/delete";
+
+// ProgramCategories
+export const GET_PROGRAMCATEGORIES = "/api/program/category/get_All";
+export const GET_PROGRAMCATEGORY = "/api/program/category/get_one";
+export const ADD_NEW_PROGRAMCATEGORY = "/api/program/category/create";
+export const UPDATE_PROGRAMCATEGORY = "/api/program/category/update";
+export const DELETE_PROGRAMCATEGORY = "/api/program/category/delete";

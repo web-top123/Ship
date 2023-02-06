@@ -229,6 +229,16 @@ import Notifications from "../pages/Admin/Notifications/index";
 import NotificationDetail from "../pages/Admin/Notifications/NotificationDetail";
 import AddNotification from "../pages/Admin/Notifications/AddNotification";
 
+// Program Section
+import Programs from "../pages/Admin/Programs/index";
+import ProgramDetail from "../pages/Admin/Programs/ProgramDetail";
+import AddProgram from "../pages/Admin/Programs/AddProgram";
+
+// ProgramCategory Section
+import ProgramCategories from "../pages/Admin/ProgramCategories/index";
+import ProgramCategoryDetail from "../pages/Admin/ProgramCategories/ProgramCategoryDetail";
+import AddProgramCategory from "../pages/Admin/ProgramCategories/AddProgramCategory";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -420,6 +430,19 @@ const authProtectedRoutes = [
   { path: "/admin-notification-details/:id", component: NotificationDetail },
   { path: "/admin-add-notification", component: AddNotification },
   { path: "/admin-add-notification/:id", component: AddNotification },
+
+  
+  // Programs
+  { path: "/admin-programs", component: Programs },
+  { path: "/admin-program-details/:id", component: ProgramDetail },
+  { path: "/admin-add-program", component: AddProgram },
+  { path: "/admin-add-program/:id", component: AddProgram },
+
+  // ProgramCategory
+  { path: "/admin-programCategories", component: ProgramCategories },
+  { path: "/admin-programCategory-details/:id", component: ProgramCategoryDetail },
+  { path: "/admin-add-programCategory", component: AddProgramCategory },
+  { path: "/admin-add-programCategory/:id", component: AddProgramCategory },
 ];
 
 const publicRoutes = [

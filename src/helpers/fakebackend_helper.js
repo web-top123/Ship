@@ -320,3 +320,33 @@ export const updateOneNotification = (id, customer) => api.update(url.UPDATE_NOT
 
 // delete NOTIFICATION
 export const deleteNotification = id => api.delete(url.DELETE_NOTIFICATION + '/' + id);
+
+//-----------Program-----------
+// get Programs
+export const getPrograms = () => api.get(url.GET_PROGRAMS);
+
+export const getProgram = (id) => api.get(url.GET_PROGRAM + '/' + id);
+
+// add PROGRAM
+export const addNewProgram = customer => api.create(url.ADD_NEW_PROGRAM, customer);
+
+// update PROGRAM
+export const updateOneProgram = (id, customer) => api.update(url.UPDATE_PROGRAM + '/' + id, customer);
+
+// delete PROGRAM
+export const deleteProgram = id => api.delete(url.DELETE_PROGRAM + '/' + id);
+
+//-----------ProgramCategory-----------
+// get ProgramCategories
+export const getProgramCategories = () => api.get(url.GET_PROGRAMCATEGORIES);
+
+export const getProgramCategory = (id) => api.get(url.GET_PROGRAMCATEGORY + '/' + id);
+
+// add PROGRAMCATEGORY
+export const addNewProgramCategory = customer => api.create(url.ADD_NEW_PROGRAMCATEGORY, customer);
+
+// update PROGRAMCATEGORY
+export const updateOneProgramCategory = (id, customer) => api.update(url.UPDATE_PROGRAMCATEGORY + '/' + id, customer);
+
+// delete PROGRAMCATEGORY
+export const deleteProgramCategory = id => api.delete(url.DELETE_PROGRAMCATEGORY + '/' + id);

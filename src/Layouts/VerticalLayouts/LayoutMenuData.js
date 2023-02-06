@@ -39,7 +39,8 @@ const Navdata = () => {
     // Admin
     const [isUser, setIsUser] = useState(false);
     const [isNotification, setIsNotification] = useState(false);
-
+    const [isProgram, setIsProgram] = useState(false);
+    const [isProgramCategory, setIsProgramCategory] = useState(false);
     // Charts
     const [isApex, setIsApex] = useState(false);
 
@@ -178,6 +179,40 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "List", link: "/admin-notifications", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-notification", parentId: "admin" },
+                    ]
+                },
+                {
+                    id: "admin-program",
+                    label: "Program",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsProgram(!isProgram);
+                    },
+                    parentId: "admin",
+                    stateVariables: isProgram,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-programs", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-program", parentId: "admin" },
+                        // { id: 3, label: "Category_List", link: "/admin-programCategoy", parentId: "admin" },
+                        // { id: 4, label: "Category_Create", link: "/admin-add-programCategory", parentId: "admin" },
+                    ]
+                },
+                {
+                    id: "admin-programCategory",
+                    label: "ProgramCategory",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsProgramCategory(!isProgramCategory);
+                    },
+                    parentId: "admin",
+                    stateVariables: isProgramCategory,
+                    childItems: [
+                        { id: 1, label: "CategoryList", link: "/admin-programCategories", parentId: "admin" },
+                        { id: 2, label: "CategoryCreate", link: "/admin-add-programCategory", parentId: "admin" },
                     ]
                 },
             ],
