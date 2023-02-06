@@ -51,13 +51,14 @@ const AddUser = (props) => {
     name: '',
     email: '',
     gender: 'male',
-    birthday: '',
+    birthday: new Date(),
     password: '',
   });
 
   useEffect(() => {
     if (id) {
       getUser(id).then(res => {
+        res['birthday'] = new Date(res['birthday']);
         setUser(res);
       })
     }
@@ -198,6 +199,10 @@ const AddUser = (props) => {
                         <Flatpickr
                           className="form-control"
                           id="datepicker-publish-input"
+                          value={user.birthday}
+                          onChange={([date]) => {
+                            setUser({ ...user, ...{ birthday: date } })
+                          }}
                           options={{
                             altInput: true,
                             altFormat: "F j, Y",
