@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Label, CardBody, Col, Input, Row, TabPane, Form } from "reactstrap";
 import Flatpickr from "react-flatpickr";
 import { getGetMyInformation, getAuthenticatedUser, putSaveMyInformation, updateAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProfile, editProfile } from '../../../../store/actions';
+import {  Toast, ToastBody, ToastHeader, } from 'reactstrap';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfile, editProfile, resetProfileFlag } from '../../../../store/actions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Formik validation
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -32,30 +35,27 @@ const MyInformation = () => {
     //         window.location.reload()
     //     }
     // }
-
+    const toprightnotify_profile_success = () => toast("Updated Successfully", { position: "top-right", hideProgressBar: true, className: 'bg-success text-white' });
     const dispatch = useDispatch();
     const [myInformation, setMyInformation] = useState({ birthday: '', username: '', name: '', email: '' });
-    // const [, setMyInformation] = useState("");
-
-    console.log("localstorage", localStorage.getItem('authUser'));
     const user =JSON.parse(localStorage.getItem('authUser'));
-    const myinformationdispatch = useSelector(state => {console.log("profile",state.Profile); return state.Profile.myinformation})
-    console.log("myinformationdispatchb", myinformationdispatch);
-    
+    const myinformationdispatch = useSelector(state =>  state.Profile.myinformation)
+    const profile = useSelector(state => state.Profile)
+    console.log("profile", profile);
     useEffect(()=>{
         // 
         if(!myinformationdispatch) {
             dispatch(getProfile(user))
-            console.log("myinformationdispatchx", myinformationdispatch);
         } else {
             setMyInformation(myinformationdispatch);
-            console.log("myinformationdispatchyyyyy", myinformationdispatch);
-
+            if(profile.update) {
+                toprightnotify_profile_success();
+            }
+            dispatch(resetProfileFlag());
         }
-    },[myinformationdispatch])
+    },[myinformationdispatch]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const saveMyInformation = () => {
-        console.log("mysave",myInformation );
         dispatch(editProfile(myInformation));
     }
 
@@ -69,6 +69,7 @@ const MyInformation = () => {
                 }}
                 action="#">
                 <Row>
+                    <ToastContainer />
                     <Col lg={6}>
                         <div className="mb-3">
                             <Label htmlFor="identifierInput" className="form-label">
