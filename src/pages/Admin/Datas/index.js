@@ -104,7 +104,7 @@ const Datas = (props) => {
       },
       {
         Header: "Data_type",
-        accessor: "data_type",
+        accessor: "dataCategory.title",
         filterable: false,
       },
       {

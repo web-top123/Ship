@@ -14,7 +14,6 @@ import {
 // RangeSlider
 import "nouislider/distribute/nouislider.css";
 import DeleteModal from "../../../Components/Common/DeleteModal";
-
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import TableContainer from "../../../Components/Common/TableContainer";
 
@@ -22,54 +21,42 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getUsers, deleteUser } from "../../../helpers/fakebackend_helper";
+import { getAnswers, deleteAnswer } from "../../../helpers/fakebackend_helper";
 
-const Users = (props) => {
+const Answers = (props) => {
+  // const dispatch = useDispatch();
 
-  const [userList, setUserList] = useState([]);
+  // const { Answers } = useSelector((state) => ({
+  //   Answers: state.Answer.AnswerList,
+  // }));
+  // const [Answer, setAnswer] = useState(null);
+
+  const [AnswerList, setAnswerList] = useState([]);
   useEffect(() => {
-    getUserList();
+    getAnswerList();
   }, []);
 
-  const getUserList = () => {
-    getUsers().then(res => {
-      setUserList(res);
+  const getAnswerList = () => {
+    getAnswers().then(res => {
+      setAnswerList(res);
     })
   }
-
-  // useEffect(() => {
-  //   if (users && !users.length) {
-  //     dispatch(onGetUsers());
-  //   }
-  // }, [dispatch, users]);
-
-  // useEffect(() => {
-  //   setUserList(users);
-  // }, [users]);
-
-  // useEffect(() => {
-  //   dispatch(onGetUsers());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!isEmpty(users)) setUserList(users);
-  // }, [users]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (user) => {
-    setCurrentID(user.id);
-    // setUser(user);
+  const onClickDelete = (Answer) => {
+    setCurrentID(Answer.id);
+    // setAnswer(Answer);
     setDeleteModal(true);
   };
 
-  const handleDeleteUser = () => {
+  const handleDeleteAnswer = () => {
     if (currentID) {
-      deleteUser(currentID).then(res => {
-        if (res == 1) {
-          getUserList();
+      deleteAnswer(currentID).then(res => {
+        if (res === 1) {
+          getAnswerList();
           setDeleteModal(false);
         } else {
           setDeleteModal(false);
@@ -87,56 +74,16 @@ const Users = (props) => {
         },
       },
       {
-        Header: "User",
-        Cell: (user) => (
-          <>
-            <div className="d-flex align-items-center">
-              <div className="flex-shrink-0 me-3">
-                <div className="avatar-sm bg-light rounded p-1">
-                  <img
-                    src={user.row.original.image}
-                    alt=""
-                    className="img-fluid d-block"
-                  />
-                </div>
-              </div>
-              <div className="flex-grow-1">
-                <h5 className="fs-14 mb-1">
-                  <Link
-                    to={"/admin-user-details/" + user.row.original.id}
-                    className="text-dark"
-                  >
-                    {" "}
-                    {user.row.original.name}
-                  </Link>
-                </h5>
-              </div>
-            </div>
-          </>
-        ),
-        accessor: "name",
+        Header: "Dscription",
+        accessor: "description",
         filterable: false,
       },
       {
-        Header: "Username",
-        accessor: "username",
+        Header: "Result",
+        accessor: "result",
         filterable: false,
       },
-      {
-        Header: "Email",
-        accessor: "email",
-        filterable: false,
-      },
-      {
-        Header: "Gender",
-        accessor: "gender",
-        filterable: false,
-      },
-      {
-        Header: "Birthday",
-        accessor: "birthday",
-        filterable: false,
-      },
+      
       {
         Header: "Action",
         Cell: (cellProps) => {
@@ -150,12 +97,12 @@ const Users = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-user-details/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-Answer-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
                 </DropdownItem>
 
-                <DropdownItem href={"admin-add-user/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-add-Answer/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -164,8 +111,8 @@ const Users = (props) => {
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const userData = cellProps.row.original;
-                    onClickDelete(userData);
+                    const AnswerData = cellProps.row.original;
+                    onClickDelete(AnswerData);
                   }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -179,17 +126,17 @@ const Users = (props) => {
     ],
     []
   );
-  document.title = "Users";
+  document.title = "Answers";
   return (
     <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteUser}
+        onDeleteClick={handleDeleteAnswer}
         onCloseClick={() => setDeleteModal(false)}
       />
 
       <Container fluid>
-        <BreadCrumb title="Users" pageTitle="Admin" />
+        <BreadCrumb title="Answers" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -200,11 +147,11 @@ const Users = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-user"
+                          to="/admin-add-Answer"
                           className="btn btn-success"
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Add
-                          User
+                          Answer
                         </Link>
                       </div>
                     </div>
@@ -214,7 +161,7 @@ const Users = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Users..."
+                            placeholder="Search Answers..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -230,12 +177,12 @@ const Users = (props) => {
                         id="table-product-list-all"
                         className="table-card gridjs-border-none pb-2"
                       >
-                        {userList && userList !== "" ? (
+                        {AnswerList && AnswerList !== "" ? (
                           <TableContainer
                             columns={columns}
-                            data={userList}
+                            data={AnswerList}
                             isGlobalFilter={false}
-                            isAddUserList={false}
+                            isAddAnswerList={false}
                             customPageSize={10}
                             divClass="table-responsive mb-1"
                             tableClass="mb-0 table-borderless"
@@ -270,4 +217,4 @@ const Users = (props) => {
   );
 };
 
-export default Users;
+export default Answers;

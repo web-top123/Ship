@@ -44,8 +44,17 @@ const Navdata = () => {
     const [isSuggestion, setIsSuggestion] = useState(false);
     const [isArticle, setIsArticle] = useState(false);
     const [isArticleCategory, setIsArticleCategory] = useState(false);
+    const [isComment, setIsComment] = useState(false);
+    const [isAvatar, setIsAvatar] = useState(false);
+
     const [isData, setIsData] = useState(false);
     const [isDataCategory, setIsDataCategory] = useState(false);
+
+    const [isCampus, setIsCampus] = useState(false);
+    const [isCampusCategory, setIsCampusCategory] = useState(false);
+
+    const [isQuestion, setIsQuestion] = useState(false);
+    const [isAnswer, setIsAnswer] = useState(false);
     // Charts
     const [isApex, setIsApex] = useState(false);
 
@@ -220,13 +229,13 @@ const Navdata = () => {
                         // { id: 4, label: "Category_Create", link: "/admin-add-programCategory", parentId: "admin" },
                     ]
                 },
-                
+
                 {
                     id: "admin-suggestion",
                     label: "Suggestion",
                     link: "/#",
                     isChildItem: true,
-                    click: function (e) { 
+                    click: function (e) {
                         e.preventDefault();
                         setIsSuggestion(!isSuggestion);
                     },
@@ -235,6 +244,22 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "List", link: "/admin-suggestions", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-suggestion", parentId: "admin" },
+                    ]
+                },
+                {
+                    id: "admin-avatar",
+                    label: "Avatar",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsAvatar(!isAvatar);
+                    },
+                    parentId: "admin",
+                    stateVariables: isAvatar,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-avatars", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-avatar", parentId: "admin" },
                     ]
                 },
                 {
@@ -251,23 +276,38 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "List", link: "/admin-articles", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-article", parentId: "admin" },
-                        
-                    ]
-                },
-                {
-                    id: "admin-articleCategory",
-                    label: "ArticleCategory",
-                    link: "/#",
-                    isChildItem: true,
-                    click: function (e) {
-                        e.preventDefault();
-                        setIsArticleCategory(!isArticleCategory);
-                    },
-                    parentId: "admin",
-                    stateVariables: isArticleCategory,
-                    childItems: [
-                        { id: 1, label: "CategoryList", link: "/admin-articleCategories", parentId: "admin" },
-                        { id: 2, label: "CategoryCreate", link: "/admin-add-articleCategory", parentId: "admin" },
+                        {
+                            id: "admin-articleCategory",
+                            label: "Category",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsArticleCategory(!isArticleCategory);
+                            },
+                            parentId: "admin",
+                            stateVariables: isArticleCategory,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-articleCategories", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-articleCategory", parentId: "admin" },
+                            ]
+                        },
+                        {
+                            id: "admin-comment",
+                            label: "Comment",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsComment(!isComment);
+                            },
+                            parentId: "admin",
+                            stateVariables: isComment,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-comments", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-comment", parentId: "admin" },
+                            ]
+                        },
                     ]
                 },
                 {
@@ -282,9 +322,8 @@ const Navdata = () => {
                     parentId: "admin",
                     stateVariables: isData,
                     childItems: [
-                        { id: 1, label: "DataList", link: "/admin-datas", parentId: "admin" },
-                        { id: 2, label: "DataCreate", link: "/admin-add-data", parentId: "admin" },
-
+                        { id: 1, label: "List", link: "/admin-datas", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-data", parentId: "admin" },
                         {
                             id: "admin-dataCategory",
                             label: "Category",
@@ -292,20 +331,85 @@ const Navdata = () => {
                             isChildItem: true,
                             click: function (e) {
                                 e.preventDefault();
-                                setIsData(!isData);
+                                setIsDataCategory(!isDataCategory);
                             },
                             parentId: "admin",
-                            stateVariables: isData,
+                            stateVariables: isDataCategory,
                             childItems: [
                                 { id: 1, label: "List", link: "/admin-dataCategories", parentId: "admin" },
                                 { id: 2, label: "Create", link: "/admin-add-dataCategory", parentId: "admin" },
                             ]
                         },
                     ]
+                }, 
+                {
+                    id: "admin-campus",
+                    label: "Campus",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsCampus(!isCampus);
+                    },
+                    parentId: "admin",
+                    stateVariables: isCampus,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-campuses", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-campus", parentId: "admin" },
+                        {
+                            id: "admin-campusCategory",
+                            label: "Category",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsCampusCategory(!isCampusCategory);
+                            },
+                            parentId: "admin",
+                            stateVariables: isCampusCategory,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-campusCategories", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-campusCategory", parentId: "admin" },
+                            ]
+                        },
+                    ]
+                },   
+                {
+                    id: "admin-question",
+                    label: "Question",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsQuestion(!isQuestion);
+                    },
+                    parentId: "admin",
+                    stateVariables: isQuestion,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-questiones", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-question", parentId: "admin" },
+                        {
+                            id: "admin-answer",
+                            label: "answer",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsAnswer(!isAnswer);
+                            },
+                            parentId: "admin",
+                            stateVariables: isAnswer,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-answers", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-answer", parentId: "admin" },
+                            ]
+                        },
+                    ]
                 },
-                
-            ],
+                                            
+            ]
         },
+
         {
             id: "blogservice",
             label: "Blog Service",

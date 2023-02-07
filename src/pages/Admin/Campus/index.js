@@ -22,54 +22,34 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getUsers, deleteUser } from "../../../helpers/fakebackend_helper";
+import { getCampuses, deleteCampus } from "../../../helpers/fakebackend_helper";
 
-const Users = (props) => {
-
-  const [userList, setUserList] = useState([]);
+const Campuses = (props) => {
+  const [campusList, setCampusList] = useState([]);
   useEffect(() => {
-    getUserList();
+    getCampusList();
   }, []);
 
-  const getUserList = () => {
-    getUsers().then(res => {
-      setUserList(res);
+  const getCampusList = () => {
+    getCampuses().then(res => {
+      setCampusList(res);
     })
   }
-
-  // useEffect(() => {
-  //   if (users && !users.length) {
-  //     dispatch(onGetUsers());
-  //   }
-  // }, [dispatch, users]);
-
-  // useEffect(() => {
-  //   setUserList(users);
-  // }, [users]);
-
-  // useEffect(() => {
-  //   dispatch(onGetUsers());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!isEmpty(users)) setUserList(users);
-  // }, [users]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (user) => {
-    setCurrentID(user.id);
-    // setUser(user);
+  const onClickDelete = (campus) => {
+    setCurrentID(campus.id);
     setDeleteModal(true);
   };
 
-  const handleDeleteUser = () => {
+  const handleDeleteCampus = () => {
     if (currentID) {
-      deleteUser(currentID).then(res => {
-        if (res == 1) {
-          getUserList();
+      deleteCampus(currentID).then(res => {
+        if (res === 1) {
+          getCampusList();
           setDeleteModal(false);
         } else {
           setDeleteModal(false);
@@ -87,54 +67,33 @@ const Users = (props) => {
         },
       },
       {
-        Header: "User",
-        Cell: (user) => (
-          <>
-            <div className="d-flex align-items-center">
-              <div className="flex-shrink-0 me-3">
-                <div className="avatar-sm bg-light rounded p-1">
-                  <img
-                    src={user.row.original.image}
-                    alt=""
-                    className="img-fluid d-block"
-                  />
-                </div>
-              </div>
-              <div className="flex-grow-1">
-                <h5 className="fs-14 mb-1">
-                  <Link
-                    to={"/admin-user-details/" + user.row.original.id}
-                    className="text-dark"
-                  >
-                    {" "}
-                    {user.row.original.name}
-                  </Link>
-                </h5>
-              </div>
-            </div>
-          </>
-        ),
+        Header: "Name",
         accessor: "name",
         filterable: false,
       },
       {
-        Header: "Username",
-        accessor: "username",
+        Header: "Description",
+        accessor: "description",
         filterable: false,
       },
       {
-        Header: "Email",
-        accessor: "email",
+        Header: "Browses",
+        accessor: "browses",
         filterable: false,
       },
       {
-        Header: "Gender",
-        accessor: "gender",
+        Header: "Recommends",
+        accessor: "recommends",
         filterable: false,
       },
       {
-        Header: "Birthday",
-        accessor: "birthday",
+        Header: "Cost",
+        accessor: "cost",
+        filterable: false,
+      },
+      {
+        Header: "CampusCatetoryId",
+        accessor: "campusCategoryId",
         filterable: false,
       },
       {
@@ -150,12 +109,12 @@ const Users = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-user-details/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-campus-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
                 </DropdownItem>
 
-                <DropdownItem href={"admin-add-user/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-add-campus/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -164,8 +123,8 @@ const Users = (props) => {
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const userData = cellProps.row.original;
-                    onClickDelete(userData);
+                    const campusData = cellProps.row.original;
+                    onClickDelete(campusData);
                   }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -179,17 +138,17 @@ const Users = (props) => {
     ],
     []
   );
-  document.title = "Users";
+  document.title = "Campuses";
   return (
     <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteUser}
+        onDeleteClick={handleDeleteCampus}
         onCloseClick={() => setDeleteModal(false)}
       />
 
       <Container fluid>
-        <BreadCrumb title="Users" pageTitle="Admin" />
+        <BreadCrumb title="Campuses" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -200,11 +159,11 @@ const Users = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-user"
+                          to="/admin-add-campus"
                           className="btn btn-success"
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Add
-                          User
+                          Campus
                         </Link>
                       </div>
                     </div>
@@ -214,7 +173,7 @@ const Users = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Users..."
+                            placeholder="Search Campuses..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -230,12 +189,12 @@ const Users = (props) => {
                         id="table-product-list-all"
                         className="table-card gridjs-border-none pb-2"
                       >
-                        {userList && userList !== "" ? (
+                        {campusList && campusList !== "" ? (
                           <TableContainer
                             columns={columns}
-                            data={userList}
+                            data={campusList}
                             isGlobalFilter={false}
-                            isAddUserList={false}
+                            isAddCampusList={false}
                             customPageSize={10}
                             divClass="table-responsive mb-1"
                             tableClass="mb-0 table-borderless"
@@ -270,4 +229,4 @@ const Users = (props) => {
   );
 };
 
-export default Users;
+export default Campuses;

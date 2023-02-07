@@ -22,54 +22,42 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getUsers, deleteUser } from "../../../helpers/fakebackend_helper";
+import { getCampusCategories, deleteCampusCategory } from "../../../helpers/fakebackend_helper";
 
-const Users = (props) => {
+const CampusCategories = (props) => {
+  // const dispatch = useDispatch();
 
-  const [userList, setUserList] = useState([]);
+  // const { CampusCategorys } = useSelector((state) => ({
+  //   CampusCategorys: state.CampusCategory.CampusCategoryList,
+  // }));
+  // const [CampusCategory, setCampusCategory] = useState(null);
+
+  const [CampusCategoryList, setCampusCategoryList] = useState([]);
   useEffect(() => {
-    getUserList();
+    getCampusCategoryList();
   }, []);
 
-  const getUserList = () => {
-    getUsers().then(res => {
-      setUserList(res);
+  const getCampusCategoryList = () => {
+    getCampusCategories().then(res => {
+      setCampusCategoryList(res);
     })
   }
-
-  // useEffect(() => {
-  //   if (users && !users.length) {
-  //     dispatch(onGetUsers());
-  //   }
-  // }, [dispatch, users]);
-
-  // useEffect(() => {
-  //   setUserList(users);
-  // }, [users]);
-
-  // useEffect(() => {
-  //   dispatch(onGetUsers());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!isEmpty(users)) setUserList(users);
-  // }, [users]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (user) => {
-    setCurrentID(user.id);
-    // setUser(user);
+  const onClickDelete = (CampusCategory) => {
+    setCurrentID(CampusCategory.id);
+    // setCampusCategory(CampusCategory);
     setDeleteModal(true);
   };
 
-  const handleDeleteUser = () => {
+  const handleDeleteCampusCategory = () => {
     if (currentID) {
-      deleteUser(currentID).then(res => {
-        if (res == 1) {
-          getUserList();
+      deleteCampusCategory(currentID).then(res => {
+        if (res === 1) {
+          getCampusCategoryList();
           setDeleteModal(false);
         } else {
           setDeleteModal(false);
@@ -87,14 +75,14 @@ const Users = (props) => {
         },
       },
       {
-        Header: "User",
-        Cell: (user) => (
+        Header: "Title",
+        Cell: (CampusCategory) => (
           <>
             <div className="d-flex align-items-center">
               <div className="flex-shrink-0 me-3">
                 <div className="avatar-sm bg-light rounded p-1">
                   <img
-                    src={user.row.original.image}
+                    src={CampusCategory.row.original.image}
                     alt=""
                     className="img-fluid d-block"
                   />
@@ -103,40 +91,26 @@ const Users = (props) => {
               <div className="flex-grow-1">
                 <h5 className="fs-14 mb-1">
                   <Link
-                    to={"/admin-user-details/" + user.row.original.id}
+                    to={"/admin-CampusCategory-details/" + CampusCategory.row.original.id}
                     className="text-dark"
                   >
                     {" "}
-                    {user.row.original.name}
+                    {CampusCategory.row.original.title}
                   </Link>
                 </h5>
               </div>
             </div>
           </>
         ),
-        accessor: "name",
+        accessor: "title",
         filterable: false,
       },
       {
-        Header: "Username",
-        accessor: "username",
+        Header: "Dscription",
+        accessor: "description",
         filterable: false,
       },
-      {
-        Header: "Email",
-        accessor: "email",
-        filterable: false,
-      },
-      {
-        Header: "Gender",
-        accessor: "gender",
-        filterable: false,
-      },
-      {
-        Header: "Birthday",
-        accessor: "birthday",
-        filterable: false,
-      },
+      
       {
         Header: "Action",
         Cell: (cellProps) => {
@@ -150,12 +124,12 @@ const Users = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-user-details/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-CampusCategory-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
                 </DropdownItem>
 
-                <DropdownItem href={"admin-add-user/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-add-CampusCategory/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -164,8 +138,8 @@ const Users = (props) => {
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const userData = cellProps.row.original;
-                    onClickDelete(userData);
+                    const CampusCategoryData = cellProps.row.original;
+                    onClickDelete(CampusCategoryData);
                   }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -179,17 +153,17 @@ const Users = (props) => {
     ],
     []
   );
-  document.title = "Users";
+  document.title = "CampusCategories";
   return (
     <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteUser}
+        onDeleteClick={handleDeleteCampusCategory}
         onCloseClick={() => setDeleteModal(false)}
       />
 
       <Container fluid>
-        <BreadCrumb title="Users" pageTitle="Admin" />
+        <BreadCrumb title="CampusCategories" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -200,11 +174,11 @@ const Users = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-user"
+                          to="/admin-add-CampusCategory"
                           className="btn btn-success"
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Add
-                          User
+                          CampusCategory
                         </Link>
                       </div>
                     </div>
@@ -214,7 +188,7 @@ const Users = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Users..."
+                            placeholder="Search CampusCategories..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -230,12 +204,12 @@ const Users = (props) => {
                         id="table-product-list-all"
                         className="table-card gridjs-border-none pb-2"
                       >
-                        {userList && userList !== "" ? (
+                        {CampusCategoryList && CampusCategoryList !== "" ? (
                           <TableContainer
                             columns={columns}
-                            data={userList}
+                            data={CampusCategoryList}
                             isGlobalFilter={false}
-                            isAddUserList={false}
+                            isAddCampusCategoryList={false}
                             customPageSize={10}
                             divClass="table-responsive mb-1"
                             tableClass="mb-0 table-borderless"
@@ -270,4 +244,4 @@ const Users = (props) => {
   );
 };
 
-export default Users;
+export default CampusCategories;

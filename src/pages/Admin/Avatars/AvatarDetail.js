@@ -22,7 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewNotification, getNotification, updateOneNotification } from "../../../helpers/fakebackend_helper";
+import { addNewAvatar, getAvatar, updateOneAvatar } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -42,7 +42,7 @@ import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
-const NotificationReview = (props) => {
+const AvatarReview = (props) => {
 
   return (
     <React.Fragment>
@@ -114,23 +114,21 @@ const PricingWidgetList = (props) => {
   );
 };
 
-function NotificationDetail(props) {
+function AvatarDetail(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
-  const [user, setNotification] = useState({
-    date: '',
-    description: '',
-    type: '',
-   
-    
+  const [Avatar, setAvatar] = useState({
+    name: '',
+    file_url: '',
+    cost: '',
   });
   useEffect(() => {
     if (id) {
-      getNotification(id).then(res => {
-        setNotification(res);
+      getAvatar(id).then(res => {
+        setAvatar(res);
       })
     }
   }, []);
@@ -139,12 +137,12 @@ function NotificationDetail(props) {
       setcustomActiveTab(tab);
     }
   };
-  document.title = "Notification Details | Velzon - React Admin & Dashboard Template";
+  document.title = "Avatar Details | Velzon - React Admin & Dashboard Template";
   return (
     <div className="page-content">
       <Container fluid>
 
-        <BreadCrumb title="Notification Details" pageTitle="Ecommerce" />
+        <BreadCrumb title="Avatar Details" pageTitle="Ecommerce" />
 
         <Row>
           <Col lg={12}>
@@ -246,7 +244,7 @@ function NotificationDetail(props) {
                     <div className="mt-xl-0 mt-5">
                       <div className="d-flex">
                         <div className="flex-grow-1">
-                          <h4>{user.name}</h4>
+                          <h4>{Avatar.name}</h4>
                         </div>
                         <div className="flex-shrink-0">
                           <div>
@@ -259,15 +257,16 @@ function NotificationDetail(props) {
                               }}
                             >
                               <Link
-                                to="/admin-add-notification"
+                                to="/admin-add-Avatar"
                                 className="btn btn-success"
+                                
                               >
-                                <i className="ri-add-line align-bottom me-1"></i> Add
+                                <i className="ri-add-line align-bottom me-1"></i> 
                                 Edit
                               </Link>
                             </Tooltip>
                             <a
-                              href={"/admin-add-notification/"+id}
+                              href={"/admin-add-Avatar/"+id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
@@ -315,7 +314,7 @@ function NotificationDetail(props) {
                       </Row> */}
 
                       <div className="product-content mt-5">
-                        <h5 className="fs-14 mb-3">Notification Description :</h5>
+                        <h5 className="fs-14 mb-3">Avatar Description :</h5>
                         <Nav tabs className="nav-tabs-custom nav-success">
                           <NavItem>
                             <NavLink
@@ -359,23 +358,19 @@ function NotificationDetail(props) {
                                 <tbody>
                                   <tr>
                                     <th scope="row" style={{ width: "200px" }}>
-                                      Date
+                                      Name
                                     </th>
-                                    <td>{user.date}</td>
+                                    <td>{Avatar.name}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">Description</th>
-                                    <td>{user.description}</td>
+                                    <th scope="row">File_url</th>
+                                    <td>{Avatar.file_url}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">Type</th>
-                                    <td>{user.type}</td>
+                                    <th scope="row">Cost</th>
+                                    <td>{Avatar.cost}</td>
                                   </tr>
                                   
-                                  {/* <tr>
-                                    <th scope="row">Weight</th>
-                                    <td>140 Gram</td>
-                                  </tr> */}
                                 </tbody>
                               </table>
                             </div>
@@ -431,4 +426,4 @@ function NotificationDetail(props) {
   );
 }
 
-export default NotificationDetail;
+export default AvatarDetail;

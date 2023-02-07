@@ -22,7 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewNotification, getNotification, updateOneNotification } from "../../../helpers/fakebackend_helper";
+import { addNewCampus, getCampus, updateOneCampus } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -42,7 +42,7 @@ import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
-const NotificationReview = (props) => {
+const CampusReview = (props) => {
 
   return (
     <React.Fragment>
@@ -114,23 +114,24 @@ const PricingWidgetList = (props) => {
   );
 };
 
-function NotificationDetail(props) {
+function CampusDetail(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
-  const [user, setNotification] = useState({
-    date: '',
+  const [Campus, setCampus] = useState({
+    name: '',
     description: '',
-    type: '',
-   
-    
+    browses: '',
+    cost: '',
+    recommends: '',
+    campusCategoryId: '',
   });
   useEffect(() => {
     if (id) {
-      getNotification(id).then(res => {
-        setNotification(res);
+      getCampus(id).then(res => {
+        setCampus(res);
       })
     }
   }, []);
@@ -139,12 +140,12 @@ function NotificationDetail(props) {
       setcustomActiveTab(tab);
     }
   };
-  document.title = "Notification Details | Velzon - React Admin & Dashboard Template";
+  document.title = "Campus Details | Velzon - React Admin & Dashboard Template";
   return (
     <div className="page-content">
       <Container fluid>
 
-        <BreadCrumb title="Notification Details" pageTitle="Ecommerce" />
+        <BreadCrumb title="Campus Details" pageTitle="Ecommerce" />
 
         <Row>
           <Col lg={12}>
@@ -246,7 +247,7 @@ function NotificationDetail(props) {
                     <div className="mt-xl-0 mt-5">
                       <div className="d-flex">
                         <div className="flex-grow-1">
-                          <h4>{user.name}</h4>
+                          <h4>{Campus.name}</h4>
                         </div>
                         <div className="flex-shrink-0">
                           <div>
@@ -259,15 +260,16 @@ function NotificationDetail(props) {
                               }}
                             >
                               <Link
-                                to="/admin-add-notification"
+                                to={"/admin-add-Campus/" + id}
                                 className="btn btn-success"
+
                               >
-                                <i className="ri-add-line align-bottom me-1"></i> Add
+                                <i className="ri-add-line align-bottom me-1"></i>
                                 Edit
                               </Link>
                             </Tooltip>
                             <a
-                              href={"/admin-add-notification/"+id}
+                              href={"/admin-add-Campus/" + id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
@@ -277,45 +279,8 @@ function NotificationDetail(props) {
                         </div>
                       </div>
 
-                      {/* <Row>
-                        <Col sm={6}>
-                          <div className="mt-3">
-                            <h5 className="fs-14">Features :</h5>
-                            <ul className="list-unstyled">
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                Full Sleeve
-                              </li>
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                Cotton
-                              </li>
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                All Sizes available
-                              </li>
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                4 Different Color
-                              </li>
-                            </ul>
-                          </div>
-                        </Col>
-                        <Col sm={6}>
-                          <div className="mt-3">
-                            <h5 className="fs-14">Services :</h5>
-                            <ul className="list-unstyled product-desc-list">
-                              <li className="py-1">10 Days Replacement</li>
-                              <li className="py-1">
-                                Cash on Delivery available
-                              </li>
-                            </ul>
-                          </div>
-                        </Col>
-                      </Row> */}
-
                       <div className="product-content mt-5">
-                        <h5 className="fs-14 mb-3">Notification Description :</h5>
+                        <h5 className="fs-14 mb-3">Campus Description :</h5>
                         <Nav tabs className="nav-tabs-custom nav-success">
                           <NavItem>
                             <NavLink
@@ -359,23 +324,30 @@ function NotificationDetail(props) {
                                 <tbody>
                                   <tr>
                                     <th scope="row" style={{ width: "200px" }}>
-                                      Date
+                                      Name
                                     </th>
-                                    <td>{user.date}</td>
+                                    <td>{Campus.name}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">Description</th>
-                                    <td>{user.description}</td>
+                                    <th scope="row" style={{ width: "200px" }}>Description</th>
+                                    <td>{Campus.description}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">Type</th>
-                                    <td>{user.type}</td>
+                                    <th scope="row" >Cost</th>
+                                    <td>{Campus.cost}</td>
                                   </tr>
-                                  
-                                  {/* <tr>
-                                    <th scope="row">Weight</th>
-                                    <td>140 Gram</td>
-                                  </tr> */}
+                                  <tr>
+                                    <th scope="row">Recommends</th>
+                                    <td>{Campus.recommends}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">CampusCategoryId</th>
+                                    <td>{Campus.campusCategoryId}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Browses</th>
+                                    <td>{Campus.browses}</td>
+                                  </tr>
                                 </tbody>
                               </table>
                             </div>
@@ -431,4 +403,4 @@ function NotificationDetail(props) {
   );
 }
 
-export default NotificationDetail;
+export default CampusDetail;

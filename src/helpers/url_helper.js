@@ -175,8 +175,15 @@ export const ADD_NEW_ARTICLECATEGORY = "/api/article/category/create";
 export const UPDATE_ARTICLECATEGORY = "/api/article/category/update";
 export const DELETE_ARTICLECATEGORY = "/api/article/category/delete";
 
+// Comments
+export const GET_COMMENTS = "/api/comment/get_All";
+export const GET_COMMENT = "/api/comment/getOneComment";
+export const ADD_NEW_COMMENT = "/api/comment/create";
+export const UPDATE_COMMENT = "/api/comment/update";
+export const DELETE_COMMENT = "/api/comment/delete";
+
 // Datas
-export const GET_DATAS = "/api/data/get_All";
+export const GET_DATAS = "/api/data/findAll";
 export const GET_DATA = "/api/data/get_one";
 export const ADD_NEW_DATA = "/api/data/create";
 export const UPDATE_DATA = "/api/data/update";
@@ -188,3 +195,38 @@ export const GET_DATACATEGORY = "/api/data/category/get_one";
 export const ADD_NEW_DATACATEGORY = "/api/data/category/create";
 export const UPDATE_DATACATEGORY = "/api/data/category/update";
 export const DELETE_DATACATEGORY = "/api/data/category/delete";
+
+// Campuses
+export const GET_CAMPUSES = "/api/campus/get_All";
+export const GET_CAMPUS = "/api/campus/get_one";
+export const ADD_NEW_CAMPUS = "/api/campus/create";
+export const UPDATE_CAMPUS = "/api/campus/update";
+export const DELETE_CAMPUS = "/api/campus/delete";
+
+// CampusCategories
+export const GET_CAMPUSCATEGORIES = "/api/campus/category/get_All";
+export const GET_CAMPUSCATEGORY = "/api/campus/category/get_one";
+export const ADD_NEW_CAMPUSCATEGORY = "/api/campus/category/create";
+export const UPDATE_CAMPUSCATEGORY = "/api/campus/category/update";
+export const DELETE_CAMPUSCATEGORY = "/api/campus/category/delete";
+
+//Avatar
+export const GET_AVATARS = "/api/avatar/get_All";
+export const GET_AVATAR = "/api/avatar/get_one";
+export const ADD_NEW_AVATAR = "/api/avatar/create";
+export const UPDATE_AVATAR = "/api/avatar/update";
+export const DELETE_AVATAR = "/api/avatar/delete";
+
+// Questiones
+export const GET_QUESTIONES = "/api/question/get_All";
+export const GET_QUESTION = "/api/question/get_one";
+export const ADD_NEW_QUESTION = "/api/question/create";
+export const UPDATE_QUESTION = "/api/question/update";
+export const DELETE_QUESTION = "/api/question/delete";
+
+// Answers
+export const GET_ANSWERS = "/api/answer/get_All";
+export const GET_ANSWER = "/api/answer/get_one";
+export const ADD_NEW_ANSWER = "/api/answer/create";
+export const UPDATE_ANSWER = "/api/answer/update";
+export const DELETE_ANSWER = "/api/answer/delete";

@@ -38,28 +38,24 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewUser, getUser, updateOneUser } from "../../../helpers/fakebackend_helper";
+import { addNewComment, getComment, updateOneComment } from "../../../helpers/fakebackend_helper";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const AddUser = (props) => {
+const AddComment = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
 
-  const [user, setUser] = useState({
-    username: '',
+  const [Comment, setComment] = useState({
     name: '',
-    email: '',
-    gender: 'male',
-    birthday: new Date(),
-    password: '',
+    description: '',    
+  
   });
 
   useEffect(() => {
     if (id) {
-      getUser(id).then(res => {
-        res['birthday'] = new Date(res['birthday']);
-        setUser(res);
+      getComment(id).then(res => {
+        setComment(res);
       })
     }
   }, []);
@@ -88,20 +84,13 @@ const AddUser = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const gender = [
-    {
-      options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
-      ],
-    },
-  ];
-  document.title = id ? "Edit User" : "Add User";
+
+  document.title = id ? "Edit Comment" : "Add Comment";
   return (
     <div className="page-content">
       <Container fluid>
 
-        <BreadCrumb title={id ? "Edit User" : "Add User"} pageTitle="Admin User" />
+        <BreadCrumb title={id ? "Edit Comment" : "Add Comment"} pageTitle="Admin Comment" />
 
         <Row>
           <Col lg={8}>
@@ -117,102 +106,37 @@ const AddUser = (props) => {
                       className="form-control"
                       id="product-title-input"
                       placeholder="Enter name"
-                      value={user.name}
+                      value={Comment.name}
                       onChange={e => {
-                        setUser({ ...user, ...{ name: e.target.value } })
+                        setComment({ ...Comment, ...{ name: e.target.value } })
                       }}
                     />
                   </div>
                   <Row>
-                    <Col lg={6}>
+                    <Col lg={8}>
                       <div className="mb-3">
                         <label
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          Username
+                          Description
                         </label>
                         <input
                           type="text"
                           className="form-control"
                           id="manufacturer-brand-input"
-                          placeholder="Enter Username"
-                          value={user.username}
+                          placeholder="Enter description"
+                          value={Comment.description}
                           onChange={e => {
-                            setUser({ ...user, ...{ username: e.target.value } })
+                            setComment({ ...Comment, ...{ description: e.target.value } })
                           }}
                         />
                       </div>
                     </Col>
-                    <Col lg={6}>
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          htmlFor="manufacturer-brand-input"
-                        >
-                          Email
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter Email"
-                          value={user.email}
-                          onChange={e => {
-                            setUser({ ...user, ...{ email: e.target.value } })
-                          }}
-                        />
-                      </div>
-                    </Col>
+                    
                   </Row>
 
-                  <Row>
-                    <Col lg={6}>
-                      <div>
-                        <Label
-                          htmlFor="choices-publish-visibility-input"
-                          className="form-label"
-                        >
-                          Select Gender
-                        </Label>
-
-                        <Select
-                          value={{ value: user.gender, label: user.gender == 'male' ? 'Male' : 'Female' }}
-                          onChange={(e) => {
-                            console.log(e);
-                            setUser({ ...user, ...{ gender: e.value } })
-                          }}
-                          options={gender}
-                          name="choices-publish-visibility-input"
-                          classNamePrefix="select2-selection form-select"
-                        />
-                      </div>
-                    </Col>
-                    <Col lg={6}>
-                      <div>
-                        <label
-                          htmlFor="datepicker-publish-input"
-                          className="form-label"
-                        >
-                          Input Date Of Birth
-                        </label>
-                        <Flatpickr
-                          className="form-control"
-                          id="datepicker-publish-input"
-                          value={user.birthday}
-                          onChange={([date]) => {
-                            setUser({ ...user, ...{ birthday: date } })
-                          }}
-                          options={{
-                            altInput: true,
-                            altFormat: "F j, Y",
-                            mode: "single",
-                            dateFormat: "d.m.y",
-                          }}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
+                  
                 </CardBody>
               </Card>
 
@@ -238,16 +162,16 @@ const AddUser = (props) => {
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {
                   e.preventDefault();
                   if (id) {
-                    updateOneUser(id, user).then(res => {
+                    updateOneComment(id, Comment).then(res => {
                       console.log(res);
                     })
                   } else {
-                    addNewUser(user).then(res => {
+                    addNewComment(Comment).then(res => {
                       console.log(res);
                     })
                   }
                 }}>
-                  {id ? "Update" : "Add"}
+                  {id ? "Update Comment" : "Add Comment"}
                 </button>
               </div>
             </form>
@@ -259,4 +183,4 @@ const AddUser = (props) => {
   );
 };
 
-export default AddUser;
+export default AddComment;

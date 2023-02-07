@@ -38,32 +38,30 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewUser, getUser, updateOneUser } from "../../../helpers/fakebackend_helper";
+import { addNewCampus, getCampus, updateOneCampus } from "../../../helpers/fakebackend_helper";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const AddUser = (props) => {
+const AddCampus = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
 
-  const [user, setUser] = useState({
-    username: '',
+  const [Campus, setCampus] = useState({
     name: '',
-    email: '',
-    gender: 'male',
-    birthday: new Date(),
-    password: '',
+    description: '',
+    browses: '',
+    cost: '',
+    recommends: '',
+    campusCategoryId: '',
   });
 
   useEffect(() => {
     if (id) {
-      getUser(id).then(res => {
-        res['birthday'] = new Date(res['birthday']);
-        setUser(res);
+      getCampus(id).then(res => {
+        setCampus(res);
       })
     }
   }, []);
-
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -88,20 +86,21 @@ const AddUser = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const gender = [
+  const campusCategoryId = [
     {
       options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
+        { label: "1", value: "1" },
+        { label: "2", value: "2" },
+
       ],
     },
   ];
-  document.title = id ? "Edit User" : "Add User";
+  document.title = id ? "Edit Campus" : "Add Campus";
   return (
     <div className="page-content">
       <Container fluid>
 
-        <BreadCrumb title={id ? "Edit User" : "Add User"} pageTitle="Admin User" />
+        <BreadCrumb title={id ? "Edit Campus" : "Add Campus"} pageTitle="Admin Campus" />
 
         <Row>
           <Col lg={8}>
@@ -117,12 +116,31 @@ const AddUser = (props) => {
                       className="form-control"
                       id="product-title-input"
                       placeholder="Enter name"
-                      value={user.name}
+                      value={Campus.name}
                       onChange={e => {
-                        setUser({ ...user, ...{ name: e.target.value } })
+                        setCampus({ ...Campus, ...{ name: e.target.value } })
                       }}
                     />
                   </div>
+                  <div className="mb-3">
+                    <label
+                      className="form-label"
+                      htmlFor="manufacturer-brand-input"
+                    >
+                      Description
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="manufacturer-brand-input"
+                      placeholder="Enter description"
+                      value={Campus.description}
+                      onChange={e => {
+                        setCampus({ ...Campus, ...{ description: e.target.value } })
+                      }}
+                    />
+                  </div>
+
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -130,16 +148,16 @@ const AddUser = (props) => {
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          Username
+                          Cost
                         </label>
                         <input
                           type="text"
                           className="form-control"
                           id="manufacturer-brand-input"
-                          placeholder="Enter Username"
-                          value={user.username}
+                          placeholder="Enter cost"
+                          value={Campus.cost}
                           onChange={e => {
-                            setUser({ ...user, ...{ username: e.target.value } })
+                            setCampus({ ...Campus, ...{ cost: e.target.value } })
                           }}
                         />
                       </div>
@@ -150,16 +168,16 @@ const AddUser = (props) => {
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          Email
+                          Browses
                         </label>
                         <input
                           type="text"
                           className="form-control"
                           id="manufacturer-brand-input"
-                          placeholder="Enter Email"
-                          value={user.email}
+                          placeholder="Enter browses"
+                          value={Campus.browses}
                           onChange={e => {
-                            setUser({ ...user, ...{ email: e.target.value } })
+                            setCampus({ ...Campus, ...{ browses: e.target.value } })
                           }}
                         />
                       </div>
@@ -168,51 +186,47 @@ const AddUser = (props) => {
 
                   <Row>
                     <Col lg={6}>
-                      <div>
-                        <Label
-                          htmlFor="choices-publish-visibility-input"
+                      <div className="mb-3">
+                        <label
                           className="form-label"
+                          htmlFor="manufacturer-brand-input"
                         >
-                          Select Gender
-                        </Label>
-
-                        <Select
-                          value={{ value: user.gender, label: user.gender == 'male' ? 'Male' : 'Female' }}
-                          onChange={(e) => {
-                            console.log(e);
-                            setUser({ ...user, ...{ gender: e.value } })
+                          Recommends
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter recommends"
+                          value={Campus.recommends}
+                          onChange={e => {
+                            setCampus({ ...Campus, ...{ recommends: e.target.value } })
                           }}
-                          options={gender}
-                          name="choices-publish-visibility-input"
-                          classNamePrefix="select2-selection form-select"
                         />
                       </div>
                     </Col>
                     <Col lg={6}>
-                      <div>
+                      <div className="mb-3">
                         <label
-                          htmlFor="datepicker-publish-input"
                           className="form-label"
+                          htmlFor="manufacturer-brand-input"
                         >
-                          Input Date Of Birth
+                          CampusCategoryId
                         </label>
-                        <Flatpickr
+                        <input
+                          type="text"
                           className="form-control"
-                          id="datepicker-publish-input"
-                          value={user.birthday}
-                          onChange={([date]) => {
-                            setUser({ ...user, ...{ birthday: date } })
-                          }}
-                          options={{
-                            altInput: true,
-                            altFormat: "F j, Y",
-                            mode: "single",
-                            dateFormat: "d.m.y",
+                          id="manufacturer-brand-input"
+                          placeholder="Enter campusCategoryId"
+                          value={Campus.campusCategoryId}
+                          onChange={e => {
+                            setCampus({ ...Campus, ...{ campusCategoryId: e.target.value } })
                           }}
                         />
                       </div>
                     </Col>
                   </Row>
+
                 </CardBody>
               </Card>
 
@@ -238,16 +252,16 @@ const AddUser = (props) => {
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {
                   e.preventDefault();
                   if (id) {
-                    updateOneUser(id, user).then(res => {
+                    updateOneCampus(id, Campus).then(res => {
                       console.log(res);
                     })
                   } else {
-                    addNewUser(user).then(res => {
+                    addNewCampus(Campus).then(res => {
                       console.log(res);
                     })
                   }
                 }}>
-                  {id ? "Update" : "Add"}
+                  {id ? "Update Campus" : "Add Campus"}
                 </button>
               </div>
             </form>
@@ -259,4 +273,4 @@ const AddUser = (props) => {
   );
 };
 
-export default AddUser;
+export default AddCampus;
