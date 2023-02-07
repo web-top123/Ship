@@ -487,3 +487,33 @@ export const updateOneCampusCategory = (id, customer) => api.update(url.UPDATE_C
 
 // delete CAMPUSCATEGORY
 export const deleteCampusCategory = id => api.delete(url.DELETE_CAMPUSCATEGORY + '/' + id);
+
+//--------Question--------
+// get Questiones
+export const getQuestiones = () => api.get(url.GET_QUESTIONES);
+export const getQuestion = (id) => api.get(url.GET_QUESTION + '/' + id);
+
+// add QUESTION
+export const addNewQuestion = customer => api.create(url.ADD_NEW_QUESTION, customer);
+
+// update QUESTION
+export const updateOneQuestion = (id, customer) => api.update(url.UPDATE_QUESTION + '/' + id, customer);
+
+// delete QUESTION
+export const deleteQuestion = id => api.delete(url.DELETE_QUESTION + '/' + id);
+
+// ----------- Answer --------------
+
+// get Answers
+export const getAnswers = () => api.get(url.GET_ANSWERS);
+
+export const getAnswer = (id) => api.get(url.GET_ANSWER + '/' + id);
+
+// add ANSWER
+export const addNewAnswer = customer => api.create(url.ADD_NEW_ANSWER, customer);
+
+// update ANSWER
+export const updateOneAnswer = (id, customer) => api.update(url.UPDATE_ANSWER + '/' + id, customer);
+
+// delete ANSWER
+export const deleteAnswer = id => api.delete(url.DELETE_ANSWER + '/' + id);

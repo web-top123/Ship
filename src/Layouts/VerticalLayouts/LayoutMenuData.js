@@ -52,6 +52,9 @@ const Navdata = () => {
 
     const [isCampus, setIsCampus] = useState(false);
     const [isCampusCategory, setIsCampusCategory] = useState(false);
+
+    const [isQuestion, setIsQuestion] = useState(false);
+    const [isAnswer, setIsAnswer] = useState(false);
     // Charts
     const [isApex, setIsApex] = useState(false);
 
@@ -370,7 +373,40 @@ const Navdata = () => {
                             ]
                         },
                     ]
-                },                               
+                },   
+                {
+                    id: "admin-question",
+                    label: "Question",
+                    link: "/#",
+                    isChildItem: true,
+                    click: function (e) {
+                        e.preventDefault();
+                        setIsQuestion(!isQuestion);
+                    },
+                    parentId: "admin",
+                    stateVariables: isQuestion,
+                    childItems: [
+                        { id: 1, label: "List", link: "/admin-questiones", parentId: "admin" },
+                        { id: 2, label: "Create", link: "/admin-add-question", parentId: "admin" },
+                        {
+                            id: "admin-answer",
+                            label: "answer",
+                            link: "/#",
+                            isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsAnswer(!isAnswer);
+                            },
+                            parentId: "admin",
+                            stateVariables: isAnswer,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-answers", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-answer", parentId: "admin" },
+                            ]
+                        },
+                    ]
+                },
+                                            
             ]
         },
 

@@ -285,6 +285,17 @@ import Avatars from "../pages/Admin/Avatars/index";
 import AvatarDetail from "../pages/Admin/Avatars/AvatarDetail";
 import AddAvatar from "../pages/Admin/Avatars/AddAvatar";
 
+
+// Question Section
+import Questiones from "../pages/Admin/Questions/index";
+import QuestionDetail from "../pages/Admin/Questions/QuestionDetail";
+import AddQuestion from "../pages/Admin/Questions/AddQuestions";
+
+// Answer Section
+import Answers from "../pages/Admin/Answers/index";
+import AnswerDetail from "../pages/Admin/Answers/AnswerDetail";
+import AddAnswer from "../pages/Admin/Answers/AddAnswer";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
   { path: "/dashboard-crm", component: DashboardCrm },
@@ -546,6 +557,20 @@ const authProtectedRoutes = [
   { path: "/admin-avatar-details/:id", component: AvatarDetail },
   { path: "/admin-add-avatar", component: AddAvatar },
   { path: "/admin-add-avatar/:id", component: AddAvatar },
+
+
+// Questiones
+{ path: "/admin-questiones", component: Questiones },
+{ path: "/admin-question-details/:id", component: QuestionDetail },
+{ path: "/admin-add-question", component: AddQuestion },
+{ path: "/admin-add-question/:id", component: AddQuestion },
+
+  // Answers
+  { path: "/admin-answers", component: Answers },
+  { path: "/admin-answer-details/:id", component: AnswerDetail },
+  { path: "/admin-add-answer", component: AddAnswer },
+  { path: "/admin-add-answer/:id", component: AddAnswer },
+
 ];
 
 const publicRoutes = [
