@@ -1,8 +1,8 @@
 import { takeEvery, fork, put, all, call } from "redux-saga/effects"
 
 // Login Redux States
-import { EDIT_PROFILE, GET_PROFILE} from "./actionTypes"
-import { profileSuccess, profileError } from "./actions"
+import { EDIT_PROFILE, GET_PROFILE, } from "./actionTypes"
+import { profileSuccess, profileError, profileUpdateSuccess } from "./actions"
 
 //Include Both Helper File with needed methods
 import { getFirebaseBackend } from "../../../helpers/firebase_helper"
@@ -25,10 +25,10 @@ function* editProfile({ payload: { user } }) {
       yield put(profileSuccess(response))
     } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
       const response = yield call(postJwtProfile, {
-        username: user.username,
+        user: user,
         id: user.id,
       })
-      yield put(profileSuccess(user))
+      yield put(profileUpdateSuccess(user))
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
       const response = yield call(postFakeProfile, {
         username: user.username,
