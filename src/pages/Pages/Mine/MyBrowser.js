@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardBody, TabPane } from "reactstrap";
 import { BaseExample } from '../../Tables/GridTables/GridTablesData';
 import TableContainer from "../../../Components/Common/TableContainer";
-
 
 import { Link } from "react-router-dom";
 import { columnsData, dataList } from './TestData'

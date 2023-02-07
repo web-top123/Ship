@@ -3,7 +3,7 @@ import { Label, CardBody, Col, Input, Row, TabPane, Form } from "reactstrap";
 import Flatpickr from "react-flatpickr";
 import { getGetMyInformation, getAuthenticatedUser, putSaveMyInformation, updateAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfile } from '../../../../store/actions';
+import { getProfile, editProfile } from '../../../../store/actions';
 
 // Formik validation
 import * as Yup from "yup";
@@ -13,26 +13,50 @@ import { useFormik } from "formik";
 const MyInformation = () => {
 
 
+    // const [myInformation, setMyInformation] = useState({ birthday: '', username: '', name: '', email: '' });
+
+    // useEffect(() => {
+    //     var user = getAuthenticatedUser();
+    //     console.log(user);
+    //     getGetMyInformation(user.id).then(res => {
+    //         setMyInformation(res);
+    //     })
+    // }, []);
+
+    // const saveMyInformation = () => {
+    //     var user = getAuthenticatedUser();
+    //     console.log(user);
+    //     putSaveMyInformation(user.id, myInformation);
+    //     if (user.username != myInformation.username) {
+    //         updateAuthenticatedUser({ ...user, ...{ username: myInformation.username } });
+    //         window.location.reload()
+    //     }
+    // }
+
+    const dispatch = useDispatch();
     const [myInformation, setMyInformation] = useState({ birthday: '', username: '', name: '', email: '' });
     // const [, setMyInformation] = useState("");
 
+    console.log("localstorage", localStorage.getItem('authUser'));
+    const user =JSON.parse(localStorage.getItem('authUser'));
+    const myinformationdispatch = useSelector(state => {console.log("profile",state.Profile); return state.Profile.myinformation})
+    console.log("myinformationdispatchb", myinformationdispatch);
+    
+    useEffect(()=>{
+        // 
+        if(!myinformationdispatch) {
+            dispatch(getProfile(user))
+            console.log("myinformationdispatchx", myinformationdispatch);
+        } else {
+            setMyInformation(myinformationdispatch);
+            console.log("myinformationdispatchyyyyy", myinformationdispatch);
 
-    useEffect(() => {
-        var user = getAuthenticatedUser();
-        console.log(user);
-        getGetMyInformation(user.id).then(res => {
-            setMyInformation(res);
-        })
-    }, []);
+        }
+    },[myinformationdispatch])
 
     const saveMyInformation = () => {
-        var user = getAuthenticatedUser();
-        console.log(user);
-        putSaveMyInformation(user.id, myInformation);
-        if (user.username != myInformation.username) {
-            updateAuthenticatedUser({ ...user, ...{ username: myInformation.username } });
-            window.location.reload()
-        }
+        console.log("mysave",myInformation );
+        dispatch(editProfile(myInformation));
     }
 
     return (
@@ -61,7 +85,7 @@ const MyInformation = () => {
                                 Name
                             </Label>
                             <Input type="text" className="form-control" id="nameInput"
-                                placeholder="Enter your name" value={myInformation.name} />
+                                placeholder="Enter your name" value={myInformation.name} onChange={e => { setMyInformation({ ...myInformation, ...{ name: e.target.value } }) }}/>
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -69,15 +93,15 @@ const MyInformation = () => {
                             <Label htmlFor="emailInput" className="form-label">Email
                                 Address</Label>
                             <Input type="email" className="form-control" id="emailInput"
-                                placeholder="Enter your email" value={myInformation.email} />
+                                placeholder="Enter your email" value={myInformation.email}  onChange={e => { setMyInformation({ ...myInformation, ...{ email: e.target.value } }) }}/>
                         </div>
                     </Col>
                     <Col lg={6}>
                         <div className="mb-3">
                             <Label htmlFor="skillsInput" className="form-label">Man/Woman</Label>
-                            <select id="genderslection" className="form-select mb-3" >
-                                <option value="Male">Male</option>
-                                <option value="Femail">Female</option>
+                            <select id="genderslection" className="form-select mb-3" value={myInformation.gender} onChange={e => { setMyInformation({ ...myInformation, ...{ gender: e.target.value } }) }} >
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
                             </select>
                         </div>
                     </Col>
@@ -91,7 +115,8 @@ const MyInformation = () => {
                                 options={{
                                     dateFormat: "d M, Y"
                                 }}
-
+                                value = {new Date(myInformation.birthday)}
+                                onChange={e => {setMyInformation({ ...myInformation, ...{ birthday: e[0]} }) }}
                             />
                         </div>
                     </Col>

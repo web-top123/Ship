@@ -37,7 +37,7 @@ export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";
 export const SOCIAL_LOGIN = "/social-login";
 
 //PROFILE
-export const POST_EDIT_JWT_PROFILE = "";
+export const POST_EDIT_JWT_PROFILE = "/api/myInfo/update";
 export const POST_EDIT_PROFILE = "/post-fake-profile";
 export const GET_MY_PROFILE = "/api/browseHistory/findBrowseHistoryById"
 
