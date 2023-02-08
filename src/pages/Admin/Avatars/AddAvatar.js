@@ -48,9 +48,8 @@ const AddAvatar = (props) => {
 
   const [Avatar, setAvatar] = useState({
     name: '',
-    file_url: '',
     cost: '',
-    
+
   });
 
   useEffect(() => {
@@ -85,7 +84,7 @@ const AddAvatar = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  
+
   document.title = id ? "Edit Avatar" : "Add Avatar";
   return (
     <div className="page-content">
@@ -113,61 +112,36 @@ const AddAvatar = (props) => {
                       }}
                     />
                   </div>
-                  <Row>
-                    <Col lg={6}>
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          htmlFor="manufacturer-brand-input"
-                        >
-                          File_url
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter file_url"
-                          value={Avatar.file_url}
-                          onChange={e => {
-                            setAvatar({ ...Avatar, ...{ file_url: e.target.value } })
-                          }}
-                        />
-                      </div>
-                    </Col>
-                    <Col lg={6}>
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          htmlFor="manufacturer-brand-input"
-                        >
-                          Cost
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter cost"
-                          value={Avatar.cost}
-                          onChange={e => {
-                            setAvatar({ ...Avatar, ...{ cost: e.target.value } })
-                          }}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
 
-                  
+                  <div className="mb-3">
+                    <label
+                      className="form-label"
+                      htmlFor="manufacturer-brand-input"
+                    >
+                      Cost
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="manufacturer-brand-input"
+                      placeholder="Enter cost"
+                      value={Avatar.cost}
+                      onChange={e => {
+                        setAvatar({ ...Avatar, ...{ cost: e.target.value } })
+                      }}
+                    />
+                  </div>
                 </CardBody>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <h5 className="card-title mb-0">Product Gallery</h5>
+                  <h5 className="card-title mb-0">Avatar</h5>
                 </CardHeader>
                 <CardBody>
                   <div className="mb-4">
-                    <h5 className="fs-14 mb-1">Product Image</h5>
-                    <p className="text-muted">Add Product main Image.</p>
+                    <h5 className="fs-14 mb-1">Avatar Image</h5>
+                    <p className="text-muted">Add avatar main Image.</p>
                     <input
                       className="form-control"
                       id="product-image-input"
