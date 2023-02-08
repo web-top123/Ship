@@ -11,6 +11,8 @@ export const GET_MY_INFORMATION = "/api/myInfo/get_one";
 export const PUT_SAVE_MY_INFORMATION = "/api/myInfo/update";
 export const GET_FIND_BROWSER_HISTORY = "/api/browseHistory/findBrowseHistoryById";
 export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/browseHistory/findBrowseHistoryById";
+export const GET_FIND_BROWSER_HISTORY_ALL = "api/browseHistory/get_All";
+export const GET_FIND_PASSED_TEST = "api/findPassedTestById";
 
 // Test page
 
@@ -189,7 +191,7 @@ export const UPDATE_COMMENT = "/api/comment/update";
 export const DELETE_COMMENT = "/api/comment/delete";
 
 // Datas
-export const GET_DATAS = "/api/data/findAll";
+export const GET_DATAS = "/api/data/get_All";
 export const GET_DATA = "/api/data/get_one";
 export const ADD_NEW_DATA = "/api/data/create";
 export const UPDATE_DATA = "/api/data/update";
@@ -203,7 +205,7 @@ export const UPDATE_DATACATEGORY = "/api/data/category/update";
 export const DELETE_DATACATEGORY = "/api/data/category/delete";
 
 // Campuses
-export const GET_CAMPUSES = "/api/campus/get_All";
+export const GET_CAMPUSES = "/api/campus/findAll";
 export const GET_CAMPUS = "/api/campus/get_one";
 export const ADD_NEW_CAMPUS = "/api/campus/create";
 export const UPDATE_CAMPUS = "/api/campus/update";
@@ -224,7 +226,7 @@ export const UPDATE_AVATAR = "/api/avatar/update";
 export const DELETE_AVATAR = "/api/avatar/delete";
 
 // Questiones
-export const GET_QUESTIONES = "/api/question/get_All";
+export const GET_QUESTIONES = "/api/question/findAll";
 export const GET_QUESTION = "/api/question/get_one";
 export const ADD_NEW_QUESTION = "/api/question/create";
 export const UPDATE_QUESTION = "/api/question/update";

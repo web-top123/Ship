@@ -21,7 +21,7 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
         <React.Fragment>
             <Card>
                 <CardBody>
-                    <h4 className='mb-sm-0 pb-4'>Pop articles</h4>
+                    <h4 className='mb-sm-0 pb-4' style={{textAlign: "center"}}>Pop articles</h4>
                     <div className="top-writers d-flex align-items-center pt-4">
                         <div className='d-flex me-2'>
                             <div className='me-2'>
@@ -47,7 +47,7 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
             </Card>
             <Card>
                 <CardBody>
-                    <h4 className='mb-sm-0 pb-4'>Top Writers</h4>
+                    <h4 className='mb-sm-0 pb-4' style={{textAlign: "center"}}>Top Writers</h4>
                     <div className="top-writers d-flex align-items-center pt-4">
                         <div className='d-flex me-2'>
                             <div className='me-2'>
@@ -97,8 +97,8 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
             </Card>
             <div className="card ribbon-box border shadow-none mb-lg-0">
                 <div className="card-body text-muted">
-                    <span className="ribbon-three ribbon-three-success"><span>News</span></span><br/><br/><br/>
-                    <h5>Notification</h5>
+                    <h4 className='mb-sm-0 pb-4' style={{textAlign: "center"}}>Notification</h4>
+                    <h5>To Vip</h5>
                     <p style={{marginBottom: "40px"}}>Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio. Vivamus pretium nec odio cursus.</p>
                 </div>
             </div>

@@ -1,12 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import {
-  Card,
-  CardBody,
-  Col,
-  Container,
-  CardHeader,
-  Nav,
+  Button, Card, CardBody, Col, Container, CardHeader, Nav,
   NavItem,
   NavLink,
   Row,
@@ -14,7 +9,11 @@ import {
   TabPane,
   Input,
   Label,
+  Modal,
+  ModalHeader,
 } from "reactstrap";
+
+import { PositionModalExample } from "../../BaseUi/UiModals/UiModalCode";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -45,6 +44,14 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 const AddUser = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
+
+  // --------------- use modal ----------
+  const [modal_positionTop, setmodal_positionTop] = useState(false);
+  function tog_positionTop() {
+    setmodal_positionTop(!modal_positionTop);
+  }  
+
+  // --------------- use modal ----------
 
   const [user, setUser] = useState({
     username: '',
@@ -102,6 +109,26 @@ const AddUser = (props) => {
       <Container fluid>
 
         <BreadCrumb title={id ? "Edit User" : "Add User"} pageTitle="Admin User" />
+
+        <Modal id="topmodal" isOpen={modal_positionTop} toggle={() => { tog_positionTop(); }} >
+          <ModalHeader>
+            Modal Heading
+            <Button type="button" className="btn-close" onClick={() => { setmodal_positionTop(false); }} aria-label="Close"> </Button>
+          </ModalHeader>
+          <div className="modal-body text-center p-5">
+            <lord-icon src="https://cdn.lordicon.com/pithnlch.json"
+              trigger="loop" colors="primary:#121331,secondary:#08a88a" style={{ width: "120px", height: "120px" }}>
+            </lord-icon>
+            <div className="mt-4">
+              <h4 className="mb-3">Your event has been created.</h4>
+              <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
+              <div className="hstack gap-2 justify-content-center">
+                <Link to="#" className="btn btn-link link-success fw-medium shadow-none" onClick={() => { tog_positionTop(); }}><i className="ri-close-line me-1 align-middle"></i> Close</Link>
+                <Link to="#" className="btn btn-success">Completed</Link>
+              </div>
+            </div>
+          </div>
+        </Modal>
 
         <Row>
           <Col lg={8}>
@@ -177,7 +204,7 @@ const AddUser = (props) => {
                         </Label>
 
                         <Select
-                          value={{ value: user.gender, label: user.gender == 'male' ? 'Male' : 'Female' }}
+                          value={{ value: user.gender, label: user.gender === 'male' ? 'Male' : 'Female' }}
                           onChange={(e) => {
                             console.log(e);
                             setUser({ ...user, ...{ gender: e.value } })
@@ -240,12 +267,15 @@ const AddUser = (props) => {
                   if (id) {
                     updateOneUser(id, user).then(res => {
                       console.log(res);
-                    })
+                    });
+
                   } else {
                     addNewUser(user).then(res => {
                       console.log(res);
+                      
                     })
                   }
+                  // tog_positionTop();
                 }}>
                   {id ? "Update" : "Add"}
                 </button>

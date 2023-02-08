@@ -93,7 +93,7 @@ const Campuses = (props) => {
       },
       {
         Header: "CampusCatetoryId",
-        accessor: "campusCategoryId",
+        accessor: "campusCategory.title",
         filterable: false,
       },
       {

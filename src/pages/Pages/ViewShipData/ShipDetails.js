@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect,  useState } from "react";
 import {
   Card,
   Button, 
@@ -19,6 +19,9 @@ import {
 //Simple bar
 import SimpleBar from "simplebar-react"; 
 
+import { addNewData, getData, updateOneData } from "../../../helpers/fakebackend_helper";
+
+
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 import ship1 from "../../../assets/images/ship1.png";
@@ -37,7 +40,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
@@ -116,16 +119,58 @@ function ShipDetails(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
 
+
+  
+  const [customActiveTab, setcustomActiveTab] = useState("1"); 
+
+  let { id } = useParams();
+
+  const [Data, setData] = useState({
+    name: '',
+    file_url: '',
+    data_type: '',
+    dataCategoryId: '',
+    date: '',
+    amount: '',
+    unit: '',
+    port: '',
+    price: '',
+    from: '',
+    to: '',
+    owner: '',
+    runner: '',
+    total_weight: '',
+    load_weight: '',
+    weight: '',
+    current_height: '',
+    width: '',
+    length: '',
+    full_load: '',
+    engine: '',
+    created: '',
+    factory: '',
+    location: '',
+    status: '',
+  });
+
+
   const [ssize, setssize] = useState(false);
   const [msize, setmsize] = useState(false);
   const [lsize, setlsize] = useState(false);
   const [xlsize, setxlsize] = useState(false);
-  const [customActiveTab, setcustomActiveTab] = useState("1");
+
   const toggleCustom = tab => {
     if (customActiveTab !== tab) {
       setcustomActiveTab(tab);
     }
   };
+  useEffect(() => {
+    if (id) {
+      getData(id).then(res => {
+        setData(res);
+      })
+    }
+  }, []);
   document.title = "Product Details | Velzon - React Admin & Dashboard Template";
   return (
     <div className="page-content">
@@ -251,7 +296,7 @@ function ShipDetails(props) {
                               Edit
                             </Tooltip>
                             <a
-                              href="new-data-vote"
+                              href={"/new-data-vote/" + id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
@@ -283,19 +328,19 @@ function ShipDetails(props) {
                                 <th scope="row" style={{ width: "200px" }}>
                                   Business of Ship
                                 </th>
-                                <td>Star Group</td>
+                                <td>{Data.owner}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Running Business</th>
-                                <td>DaeDong Group</td>
+                                <td>{Data.runner}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Location</th>
-                                <td>Star port</td>
+                                <td>{Data.location}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Call Sign</th>
-                                <td>459646365ji435</td>
+                                <td>{Data.licence}</td>
                               </tr>
                               <tr>
                                 <th scope="row">HTTP</th>
@@ -318,44 +363,44 @@ function ShipDetails(props) {
                                 <th scope="row" style={{ width: "200px" }}>
                                   Kind of Ship
                                 </th>
-                                <td>Load Ship</td>
+                                <td>{Data.type}p</td>
                                 <th scope="row" style={{ width: "200px" }}>
                                   Full Load Index
                                 </th>
-                                <td>3.7ip</td>
+                                <td>{Data.full_load}t</td>
                               </tr>
                               <tr>
                                 <th scope="row">Total Weight</th>
-                                <td>1, 000 t</td>                                
+                                <td>{Data.total_weight}t</td>                                
                                 <th scope="row">Engine</th>
-                                <td>5, 000 HP</td>
+                                <td>{Data.engine}HP</td>
                               </tr>
                               <tr>
                                 <th scope="row">Load limit</th>
-                                <td>500 t</td>
+                                <td>{Data.limit}t</td>
                                 <th scope="row">Manufacture Date</th>
-                                <td>1987. 8. 1</td>
+                                <td>{Data.created}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Load</th>
-                                <td>350t</td>
+                                <td>{Data.full_load}t</td>
                                 <th scope="row">Manufacture Factory</th>
-                                <td>Hidaka ship, Japan</td>
+                                <td>{Data.factory}</td>
                               </tr>
                               <tr>
                                 <th scope="row">length</th>
-                                <td>78.1 m</td>
+                                <td>{Data.length} m</td>
                                 <th scope="row">locatinn</th>
-                                <td>ooo port</td>
+                                <td>{Data.location}port</td>
                               </tr><tr>
                                 <th scope="row">Width</th>
-                                <td>12 m</td>
-                                <th scope="row">State</th>
-                                <td>Waiting</td>
+                                <td>{Data.width} m</td>
+                                <th scope="row">Status</th>
+                                <td>{Data.status}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Sub height</th>
-                                <td>5.35 m</td>
+                                <td>{Data.current_height} m</td>
                               </tr>
                             </tbody>
                           </table>
@@ -368,7 +413,7 @@ function ShipDetails(props) {
                 <div className="modal-body text-center p-3">
                     <div className="mt-4 pt-3 pb-3">
                         <div className="hstack gap-2 justify-content-end">
-                            <NavLink href="view-ship-data" className=' d-inline'>
+                            <NavLink href="/view-ship-data" className=' d-inline'>
                                 <Button color="primary" className="ms-3">Go Back</Button>
                             </NavLink>
                         </div>

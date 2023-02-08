@@ -16,21 +16,9 @@ import {
   Label,
 } from "reactstrap";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import classnames from "classnames";
-import Dropzone from "react-dropzone";
-import MetaTags from 'react-meta-tags';
-
 // Import React FilePond
 import { registerPlugin } from "react-filepond";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 import Flatpickr from "react-flatpickr";
 import Select from "react-select";
 // Import FilePond styles
@@ -97,7 +85,7 @@ const AddCampus = (props) => {
     cateTree = [];
     refreshTree(cateTree, 0);
     setCateList(cateTree);
-  }, [Campus,campusCate]);
+  }, [Campus, campusCate]);
 
   const refreshTree = (obj, pid) => {
     campusCate.filter(e => e.parentId == pid).map(e => {
@@ -132,7 +120,7 @@ const AddCampus = (props) => {
   }
 
   const onChange = (currentNode, selectedNodes) => {
-    console.log('onChange::', currentNode, selectedNodes)
+    console.log('onChange::', currentNode, selectedNodes.title)
     if (selectedNodes.length) {
       setCampus({ ...Campus, ...{ campusCategoryId: selectedNodes[0]['value'] } })
     }
@@ -263,18 +251,7 @@ const AddCampus = (props) => {
                         >
                           CampusCategoryId
                         </label>
-
                         <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
-                        {/* <input
-                          type="text"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter campusCategoryId"
-                          value={Campus.campusCategoryId}
-                          onChange={e => {
-                            setCampus({ ...Campus, ...{ campusCategoryId: e.target.value } })
-                          }}
-                        /> */}
                       </div>
                     </Col>
                   </Row>

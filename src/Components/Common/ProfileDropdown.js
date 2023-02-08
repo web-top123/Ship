@@ -25,7 +25,7 @@ const ProfileDropdown = () => {
     useEffect(()=>{
         if (myinformationSelctor) {
              setUsername(myinformationSelctor.username)
-             console.log("username", username)
+             console.log("username", localStorage.getItem("authUser"))
         } else {
             setUsername('')
         }
@@ -53,9 +53,9 @@ const ProfileDropdown = () => {
                     <DropdownItem href="/pages-profile-settings"><i
                         className="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                             className="align-middle">My Page</span></DropdownItem>
-                    <DropdownItem href="/apps-chat"><i
+                    {/* <DropdownItem href="/apps-chat"><i
                         className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span
-                            className="align-middle">Messages</span></DropdownItem>
+                            className="align-middle">Messages</span></DropdownItem> */}
                     {/* <DropdownItem href="/apps-tasks-kanban"><i
                         className="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span
                             className="align-middle">Taskboard</span></DropdownItem>
@@ -63,10 +63,10 @@ const ProfileDropdown = () => {
                         className="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
                             className="align-middle">Help</span></DropdownItem> */}
                     <div className="dropdown-divider"></div>
-                    <DropdownItem href="/pages-profile"><i
+                    <DropdownItem ><i
                         className="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
                             className="align-middle">Free Charge : <b>$3000</b></span></DropdownItem>
-                    <DropdownItem href="/pages-profile"><i
+                    <DropdownItem ><i
                         className="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
                             className="align-middle">Balance : <b>$5971.67</b></span></DropdownItem>
                     <div className="dropdown-divider"></div>
