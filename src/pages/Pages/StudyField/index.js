@@ -463,28 +463,7 @@ const Software = () => {
                   </div>
                 </Row>
               </CardHeader>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
               <Row>
-
-
-
                 <div className="table-responsive mt-4 mt-xl-0  p-4 pt-1">
                   <Table className="table-hover  align-middle table-nowrap mb-0 ">
                     <thead className="bg-light">
