@@ -59,7 +59,7 @@ import { getStudy } from '../../../helpers/fakebackend_helper';
 
 
 
-const Software = () => {
+const Study  = () => {
 
 
   const [studyData, setstudyData] = useState([]);
@@ -557,7 +557,7 @@ const Software = () => {
   );
 };
 
-export default Software;
+export default Study  ;
 
 
 

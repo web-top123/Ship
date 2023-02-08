@@ -128,7 +128,11 @@ const ProgramCategories = (props) => {
         accessor: "description",
         filterable: false,
       },
-      
+      {
+        Header: "ParentId",
+        accessor: "parendId",
+        filterable: false,
+      },
       {
         Header: "Action",
         Cell: (cellProps) => {

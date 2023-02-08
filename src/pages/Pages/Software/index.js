@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Container,
@@ -16,13 +16,15 @@ import {
   Input,
   Button,
   CardBody,
+  Table,
+  Label,
 } from "reactstrap";
 
 //Title
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 //data
-import { shoppingCart } from "../../../common/data/ecommerce";
+import { sellersList } from "../../../common/data/ecommerce";
 
 //redux
 import { Link } from "react-router-dom";
@@ -31,32 +33,98 @@ import { Link } from "react-router-dom";
 import TreeView, { flattenTree } from "react-accessible-treeview";
 import { IoMdArrowDropright } from "react-icons/io";
 import cx from "classnames";
-
-
-
-
-
-
-
-
-
-
+import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories } from '../../../helpers/fakebackend_helper';
 
 const Software = () => {
+  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const fetchData = async () => {
+    if (selectedCategoryId == 1) {
+      getAllSoftware().then(sofwareList => {
+        setsoftwareData(sofwareList);
+      });
+    } else {
+      getAllSoftwareByCategory(selectedCategoryId).then(categoryData => {
+        setsoftwareData(categoryData.programs);
+      });
+    }
+  };
 
+  const [softwareData, setsoftwareData] = useState([]);
+  const [originalCategoryList, setOriginalCategoryList] = useState([]);
+  useEffect(() => {
+    getCategoryList();
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedCategoryId])
+
+  function getCategoryList() {
+    getProgramCategories().then(categoryList => {
+      let nodes = [];
+      let categoryNodes = [];
+      let lookupList = {};
+
+      categoryList = categoryList.sort((a, b) => a.parentId - b.parentId);
+      setOriginalCategoryList(categoryList);
+
+      for (const category of categoryList) {
+        let item = {
+          id: category.id,
+          category_id: category.id,
+          name: category.title,
+          parent_id: ((category.parentId == 0) ? null : category.parentId),
+          children: []
+        };
+        lookupList[item.id] = item;
+        nodes.push(item);
+        if (item.parent_id == null) {
+          categoryNodes.push(item);
+        }
+      }
+      for (let i = 0; i < nodes.length; i++) {
+        let n = nodes[i];
+        if (!(n.parent_id == null)) {
+          lookupList[n.parent_id].children = lookupList[n.parent_id].children.concat([n]);
+        }
+      }
+
+      let folder = {
+        name: "",
+        children: categoryNodes,
+      };
+
+      setAllCategories(folder);
+    });
+  }
+
+  //selection category
+  const [selectedSingle, setSelectedSingle] = useState(null);
+  function handleSelectSingle(value) {
+    if (selectedSingle != value) {
+      setAllCategories(value);
+    }
+    setSelectedSingle(value);
+  }
+  const SingleOptions = [
+    { value: 'folder1', label: 'Choices 1' },
+    { value: 'folder2', label: 'Choices 2' },
+    { value: 'folder3', label: 'Choices 3' },
+    { value: 'folder4', label: 'Choices 4' }
+  ];
 
   // Data
-  const [productLists, setproductLists] = useState(shoppingCart);
- 
-  //product detail
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [request, setRequest] = useState("");
-  const [description, setDescription] = useState("");
-  const [rate, setRate] = useState("");
-  const [price, setPrice] = useState("");
-  const [img, setImg] = useState("");
+  const [softwareList, setsoftwareList] = useState(sellersList);
 
+  //product detail
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
+  const [requirement, setRequirement] = useState("");
+  const [description, setDescription] = useState("");
+  const [recommends, setRecommends] = useState("");
+  const [cost, setCost] = useState("");
+  const [img, setImg] = useState("");
 
   //modal
   // Border Top Nav Justified Tabs
@@ -70,12 +138,12 @@ const Software = () => {
   //modal first
   const [modal_togFirst, setmodal_togFirst] = useState(false);
   function tog_togFirst(value) {
-    setTitle(value.name);
-    setDate(value.id);
-    setRequest(value.name);
-    setDescription(value.name);
-    setRate(value.name);
-    setPrice(value.name);
+    setName(value.name);
+    setDate(value.date);
+    setRequirement(value.requirement);
+    setDescription(value.description);
+    setRecommends(value.recommends);
+    setCost(value.cost);
     setImg(value.img);
     setmodal_togFirst(!modal_togFirst);
 
@@ -89,49 +157,10 @@ const Software = () => {
   }
 
   //treeview
-  const folder = {
-    name: "",
-    children: [
-      {
-        name: "Fruits",
-        children: [
-          { name: "Avocados" },
-          { name: "Bananas" },
-          { name: "Berries" },
-          { name: "Oranges" },
-          { name: "Pears" },
-        ],
-      },
-      {
-        name: "Drinks",
-        children: [
-          { name: "Apple Juice" },
-          { name: "Chocolate" },
-          { name: "Coffee" },
-          {
-            name: "Tea",
-            children: [
-              { name: "Black Tea" },
-              { name: "Green Tea" },
-              { name: "Red Tea" },
-              { name: "Matcha" },
-            ],
-          },
-        ],
-      },
-      {
-        name: "Vegetables",
-        children: [
-          { name: "Beets" },
-          { name: "Carrots" },
-          { name: "Celery" },
-          { name: "Lettuce" },
-          { name: "Onions" },
-        ],
-      },
-    ],
-  };
-  const data = flattenTree(folder);
+
+  //data folder
+  const [allCategories, setAllCategories] = useState([]);
+  const data = flattenTree(allCategories);
   const ArrowIcon = ({ isOpen, className }) => {
     const baseClass = "arrow";
     const classes = cx(
@@ -144,16 +173,11 @@ const Software = () => {
     return <IoMdArrowDropright className={classes} />;
   };
 
-
   const [expandedIds, setExpandedIds] = useState();
 
-
-
-
-
-
-
-
+  function selectCategory(selectedId) {
+    console.log("Selected Category ID:", selectedId);
+  }
 
   return (
     <div className="page-content">
@@ -166,101 +190,82 @@ const Software = () => {
         centered
       >
 
-        <Row>
-          <div className="col-sm-10"></div>
-          <div className="col-sm-2 pt-4"> <Button
-            type="button"
-            className="btn-close "
-            onClick={() => {
-              setmodal_togFirst(false);
-            }}
-
-          >
-          </Button></div>
-        </Row>
         <ModalBody className=" p-2">
           <CardBody>
-            <Row className="gy-3">
+            <Row className="pt-3">
               <div className="col-sm-5">
-                <div className="avatar-xl bg-light rounded p-1">
-                  <img
-                    src={img}
-                    alt=""
-                    className="img-fluid d-block"
-                  />
-                </div>
+                <h5 className="fs-15">
+                  Name :
+                </h5>
               </div>
               <div className="col-sm-7">
-                <div className="row">
-                  <div className="col-sm-4">
-                    <h5 className="fs-13">
-                      Title :
-                    </h5>
-                  </div>
-                  <div className="col-sm-8">
-                    <h5 className="fs-15">
-                      {title}
-                    </h5>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-4">
-                    <h5 className="fs-13">
-                      Date :
-                    </h5>
-                  </div>
-                  <div className="col-sm-8">
-                    <h5 className="fs-13">
-                      {date}
-                    </h5>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-4">
-                    <h5 className="fs-13">
-                      Request:
-                    </h5>
-                  </div>
-                  <div className="col-sm-8">
-                    <h5 className="fs-13">
-                      {request}                    </h5>
-                  </div>
-                </div>
+                <h5 className="fs-15">
+                  {name}     </h5>
               </div>
-
-
-
             </Row>
-
             <Row className="pt-3">
-              <div className="col-sm-3">
-                <h5 className="fs-12">
+              <div className="col-sm-5">
+                <h5 className="fs-15">
+                  Date :
+                </h5>
+              </div>
+              <div className="col-sm-7">
+                <h5 className="fs-15">
+                  {date}     </h5>
+              </div>
+            </Row>
+            <Row className="pt-3">
+              <div className="col-sm-5">
+                <h5 className="fs-15">
+                  Requirement :
+                </h5>
+              </div>
+              <div className="col-sm-7">
+                <h5 className="fs-15">
+                  {requirement}     </h5>
+              </div>
+            </Row>
+            <Row className="pt-3">
+              <div className="col-sm-5">
+                <h5 className="fs-15">
                   Description :
                 </h5>
               </div>
-              <div className="col-sm-9">
-                <h5 className="fs-12">
+              <div className="col-sm-7">
+                <h5 className="fs-15">
                   {description}     </h5>
               </div>
             </Row>
-
-            <Row>
-              <div className="col-sm-1"></div>
-              <div className="col-sm-5 text-center">
-                Rate : {rate}
-              </div>
+            <Row className="pt-3">
               <div className="col-sm-5">
-                Price : {price}
+                <h5 className="fs-15">
+                  Recommends :
+                </h5>
               </div>
-              <div className="col-sm-1"></div>
+              <div className="col-sm-7">
+                <h5 className="fs-15">
+                  {recommends}     </h5>
+              </div>
             </Row>
-
+            <Row className="pt-3">
+              <div className="col-sm-5">
+                <h5 className="fs-15">
+                  Cost :
+                </h5>
+              </div>
+              <div className="col-sm-7">
+                <h5 className="fs-15">
+                  {cost}     </h5>
+              </div>
+            </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="light" onClick={() => { tog_togSecond(); tog_togFirst(false); }}>Buy</Button>
+                <Button color="light" onClick={() => { tog_togSecond(); tog_togFirst(false); }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
-                <Button color="primary">Download</Button>
+                <Button color="primary" onClick={() => {
+                  setmodal_togFirst(false);
+                }}>Close</Button>
               </div>
             </Row>
           </CardBody>
@@ -342,8 +347,8 @@ const Software = () => {
             </TabContent>
 
             <div className='purchase-button-group mb-5'>
-              <Button color="primary" onClick={() => { tog_togSecond(false); }} style={{ float: "left" }}>
-                buy
+              <Button color="primary" onClick={() => { tog_togSecond(false); }} style={{ float: "left" }} href="pages-software-detail">
+                Buy
               </Button>
 
               <Button color="primary" onClick={() => { }} style={{ float: "right" }}>
@@ -355,7 +360,7 @@ const Software = () => {
       </Modal>
 
       <Container fluid>
-        <BreadCrumb title="Software" pageTitle="Ecommerce" />
+        <BreadCrumb title="Software" pageTitle="Software" />
 
         <Row>
           <Col xl={3} lg={4}>
@@ -390,9 +395,19 @@ const Software = () => {
                           }}
                         >
                           {isBranch && <ArrowIcon isOpen={isExpanded} />}
-                          <span className="name">
-                            {element.name}-{element.id}
+                          <span className="name" onClick={() => {
+                            // tog_togFirst(element)
+                          }}>
+                            {element.name} 
                           </span>
+                          <button onClick={() => {
+                            console.log(originalCategoryList);
+                            let selectedCategory = originalCategoryList.find(category => {
+                              return category.title == element.name;
+                            })
+                            setSelectedCategoryId(selectedCategory.id);
+                          }} className=""><i className="las la-angle-right fs-10" ></i>
+                          </button>
                         </div>
                       );
                     }}
@@ -401,67 +416,27 @@ const Software = () => {
 
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
-                    Fashion Software
+                    Top Software
                   </p>
 
-                  <div className="p-3">{productLists.map((cartItem, key) => (
-                    <React.Fragment key={cartItem.id}>
-                      <Card className="product" onClick={() => tog_togFirst(cartItem)}>
+                  <div className="p-3">{softwareList.map((softwareItem, key) => (
+                    <React.Fragment key={softwareItem.id}>
+                      <Card className="product" onClick={() => tog_togFirst(softwareItem)}>
                         <Link
                           className="text-dark"
                         >
                           <CardBody>
-                            <Row className="gy-3">
-                              <div className="col-sm-6">
-                                <div className="avatar-lg bg-light rounded p-1">
-                                  <img
-                                    src={cartItem.img}
-                                    alt=""
-                                    className="img-fluid d-block"
-                                  />
-                                </div>
+                            <div className="d-flex align-items-center text-muted  ">
+                              <div className="flex-shrink-0 me-3">
+                                <img src={softwareItem.img} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
                               </div>
-
-                              <div className="col-sm-6">
-                                <h5 className="pt-4 fs-20 text-truncate">
-                                  {cartItem.name}
-                                </h5>
-                              </div>
-                            </Row>
-                          </CardBody>
-
-                          <div className="card-footer">
-                            <div className="row align-items-center gy-3">
-                              <div className="col-sm-6">
-                                <div className="d-flex align-items-center gap-2 text-muted">
-                                  <div>Price:</div>
-
-                                  <h5 className="fs-12 mb-0">
-                                    <span className="product-line-price">
-                                      {" "}
-                                      {cartItem.total}
-                                    </span>
-                                  </h5>
-                                </div>
-                              </div>
-
-                              <div className="col-sm-6">
-                                <div className="d-flex align-items-center gap-2 text-muted">
-                                  <div>Rate:</div>
-
-                                  <h5 className="fs-12 mb-0">
-                                    <span className="product-line-price">
-                                      {" "}
-                                      {cartItem.total}
-                                    </span>
-                                  </h5>
-                                </div>
+                              <div className="flex-grow-1">
+                                <h5 className="fs-14">{softwareItem.color}</h5>
                               </div>
                             </div>
-                          </div>
+                          </CardBody>
                         </Link>
                       </Card>
-
                     </React.Fragment>
                   ))}
                   </div>
@@ -469,7 +444,6 @@ const Software = () => {
               </div>
             </Card>
           </Col>
-
           <div className="col-xl-9 col-lg-8">
             <div className="card">
               <CardHeader >
@@ -485,10 +459,10 @@ const Software = () => {
               </CardHeader>
 
               <Row className="p-3">
-                {productLists.map((cartItem, key) => (
-                  <React.Fragment key={cartItem.id}>
+                {softwareData.map((software, key) => (
+                  <React.Fragment key={software.id}>
                     <Col lg={4}>
-                      <Card className="product" onClick={() => tog_togFirst(cartItem)}>
+                      <Card className="product" onClick={() => tog_togFirst(software)}>
                         <Link
                           className="text-dark"
                         >
@@ -497,7 +471,7 @@ const Software = () => {
                               <div className="col-sm-6">
                                 <div className="avatar-lg bg-light rounded p-1">
                                   <img
-                                    src={cartItem.img}
+                                    src={software.image_url}
                                     alt=""
                                     className="img-fluid d-block"
                                   />
@@ -506,7 +480,7 @@ const Software = () => {
 
                               <div className="col-sm-6">
                                 <h5 className="pt-4 fs-20 text-truncate">
-                                  {cartItem.name}
+                                  {software.name}
                                 </h5>
                               </div>
                             </Row>
@@ -516,12 +490,12 @@ const Software = () => {
                             <div className="row align-items-center gy-3">
                               <div className="col-sm-6">
                                 <div className="d-flex align-items-center gap-2 text-muted">
-                                  <div>Price:</div>
+                                  <div>Cost:</div>
 
                                   <h5 className="fs-12 mb-0">
                                     <span className="product-line-price">
                                       {" "}
-                                      {cartItem.total}
+                                      {software.cost}
                                     </span>
                                   </h5>
                                 </div>
@@ -529,12 +503,12 @@ const Software = () => {
 
                               <div className="col-sm-6">
                                 <div className="d-flex align-items-center gap-2 text-muted">
-                                  <div>Rate:</div>
+                                  <div>Recommends:</div>
 
                                   <h5 className="fs-12 mb-0">
                                     <span className="product-line-price">
                                       {" "}
-                                      {cartItem.total}
+                                      {software.recommends}
                                     </span>
                                   </h5>
                                 </div>
@@ -556,6 +530,7 @@ const Software = () => {
 };
 
 export default Software;
+
 
 
 
