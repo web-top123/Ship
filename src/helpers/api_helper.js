@@ -45,21 +45,21 @@ class APIClient {
   //  get = (url, params) => {
   //   return axios.get(url, params);
   // };
-   get = (url, params ) => {
+  get = (url, params) => {
     let response;
 
     let paramKeys = [];
 
-    if(params){
+    if (params) {
       Object.keys(params).map(key => {
         paramKeys.push(key + '=' + params[key])
         return paramKeys;
-    });
-    
+      });
+
       const queryString = paramKeys && paramKeys.length ? paramKeys.join('&') : "";
       response = axios.get(`${url}?${queryString}`, params);
     } else {
-        response = axios.get(`${url}`, params);
+      response = axios.get(`${url}`, params);
     }
 
     return response;
@@ -70,6 +70,18 @@ class APIClient {
   create = (url, data) => {
     return axios.post(url, data);
   };
+
+  /**
+   * post given data to url
+   */
+  postFormData = (url, formData) => {
+    return axios.post(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  };
+
   /**
    * Updates data
    */
