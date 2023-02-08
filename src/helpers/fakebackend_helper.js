@@ -1,5 +1,6 @@
 import { APIClient } from "./api_helper";
 import * as url from "./url_helper";
+import config from "../config";
 
 const api = new APIClient();
 // Gets the logged in user data from local session
@@ -42,8 +43,8 @@ export const getGetMyInformation = id => api.get(url.GET_MY_INFORMATION + '/' + 
 export const putSaveMyInformation = (id, data) => api.update(url.PUT_SAVE_MY_INFORMATION + '/' + id, data);
 export const getFindBrowseHistoriesById = id => api.get(url.GET_FIND_BROWSER_HISTORY + '/' + id);
 export const getFindDataPurchaseHistoyById = id => api.get(url.GET_FIND_DATA_PURCHASE_HISTORY + '/' + id);
-export const getBrowserHistoriesAll = ()=> api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
-export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST+'/'+id);
+export const getBrowserHistoriesAll = () => api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
+export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST + '/' + id);
 
 // Test page
 export const getGetAllQA = () => api.get(url.GET_ALL_QA);
@@ -433,6 +434,14 @@ export const updateOneAvatar = (id, customer) => api.postFormData(url.UPDATE_AVA
 
 // delete AVATAR
 export const deleteAvatar = id => api.delete(url.DELETE_AVATAR + '/' + id);
+
+// download AVATAR
+// export const downloadAvatar = (id) => api.get(url.DOWNLOAD_AVATAR + '/' + id);
+export const downloadAvatar = (id) => {
+  // http://localhost:8080/api/avatar/fileById/1
+  var str = config.API_URL + "api/avatar/fileById/" + id;
+  return str;
+}
 
 //-----------Data-----------
 // get Datas

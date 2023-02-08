@@ -49,7 +49,7 @@ const AddUser = (props) => {
   const [modal_positionTop, setmodal_positionTop] = useState(false);
   function tog_positionTop() {
     setmodal_positionTop(!modal_positionTop);
-  }  
+  }
 
   // --------------- use modal ----------
 
@@ -59,6 +59,8 @@ const AddUser = (props) => {
     email: '',
     gender: 'male',
     birthday: new Date(),
+    balance: '',
+    free_balance: '',
     password: '',
   });
 
@@ -272,7 +274,7 @@ const AddUser = (props) => {
                   } else {
                     addNewUser(user).then(res => {
                       console.log(res);
-                      
+
                     })
                   }
                   // tog_positionTop();

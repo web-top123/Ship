@@ -224,6 +224,7 @@ export const GET_AVATAR = "/api/avatar/get_one";
 export const ADD_NEW_AVATAR = "/api/avatar/create";
 export const UPDATE_AVATAR = "/api/avatar/update";
 export const DELETE_AVATAR = "/api/avatar/delete";
+export const DOWNLOAD_AVATAR ="/api/avatar/fileById";
 
 // Questiones
 export const GET_QUESTIONES = "/api/question/findAll";

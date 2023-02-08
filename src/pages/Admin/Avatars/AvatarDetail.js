@@ -22,7 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewAvatar, getAvatar, updateOneAvatar } from "../../../helpers/fakebackend_helper";
+import { addNewAvatar, getAvatar, updateOneAvatar, downloadAvatar } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -125,11 +125,15 @@ function AvatarDetail(props) {
     file_url: '',
     cost: '',
   });
+  const [AvatarSrc, setAvatarSrc] = useState({
+  });
   useEffect(() => {
     if (id) {
       getAvatar(id).then(res => {
         setAvatar(res);
-      })
+      });
+      setAvatarSrc(downloadAvatar(id));
+      console.log(downloadAvatar(id));
     }
   }, []);
   const toggleCustom = tab => {
@@ -159,84 +163,20 @@ function AvatarDetail(props) {
                         <div className="swiper-wrapper">
                           <SwiperSlide>
                             <img
-                              src={product8}
+                              src={AvatarSrc}
                               alt=""
                               className="img-fluid d-block"
                             />
                           </SwiperSlide>
                           <SwiperSlide>
                             <img
-                              src={product6}
-                              alt=""
-                              className="img-fluid d-block"
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide>
-                            <img
-                              src={product1}
-                              alt=""
-                              className="img-fluid d-block"
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide>
-                            <img
-                              src={product8}
+                              src={AvatarSrc}
                               alt=""
                               className="img-fluid d-block"
                             />
                           </SwiperSlide>
                         </div>
                       </Swiper>
-
-                      <div className="product-nav-slider mt-2">
-                        <Swiper
-                          onSwiper={setThumbsSwiper}
-                          slidesPerView={4}
-                          freeMode={true}
-                          watchSlidesProgress={true}
-                          spaceBetween={10}
-                          className="swiper product-nav-slider mt-2 overflow-hidden"
-                        >
-                          <div className="swiper-wrapper">
-                            <SwiperSlide className="rounded">
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product8}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product6}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product1}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product8}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                          </div>
-                        </Swiper>
-                      </div>
                     </div>
                   </Col>
 

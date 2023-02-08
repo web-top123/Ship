@@ -1,20 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import {
-  Card,
-  CardBody,
-  Col,
-  Container,
-  CardHeader,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  TabContent,
-  TabPane,
-  Input,
-  Label,
-} from "reactstrap";
+import { Card, CardBody, Col, Container, CardHeader, Nav, NavItem, NavLink, Row, TabContent, TabPane, Input, Label } from "reactstrap";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -24,13 +10,7 @@ import MetaTags from 'react-meta-tags';
 
 // Import React FilePond
 import { registerPlugin } from "react-filepond";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 import Flatpickr from "react-flatpickr";
 import Select from "react-select";
 // Import FilePond styles
@@ -88,7 +68,7 @@ const AddCampusCategory = (props) => {
       ch = { label: e.title, value: e.id, expanded: true, checked: CampusCategory.parentId == e.id, children: [] };
       // ch = { label: e.title, value: e.id, expanded: true, children: [] };
       obj.push(ch);
-      if(e.id != id){
+      if (e.id != id) {
         refreshTree(ch.children, e.id);
       }
     })
@@ -97,7 +77,7 @@ const AddCampusCategory = (props) => {
   const onChange = (currentNode, selectedNodes) => {
     console.log('onChange::', currentNode, selectedNodes)
     if (selectedNodes.length) {
-      setCampusCategory({ ...CampusCategory, ...{ parentId: selectedNodes[0]['value']} })
+      setCampusCategory({ ...CampusCategory, ...{ parentId: selectedNodes[0]['value'] } })
     }
   }
   const onAction = (node, action) => {

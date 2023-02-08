@@ -22,16 +22,9 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getAvatars, deleteAvatar } from "../../../helpers/fakebackend_helper";
+import { getAvatars, deleteAvatar, downloadAvatar } from "../../../helpers/fakebackend_helper";
 
 const Avatars = (props) => {
-  // const dispatch = useDispatch();
-
-  // const { avatars } = useSelector((state) => ({
-  //   avatars: state.Avatar.avatarList,
-  // }));
-  // const [avatar, setAvatar] = useState(null);
-
   const [avatarList, setAvatarList] = useState([]);
   useEffect(() => {
     getAvatarList();
@@ -42,24 +35,6 @@ const Avatars = (props) => {
       setAvatarList(res);
     })
   }
-
-  // useEffect(() => {
-  //   if (avatars && !avatars.length) {
-  //     dispatch(onGetAvatars());
-  //   }
-  // }, [dispatch, avatars]);
-
-  // useEffect(() => {
-  //   setAvatarList(avatars);
-  // }, [avatars]);
-
-  // useEffect(() => {
-  //   dispatch(onGetAvatars());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!isEmpty(avatars)) setAvatarList(avatars);
-  // }, [avatars]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
@@ -74,7 +49,7 @@ const Avatars = (props) => {
   const handleDeleteAvatar = () => {
     if (currentID) {
       deleteAvatar(currentID).then(res => {
-        if (res == 1) {
+        if (res === 1) {
           getAvatarList();
           setDeleteModal(false);
         } else {
@@ -88,18 +63,41 @@ const Avatars = (props) => {
     () => [
       {
         Header: "#",
-        Cell: () => {
+        Cell: (avatar) => {
           return <input type="checkbox" />;
         },
       },
       {
-        Header: "Name",
+        Header: "Avatar",
+        Cell: (avatar) => (
+          <>
+            <div className="d-flex align-items-center">
+              <div className="flex-shrink-0 me-3">
+                <div className="avatar-sm bg-light rounded p-1">
+                  <img
+                  src={downloadAvatar(avatar.row.original.id)}
+                  // {avatar.row.file_url}
+                    // src={downloadAvatar}
+                    alt=""
+                    className="img-fluid d-block"
+                  />
+                </div>
+              </div>
+              <div className="flex-grow-1">
+                <h5 className="fs-14 mb-1">
+                  <Link
+                    to={"/admin-avatar-details/" + avatar.row.original.id}
+                    className="text-dark"
+                  >
+                    {" "}
+                    {avatar.row.original.name}
+                  </Link>
+                </h5>
+              </div>
+            </div>
+          </>
+        ),
         accessor: "name",
-        filterable: false,
-      },
-      {
-        Header: "File_url",
-        accessor: "file_url",
         filterable: false,
       },
       {
@@ -107,7 +105,7 @@ const Avatars = (props) => {
         accessor: "cost",
         filterable: false,
       },
-      
+
       {
         Header: "Action",
         Cell: (cellProps) => {

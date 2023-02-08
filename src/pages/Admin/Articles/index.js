@@ -13,21 +13,14 @@ import { Link } from "react-router-dom";
 import { getArticles, deleteArticle } from "../../../helpers/fakebackend_helper";
 
 const Articles = (props) => {
-  // const dispatch = useDispatch();
-
-  // const { articles } = useSelector((state) => ({
-  //   articles: state.Article.articleList,
-  // }));
-  // const [article, setArticle] = useState(null);
-
   const [articleList, setArticleList] = useState([]);
   useEffect(() => {
     getArticleList();
   }, []);
 
   const getArticleList = () => {
-    getArticles().then(res => {
-      setArticleList(res);
+    getArticles().then(articles => {
+      setArticleList(articles);
     })
   }
 
@@ -97,7 +90,7 @@ const Articles = (props) => {
       },
       {
         Header: "Date",
-        accessor: "date",
+        accessor: "createdAt",
         filterable: false,
       },
       {
