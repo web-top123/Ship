@@ -285,7 +285,7 @@ function ShipDetails(props) {
                           <h4>Full Sleeve Sweatshirt for Men (Pink)</h4>
                         </div>
                         <div className="flex-shrink-0">
-                          <div>
+                          {/* <div>
                             <Tooltip
                               placement="top"
                               target="TooltipTop"
@@ -297,6 +297,32 @@ function ShipDetails(props) {
                             </Tooltip>
                             <a
                               href={"/new-data-vote/" + id}
+                              id="TooltipTop"
+                              className="btn btn-light"
+                            >
+                              <i className="ri-pencil-fill align-bottom"></i>
+                            </a>
+                          </div> */}
+                          <div>
+                            <Tooltip
+                              placement="top"
+                              isOpen={ttop}
+                              target="TooltipTop"
+                              toggle={() => {
+                                setttop(!ttop);
+                              }}
+                            >
+                              <Link
+                                to="/new-data-vote"
+                                className="btn btn-success"
+                                
+                              >
+                                <i className="ri-add-line align-bottom me-1"></i> 
+                                Edit
+                              </Link>
+                            </Tooltip>
+                            <a
+                              href={"/new-data-vote/"+id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >

@@ -134,7 +134,7 @@ const AddAvatar = (props) => {
                 </CardBody>
               </Card>
 
-              <Card>
+              {/* <Card>
                 <CardHeader>
                   <h5 className="card-title mb-0">Avatar</h5>
                 </CardHeader>
@@ -150,17 +150,21 @@ const AddAvatar = (props) => {
                     />
                   </div>
                 </CardBody>
-              </Card>
+              </Card> */}
 
               <div className="text-end mb-3">
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {
                   e.preventDefault();
+                  const formData = new FormData();
+                  formData.append("cost", Avatar.cost);
+                  formData.append("name", Avatar.name);
+                  formData.append("file", Avatar.file_url);
                   if (id) {
-                    updateOneAvatar(id, Avatar).then(res => {
+                    updateOneAvatar(id, formData).then(res => {
                       console.log(res);
                     })
                   } else {
-                    addNewAvatar(Avatar).then(res => {
+                    addNewAvatar(formData).then(res => {
                       console.log(res);
                     })
                   }

@@ -126,7 +126,13 @@ export const UPDATE_CUSTOMER = "/update/customer";
 export const DELETE_CUSTOMER = "/delete/customer";
 
 //studyfield
-export const GET_STUDY = "/api/campus/findAll";
+export const GET_STUDY = "/api/campus/findAllBy";
+
+//softwarefield
+export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";
+export const GET_ALL_SOFTWARE_BY_CATEGORY = "/api/program/findProgramCategoryById";
+export const GET_ALL_SOFTWARE = "/api/program/findAll";
+// export const GET_ALL_TOP_SOFTWARES = "/api/program/getTopPrograms";
 
 // Users
 export const GET_USERS = "/api/user/getAllUsers";

@@ -123,6 +123,7 @@ function ProgramCategoryDetail(props) {
   const [ProgramCategory, setProgramCategory] = useState({
     title: '',
     description: '',
+    parentId:''
   });
   useEffect(() => {
     if (id) {
@@ -363,6 +364,10 @@ function ProgramCategoryDetail(props) {
                                   <tr>
                                     <th scope="row">Description</th>
                                     <td>{ProgramCategory.description}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">ParentId</th>
+                                    <td>{ProgramCategory.parentId}</td>
                                   </tr>
                                   
                                   {/* <tr>
