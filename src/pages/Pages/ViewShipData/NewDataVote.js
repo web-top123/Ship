@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import {
   Card,
@@ -19,12 +19,13 @@ import {
   ModalHeader,
 } from "reactstrap";
 
+import { addNewData, getData, updateOneData } from "../../../helpers/fakebackend_helper";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import classnames from "classnames";
 import Dropzone from "react-dropzone";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 
 // Import React FilePond
@@ -40,7 +41,46 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const NewDataVote = (props) => {
+      const NewDataVote = (props) => {
+        
+        let { id } = useParams();
+
+        const [Data, setData] = useState({
+          name: '',
+          file_url: '',
+          data_type: '',
+          dataCategoryId: '',
+          date: '',
+          amount: '',
+          unit: '',
+          port: '',
+          price: '',
+          from: '',
+          to: '',
+          owner: '',
+          runner: '',
+          total_weight: '',
+          load_weight: '',
+          weight: '',
+          current_height: '',
+          width: '',
+          length: '',
+          full_load: '',
+          engine: '',
+          created: '',
+          factory: '',
+          location: '',
+          status: '',
+        });
+
+        useEffect(() => {
+          if (id) {
+            getData(id).then(res => {
+              setData(res);
+            })
+          }
+        }, []);
+
 
   
     // Modal
@@ -96,6 +136,8 @@ const NewDataVote = (props) => {
     setsortData(sortData);
   }
 
+
+
   /**
    * Formats the size
    */
@@ -112,23 +154,23 @@ const NewDataVote = (props) => {
   <TabPane tabId="1" id="v-pills-purchase"></TabPane>
 
 
-  const sortDataOption = [
+  const dataCategoryId = [
     {
       options: [
-        { label: "About Ship", value: "About Ship" },
-        { label: "Load Data", value: "Load Data" },
-        { label: "Product Data", value: "Product Data" },
-        { label: "Goods Data", value: "Goods Data" },
+        { label: "About Ship", value: "about_ship" },
+        { label: "Load Data", value: "load_data" },
+        { label: "Product Data", value: "product_data" },
+        { label: "Goods Data", value: "goods_data" },
       ],
     },
   ];
   const sortShipOption = [
     {
       options: [
-        { label: "Ship1", value: "Ship1" },
-        { label: "Ship2", value: "Ship2" },
-        { label: "Ship3", value: "Ship3" },
-        { label: "Ship4", value: "Ship4" },
+        { label: "Ship1", value: "ship1" },
+        { label: "Ship2", value: "ship2" },
+        { label: "Ship3", value: "ship3" },
+        { label: "Ship4", value: "ship4" },
       ],
     },
   ];
@@ -154,13 +196,14 @@ const NewDataVote = (props) => {
                   </Col>
                   <Col sm={8}>
                     <Select
-                      value={sortData}
-                      onChange={() => {
-                        handleSelectVisibility();
-                      }}
-                      options={sortDataOption}
                       name="choices-publish-visibility-input"
                       classNamePrefix="select2-selection form-select"
+                      value={{ value: Data.dataCategoryId, label: Data.dataCategoryId}}
+                      onChange={(e) => {
+                        console.log(e);
+                        setData({ ...Data, ...{ dataCategoryId: e.value } })
+                      }}
+                      options={dataCategoryId}
                     />
                   </Col>
                 </Row>
@@ -184,6 +227,10 @@ const NewDataVote = (props) => {
                           className="form-control"
                           id="ship-name-input"
                           placeholder="Enter ship name"
+                          value={Data.name}
+                          onChange={e => {
+                            setData({ ...Data, ...{ name: e.target.value } })
+                          }}
                         />
                       </Col>
                     </Row>
@@ -209,6 +256,10 @@ const NewDataVote = (props) => {
                             mode: "multiple",
                             dateFormat: "d.m.y",
                           }}
+                          value={Data.date}
+                          onChange={e => {
+                            setData({ ...Data, ...{ date: e.target.value } })
+                          }}
                         />
                       </Col>
                     </Row>
@@ -222,9 +273,10 @@ const NewDataVote = (props) => {
                       </Col>
                       <Col sm={8}>
                         <Select
-                          value={sortData}
-                          onChange={() => {
-                            handleSelectVisibility();
+                          value={{ value: Data.type, label: Data.type}}
+                          onChange={(e) => {
+                            console.log(e);
+                            setData({ ...Data, ...{ type: e.value } })
                           }}
                           options={sortShipOption}
                           name="choices-publish-visibility-input"
@@ -246,6 +298,10 @@ const NewDataVote = (props) => {
                           className="form-control"
                           id="Ship-owner-input"
                           placeholder="Enter product title"
+                          value={Data.owner}
+                          onChange={e => {
+                            setData({ ...Data, ...{ owner: e.target.value } })
+                          }}
                         />
                       </Col>
                     </Row>
@@ -266,6 +322,11 @@ const NewDataVote = (props) => {
                           id="ship-image-input"
                           type="file"
                           accept="image/png, image/gif, image/jpeg"
+                          
+                          value={Data.file_url}
+                          onChange={e => {
+                            setData({ ...Data, ...{ file_url: e.target.value } })
+                          }}
                         />
                       </Col>
                     </Row>
@@ -274,7 +335,7 @@ const NewDataVote = (props) => {
                     <Row>
                       <Col sm={4}>                    
                         <Label className="form-label" htmlFor="plan-ship-input">
-                          4. Plan Ship
+                          4. Port
                         </Label>
                       </Col>
                       <Col sm={8}>
@@ -283,6 +344,10 @@ const NewDataVote = (props) => {
                           className="form-control"
                           id="plan-ship-input"
                           placeholder="Enter plan port"
+                          value={Data.port}
+                          onChange={e => {
+                            setData({ ...Data, ...{ port: e.target.value } })
+                          }}
                         />
                       </Col>
                     </Row>
@@ -296,10 +361,14 @@ const NewDataVote = (props) => {
                       </Col>
                       <Col sm={8}>
                         <Input
-                          type="text"
+                          type="number"
                           className="form-control"
                           id="default-price-input"
                           placeholder="Enter plan port"
+                          value={Data.price}
+                          onChange={e => {
+                            setData({ ...Data, ...{ price: e.target.value } })
+                          }}
                         />
                       </Col>
                     </Row>
@@ -317,6 +386,10 @@ const NewDataVote = (props) => {
                           className="form-control"
                           id="ship-runner-input"
                           placeholder="Enter plan port"
+                          value={Data.runner}
+                          onChange={e => {
+                            setData({ ...Data, ...{ runner: e.target.value } })
+                          }}
                         />
                       </Col>
                     </Row>
@@ -339,10 +412,14 @@ const NewDataVote = (props) => {
                         </Col>
                         <Col sm={8}>
                           <Input
-                            type="text"
+                            type="number"
                             className="form-control"
                             id="total-weight-input"
                             placeholder="Enter Total Weight"
+                            value={Data.total_weight}
+                            onChange={e => {
+                              setData({ ...Data, ...{ total_weight: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -356,10 +433,14 @@ const NewDataVote = (props) => {
                         </Col>
                         <Col sm={8}>
                           <Input
-                            type="text"
+                            type="number"
                             className="form-control"
                             id="load-weight-input"
                             placeholder="Enter Load Weight"
+                            value={Data.load_weight}
+                            onChange={e => {
+                              setData({ ...Data, ...{ load_weight: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -373,10 +454,14 @@ const NewDataVote = (props) => {
                         </Col>
                         <Col sm={8}>
                           <Input
-                            type="text"
+                            type="number"
                             className="form-control"
                             id="Ship-weight-input"
                             placeholder="Enter  Ship Weight"
+                            value={Data.weight}
+                            onChange={e => {
+                              setData({ ...Data, ...{ weight: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -390,10 +475,14 @@ const NewDataVote = (props) => {
                         </Col>
                         <Col sm={8}>
                           <Input
-                            type="text"
+                            type="number"
                             className="form-control"
                             id="ship-length-input"
                             placeholder="Enter Ship Lenght"
+                            value={Data.length}
+                            onChange={e => {
+                              setData({ ...Data, ...{ length: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -407,10 +496,14 @@ const NewDataVote = (props) => {
                         </Col>
                         <Col sm={8}>
                           <Input
-                            type="text"
+                            type="number"
                             className="form-control"
                             id="ship-width-input"
                             placeholder="Enter Ship width"
+                            value={Data.width}
+                            onChange={e => {
+                              setData({ ...Data, ...{ width: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -424,10 +517,14 @@ const NewDataVote = (props) => {
                         </Col>
                         <Col sm={8}>
                           <Input
-                            type="text"
+                            type="number"
                             className="form-control"
                             id="current-height-input"
                             placeholder="Enter Current Height"
+                            value={Data.current_height}
+                            onChange={e => {
+                              setData({ ...Data, ...{ current_height: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -443,10 +540,14 @@ const NewDataVote = (props) => {
                         </Col>
                         <Col sm={8}>
                           <Input
-                            type="text"
+                            type="number"
                             className="form-control"
                             id="full-load-input"
                             placeholder="Enter Full Load"
+                            value={Data.full_load}
+                            onChange={e => {
+                              setData({ ...Data, ...{ full_load: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -464,6 +565,10 @@ const NewDataVote = (props) => {
                             className="form-control"
                             id="ship-engine-input"
                             placeholder="Enter Ship Engine"
+                            value={Data.engine}
+                            onChange={e => {
+                              setData({ ...Data, ...{ engine: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -502,6 +607,10 @@ const NewDataVote = (props) => {
                             className="form-control"
                             id="factory-input"
                             placeholder="Enter Factory"
+                            value={Data.factory}
+                            onChange={e => {
+                              setData({ ...Data, ...{ factory: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -519,6 +628,10 @@ const NewDataVote = (props) => {
                             className="form-control"
                             id="current-location-input"
                             placeholder="Enter Current Location"
+                            value={Data.location}
+                            onChange={e => {
+                              setData({ ...Data, ...{ location: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -536,6 +649,10 @@ const NewDataVote = (props) => {
                             className="form-control"
                             id="current-status-input"
                             placeholder="Enter Current Status"
+                            value={Data.status}
+                            onChange={e => {
+                              setData({ ...Data, ...{ status: e.target.value } })
+                            }}
                           />
                         </Col>
                       </Row>
@@ -550,7 +667,7 @@ const NewDataVote = (props) => {
                 >
                   Back
                 </Link>
-                <Button color="primary" className="shadow-none me-4" onClick={() => tog_togFirst()}>vote</Button>
+                <Button color="primary" className="shadow-none me-4" onClick={() => tog_togFirst()}>{id ? "Update Vote" : "Add Vote"}</Button>
               </div>
 
             </form>
@@ -623,7 +740,19 @@ const NewDataVote = (props) => {
                       </TabPane>
                   </TabContent>
                   <div className='purchase-button-group mb-5'>
-                      <Button color="primary" onClick={() => { tog_togSecond(); tog_togFirst(false); }} style={{float: "left"}}>
+                      <Button color="primary" onClick={(e) => { 
+                          tog_togSecond(); 
+                          tog_togFirst(false); 
+                          e.preventDefault();
+                          if (id) {
+                            updateOneData(id, Data).then(res => {
+                              console.log(res);
+                            })
+                          } else {
+                            addNewData(Data).then(res => {
+                              console.log(res);
+                            })
+                          }}} style={{float: "left"}}>
                           pay
                       </Button>
                       <Button color="primary" onClick={() => { }} style={{float: "right"}}>

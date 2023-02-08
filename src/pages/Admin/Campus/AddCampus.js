@@ -38,13 +38,39 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewCampus, getCampus, updateOneCampus } from "../../../helpers/fakebackend_helper";
+import { addNewCampus, getCampus, updateOneCampus, getCampusCategories } from "../../../helpers/fakebackend_helper";
+
+import DropdownTreeSelect from 'react-dropdown-tree-select'
+import 'react-dropdown-tree-select/dist/styles.css'
+
+const data = [{
+  label: 'search me',
+  value: 'searchme',
+  children: [
+    {
+      label: 'search me too',
+      value: 'searchmetoo',
+      children: [
+        {
+          label: 'No one can get me',
+          value: 'anonymous',
+        },
+      ],
+    },
+  ],
+}, {
+  label: 'Other',
+  value: 'other',
+},]
+
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const AddCampus = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
+  const [cateList, setCateList] = useState([]);
+  const [campusCate, setCampusCate] = useState([]);
 
   const [Campus, setCampus] = useState({
     name: '',
@@ -55,13 +81,32 @@ const AddCampus = (props) => {
     campusCategoryId: '',
   });
 
+  var cateTree = [];
   useEffect(() => {
-    if (id) {
-      getCampus(id).then(res => {
-        setCampus(res);
-      })
-    }
+    getCampusCategories().then(res => {
+      setCampusCate(res);
+      if (id) {
+        getCampus(id).then(e => {
+          setCampus(e);
+        })
+      }
+    })
   }, []);
+
+  useEffect(() => {
+    cateTree = [];
+    refreshTree(cateTree, 0);
+    setCateList(cateTree);
+  }, [Campus,campusCate]);
+
+  const refreshTree = (obj, pid) => {
+    campusCate.filter(e => e.parentId == pid).map(e => {
+      var ch = {};
+      ch = { label: e.title, value: e.id, expanded: true, checked: Campus.campusCategoryId == e.id, children: [] };
+      obj.push(ch);
+      refreshTree(ch.children, e.id);
+    })
+  }
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -86,15 +131,19 @@ const AddCampus = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const campusCategoryId = [
-    {
-      options: [
-        { label: "1", value: "1" },
-        { label: "2", value: "2" },
+  const onChange = (currentNode, selectedNodes) => {
+    console.log('onChange::', currentNode, selectedNodes)
+    if (selectedNodes.length) {
+      setCampus({ ...Campus, ...{ campusCategoryId: selectedNodes[0]['value'] } })
+    }
+  }
+  const onAction = (node, action) => {
+    console.log('onAction::', action, node)
+  }
+  const onNodeToggle = currentNode => {
+    console.log('onNodeToggle::', currentNode)
+  }
 
-      ],
-    },
-  ];
   document.title = id ? "Edit Campus" : "Add Campus";
   return (
     <div className="page-content">
@@ -206,6 +255,7 @@ const AddCampus = (props) => {
                       </div>
                     </Col>
                     <Col lg={6}>
+
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -213,7 +263,9 @@ const AddCampus = (props) => {
                         >
                           CampusCategoryId
                         </label>
-                        <input
+
+                        <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
+                        {/* <input
                           type="text"
                           className="form-control"
                           id="manufacturer-brand-input"
@@ -222,7 +274,7 @@ const AddCampus = (props) => {
                           onChange={e => {
                             setCampus({ ...Campus, ...{ campusCategoryId: e.target.value } })
                           }}
-                        />
+                        /> */}
                       </div>
                     </Col>
                   </Row>

@@ -185,7 +185,7 @@ export const UPDATE_COMMENT = "/api/comment/update";
 export const DELETE_COMMENT = "/api/comment/delete";
 
 // Datas
-export const GET_DATAS = "/api/data/findAll";
+export const GET_DATAS = "/api/data/get_All";
 export const GET_DATA = "/api/data/get_one";
 export const ADD_NEW_DATA = "/api/data/create";
 export const UPDATE_DATA = "/api/data/update";

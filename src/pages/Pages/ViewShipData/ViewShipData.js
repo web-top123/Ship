@@ -36,9 +36,6 @@ const ViewData = () => {
                 <Container fluid>
                     <BreadCrumb title="View Data Field" />
                         <Row>
-                            <Col xl={3} lg={4}>
-                                <MySidebar toggleVertical={toggleVertical} verticalTab ={verticalTab}/>
-                            </Col>
                             <Col xl={9} lg={8}>
                                 <Card>
                                     <CardBody>
@@ -55,7 +52,10 @@ const ViewData = () => {
                                         </TabContent>
                                     </CardBody>
                                 </Card>
-                            </Col> 
+                            </Col>
+                            <Col xl={3} lg={4}>
+                                <MySidebar toggleVertical={toggleVertical} verticalTab ={verticalTab}/>
+                            </Col>
                         </Row>
                 </Container>
             </div>
