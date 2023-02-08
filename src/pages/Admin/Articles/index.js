@@ -174,7 +174,7 @@ const Articles = (props) => {
   );
   document.title = "Articles";
   return (
-    <div className="page-content">
+    <div className="page-content" style={{overflow:"hidden"}}>
       <DeleteModal
         show={deleteModal}
         onDeleteClick={handleDeleteArticle}

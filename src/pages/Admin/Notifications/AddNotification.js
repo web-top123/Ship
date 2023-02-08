@@ -46,13 +46,12 @@ const AddNotification = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
 
-  const [user, setNotification] = useState({
-    username: '',
-    name: '',
-    email: '',
-    gender: 'male',
-    birthday: '',
-    password: '',
+
+  const [notification, setNotification] = useState({
+    date: '',
+    description: '',
+    type: '',
+    
   });
 
   useEffect(() => {
@@ -87,11 +86,11 @@ const AddNotification = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const gender = [
+  const type = [
     {
       options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
+        { label: "select1", value: "select1" },
+        { label: "select2", value: "select2" },
       ],
     },
   ];
@@ -107,21 +106,7 @@ const AddNotification = (props) => {
             <form>
               <Card>
                 <CardBody>
-                  <div className="mb-3">
-                    <Label className="form-label" htmlFor="product-title-input">
-                      Name
-                    </Label>
-                    <Input
-                      type="text"
-                      className="form-control"
-                      id="product-title-input"
-                      placeholder="Enter name"
-                      value={user.name}
-                      onChange={e => {
-                        setNotification({ ...user, ...{ name: e.target.value } })
-                      }}
-                    />
-                  </div>
+                  
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -129,18 +114,19 @@ const AddNotification = (props) => {
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          Notificationname
+                          Date
                         </label>
-                        <input
-                          type="text"
+                        <Flatpickr
                           className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter Notificationname"
-                          value={user.username}
-                          onChange={e => {
-                            setNotification({ ...user, ...{ username: e.target.value } })
+                          id="datepicker-publish-input"
+                          options={{
+                            // altInput: true,
+                            // altFormat: "F j, Y",
+                            mode: "single",
+                            dateFormat: "Y-m-d",
                           }}
                         />
+                        
                       </div>
                     </Col>
                     <Col lg={6}>
@@ -149,16 +135,16 @@ const AddNotification = (props) => {
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          Email
+                          description
                         </label>
-                        <input
-                          type="text"
+                        <textarea
+                        rows="3"
                           className="form-control"
                           id="manufacturer-brand-input"
-                          placeholder="Enter Email"
-                          value={user.email}
+                          placeholder="Enter description"
+                          value={notification.description}
                           onChange={e => {
-                            setNotification({ ...user, ...{ email: e.target.value } })
+                            setNotification({ ...notification, ...{ description: e.target.value } })
                           }}
                         />
                       </div>
@@ -172,22 +158,22 @@ const AddNotification = (props) => {
                           htmlFor="choices-publish-visibility-input"
                           className="form-label"
                         >
-                          Select Gender
+                          Select type
                         </Label>
 
                         <Select
-                          value={{ value: user.gender, label: user.gender == 'male' ? 'Male' : 'Female' }}
+                          value={{ value: notification.type, label: notification.type == 'select1' ? 'select1' : 'select2' }}
                           onChange={(e) => {
                             console.log(e);
-                            setNotification({ ...user, ...{ gender: e.value } })
+                            setNotification({ ...notification, ...{ type: e.value } })
                           }}
-                          options={gender}
+                          options={type}
                           name="choices-publish-visibility-input"
                           classNamePrefix="select2-selection form-select"
                         />
                       </div>
                     </Col>
-                    <Col lg={6}>
+                    {/* <Col lg={6}>
                       <div>
                         <label
                           htmlFor="datepicker-publish-input"
@@ -206,7 +192,7 @@ const AddNotification = (props) => {
                           }}
                         />
                       </div>
-                    </Col>
+                    </Col> */}
                   </Row>
                 </CardBody>
               </Card>
@@ -233,11 +219,11 @@ const AddNotification = (props) => {
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {
                   e.preventDefault();
                   if (id) {
-                    updateOneNotification(id, user).then(res => {
+                    updateOneNotification(id, notification).then(res => {
                       console.log(res);
                     })
                   } else {
-                    addNewNotification(user).then(res => {
+                    addNewNotification(notification).then(res => {
                       console.log(res);
                     })
                   }

@@ -255,6 +255,11 @@ import ArticleCategories from "../pages/Admin/ArticleCategories/index";
 import ArticleCategoryDetail from "../pages/Admin/ArticleCategories/ArticleCategoryDetail";
 import AddArticleCategory from "../pages/Admin/ArticleCategories/AddArticleCategory";
 
+// Comment Section
+import Comments from "../pages/Admin/Comments/index";
+import CommentDetail from "../pages/Admin/Comments/CommentDetail";
+import AddComment from "../pages/Admin/Comments/AddComment";
+
 // Data Section
 import Datas from "../pages/Admin/Datas/index";
 import DataDetail from "../pages/Admin/Datas/DataDetail";
@@ -264,6 +269,32 @@ import AddData from "../pages/Admin/Datas/AddData";
 import DataCategories from "../pages/Admin/DataCategories/index";
 import DataCategoryDetail from "../pages/Admin/DataCategories/DataCategoryDetail";
 import AddDataCategory from "../pages/Admin/DataCategories/AddDataCategory";
+
+// Campus Section
+import Campuses from "../pages/Admin/Campus/index";
+import CampusDetail from "../pages/Admin/Campus/CampusDetail";
+import AddCampus from "../pages/Admin/Campus/AddCampus";
+
+// CampusCategory Section
+import CampusCategories from "../pages/Admin/CampusCategories/index";
+import CampusCategoryDetail from "../pages/Admin/CampusCategories/CampusCategoryDetail";
+import AddCampusCategory from "../pages/Admin/CampusCategories/AddCampusCategory";
+
+// Avatar Section
+import Avatars from "../pages/Admin/Avatars/index";
+import AvatarDetail from "../pages/Admin/Avatars/AvatarDetail";
+import AddAvatar from "../pages/Admin/Avatars/AddAvatar";
+
+
+// Question Section
+import Questiones from "../pages/Admin/Questions/index";
+import QuestionDetail from "../pages/Admin/Questions/QuestionDetail";
+import AddQuestion from "../pages/Admin/Questions/AddQuestions";
+
+// Answer Section
+import Answers from "../pages/Admin/Answers/index";
+import AnswerDetail from "../pages/Admin/Answers/AnswerDetail";
+import AddAnswer from "../pages/Admin/Answers/AddAnswer";
 
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: DashboardAnalytics },
@@ -487,7 +518,13 @@ const authProtectedRoutes = [
   { path: "/admin-articleCategory-details/:id", component: ArticleCategoryDetail },
   { path: "/admin-add-articleCategory", component: AddArticleCategory },
   { path: "/admin-add-articleCategory/:id", component: AddArticleCategory },
-  
+
+  // Comments
+  { path: "/admin-comments", component: Comments },
+  { path: "/admin-comment-details/:id", component: CommentDetail },
+  { path: "/admin-add-comment", component: AddComment },
+  { path: "/admin-add-comment/:id", component: AddComment },
+
   // Datas
   { path: "/admin-datas", component: Datas },
   { path: "/admin-data-details/:id", component: DataDetail },
@@ -499,6 +536,39 @@ const authProtectedRoutes = [
   { path: "/admin-dataCategory-details/:id", component: DataCategoryDetail },
   { path: "/admin-add-dataCategory", component: AddDataCategory },
   { path: "/admin-add-dataCategory/:id", component: AddDataCategory },
+
+  // Campuses
+  { path: "/admin-campuses", component: Campuses },
+  { path: "/admin-campus-details/:id", component: CampusDetail },
+  { path: "/admin-add-campus", component: AddCampus },
+  { path: "/admin-add-campus/:id", component: AddCampus },
+
+  // CampusCategory
+  { path: "/admin-campusCategories", component: CampusCategories },
+  { path: "/admin-campusCategory-details/:id", component: CampusCategoryDetail },
+  { path: "/admin-add-campusCategory", component: AddCampusCategory },
+  { path: "/admin-add-campusCategory/:id", component: AddCampusCategory },
+
+
+  // Avatars
+  { path: "/admin-avatars", component: Avatars },
+  { path: "/admin-avatar-details/:id", component: AvatarDetail },
+  { path: "/admin-add-avatar", component: AddAvatar },
+  { path: "/admin-add-avatar/:id", component: AddAvatar },
+
+
+// Questiones
+{ path: "/admin-questiones", component: Questiones },
+{ path: "/admin-question-details/:id", component: QuestionDetail },
+{ path: "/admin-add-question", component: AddQuestion },
+{ path: "/admin-add-question/:id", component: AddQuestion },
+
+  // Answers
+  { path: "/admin-answers", component: Answers },
+  { path: "/admin-answer-details/:id", component: AnswerDetail },
+  { path: "/admin-add-answer", component: AddAnswer },
+  { path: "/admin-add-answer/:id", component: AddAnswer },
+
 ];
 
 const publicRoutes = [

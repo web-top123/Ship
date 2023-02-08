@@ -121,12 +121,11 @@ function NotificationDetail(props) {
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
   const [user, setNotification] = useState({
-    username: '',
-    name: '',
-    email: '',
-    gender: 'male',
-    birthday: '',
-    password: '',
+    date: '',
+    description: '',
+    type: '',
+   
+    
   });
   useEffect(() => {
     if (id) {
@@ -260,7 +259,7 @@ function NotificationDetail(props) {
                               }}
                             >
                               <Link
-                                to="/admin-add-user"
+                                to="/admin-add-notification"
                                 className="btn btn-success"
                               >
                                 <i className="ri-add-line align-bottom me-1"></i> Add
@@ -268,7 +267,7 @@ function NotificationDetail(props) {
                               </Link>
                             </Tooltip>
                             <a
-                              href="apps-ecommerce-add-product"
+                              href={"/admin-add-notification/"+id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
@@ -360,22 +359,19 @@ function NotificationDetail(props) {
                                 <tbody>
                                   <tr>
                                     <th scope="row" style={{ width: "200px" }}>
-                                      Notificationname
+                                      Date
                                     </th>
-                                    <td>{user.username}</td>
+                                    <td>{user.date}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">Email</th>
-                                    <td>{user.email}</td>
+                                    <th scope="row">Description</th>
+                                    <td>{user.description}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">Gender</th>
-                                    <td>{user.gender == 'male' ? 'Male' : 'Female'}</td>
+                                    <th scope="row">Type</th>
+                                    <td>{user.type}</td>
                                   </tr>
-                                  <tr>
-                                    <th scope="row">Birthday</th>
-                                    <td>{user.birthday}</td>
-                                  </tr>
+                                  
                                   {/* <tr>
                                     <th scope="row">Weight</th>
                                     <td>140 Gram</td>

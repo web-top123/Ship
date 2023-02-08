@@ -106,7 +106,7 @@ const BlogServiceDetail = () => {
                                     </div>
                                 </CardBody>
                                 <CardBody>
-                                    <h4 className='mb-sm-0 pb-4'>Top Writers</h4>
+                                    <h4 className='mb-sm-0 pb-4 border-top pt-4'>Top Writers</h4>
                                     <div className="top-writers d-flex align-items-center pt-4">
                                         <div className='d-flex me-2'>
                                             <div className='me-2'>

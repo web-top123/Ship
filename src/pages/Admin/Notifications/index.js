@@ -173,8 +173,8 @@ const Notifications = (props) => {
                           to="/admin-add-notification"
                           className="btn btn-success"
                         >
-                          <i className="ri-add-line align-bottom me-1"></i> Add
-                          Notification
+                          <i className="ri-add-line align-bottom me-1"></i> 
+                          Add Notification
                         </Link>
                       </div>
                     </div>

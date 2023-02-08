@@ -110,7 +110,7 @@ export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
 export const postFakeForgetPwd = data => api.create(url.POST_FAKE_PASSWORD_FORGET, data);
 
 // Edit profile
-export const postJwtProfile = data => api.create(url.POST_EDIT_JWT_PROFILE + "/" + data.id, data);
+export const postJwtProfile = data => api.update(url.POST_EDIT_JWT_PROFILE + "/" + data.id, data.user);
 
 // Browser My Inoformation
 
@@ -398,6 +398,36 @@ export const updateOneArticleCategory = (id, customer) => api.update(url.UPDATE_
 // delete ARTICLECATEGORY
 export const deleteArticleCategory = id => api.delete(url.DELETE_ARTICLECATEGORY + '/' + id);
 
+//-----------Comment-----------
+// get Comments
+export const getComments = () => api.get(url.GET_COMMENTS);
+
+export const getComment = (id) => api.get(url.GET_COMMENT + '/' + id);
+
+// add COMMENT
+export const addNewComment = customer => api.create(url.ADD_NEW_COMMENT, customer);
+
+// update COMMENT
+export const updateOneComment = (id, customer) => api.update(url.UPDATE_COMMENT + '/' + id, customer);
+
+// delete COMMENT
+export const deleteComment = id => api.delete(url.DELETE_COMMENT + '/' + id);
+
+//-----------Avatar-----------
+// get Avatars
+export const getAvatars = () => api.get(url.GET_AVATARS);
+
+export const getAvatar = (id) => api.get(url.GET_AVATAR + '/' + id);
+
+// add AVATAR
+export const addNewAvatar = customer => api.create(url.ADD_NEW_AVATAR, customer);
+
+// update AVATAR
+export const updateOneAvatar = (id, customer) => api.update(url.UPDATE_AVATAR + '/' + id, customer);
+
+// delete AVATAR
+export const deleteAvatar = id => api.delete(url.DELETE_AVATAR + '/' + id);
+
 //-----------Data-----------
 // get Datas
 export const getDatas = () => api.get(url.GET_DATAS);
@@ -427,3 +457,63 @@ export const updateOneDataCategory = (id, customer) => api.update(url.UPDATE_DAT
 
 // delete DATACATEGORY
 export const deleteDataCategory = id => api.delete(url.DELETE_DATACATEGORY + '/' + id);
+
+
+// get Campuses
+export const getCampuses = () => api.get(url.GET_CAMPUSES);
+export const getCampus = (id) => api.get(url.GET_CAMPUS + '/' + id);
+
+// add CAMPUS
+export const addNewCampus = customer => api.create(url.ADD_NEW_CAMPUS, customer);
+
+// update CAMPUS
+export const updateOneCampus = (id, customer) => api.update(url.UPDATE_CAMPUS + '/' + id, customer);
+
+// delete CAMPUS
+export const deleteCampus = id => api.delete(url.DELETE_CAMPUS + '/' + id);
+
+// ----------- CampusCategory --------------
+
+// get CampusCategories
+export const getCampusCategories = () => api.get(url.GET_CAMPUSCATEGORIES);
+
+export const getCampusCategory = (id) => api.get(url.GET_CAMPUSCATEGORY + '/' + id);
+
+// add CAMPUSCATEGORY
+export const addNewCampusCategory = customer => api.create(url.ADD_NEW_CAMPUSCATEGORY, customer);
+
+// update CAMPUSCATEGORY
+export const updateOneCampusCategory = (id, customer) => api.update(url.UPDATE_CAMPUSCATEGORY + '/' + id, customer);
+
+// delete CAMPUSCATEGORY
+export const deleteCampusCategory = id => api.delete(url.DELETE_CAMPUSCATEGORY + '/' + id);
+
+//--------Question--------
+// get Questiones
+export const getQuestiones = () => api.get(url.GET_QUESTIONES);
+export const getQuestion = (id) => api.get(url.GET_QUESTION + '/' + id);
+
+// add QUESTION
+export const addNewQuestion = customer => api.create(url.ADD_NEW_QUESTION, customer);
+
+// update QUESTION
+export const updateOneQuestion = (id, customer) => api.update(url.UPDATE_QUESTION + '/' + id, customer);
+
+// delete QUESTION
+export const deleteQuestion = id => api.delete(url.DELETE_QUESTION + '/' + id);
+
+// ----------- Answer --------------
+
+// get Answers
+export const getAnswers = () => api.get(url.GET_ANSWERS);
+
+export const getAnswer = (id) => api.get(url.GET_ANSWER + '/' + id);
+
+// add ANSWER
+export const addNewAnswer = customer => api.create(url.ADD_NEW_ANSWER, customer);
+
+// update ANSWER
+export const updateOneAnswer = (id, customer) => api.update(url.UPDATE_ANSWER + '/' + id, customer);
+
+// delete ANSWER
+export const deleteAnswer = id => api.delete(url.DELETE_ANSWER + '/' + id);

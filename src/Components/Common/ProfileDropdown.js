@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 
@@ -15,15 +15,23 @@ import { getAuthenticatedUser } from '../../helpers/fakebackend_helper';
 const ProfileDropdown = () => {
     //Dropdown Toggle
     const [isProfileDropdown, setIsProfileDropdown] = useState(false);
+    const [username, setUsername] = useState('');
     const toggleProfileDropdown = () => {
         setIsProfileDropdown(!isProfileDropdown);
     };
 
-    const { username } = useSelector(state => ({
-        username: state.Login.username,
-    }));
+    const  myinformationSelctor  = useSelector(state=>state.Profile.myinformation);
 
-    const userAuth = getAuthenticatedUser();
+    useEffect(()=>{
+        if (myinformationSelctor) {
+             setUsername(myinformationSelctor.username)
+             console.log("username", username)
+        } else {
+            setUsername('')
+        }
+    },[myinformationSelctor])
+
+    // const userAuth = getAuthenticatedUser();
     return (
         <React.Fragment>
             <Dropdown isOpen={isProfileDropdown} toggle={toggleProfileDropdown} className="ms-sm-3 header-item topbar-user">
@@ -32,14 +40,14 @@ const ProfileDropdown = () => {
                         <img className="rounded-circle header-profile-user" src={avatar1}
                             alt="Header Avatar" />
                         <span className="text-start ms-xl-2">
-                            <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{userAuth.username}</span>
+                            <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{username}</span>
                             {/* <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"></span> */}
                         </span>
                     </span>
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-end">
 
-                    <h6 className="dropdown-header">Welcome {userAuth.username}!</h6>
+                    <h6 className="dropdown-header">Welcome {username}!</h6>
                     {/* <DropdownItem href="/pages-profile"><i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
                         <span className="align-middle">Profile</span></DropdownItem> */}
                     <DropdownItem href="/pages-profile-settings"><i

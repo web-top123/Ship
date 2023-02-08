@@ -9,27 +9,22 @@ import { useMemo } from "react";
 
 // const userId = getAuthenticatedUser().id;
 
-
 const MyBrowser = () => {
     const columns = useMemo(() => columnsData, []);
 
-    // const [myInformation, setmyInformation] = useState([])
-    // useEffect(() => {
-    //     // Create function inside useEffect so that the function is only
-    //     // created everytime the useEffect runs and not every render.
-    //     const fetchData = async () => {
-    //         const result = await getFindBrowseHistoriesById(userId);
-    
-    //         console.log(result);
-    //     };
-    
-    //     //Run data fetching function.
-    //     fetchData();
-    // }, []);
+    const [dataList, setdataList] = useState([]);
 
+    useEffect(() => {
+        var user = getAuthenticatedUser();
+        getFindBrowseHistoriesById(user.id).then(res => {
+            setdataList(res.browseHistories);
+        })
+    }, []);
+    console.log("dataList", dataList);
     return (
         <React.Fragment>
             <TabPane tabId="2" id="v-pills-browser">
+             {dataList && dataList !== "" ? (
                     <TableContainer
                         columns={columns}
                         data={dataList}
@@ -40,7 +35,22 @@ const MyBrowser = () => {
                         divClass="table-responsive mb-1"
                         tableClass="mb-0 table-borderless"
                         theadClass="text-muted"
-                    />
+                    />):(
+                        <div className="py-4 text-center">
+                            <div>
+                              <lord-icon
+                                src="https://cdn.lordicon.com/msoeawqm.json"
+                                trigger="loop"
+                                colors="primary:#405189,secondary:#0ab39c"
+                                style={{ width: "72px", height: "72px" }}
+                              ></lord-icon>
+                            </div>
+
+                            <div className="mt-4">
+                              <h5>Sorry! No Result Found</h5>
+                            </div>
+                          </div>
+                    )}
             </TabPane>
         </React.Fragment>
     )
