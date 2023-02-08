@@ -5,7 +5,7 @@ import TableContainer from "../../../Components/Common/TableContainer";
 
 
 import { Link } from "react-router-dom";
-import { columnsData, dataList } from './TestData'
+import { columnsData, datasList } from './TestData'
 import { useMemo } from "react";
 
 const MyBrowser = () => {
@@ -15,7 +15,7 @@ const MyBrowser = () => {
             <TabPane tabId="5" id="v-pills-browser">
                 <TableContainer
                     columns={columns}
-                    data={dataList}
+                    data={datasList}
                     isGlobalFilter={false}
                     isGlobalSearch = {true}
                     isAddUserList={false}

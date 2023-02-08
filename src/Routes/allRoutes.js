@@ -434,16 +434,14 @@ const authProtectedRoutes = [
   { path: "/pages-software", component: Software },
   { path: "/pages-question-service", component: QuestionService },
   { path: "/pages-blog-service", component: BlogService },
-  //view ship data  
-  { path: "/new-data-vote", component: NewDataVote },
-  { path: "/view-ship-data", component: ViewShipData },
   { path: "/pages-blog-service/article-kind", component: ArticleKind },
   { path: "/pages-blog-service/article-man", component: ArticleMan },
   { path: "/pages-blog-service/detail", component: BlogServiceDetail },
 
+  //view ship data 
   { path: "/view-ship-data", component: ViewShipData},
-  { path: "/ship-details", component: ShipDetails},
-  { path: "/new-data-vote", component: NewDataVote},
+  { path: "/ship-details/:id", component: ShipDetails},
+  { path: "/new-data-vote/:id", component: NewDataVote},
   { path: "/pages-study-detail", component: StudyDetail},
 
   // Admin
