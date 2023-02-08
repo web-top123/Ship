@@ -221,7 +221,7 @@ export const DELETE_AVATAR = "/api/avatar/delete";
 
 // Questiones
 export const GET_QUESTIONES = "/api/question/findAll";
-export const GET_QUESTION = "/api/question/get_one";
+export const GET_QUESTION = "/api/question/get_question";
 export const ADD_NEW_QUESTION = "/api/question/create";
 export const UPDATE_QUESTION = "/api/question/update";
 export const DELETE_QUESTION = "/api/question/delete";

@@ -121,8 +121,8 @@ function QuestionDetail(props) {
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
   const [Question, setQuestion] = useState({
-    name: '',
     description: '',
+    campusCategoryId: '',
   });
   useEffect(() => {
     if (id) {
@@ -148,7 +148,7 @@ function QuestionDetail(props) {
             <Card>
               <CardBody>
                 <Row className="gx-lg-5">
-                  <Col xl={8}>
+                  <Col xl={12}>
                     <div className="mt-xl-0 mt-5">
                       <div className="d-flex">
                         <div className="flex-grow-1">
@@ -232,7 +232,7 @@ function QuestionDetail(props) {
                                     <td>{Question.description}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">CampusCategoryId</th>
+                                    <th scope="row">CampusCategory</th>
                                     <td>{Question.campusCategoryId}</td>
                                   </tr>
                                 </tbody>
@@ -248,24 +248,24 @@ function QuestionDetail(props) {
                                 Tommy Hilfiger Sweatshirt for Men (Pink)
                               </h5>
                               <p>
-                                -------------------
+                                --------------------------------
                               </p>
                               <div>
                                 <p className="mb-2">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                -------------
+                                  --------------------------------
                                 </p>
                                 <p className="mb-2">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                  ---------------
+                                  --------------------------------
                                 </p>
                                 <p className="mb-2">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                 -------------
+                                  --------------------------------
                                 </p>
                                 <p className="mb-0">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                --------------
+                                  --------------------------------
                                 </p>
                               </div>
                             </div>

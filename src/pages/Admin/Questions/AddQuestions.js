@@ -155,9 +155,8 @@ const AddQuestion = (props) => {
                       className="form-label"
                       htmlFor="manufacturer-brand-input"
                     >
-                      CampusCategoryId
+                      CampusCategory
                     </label>
-
                     <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
                   </div>
 
