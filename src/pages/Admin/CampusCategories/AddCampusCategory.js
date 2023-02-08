@@ -38,13 +38,18 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewCampusCategory, getCampusCategory, updateOneCampusCategory } from "../../../helpers/fakebackend_helper";
+import { addNewCampusCategory, getCampusCategory, getCampusCategories, updateOneCampusCategory } from "../../../helpers/fakebackend_helper";
+
+import DropdownTreeSelect from 'react-dropdown-tree-select'
+import 'react-dropdown-tree-select/dist/styles.css'
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const AddCampusCategory = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
+  const [cateList, setCateList] = useState([]);
+  const [campusCate, setCampusCate] = useState([]);
 
   const [CampusCategory, setCampusCategory] = useState({
     title: '',
@@ -53,14 +58,52 @@ const AddCampusCategory = (props) => {
 
   });
 
+  var cateTree = [];
   useEffect(() => {
     if (id) {
       getCampusCategory(id).then(res => {
         setCampusCategory(res);
       })
     }
+
+    getCampusCategories().then(res => {
+      setCampusCate(res);
+      if (id) {
+        // getCampus(id).then(e => {
+        //   setCampus(e);
+        // })
+      }
+    })
   }, []);
 
+  useEffect(() => {
+    cateTree = [];
+    refreshTree(cateTree, 0);
+    setCateList(cateTree);
+  }, [CampusCategory,campusCate]);
+
+  const refreshTree = (obj, pid) => {
+    campusCate.filter(e => e.parentId == pid).map(e => {
+      var ch = {};
+      // ch = { label: e.title, value: e.id, expanded: true, checked: Campus.campusCategoryId == e.id, children: [] };
+      ch = { label: e.title, value: e.id, expanded: true,  children: [] };
+      obj.push(ch);
+      refreshTree(ch.children, e.id);
+    })
+  }
+
+  const onChange = (currentNode, selectedNodes) => {
+    console.log('onChange::', currentNode, selectedNodes)
+    if (selectedNodes.length) {
+      // setCampus({ ...Campus, ...{ campusCategoryId: selectedNodes[0]['value'] } })
+    }
+  }
+  const onAction = (node, action) => {
+    console.log('onAction::', action, node)
+  }
+  const onNodeToggle = currentNode => {
+    console.log('onNodeToggle::', currentNode)
+  }
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -149,6 +192,7 @@ const AddCampusCategory = (props) => {
                         >
                           ParentId
                         </label>
+                        <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
                         <input
                           type="text"
                           className="form-control"
