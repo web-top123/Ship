@@ -1,12 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { TabPane, Table } from "reactstrap";
 import { Link } from 'react-router-dom';
 import { columnsPurchaseData, PurchaseDataList } from './TestData'
 import TableContainer from "../../../../Components/Common/TableContainer";
+import { getFindDataPurchaseHistoyById, getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
+
 import { useMemo } from "react";
 
 const MyPurchase = () => {
     const columnsPurchase = useMemo(() => columnsPurchaseData, []);
+    const [dataList, setdataList] = useState([]);
+
+    useEffect(() => {
+        var user = getAuthenticatedUser();
+        getFindDataPurchaseHistoyById(user.id).then(res => {
+            console.log("purchase", res)
+            setdataList(res);
+        })
+    }, []);
+
     return (
         <React.Fragment>
             <TabPane tabId="4" id="v-pills-purchase">

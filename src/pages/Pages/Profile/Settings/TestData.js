@@ -1,6 +1,6 @@
 import { Cell } from "gridjs";
+import { coerce } from "yargs";
 
-var j=1;
 const columnsData = [
     {
         Header: "ID",
