@@ -18,7 +18,7 @@ padding-top:100px;
   color: white;
 }
 .slide-content-wrapper {
-  height: 70vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

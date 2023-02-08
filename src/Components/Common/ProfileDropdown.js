@@ -25,7 +25,7 @@ const ProfileDropdown = () => {
     useEffect(()=>{
         if (myinformationSelctor) {
              setUsername(myinformationSelctor.username)
-             console.log("username", username)
+             console.log("username", localStorage.getItem("authUser"))
         } else {
             setUsername('')
         }

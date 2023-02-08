@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { CardBody, TabPane } from "reactstrap";
 import TableContainer from "../../../../Components/Common/TableContainer";
-import { getFindBrowseHistoriesById, getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
+import { getFindBrowseHistoriesById, getAuthenticatedUser, getBrowserHistoriesAll} from '../../../../helpers/fakebackend_helper';
 
 import { Link } from "react-router-dom";
 import { columnsData, dataList } from './TestData'
@@ -16,8 +16,8 @@ const MyBrowser = () => {
 
     useEffect(() => {
         var user = getAuthenticatedUser();
-        getFindBrowseHistoriesById(user.id).then(res => {
-            setdataList(res.browseHistories);
+        getBrowserHistoriesAll().then(res => {
+            setdataList(res);
         })
     }, []);
     console.log("dataList", dataList);
