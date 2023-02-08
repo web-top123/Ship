@@ -121,6 +121,7 @@ function QuestionDetail(props) {
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
   const [Question, setQuestion] = useState({
+    name: '',
     description: '',
   });
   useEffect(() => {
@@ -147,97 +148,6 @@ function QuestionDetail(props) {
             <Card>
               <CardBody>
                 <Row className="gx-lg-5">
-                  <Col xl={4} md={8} className="mx-auto">
-                    <div className="product-img-slider sticky-side-div">
-                      <Swiper
-                        navigation={true}
-                        thumbs={{ swiper: thumbsSwiper }}
-                        className="swiper product-thumbnail-slider p-2 rounded bg-light"
-                      >
-                        <div className="swiper-wrapper">
-                          <SwiperSlide>
-                            <img
-                              src={product8}
-                              alt=""
-                              className="img-fluid d-block"
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide>
-                            <img
-                              src={product6}
-                              alt=""
-                              className="img-fluid d-block"
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide>
-                            <img
-                              src={product1}
-                              alt=""
-                              className="img-fluid d-block"
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide>
-                            <img
-                              src={product8}
-                              alt=""
-                              className="img-fluid d-block"
-                            />
-                          </SwiperSlide>
-                        </div>
-                      </Swiper>
-
-                      <div className="product-nav-slider mt-2">
-                        <Swiper
-                          onSwiper={setThumbsSwiper}
-                          slidesPerView={4}
-                          freeMode={true}
-                          watchSlidesProgress={true}
-                          spaceBetween={10}
-                          className="swiper product-nav-slider mt-2 overflow-hidden"
-                        >
-                          <div className="swiper-wrapper">
-                            <SwiperSlide className="rounded">
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product8}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product6}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product1}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product8}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                          </div>
-                        </Swiper>
-                      </div>
-                    </div>
-                  </Col>
-
                   <Col xl={8}>
                     <div className="mt-xl-0 mt-5">
                       <div className="d-flex">
@@ -321,7 +231,10 @@ function QuestionDetail(props) {
                                     <th scope="row" style={{ width: "200px" }}>Description</th>
                                     <td>{Question.description}</td>
                                   </tr>
-                                 
+                                  <tr>
+                                    <th scope="row">CampusCategoryId</th>
+                                    <td>{Question.campusCategoryId}</td>
+                                  </tr>
                                 </tbody>
                               </table>
                             </div>
@@ -335,30 +248,24 @@ function QuestionDetail(props) {
                                 Tommy Hilfiger Sweatshirt for Men (Pink)
                               </h5>
                               <p>
-                                Tommy Hilfiger men striped pink sweatshirt.
-                                Crafted with cotton. Material composition is
-                                100% organic cotton. This is one of the world’s
-                                leading designer lifestyle brands and is
-                                internationally recognized for celebrating the
-                                essence of classic American cool style,
-                                featuring preppy with a twist designs.
+                                -------------------
                               </p>
                               <div>
                                 <p className="mb-2">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                  Machine Wash
+                                -------------
                                 </p>
                                 <p className="mb-2">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                  Fit Type: Regular
+                                  ---------------
                                 </p>
                                 <p className="mb-2">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                  100% Cotton
+                                 -------------
                                 </p>
                                 <p className="mb-0">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                  Long sleeve
+                                --------------
                                 </p>
                               </div>
                             </div>

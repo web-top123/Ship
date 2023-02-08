@@ -37,31 +37,12 @@ const Users = (props) => {
     })
   }
 
-  // useEffect(() => {
-  //   if (users && !users.length) {
-  //     dispatch(onGetUsers());
-  //   }
-  // }, [dispatch, users]);
-
-  // useEffect(() => {
-  //   setUserList(users);
-  // }, [users]);
-
-  // useEffect(() => {
-  //   dispatch(onGetUsers());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!isEmpty(users)) setUserList(users);
-  // }, [users]);
-
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
   const onClickDelete = (user) => {
     setCurrentID(user.id);
-    // setUser(user);
     setDeleteModal(true);
   };
 

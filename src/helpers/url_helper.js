@@ -126,7 +126,13 @@ export const UPDATE_CUSTOMER = "/update/customer";
 export const DELETE_CUSTOMER = "/delete/customer";
 
 //studyfield
-export const GET_STUDY = "/api/campus/findAll";
+export const GET_STUDY = "/api/campus/findAllBy";
+
+//softwarefield
+export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";
+export const GET_ALL_SOFTWARE_BY_CATEGORY = "/api/program/findProgramCategoryById";
+export const GET_ALL_SOFTWARE = "/api/program/findAll";
+// export const GET_ALL_TOP_SOFTWARES = "/api/program/getTopPrograms";
 
 // Users
 export const GET_USERS = "/api/user/getAllUsers";
@@ -199,7 +205,7 @@ export const UPDATE_DATACATEGORY = "/api/data/category/update";
 export const DELETE_DATACATEGORY = "/api/data/category/delete";
 
 // Campuses
-export const GET_CAMPUSES = "/api/campus/get_All";
+export const GET_CAMPUSES = "/api/campus/findAll";
 export const GET_CAMPUS = "/api/campus/get_one";
 export const ADD_NEW_CAMPUS = "/api/campus/create";
 export const UPDATE_CAMPUS = "/api/campus/update";
@@ -220,7 +226,7 @@ export const UPDATE_AVATAR = "/api/avatar/update";
 export const DELETE_AVATAR = "/api/avatar/delete";
 
 // Questiones
-export const GET_QUESTIONES = "/api/question/get_All";
+export const GET_QUESTIONES = "/api/question/findAll";
 export const GET_QUESTION = "/api/question/get_one";
 export const ADD_NEW_QUESTION = "/api/question/create";
 export const UPDATE_QUESTION = "/api/question/update";

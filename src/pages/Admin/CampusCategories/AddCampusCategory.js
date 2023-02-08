@@ -68,34 +68,36 @@ const AddCampusCategory = (props) => {
 
     getCampusCategories().then(res => {
       setCampusCate(res);
-      if (id) {
-        // getCampus(id).then(e => {
-        //   setCampus(e);
-        // })
-      }
     })
   }, []);
 
   useEffect(() => {
-    cateTree = [];
-    refreshTree(cateTree, 0);
+    cateTree = [{
+      label: 'Categories',
+      value: 0,
+      checked: CampusCategory.parentId == 0,
+      children: [],
+    }];
+    refreshTree(cateTree[0].children, 0);
     setCateList(cateTree);
-  }, [CampusCategory,campusCate]);
+  }, [CampusCategory, campusCate]);
 
   const refreshTree = (obj, pid) => {
     campusCate.filter(e => e.parentId == pid).map(e => {
       var ch = {};
-      // ch = { label: e.title, value: e.id, expanded: true, checked: Campus.campusCategoryId == e.id, children: [] };
-      ch = { label: e.title, value: e.id, expanded: true,  children: [] };
+      ch = { label: e.title, value: e.id, expanded: true, checked: CampusCategory.parentId == e.id, children: [] };
+      // ch = { label: e.title, value: e.id, expanded: true, children: [] };
       obj.push(ch);
-      refreshTree(ch.children, e.id);
+      if(e.id != id){
+        refreshTree(ch.children, e.id);
+      }
     })
   }
 
   const onChange = (currentNode, selectedNodes) => {
     console.log('onChange::', currentNode, selectedNodes)
     if (selectedNodes.length) {
-      // setCampus({ ...Campus, ...{ campusCategoryId: selectedNodes[0]['value'] } })
+      setCampusCategory({ ...CampusCategory, ...{ parentId: selectedNodes[0]['value']} })
     }
   }
   const onAction = (node, action) => {
@@ -193,7 +195,7 @@ const AddCampusCategory = (props) => {
                           ParentId
                         </label>
                         <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
-                        <input
+                        {/* <input
                           type="text"
                           className="form-control"
                           id="manufacturer-brand-input"
@@ -202,7 +204,7 @@ const AddCampusCategory = (props) => {
                           onChange={e => {
                             setCampusCategory({ ...CampusCategory, ...{ parentId: e.target.value } })
                           }}
-                        />
+                        /> */}
                       </div>
                     </Col>
 

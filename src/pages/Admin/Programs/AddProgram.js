@@ -90,15 +90,6 @@ const AddProgram = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const programCategoryId = [
-    {
-      options: [
-        { label: "1", value: "1" },
-        { label: "2", value: "2" },
-        
-      ],
-    },
-  ];
   document.title = id ? "Edit Program" : "Add Program";
   return (
     <div className="page-content">
@@ -256,24 +247,23 @@ const AddProgram = (props) => {
                   </Row>
 
                   <Row>
-                    <Col lg={6}>
-                      <div>
-                        <Label
-                          htmlFor="choices-publish-visibility-input"
+                  <Col lg={6}>
+                      <div className="mb-3">
+                        <label
                           className="form-label"
+                          htmlFor="manufacturer-brand-input"
                         >
                           ProgramCategoryId
-                        </Label>
-
-                        <Select
-                          value={{ value: Program.programCategoryId, label: Program.programCategoryId}}
-                          onChange={(e) => {
-                            console.log(e);
-                            setProgram({ ...Program, ...{ programCategoryId: e.value } })
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter programCategoryId"
+                          value={Program.programCategoryId}
+                          onChange={e => {
+                            setProgram({ ...Program, ...{ programCategoryId: e.target.value } })
                           }}
-                          options={programCategoryId}
-                          name="choices-publish-visibility-input"
-                          classNamePrefix="select2-selection form-select"
                         />
                       </div>
                     </Col>
@@ -293,6 +283,7 @@ const AddProgram = (props) => {
                             altFormat: "F j, Y",
                             mode: "single",
                             dateFormat: "d.m.y",
+                            
                           }}
                         />
                       </div>

@@ -49,7 +49,7 @@ const AddProgramCategory = (props) => {
   const [ProgramCategory, setProgramCategory] = useState({
     title: '',
     description: '',
-    
+    parentId:''
   
   });
 
@@ -85,14 +85,14 @@ const AddProgramCategory = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const gender = [
-    {
-      options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
-      ],
-    },
-  ];
+  // // const gender = [
+  // //   {
+  // //     options: [
+  // //       { label: "Male", value: "male" },
+  // //       { label: "Female", value: "female" },
+  // //     ],
+  // //   },
+  // ];
   document.title = id ? "Edit ProgramCategory" : "Add ProgramCategory";
   return (
     <div className="page-content">
@@ -121,7 +121,7 @@ const AddProgramCategory = (props) => {
                     />
                   </div>
                   <Row>
-                    <Col lg={8}>
+                    <Col lg={7}>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -137,6 +137,26 @@ const AddProgramCategory = (props) => {
                           value={ProgramCategory.description}
                           onChange={e => {
                             setProgramCategory({ ...ProgramCategory, ...{ description: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={5}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          ParentId
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter parentId"
+                          value={ProgramCategory.parentId}
+                          onChange={e => {
+                            setProgramCategory({ ...ProgramCategory, ...{ parentId: e.target.value } })
                           }}
                         />
                       </div>
