@@ -42,6 +42,8 @@ export const getGetMyInformation = id => api.get(url.GET_MY_INFORMATION + '/' + 
 export const putSaveMyInformation = (id, data) => api.update(url.PUT_SAVE_MY_INFORMATION + '/' + id, data);
 export const getFindBrowseHistoriesById = id => api.get(url.GET_FIND_BROWSER_HISTORY + '/' + id);
 export const getFindDataPurchaseHistoyById = id => api.get(url.GET_FIND_DATA_PURCHASE_HISTORY + '/' + id);
+export const getBrowserHistoriesAll = ()=> api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
+export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST+'/'+id);
 
 // Test page
 export const getGetAllQA = () => api.get(url.GET_ALL_QA);

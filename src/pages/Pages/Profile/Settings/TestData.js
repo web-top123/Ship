@@ -1,24 +1,38 @@
+import { Cell } from "gridjs";
 
+var j=1;
 const columnsData = [
     {
         Header: "ID",
         accessor: "id",
         filterable: false,
+        Cell: (cell) => (<>
+            <div></div>
+         </>)
     },
     {
         Header: "Sort",
         accessor: "sort",
         filterable: false,
+        Cell: (history) => (<>
+           <div>{history.row.original.campus.campusCategory['title']}</div>
+        </>)
     },
     {
         Header: "Level",
         accessor: "level",
         filterable: false,
+        Cell: (history) => (<>
+            <div>{history.row.original.campus['level']}</div>
+         </>)
     },
     {
         Header: "Title",
         accessor: "title",
         filterable: false,
+        Cell: (history) => (<>
+            <div>{history.row.original.campus['name']}</div>
+         </>)
     },
     {
         Header: "View Date",
@@ -107,6 +121,9 @@ const columnsTestData = [
         Header: "Sort",
         accessor: "sort",
         filterable: false,
+        Cell: (passed) => (<>
+            <div>{passed.row.original.campusCategory['title']}</div>
+        </>)
     },
     {
         Header: "Level",
@@ -115,12 +132,12 @@ const columnsTestData = [
     },
     {
         Header: "Testing Counter",
-        accessor: "testcounter",
+        accessor: "testing_counter",
         filterable: false,
     },
     {
         Header: "Passed Counter",
-        accessor: "passedcounter",
+        accessor: "passed_counter",
         filterable: false,
     },
 ]
