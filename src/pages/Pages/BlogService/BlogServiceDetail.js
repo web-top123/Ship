@@ -14,6 +14,8 @@ import { size } from 'lodash';
 import { Link, BrowserRouter } from 'react-router-dom';
 import {BlogDetailData, columnsReplyMessageData} from './TestBlogDetail'
 
+import ArticleSideBar from "./ArticleSideBar";
+
 const BlogServiceDetail = () => {
     document.title = "Blog Service";
     const columnsReplyMessage = useMemo(() => columnsReplyMessageData, []);
@@ -87,73 +89,8 @@ const BlogServiceDetail = () => {
                             </Card>
                         </Col>
                         <Col xl={3} lg={4}>
-                            <Card>
-                                <CardBody>
-                                    <h4 className='mb-sm-0'>Realted Topics</h4>
-                                    <div className="realted-topic d-flex flex-wrap">
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'/pages-blog-service/article-kind'}>Software</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Java</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Ship</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Ship Control</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Machine Learning</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Ship Control</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Data</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Electric Engineering</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4"  to={'/pages-blog-service/article-kind'}>Boat Shipping</Link>
-                                    </div>
-                                    <div className='Top Writers'>
-
-                                    </div>
-                                </CardBody>
-                                <CardBody>
-                                    <h4 className='mb-sm-0 pb-4 border-top pt-4'>Top Writers</h4>
-                                    <div className="top-writers d-flex align-items-center pt-4">
-                                        <div className='d-flex me-2'>
-                                            <div className='me-2'>
-                                                <img style={{ "width": "32px", "height":"auto", "border-radius":"50%"}} src={avatar1} />
-                                            </div>
-                                            <div>
-                                            <Link to={'/pages-blog-service/article-man'}><h6 style={{"font-size":"16px"}}>JavinPaul</h6></Link>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="top-writers d-flex align-items-center pt-4">
-                                        <div className='d-flex me-2'>
-                                            <div className='me-2'>
-                                                <img style={{ "width": "32px", "height":"auto", "border-radius":"50%"}} src={avatar3} />
-                                            </div>
-                                            <div>
-                                                <Link to={'/pages-blog-service/article-man'}><h6 style={{"font-size":"16px"}}>JavinPaul</h6></Link>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="top-writers d-flex align-items-center pt-4">
-                                        <div className='d-flex me-2'>
-                                            <div className='me-2'>
-                                                <img style={{ "width": "32px", "height":"auto", "border-radius":"50%"}} src={avatar2} />
-                                            </div>
-                                            <div>
-                                            <Link to={'/pages-blog-service/article-man'}><h6 style={{"font-size":"16px"}}>JavinPaul</h6></Link>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="top-writers d-flex align-items-center pt-4">
-                                        <div className='d-flex me-2'>
-                                            <div className='me-2'>
-                                                <img style={{ "width": "32px", "height":"auto", "border-radius":"50%"}} src={avatar1} />
-                                            </div>
-                                            <div>
-                                            <Link to={'/pages-blog-service/article-man'}><h6 style={{"font-size":"16px"}}>JavinPaul</h6></Link>
-                                                {/* <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tip Follow...</p> */}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </CardBody>
-                            </Card>
+                            <ArticleSideBar />
+                            
                         </Col>
                     </Row>
                 </Container>

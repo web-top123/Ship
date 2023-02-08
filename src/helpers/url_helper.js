@@ -175,6 +175,7 @@ export const GET_ARTICLE = "/api/article/get_one";
 export const ADD_NEW_ARTICLE = "/api/article/create";
 export const UPDATE_ARTICLE = "/api/article/update";
 export const DELETE_ARTICLE = "/api/article/delete";
+export const GET_ARTICLE_FIND_TOP_USER = "/api/article/findTopUser";
 
 // ArticleCategory
 export const GET_ARTICLECATEGORIES = "/api/article/category/get_All";
