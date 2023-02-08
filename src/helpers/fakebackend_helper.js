@@ -112,7 +112,7 @@ export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
 export const postFakeForgetPwd = data => api.create(url.POST_FAKE_PASSWORD_FORGET, data);
 
 // Edit profile
-export const postJwtProfile = data => api.update(url.POST_EDIT_JWT_PROFILE + "/" + data.id, data.user);
+export const postJwtProfile = data => api.update(url.POST_EDIT_JWT_PROFILE + "/" + data.id, data);
 
 // Browser My Inoformation
 
@@ -288,13 +288,17 @@ export const deleteMail = forId => api.delete(url.DELETE_MAIL, { headers: { forI
 export const deleteProducts = product => api.delete(url.DELETE_PRODUCT, { headers: { product } });
 
 //studyfield
-
 export const getStudy = study => api.get(url.GET_STUDY);
 
+//softwarefield
+export const getAllSoftware = () => api.get(url.GET_ALL_SOFTWARE);
+export const getAllSoftwareWithCategory = () => api.get(url.GET_ALL_SOFTWARE_WITH_CATEGORY);
+export const getAllSoftwareByCategory = (category) => api.get(url.GET_ALL_SOFTWARE_BY_CATEGORY + '/' + category);
+
+// export const getTopSoftwares = () => api.get(url.GET_ALL_TOP_SOFTWARES);
 
 // get Users
 export const getUsers = () => api.get(url.GET_USERS);
-
 export const getUser = (id) => api.get(url.GET_USER + '/' + id);
 
 // add USER
