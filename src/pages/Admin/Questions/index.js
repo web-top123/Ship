@@ -72,6 +72,11 @@ const Questiones = (props) => {
         filterable: false,
       },
       {
+        Header: "CampusCatetoryId",
+        accessor: "campusCategory.title",
+        filterable: false,
+      },
+      {
         Header: "Action",
         Cell: (cellProps) => {
           return (
@@ -114,6 +119,7 @@ const Questiones = (props) => {
     []
   );
   document.title = "Questiones";
+
   return (
     <div className="page-content">
       <DeleteModal

@@ -199,7 +199,7 @@ export const UPDATE_DATACATEGORY = "/api/data/category/update";
 export const DELETE_DATACATEGORY = "/api/data/category/delete";
 
 // Campuses
-export const GET_CAMPUSES = "/api/campus/get_All";
+export const GET_CAMPUSES = "/api/campus/findAll";
 export const GET_CAMPUS = "/api/campus/get_one";
 export const ADD_NEW_CAMPUS = "/api/campus/create";
 export const UPDATE_CAMPUS = "/api/campus/update";
@@ -220,7 +220,7 @@ export const UPDATE_AVATAR = "/api/avatar/update";
 export const DELETE_AVATAR = "/api/avatar/delete";
 
 // Questiones
-export const GET_QUESTIONES = "/api/question/get_All";
+export const GET_QUESTIONES = "/api/question/findAll";
 export const GET_QUESTION = "/api/question/get_one";
 export const ADD_NEW_QUESTION = "/api/question/create";
 export const UPDATE_QUESTION = "/api/question/update";

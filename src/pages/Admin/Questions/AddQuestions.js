@@ -38,30 +38,50 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewQuestion, getQuestion, updateOneQuestion } from "../../../helpers/fakebackend_helper";
+import { addNewQuestion, getQuestion, updateOneQuestion, getCampusCategories } from "../../../helpers/fakebackend_helper";
+
+import DropdownTreeSelect from 'react-dropdown-tree-select'
+import 'react-dropdown-tree-select/dist/styles.css'
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const AddQuestion = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
+  const [cateList, setCateList] = useState([]);
+  const [questionCate, setQuestionCate] = useState([]);
 
   const [Question, setQuestion] = useState({
-    name: '',
     description: '',
-    browses: '',
-    cost: '',
-    recommends: '',
-    questionCategoryId: '',
+    campusCategoryId: '',
   });
 
+  var cateTree = [];
   useEffect(() => {
-    if (id) {
-      getQuestion(id).then(res => {
-        setQuestion(res);
-      })
-    }
+    getCampusCategories().then(res => {
+      setQuestionCate(res);
+      if (id) {
+        getQuestion(id).then(res => {
+          setQuestion(res);
+        })
+      }
+    })
   }, []);
+
+  useEffect(() => {
+    cateTree = [];
+    refreshTree(cateTree, 0);
+    setCateList(cateTree);
+  }, [Question, questionCate]);
+
+  const refreshTree = (obj, pid) => {
+    questionCate.filter(e => e.parentId === pid).map(e => {
+      var ch = {};
+      ch = { label: e.title, value: e.id, expanded: true, checked: Question.campusCategoryId === e.id, children: [] };
+      obj.push(ch);
+      refreshTree(ch.children, e.id);
+    })
+  }
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -86,15 +106,19 @@ const AddQuestion = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const questionCategoryId = [
-    {
-      options: [
-        { label: "1", value: "1" },
-        { label: "2", value: "2" },
+  const onChange = (currentNode, selectedNodes) => {
+    console.log('onChange::', currentNode, selectedNodes.title)
+    if (selectedNodes.length) {
+      setQuestion({ ...Question, ...{ campusCategoryId: selectedNodes[0]['value'] } })
+    }
+  }
+  const onAction = (node, action) => {
+    console.log('onAction::', action, node)
+  }
+  const onNodeToggle = currentNode => {
+    console.log('onNodeToggle::', currentNode)
+  }
 
-      ],
-    },
-  ];
   document.title = id ? "Edit Question" : "Add Question";
   return (
     <div className="page-content">
@@ -124,6 +148,17 @@ const AddQuestion = (props) => {
                         setQuestion({ ...Question, ...{ description: e.target.value } })
                       }}
                     />
+                  </div>
+
+                  <div className="mb-3">
+                    <label
+                      className="form-label"
+                      htmlFor="manufacturer-brand-input"
+                    >
+                      CampusCategoryId
+                    </label>
+
+                    <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
                   </div>
 
                 </CardBody>

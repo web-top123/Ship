@@ -132,7 +132,7 @@ const AddCampus = (props) => {
   }
 
   const onChange = (currentNode, selectedNodes) => {
-    console.log('onChange::', currentNode, selectedNodes)
+    console.log('onChange::', currentNode, selectedNodes.title)
     if (selectedNodes.length) {
       setCampus({ ...Campus, ...{ campusCategoryId: selectedNodes[0]['value'] } })
     }
@@ -263,18 +263,7 @@ const AddCampus = (props) => {
                         >
                           CampusCategoryId
                         </label>
-
-                        <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
-                        {/* <input
-                          type="text"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter campusCategoryId"
-                          value={Campus.campusCategoryId}
-                          onChange={e => {
-                            setCampus({ ...Campus, ...{ campusCategoryId: e.target.value } })
-                          }}
-                        /> */}
+                        <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />                       
                       </div>
                     </Col>
                   </Row>
