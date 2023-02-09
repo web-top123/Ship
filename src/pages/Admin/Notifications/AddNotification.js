@@ -1,19 +1,9 @@
 import React, { useEffect, useState, useMemo } from "react";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import {
-  Card,
-  CardBody,
-  Col,
-  Container,
-  CardHeader,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  TabContent,
-  TabPane,
-  Input,
-  Label,
+  Button,
+  Card, CardBody, Col, Container, CardHeader, Nav, NavItem,
+  NavLink, Row, TabContent, TabPane, Input, Label, Modal, ModalHeader,
 } from "reactstrap";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -46,17 +36,25 @@ const AddNotification = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
 
+  // --------------- use modal ----------
+  const [modal_positionTop, setmodal_positionTop] = useState(false);
+  function tog_positionTop() {
+    setmodal_positionTop(!modal_positionTop);
+  }
+
+  // --------------- use modal ----------
 
   const [notification, setNotification] = useState({
-    date: '',
+    date: new Date(),
     description: '',
     type: '',
-    
+
   });
 
   useEffect(() => {
     if (id) {
       getNotification(id).then(res => {
+        res['birthday'] = new Date(res['birthday']);
         setNotification(res);
       })
     }
@@ -89,11 +87,12 @@ const AddNotification = (props) => {
   const type = [
     {
       options: [
-        { label: "select1", value: "select1" },
-        { label: "select2", value: "select2" },
+        { label: "Notification1", value: "notification1" },
+        { label: "Notification2", value: "notification2" },
       ],
     },
   ];
+
   document.title = id ? "Edit Notification" : "Add Notification";
   return (
     <div className="page-content">
@@ -101,12 +100,32 @@ const AddNotification = (props) => {
 
         <BreadCrumb title={id ? "Edit Notification" : "Add Notification"} pageTitle="Admin Notification" />
 
+        <Modal id="topmodal" isOpen={modal_positionTop} backdrop="static" keyboard="false" toggle={() => { tog_positionTop(); }} >
+          <ModalHeader>
+            Modal Heading
+            <Button type="button" className="btn-close" onClick={() => { setmodal_positionTop(false); }} aria-label="Close"> </Button>
+          </ModalHeader>
+          <div className="modal-body text-center p-5">
+            <lord-icon src="https://cdn.lordicon.com/pithnlch.json"
+              trigger="loop" colors="primary:#121331,secondary:#08a88a" style={{ width: "120px", height: "120px" }}>
+            </lord-icon>
+            <div className="mt-4">
+              <h4 className="mb-3">Your event has been created.</h4>
+              <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
+              <div className="hstack gap-2 justify-content-center">
+                <Link to="#" className="btn btn-link link-success fw-medium shadow-none" onClick={() => { tog_positionTop(); }}><i className="ri-close-line me-1 align-middle"></i> Close</Link>
+                <Link to="/admin-notifications" className="btn btn-success">Completed</Link>
+              </div>
+            </div>
+          </div>
+        </Modal>
+
         <Row>
           <Col lg={8}>
             <form>
               <Card>
                 <CardBody>
-                  
+
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -119,39 +138,20 @@ const AddNotification = (props) => {
                         <Flatpickr
                           className="form-control"
                           id="datepicker-publish-input"
+                          value={notification.date}
+                          onChange={([date]) => {
+                            setNotification({ ...notification, ...{ date: date } })
+                          }}
                           options={{
-                            // altInput: true,
-                            // altFormat: "F j, Y",
+                            altInput: true,
+                            altFormat: "F j, Y",
                             mode: "single",
                             dateFormat: "Y-m-d",
                           }}
                         />
-                        
-                      </div>
-                    </Col>
-                    <Col lg={6}>
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          htmlFor="manufacturer-brand-input"
-                        >
-                          description
-                        </label>
-                        <textarea
-                        rows="3"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter description"
-                          value={notification.description}
-                          onChange={e => {
-                            setNotification({ ...notification, ...{ description: e.target.value } })
-                          }}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
 
-                  <Row>
+                      </div>
+                    </Col>
                     <Col lg={6}>
                       <div>
                         <Label
@@ -162,7 +162,7 @@ const AddNotification = (props) => {
                         </Label>
 
                         <Select
-                          value={{ value: notification.type, label: notification.type == 'select1' ? 'select1' : 'select2' }}
+                          value={{ value: notification.type, label: notification.type === 'notification2' ? 'notification1' : 'notification2' }}
                           onChange={(e) => {
                             console.log(e);
                             setNotification({ ...notification, ...{ type: e.value } })
@@ -173,27 +173,26 @@ const AddNotification = (props) => {
                         />
                       </div>
                     </Col>
-                    {/* <Col lg={6}>
-                      <div>
-                        <label
-                          htmlFor="datepicker-publish-input"
-                          className="form-label"
-                        >
-                          Input Date Of Birth
-                        </label>
-                        <Flatpickr
-                          className="form-control"
-                          id="datepicker-publish-input"
-                          options={{
-                            altInput: true,
-                            altFormat: "F j, Y",
-                            mode: "single",
-                            dateFormat: "d.m.y",
-                          }}
-                        />
-                      </div>
-                    </Col> */}
                   </Row>
+                  <div className="mb-3">
+                    <label
+                      className="form-label"
+                      htmlFor="manufacturer-brand-input"
+                    >
+                      description
+                    </label>
+                    <textarea
+                      rows="3"
+                      className="form-control"
+                      id="manufacturer-brand-input"
+                      placeholder="Enter description"
+                      value={notification.description}
+                      onChange={e => {
+                        setNotification({ ...notification, ...{ description: e.target.value } })
+                      }}
+                    />
+                  </div>
+
                 </CardBody>
               </Card>
 
@@ -227,6 +226,7 @@ const AddNotification = (props) => {
                       console.log(res);
                     })
                   }
+                  tog_positionTop();
                 }}>
                   {id ? "Update" : "Add"}
                 </button>
