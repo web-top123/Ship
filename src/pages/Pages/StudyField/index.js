@@ -36,13 +36,16 @@ import { IoMdArrowDropright } from "react-icons/io";
 import cx from "classnames";
 //selection category
 import Select from "react-select";
-import { getAllStudyByCategory, getAllStudy, getCampusCategories } from '../../../helpers/fakebackend_helper';
+import { getAllStudyByCategory, getAllStudy, getCampusCategories,getTopSoftwares } from '../../../helpers/fakebackend_helper';
 
 
 const Study  = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const fetchData = async () => {
     if (selectedCategoryId === 1) {
+      getTopSoftwares().then(res => {
+        setTopsoftwareData(res);
+      });
       getAllStudy().then(sofwareList => {
         setstudyData(sofwareList);
       });
@@ -54,6 +57,7 @@ const Study  = () => {
   };
 
   const [studyData, setstudyData] = useState([]);
+  const [TopsoftwareData, setTopsoftwareData] = useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
     useEffect(() => {
       getCategoryList();
@@ -407,19 +411,20 @@ const Study  = () => {
                     Top reader
                   </p>
 
-                  <div className="p-3">{productLists.map((study, key) => (
-                    <React.Fragment key={study.id}>
-                      <Card className="product" onClick={() => tog_togFirst(study)}>
+                  <div className="p-3">{TopsoftwareData.map((softwareItem, key) => (
+                    <React.Fragment key={softwareItem.id}>
+                      <Card className="product" onClick={() => tog_togFirst(softwareItem)}>
                         <Link
                           className="text-dark"
                         >
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
                               <div className="flex-shrink-0 me-3">
-                                <img src={study.img} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
+                                <img src={softwareItem.image_url} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
                               </div>
                               <div className="flex-grow-1">
-                                <h5 className="fs-14">{study.color}</h5>
+                                <h5 className="fs-14">{softwareItem.name}</h5>
+                                <h5 className="fs-14">{softwareItem.recommends}</h5>
                               </div>
                             </div>
                           </CardBody>
