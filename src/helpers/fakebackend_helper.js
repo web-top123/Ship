@@ -452,6 +452,9 @@ export const updateOneData = (id, customer) => api.update(url.UPDATE_DATA + '/' 
 // delete DATA
 export const deleteData = id => api.delete(url.DELETE_DATA + '/' + id);
 
+// get all top recommended data
+export const getTopDatas = () => api.get(url.GET_ALL_TOP_DATA);
+
 //-----------DataCategory-----------
 // get DataCategories
 export const getDataCategories = () => api.get(url.GET_DATACATEGORIES);
