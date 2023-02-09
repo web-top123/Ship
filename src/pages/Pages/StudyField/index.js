@@ -22,7 +22,6 @@ import {
 
 //Title
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-
 //data
 import { sellersList } from "../../../common/data/ecommerce";
 import { productsData } from "../../../common/data/ecommerce";
@@ -37,8 +36,6 @@ import cx from "classnames";
 //selection category
 import Select from "react-select";
 import { getAllStudyByCategory, getAllStudy, getCampusCategories,getTopSoftwares } from '../../../helpers/fakebackend_helper';
-
-
 const Study  = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const fetchData = async () => {
@@ -67,14 +64,11 @@ const Study  = () => {
     useEffect(() => {
       fetchData();
     }, [selectedCategoryId])
-
-    
   function getCategoryList() {
     getCampusCategories().then(categoryList => {
       let nodes = [];
       let categoryNodes = [];
       let lookupList = {};
-
       categoryList = categoryList.sort((a, b) => a.parentId - b.parentId);
       setOriginalCategoryList(categoryList);
 
@@ -107,11 +101,6 @@ const Study  = () => {
       setCategory(folder);
     });
   }
-
-
-
-
-
   //selection category
   const [selectedSingle, setSelectedSingle] = useState(null);
   function handleSelectSingle(value) {
@@ -132,8 +121,6 @@ const Study  = () => {
 
   // Data
   const [productLists, setproductLists] = useState(sellersList);
-
-
   //product detail
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
@@ -143,7 +130,6 @@ const Study  = () => {
   const [price, setPrice] = useState("");
   const [img, setImg] = useState("");
 
-
   //modal
   // Border Top Nav Justified Tabs
   const [topBorderjustifyTab, settopBorderjustifyTab] = useState("1");
@@ -152,16 +138,14 @@ const Study  = () => {
       settopBorderjustifyTab(tab);
     }
   };
-
   //modal first
   const [modal_togFirst, setmodal_togFirst] = useState(false);
   function tog_togFirst(value) {
     setTitle(value.name);
     setDescription(value.description);
+    setPrice(value.cost);
     setmodal_togFirst(!modal_togFirst);
-
   }
-
   //modal second
   const [modal_togSecond, setmodal_togSecond] = useState(false);
 
@@ -173,7 +157,6 @@ const Study  = () => {
 
   //data folder
   const [category, setCategory] = useState([]);
-
 
   const data = flattenTree(category);
   const ArrowIcon = ({ isOpen, className }) => {
@@ -187,18 +170,7 @@ const Study  = () => {
 
     return <IoMdArrowDropright className={classes} />;
   };
-
-
   const [expandedIds, setExpandedIds] = useState();
-
-
-
-
-
-
-
-
-
   return (
     <div className="page-content">
       <Modal
@@ -209,9 +181,7 @@ const Study  = () => {
         id="firstmodal"
         centered
       >
-
         <Row>
-
         </Row>
         <ModalBody className=" p-2">
           <CardBody>
@@ -238,9 +208,6 @@ const Study  = () => {
                   {description}     </h5>
               </div>
             </Row>
-
-
-
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
                 <Button color="light" onClick={() => { tog_togSecond(); tog_togFirst(false); }} >Buy</Button>
@@ -263,7 +230,7 @@ const Study  = () => {
         id="secondmodal"
         centered
       >
-        <ModalHeader className='purchase-setting-header'>
+        {/* <ModalHeader className='purchase-setting-header'>
           Purchase
           <Button
             type="button"
@@ -274,10 +241,10 @@ const Study  = () => {
           >
 
           </Button>
-        </ModalHeader>
-
+        </ModalHeader> */}
         <div className="modal-body text-center">
           <div className=" ">
+            <h3 className="mb-5">Purchase</h3>
             <h4 className="mb-4">You can purchase with real or free score</h4>
 
             <Nav tabs className="nav nav-tabs nav-border-top nav-border-top-primary mb-3">
@@ -293,8 +260,7 @@ const Study  = () => {
                 </NavLink>
               </NavItem>
             </Nav>
-
-            <TabContent activeTab={topBorderjustifyTab} className="text-muted">
+            {/* <TabContent activeTab={topBorderjustifyTab} className="text-muted">
               <TabPane tabId="1" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -302,7 +268,7 @@ const Study  = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p>100 Won</p>
+                    <span>pay: </span><p>{price}</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -327,6 +293,38 @@ const Study  = () => {
 
                 </div>
               </TabPane>
+            </TabContent> */}
+            <TabContent activeTab={topBorderjustifyTab} className="text-muted">
+              <TabPane tabId="1" id="nav-border-top-home">
+                <div className="d-block purchase-pro-setting mt-5">
+                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
+                    <span>current: </span><p>100 Won</p>
+                  </div><br /><hr />
+
+                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
+                    <span>pay: </span><p>{price}</p>
+                  </div><br /><hr />
+
+                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
+                    <span>real valance: </span><p>none</p>
+                  </div><br /><hr /><br />
+                </div>
+              </TabPane>
+              <TabPane tabId="2" id="nav-border-top-home">
+                <div className="d-block purchase-pro-setting mt-5">
+                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
+                    <span>current: </span><p>100 Won</p>
+                  </div><br /><hr />
+
+                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
+                    <span>pay: </span><p>100 Won</p>
+                  </div><br /><hr />
+
+                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
+                    <span>free valance: </span><p>none</p>
+                  </div><br /><hr /><br />
+                </div>
+              </TabPane>
             </TabContent>
 
             <div className='purchase-button-group mb-5'>
@@ -341,7 +339,6 @@ const Study  = () => {
           </div>
         </div>
       </Modal>
-
       <Container fluid>
         <BreadCrumb title="Study" pageTitle="Study" />
 
@@ -362,7 +359,6 @@ const Study  = () => {
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Categories
                   </p>
-
                   <TreeView
                     data={data}
                     className="basic p-2"
@@ -405,7 +401,6 @@ const Study  = () => {
                     }}
                   />
                 </div>
-
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Top reader
@@ -460,7 +455,6 @@ const Study  = () => {
                         <th scope="col">Cost</th>
                         <th scope="col">Browses</th>
                         <th scope="col">Recommends</th>
-
                       </tr>
                     </thead>
                     <tbody>
@@ -481,40 +475,6 @@ const Study  = () => {
                 </div>
 
               </Row>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
           </div>
         </Row>
