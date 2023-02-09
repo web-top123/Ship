@@ -150,6 +150,7 @@ const Study  = () => {
   const [modal_togSecond, setmodal_togSecond] = useState(false);
 
   function tog_togSecond() {
+   // setPrice(value.cost);
     setmodal_togSecond(!modal_togSecond);
   }
 
@@ -230,18 +231,7 @@ const Study  = () => {
         id="secondmodal"
         centered
       >
-        {/* <ModalHeader className='purchase-setting-header'>
-          Purchase
-          <Button
-            type="button"
-            className="btn-close"
-            onClick={() => {
-              setmodal_togFirst(false);
-            }}
-          >
 
-          </Button>
-        </ModalHeader> */}
         <div className="modal-body text-center">
           <div className=" ">
             <h3 className="mb-5">Purchase</h3>
@@ -260,40 +250,7 @@ const Study  = () => {
                 </NavLink>
               </NavItem>
             </Nav>
-            {/* <TabContent activeTab={topBorderjustifyTab} className="text-muted">
-              <TabPane tabId="1" id="nav-border-top-home">
-                <div className="d-block purchase-pro-setting mt-5">
-                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100 Won</p>
-                  </div><br /><hr />
 
-                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p>{price}</p>
-                  </div><br /><hr />
-
-                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>real valance: </span><p>none</p>
-                  </div><br /><hr /><br />
-                </div>
-              </TabPane>
-
-              <TabPane tabId="2" id="nav-border-top-home">
-                <div className="d-block purchase-pro-setting mt-5">
-                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100 Won</p>
-                  </div><br /><hr />
-
-                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p>100 Won</p>
-                  </div><br /><hr />
-
-                  <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>free valance: </span><p>none</p>
-                  </div><br /><hr /><br />
-
-                </div>
-              </TabPane>
-            </TabContent> */}
             <TabContent activeTab={topBorderjustifyTab} className="text-muted">
               <TabPane tabId="1" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
@@ -388,7 +345,7 @@ const Study  = () => {
                             }}>
                             {element.name}
                           </span>
-                          <button onClick={() => {
+                          <button style={{border:"none", backgroundColor:"lightblue", width:"40px", height:"19px", borderRadius:"8px"}} onClick={() => {
                             console.log(originalCategoryList);
                             let selectedCategory = originalCategoryList.find(category => {
                               return category.title === element.name;
