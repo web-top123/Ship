@@ -55,6 +55,8 @@ const ArticleSideBar = () => {
                         ))}
                     </div>
                 </CardBody>
+            </Card>
+            <Card  className='my-5 pb-4'>
                 <CardBody>
                     <h4 className='mb-sm-0 pb-4'>Top Writers</h4>
                     <div className="top-writers d-flex align-items-center pt-4">

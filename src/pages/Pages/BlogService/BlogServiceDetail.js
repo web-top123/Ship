@@ -87,10 +87,9 @@ const BlogServiceDetail = () => {
                                 </CardBody>
                                  
                             </Card>
-                        </Col>
-                        <Col xl={3} lg={4}>
+                          </Col>
+                         <Col xl={3} lg={4}>
                             <ArticleSideBar />
-                            
                         </Col>
                     </Row>
                 </Container>
