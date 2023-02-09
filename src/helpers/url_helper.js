@@ -199,6 +199,7 @@ export const GET_DATA = "/api/data/get_one";
 export const ADD_NEW_DATA = "/api/data/create";
 export const UPDATE_DATA = "/api/data/update";
 export const DELETE_DATA = "/api/data/delete";
+export const GET_ALL_TOP_DATA = "/api/data/getTopDatas";
 
 // DataCategories
 export const GET_DATACATEGORIES = "/api/data/category/get_All";
@@ -206,6 +207,7 @@ export const GET_DATACATEGORY = "/api/data/category/get_one";
 export const ADD_NEW_DATACATEGORY = "/api/data/category/create";
 export const UPDATE_DATACATEGORY = "/api/data/category/update";
 export const DELETE_DATACATEGORY = "/api/data/category/delete";
+
 
 // Campuses
 export const GET_CAMPUSES = "/api/campus/findAll";
