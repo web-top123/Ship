@@ -1,6 +1,3 @@
-import { Cell } from "gridjs";
-import { coerce } from "yargs";
-
 const columnsData = [
     {
         Header: "ID",
@@ -270,6 +267,9 @@ const columnsPurchaseData = [
         Header: "Purchase Score",
         accessor: "score",
         filterable: false,
+        Cell: (score) => (<>
+            <div>{score.row.original.data['datacol']}</div>
+        </>)
     }
 ]
 const PurchaseDataList = [
