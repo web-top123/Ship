@@ -126,7 +126,9 @@ export const UPDATE_CUSTOMER = "/update/customer";
 export const DELETE_CUSTOMER = "/delete/customer";
 
 //studyfield
-export const GET_STUDY = "/api/campus/findAllBy";
+export const GET_ALL_STUDY_WITH_CATEGORY = "/api/campus/findAllBy";
+export const GET_ALL_STUDY = "/api/campus/findAll";
+export const GET_ALL_STUDY_BY_CATEGORY = "/api/campus/findCampusCategoryById";
 
 //softwarefield
 export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";
@@ -175,6 +177,7 @@ export const GET_ARTICLE = "/api/article/get_one";
 export const ADD_NEW_ARTICLE = "/api/article/create";
 export const UPDATE_ARTICLE = "/api/article/update";
 export const DELETE_ARTICLE = "/api/article/delete";
+export const GET_ARTICLE_FIND_TOP_USER = "/api/article/findTopUser";
 
 // ArticleCategory
 export const GET_ARTICLECATEGORIES = "/api/article/category/get_All";

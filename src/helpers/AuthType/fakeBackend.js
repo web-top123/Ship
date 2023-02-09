@@ -916,9 +916,9 @@ const fakeBackend = () => {
   //   });
   // });
 
-  axios.get(url.GET_USERS).then(response => {
-    console.log(response);
-  })
+  // axios.get(url.GET_USERS).then(response => {
+  //   console.log(response);
+  // })
 
 };
 

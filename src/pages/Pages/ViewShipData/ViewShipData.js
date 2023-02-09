@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import MySidebar from './MySidebar'
 import MyTabBar from './MyTabBar'
-import MyInformation from './MyInformation'
 import MyBrowser from './MyBrowser'
 import MyPurchase from './MyPurchase'
 import '../Test/test-page-custom.css'
@@ -46,7 +45,6 @@ const ViewData = () => {
                                             id="v-pills-tabContent"
                                             style={{textAlign: "center"}}
                                         >
-                                            <MyInformation />
                                             <MyBrowser />
                                             <MyPurchase />
                                         </TabContent>
@@ -54,7 +52,7 @@ const ViewData = () => {
                                 </Card>
                             </Col>
                             <Col xl={3} lg={4}>
-                                <MySidebar toggleVertical={toggleVertical} verticalTab ={verticalTab}/>
+                                <MySidebar />
                             </Col>
                         </Row>
                 </Container>

@@ -7,32 +7,31 @@ const columnsBlogData = [
         Header: "Reply message",
         accessor: "content",
         filterable: false,
-        Cell: (purchase) => (<>
+        Cell: (article) => (<>
             <div className="blog-content-wrapper">
                 <div>
-                    <Link to = {"/pages-blog-service/article-man"} style={{"display":"inline-block"}}><img className="author-img" src={purchase.row.original.content[0]} /></Link>
-                    <span className="author-name">{purchase.row.original.content[1]}</span>
-                    <span>.</span>
-                    <span className="publish-date">{purchase.row.original.content[2]} days ago</span>
+                    <Link to = {"/pages-blog-service/article-man"} style={{"display":"inline-block"}}><img className="author-img" src={article.row.original.userId} /></Link>
+                    <span className="author-name">{article.row.original.userId}</span>
+                    <span className="publish-date ms-1">{article.row.original.ago}</span>
                 </div>
                 <div className="pt-3 d-flex justify-content-between">
 
                     <Link to={'/pages-blog-service/detail'}>
                         <div className="blog-content">
-                            <h3 className="blog-title">{purchase.row.original.content[3]}</h3>
-                            <p className="blog-detail">{purchase.row.original.content[4]}</p>
+                            <h3 className="blog-title">{article.row.original.name}</h3>
+                            <p className="blog-detail">{article.row.original.description}</p>
                         </div>
                     </Link>
 
                     <div className="blog-detail-img-wrap">
-                        <img className="blog-detail-img" src={purchase.row.original.content[5]} />
+                        <img className="blog-detail-img" src={article.row.original.attach_url} />
                     </div>
 
                 </div>
                 <div>
-                    <Link to={'/pages-blog-service/article-kind'} className="rounded-pill btn btn-light tags me-4">{purchase.row.original.content[6]}</Link>
-                    <i className="bx bx-like pe-1"></i><span className="pe-3">{purchase.row.original.content[7]}</span>
-                    <i className="bx bx-message pe-1"></i><span className="pe-3">{purchase.row.original.content[8]}</span>
+                    <Link to={'/pages-blog-service/article-kind'} className="rounded-pill btn btn-light tags me-4">{article.row.original.articleCategoryId}</Link>
+                    <i className="bx bx-like pe-1"></i><span className="pe-3">{article.row.original.recommends}</span>
+                    <i className="bx bx-message pe-1"></i><span className="pe-3">{article.row.original.oppositions}</span>
                 </div>
 
             </div>
@@ -40,7 +39,7 @@ const columnsBlogData = [
         </>)
     },
 ]
-// {purchase.row.original.content[0]}
+// {article.row.original.content[0]}
 const BlogDataList = [
     {
         id: "1",

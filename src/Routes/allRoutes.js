@@ -465,9 +465,9 @@ const authProtectedRoutes = [
   { path: "/pages-software", component: Software },
   { path: "/pages-question-service", component: QuestionService },
   { path: "/pages-blog-service", component: BlogService },
-  { path: "/pages-blog-service/article-kind", component: ArticleKind },
-  { path: "/pages-blog-service/article-man", component: ArticleMan },
-  { path: "/pages-blog-service/detail", component: BlogServiceDetail },
+  { path: "/pages-blog-service/article-kind/:id", component: ArticleKind },
+  { path: "/pages-blog-service/article-man/:id", component: ArticleMan },
+  { path: "/pages-blog-service/detail/:id", component: BlogServiceDetail },
 
   //view ship data 
   { path: "/view-ship-data", component: ViewShipData},
