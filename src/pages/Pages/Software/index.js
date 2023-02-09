@@ -34,6 +34,7 @@ import TreeView, { flattenTree } from "react-accessible-treeview";
 import { IoMdArrowDropright } from "react-icons/io";
 import cx from "classnames";
 import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories, getTopSoftwares } from '../../../helpers/fakebackend_helper';
+// import FontSize from "@ckeditor/ckeditor5-font/src/fontsize";
 
 const Software = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
@@ -302,11 +303,11 @@ const Software = () => {
               <TabPane tabId="1" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100 Won</p>
+                    <span>current: </span><p>5971.67 Won</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p>100 Won</p>
+                    <span>pay: </span><p>300 Won</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -318,11 +319,11 @@ const Software = () => {
               <TabPane tabId="2" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100 Won</p>
+                    <span>current: </span><p>5971.67 Won</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p>100 Won</p>
+                    <span>pay: </span><p>700 Won</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -385,6 +386,7 @@ const Software = () => {
                           style={{
                             marginLeft: 20 * (level - 1),
                             opacity: isDisabled ? 0.5 : 1,
+                          
                           }}
                         >
                           {isBranch && <ArrowIcon isOpen={isExpanded} />}
@@ -392,15 +394,15 @@ const Software = () => {
                             // tog_togFirst(element)
                           }}>
                             {element.name}
-                          </span>
-                          <button onClick={() => {
+                          
+                          <button style={{border:"none", backgroundColor:"lightblue", width:"40px", height:"19px", borderRadius:"8px"}} onClick={() => {
                             console.log(originalCategoryList);
                             let selectedCategory = originalCategoryList.find(category => {
                               return category.title == element.name;
                             })
                             setSelectedCategoryId(selectedCategory.id);
-                          }} className=""><i className="las la-angle-right fs-10" ></i>
-                          </button>
+                          }} className="">  <i className="las la-angle-right fs-12" ></i>
+                          </button></span>
                         </div>
                       );
                     }}
