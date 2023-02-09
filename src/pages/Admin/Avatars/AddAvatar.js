@@ -48,6 +48,7 @@ const AddAvatar = (props) => {
 
   const [Avatar, setAvatar] = useState({
     name: '',
+    file_url: null,
     cost: '',
 
   });
@@ -59,31 +60,6 @@ const AddAvatar = (props) => {
       })
     }
   }, []);
-
-
-  function handleAcceptedFiles(files) {
-    files.map((file) =>
-      Object.assign(file, {
-        preview: URL.createObjectURL(file),
-        formattedSize: formatBytes(file.size),
-      })
-    );
-    setselectedFiles(files);
-  }
-
-  /**
-   * Formats the size
-   */
-  function formatBytes(bytes, decimals = 2) {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-  }
-
 
   document.title = id ? "Edit Avatar" : "Add Avatar";
   return (
@@ -112,36 +88,60 @@ const AddAvatar = (props) => {
                       }}
                     />
                   </div>
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          File_url
+                        </label>
+                        <input
+                          className="form-control"
+                          id="product-image-input"
+                          type="file"
+                          accept="image/png, image/gif, image/jpeg"
+                          onChange={e=>{
+                            setAvatar({ ...Avatar, ...{ file_url: e.target.files[0] } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Cost
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter cost"
+                          value={Avatar.cost}
+                          onChange={e => {
+                            setAvatar({ ...Avatar, ...{ cost: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
 
-                  <div className="mb-3">
-                    <label
-                      className="form-label"
-                      htmlFor="manufacturer-brand-input"
-                    >
-                      Cost
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="manufacturer-brand-input"
-                      placeholder="Enter cost"
-                      value={Avatar.cost}
-                      onChange={e => {
-                        setAvatar({ ...Avatar, ...{ cost: e.target.value } })
-                      }}
-                    />
-                  </div>
+
                 </CardBody>
               </Card>
 
               {/* <Card>
                 <CardHeader>
-                  <h5 className="card-title mb-0">Avatar</h5>
+                  <h5 className="card-title mb-0">Product Gallery</h5>
                 </CardHeader>
                 <CardBody>
                   <div className="mb-4">
-                    <h5 className="fs-14 mb-1">Avatar Image</h5>
-                    <p className="text-muted">Add avatar main Image.</p>
+                    <h5 className="fs-14 mb-1">Product Image</h5>
+                    <p className="text-muted">Add Product main Image.</p>
                     <input
                       className="form-control"
                       id="product-image-input"
