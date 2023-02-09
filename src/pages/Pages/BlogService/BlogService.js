@@ -7,6 +7,8 @@ import TableContainer from "../../../Components/Common/TableContainer";
 import classnames from "classnames";
 import { useSelector } from 'react-redux';
 
+import { getArticles, getArticle, getArticleCategories, getArticleFindTopUser} from "../../../helpers/fakebackend_helper";
+
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
@@ -26,7 +28,11 @@ const BlogService = () => {
     document.title = "Blog Service";
     const columnsBlog = useMemo(() => columnsBlogData, []);
 
-    const [BlogDataListFilter, setBlogDataList] = useState(BlogDataList);
+    const [articles, setArticles] = useState([]);
+    const [articleCategories, setArticleCategories] = useState([]);
+    const [articleTopWriter, setArticleTopWriter] = useState([]);
+
+
     const [BlogDataPublisedFilter, setBlogDataPublisedFilter] = useState([]);
     const [BlogDataDraftFilter, setBlogDataDraftFilter] = useState([]);
 
@@ -40,16 +46,45 @@ const BlogService = () => {
                 filteredBlogs.map((product) => console.log(product))
                 filteredBlogs = BlogDataList.filter((product) => product.type == type);
             }
-            if (type == 'date') { setBlogDataPublisedFilter(filteredBlogs); setBlogDataList(filteredBlogs); }
-            if (type == 'trending') { setBlogDataList(filteredBlogs); }
-            if (type == 'draft') { setBlogDataDraftFilter(BlogDataDraftFilter); setBlogDataList(filteredBlogs); }
+            if (type == 'date') { setBlogDataPublisedFilter(filteredBlogs); setArticles(filteredBlogs); }
+            if (type == 'trending') { setArticles(filteredBlogs); }
+            if (type == 'draft') { setBlogDataDraftFilter(BlogDataDraftFilter); setArticles(filteredBlogs); }
             // setBlogDataList(filteredBlogs);
         }
     };
 
+    const getAgoString = (difference) => {
+        let dayDifference = Math.ceil(difference / (1000 * 60 * 60 * 24));
+        let hourDifference = Math.ceil(difference / (1000 * 60 * 60 * 24));
+        let minDifference = Math.ceil(difference / (1000 * 60 * 60 * 24));
+        if (dayDifference > 0) {
+            return dayDifference + ((dayDifference == 1) ? " day ago" : " days ago");
+        }
+        if (hourDifference > 0) {
+            return hourDifference + " hours ago";
+        }
+        return minDifference + " mins ago";
+    }
+
     useEffect(() => {
-        setBlogDataList(BlogDataListFilter);
-    }, [BlogDataListFilter]);
+        getArticles().then(articles => {
+            let today = new Date();
+            for (const article of articles) {
+                let createdDate = new Date(article.createdAt);
+                let difference = Math.abs(today - createdDate);
+                article.ago = getAgoString(difference);
+            }
+            setArticles(articles);
+        });
+        getArticleCategories().then(categories => {
+            console.log("Article Categories:", categories);
+            setArticleCategories(categories);
+        });
+        getArticleFindTopUser().then(topUser => {
+            console.log("top user;", topUser);
+            setArticleTopWriter(topUser);
+        });
+    }, []);
 
     const [modal_large, setmodal_large] = useState(false);
     function tog_large() {
@@ -90,7 +125,7 @@ const BlogService = () => {
                                             >
                                                 Trending{" "}
                                                 <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
-                                                    {BlogDataListFilter.length}
+                                                    {articles.length}
                                                 </span>
                                             </NavLink>
                                         </NavItem>
@@ -141,7 +176,7 @@ const BlogService = () => {
                                             >
                                                 <TableContainer
                                                     columns={columnsBlog}
-                                                    data={BlogDataListFilter}
+                                                    data={articles}
                                                     isGlobalFilter={false}
                                                     isGlobalSearch={true}
                                                     isAddUserList={false}
@@ -163,18 +198,11 @@ const BlogService = () => {
                                 <CardBody>
                                     <h4 className='mb-sm-0'>Realted Topics</h4>
                                     <div className="realted-topic d-flex flex-wrap">
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind'}>Software</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind'}>Java</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind'}>Ship</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind'}>Ship Control</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind'}>Machine Learning</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind'}>Ship Control</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind'}>Data</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind'}>Electric Engineering</Link>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind'}>Boat Shipping</Link>
-                                    </div>
-                                    <div className='Top Writers'>
-
+                                        {articleCategories.map((articleCategory, key) => (
+                                            <React.Fragment key={articleCategory.id}>
+                                                <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind/' + articleCategory.id}>{articleCategory.title}</Link>
+                                            </React.Fragment>
+                                        ))}
                                     </div>
                                 </CardBody>
                                 <CardBody>
@@ -185,45 +213,14 @@ const BlogService = () => {
                                                 <img style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar1} />
                                             </div>
                                             <div>
-                                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
+                                                {articleTopWriter.map((findTopWirter, key) => (
+                                                    <React.Fragment key={findTopWirter.id}>
+                                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/detail/' + findTopWirter.id}>{findTopWirter.userId}</Link>
+                                                    </React.Fragment>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div className="top-writers d-flex align-items-center pt-4">
-                                        <div className='d-flex me-2'>
-                                            <div className='me-2'>
-                                                <img style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar3} />
-                                            </div>
-                                            <div>
-                                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="top-writers d-flex align-items-center pt-4">
-                                        <div className='d-flex me-2'>
-                                            <div className='me-2'>
-                                                <img style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar2} />
-                                            </div>
-                                            <div>
-                                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="top-writers d-flex align-items-center pt-4">
-                                        <div className='d-flex me-2'>
-                                            <div className='me-2'>
-                                                <img style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar1} />
-                                            </div>
-                                            <div>
-                                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
-                                                {/* <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tip Follow...</p> */}
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </CardBody>
                             </Card>
                         </Col>
@@ -310,12 +307,12 @@ const BlogService = () => {
                             type="text" />
                     </div>
                     <div className='pt-2 d-flex justify-content-between align-items-center'>
-                            <Button color="primary" data-bs-toggle="button" aria-pressed="false" className='me-2'>
-                                Grammar Checking
-                            </Button>
-                            <Button color="primary" data-bs-toggle="button" aria-pressed="false">
-                                Add
-                            </Button>
+                        <Button color="primary" data-bs-toggle="button" aria-pressed="false" className='me-2'>
+                            Grammar Checking
+                        </Button>
+                        <Button color="primary" data-bs-toggle="button" aria-pressed="false">
+                            Add
+                        </Button>
                     </div>
                 </div>
             </Modal>

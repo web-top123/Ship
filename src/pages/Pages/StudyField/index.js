@@ -36,92 +36,77 @@ import { IoMdArrowDropright } from "react-icons/io";
 import cx from "classnames";
 //selection category
 import Select from "react-select";
-
-import { getStudy } from '../../../helpers/fakebackend_helper';
-
-// const [myInformation, setmyInformation] = useState([])
-// useEffect(() => {
-//     // Create function inside useEffect so that the function is only
-//     // created everytime the useEffect runs and not every render.
-//     const fetchData = async () => {
-//         const result = await getFindBrowseHistoriesById(userId);
-
-//         console.log(result);
-//     };
-
-//     //Run data fetching function.
-//     fetchData();
-// }, []);
-// import { getFindBrowseHistoriesById, getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
-
-
-
-
+import { getAllStudyByCategory, getAllStudy, getCampusCategories,getTopSoftwares } from '../../../helpers/fakebackend_helper';
 
 
 const Study  = () => {
-
+  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const fetchData = async () => {
+    if (selectedCategoryId === 1) {
+      getTopSoftwares().then(res => {
+        setTopsoftwareData(res);
+      });
+      getAllStudy().then(sofwareList => {
+        setstudyData(sofwareList);
+      });
+    } else {
+      getAllStudyByCategory(selectedCategoryId).then(categoryData => {
+        setstudyData(categoryData.campuses);
+      });
+    }
+  };
 
   const [studyData, setstudyData] = useState([]);
+  const [TopsoftwareData, setTopsoftwareData] = useState([]);
+  const [originalCategoryList, setOriginalCategoryList] = useState([]);
+    useEffect(() => {
+      getCategoryList();
+      fetchData();
+    }, []);
 
+    useEffect(() => {
+      fetchData();
+    }, [selectedCategoryId])
 
-  //  useEffect(() => {
-  //   fetch(`http://10.10.12.75:8080/api/data/findAll`)
-  //     .then((response) => response.json())
-  //     .then((actualData) => setstudyData(actualData));
-  // }, []);
+    
+  function getCategoryList() {
+    getCampusCategories().then(categoryList => {
+      let nodes = [];
+      let categoryNodes = [];
+      let lookupList = {};
 
+      categoryList = categoryList.sort((a, b) => a.parentId - b.parentId);
+      setOriginalCategoryList(categoryList);
 
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getStudy();
-      setstudyData(result);
-      var nodes = [];
-      var toplevelNodes = [];
-      var lookupList = {};
-      console.log("dsssssssssssss", result);
-      for (var i = 0; i < result.length; i++) {
-        var n = {
-          id: result[i].id,
-          name: result[i].title,
-          parent_id: ((result[i].parentId == 0) ? null : result[i].parentId),
+      for (const category of categoryList) {
+        let item = {
+          id: category.id,
+          category_id: category.id,
+          name: category.title,
+          parent_id: ((category.parentId === 0) ? null : category.parentId),
           children: []
         };
-        lookupList[n.id] = n;
-        nodes.push(n);
-        if (n.parent_id == null) {
-          toplevelNodes.push(n);
+        lookupList[item.id] = item;
+        nodes.push(item);
+        if (item.parent_id == null) {
+          categoryNodes.push(item);
         }
       }
-
-      for (var i = 0; i < nodes.length; i++) {
-        var n = nodes[i];
+      for (let i = 0; i < nodes.length; i++) {
+        let n = nodes[i];
         if (!(n.parent_id == null)) {
           lookupList[n.parent_id].children = lookupList[n.parent_id].children.concat([n]);
         }
       }
 
-      var folder = {
+      let folder = {
         name: "",
-        children: toplevelNodes,
+        children: categoryNodes,
       };
 
-      console.log("cate",folder);
       setCategory(folder);
-
-
-
-    };
-
-    //Run data fetching function.
-    fetchData();
-  }, []);
-  //   useEffect(() => {
-
-  //  console.log("aaaaaaaaaaaaaa");
-  // }, []);
+    });
+  }
 
 
 
@@ -130,7 +115,7 @@ const Study  = () => {
   //selection category
   const [selectedSingle, setSelectedSingle] = useState(null);
   function handleSelectSingle(value) {
-    if (selectedSingle != value) {
+    if (selectedSingle !== value) {
       setCategory(value);
     }
     setSelectedSingle(value);
@@ -172,12 +157,7 @@ const Study  = () => {
   const [modal_togFirst, setmodal_togFirst] = useState(false);
   function tog_togFirst(value) {
     setTitle(value.name);
-    setDate(value.id);
-    setRequest(value.name);
-    setDescription(value.name);
-    setRate(value.name);
-    setPrice(value.name);
-    setImg(value.img);
+    setDescription(value.description);
     setmodal_togFirst(!modal_togFirst);
 
   }
@@ -193,9 +173,7 @@ const Study  = () => {
 
   //data folder
   const [category, setCategory] = useState([]);
-  // const changeFolder=()=>{
-  //   setCategory(folder2)
-  // }
+
 
   const data = flattenTree(category);
   const ArrowIcon = ({ isOpen, className }) => {
@@ -246,7 +224,7 @@ const Study  = () => {
               </div>
               <div className="col-sm-9">
                 <h5 className="fs-15">
-                  {description}     </h5>
+                  {title}     </h5>
               </div>
             </Row>
             <Row className="pt-3">
@@ -356,8 +334,8 @@ const Study  = () => {
                 Buy
               </Button>
 
-              <Button color="primary" onClick={() => { }} style={{ float: "right" }}>
-                charging score
+              <Button color="primary" onClick={() => { }} style={{ float: "right" }} href="pages-profile-settings">
+                charge score
               </Button>
             </div><br /><br />
           </div>
@@ -412,8 +390,16 @@ const Study  = () => {
                           <span className="name" onClick={() => {
                             // tog_togFirst(element)
                             }}>
-                            {element.name}-{element.id}
+                            {element.name}
                           </span>
+                          <button onClick={() => {
+                            console.log(originalCategoryList);
+                            let selectedCategory = originalCategoryList.find(category => {
+                              return category.title === element.name;
+                            })
+                            setSelectedCategoryId(selectedCategory.id);
+                          }} className=""><i className="las la-angle-right fs-10" ></i>
+                          </button>
                         </div>
                       );
                     }}
@@ -425,19 +411,20 @@ const Study  = () => {
                     Top reader
                   </p>
 
-                  <div className="p-3">{productLists.map((cartItem, key) => (
-                    <React.Fragment key={cartItem.id}>
-                      <Card className="product" onClick={() => tog_togFirst(cartItem)}>
+                  <div className="p-3">{TopsoftwareData.map((softwareItem, key) => (
+                    <React.Fragment key={softwareItem.id}>
+                      <Card className="product" onClick={() => tog_togFirst(softwareItem)}>
                         <Link
                           className="text-dark"
                         >
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
                               <div className="flex-shrink-0 me-3">
-                                <img src={cartItem.img} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
+                                <img src={softwareItem.image_url} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
                               </div>
                               <div className="flex-grow-1">
-                                <h5 className="fs-14">{cartItem.color}</h5>
+                                <h5 className="fs-14">{softwareItem.name}</h5>
+                                <h5 className="fs-14">{softwareItem.recommends}</h5>
                               </div>
                             </div>
                           </CardBody>
@@ -468,23 +455,23 @@ const Study  = () => {
                   <Table className="table-hover  align-middle table-nowrap mb-0 ">
                     <thead className="bg-light">
                       <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Title</th>
-                        <th scope="col">Score</th>
-                        <th scope="col">Visit</th>
-                        <th scope="col">Rate</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Browses</th>
+                        <th scope="col">Recommends</th>
 
                       </tr>
                     </thead>
                     <tbody>
-                      {studyData.map((cartItem, key) => (
-                        <React.Fragment key={cartItem.id}>
+                      {studyData.map((study, key) => (
+                        <React.Fragment key={study.id}>
                           <tr >
-                            <td className="fw-medium" style={{ border: "none" }}>{cartItem.id}</td>
-                            <td className="text-truncate" style={{ "border": "none", "width": "65%" }} onClick={() => tog_togFirst(cartItem)}><Link><div>{cartItem.title}</div></Link></td>
-                            <td style={{ border: "none" }}>{cartItem.id}</td>
-                            <td style={{ border: "none" }}>{cartItem.id}</td>
-                            <td style={{ border: "none" }}>{cartItem.id}</td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => tog_togFirst(study)}><Link><div>{study.name}</div></Link></td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => tog_togFirst(study)}><Link><div>{study.description}</div></Link></td>
+                            <td style={{ border: "none" }}>{study.cost}</td>
+                            <td style={{ border: "none" }}>{study.browses}</td>
+                            <td style={{ border: "none" }}>{study.recommends}</td>
 
                           </tr>
                         </React.Fragment>

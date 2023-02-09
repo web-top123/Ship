@@ -94,6 +94,32 @@ const Programs = (props) => {
       },
       {
         Header: "Name",
+        Cell: (program) => (
+          <>
+            <div className="d-flex align-items-center">
+              <div className="flex-shrink-0 me-3">
+                <div className="avatar-sm bg-light rounded p-1">
+                  <img
+                    src={program.row.original.image}
+                    alt=""
+                    className="img-fluid d-block"
+                  />
+                </div>
+              </div>
+              <div className="flex-grow-1">
+                <h5 className="fs-14 mb-1">
+                  <Link
+                    to={"/admin-program-details/" + program.row.original.id}
+                    className="text-dark"
+                  >
+                    {" "}
+                    {program.row.original.name}
+                  </Link>
+                </h5>
+              </div>
+            </div>
+          </>
+        ),
         accessor: "name",
         filterable: false,
       },
