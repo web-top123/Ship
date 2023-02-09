@@ -28,7 +28,7 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
                                 <img alt=" " style={{ "width": "80px", "height": "auto"}} src={ship1} />
                             </div>
                             <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>ship1</h6><p>S-345-778</p></Link>
+                                <Link to="pages-blog-service/article-man"><h6 style={{ "font-size": "16px" }}>ship1</h6><p>S-345-778</p></Link>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
                                 <img alt=" " style={{ "width": "80px", "height": "auto"}} src={ship2} />
                             </div>
                             <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>ship2</h6><p>S-345-778</p></Link>
+                                <Link to="pages-blog-service/article-man"><h6 style={{ "font-size": "16px" }}>ship2</h6><p>S-345-778</p></Link>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
                                 <img alt=" " style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar1} />
                             </div>
                             <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
+                                <Link to="pages-blog-service/article-man"><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
                                 <img alt=" " style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar3} />
                             </div>
                             <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
+                                <Link to="pages-blog-service/article-man"><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
                                 <img alt=" " style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar2} />
                             </div>
                             <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
+                                <Link to="pages-blog-service/article-man"><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ const MySidebar = ({ toggleVertical, verticalTab }) => {
                                 <img alt=" " style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar1} />
                             </div>
                             <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
+                                <Link to="pages-blog-service/article-man"><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
                                 {/* <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tip Follow...</p> */}
                             </div>
                         </div>

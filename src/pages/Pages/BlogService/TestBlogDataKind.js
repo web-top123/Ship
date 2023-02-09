@@ -17,7 +17,7 @@ const columnsBlogData = [
                 </div>
                 <div className="pt-3 d-flex justify-content-between">
 
-                    <Link to={'detail'}>
+                    <Link to="detail">
                         <div className="blog-content">
                             <h3 className="blog-title">{purchase.row.original.content[3]}</h3>
                             <p className="blog-detail">{purchase.row.original.content[4]}</p>
