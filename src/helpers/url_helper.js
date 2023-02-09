@@ -10,7 +10,7 @@ export const POST_JWT_LOGIN = "/api/auth/signin";
 export const GET_MY_INFORMATION = "/api/myInfo/get_one";
 export const PUT_SAVE_MY_INFORMATION = "/api/myInfo/update";
 export const GET_FIND_BROWSER_HISTORY = "/api/browseHistory/findBrowseHistoryById";
-export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/browseHistory/findBrowseHistoryById";
+export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/dataPurchaseHistory/finddataPurchaseHistoyById";
 export const GET_FIND_BROWSER_HISTORY_ALL = "api/browseHistory/get_All";
 export const GET_FIND_PASSED_TEST = "api/findPassedTestById";
 
@@ -126,13 +126,15 @@ export const UPDATE_CUSTOMER = "/update/customer";
 export const DELETE_CUSTOMER = "/delete/customer";
 
 //studyfield
-export const GET_STUDY = "/api/campus/findAllBy";
+export const GET_ALL_STUDY_WITH_CATEGORY = "/api/campus/findAllBy";
+export const GET_ALL_STUDY = "/api/campus/findAll";
+export const GET_ALL_STUDY_BY_CATEGORY = "/api/campus/findCampusCategoryById";
 
 //softwarefield
 export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";
 export const GET_ALL_SOFTWARE_BY_CATEGORY = "/api/program/findProgramCategoryById";
 export const GET_ALL_SOFTWARE = "/api/program/findAll";
-// export const GET_ALL_TOP_SOFTWARES = "/api/program/getTopPrograms";
+export const GET_ALL_TOP_SOFTWARES = "/api/program/getTopPrograms";
 
 // Users
 export const GET_USERS = "/api/user/getAllUsers";
@@ -175,6 +177,7 @@ export const GET_ARTICLE = "/api/article/get_one";
 export const ADD_NEW_ARTICLE = "/api/article/create";
 export const UPDATE_ARTICLE = "/api/article/update";
 export const DELETE_ARTICLE = "/api/article/delete";
+export const GET_ARTICLE_FIND_TOP_USER = "/api/article/findTopUser";
 
 // ArticleCategory
 export const GET_ARTICLECATEGORIES = "/api/article/category/get_All";

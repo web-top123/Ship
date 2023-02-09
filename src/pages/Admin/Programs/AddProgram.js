@@ -278,6 +278,10 @@ const AddProgram = (props) => {
                         <Flatpickr
                           className="form-control"
                           id="datepicker-publish-input"
+                          value={Program.date}
+                          onChange={([value]) => {
+                            setProgram({ ...Program, ...{ date: value } })
+                          }}
                           options={{
                             altInput: true,
                             altFormat: "F j, Y",
