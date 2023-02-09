@@ -95,8 +95,8 @@ const NotificationDropdown = () => {
                         <TabPane tabId="1" className="py-2 ps-2">
                             <SimpleBar style={{ maxHeight: "300px" }} className="pe-2">
                                 {
-                                    NotificationList.map(e => (
-                                        <div key={e} className="text-reset notification-item d-block dropdown-item position-relative">
+                                    NotificationList.map((e, key) => (
+                                        <div key={key} className="text-reset notification-item d-block dropdown-item position-relative">
                                             <div className="d-flex">
                                                 <div className="avatar-xs me-3">
                                                     <span className="avatar-title bg-soft-info text-info rounded-circle fs-16 shadow">

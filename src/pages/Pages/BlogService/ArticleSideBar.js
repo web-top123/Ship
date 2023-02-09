@@ -62,7 +62,7 @@ const ArticleSideBar = () => {
                     <div className="top-writers d-flex align-items-center pt-4">
                         <div className='d-flex me-2'>
                             <div className='me-2'>
-                                <img style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar1} />
+                                <img style={{ "width": "32px", "height": "auto", "borderRadius": "50%" }} src={avatar1} />
                             </div>
                             <div>
                                 {articleTopWriter.map((findTopWirter, key) => (

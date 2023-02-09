@@ -49,7 +49,7 @@ const MySidebar = () => {
                     <h4 className='mb-sm-0'>Top data</h4>
                     <div className="realted-topic d-flex flex-wrap">
                         {articleCategories.map((articleCategory, key) => (
-                            <React.Fragment key={articleCategory.id}>
+                            <React.Fragment key={key}>
                                 <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind/' + articleCategory.id}>{articleCategory.title}</Link>
                             </React.Fragment>
                         ))}
@@ -62,11 +62,11 @@ const MySidebar = () => {
                     <div className="top-writers d-flex align-items-center pt-4">
                         <div className='d-flex me-2'>
                             <div className='me-2'>
-                                <img style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar1} />
+                                <img style={{ "width": "32px", "height": "auto", "borderRadius": "50%" }} src={avatar1} />
                             </div>
                             <div>
                                 {articleTopWriter.map((findTopWirter, key) => (
-                                    <React.Fragment key={findTopWirter.id}>
+                                    <React.Fragment key={key}>
                                         <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/detail/' + findTopWirter.id}>{findTopWirter.userId}</Link>
                                     </React.Fragment>
                                 ))}

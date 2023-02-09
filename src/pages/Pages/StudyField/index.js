@@ -366,7 +366,7 @@ const Study  = () => {
                   <div className="p-3">{TopsoftwareData.map((softwareItem, key) => (
                     <React.Fragment key={softwareItem.id}>
                       <Card className="product" onClick={() => tog_togFirst(softwareItem)}>
-                        <Link
+                        <Link to='#'
                           className="text-dark"
                         >
                           <CardBody>
