@@ -1,46 +1,46 @@
 const columnsData = [
-    {
-        Header: "ID",
-        accessor: "id",
-        filterable: false,
-        Cell: (cell) => (<>
-            <div></div>
-         </>)
-    },
-    {
-        Header: "Sort",
-        accessor: "sort",
-        filterable: false,
-        Cell: (history) => (<>
-           <div>{history.row.original.campus.campusCategory['title']}</div>
-        </>)
-    },
-    {
-        Header: "Level",
-        accessor: "level",
-        filterable: false,
-        Cell: (history) => (<>
-            <div>{history.row.original.campus['level']}</div>
-         </>)
-    },
-    {
-        Header: "Title",
-        accessor: "title",
-        filterable: false,
-        Cell: (history) => (<>
-            <div>{history.row.original.campus['name']}</div>
-         </>)
-    },
-    {
-        Header: "View Date",
-        accessor: "date",
-        filterable: false,
-    },
-    {
-        Header: "View count",
-        accessor: "count",
-        filterable: false,
-    },
+    // {
+    //     Header: "ID",
+    //     accessor: "id",
+    //     filterable: false,
+    //     Cell: (cell) => (<>
+    //         <div></div>
+    //      </>)
+    // },
+    // {
+    //     Header: "Sort",
+    //     accessor: "sort",
+    //     filterable: false,
+    //     Cell: (history) => (<>
+    //        <div>{history.row.original.campus.campusCategory['title']}</div>
+    //     </>)
+    // },
+    // {
+    //     Header: "Level",
+    //     accessor: "level",
+    //     filterable: false,
+    //     Cell: (history) => (<>
+    //         <div>{history.row.original.campus['level']}</div>
+    //      </>)
+    // },
+    // {
+    //     Header: "Title",
+    //     accessor: "title",
+    //     filterable: false,
+    //     Cell: (history) => (<>
+    //         <div>{history.row.original.campus['name']}</div>
+    //      </>)
+    // },
+    // {
+    //     Header: "View Date",
+    //     accessor: "date",
+    //     filterable: false,
+    // },
+    // {
+    //     Header: "View count",
+    //     accessor: "count",
+    //     filterable: false,
+    // },
 ]
 const dataList = [
     {
