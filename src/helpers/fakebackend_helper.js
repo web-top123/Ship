@@ -297,7 +297,7 @@ export const getAllSoftware = () => api.get(url.GET_ALL_SOFTWARE);
 export const getAllSoftwareWithCategory = () => api.get(url.GET_ALL_SOFTWARE_WITH_CATEGORY);
 export const getAllSoftwareByCategory = (category) => api.get(url.GET_ALL_SOFTWARE_BY_CATEGORY + '/' + category);
 
-// export const getTopSoftwares = () => api.get(url.GET_ALL_TOP_SOFTWARES);
+export const getTopSoftwares = () => api.get(url.GET_ALL_TOP_SOFTWARES);
 
 // get Users
 export const getUsers = () => api.get(url.GET_USERS);
@@ -379,6 +379,7 @@ export const deleteSuggestion = id => api.delete(url.DELETE_SUGGESTION + '/' + i
 
 // get Articles
 export const getArticles = () => api.get(url.GET_ARTICLES);
+export const getArticleFindTopUser = () => api.get(url.GET_ARTICLE_FIND_TOP_USER);
 export const getArticle = (id) => api.get(url.GET_ARTICLE + '/' + id);
 
 // add ARTICLE
