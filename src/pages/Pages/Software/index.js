@@ -33,11 +33,14 @@ import { Link } from "react-router-dom";
 import TreeView, { flattenTree } from "react-accessible-treeview";
 import { IoMdArrowDropright } from "react-icons/io";
 import cx from "classnames";
-import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories } from '../../../helpers/fakebackend_helper';
+import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories, getTopSoftwares } from '../../../helpers/fakebackend_helper';
 
 const Software = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const fetchData = async () => {
+    getTopSoftwares().then(res => {
+      setTopsoftwareData(res);
+    });
     if (selectedCategoryId == 1) {
       getAllSoftware().then(sofwareList => {
         setsoftwareData(sofwareList);
@@ -49,12 +52,16 @@ const Software = () => {
     }
   };
 
+
   const [softwareData, setsoftwareData] = useState([]);
+  const [TopsoftwareData, setTopsoftwareData] = useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
   useEffect(() => {
     getCategoryList();
     fetchData();
   }, []);
+
+
 
   useEffect(() => {
     fetchData();
@@ -124,7 +131,7 @@ const Software = () => {
   const [description, setDescription] = useState("");
   const [recommends, setRecommends] = useState("");
   const [cost, setCost] = useState("");
-  const [img, setImg] = useState("");
+  const [image_url, setImage_url] = useState("");
 
   //modal
   // Border Top Nav Justified Tabs
@@ -144,7 +151,7 @@ const Software = () => {
     setDescription(value.description);
     setRecommends(value.recommends);
     setCost(value.cost);
-    setImg(value.img);
+    setImage_url(value.image_url);
     setmodal_togFirst(!modal_togFirst);
 
   }
@@ -192,38 +199,18 @@ const Software = () => {
 
         <ModalBody className=" p-2">
           <CardBody>
-            <Row className="pt-3">
+            <Row className="d-flex ">
               <div className="col-sm-5">
-                <h5 className="fs-15">
-                  Name :
-                </h5>
-              </div>
+              <div className="avatar-lg bg-light rounded p-1">
+                <img src={image_url}  alt="..." className="img-fluid d-block"></img>
+              </div></div>
               <div className="col-sm-7">
-                <h5 className="fs-15">
-                  {name}     </h5>
+                <br />
+                <h5 className="fs-15">Name : {name}</h5>
+                <h5 className="fs-15">Date : {date}</h5>
+                <h5 className="fs-15">Requirement : {requirement}</h5>
               </div>
-            </Row>
-            <Row className="pt-3">
-              <div className="col-sm-5">
-                <h5 className="fs-15">
-                  Date :
-                </h5>
-              </div>
-              <div className="col-sm-7">
-                <h5 className="fs-15">
-                  {date}     </h5>
-              </div>
-            </Row>
-            <Row className="pt-3">
-              <div className="col-sm-5">
-                <h5 className="fs-15">
-                  Requirement :
-                </h5>
-              </div>
-              <div className="col-sm-7">
-                <h5 className="fs-15">
-                  {requirement}     </h5>
-              </div>
+              
             </Row>
             <Row className="pt-3">
               <div className="col-sm-5">
@@ -346,15 +333,21 @@ const Software = () => {
               </TabPane>
             </TabContent>
 
-            <div className='purchase-button-group mb-5'>
-              <Button color="primary" onClick={() => { tog_togSecond(false); }} style={{ float: "left" }} href="pages-software-detail">
+            <Row className='d-flex' >
+              <div className="col-sm-4">
+              <Link to="/pages-software-detail"><Button color="primary" onClick={() => { tog_togSecond(false); }}  >
                 Buy
-              </Button>
+              </Button></Link></div>
+              <div className="col-sm-4">
+              <Link to="/pages-profile-settings"><Button color="primary" onClick={() => { }}>
+                Charging score
+              </Button></Link></div>
+              <div className="col-sm-4">
+              <Link to="/pages-profile-settings"><Button color="primary" onClick={() => { }} >
+                Download
+              </Button></Link></div>
 
-              <Button color="primary" onClick={() => { }} style={{ float: "right" }}>
-                charging score
-              </Button>
-            </div><br /><br />
+            </Row><br /><br />
           </div>
         </div>
       </Modal>
@@ -398,7 +391,7 @@ const Software = () => {
                           <span className="name" onClick={() => {
                             // tog_togFirst(element)
                           }}>
-                            {element.name} 
+                            {element.name}
                           </span>
                           <button onClick={() => {
                             console.log(originalCategoryList);
@@ -419,7 +412,7 @@ const Software = () => {
                     Top Software
                   </p>
 
-                  <div className="p-3">{softwareList.map((softwareItem, key) => (
+                  <div className="p-3">{TopsoftwareData.map((softwareItem, key) => (
                     <React.Fragment key={softwareItem.id}>
                       <Card className="product" onClick={() => tog_togFirst(softwareItem)}>
                         <Link
@@ -428,10 +421,11 @@ const Software = () => {
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
                               <div className="flex-shrink-0 me-3">
-                                <img src={softwareItem.img} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
+                                <img src={softwareItem.image_url} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
                               </div>
                               <div className="flex-grow-1">
-                                <h5 className="fs-14">{softwareItem.color}</h5>
+                                <h5 className="fs-14">{softwareItem.name}</h5>
+                                <h5 className="fs-14">{softwareItem.recommends}</h5>
                               </div>
                             </div>
                           </CardBody>

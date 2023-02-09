@@ -132,7 +132,7 @@ export const GET_STUDY = "/api/campus/findAllBy";
 export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";
 export const GET_ALL_SOFTWARE_BY_CATEGORY = "/api/program/findProgramCategoryById";
 export const GET_ALL_SOFTWARE = "/api/program/findAll";
-// export const GET_ALL_TOP_SOFTWARES = "/api/program/getTopPrograms";
+export const GET_ALL_TOP_SOFTWARES = "/api/program/getTopPrograms";
 
 // Users
 export const GET_USERS = "/api/user/getAllUsers";
