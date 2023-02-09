@@ -194,6 +194,7 @@ const BlogService = () => {
                             </Card>
                         </Col>
                         <Col xl={3} lg={4}>
+                            <Row>
                             <Card>
                                 <CardBody>
                                     <h4 className='mb-sm-0'>Realted Topics</h4>
@@ -205,6 +206,10 @@ const BlogService = () => {
                                         ))}
                                     </div>
                                 </CardBody>
+                            </Card>
+                            </Row>
+                            <Row>
+                            <Card className='my-5 pb-4'>
                                 <CardBody>
                                     <h4 className='mb-sm-0 pb-4'>Top Writers</h4>
                                     <div className="top-writers d-flex align-items-center pt-4">
@@ -223,6 +228,8 @@ const BlogService = () => {
                                     </div>
                                 </CardBody>
                             </Card>
+                            </Row>
+                            
                         </Col>
                     </Row>
                 </Container>
