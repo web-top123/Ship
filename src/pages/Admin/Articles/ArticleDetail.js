@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { Card, CardBody, Col, Container, Input, Label, Tooltip, Nav, NavItem, NavLink, Row, TabContent, TabPane, } from "reactstrap";
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewArticle, getArticle, updateOneArticle } from "../../../helpers/fakebackend_helper";
+import { addNewArticle, getArticle, updateOneArticle, downloadArticle } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -110,7 +110,7 @@ function ArticleDetail(props) {
     source: '',
     oppositions: '',
     browingcount: '',
-    date:'',
+    date: new Date(),
   });
   useEffect(() => {
     if (id) {

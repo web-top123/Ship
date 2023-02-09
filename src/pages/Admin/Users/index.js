@@ -49,7 +49,7 @@ const Users = (props) => {
   const handleDeleteUser = () => {
     if (currentID) {
       deleteUser(currentID).then(res => {
-        if (res == 1) {
+        if (res === 1) {
           getUserList();
           setDeleteModal(false);
         } else {
@@ -116,6 +116,16 @@ const Users = (props) => {
       {
         Header: "Birthday",
         accessor: "birthday",
+        filterable: false,
+      },
+      {
+        Header: "Balance",
+        accessor: "balance",
+        filterable: false,
+      },
+      {
+        Header: "Free_balance",
+        accessor: "free_balance",
         filterable: false,
       },
       {

@@ -19,7 +19,10 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewArticle, getArticle, updateOneArticle } from "../../../helpers/fakebackend_helper";
+import { addNewArticle, getArticle, updateOneArticle, getArticleCategories } from "../../../helpers/fakebackend_helper";
+
+import DropdownTreeSelect from 'react-dropdown-tree-select'
+import 'react-dropdown-tree-select/dist/styles.css'
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -27,23 +30,38 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 const AddArticle = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
+  const [articleCategories, setArticleCategories] = useState([]);
 
-  const [Article, setArticle] = useState({
+  const [article, setArticle] = useState({
     name: '',
     description: '',
     contact_number: '',
-    articleCategoryId: 'politics',
+    articleCategoryId: '',
+    articleCategory: {
+      title: '',
+    },
     attach_url: '',
     recommends: '',
     source: '',
     oppositions: '',
     browingcount: '',
-    date: '',
   });
+
+  useEffect(() => {
+    getArticleCategories().then(categories => {
+      console.log(categories);
+      for (const category of categories) {
+        category.label = category.title;
+        category.value = category.id;
+      }
+      setArticleCategories(categories);
+    })
+  }, []);
 
   useEffect(() => {
     if (id) {
       getArticle(id).then(res => {
+        console.log("Article Data:", res);
         setArticle(res);
       })
     }
@@ -73,18 +91,6 @@ const AddArticle = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const articleCategoryId = [
-    {
-      options: [
-        { label: "politics", value: "1" },
-        { label: "culture", value: "2" },
-        { label: "artist", value: "3" },
-        { label: "sport", value: "4" },
-
-      ],
-    },
-  ];
-
   document.title = id ? "Edit Article" : "Add Article";
 
   return (
@@ -107,9 +113,9 @@ const AddArticle = (props) => {
                       className="form-control"
                       id="product-title-input"
                       placeholder="Enter name"
-                      value={Article.name}
+                      value={article.name}
                       onChange={e => {
-                        setArticle({ ...Article, ...{ name: e.target.value } })
+                        setArticle({ ...article, ...{ name: e.target.value } })
                       }}
                     />
                   </div>
@@ -123,9 +129,9 @@ const AddArticle = (props) => {
                       className="form-control"
                       id="product-title-input"
                       placeholder="Enter description"
-                      value={Article.description}
+                      value={article.description}
                       onChange={e => {
-                        setArticle({ ...Article, ...{ description: e.target.value } })
+                        setArticle({ ...article, ...{ description: e.target.value } })
                       }}
                     />
                   </div>
@@ -144,9 +150,9 @@ const AddArticle = (props) => {
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter contact_number"
-                          value={Article.contact_number}
+                          value={article.contact_number}
                           onChange={e => {
-                            setArticle({ ...Article, ...{ contact_number: e.target.value } })
+                            setArticle({ ...article, ...{ contact_number: e.target.value } })
                           }}
                         />
                       </div>
@@ -160,13 +166,12 @@ const AddArticle = (props) => {
                           Attach_url
                         </label>
                         <input
-                          type="url"
                           className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter attach_url"
-                          value={Article.attach_url}
+                          id="product-image-input"
+                          type="file"
+                          accept="image/png, image/gif, image/jpeg"
                           onChange={e => {
-                            setArticle({ ...Article, ...{ attach_url: e.target.value } })
+                            setArticle({ ...article, ...{ attach_url: e.target.files[0] } })
                           }}
                         />
                       </div>
@@ -187,9 +192,9 @@ const AddArticle = (props) => {
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter source"
-                          value={Article.source}
+                          value={article.source}
                           onChange={e => {
-                            setArticle({ ...Article, ...{ source: e.target.value } })
+                            setArticle({ ...article, ...{ source: e.target.value } })
                           }}
                         />
                       </div>
@@ -207,9 +212,9 @@ const AddArticle = (props) => {
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter recommends"
-                          value={Article.recommends}
+                          value={article.recommends}
                           onChange={e => {
-                            setArticle({ ...Article, ...{ recommends: e.target.value } })
+                            setArticle({ ...article, ...{ recommends: e.target.value } })
                           }}
                         />
                       </div>
@@ -230,9 +235,9 @@ const AddArticle = (props) => {
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter oppositions"
-                          value={Article.oppositions}
+                          value={article.oppositions}
                           onChange={e => {
-                            setArticle({ ...Article, ...{ oppositions: e.target.value } })
+                            setArticle({ ...article, ...{ oppositions: e.target.value } })
                           }}
                         />
                       </div>
@@ -243,16 +248,16 @@ const AddArticle = (props) => {
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          Browingcount
+                          Browsing Count
                         </label>
                         <input
                           type="number"
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter browingcount"
-                          value={Article.browingcount}
+                          value={article.browingcount}
                           onChange={e => {
-                            setArticle({ ...Article, ...{ browingcount: e.target.value } })
+                            setArticle({ ...article, ...{ browingcount: e.target.value } })
                           }}
                         />
                       </div>
@@ -266,72 +271,43 @@ const AddArticle = (props) => {
                           htmlFor="choices-publish-visibility-input"
                           className="form-label"
                         >
-                          ArticleCategoryId
+                          Article Category
                         </Label>
 
                         <Select
-                          value={{ value: Article.articleCategoryId, label: Article.articleCategoryId }}
+                          value={{ label: article.articleCategory.title, value: article.articleCategoryId }}
                           onChange={(e) => {
-                            console.log(e);
-                            setArticle({ ...Article, ...{ articleCategoryId: e.value } })
+                            console.log("Set Article", e);
+                            setArticle({ ...article, ...{ articleCategoryId: e.value } })
                           }}
-                          options={articleCategoryId}
+                          options={articleCategories}
                           name="choices-publish-visibility-input"
                           classNamePrefix="select2-selection form-select"
-                        />
-                      </div>
-                    </Col>
-                    <Col lg={6}>
-                      <div>
-                        <label
-                          htmlFor="datepicker-publish-input"
-                          className="form-label"
-                        >
-                          Date
-                        </label>
-                        <Flatpickr
-                          className="form-control"
-                          id="datepicker-publish-input"
-                          options={{
-                            altInput: true,
-                            altFormat: "F j, Y",
-                            mode: "single",
-                            dateFormat: "d.m.y",
-                          }}
                         />
                       </div>
                     </Col>
                   </Row>
                 </CardBody>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <h5 className="card-title mb-0">Product Gallery</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="mb-4">
-                    <h5 className="fs-14 mb-1">Product Image</h5>
-                    <p className="text-muted">Add Product main Image.</p>
-                    <input
-                      className="form-control"
-                      id="product-image-input"
-                      type="file"
-                      accept="image/png, image/gif, image/jpeg"
-                    />
-                  </div>
-                </CardBody>
-              </Card>
-
               <div className="text-end mb-3">
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {
                   e.preventDefault();
+                  const formData = new FormData();
+                  formData.append("name", article.name);
+                  formData.append("description", article.description);
+                  formData.append("contact_number", article.contact_number);
+                  formData.append("articleCategoryId", article.articleCategoryId);
+                  formData.append("attach_url", article.attach_url);
+                  formData.append("recommends", article.recommends);
+                  formData.append("source", article.source);
+                  formData.append("oppositions", article.oppositions);
+                  formData.append("browingcount", article.browingcount);
                   if (id) {
-                    updateOneArticle(id, Article).then(res => {
+                    updateOneArticle(id, article).then(res => {
                       console.log(res);
                     })
                   } else {
-                    addNewArticle(Article).then(res => {
+                    addNewArticle(article).then(res => {
                       console.log(res);
                     })
                   }

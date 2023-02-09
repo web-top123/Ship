@@ -125,8 +125,9 @@ function UserDetail(props) {
     name: '',
     email: '',
     gender: 'male',
-    birthday: '',
-    password: '',
+    birthday: new Date(),
+    balance: '',
+    free_balance: '',
   });
   useEffect(() => {
     if (id) {
@@ -370,11 +371,19 @@ function UserDetail(props) {
                                   </tr>
                                   <tr>
                                     <th scope="row">Gender</th>
-                                    <td>{user.gender == 'male' ? 'Male' : 'Female'}</td>
+                                    <td>{user.gender === 'male' ? 'Male' : 'Female'}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">Birthday</th>
                                     <td>{user.birthday}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Balance</th>
+                                    <td>{user.balance}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Free_balance</th>
+                                    <td>{user.free_balance}</td>
                                   </tr>
                                   {/* <tr>
                                     <th scope="row">Weight</th>

@@ -72,7 +72,7 @@ const Questiones = (props) => {
         filterable: false,
       },
       {
-        Header: "CampusCatetoryId",
+        Header: "CampusCatetory",
         accessor: "campusCategory.title",
         filterable: false,
       },

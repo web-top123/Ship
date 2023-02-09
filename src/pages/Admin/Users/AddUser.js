@@ -61,7 +61,6 @@ const AddUser = (props) => {
     birthday: new Date(),
     balance: '',
     free_balance: '',
-    password: '',
   });
 
   useEffect(() => {
@@ -126,7 +125,7 @@ const AddUser = (props) => {
               <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
               <div className="hstack gap-2 justify-content-center">
                 <Link to="#" className="btn btn-link link-success fw-medium shadow-none" onClick={() => { tog_positionTop(); }}><i className="ri-close-line me-1 align-middle"></i> Close</Link>
-                <Link to="#" className="btn btn-success">Completed</Link>
+                <Link to="/admin-users" className="btn btn-success">Completed</Link>
               </div>
             </div>
           </div>
@@ -152,6 +151,7 @@ const AddUser = (props) => {
                       }}
                     />
                   </div>
+
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -197,7 +197,7 @@ const AddUser = (props) => {
 
                   <Row>
                     <Col lg={6}>
-                      <div>
+                      <div className="mb-3">
                         <Label
                           htmlFor="choices-publish-visibility-input"
                           className="form-label"
@@ -218,7 +218,7 @@ const AddUser = (props) => {
                       </div>
                     </Col>
                     <Col lg={6}>
-                      <div>
+                      <div className="mb-3">
                         <label
                           htmlFor="datepicker-publish-input"
                           className="form-label"
@@ -237,6 +237,49 @@ const AddUser = (props) => {
                             altFormat: "F j, Y",
                             mode: "single",
                             dateFormat: "d.m.y",
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Balance
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter Balance"
+                          value={user.balance}
+                          onChange={e => {
+                            setUser({ ...user, ...{ balance: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Free_balance
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter Free_balance"
+                          value={user.free_balance}
+                          onChange={e => {
+                            setUser({ ...user, ...{ free_balance: e.target.value } })
                           }}
                         />
                       </div>
@@ -277,7 +320,7 @@ const AddUser = (props) => {
 
                     })
                   }
-                  // tog_positionTop();
+                  tog_positionTop();
                 }}>
                   {id ? "Update" : "Add"}
                 </button>

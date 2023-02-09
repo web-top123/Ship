@@ -38,13 +38,19 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewAnswer, getAnswer, updateOneAnswer } from "../../../helpers/fakebackend_helper";
+import { addNewAnswer, getAnswer, updateOneAnswer, getQuestiones } from "../../../helpers/fakebackend_helper";
+
+import DropdownTreeSelect from 'react-dropdown-tree-select'
+import 'react-dropdown-tree-select/dist/styles.css'
+
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const AddAnswer = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
+  const [cateList, setCateList] = useState([]);
+  const [questionCate, setQuestionCate] = useState([]);
 
   const [Answer, setAnswer] = useState({
     description: '',
@@ -52,14 +58,32 @@ const AddAnswer = (props) => {
 
   });
 
+  var cateTree = [];
   useEffect(() => {
-    if (id) {
-      getAnswer(id).then(res => {
-        setAnswer(res);
-      })
-    }
+    getQuestiones().then(res => {
+      setQuestionCate(res);
+      if (id) {
+        getAnswer(id).then(e => {
+          setAnswer(e);
+        })
+      }
+    })
   }, []);
 
+  useEffect(() => {
+    cateTree = [];
+    refreshTree(cateTree, 0);
+    setCateList(cateTree);
+  }, [Answer, questionCate]);
+
+  const refreshTree = (obj, pid) => {
+    questionCate.filter(e => e.parentId === pid).map(e => {
+      var ch = {};
+      ch = { label: e.title, value: e.id, expanded: true, checked: Answer.campusCategoryId === e.id, children: [] };
+      obj.push(ch);
+      refreshTree(ch.children, e.id);
+    })
+  }
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -84,11 +108,24 @@ const AddAnswer = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  const answerId = [
+  const onChange = (currentNode, selectedNodes) => {
+    console.log('onChange::', currentNode, selectedNodes.title)
+    if (selectedNodes.length) {
+      setAnswer({ ...Answer, ...{ questionId: selectedNodes[0]['value'] } })
+    }
+  }
+  const onAction = (node, action) => {
+    console.log('onAction::', action, node)
+  }
+  const onNodeToggle = currentNode => {
+    console.log('onNodeToggle::', currentNode)
+  }
+
+  const boolean = [
     {
       options: [
-        { label: "1", value: "1" },
-        { label: "2", value: "2" },
+        { label: "Yes", value: "yes" },
+        { label: "No", value: "no" },
       ],
     },
   ];
@@ -104,7 +141,8 @@ const AddAnswer = (props) => {
             <form>
               <Card>
                 <CardBody>
-                    <Col lg={8}>
+                  <Row>
+                    <Col lg={5}>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -124,7 +162,7 @@ const AddAnswer = (props) => {
                         />
                       </div>
                     </Col>
-                    <Col lg={8}>
+                    <Col lg={7}>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -144,7 +182,40 @@ const AddAnswer = (props) => {
                         />
                       </div>
                     </Col>
-
+                  </Row>
+                  <Row>
+                    <Col lg={6}>
+                      <div>
+                        <Label
+                          htmlFor="choices-publish-visibility-input"
+                          className="form-label"
+                        >
+                          Select Boolean
+                        </Label>
+                        <Select
+                          value={{ value: Answer.boolean, label: Answer.boolean === 'yes' ? 'Yes' : 'No' }}
+                          onChange={(e) => {
+                            console.log(e);
+                            setAnswer({ ...Answer, ...{ boolean: e.value } })
+                          }}
+                          options={boolean}
+                          name="choices-publish-visibility-input"
+                          classNamePrefix="select2-selection form-select"
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div>
+                        <Label
+                          htmlFor="choices-publish-visibility-input"
+                          className="form-label"
+                        >
+                          Select Problem
+                        </Label>
+                        <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
+                      </div>
+                    </Col>
+                  </Row>
                 </CardBody>
               </Card>
 
@@ -187,7 +258,7 @@ const AddAnswer = (props) => {
 
         </Row>
       </Container>
-    </div>
+    </div >
   );
 };
 

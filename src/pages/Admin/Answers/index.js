@@ -83,7 +83,11 @@ const Answers = (props) => {
         accessor: "result",
         filterable: false,
       },
-      
+      {
+        Header: "Question",
+        accessor: "question.title",
+        filterable: false,
+      },      
       {
         Header: "Action",
         Cell: (cellProps) => {

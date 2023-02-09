@@ -1,20 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import {
-  Card,
-  CardBody,
-  Col,
-  Container,
-  CardHeader,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  TabContent,
-  TabPane,
-  Input,
-  Label,
-} from "reactstrap";
+import { Card, CardBody, Col, Container, CardHeader, Nav, NavItem, NavLink, Row, TabContent, TabPane, Input, Label, } from "reactstrap";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -24,21 +10,17 @@ import MetaTags from 'react-meta-tags';
 
 // Import React FilePond
 import { registerPlugin } from "react-filepond";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 import Flatpickr from "react-flatpickr";
 import Select from "react-select";
+
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { addNewArticleCategory, getArticleCategory, updateOneArticleCategory } from "../../../helpers/fakebackend_helper";
+
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
@@ -49,7 +31,7 @@ const AddArticleCategory = (props) => {
   const [ArticleCategory, setArticleCategory] = useState({
     title: '',
     description: '',
-
+    parentId: ''
 
   });
 
