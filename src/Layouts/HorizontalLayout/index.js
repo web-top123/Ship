@@ -12,7 +12,7 @@ const HorizontalLayout = (props) => {
     const navData = navdata().props.children;
     let menuItems = [];
     let splitMenuItems = [];
-    let menuSplitContainer = 6;
+    let menuSplitContainer = 8;
     navData.forEach(function (value, key) {
         if (value['isHeader']) {
             menuSplitContainer++;
@@ -27,7 +27,7 @@ const HorizontalLayout = (props) => {
             menuItems.push(value);
         }
     });
-    menuItems.push({ id: 'more', label: 'More', icon: 'ri-briefcase-2-line', link: "/#", stateVariables: isMoreMenu, subItems: splitMenuItems ,click: function (e) {e.preventDefault(); setIsMoreMenu(!isMoreMenu);}, });
+    // menuItems.push({ id: 'more', label: 'More', icon: 'ri-briefcase-2-line', link: "/#", stateVariables: isMoreMenu, subItems: splitMenuItems ,click: function (e) {e.preventDefault(); setIsMoreMenu(!isMoreMenu);}, });
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -125,7 +125,7 @@ const HorizontalLayout = (props) => {
                                                                 <Col lg={4}>
                                                                     <ul className="nav nav-sm flex-column">
                                                                         <li className="nav-item">
-                                                                            <Link to={item.subItems[key].link} className="nav-link">{item.subItems[key].label}</Link>
+                                                                            <Link to={item.subItems[key].link ? item.subItems[key].link : '#'} className="nav-link">{item.subItems[key].label}</Link>
                                                                         </li>
                                                                     </ul>
                                                                 </Col>
@@ -133,7 +133,7 @@ const HorizontalLayout = (props) => {
                                                                 <Col lg={4}>
                                                                     <ul className="nav nav-sm flex-column">
                                                                         <li className="nav-item">
-                                                                            <Link to={item.subItems[key].link} className="nav-link">{item.subItems[key].label}</Link>
+                                                                            <Link to={item.subItems[key].link ? item.subItems[key].link : '#'} className="nav-link">{item.subItems[key].label}</Link>
                                                                         </li>
                                                                     </ul>
                                                                 </Col>

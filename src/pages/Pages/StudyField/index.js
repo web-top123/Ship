@@ -366,7 +366,7 @@ const Study  = () => {
                   <div className="p-3">{TopsoftwareData.map((softwareItem, key) => (
                     <React.Fragment key={softwareItem.id}>
                       <Card className="product" onClick={() => tog_togFirst(softwareItem)}>
-                        <Link
+                        <Link to='#'
                           className="text-dark"
                         >
                           <CardBody>
@@ -418,8 +418,8 @@ const Study  = () => {
                       {studyData.map((study, key) => (
                         <React.Fragment key={study.id}>
                           <tr >
-                            <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => tog_togFirst(study)}><Link><div>{study.name}</div></Link></td>
-                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => tog_togFirst(study)}><Link><div>{study.description}</div></Link></td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => tog_togFirst(study)}><Link to="#"><div>{study.name}</div></Link></td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => tog_togFirst(study)}><Link to="#"><div>{study.description}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{study.browses}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>

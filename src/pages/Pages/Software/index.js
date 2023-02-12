@@ -417,7 +417,7 @@ const Software = () => {
                   <div className="p-3">{TopsoftwareData.map((softwareItem, key) => (
                     <React.Fragment key={softwareItem.id}>
                       <Card className="product" onClick={() => tog_togFirst(softwareItem)}>
-                        <Link
+                        <Link to='#'
                           className="text-dark"
                         >
                           <CardBody>
@@ -459,7 +459,7 @@ const Software = () => {
                   <React.Fragment key={software.id}>
                     <Col lg={4}>
                       <Card className="product" onClick={() => tog_togFirst(software)}>
-                        <Link
+                        <Link to='#'
                           className="text-dark"
                         >
                           <CardBody>

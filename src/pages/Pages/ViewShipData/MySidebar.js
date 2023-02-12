@@ -1,107 +1,80 @@
-import React, { useState } from 'react';
-import classnames from "classnames";
-import { Button, Label, Card, CardBody, Col, Input, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table, CardHeader } from "reactstrap";
-import { FormGrid, Gutters, VerticalForm, HorizontalForm, HorizontalFormLabelSizing, ColumnSizing, AutoSizing, InlineForms, FloatingLabels } from '../../Forms/FormLayouts/FormlayoutsCode';
-import { BaseExample, CardTableExample, PaginationExample, SearchExample, SortingExample, LoadingStateExample, FixedHeaderExample, HiddenColumnsExample } from '../../Tables/GridTables/GridTablesData';
+import React, { useState, useEffect } from 'react'
+import { Col, Container, Row, Card, CardBody, TabContent, Nav, NavItem, NavLink, CardHeader, TabPane, Button, Modal, ModalHeader, Label, Input, Form } from "reactstrap";
 
-import Flatpickr from "react-flatpickr";
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { getArticleCategories, getArticleFindTopUser } from "../../../helpers/fakebackend_helper";
 
-//avatars
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
-import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-import avatar3 from "../../../assets/images/users/avatar-3.jpg";
-import ship1 from "../../../assets/images/ship1.png";
-import ship2 from "../../../assets/images/ship2.png";
+import { Link } from 'react-router-dom';
+import "quill/dist/quill.snow.css";
 
-const MySidebar = ({ toggleVertical, verticalTab }) => {
-    // Vertical Nav Tabs
+
+const MySidebar = () => {
+
+
+    document.title = "Blog Service";
+
+    const [articleCategories, setArticleCategories] = useState([]);
+    const [articleTopWriter, setArticleTopWriter] = useState([]);
+
+
+
+    useEffect(() => {
+        getArticleCategories().then(categories => {
+            console.log("Article Categories:", categories);
+            setArticleCategories(categories);
+        });
+        getArticleFindTopUser().then(topUser => {
+            console.log("top user;", topUser);
+            setArticleTopWriter(topUser);
+        });
+    }, []);
+
+    const [modal_large, setmodal_large] = useState(false);
+    function tog_large() {
+        setmodal_large(!modal_large);
+    }
+
+    const sort = [
+        {
+            options: [
+                { label: "Engineering", value: "Engineering" },
+                { label: "Math", value: "Math" },
+            ],
+        },
+    ];
     return (
         <React.Fragment>
             <Card>
                 <CardBody>
-                    <h4 className='mb-sm-0 pb-4' style={{textAlign: "center"}}>Pop articles</h4>
-                    <div className="top-writers d-flex align-items-center pt-4">
-                        <div className='d-flex me-2'>
-                            <div className='me-2'>
-                                <img alt=" " style={{ "width": "80px", "height": "auto"}} src={ship1} />
-                            </div>
-                            <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>ship1</h6><p>S-345-778</p></Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="top-writers d-flex align-items-center pt-4">
-                        <div className='d-flex me-2'>
-                            <div className='me-2'>
-                                <img alt=" " style={{ "width": "80px", "height": "auto"}} src={ship2} />
-                            </div>
-                            <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>ship2</h6><p>S-345-778</p></Link>
-                            </div>
-                        </div>
+                    <h4 className='mb-sm-0'>Top data</h4>
+                    <div className="realted-topic d-flex flex-wrap">
+                        {articleCategories.map((articleCategory, key) => (
+                            <React.Fragment key={key}>
+                                <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind/' + articleCategory.id}>{articleCategory.title}</Link>
+                            </React.Fragment>
+                        ))}
                     </div>
                 </CardBody>
             </Card>
             <Card>
                 <CardBody>
-                    <h4 className='mb-sm-0 pb-4' style={{textAlign: "center"}}>Top Writers</h4>
+                    <h4 className='mb-sm-0 pb-4'>Top Writers</h4>
                     <div className="top-writers d-flex align-items-center pt-4">
                         <div className='d-flex me-2'>
                             <div className='me-2'>
-                                <img alt=" " style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar1} />
+                                <img style={{ "width": "32px", "height": "auto", "borderRadius": "50%" }} src={avatar1} />
                             </div>
                             <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
+                                {articleTopWriter.map((findTopWirter, key) => (
+                                    <React.Fragment key={key}>
+                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/detail/' + findTopWirter.id}>{findTopWirter.userId}</Link>
+                                    </React.Fragment>
+                                ))}
                             </div>
                         </div>
                     </div>
-
-                    <div className="top-writers d-flex align-items-center pt-4">
-                        <div className='d-flex me-2'>
-                            <div className='me-2'>
-                                <img alt=" " style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar3} />
-                            </div>
-                            <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="top-writers d-flex align-items-center pt-4">
-                        <div className='d-flex me-2'>
-                            <div className='me-2'>
-                                <img alt=" " style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar2} />
-                            </div>
-                            <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="top-writers d-flex align-items-center pt-4">
-                        <div className='d-flex me-2'>
-                            <div className='me-2'>
-                                <img alt=" " style={{ "width": "32px", "height": "auto", "border-radius": "50%" }} src={avatar1} />
-                            </div>
-                            <div>
-                                <Link to={'pages-blog-service/article-man'}><h6 style={{ "font-size": "16px" }}>JavinPaul</h6></Link>
-                                {/* <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tip Follow...</p> */}
-                            </div>
-                        </div>
-                    </div>
-
                 </CardBody>
             </Card>
-            <div className="card ribbon-box border shadow-none mb-lg-0">
-                <div className="card-body text-muted">
-                    <h4 className='mb-sm-0 pb-4' style={{textAlign: "center"}}>Notification</h4>
-                    <h5>To Vip</h5>
-                    <p style={{marginBottom: "40px"}}>Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio. Vivamus pretium nec odio cursus.</p>
-                </div>
-            </div>
         </React.Fragment>
     );
 };

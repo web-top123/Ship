@@ -46,7 +46,7 @@ const BlogServiceDetail = () => {
                                     <div className='d-flex justify-content-between'>
                                         <div className='d-flex mb-4'>
                                             <div style={{"width":"48px"}} className="me-3">
-                                                <img src = {BlogDetailData.user_img} style={{"width":"100%","border-radius":"50%"}}/>    
+                                                <img src = {BlogDetailData.user_img} style={{"width":"100%","borderRadius":"50%"}}/>    
                                             </div>
                                             <div>
                                                 <h5>{BlogDetailData.user_name}</h5>

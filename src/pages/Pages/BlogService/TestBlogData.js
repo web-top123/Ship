@@ -16,7 +16,7 @@ const columnsBlogData = [
                 </div>
                 <div className="pt-3 d-flex justify-content-between">
 
-                    <Link to={'/pages-blog-service/detail'}>
+                    <Link to="/pages-blog-service/detail">
                         <div className="blog-content">
                             <h3 className="blog-title">{article.row.original.name}</h3>
                             <p className="blog-detail">{article.row.original.description}</p>
@@ -29,7 +29,7 @@ const columnsBlogData = [
 
                 </div>
                 <div>
-                    <Link to={'/pages-blog-service/article-kind'} className="rounded-pill btn btn-light tags me-4">{article.row.original.articleCategoryId}</Link>
+                    <Link to="/pages-blog-service/article-kind" className="rounded-pill btn btn-light tags me-4">{article.row.original.articleCategoryId}</Link>
                     <i className="bx bx-like pe-1"></i><span className="pe-3">{article.row.original.recommends}</span>
                     <i className="bx bx-message pe-1"></i><span className="pe-3">{article.row.original.oppositions}</span>
                 </div>
