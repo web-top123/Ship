@@ -231,6 +231,14 @@ export const UPDATE_AVATAR = "/api/avatar/update";
 export const DELETE_AVATAR = "/api/avatar/delete";
 export const DOWNLOAD_AVATAR ="/api/avatar/fileById";
 
+//Media
+export const GET_MEDIAS = "/api/media/get_All";
+export const GET_MEDIA = "/api/media/get_one";
+export const ADD_NEW_MEDIA = "/api/media/create";
+export const UPDATE_MEDIA = "/api/media/update";
+export const DELETE_MEDIA = "/api/media/delete";
+export const DOWNLOAD_MEDIA ="/api/media/fileById";
+
 // Questiones
 export const GET_QUESTIONES = "/api/question/findAll";
 export const GET_QUESTION = "/api/question/get_question";

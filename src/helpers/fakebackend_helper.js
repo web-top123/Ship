@@ -446,6 +446,30 @@ export const downloadAvatar = (id) => {
   return str;
 }
 
+
+//-----------Media-----------
+// get Medias
+export const getMedias = () => api.get(url.GET_MEDIAS);
+
+export const getMedia = (id) => api.get(url.GET_MEDIA + '/' + id);
+
+// add MEDIA
+export const addNewMedia = customer => api.postFormData(url.ADD_NEW_MEDIA, customer);
+
+// update MEDIA
+export const updateOneMedia = (id, customer) => api.postFormData(url.UPDATE_MEDIA + '/' + id, customer);
+
+// delete MEDIA
+export const deleteMedia = id => api.delete(url.DELETE_MEDIA + '/' + id);
+
+// download MEDIA
+// export const downloadMedia = (id) => api.get(url.DOWNLOAD_MEDIA + '/' + id);
+export const downloadMedia = (id) => {
+  // http://localhost:8080/api/media/fileById/1
+  var str = config.API_URL + "api/media/fileById/" + id;
+  return str;
+}
+
 //-----------Data-----------
 // get Datas
 export const getDatas = () => api.get(url.GET_DATAS);

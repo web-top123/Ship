@@ -285,6 +285,10 @@ import Avatars from "../pages/Admin/Avatars/index";
 import AvatarDetail from "../pages/Admin/Avatars/AvatarDetail";
 import AddAvatar from "../pages/Admin/Avatars/AddAvatar";
 
+// Avatar Section
+import Medias from "../pages/Admin/Medias/index";
+import MediaDetail from "../pages/Admin/Medias/MediaDetail";
+import AddMedia from "../pages/Admin/Medias/AddMedia";
 
 // Question Section
 import Questiones from "../pages/Admin/Questions/index";
@@ -555,6 +559,12 @@ const authProtectedRoutes = [
   { path: "/admin-avatar-details/:id", component: AvatarDetail },
   { path: "/admin-add-avatar", component: AddAvatar },
   { path: "/admin-add-avatar/:id", component: AddAvatar },
+
+  // Media
+  { path: "/admin-medias", component: Medias },
+  { path: "/admin-media-details/:id", component: MediaDetail },
+  { path: "/admin-add-media", component: AddMedia },
+  { path: "/admin-add-media/:id", component: AddMedia },
 
 
 // Questiones
