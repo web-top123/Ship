@@ -290,6 +290,9 @@ import Medias from "../pages/Admin/Medias/index";
 import MediaDetail from "../pages/Admin/Medias/MediaDetail";
 import AddMedia from "../pages/Admin/Medias/AddMedia";
 
+// Settings Section
+import AdminSettings from "../pages/Admin/Settings/index";
+
 // Question Section
 import Questiones from "../pages/Admin/Questions/index";
 import QuestionDetail from "../pages/Admin/Questions/QuestionDetail";
@@ -565,6 +568,9 @@ const authProtectedRoutes = [
   { path: "/admin-media-details/:id", component: MediaDetail },
   { path: "/admin-add-media", component: AddMedia },
   { path: "/admin-add-media/:id", component: AddMedia },
+
+  // Settings
+  { path: "/admin-settings", component: AdminSettings },
 
 
 // Questiones
