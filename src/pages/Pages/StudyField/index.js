@@ -328,16 +328,16 @@ const Study  = () => {
                       isExpanded,
                       isDisabled,
                       getNodeProps,
-                      level,
+                      // level,
                       handleExpand,
                     }) => {
                       return (
                         <div
-                          {...getNodeProps({ onClick: handleExpand })}
-                          style={{
-                            marginLeft: 20 * (level - 1),
-                            opacity: isDisabled ? 0.5 : 1,
-                          }}
+                          // {...getNodeProps({ onClick: handleExpand })}
+                          // style={{
+                          //   marginLeft: 20 * (level - 1),
+                          //   opacity: isDisabled ? 0.5 : 1,
+                          // }}
                         >
                           {isBranch && <ArrowIcon isOpen={isExpanded} />}
                           <span className="name" onClick={() => {
