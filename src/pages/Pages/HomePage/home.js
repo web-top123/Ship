@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useMemo } from "react";
 import { Col, Container, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import "./homepage.css"
@@ -7,75 +7,44 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import software from "./assets/creative.jpeg";
 import testfield from "./assets/default.jpeg";
 import studyfield from "./assets/interactive.jpeg";
+
+import { downloadMedia, getSettingByTitle } from '../../../helpers/fakebackend_helper';
+
+
 const Home = () => {
+    const [homeImages, setHomeImages] = useState([]);
+    useEffect(() => {
+        getSettingByTitle('homeImages').then(res => {
+            console.log("homeimages", JSON.parse(res.value));
+            setHomeImages(JSON.parse(res.value));
+        })
+    }, []);
+
     return (
         <React.Fragment>
             <section className="section pb-0 hero-section" id="home">
                 <Carousel>
-                    <div>
-                        <div className="ca-background">
-                            <img src={software} />
-                        </div>
-                        <div className="ca-title">
-                            <div className='background-overlay'></div>
-                            <div className='slide-inner-wrapper'>
-                                <div className='text-center'>
-                                    <h1 className='home-slide-title'><span
-                                        className="">Our Ship</span></h1>
-                                    <h1 className="home-slide-title">Rent management office </h1>
+                    {
+                        homeImages.map((e, key) =>
+
+                            <div key={key}>
+                                <div className="ca-background">
+                                    <img src={downloadMedia(e.media)} />
                                 </div>
-                                <p className="text-white home-slide-sub-title pt-5">We are carrying out training and retraining of trade barge crews based on the operation management of ships by exploration of crude oil in the sea and charter brokerage of barges for ship cargoes for export and import.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="ca-background">
-                            <img src={testfield} />
-                        </div>
-                        <div className="ca-title">
-                            <div className='background-overlay'></div>
-                            <div className='slide-inner-wrapper'>
-                                <div className='text-center'>
-                                    <h1 className='home-slide-title'><span
-                                        className="">testfield</span></h1>
-                                    <h1 className="home-slide-title">Rent management office </h1>
+                                <div className="ca-title">
+                                    <div className='background-overlay'></div>
+                                    <div className='slide-inner-wrapper'>
+                                        <div className='text-center'>
+                                            <h1 className="home-slide-title">{e.title}</h1>
+                                        </div>
+                                        <p className="text-white home-slide-sub-title pt-5">{e.description}</p>
+                                    </div>
                                 </div>
-                                <p className="text-white home-slide-sub-title pt-5">We are carrying out training and retraining of trade barge crews based on the operation management of ships by exploration of crude oil in the sea and charter brokerage of barges for ship cargoes for export and import.</p>
                             </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="ca-background">
-                            <img src={studyfield} />
-                        </div>
-                        <div className="ca-title">
-                            <div className='background-overlay'></div>
-                            <div className='slide-inner-wrapper'>
-                                <div className='text-center'>
-                                    <h1 className='home-slide-title'><span
-                                        className="">studyfield</span></h1>
-                                    <h1 className="home-slide-title">Rent management office </h1>
-                                </div>
-                                <p className="text-white home-slide-sub-title pt-5">We are carrying out training and retraining of trade barge crews based on the operation management of ships by exploration of crude oil in the sea and charter brokerage of barges for ship cargoes for export and import.</p>
-                            </div>
-                        </div>
-                    </div>
+
+                        )
+                    }
                 </Carousel>
-                {/* <div className='background container-fluid'>
-                    <Row>
-                        <Col lg={6} className="slide-content-wrapper">
-                            <div className='background-overlay'></div>
-                            <div className='slide-inner-wrapper'>
-                                <div className='text-center'>
-                                    <h1 className='home-slide-title'><span
-                                        className="">Our Ship</span></h1>
-                                    <h1 className="home-slide-title">Rent management office </h1>
-                                </div>
-                                <p className="text-white home-slide-sub-title pt-5">We are carrying out training and retraining of trade barge crews based on the operation management of ships by exploration of crude oil in the sea and charter brokerage of barges for ship cargoes for export and import.</p>
-                            </div>
-                        </Col>
-                    </Row>
-                </div> */}
             </section>
         </React.Fragment>
     );
