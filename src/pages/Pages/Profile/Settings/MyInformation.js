@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Label, CardBody, Col, Input, Row, TabPane, Form } from "reactstrap";
 import Flatpickr from "react-flatpickr";
 import { getGetMyInformation, getAuthenticatedUser, putSaveMyInformation, updateAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
-import {  Toast, ToastBody, ToastHeader, } from 'reactstrap';
+import { Toast, ToastBody, ToastHeader, } from 'reactstrap';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfile, editProfile, resetProfileFlag } from '../../../../store/actions';
@@ -38,22 +38,22 @@ const MyInformation = () => {
     const toprightnotify_profile_success = () => toast("Updated Successfully", { position: "top-right", hideProgressBar: true, className: 'bg-success text-white' });
     const dispatch = useDispatch();
     const [myInformation, setMyInformation] = useState({ birthday: '', username: '', name: '', email: '' });
-    const user =JSON.parse(localStorage.getItem('authUser'));
-    const myinformationdispatch = useSelector(state =>  state.Profile.myinformation)
+    const user = JSON.parse(localStorage.getItem('authUser'));
+    const myInformationDispatch = useSelector(state => state.Profile.myinformation)
     const profile = useSelector(state => state.Profile)
     console.log("profile", profile);
-    useEffect(()=>{
+    useEffect(() => {
         // 
-        if(!myinformationdispatch) {
+        if (!myInformationDispatch) {
             dispatch(getProfile(user))
         } else {
-            setMyInformation(myinformationdispatch);
-            if(profile.update) {
+            setMyInformation(myInformationDispatch);
+            if (profile.update) {
                 toprightnotify_profile_success();
             }
             dispatch(resetProfileFlag());
         }
-    },[myinformationdispatch]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [myInformationDispatch]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const saveMyInformation = () => {
         dispatch(editProfile(myInformation));
@@ -86,7 +86,7 @@ const MyInformation = () => {
                                 Name
                             </Label>
                             <Input type="text" className="form-control" id="nameInput"
-                                placeholder="Enter your name" value={myInformation.name} onChange={e => { setMyInformation({ ...myInformation, ...{ name: e.target.value } }) }}/>
+                                placeholder="Enter your name" value={myInformation.name} onChange={e => { setMyInformation({ ...myInformation, ...{ name: e.target.value } }) }} />
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -94,7 +94,7 @@ const MyInformation = () => {
                             <Label htmlFor="emailInput" className="form-label">Email
                                 Address</Label>
                             <Input type="email" className="form-control" id="emailInput"
-                                placeholder="Enter your email" value={myInformation.email}  onChange={e => { setMyInformation({ ...myInformation, ...{ email: e.target.value } }) }}/>
+                                placeholder="Enter your email" value={myInformation.email} onChange={e => { setMyInformation({ ...myInformation, ...{ email: e.target.value } }) }} />
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -116,8 +116,8 @@ const MyInformation = () => {
                                 options={{
                                     dateFormat: "d M, Y"
                                 }}
-                                value = {new Date(myInformation.birthday)}
-                                onChange={e => {setMyInformation({ ...myInformation, ...{ birthday: e[0]} }) }}
+                                value={new Date(myInformation.birthday)}
+                                onChange={e => { setMyInformation({ ...myInformation, ...{ birthday: e[0] } }) }}
                             />
                         </div>
                     </Col>

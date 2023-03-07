@@ -28,7 +28,7 @@ function* editProfile({ payload: { user } }) {
         user: user,
         id: user.id,
       })
-      yield put(profileUpdateSuccess(user))
+      yield put(profileUpdateSuccess(response))
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
       const response = yield call(postFakeProfile, {
         username: user.username,
