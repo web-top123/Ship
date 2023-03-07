@@ -171,6 +171,10 @@ export const ADD_NEW_SUGGESTION = "/api/suggestions/create";
 export const UPDATE_SUGGESTION = "/api/suggestions/update";
 export const DELETE_SUGGESTION = "/api/suggestions/delete";
 
+//Degree
+export const GET_DegreeS = "/api/Degrees/get_All";
+export const GET_Degree = "/api/Degrees/get_one";
+
 // Articles
 export const GET_ARTICLES = "/api/article/get_All";
 export const GET_ARTICLE = "/api/article/get_one";

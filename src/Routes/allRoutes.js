@@ -245,6 +245,10 @@ import Suggestions from "../pages/Admin/Suggestions/index";
 import SuggestionDetail from "../pages/Admin/Suggestions/SuggestionDetail";
 import AddSuggestion from "../pages/Admin/Suggestions/AddSuggestion";
 
+// Degree Section
+import Degrees from "../pages/Admin/Degrees/index";
+import DegreeDetail from "../pages/Admin/Degrees/DegreeDetail";
+
 // Article Section
 import Articles from "../pages/Admin/Articles/index";
 import ArticleDetail from "../pages/Admin/Articles/ArticleDetail";
@@ -513,6 +517,10 @@ const authProtectedRoutes = [
   { path: "/admin-suggestion-details/:id", component: SuggestionDetail },
   { path: "/admin-add-suggestion", component: AddSuggestion },
   { path: "/admin-add-suggestion/:id", component: AddSuggestion },
+
+    //Degree
+    { path: "/admin-degrees", component: Degrees },
+    { path: "/admin-degree-details/:id", component: DegreeDetail },
 
   // Articles
   { path: "/admin-articles", component: Articles },

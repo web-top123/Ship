@@ -376,6 +376,14 @@ export const updateOneSuggestion = (id, customer) => api.update(url.UPDATE_SUGGE
 // delete SUGGESTION
 export const deleteSuggestion = id => api.delete(url.DELETE_SUGGESTION + '/' + id);
 
+
+//---------------Degree-----------//
+
+// get Degrees
+export const getDegrees = () => api.get(url.GET_DegreeS);
+
+export const getDegree = (id) => api.get(url.GET_Degree + '/' + id);
+
 // ----------- Article --------------
 
 // get Articles

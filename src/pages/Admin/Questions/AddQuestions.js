@@ -45,11 +45,37 @@ import 'react-dropdown-tree-select/dist/styles.css'
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
+const GroupOptions2 = [
+  { value: 'Zero', label: 'Zero' },
+  { value: 'Two', label: 'Two' },
+  { value: 'Four', label: 'Four' },
+  { value: 'One', label: 'One' },
+  { value: 'Five', label: 'Five' },
+  { value: 'Three', label: 'Three' },
+  { value: 'Six', label: 'Six' },
+];
+
 const AddQuestion = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
   const [cateList, setCateList] = useState([]);
   const [questionCate, setQuestionCate] = useState([]);
+
+  const [selectedGroup2, setSelectedGroup2] = useState(null);
+  const [defaultCounter, setdefaultCounter] = useState(1);
+
+  function handleSelectGroups2(selectedGroup2) {
+    setSelectedGroup2(selectedGroup2);
+}
+function countUP(id, prev_data_attr) {
+  id(prev_data_attr + 1);
+
+
+}
+
+function countDown(id, prev_data_attr) {
+  id(prev_data_attr - 1);
+}
 
   const [Question, setQuestion] = useState({
     description: '',
@@ -131,6 +157,54 @@ const AddQuestion = (props) => {
             <form>
               <Card>
                 <CardBody>
+                  <Row>
+                <Col lg={3} md={4}>
+                <div className="mb-3">
+                 <Label htmlFor="choices-single-no-search" className="form-label text-muted">Select position</Label>
+                 <Select isClearable={true}
+                    value={selectedGroup2}
+                    onChange={() => {
+                         handleSelectGroups2();
+                    }}
+                     options={GroupOptions2}    />
+                 </div>   
+                 </Col>
+                 <Col sm={6}>
+                        <div>
+                          <h5 className="fs-13 fw-medium text-muted">
+                            Degree
+                          </h5>
+                          <div className="input-step">
+                            <button
+                              type="button"
+                              className="minus"
+                              onClick={() => {
+                                countDown(setdefaultCounter, defaultCounter);
+                              }}
+                            >
+                              –
+                            </button>
+                            <Input
+                              type="number"
+                              className="product-quantity"
+                              value={defaultCounter}
+                              min="1"
+                              max="5"
+                              readOnly
+                            />
+                            <button
+                              type="button"
+                              className="plus"
+                              onClick={() => {
+                                countUP(setdefaultCounter, defaultCounter);
+                              }}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </Col>    
+                 </Row>           
                   <div className="mb-3">
                     <label
                       className="form-label"
@@ -160,24 +234,6 @@ const AddQuestion = (props) => {
                     <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
                   </div>
 
-                </CardBody>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <h5 className="card-title mb-0">Product Gallery</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="mb-4">
-                    <h5 className="fs-14 mb-1">Product Image</h5>
-                    <p className="text-muted">Add Product main Image.</p>
-                    <input
-                      className="form-control"
-                      id="product-image-input"
-                      type="file"
-                      accept="image/png, image/gif, image/jpeg"
-                    />
-                  </div>
                 </CardBody>
               </Card>
 

@@ -42,6 +42,7 @@ const Navdata = () => {
     const [isProgram, setIsProgram] = useState(false);
     const [isProgramCategory, setIsProgramCategory] = useState(false);
     const [isSuggestion, setIsSuggestion] = useState(false);
+    const [isDegree, setIsDegree] = useState(false);
     const [isArticle, setIsArticle] = useState(false);
     const [isArticleCategory, setIsArticleCategory] = useState(false);
     const [isComment, setIsComment] = useState(false);
@@ -435,9 +436,7 @@ const Navdata = () => {
                     },
                     parentId: "admin",
                     stateVariables: isSetting,        
-                               
                 }
-                                            
             ]
         },
 
