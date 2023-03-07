@@ -32,11 +32,11 @@ const Login = (props) => {
         enableReinitialize: true,
 
         initialValues: {
-            email: "Smith@gmail.com" || '',
-            password: "12345678" || '',
+            username: "" || '',
+            password: "" || '',
         },
         validationSchema: Yup.object({
-            email: Yup.string().required("Please Enter Your Email"),
+            username: Yup.string().required("Please Enter Your User ID"),
             password: Yup.string().required("Please Enter Your Password"),
         }),
         onSubmit: (values) => {
@@ -80,7 +80,7 @@ const Login = (props) => {
     const facebookResponse = response => {
         signIn(response, "facebook");
     };
-    document.title = "Basic SignIn | Velzon - React Admin & Dashboard Template";
+    document.title = "Sign In Ship";
     return (
         <React.Fragment>
             <ParticlesAuth>
@@ -95,7 +95,7 @@ const Login = (props) => {
                                             <img src={logoLight} alt="" height="20" />
                                         </Link>
                                     </div>
-                                    <p className="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
+                                    <p className="mt-3 fs-15 fw-medium">Ship Management</p>
                                 </div>
                             </Col>
                         </Row>
@@ -105,7 +105,7 @@ const Login = (props) => {
                                 <Card className="mt-4">
                                     <CardBody className="p-4">
                                         <div className="text-center mt-2">
-                                            <h5 className="text-primary">Welcome Signin !</h5>
+                                            <h5 className="text-primary">Welcome Signin!</h5>
                                         </div>
                                         <div className="p-2 mt-4">
                                             <Form
@@ -117,25 +117,25 @@ const Login = (props) => {
                                                 action="#">
 
                                                 <div className="mb-3">
-                                                    <Label htmlFor="email" className="form-label">Email</Label>
+                                                    <Label for="username" className="form-label">User ID</Label>
                                                     <div className="input-group">
                                                         <Input
-                                                            name="email"
+                                                            name="username"
                                                             className="form-control"
-                                                            placeholder="Enter email"
-                                                            type="email"
+                                                            placeholder="Enter User ID"
+                                                            type="text"
                                                             onChange={validation.handleChange}
                                                             onBlur={validation.handleBlur}
-                                                            value={validation.values.email || ""}
+                                                            value={validation.values.username || ""}
                                                             invalid={
-                                                                validation.touched.email && validation.errors.email ? true : false
+                                                                validation.touched.username && validation.errors.username ? true : false
                                                             }
                                                             aria-describedby="button-addon2"
                                                         />
                                                         <button className="btn btn-success shadow-none" type="button" id="button-addon2"><i className=" ri-key-2-line label-icon align-middle fs-16 me-2"></i> Cert</button>
                                                     </div>
-                                                    {validation.touched.email && validation.errors.email ? (
-                                                        <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
+                                                    {validation.touched.username && validation.errors.username ? (
+                                                        <FormFeedback type="invalid">{validation.errors.username}</FormFeedback>
                                                     ) : null}
                                                 </div>
 
