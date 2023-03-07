@@ -235,6 +235,16 @@ export const UPDATE_AVATAR = "/api/avatar/update";
 export const DELETE_AVATAR = "/api/avatar/delete";
 export const DOWNLOAD_AVATAR ="/api/avatar/fileById";
 
+//Setting
+export const GET_SETTINGS = "/api/setting/get_All";
+export const GET_SETTING = "/api/setting/get_one";
+export const GET_SETTING_BY_TITLE = "/api/setting/get_one_by_title";
+export const ADD_NEW_SETTING = "/api/setting/create";
+export const UPDATE_SETTING = "/api/setting/update";
+export const UPDATE_SETTING_BY_TITLE = "/api/setting/update_by_title";
+export const DELETE_SETTING = "/api/setting/delete";
+export const DOWNLOAD_SETTING ="/api/setting/fileById";
+
 //Media
 export const GET_MEDIAS = "/api/media/get_All";
 export const GET_MEDIA = "/api/media/get_one";

@@ -27,7 +27,7 @@ function* loginUser({ payload: { user, history } }) {
     } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
       console.log("jwt");
       const response = yield call(postJwtLogin, {
-        email: user.email,
+        username: user.username,
         password: user.password,
       });
       localStorage.setItem("authUser", JSON.stringify(response));
@@ -35,7 +35,7 @@ function* loginUser({ payload: { user, history } }) {
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
       console.log("fake");
       const response = yield call(postFakeLogin, {
-        email: user.email,
+        username: user.username,
         password: user.password,
       });
       localStorage.setItem("authUser", JSON.stringify(response));

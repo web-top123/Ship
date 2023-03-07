@@ -15,7 +15,7 @@ const Index = () => {
         <React.Fragment>
             <Switch>
                 <Route path={availablePublicRoutesPaths}>
-                    <NonAuthLayout>
+                    <VerticalLayout>
                         <Switch>
                             {publicRoutes.map((route, idx) => (
                                 <Route
@@ -26,7 +26,7 @@ const Index = () => {
                                 />
                             ))}
                         </Switch>
-                    </NonAuthLayout>
+                    </VerticalLayout>
                 </Route>
 
                 <Route path={availableAuthRoutesPath}>

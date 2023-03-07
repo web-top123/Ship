@@ -9,7 +9,11 @@ import {
   TabContent,
   TabPane,
   Row,
+  Col,
+  Label,
+  Button,
 } from "reactstrap";
+import Select from "react-select";
 
 // RangeSlider
 import "nouislider/distribute/nouislider.css";
@@ -23,16 +27,34 @@ import TableContainer from "../../../Components/Common/TableContainer";
 import { Link } from "react-router-dom";
 
 import { getMedias, deleteMedia, downloadMedia } from "../../../helpers/fakebackend_helper";
+import { getSettingByTitle, updateOneSettingByTitle } from "../../../helpers/fakebackend_helper";
 
 const Medias = (props) => {
   const [mediaList, setMediaList] = useState([]);
+  const [homeImages, setHomeImages] = useState([]);
+  const [mediaSelects, setMediaSelects] = useState([]);
+  const [homeImageMedia, setHomeImageMedia] = useState({});
+  const [homeImageTitle, setHomeImageTitle] = useState("");
+  const [homeImageDescription, setHomeImageDescription] = useState("");
+
   useEffect(() => {
     getMediaList();
   }, []);
 
   const getMediaList = () => {
     getMedias().then(res => {
+      console.log("Media list", res);
+      setMediaSelects(res.map(e => {
+        return { value: e.id, label: e.title }
+      }))
       setMediaList(res);
+    })
+
+    console.log(JSON.stringify([{ media: 12, title: "asdf", description: "desc" }]));
+
+    getSettingByTitle('homeImages').then(res => {
+      console.log("homeimages", JSON.parse(res.value));
+      setHomeImages(JSON.parse(res.value));
     })
   }
 
@@ -170,8 +192,13 @@ const Medias = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-media"
+                          to="#"
                           className="btn btn-success"
+                          onClick={e => {
+                            updateOneSettingByTitle('homeImages',{value: JSON.stringify(homeImages)}).then(res=>{
+
+                            });
+                          }}
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Save
                         </Link>
@@ -188,8 +215,112 @@ const Medias = (props) => {
                       </div>
 
                       <div className="card-body">
+                        <div>
+                          <Row>
+                            <Col xl={3}>
+                              <div className="mb-3">
+                                <Label htmlFor="choices-single-default" className="form-label text-muted">Image</Label>
+                                <Select
+                                  value={homeImageMedia}
+                                  onChange={(e) => {
+                                    setHomeImageMedia(e);
+                                  }}
+                                  options={mediaSelects}
+                                />
+                              </div>
+
+                            </Col>
+
+                            <Col xl={3}>
+                              <div className="mb-3">
+                                <label
+                                  className="form-label"
+                                  htmlFor="manufacturer-brand-input"
+                                >
+                                  Title
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="manufacturer-brand-input"
+                                  placeholder="Enter description"
+                                  value={homeImageTitle}
+                                  onChange={e => {
+                                    setHomeImageTitle(e.target.value);
+                                  }}
+                                />
+                              </div>
+
+                            </Col>
+
+                            <Col xl={3}>
+                              <div className="mb-3">
+                                <label
+                                  className="form-label"
+                                  htmlFor="manufacturer-brand-input"
+                                >
+                                  Description
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="manufacturer-brand-input"
+                                  placeholder="Enter description"
+                                  value={homeImageDescription}
+                                  onChange={e => {
+                                    setHomeImageDescription(e.target.value);
+                                  }}
+                                />
+                              </div>
+                            </Col>
+                            <Col xl={3}>
+                              <button type="button" className="btn btn-success w-sm" onClick={e => {
+                                e.preventDefault();
+                                if (!homeImages.filter(item => item.media === homeImageMedia.value).length)
+                                  setHomeImages([...homeImages, ...[{ media: homeImageMedia.value, title: homeImageTitle, description: homeImageDescription }]])
+                              }}>
+                                Add
+                              </button>
+                            </Col>
+                          </Row>
+                        </div>
+
+                        {
+                          homeImages.map((e, key) => {
+                            return <Row key={key}>
+                              <Col>
+                                <div className="d-flex">
+
+                                  <img
+                                    src={downloadMedia(e.media)}
+                                    // {media.row.file_url}
+                                    // src={downloadMedia}
+                                    alt=""
+                                    className="img-fluid d-block"
+                                    style={{ width: '100px' }}
+                                  />
+                                  <h3>
+                                    {e.title}
+                                  </h3>
+                                  <h5>
+                                    {e.description}
+                                  </h5>
+
+                                  <Button color="primary" className="btn-icon" onClick={() => {
+                                    console.log(e);
+                                    setHomeImages(homeImages.filter(item => item.media !== e.media))
+                                  }}>
+                                    <i className=" ri-close-circle-line" />
+                                  </Button>
+                                </div>
+                              </Col>
+                            </Row>
+                          }
+
+                          )
+                        }
                         <Row>
-                          
+
                         </Row>
                       </div>
                     </div>

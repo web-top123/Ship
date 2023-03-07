@@ -10,7 +10,6 @@ const HomePage = () => {
         <React.Fragment>
             
             <div className="layout-wrapper landing">
-                <Navbar/>
                 <Home />
               
                 <Components />

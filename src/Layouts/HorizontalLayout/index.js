@@ -8,7 +8,7 @@ import navdata from "../VerticalLayouts/LayoutMenuData";
 import { withTranslation } from "react-i18next";
 
 const HorizontalLayout = (props) => {
-    const [isMoreMenu , setIsMoreMenu] = useState(false);
+    const [isMoreMenu, setIsMoreMenu] = useState(false);
     const navData = navdata().props.children;
     let menuItems = [];
     let splitMenuItems = [];
@@ -27,9 +27,13 @@ const HorizontalLayout = (props) => {
             menuItems.push(value);
         }
     });
-    // menuItems.push({ id: 'more', label: 'More', icon: 'ri-briefcase-2-line', link: "/#", stateVariables: isMoreMenu, subItems: splitMenuItems ,click: function (e) {e.preventDefault(); setIsMoreMenu(!isMoreMenu);}, });
+    const user = JSON.parse(localStorage.getItem('authUser'));
+    if (!user) {
+        menuItems.splice(1, 1);
+    }
 
     useEffect(() => {
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
         const initMenu = () => {
             const pathName = process.env.PUBLIC_URL + props.location.pathname;
