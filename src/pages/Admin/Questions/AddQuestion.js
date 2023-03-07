@@ -53,7 +53,7 @@ const AddQuestion = (props) => {
   const [question, setQuestion] = useState({
     position: "",
     degree: "",
-    description: "111-111-1111",
+    description: "",
 
   });
 
@@ -129,8 +129,8 @@ const AddQuestion = (props) => {
                         >
                           degree
                         </label>
-                        <textarea
-                          rows="3"
+                        <input
+                          type="text"
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter degree"
@@ -152,8 +152,8 @@ const AddQuestion = (props) => {
                         >
                           description
                         </label>
-                        <input
-                          type="text"
+                       <textarea
+                          rows="3"
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter description"
