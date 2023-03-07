@@ -447,6 +447,26 @@ export const downloadAvatar = (id) => {
 }
 
 
+
+//-----------Setting-----------
+// get Settings
+export const getSettings = () => api.get(url.GET_SETTINGS);
+
+export const getSetting = (id) => api.get(url.GET_SETTING + '/' + id);
+
+export const getSettingByTitle = (title) => api.get(url.GET_SETTING_BY_TITLE + '/' + title);
+
+// add SETTING
+export const addNewSetting = customer => api.postFormData(url.ADD_NEW_SETTING, customer);
+
+// update SETTING
+export const updateOneSetting = (id, setting) => api.update(url.UPDATE_SETTING + '/' + id, setting);
+export const updateOneSettingByTitle = (title, setting) => api.update(url.UPDATE_SETTING_BY_TITLE + '/' + title, setting);
+
+// delete SETTING
+export const deleteSetting = id => api.delete(url.DELETE_SETTING + '/' + id);
+
+
 //-----------Media-----------
 // get Medias
 export const getMedias = () => api.get(url.GET_MEDIAS);
