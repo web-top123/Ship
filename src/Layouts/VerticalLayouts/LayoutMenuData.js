@@ -405,7 +405,7 @@ const Navdata = () => {
                     parentId: "admin",
                     stateVariables: isQuestion,
                     childItems: [
-                        { id: 1, label: "List", link: "/admin-questiones", parentId: "admin" },
+                        { id: 1, label: "List", link: "/admin-questions", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-question", parentId: "admin" },
                         {
                             id: "admin-answer",

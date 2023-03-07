@@ -16,8 +16,8 @@ export const GET_FIND_PASSED_TEST = "api/findPassedTestById";
 
 // Test page
 
-export const GET_ALL_QA = "/api/question/findAll";
-export const GET_FIND_QUESTION = "/api/question/findQuestionById";
+export const GET_ALL_QA = "/api/questions/findAll";
+export const GET_FIND_QUESTION = "/api/questions/findQuestionById";
 
 // Ship Data page
 export const GET_ALL_SHIP = "/api/data/findAll";
@@ -253,12 +253,12 @@ export const UPDATE_MEDIA = "/api/media/update";
 export const DELETE_MEDIA = "/api/media/delete";
 export const DOWNLOAD_MEDIA ="/api/media/fileById";
 
-// Questiones
-export const GET_QUESTIONES = "/api/question/findAll";
-export const GET_QUESTION = "/api/question/get_question";
-export const ADD_NEW_QUESTION = "/api/question/create";
-export const UPDATE_QUESTION = "/api/question/update";
-export const DELETE_QUESTION = "/api/question/delete";
+//QUESTION
+export const GET_QUESTIONS = "/api/questions/get_All";
+export const GET_QUESTION = "/api/questions/get_one";
+export const ADD_NEW_QUESTION = "/api/questions/create";
+export const UPDATE_QUESTION = "/api/questions/update";
+export const DELETE_QUESTION = "/api/questions/delete";
 
 // Answers
 export const GET_ANSWERS = "/api/answer/get_All";

@@ -38,7 +38,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewAnswer, getAnswer, updateOneAnswer, getQuestiones } from "../../../helpers/fakebackend_helper";
+import { addNewAnswer, getAnswer, updateOneAnswer, getQuestions } from "../../../helpers/fakebackend_helper";
 
 import DropdownTreeSelect from 'react-dropdown-tree-select'
 import 'react-dropdown-tree-select/dist/styles.css'
@@ -60,7 +60,7 @@ const AddAnswer = (props) => {
 
   var cateTree = [];
   useEffect(() => {
-    getQuestiones().then(res => {
+    getQuestions().then(res => {
       setQuestionCate(res);
       if (id) {
         getAnswer(id).then(e => {

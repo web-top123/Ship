@@ -562,8 +562,8 @@ export const updateOneCampusCategory = (id, customer) => api.update(url.UPDATE_C
 export const deleteCampusCategory = id => api.delete(url.DELETE_CAMPUSCATEGORY + '/' + id);
 
 //--------Question--------
-// get Questiones
-export const getQuestiones = () => api.get(url.GET_QUESTIONES);
+// get Questions
+export const getQuestions = () => api.get(url.GET_QUESTIONS);
 export const getQuestion = (id) => api.get(url.GET_QUESTION + '/' + id);
 
 // add QUESTION

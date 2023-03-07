@@ -120,9 +120,10 @@ function QuestionDetail(props) {
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
-  const [Question, setQuestion] = useState({
+  const [question, setQuestion] = useState({
+    position: '',
+    degree: '',
     description: '',
-    campusCategoryId: '',
   });
   useEffect(() => {
     if (id) {
@@ -148,11 +149,102 @@ function QuestionDetail(props) {
             <Card>
               <CardBody>
                 <Row className="gx-lg-5">
-                  <Col xl={12}>
+                  <Col xl={4} md={8} className="mx-auto">
+                    <div className="product-img-slider sticky-side-div">
+                      <Swiper
+                        navigation={true}
+                        thumbs={{ swiper: thumbsSwiper }}
+                        className="swiper product-thumbnail-slider p-2 rounded bg-light"
+                      >
+                        <div className="swiper-wrapper">
+                          <SwiperSlide>
+                            <img
+                              src={product8}
+                              alt=""
+                              className="img-fluid d-block"
+                            />
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <img
+                              src={product6}
+                              alt=""
+                              className="img-fluid d-block"
+                            />
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <img
+                              src={product1}
+                              alt=""
+                              className="img-fluid d-block"
+                            />
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <img
+                              src={product8}
+                              alt=""
+                              className="img-fluid d-block"
+                            />
+                          </SwiperSlide>
+                        </div>
+                      </Swiper>
+
+                      <div className="product-nav-slider mt-2">
+                        <Swiper
+                          onSwiper={setThumbsSwiper}
+                          slidesPerView={4}
+                          freeMode={true}
+                          watchSlidesProgress={true}
+                          spaceBetween={10}
+                          className="swiper product-nav-slider mt-2 overflow-hidden"
+                        >
+                          <div className="swiper-wrapper">
+                            <SwiperSlide className="rounded">
+                              <div className="nav-slide-item">
+                                <img
+                                  src={product8}
+                                  alt=""
+                                  className="img-fluid d-block rounded"
+                                />
+                              </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                              <div className="nav-slide-item">
+                                <img
+                                  src={product6}
+                                  alt=""
+                                  className="img-fluid d-block rounded"
+                                />
+                              </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                              <div className="nav-slide-item">
+                                <img
+                                  src={product1}
+                                  alt=""
+                                  className="img-fluid d-block rounded"
+                                />
+                              </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                              <div className="nav-slide-item">
+                                <img
+                                  src={product8}
+                                  alt=""
+                                  className="img-fluid d-block rounded"
+                                />
+                              </div>
+                            </SwiperSlide>
+                          </div>
+                        </Swiper>
+                      </div>
+                    </div>
+                  </Col>
+
+                  <Col xl={8}>
                     <div className="mt-xl-0 mt-5">
                       <div className="d-flex">
                         <div className="flex-grow-1">
-                          <h4>{Question.name}</h4>
+                          <h4>{question.position}</h4>
                         </div>
                         <div className="flex-shrink-0">
                           <div>
@@ -165,16 +257,15 @@ function QuestionDetail(props) {
                               }}
                             >
                               <Link
-                                to={"/admin-add-Question/" + id}
+                                to="/admin-add-question"
                                 className="btn btn-success"
-
                               >
-                                <i className="ri-add-line align-bottom me-1"></i>
+                                <i className="ri-add-line align-bottom me-1"></i> Add
                                 Edit
                               </Link>
                             </Tooltip>
                             <a
-                              href={"/admin-add-Question/" + id}
+                              href={"/admin-add-question/" + id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
@@ -183,6 +274,43 @@ function QuestionDetail(props) {
                           </div>
                         </div>
                       </div>
+
+                      {/* <Row>
+                        <Col sm={6}>
+                          <div className="mt-3">
+                            <h5 className="fs-14">Features :</h5>
+                            <ul className="list-unstyled">
+                              <li className="py-1">
+                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
+                                Full Sleeve
+                              </li>
+                              <li className="py-1">
+                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
+                                Cotton
+                              </li>
+                              <li className="py-1">
+                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
+                                All Sizes available
+                              </li>
+                              <li className="py-1">
+                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
+                                4 Different Color
+                              </li>
+                            </ul>
+                          </div>
+                        </Col>
+                        <Col sm={6}>
+                          <div className="mt-3">
+                            <h5 className="fs-14">Services :</h5>
+                            <ul className="list-unstyled product-desc-list">
+                              <li className="py-1">10 Days Replacement</li>
+                              <li className="py-1">
+                                Cash on Delivery available
+                              </li>
+                            </ul>
+                          </div>
+                        </Col>
+                      </Row> */}
 
                       <div className="product-content mt-5">
                         <h5 className="fs-14 mb-3">Question Description :</h5>
@@ -228,13 +356,19 @@ function QuestionDetail(props) {
                               <table className="table mb-0">
                                 <tbody>
                                   <tr>
-                                    <th scope="row" style={{ width: "200px" }}>Description</th>
-                                    <td>{Question.description}</td>
+                                    <th scope="row" style={{ width: "200px" }}>
+                                      position :
+                                    </th>
+                                    <td>{question.position}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">CampusCategory</th>
-                                    <td>{Question.campusCategoryId}</td>
+                                    <th scope="row"> degree :</th>
+                                    <td>{question.degree}</td>
                                   </tr>
+                                  <tr>
+                                    <th scope="row">description :</th>
+                                    <td>{question.description}</td>
+                                  </tr>                                  
                                 </tbody>
                               </table>
                             </div>
@@ -248,24 +382,30 @@ function QuestionDetail(props) {
                                 Tommy Hilfiger Sweatshirt for Men (Pink)
                               </h5>
                               <p>
-                                --------------------------------
+                                Tommy Hilfiger men striped pink sweatshirt.
+                                Crafted with cotton. Material composition is
+                                100% organic cotton. This is one of the world’s
+                                leading designer lifestyle brands and is
+                                internationally recognized for celebrating the
+                                essence of classic American cool style,
+                                featuring preppy with a twist designs.
                               </p>
                               <div>
                                 <p className="mb-2">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                  --------------------------------
+                                  Machine Wash
                                 </p>
                                 <p className="mb-2">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                  --------------------------------
+                                  Fit Type: Regular
                                 </p>
                                 <p className="mb-2">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                  --------------------------------
+                                  100% Cotton
                                 </p>
                                 <p className="mb-0">
                                   <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                  --------------------------------
+                                  Long sleeve
                                 </p>
                               </div>
                             </div>

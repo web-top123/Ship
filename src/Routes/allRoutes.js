@@ -298,9 +298,9 @@ import AddMedia from "../pages/Admin/Medias/AddMedia";
 import AdminSettings from "../pages/Admin/Settings/index";
 
 // Question Section
-import Questiones from "../pages/Admin/Questions/index";
+import Questions from "../pages/Admin/Questions/index";
 import QuestionDetail from "../pages/Admin/Questions/QuestionDetail";
-import AddQuestion from "../pages/Admin/Questions/AddQuestions";
+import AddQuestion from "../pages/Admin/Questions/AddQuestion";
 
 // Answer Section
 import Answers from "../pages/Admin/Answers/index";
@@ -560,8 +560,8 @@ const authProtectedRoutes = [
   { path: "/admin-settings", component: AdminSettings },
 
 
-// Questiones
-{ path: "/admin-questiones", component: Questiones },
+// Questions
+{ path: "/admin-questions", component: Questions },
 { path: "/admin-question-details/:id", component: QuestionDetail },
 { path: "/admin-add-question", component: AddQuestion },
 { path: "/admin-add-question/:id", component: AddQuestion },
