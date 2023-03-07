@@ -41,9 +41,12 @@ const NotificationDropdown = () => {
             <Dropdown isOpen={isNotificationDropdown} toggle={toggleNotificationDropdown} className="topbar-head-dropdown ms-1 header-item">
                 <DropdownToggle type="button" tag="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none">
                     <i className='bx bx-bell fs-22'></i>
-                    <span
-                        className="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">{NotificationList.length}<span
+                    {NotificationList.length > 0 ? 
+                        <span
+                            className="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">{NotificationList.length}<span
                             className="visually-hidden">unread messages</span></span>
+                        : ''
+                    }
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-lg dropdown-menu-end p-0">
                     <div className="dropdown-head bg-primary bg-pattern rounded-top">
