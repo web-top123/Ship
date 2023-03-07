@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CardHeader, TabPane, Row, Col } from "reactstrap";
+import { CardHeader, TabPane, Row, Col, Card } from "reactstrap";
 
 import avatar1 from "../../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../../assets/images/users/avatar-2.jpg";
@@ -41,7 +41,7 @@ const Mine = () => {
                                 <h4 className="card-title flex-grow-1">Image Icon Selection</h4>
                             </div>
                         </div>
-                        <div>
+                        <div style={{ height: 300, overflowY: 'scroll' }}>
                             <div className="mt-4 md-0 px-5 my-img-select">
                                 <div className='d-flex justify-content-between pb-3' >
 
@@ -68,9 +68,10 @@ const Mine = () => {
                                 </div>
 
                             </div>
-                            <div className="text-end pt-5">
-                                <button type="submit" className="btn btn-primary">Purchase</button>
-                            </div>
+
+                        </div>
+                        <div className="text-end pt-5">
+                            <button type="submit" className="btn btn-primary">Purchase</button>
                         </div>
                     </Col>
 
@@ -80,7 +81,7 @@ const Mine = () => {
                                 <h4 className="card-title flex-grow-1">My Image List</h4>
                             </div>
                         </div>
-                        <div>
+                        <div style={{ height: 300, overflowY: 'scroll' }}>
                             <div className="mt-4 md-0 px-5 my-img-select">
                                 <div className='d-flex justify-content-between pb-3' >
 
@@ -100,14 +101,14 @@ const Mine = () => {
                                 </div>
 
                             </div>
-                            <div className="text-end pt-5">
-                                <button type="submit" className="btn btn-primary">Apply</button>
-                            </div>
+                        </div>
+                        <div className="text-end pt-5">
+                            <button type="submit" className="btn btn-primary">Apply</button>
                         </div>
                     </Col>
                 </Row>
             </TabPane>
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 
