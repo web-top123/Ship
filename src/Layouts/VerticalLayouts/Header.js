@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Dropdown, DropdownMenu, DropdownToggle, Form } from 'reactstrap';
 
@@ -16,12 +17,22 @@ import FullScreenDropdown from '../../Components/Common/FullScreenDropdown';
 import NotificationDropdown from '../../Components/Common/NotificationDropdown';
 import ProfileDropdown from '../../Components/Common/ProfileDropdown';
 import LightDark from '../../Components/Common/LightDark';
+import { getProfile } from '../../store/actions';
 
 const Header = ({ onChangeLayoutMode, layoutModeType }) => {
     const [search, setSearch] = useState(false);
     const toogleSearch = () => {
         setSearch(!search);
     };
+
+    const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('authUser'));
+    const myInformationDispatch = useSelector(state => state.Profile.myinformation)
+    useEffect(()=>{
+        if (!myInformationDispatch) {
+            dispatch(getProfile(user));
+        }
+    },[myInformationDispatch]);
 
     const toogleMenuBtn = () => {
         var windowSize = document.documentElement.clientWidth;
@@ -93,12 +104,11 @@ const Header = ({ onChangeLayoutMode, layoutModeType }) => {
                             </button>
 
 
-                            <SearchOption />
                         </div>
 
                         <div className="d-flex align-items-center">
 
-                            <Dropdown isOpen={search} toggle={toogleSearch} className="d-md-none topbar-head-dropdown header-item">
+                            {/* <Dropdown isOpen={search} toggle={toogleSearch} className="d-md-none topbar-head-dropdown header-item">
                                 <DropdownToggle type="button" tag="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle">
                                     <i className="bx bx-search fs-22"></i>
                                 </DropdownToggle>
@@ -114,7 +124,7 @@ const Header = ({ onChangeLayoutMode, layoutModeType }) => {
                                         </div>
                                     </Form>
                                 </DropdownMenu>
-                            </Dropdown>
+                            </Dropdown> */}
 
                             {/* LanguageDropdown */}
                             {/* <LanguageDropdown /> */}

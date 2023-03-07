@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 
@@ -16,20 +16,22 @@ const ProfileDropdown = () => {
     //Dropdown Toggle
     const [isProfileDropdown, setIsProfileDropdown] = useState(false);
     const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const toggleProfileDropdown = () => {
         setIsProfileDropdown(!isProfileDropdown);
     };
 
-    const  myinformationSelctor  = useSelector(state=>state.Profile.myinformation);
+    const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
-    useEffect(()=>{
-        if (myinformationSelctor) {
-             setUsername(myinformationSelctor.username)
-             console.log("username", localStorage.getItem("authUser"))
+    useEffect(() => {
+        if (myInformationSelector) {
+            setUsername(myInformationSelector.username);
+            setName(myInformationSelector.name);
         } else {
-            setUsername('')
+            setUsername('');
+            setName('');
         }
-    },[myinformationSelctor])
+    }, [myInformationSelector])
 
     // const userAuth = getAuthenticatedUser();
     return (
@@ -40,7 +42,7 @@ const ProfileDropdown = () => {
                         <img className="rounded-circle header-profile-user" src={avatar1}
                             alt="Header Avatar" />
                         <span className="text-start ms-xl-2">
-                            <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{username}</span>
+                            <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{name}</span>
                             {/* <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"></span> */}
                         </span>
                     </span>
