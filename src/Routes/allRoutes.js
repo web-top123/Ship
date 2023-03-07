@@ -460,28 +460,7 @@ const authProtectedRoutes = [
   { path: "/pages-pricing", component: Pricing },
   { path: "/pages-sitemap", component: SiteMap },
   { path: "/pages-search-results", component: SearchResults },
-  {
-    path: "/",
-    exact: true,
-    component: () => <Redirect to="/pages-profile-settings" />,
-  },
-  { path: "/pages-mine", component: Mine },
-  { path: "/test-test-page-start", component: TestPageStart },
-  { path: "/pages-study-field", component: StudyField },
-  { path: "/pages-company-introduction", component: CompanyIntroduction },
-  { path: "/pages-software", component: Software },
-  { path: "/pages-question-service", component: QuestionService },
-  { path: "/pages-blog-service", component: BlogService },
-  { path: "/pages-blog-service/article-kind/:id", component: ArticleKind },
-  { path: "/pages-blog-service/article-man/:id", component: ArticleMan },
-  { path: "/pages-blog-service/detail/:id", component: BlogServiceDetail },
-
-  //view ship data 
-  { path: "/view-ship-data", component: ViewShipData},
-  { path: "/ship-details/:id", component: ShipDetails},
-  { path: "/new-data-vote/:id", component: NewDataVote},
-  { path: "/pages-study-detail", component: StudyDetail},
-
+  
   // Admin
   // Users
   { path: "/admin-users", component: Users },
@@ -585,6 +564,11 @@ const authProtectedRoutes = [
   { path: "/admin-add-answer", component: AddAnswer },
   { path: "/admin-add-answer/:id", component: AddAnswer },
 
+  {
+    path: "/",
+    exact: true,
+    component: () => <Redirect to="/pages-home-page" />,
+  },
 ];
 
 const publicRoutes = [
@@ -594,6 +578,23 @@ const publicRoutes = [
   { path: "/login", component: Login },
   { path: "/forgot-password", component: ForgetPasswordPage },
   { path: "/register", component: Register },
+
+  { path: "/pages-mine", component: Mine },
+  { path: "/test-test-page-start", component: TestPageStart },
+  { path: "/pages-study-field", component: StudyField },
+  { path: "/pages-company-introduction", component: CompanyIntroduction },
+  { path: "/pages-software", component: Software },
+  { path: "/pages-question-service", component: QuestionService },
+  { path: "/pages-blog-service", component: BlogService },
+  { path: "/pages-blog-service/article-kind/:id", component: ArticleKind },
+  { path: "/pages-blog-service/article-man/:id", component: ArticleMan },
+  { path: "/pages-blog-service/detail/:id", component: BlogServiceDetail },
+
+  //view ship data 
+  { path: "/view-ship-data", component: ViewShipData},
+  { path: "/ship-details/:id", component: ShipDetails},
+  { path: "/new-data-vote/:id", component: NewDataVote},
+  { path: "/pages-study-detail", component: StudyDetail},
 
 
   //AuthenticationInner pages 
