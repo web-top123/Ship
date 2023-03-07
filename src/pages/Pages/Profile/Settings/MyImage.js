@@ -98,7 +98,7 @@ const Mine = () => {
                                     <img className={"img-thumbnail rounded-circle avatar-xl "} alt="200x200" src={avatar9} onClick={(e) => tog_large(e)} />
                                     <img className={"img-thumbnail rounded-circle avatar-xl "} alt="200x200" src={avatar10} onClick={(e) => tog_large(e)} />
                                 </div>
-                                
+
                             </div>
                             <div className="text-end pt-5">
                                 <button type="submit" className="btn btn-primary">Apply</button>
