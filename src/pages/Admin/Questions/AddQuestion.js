@@ -63,17 +63,46 @@ const AddQuestion = (props) => {
 
   useEffect(() => {
     if (id) {
-      getQuestion(id).then((res) => {
-        setQuestion(res);
-      });
+      getQuestion(id).then((response) => {
+        setQuestion(response);
+
+        getDegrees().then(res => {
+          console.log("Degree list", res);
+          setDegreeSelects(res.map(e => {
+            return { value: e.id, label: e.name, max: e.maxdegree }
+          }))
+          // console.log(response.degreeId)
+          let obj = res.find(o => o.id === response.degreeId);
+          let priD = { value: obj.id, label: obj.name, max: obj.maxdegree }
+          setDegree(priD);
+
+          var arr = [];
+          var len = obj.maxdegree
+          for (var i = 0; i < len; i++) {
+              arr.push({
+                  value: i + 1,
+                  label: (i + 1).toString(),
+              });
+          }
+          setLevelSelects(arr)
+          console.log(arr);
+
+          let opj = arr.find(o => o.label === response.level);
+          let priL = { value: opj.value, label: opj.label }
+          setLevel(priL);
+          // setLevel()
+        })
+      });      
     }
-    getDegrees().then(res => {
-      console.log("Degree list", res);
-      setDegreeSelects(res.map(e => {
-        return { value: e.id, label: e.name, max: e.maxdegree }
-      }))
-      setLevelSelects([])
-    })
+    else {
+      getDegrees().then(res => {
+        console.log("Degree list", res);
+        setDegreeSelects(res.map(e => {
+          return { value: e.id, label: e.name, max: e.maxdegree }
+        }))
+        setLevelSelects([])
+      })
+    }
   }, []);
 
   function handleAcceptedFiles(files) {
@@ -130,6 +159,8 @@ const AddQuestion = (props) => {
                         <Select
                           value={selectedDegree}
                           onChange={(e) => {
+                            // console.log(e);
+                            // console.log(degreeSelects);
                             var arr = [];
                             var len = e.max;
                             for (var i = 0; i < len; i++) {
@@ -138,7 +169,6 @@ const AddQuestion = (props) => {
                                     label: (i + 1).toString(),
                                 });
                             }
-                            console.log(arr);
                             setLevelSelects(arr)
                             setDegree(e);
                             setQuestion({
