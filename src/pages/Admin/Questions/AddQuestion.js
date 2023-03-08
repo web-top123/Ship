@@ -102,25 +102,28 @@ const AddQuestion = (props) => {
             <form>
               <Card>
                 <CardBody>
+                  
+                  <Row>
+                  <Col lg={6}>
                   <div className="mb-3">
                     <Label className="form-label" htmlFor="product-title-input">
                       position
                     </Label>
-                    <Input
-                      type="text"
-                      className="form-control"
-                      id="product-title-input"
-                      placeholder="Enter position"
-                      value={question.position}
-                      onChange={(e) => {
-                        setQuestion({
-                          ...question,
-                          ...{ position: e.target.value },
-                        });
-                      }}
-                    />
+                    <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter position"
+                          value={question.position}
+                          onChange={(e) => {
+                            setQuestion({
+                              ...question,
+                              ...{ position: e.target.value },
+                            });
+                          }}
+                        />
                   </div>
-                  <Row>
+                  </Col>
                     <Col lg={6}>
                       <div className="mb-3">
                         <label
@@ -144,7 +147,7 @@ const AddQuestion = (props) => {
                         />
                       </div>
                     </Col>
-                    <Col lg={6}>
+                    </Row>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -166,8 +169,7 @@ const AddQuestion = (props) => {
                           }}
                         />
                       </div>
-                    </Col>
-                  </Row>
+
 
                 </CardBody>
               </Card>
