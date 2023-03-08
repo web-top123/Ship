@@ -44,12 +44,12 @@ function QuestionDetail(props) {
 
   const [modal_list, setmodal_list] = useState(false);
   function tog_list() {
-      setmodal_list(!modal_list);
+    setmodal_list(!modal_list);
   }
 
   const [modal_delete, setmodal_delete] = useState(false);
   function tog_delete() {
-      setmodal_delete(!modal_delete);
+    setmodal_delete(!modal_delete);
   }
 
   useEffect(() => {
@@ -124,10 +124,10 @@ function QuestionDetail(props) {
                       </div>
                     </Col>
                   </Row>
-                  </CardBody>
-                  </Card>
-                  <Card>
-                    <CardBody>
+                </CardBody>
+              </Card>
+              <Card>
+                <CardBody>
                   <Row>
                     <div className="table-responsive table-card mt-3 mb-1">
                       <table className="table align-middle table-nowrap" id="customerTable">
@@ -196,7 +196,7 @@ function QuestionDetail(props) {
       {/* Add Modal */}
       <Modal isOpen={modal_list} toggle={() => { tog_list(); }} centered >
         <div className="modal-header bg-light p-3">
-          Add Customer
+         {question.degreeId} {question.level} Level
           <Button type="button" onClick={() => { setmodal_list(false); }} className="btn-close" aria-label="Close" >
           </Button>
         </div>
@@ -208,37 +208,15 @@ function QuestionDetail(props) {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="customername-field" className="form-label">Customer Name</label>
-              <input type="text" id="customername-field" className="form-control" placeholder="Enter Name" required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="email-field" className="form-label">Email</label>
-              <input type="email" id="email-field" className="form-control" placeholder="Enter Email" required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="phone-field" className="form-label">Phone</label>
-              <input type="text" id="phone-field" className="form-control" placeholder="Enter Phone no." required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="date-field" className="form-label">Joining Date</label>
-              <Flatpickr
-                className="form-control"
-                options={{
-                  dateFormat: "d M, Y"
-                }}
-                placeholder="Select Date"
-              />
-            </div>
-
+              <label htmlFor="customername-field" className="form-label">Add Answer</label>
+              <textarea type="text" id="customername-field" className="form-control" placeholder="Enter Answer" required />
+            </div>          
             <div>
-              <label htmlFor="status-field" className="form-label">Status</label>
+              <label htmlFor="status-field" className="form-label">Correct Answer</label>
               <select className="form-control" data-trigger name="status-field" id="status-field" >
-                <option value="">Status</option>
-                <option value="Active">Active</option>
-                <option value="Block">Block</option>
+                <option value="">  </option>
+                <option value="Active">Yes</option>
+                <option value="Block">No</option>
               </select>
             </div>
           </ModalBody>
