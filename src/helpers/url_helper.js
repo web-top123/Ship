@@ -129,6 +129,7 @@ export const DELETE_CUSTOMER = "/delete/customer";
 export const GET_ALL_STUDY_WITH_CATEGORY = "/api/campus/findAllBy";
 export const GET_ALL_STUDY = "/api/campus/findAll";
 export const GET_ALL_STUDY_BY_CATEGORY = "/api/campus/findCampusCategoryById";
+export const GET_ALL_TOP_READERS = "/api/campus/getTopCampuses";
 
 //softwarefield
 export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";
