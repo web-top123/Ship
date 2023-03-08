@@ -94,13 +94,13 @@ const Questions = (props) => {
       },
       
       {
-        Header: "position",
-        accessor: "position",
+        Header: "degree",
+        accessor: "degreeId",
         filterable: false,
       },
       {
-        Header: "degree",
-        accessor: "degree",
+        Header: "level",
+        accessor: "level",
         filterable: false,
       },
       {
@@ -121,14 +121,15 @@ const Questions = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
+                
                 <DropdownItem href={"admin-question-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
-                  View
+                  Create Answer
                 </DropdownItem>
 
                 <DropdownItem href={"admin-add-question/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
-                  Edit
+                  Edit Question
                 </DropdownItem>
 
                 <DropdownItem divider />

@@ -251,7 +251,7 @@ const Navdata = () => {
                 },
                 {
                     id: "admin-avatar",
-                    label: "SetsetIsSetting",
+                    label: "Avatar",
                     link: "/#",
                     isChildItem: true,
                     click: function (e) {
