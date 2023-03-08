@@ -46,13 +46,27 @@ import {
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
+const SingleOptions = [
+  { value: '1', label: 'Caption' },
+  { value: '2', label: 'Engineer manager' },
+  { value: '3', label: 'Vice-caption' },
+  { value: '4', label: 'Bosun' },
+  { value: '5', label: 'Vice-E.manager' },
+  { value: '6', label: 'Sailor' },
+  { value: '7', label: 'Communicator' },
+  { value: '8', label: 'Bosun member' },
+  { value: '9', label: 'Engineer' },
+  { value: '10', label: 'Electircian' },
+  { value: '11', label: '2nd Engineer' },
+];
+
 const AddQuestion = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
-
+  const [selectedSingle, setSelectedSingle] = useState(null);
   const [question, setQuestion] = useState({
-    position: "",
-    degree: "",
+    level:"",
+    degreeId: "",
     description: "",
 
   });
@@ -74,6 +88,10 @@ const AddQuestion = (props) => {
     );
     setselectedFiles(files);
   }
+
+  function handleSelectSingle(selectedSingle) {
+    setSelectedSingle(selectedSingle);
+}
 
   /**
    * Formats the size
@@ -102,30 +120,10 @@ const AddQuestion = (props) => {
             <form>
               <Card>
                 <CardBody>
-                  
+
                   <Row>
-                  <Col lg={6}>
-                  <div className="mb-3">
-                    <Label className="form-label" htmlFor="product-title-input">
-                      position
-                    </Label>
-                    <input
-                          type="text"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter position"
-                          value={question.position}
-                          onChange={(e) => {
-                            setQuestion({
-                              ...question,
-                              ...{ position: e.target.value },
-                            });
-                          }}
-                        />
-                  </div>
-                  </Col>
                     <Col lg={6}>
-                      <div className="mb-3">
+                    <div className="mb-3">
                         <label
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
@@ -133,42 +131,73 @@ const AddQuestion = (props) => {
                           degree
                         </label>
                         <input
-                          type="text"
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter degree"
-                          value={question.degree}
+                          value={question.degreeId}
                           onChange={(e) => {
                             setQuestion({
                               ...question,
-                              ...{ degree: e.target.value },
+                              ...{ degreeId: e.target.value },
                             });
                           }}
                         />
-                      </div>
+
+                       </div>
                     </Col>
-                    </Row>
+                                              {/* <div className="mb-3">
+                            <Select
+                              value={selectedSingle}
+                              onChange={() => {
+                                handleSelectSingle();
+                              }}
+                              options={SingleOptions}
+                            />
+                          </div> */}
+                    <Col lg={6}>
                       <div className="mb-3">
                         <label
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          description
+                          level
                         </label>
-                       <textarea
-                          rows="3"
+                        <input
                           className="form-control"
                           id="manufacturer-brand-input"
-                          placeholder="Enter description"
-                          value={question.description}
+                          placeholder="Enter level"
+                          value={question.level}
                           onChange={(e) => {
                             setQuestion({
                               ...question,
-                              ...{ description: e.target.value },
+                              ...{ level: e.target.value },
                             });
                           }}
                         />
                       </div>
+                    </Col>
+                  </Row>
+                  <div className="mb-3">
+                    <label
+                      className="form-label"
+                      htmlFor="manufacturer-brand-input"
+                    >
+                      description
+                    </label>
+                    <textarea
+                      rows="3"
+                      className="form-control"
+                      id="manufacturer-brand-input"
+                      placeholder="Enter description"
+                      value={question.description}
+                      onChange={(e) => {
+                        setQuestion({
+                          ...question,
+                          ...{ description: e.target.value },
+                        });
+                      }}
+                    />
+                  </div>
 
 
                 </CardBody>
