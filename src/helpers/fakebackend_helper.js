@@ -376,6 +376,14 @@ export const updateOneSuggestion = (id, customer) => api.update(url.UPDATE_SUGGE
 // delete SUGGESTION
 export const deleteSuggestion = id => api.delete(url.DELETE_SUGGESTION + '/' + id);
 
+
+//---------------Degree-----------//
+
+// get Degrees
+export const getDegrees = () => api.get(url.GET_DegreeS);
+
+export const getDegree = (id) => api.get(url.GET_Degree + '/' + id);
+
 // ----------- Article --------------
 
 // get Articles
@@ -554,8 +562,8 @@ export const updateOneCampusCategory = (id, customer) => api.update(url.UPDATE_C
 export const deleteCampusCategory = id => api.delete(url.DELETE_CAMPUSCATEGORY + '/' + id);
 
 //--------Question--------
-// get Questiones
-export const getQuestiones = () => api.get(url.GET_QUESTIONES);
+// get Questions
+export const getQuestions = () => api.get(url.GET_QUESTIONS);
 export const getQuestion = (id) => api.get(url.GET_QUESTION + '/' + id);
 
 // add QUESTION

@@ -4,6 +4,7 @@ import { Redirect, Route,BrowserRouter, Routes, useLocation } from "react-router
 import { useProfile } from "../Components/Hooks/UserHooks";
 
 const AuthProtected = (props) => {
+  console.log("Auth Protected");
   const { userProfile, loading } = useProfile();
 
   const location = useLocation();

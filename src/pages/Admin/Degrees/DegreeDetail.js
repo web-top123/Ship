@@ -22,11 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewQuestion, getQuestion, updateOneQuestion } from "../../../helpers/fakebackend_helper";
-
-import product1 from "../../../assets/images/products/img-1.png";
-import product6 from "../../../assets/images/products/img-6.png";
-import product8 from "../../../assets/images/products/img-8.png";
+import {getDegree } from "../../../helpers/fakebackend_helper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import classnames from "classnames";
@@ -42,7 +38,7 @@ import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
-const QuestionReview = (props) => {
+const DegreeReview = (props) => {
 
   return (
     <React.Fragment>
@@ -114,21 +110,20 @@ const PricingWidgetList = (props) => {
   );
 };
 
-function QuestionDetail(props) {
+function DegreeDetail(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
-  const [question, setQuestion] = useState({
-    position: '',
-    degree: '',
-    description: '',
+  const [degree, setDegree] = useState({
+    name: '',
+    maxdegree: '',
   });
   useEffect(() => {
     if (id) {
-      getQuestion(id).then(res => {
-        setQuestion(res);
+      getDegree(id).then(res => {
+        setDegree(res);
       })
     }
   }, []);
@@ -137,12 +132,12 @@ function QuestionDetail(props) {
       setcustomActiveTab(tab);
     }
   };
-  document.title = "Question Details | Velzon - React Admin & Dashboard Template";
+  document.title = "Degree Details | Velzon - React Admin & Dashboard Template";
   return (
     <div className="page-content">
       <Container fluid>
 
-        <BreadCrumb title="Question Details" pageTitle="Ecommerce" />
+        <BreadCrumb title="Degree Details" pageTitle="Ecommerce" />
 
         <Row>
           <Col lg={12}>
@@ -244,7 +239,7 @@ function QuestionDetail(props) {
                     <div className="mt-xl-0 mt-5">
                       <div className="d-flex">
                         <div className="flex-grow-1">
-                          <h4>{question.position}</h4>
+                          <h4>{degree.name}</h4>
                         </div>
                         <div className="flex-shrink-0">
                           <div>
@@ -257,7 +252,7 @@ function QuestionDetail(props) {
                               }}
                             >
                               <Link
-                                to="/admin-add-question"
+                                to="/admin-add-degree"
                                 className="btn btn-success"
                               >
                                 <i className="ri-add-line align-bottom me-1"></i> Add
@@ -265,7 +260,7 @@ function QuestionDetail(props) {
                               </Link>
                             </Tooltip>
                             <a
-                              href={"/admin-add-question/" + id}
+                              href={"/admin-add-degree/" + id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
@@ -275,45 +270,10 @@ function QuestionDetail(props) {
                         </div>
                       </div>
 
-                      {/* <Row>
-                        <Col sm={6}>
-                          <div className="mt-3">
-                            <h5 className="fs-14">Features :</h5>
-                            <ul className="list-unstyled">
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                Full Sleeve
-                              </li>
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                Cotton
-                              </li>
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                All Sizes available
-                              </li>
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                4 Different Color
-                              </li>
-                            </ul>
-                          </div>
-                        </Col>
-                        <Col sm={6}>
-                          <div className="mt-3">
-                            <h5 className="fs-14">Services :</h5>
-                            <ul className="list-unstyled product-desc-list">
-                              <li className="py-1">10 Days Replacement</li>
-                              <li className="py-1">
-                                Cash on Delivery available
-                              </li>
-                            </ul>
-                          </div>
-                        </Col>
-                      </Row> */}
+                    
 
                       <div className="product-content mt-5">
-                        <h5 className="fs-14 mb-3">Question Description :</h5>
+                        <h5 className="fs-14 mb-3">Degree Description :</h5>
                         <Nav tabs className="nav-tabs-custom nav-success">
                           <NavItem>
                             <NavLink
@@ -357,17 +317,13 @@ function QuestionDetail(props) {
                                 <tbody>
                                   <tr>
                                     <th scope="row" style={{ width: "200px" }}>
-                                      position :
+                                      Name :
                                     </th>
-                                    <td>{question.position}</td>
+                                    <td>{degree.name}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row"> degree :</th>
-                                    <td>{question.degree}</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">description :</th>
-                                    <td>{question.description}</td>
+                                    <th scope="row"> Maxdegree :</th>
+                                    <td>{degree.description}</td>
                                   </tr>                                  
                                 </tbody>
                               </table>
@@ -424,4 +380,4 @@ function QuestionDetail(props) {
   );
 }
 
-export default QuestionDetail;
+export default DegreeDetail;

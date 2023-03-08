@@ -17,24 +17,49 @@ import DeleteModal from "../../../Components/Common/DeleteModal";
 
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import TableContainer from "../../../Components/Common/TableContainer";
-
+   
 
 //redux
 import { Link } from "react-router-dom";
 
-import { getQuestiones, deleteQuestion } from "../../../helpers/fakebackend_helper";
+import { getQuestions, deleteQuestion } from "../../../helpers/fakebackend_helper";
 
-const Questiones = (props) => {
+const Questions = (props) => {
+  // const dispatch = useDispatch();
+
+  // const { questions } = useSelector((state) => ({
+  //   questions: state.Question.questionList,
+  // }));
+  // const [question, setQuestion] = useState(null);
+
   const [questionList, setQuestionList] = useState([]);
   useEffect(() => {
     getQuestionList();
-  }, []);
+  }, []); 
 
   const getQuestionList = () => {
-    getQuestiones().then(res => {
+    getQuestions().then(res => {
       setQuestionList(res);
     })
   }
+
+  // useEffect(() => {
+  //   if (questions && !questions.length) {
+  //     dispatch(onGetQuestions());
+  //   }
+  // }, [dispatch, questions]);
+
+  // useEffect(() => {
+  //   setQuestionList(questions);
+  // }, [questions]);
+
+  // useEffect(() => {
+  //   dispatch(onGetQuestions());
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (!isEmpty(questions)) setQuestionList(questions);
+  // }, [questions]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
@@ -42,13 +67,14 @@ const Questiones = (props) => {
 
   const onClickDelete = (question) => {
     setCurrentID(question.id);
+    // setQuestion(question);
     setDeleteModal(true);
   };
 
   const handleDeleteQuestion = () => {
     if (currentID) {
       deleteQuestion(currentID).then(res => {
-        if (res === 1) {
+        if (res == 1) {
           getQuestionList();
           setDeleteModal(false);
         } else {
@@ -66,14 +92,20 @@ const Questiones = (props) => {
           return <input type="checkbox" />;
         },
       },
+      
       {
-        Header: "Description",
-        accessor: "description",
+        Header: "position",
+        accessor: "position",
         filterable: false,
       },
       {
-        Header: "CampusCatetory",
-        accessor: "campusCategory.title",
+        Header: "degree",
+        accessor: "degree",
+        filterable: false,
+      },
+      {
+        Header: "description",
+        accessor: "description",
         filterable: false,
       },
       {
@@ -118,8 +150,7 @@ const Questiones = (props) => {
     ],
     []
   );
-  document.title = "Questiones";
-
+  document.title = "Questions";
   return (
     <div className="page-content">
       <DeleteModal
@@ -129,7 +160,7 @@ const Questiones = (props) => {
       />
 
       <Container fluid>
-        <BreadCrumb title="Questiones" pageTitle="Admin" />
+        <BreadCrumb title="Questions" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -154,7 +185,7 @@ const Questiones = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Questiones..."
+                            placeholder="Search Questions..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -184,8 +215,7 @@ const Questiones = (props) => {
                         ) : (
                           <div className="py-4 text-center">
                             <div>
-                              <lord-icon
-                                src="https://cdn.lordicon.com/msoeawqm.json"
+                              <lord-icon                              
                                 trigger="loop"
                                 colors="primary:#405189,secondary:#0ab39c"
                                 style={{ width: "72px", height: "72px" }}
@@ -210,4 +240,4 @@ const Questiones = (props) => {
   );
 };
 
-export default Questiones;
+export default Questions;
