@@ -43,32 +43,22 @@ import {
   getQuestion,
   updateOneQuestion,
 } from "../../../helpers/fakebackend_helper";
+import { getDegrees } from "../../../helpers/fakebackend_helper";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
-
-const SingleOptions = [
-  { value: '1', label: 'Caption' },
-  { value: '2', label: 'Engineer manager' },
-  { value: '3', label: 'Vice-caption' },
-  { value: '4', label: 'Bosun' },
-  { value: '5', label: 'Vice-E.manager' },
-  { value: '6', label: 'Sailor' },
-  { value: '7', label: 'Communicator' },
-  { value: '8', label: 'Bosun member' },
-  { value: '9', label: 'Engineer' },
-  { value: '10', label: 'Electircian' },
-  { value: '11', label: '2nd Engineer' },
-];
 
 const AddQuestion = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
   const [selectedSingle, setSelectedSingle] = useState(null);
+  const [selectedDegree, setDegree] = useState({});
+  const [degreeSelects, setDegreeSelects] = useState([]);
+  const [levelSelects, setLevelSelects] = useState([]);
+  const [selectedLevel, setLevel] = useState({});
   const [question, setQuestion] = useState({
     level:"",
     degreeId: "",
     description: "",
-
   });
 
   useEffect(() => {
@@ -77,6 +67,13 @@ const AddQuestion = (props) => {
         setQuestion(res);
       });
     }
+    getDegrees().then(res => {
+      console.log("Degree list", res);
+      setDegreeSelects(res.map(e => {
+        return { value: e.id, label: e.name, max: e.maxdegree }
+      }))
+      setLevelSelects([])
+    })
   }, []);
 
   function handleAcceptedFiles(files) {
@@ -130,30 +127,29 @@ const AddQuestion = (props) => {
                         >
                           degree
                         </label>
-                        <input
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter degree"
-                          value={question.degreeId}
+                        <Select
+                          value={selectedDegree}
                           onChange={(e) => {
+                            var arr = [];
+                            var len = e.max;
+                            for (var i = 0; i < len; i++) {
+                                arr.push({
+                                    value: i + 1,
+                                    label: (i + 1).toString(),
+                                });
+                            }
+                            console.log(arr);
+                            setLevelSelects(arr)
+                            setDegree(e);
                             setQuestion({
                               ...question,
-                              ...{ degreeId: e.target.value },
+                              ...{ degreeId: e.value },
                             });
                           }}
+                          options={degreeSelects}
                         />
-
                        </div>
                     </Col>
-                                              {/* <div className="mb-3">
-                            <Select
-                              value={selectedSingle}
-                              onChange={() => {
-                                handleSelectSingle();
-                              }}
-                              options={SingleOptions}
-                            />
-                          </div> */}
                     <Col lg={6}>
                       <div className="mb-3">
                         <label
@@ -162,7 +158,7 @@ const AddQuestion = (props) => {
                         >
                           level
                         </label>
-                        <input
+                        {/* <input
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter level"
@@ -173,6 +169,17 @@ const AddQuestion = (props) => {
                               ...{ level: e.target.value },
                             });
                           }}
+                        /> */}
+                        <Select
+                          value={selectedLevel}
+                          onChange={(e) => {
+                            setLevel(e);
+                            setQuestion({
+                              ...question,
+                              ...{ level: e.value },
+                            });
+                          }}
+                          options={levelSelects}
                         />
                       </div>
                     </Col>
