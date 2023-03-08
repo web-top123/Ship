@@ -29,16 +29,16 @@ const Home = () => {
 
                             <div key={key}>
                                 <div className="ca-background">
-                                    <img src={downloadMedia(e.media)} />
+                                    <img src={downloadMedia(e.media)} alt="" />
                                 </div>
                                 <div className="ca-title">
-                                    <div className='background-overlay'></div>
                                     <div className='slide-inner-wrapper'>
                                         <div className='text-center'>
                                             <h1 className="home-slide-title">{e.title}</h1>
                                         </div>
                                         <p className="text-white home-slide-sub-title pt-5">{e.description}</p>
                                     </div>
+                                    <div className='background-overlay'></div>
                                 </div>
                             </div>
 
