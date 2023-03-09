@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   Container,
@@ -36,13 +37,17 @@ import { RiCheckboxBlankLine, RiCheckboxIndeterminateLine, RiCheckboxLine } from
 import cx from "classnames";
 //selection category
 import Select from "react-select";
-import { getAllStudyByCategory, getAllStudy, getCampusCategories,getTopReaders } from '../../../helpers/fakebackend_helper';
-const Study  = () => {
+
+import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopReaders, addNewBrowserHistory } from '../../../helpers/fakebackend_helper';
+const Study = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const myInformationSelector = useSelector(state => state.Profile.myinformation);
+
   const fetchData = async () => {
     if (selectedCategoryId === 1) {
       getTopReaders().then(res => {
         setTopcampusData(res);
+
       });
       getAllStudy().then(sofwareList => {
         setstudyData(sofwareList);
@@ -57,10 +62,17 @@ const Study  = () => {
   const [studyData, setstudyData] = useState([]);
   const [TopcampusData, setTopcampusData] = useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
+  const [userId, setUserId] = useState([])
   useEffect(() => {
     getCategoryList();
     fetchData();
-  }, []);
+    if (myInformationSelector) {
+      setUserId(myInformationSelector.id);
+    } else {
+      console.log(myInformationSelector);
+      setUserId('');
+    }
+  }, [myInformationSelector]);
 
   useEffect(() => {
     fetchData();
@@ -130,6 +142,7 @@ const Study  = () => {
   const [rate, setRate] = useState("");
   const [price, setPrice] = useState("");
   const [img, setImg] = useState("");
+  const [campusId, setCampuseId] = useState("");
 
   //modal
   // Border Top Nav Justified Tabs
@@ -140,19 +153,19 @@ const Study  = () => {
     }
   };
   //modal first
-  const [modal_togFirst, setmodal_togFirst] = useState(false);
-  function tog_togFirst(value) {
-    setTitle(value.name);
-    setDescription(value.description);
-    setPrice(value.cost);
-    setmodal_togFirst(!modal_togFirst);
+  const [showCampusModal, setShowCampusModal] = useState(false);
+  function showCampus(selectedCampus) {
+    setCampuseId(selectedCampus.id);
+    setTitle(selectedCampus.name);
+    setDescription(selectedCampus.description);
+    setPrice(selectedCampus.cost);
+    setShowCampusModal(true);
   }
   //modal second
-  const [modal_togSecond, setmodal_togSecond] = useState(false);
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
-  function tog_togSecond() {
-    // setPrice(value.cost);
-    setmodal_togSecond(!modal_togSecond);
+  function purchaseCampus() {
+    setShowPurchaseModal(true);
   }
 
   //treeview
@@ -189,15 +202,10 @@ const Study  = () => {
   return (
     <div className="page-content">
       <Modal
-        isOpen={modal_togFirst}
-        toggle={() => {
-          tog_togFirst();
-        }}
+        isOpen={showCampusModal}
         id="firstmodal"
         centered
       >
-        <Row>
-        </Row>
         <ModalBody className=" p-2">
           <CardBody>
 
@@ -209,7 +217,8 @@ const Study  = () => {
               </div>
               <div className="col-sm-9">
                 <h5 className="fs-15">
-                  {title}     </h5>
+                  {title}
+                </h5>
               </div>
             </Row>
             <Row className="pt-3">
@@ -220,16 +229,17 @@ const Study  = () => {
               </div>
               <div className="col-sm-9">
                 <h5 className="fs-15">
-                  {description}     </h5>
+                  {description}
+                </h5>
               </div>
             </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="light" onClick={() => { tog_togSecond(); tog_togFirst(false); }} >Buy</Button>
+                <Button color="light" onClick={() => { setShowCampusModal(false); purchaseCampus(); }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
                 <Button color="primary" onClick={() => {
-                  setmodal_togFirst(false);
+                  setShowCampusModal(false);
                 }}>Close</Button>
               </div>
             </Row>
@@ -238,10 +248,7 @@ const Study  = () => {
       </Modal>
 
       <Modal
-        isOpen={modal_togSecond}
-        toggle={() => {
-          tog_togSecond();
-        }}
+        isOpen={showPurchaseModal}
         id="secondmodal"
         centered
       >
@@ -269,7 +276,7 @@ const Study  = () => {
               <TabPane tabId="1" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100 Won</p>
+                    <span>current: </span><p>100</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -299,12 +306,17 @@ const Study  = () => {
             </TabContent>
 
             <div className='purchase-button-group mb-5'>
-              <Button color="primary" onClick={() => { tog_togSecond(false); }} style={{ float: "left" }} href="pages-study-detail">
+              <Button color="primary" onClick={() => { 
+                  console.log("campusId", campusId); 
+                  addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId }) 
+                }} style={{ float: "left" }} href="pages-study-detail">
                 Buy
               </Button>
-
-              <Button color="primary" onClick={() => { }} style={{ float: "right" }} href="pages-profile-settings">
-                charge score
+              <Button color="primary" href="pages-profile-settings">
+                Charge
+              </Button>
+              <Button color="primary" style={{ float: "right" }} onClick={() => {setShowPurchaseModal(false);}}>
+                Close
               </Button>
             </div><br /><br />
           </div>
@@ -397,7 +409,7 @@ const Study  = () => {
 
                   <div className="p-3">{TopcampusData.map((campusItem, key) => (
                     <React.Fragment key={campusItem.id}>
-                      <Card className="product" onClick={() => tog_togFirst(campusItem)}>
+                      <Card className="product" onClick={() => showCampus(campusItem)}>
                         <Link to='#'
                           className="text-dark"
                         >
@@ -450,8 +462,8 @@ const Study  = () => {
                       {studyData.map((study, key) => (
                         <React.Fragment key={study.id}>
                           <tr >
-                            <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => tog_togFirst(study)}><Link to="#"><div>{study.name}</div></Link></td>
-                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => tog_togFirst(study)}><Link to="#"><div>{study.description}</div></Link></td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{study.browses}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
