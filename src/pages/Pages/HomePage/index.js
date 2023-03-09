@@ -4,6 +4,7 @@ import Components from './components';
 import Contact from './contact';
 import Footer from './footer';
 import Navbar from './navbar';
+import NotificaitonModal from './notification-modal';
 const HomePage = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
     return (
@@ -11,6 +12,7 @@ const HomePage = () => {
             
             <div className="layout-wrapper landing">
                 <Home />
+                <NotificaitonModal />
               
                 <Components />
                 
