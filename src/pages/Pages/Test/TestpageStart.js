@@ -17,14 +17,26 @@ const TestPage = () => {
             setDegrees(degreeList);
         });
     };
+    // var testStartBtn = 'You can gain best score!';
+    const [testStartBtn, setTestStartBtn] = useState();
+    const [selectedLevel, setSelectedLevel] = useState('');
+    const [degrees, setDegrees] = useState([]);
+    const [degreeLevels, setDegreeLevels] = useState([]);
+
+
 
     useEffect(() => {
         fetchData();
-        setDegreeLevels([])
+        setDegreeLevels([]);
     }, []);
+    useEffect(() => {
+        setTestStartBtn('You can gain best score!');
+    }, [])
 
-    const [degrees, setDegrees] = useState([]);
-    const [degreeLevels, setDegreeLevels] = useState([]);
+    // useEffect(() =>{
+    //    console.log("test", testStartBtn)
+    // }, [testStartBtn])
+
 
     // Modal
     const [modal_togFirst, setmodal_togFirst] = useState(false);
@@ -91,7 +103,26 @@ const TestPage = () => {
                                         <div className="d-flex flex-wrap gap-2">
                                             {degreeLevels.map((level, key) => (
                                                 <div key={key}>
-                                                    <Input type="radio" className="btn-check" name="options" id={level.label} />
+                                                    <Input type="radio" className="btn-check" name="options" id={level.label}
+                                                        onClick={(e) => {
+
+                                                            setSelectedLevel(level.value);
+                                                            console.log('level value is', selectedLevel);
+
+                                                            if (level.value == 1) {
+                                                                setTestStartBtn('Start now!');
+                                                                console.log("------------>", testStartBtn)
+
+
+                                                            }
+                                                            if (level.value > 1) {
+                                                                setTestStartBtn('Please Purchase!');
+                                                                console.log("------------>", testStartBtn)
+
+                                                            }
+                                                        }}
+
+                                                    />
                                                     <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for={level.label} size='lg'> {level.label} </Label>
                                                 </div>
                                             ))}
@@ -101,7 +132,17 @@ const TestPage = () => {
                                     </Col>
                                 </Row>
                                 <div className='align-self-center purchase-button-group'>
-                                    <Button className="shadow-none me-4 fs-20" onClick={() => tog_togFirst()}>Purchase</Button>
+                                    <Button className="shadow-none me-4 fs-20" onClick={() => {
+
+                                        
+                                            console.log("-------------+>", selectedLevel, testStartBtn);
+                                        if (selectedLevel == 1) {
+                                            window.location.href='/test-test-page';
+                                        }
+                                        if (selectedLevel > 1) {
+                                            tog_togFirst();
+                                        }
+                                    }}>{testStartBtn}</Button>
                                 </div>
                             </Container>
                         </div>
