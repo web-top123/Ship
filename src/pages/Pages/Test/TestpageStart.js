@@ -20,9 +20,11 @@ const TestPage = () => {
 
     useEffect(() => {
         fetchData();
+        setDegreeLevels([])
     }, []);
 
-    const [degree, setDegrees] = useState([]);
+    const [degrees, setDegrees] = useState([]);
+    const [degreeLevels, setDegreeLevels] = useState([]);
 
     // Modal
     const [modal_togFirst, setmodal_togFirst] = useState(false);
@@ -59,10 +61,23 @@ const TestPage = () => {
                                         <h2 className="select-title-customer m-5">Select Your Roll Below Items</h2>
 
                                         <div className="d-flex flex-wrap gap-2">
-                                            {degree.map((degree, key) => (
+                                            {degrees.map((degree, key) => (
                                                 <div className="live-preview" key={degree.id}>
                                                     <div className="hstack gap-2 flex-wrap">
-                                                        <Input type="radio" className="btn-check" name="optios" id={degree.name} />
+                                                        <Input type="radio" className="btn-check" name="optios" id={degree.name}
+                                                            onClick={(e) => {
+                                                                var levels = [];
+                                                                var len = degree.maxdegree;
+                                                                for (var i = 0; i < len; i++) {
+                                                                    levels.push({
+                                                                        value: i + 1,
+                                                                        label: degree.name + (i + 1).toString(),
+                                                                    });
+                                                                }
+                                                                setDegreeLevels(levels);
+                                                                console.log("Degree list", levels);
+                                                                console.log("levels", degreeLevels);
+                                                            }} />
                                                         <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for={degree.name}>{degree.name}</Label>
                                                     </div>
                                                 </div>
@@ -74,14 +89,14 @@ const TestPage = () => {
                                     <Col lg={12}>
                                         <h2 className="select-title-customer m-5">Select Your Roll Degree</h2>
                                         <div className="d-flex flex-wrap gap-2">
-                                            <Input type="radio" className="btn-check" name="options" id="option1" />
-                                            <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for="option1" size='lg'> Engineer 1st </Label>
+                                            {degreeLevels.map((level, key) => (
+                                                <div key={key}>
+                                                    <Input type="radio" className="btn-check" name="options" id={level.label} />
+                                                    <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for={level.label} size='lg'> {level.label} </Label>
+                                                </div>
+                                            ))}
 
-                                            <Input type="radio" className="btn-check" name="options" id="option2" />
-                                            <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for="option2" size='lg'> Engineer 2nd </Label>
 
-                                            <Input type="radio" className="btn-check" name="options" id="option3" />
-                                            <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for="option3" size='lg'> Engineer 3rd </Label>
                                         </div>
                                     </Col>
                                 </Row>
