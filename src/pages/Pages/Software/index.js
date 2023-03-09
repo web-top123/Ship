@@ -126,14 +126,14 @@ const Software = () => {
   // Data
   const [softwareList, setsoftwareList] = useState(sellersList);
 
-  //product detail
+  //program detail
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [requirement, setRequirement] = useState("");
   const [description, setDescription] = useState("");
   const [recommends, setRecommends] = useState("");
   const [cost, setCost] = useState("");
-  const [image_url, setImage_url] = useState("");
+  const [file_url, setFile_url] = useState("");
 
   //modal
   // Border Top Nav Justified Tabs
@@ -153,7 +153,7 @@ const Software = () => {
     setDescription(value.description);
     setRecommends(value.recommends);
     setCost(value.cost);
-    setImage_url(value.image_url);
+    setFile_url(value.file_url);
     setmodal_togFirst(!modal_togFirst);
 
   }
@@ -190,6 +190,8 @@ const Software = () => {
 
   return (
     <div className="page-content">
+      {/* Top software modal */}
+      {/* ---------------------------------- */}
       <Modal
         isOpen={modal_togFirst}
         toggle={() => {
@@ -204,7 +206,7 @@ const Software = () => {
             <Row className="d-flex ">
               <div className="col-sm-5">
                 <div className="avatar-lg bg-light rounded p-1">
-                  <img src={image_url} alt="..." className="img-fluid d-block"></img>
+                  <img src={file_url} alt="..." className="img-fluid d-block"></img>
                 </div></div>
               <div className="col-sm-7">
                 <br />
@@ -261,6 +263,7 @@ const Software = () => {
         </ModalBody>
       </Modal>
 
+      {/* second Top software modal */}
       <Modal
         isOpen={modal_togSecond}
         toggle={() => {
@@ -353,6 +356,7 @@ const Software = () => {
           </div>
         </div>
       </Modal>
+      {/* --------------------- */}
 
       <Container fluid>
         <BreadCrumb title="Software" pageTitle="Software" />
@@ -361,11 +365,12 @@ const Software = () => {
           <Col xl={3} lg={4}>
             <Card>
               <div className="accordion accordion-flush ">
+                {/* -------------treeview---------------- */}
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
+                    <i className="bi bi-hand-thumbs-up"></i>
                     Categories
                   </p>
-
                   <TreeView
                     data={data}
                     className="basic p-2"
@@ -410,6 +415,7 @@ const Software = () => {
                   />
                 </div>
 
+                {/* -------------Top software------------ */}
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Top Software
@@ -424,7 +430,7 @@ const Software = () => {
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
                               <div className="flex-shrink-0 me-3">
-                                <img src={softwareItem.image_url} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
+                                <img src={softwareItem.file_url} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
                               </div>
                               <div className="flex-grow-1">
                                 <h5 className="fs-14">{softwareItem.name}</h5>
@@ -443,6 +449,7 @@ const Software = () => {
           </Col>
           <div className="col-xl-9 col-lg-8">
             <div className="card">
+              {/* --------------------search... --------------------- */}
               <CardHeader >
                 <Row>
                   <div className="col-sm-6"></div>
@@ -455,6 +462,7 @@ const Software = () => {
                 </Row>
               </CardHeader>
 
+              {/* -----------------main table display------------------ */}
               <Row className="p-3">
                 {softwareData.map((software, key) => (
                   <React.Fragment key={software.id}>
@@ -470,14 +478,15 @@ const Software = () => {
                                   <img
                                     src={software.file}
                                     alt=""
-                                    
+
                                     className="img-fluid d-block"
-                                  />{console.log(software.file_url)}
+                                  />{console.log("main table", software.file_url)}
                                 </div>
                               </div>
 
                               <div className="col-sm-6">
                                 <h5 className="pt-4 fs-20 text-truncate">
+
                                   {software.name}
                                 </h5>
                               </div>
@@ -492,8 +501,8 @@ const Software = () => {
                                   <h5 className="fs-12 mb-0">
                                     <span className="product-line-price">
                                       {" "}
+
                                       {software.cost}
-                                      
                                     </span>
                                   </h5>
                                 </div>
@@ -506,7 +515,7 @@ const Software = () => {
                                   <h5 className="fs-12 mb-0">
                                     <span className="product-line-price">
                                       {" "}
-                                      {software.recommends}
+                                      {software.recommends}<button><i className="bi bi-hand-thumbs-up">d</i></button>
                                     </span>
                                   </h5>
                                 </div>
