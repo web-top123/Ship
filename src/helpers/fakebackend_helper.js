@@ -341,13 +341,21 @@ export const getPrograms = () => api.get(url.GET_PROGRAMS);
 export const getProgram = (id) => api.get(url.GET_PROGRAM + '/' + id);
 
 // add PROGRAM
-export const addNewProgram = customer => api.create(url.ADD_NEW_PROGRAM, customer);
+export const addNewProgram = customer => api.postFormData(url.ADD_NEW_PROGRAM, customer);
 
 // update PROGRAM
-export const updateOneProgram = (id, customer) => api.update(url.UPDATE_PROGRAM + '/' + id, customer);
+export const updateOneProgram = (id, customer) => api.postFormData(url.UPDATE_PROGRAM + '/' + id, customer);
 
 // delete PROGRAM
 export const deleteProgram = id => api.delete(url.DELETE_PROGRAM + '/' + id);
+
+// download PROGRAM
+// export const downloadProgram = (id) => api.get(url.DOWNLOAD_PROGRAM + '/' + id);
+export const downloadProgram = (id) => {
+  // http://localhost:8080/api/program/fileById/1
+  var str = config.API_URL + "api/program/fileById/" + id;
+  return str;
+}
 
 //-----------ProgramCategory-----------
 // get ProgramCategories

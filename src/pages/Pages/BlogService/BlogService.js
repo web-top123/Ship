@@ -127,7 +127,7 @@ const BlogService = () => {
                                                 onClick={() => {
                                                     toggleTab("2", "date");
                                                 }}
-                                                href="#"
+                                                href="/pages-blog-service"
                                             >
                                                 Date{" "}
                                                 <span className="badge badge-soft-danger align-middle rounded-pill ms-1">

@@ -45,8 +45,6 @@ import {
   updateOneArticle,
   getArticleCategories,
 } from "../../../helpers/fakebackend_helper";
-
-import DropdownTreeSelect from "react-dropdown-tree-select";
 import "react-dropdown-tree-select/dist/styles.css";
 
 // Register the plugins
@@ -56,7 +54,7 @@ const AddArticle = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
   const [articleCategories, setArticleCategories] = useState([]);
-  const [articleTitle, setArticleTitle] = useState({});
+  const [articleCategory, setArticleCategory] = useState({});
 
   const [article, setArticle] = useState({
     name: "",
@@ -91,7 +89,7 @@ const AddArticle = (props) => {
         setArticle(res);
       });
     }
-  }, []);
+  }, [id]);
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -102,7 +100,6 @@ const AddArticle = (props) => {
     );
     setselectedFiles(files);
   }
-
   /**
    * Formats the size
    */
@@ -125,7 +122,6 @@ const AddArticle = (props) => {
           title={id ? "Edit Article" : "Add Article"}
           pageTitle="Admin Article"
         />
-
         <Row>
           <Col lg={8}>
             <form>
@@ -146,7 +142,6 @@ const AddArticle = (props) => {
                       }}
                     />
                   </div>
-
                   <div className="mb-3">
                     <Label className="form-label" htmlFor="product-title-input">
                       Description
@@ -165,7 +160,6 @@ const AddArticle = (props) => {
                       }}
                     />
                   </div>
-
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -213,7 +207,6 @@ const AddArticle = (props) => {
                       </div>
                     </Col>
                   </Row>
-
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -262,7 +255,6 @@ const AddArticle = (props) => {
                       </div>
                     </Col>
                   </Row>
-
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -311,7 +303,6 @@ const AddArticle = (props) => {
                       </div>
                     </Col>
                   </Row>
-
                   <Row>
                     <Col lg={6}>
                       <div>
@@ -321,16 +312,15 @@ const AddArticle = (props) => {
                         >
                           Article Category
                         </Label>
-
                         <Select
-                          value={articleTitle}                          
+                          value={articleCategory}                          
                           onChange={(e) => {
-                            setArticleTitle(e);               
+                            setArticleCategory(e);
                             setArticle({
                               ...article,
-                              ...{ articleCategoryId: articleTitle.value },
+                              ...{ articleCategoryId: e.id },
                             });
-                            console.log("Set Article",article);
+                            console.log("Set Article", articleCategories, e.id );
                           }}
                           options={articleCategories}
                           name="choices-publish-visibility-input"
@@ -358,10 +348,7 @@ const AddArticle = (props) => {
                     formData.append("name", article.name);
                     formData.append("description", article.description);
                     formData.append("contact_number", article.contact_number);
-                    formData.append(
-                      "articleCategoryId",
-                      article.articleCategoryId
-                    );
+                    formData.append("articleCategoryId", article.articleCategoryId);
                     formData.append("attach_url", article.attach_url);
                     formData.append("recommends", article.recommends);
                     formData.append("source", article.source);

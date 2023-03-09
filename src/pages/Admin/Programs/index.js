@@ -22,7 +22,7 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getPrograms, deleteProgram } from "../../../helpers/fakebackend_helper";
+import { getPrograms, deleteProgram,downloadProgram } from "../../../helpers/fakebackend_helper";
 
 const Programs = (props) => {
   // const dispatch = useDispatch();
@@ -42,24 +42,6 @@ const Programs = (props) => {
       setProgramList(res);
     })
   }
-
-  // useEffect(() => {
-  //   if (programs && !programs.length) {
-  //     dispatch(onGetPrograms());
-  //   }
-  // }, [dispatch, programs]);
-
-  // useEffect(() => {
-  //   setProgramList(programs);
-  // }, [programs]);
-
-  // useEffect(() => {
-  //   dispatch(onGetPrograms());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!isEmpty(programs)) setProgramList(programs);
-  // }, [programs]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
@@ -100,7 +82,7 @@ const Programs = (props) => {
               <div className="flex-shrink-0 me-3">
                 <div className="avatar-sm bg-light rounded p-1">
                   <img
-                    src={program.row.original.image}
+                    src={downloadProgram(program.row.original.id)}
                     alt=""
                     className="img-fluid d-block"
                   />
@@ -146,11 +128,6 @@ const Programs = (props) => {
       {
         Header: "Recommends",
         accessor: "recommends",
-        filterable: false,
-      },
-      {
-        Header: "File_url",
-        accessor: "file_url",
         filterable: false,
       },
       {
