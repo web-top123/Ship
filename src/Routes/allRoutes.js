@@ -213,6 +213,7 @@ import HomePage from "../pages/Pages/HomePage/index";
 import StudyDetail from "../pages/Pages/StudyField/detail";
 import StudyField from "../pages/Pages/StudyField/index";
 import Software from "../pages/Pages/Software/index";
+import BuySoftware from "../pages/Pages/Software/buySoftware";
 import CompanyIntroduction from "../pages/Pages/CompanyIntroduction/index";
 import ViewShipData from "../pages/Pages/ViewShipData/ViewShipData";
 import ShipDetails from "../pages/Pages/ViewShipData/ShipDetails";
@@ -464,7 +465,7 @@ const authProtectedRoutes = [
   { path: "/pages-pricing", component: Pricing },
   { path: "/pages-sitemap", component: SiteMap },
   { path: "/pages-search-results", component: SearchResults },
-  
+
   // Admin
   // Users
   { path: "/admin-users", component: Users },
@@ -497,9 +498,9 @@ const authProtectedRoutes = [
   { path: "/admin-add-suggestion", component: AddSuggestion },
   { path: "/admin-add-suggestion/:id", component: AddSuggestion },
 
-    //Degree
-    { path: "/admin-degrees", component: Degrees },
-    { path: "/admin-degree-details/:id", component: DegreeDetail },
+  //Degree
+  { path: "/admin-degrees", component: Degrees },
+  { path: "/admin-degree-details/:id", component: DegreeDetail },
 
   // Articles
   { path: "/admin-articles", component: Articles },
@@ -560,11 +561,11 @@ const authProtectedRoutes = [
   { path: "/admin-settings", component: AdminSettings },
 
 
-// Questions
-{ path: "/admin-questions", component: Questions },
-{ path: "/admin-question-details/:id", component: QuestionDetail },
-{ path: "/admin-add-question", component: AddQuestion },
-{ path: "/admin-add-question/:id", component: AddQuestion },
+  // Questions
+  { path: "/admin-questions", component: Questions },
+  { path: "/admin-question-details/:id", component: QuestionDetail },
+  { path: "/admin-add-question", component: AddQuestion },
+  { path: "/admin-add-question/:id", component: AddQuestion },
 
   // Answers
   { path: "/admin-answers", component: Answers },
@@ -592,6 +593,7 @@ const publicRoutes = [
   { path: "/pages-study-field", component: StudyField },
   { path: "/pages-company-introduction", component: CompanyIntroduction },
   { path: "/pages-software", component: Software },
+  { path: "/pages-software-buySoftware", component: BuySoftware },
   { path: "/pages-question-service", component: QuestionService },
   { path: "/pages-blog-service", component: BlogService },
   { path: "/pages-blog-service/article-kind/:id", component: ArticleKind },
@@ -602,7 +604,7 @@ const publicRoutes = [
   { path: "/view-ship-data", component: ViewShipData},
   { path: "/ship-details/:id", component: ShipDetails},
   { path: "/new-data-vote/:id", component: NewDataVote},
-  { path: "/pages-study-detail", component: StudyDetail},
+  { path: "/pages-study-detail/:id", component: StudyDetail},
 
 
   //AuthenticationInner pages 

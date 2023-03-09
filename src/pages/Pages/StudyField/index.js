@@ -49,8 +49,8 @@ const Study = () => {
         setTopcampusData(res);
 
       });
-      getAllStudy().then(sofwareList => {
-        setstudyData(sofwareList);
+      getAllStudy().then(studyFieldList => {
+        setstudyData(studyFieldList);
       });
     } else {
       getAllStudyByCategory(selectedCategoryId).then(categoryData => {
@@ -276,7 +276,7 @@ const Study = () => {
               <TabPane tabId="1" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100</p>
+                    <span>current: </span><p>3000</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -284,14 +284,14 @@ const Study = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>real valance: </span><p>none</p>
+                    <span>real valance: </span><p>{3000-price}</p>
                   </div><br /><hr /><br />
                 </div>
               </TabPane>
               <TabPane tabId="2" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100 </p>
+                    <span>current: </span><p>2000 </p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -299,25 +299,28 @@ const Study = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>free valance: </span><p>none</p>
+                    <span>free valance: </span><p>{2000-price}</p>
                   </div><br /><hr /><br />
                 </div>
               </TabPane>
             </TabContent>
 
-            <div className='purchase-button-group mb-5'>
-              <Button color="primary" onClick={() => { 
+            <div className='d-flex'>
+              <div className="col-sm-4">
+            <Link to={"/pages-study-detail/"+campusId}><Button color="primary" onClick={() => { 
                   console.log("campusId", campusId); 
                   addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId }) 
-                }} style={{ float: "left" }} href="pages-study-detail">
+                }} >
                 Buy
-              </Button>
-              <Button color="primary" href="pages-profile-settings">
+              </Button></Link></div>
+              <div className="col-sm-4">
+              <Link to="/pages-profile-settings"><Button color="primary">
                 Charge
-              </Button>
-              <Button color="primary" style={{ float: "right" }} onClick={() => {setShowPurchaseModal(false);}}>
+              </Button></Link></div>
+              <div className="col-sm-4">
+              <Button color="primary"  onClick={() => {setShowPurchaseModal(false);}}>
                 Close
-              </Button>
+              </Button></div>
             </div><br /><br />
           </div>
         </div>
@@ -454,6 +457,7 @@ const Study = () => {
                         <th scope="col">Cost</th>
                         <th scope="col">Browses</th>
                         <th scope="col">Recommends</th>
+                        <th scope="col">Unrecommends</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -465,7 +469,7 @@ const Study = () => {
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{study.browses}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
-
+                            <td style={{ border: "none" }}>{study.unrecommends}</td>
                           </tr>
                         </React.Fragment>
                       ))}

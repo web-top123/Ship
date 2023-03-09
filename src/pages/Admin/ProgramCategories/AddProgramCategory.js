@@ -5,9 +5,9 @@ import {
   CardBody,
   Col,
   Container,
-  CardHeader,
-  Nav,
-  NavItem,
+  Button,
+  Modal,
+  ModalHeader,
   NavLink,
   Row,
   TabContent,
@@ -46,11 +46,16 @@ const AddProgramCategory = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
 
+  // --------------- use modal ----------
+  const [modal_positionTop, setmodal_positionTop] = useState(false);
+  function tog_positionTop() {
+    setmodal_positionTop(!modal_positionTop);
+  }
+
   const [ProgramCategory, setProgramCategory] = useState({
     title: '',
     description: '',
-    parentId:''
-  
+    parentId: ''
   });
 
   useEffect(() => {
@@ -60,7 +65,6 @@ const AddProgramCategory = (props) => {
       })
     }
   }, []);
-
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -85,20 +89,32 @@ const AddProgramCategory = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  // // const gender = [
-  // //   {
-  // //     options: [
-  // //       { label: "Male", value: "male" },
-  // //       { label: "Female", value: "female" },
-  // //     ],
-  // //   },
-  // ];
   document.title = id ? "Edit ProgramCategory" : "Add ProgramCategory";
   return (
     <div className="page-content">
       <Container fluid>
 
         <BreadCrumb title={id ? "Edit ProgramCategory" : "Add ProgramCategory"} pageTitle="Admin ProgramCategory" />
+
+        <Modal id="topmodal" isOpen={modal_positionTop} backdrop="static" keyboard="false" toggle={() => { tog_positionTop(); }} >
+          <ModalHeader>
+            Modal Heading
+            <Button type="button" className="btn-close" onClick={() => { setmodal_positionTop(false); }} aria-label="Close"> </Button>
+          </ModalHeader>
+          <div className="modal-body text-center p-5">
+            <lord-icon src="https://cdn.lordicon.com/pithnlch.json"
+              trigger="loop" colors="primary:#121331,secondary:#08a88a" style={{ width: "120px", height: "120px" }}>
+            </lord-icon>
+            <div className="mt-4">
+              <h4 className="mb-3">Your event has been created.</h4>
+              <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
+              <div className="hstack gap-2 justify-content-center">
+                <Link to="#" className="btn btn-link link-success fw-medium shadow-none" onClick={() => { tog_positionTop(); }}><i className="ri-close-line me-1 align-middle"></i> Close</Link>
+                <Link to="/admin-programs" className="btn btn-success">Completed</Link>
+              </div>
+            </div>
+          </div>
+        </Modal>
 
         <Row>
           <Col lg={8}>
@@ -161,28 +177,7 @@ const AddProgramCategory = (props) => {
                         />
                       </div>
                     </Col>
-                    
                   </Row>
-
-                  
-                </CardBody>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <h5 className="card-title mb-0">Product Gallery</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="mb-4">
-                    <h5 className="fs-14 mb-1">Product Image</h5>
-                    <p className="text-muted">Add Product main Image.</p>
-                    <input
-                      className="form-control"
-                      id="product-image-input"
-                      type="file"
-                      accept="image/png, image/gif, image/jpeg"
-                    />
-                  </div>
                 </CardBody>
               </Card>
 
@@ -198,6 +193,7 @@ const AddProgramCategory = (props) => {
                       console.log(res);
                     })
                   }
+                  tog_positionTop();
                 }}>
                   {id ? "Update ProgramCategory" : "Add ProgramCategory"}
                 </button>

@@ -1,99 +1,91 @@
-import classnames from "classnames";
-import React, { useState } from "react";
-
-import {
-    Container,
-    Nav,
-    NavItem,
-    NavLink,
-    TabContent,
-    TabPane,
-    Modal, ModalBody, ModalHeader,
-    Row,
-    Card,
-    CardHeader,
-    Col,
-    Input,
-    Button,
-    CardBody,
-    Table,
-    Label,
-} from "reactstrap";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { Col, Container, Row, Card, CardBody, Button, CardHeader, TabPane } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
+import { getCampus } from "../../../helpers/fakebackend_helper";
+import { Link, useParams } from "react-router-dom";
+
+
+const StudyDetail = (props) => {
+    document.title = "Study Field Detail";
 
 
 
+    let { id } = useParams();
+    const [campus, setCampusList] = useState({
+        name: "",
+        description: ""
 
-const Software = () => {
-
-
-
-
+    });
+    { console.log("asdfa", id) }
+    useEffect(() => {
+        if (id) {
+            getCampus(id).then(res => {
+                setCampusList(res);
+            })
+        }
+    }, []);
+    console.log("ppppp", campus);
 
     return (
-        <div className="page-content">
-
-
-            <Container fluid>
-                <BreadCrumb title="Detail Data" pageTitle="Ecommerce" />
-
-
-
-                <div className="card pt-2 ">
+        <React.Fragment>
+            <div className="page-content">
+                <Container fluid>
+                    <BreadCrumb title="Study Detail" />
 
                     <Row>
-                        <div className="col-sm-11"></div>
-                        <div className="col-sm-1  p-4 pt-2"> <Button href="pages-study-field"
-                            type="button"
-                            className="btn-close"
-                            style={{ float: "right" }}
-                        >
-                        </Button></div>
+                        <Col xl={12} lg={12}>
+                            <Card>
+                                <CardHeader>
+                                    <Row>
+                                        <Col lg={11}>
+                                            <h1 style={{ textAlign: "center" }}>{campus.name}</h1>
+                                        </Col>
+                                        <Col lg={1}>
+                                            <Link to="/pages-study-field"><Button
+                                                type="button"
+                                                className="btn-close"
+                                                style={{ float: "right" }}
+                                            >
+                                            </Button></Link>
+                                        </Col>
+                                    </Row>
+
+                                </CardHeader>
+
+                                <CardBody className='px-5 py-5'>
+                                    <div className='d-flex justify-content-between'>
+                                        <div className='d-flex mb-4'>
+
+                                            <div>
+
+                                                <span>{campus.description}</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div style={{ padding: "50px 20%" }}>
+                                        <Row className="pt-4">
+                                            <div className="col-sm-6 text-center">
+                                                <Button color="light" onClick={() => { }} >Agree</Button>
+                                            </div>
+                                            <div className="col-sm-6 text-center">
+                                                <Button color="primary" onClick={() => {
+
+                                                }}>Disagree</Button>
+                                            </div>
+                                        </Row>
+                                    </div>
+                                </CardBody>
+
+                            </Card>
+                        </Col>
+
                     </Row>
-                    <div className="p-4">
-                        <h1 className="text-center "><em> About ship Enginee</em></h1>
-                       
-                        
-                    </div>
-
-
-                    <div className="pt-0" style={{padding:"0 70px"}}>
-                        <h3 className="text-center">Ship's engineers are responsible for installing, operating, maintaining and repairing engines, machinery and other mechanical and electronic equipment aboard ships and offshore structures. They operate a ship's engine to control the speed of the vessel, according to orders from the ship's captain.</h3>
-                    </div>
-
-
-                    <div  style={{padding:"50px 20%"}}>
-                        <Row className="pt-4">
-                            <div className="col-sm-6 text-center">
-                                <Button color="light" onClick={() => { }} >Agree</Button>
-                            </div>
-                            <div className="col-sm-6 text-center">
-                                <Button color="primary" onClick={() => {
-
-                                }}>Disagree</Button>
-                            </div>
-                        </Row>
-                    </div>
-                </div>
-
-
-
-
-            </Container>
-        </div>
+                </Container>
+            </div>
+        </React.Fragment>
     );
 };
-
-export default Software;
-
-
-
-
-
-
-
-
-
-
+export default StudyDetail;
