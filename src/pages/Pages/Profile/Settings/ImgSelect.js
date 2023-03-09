@@ -13,7 +13,7 @@ const ImgSelect = ({src}) => {
     const [image_purchase, setimage_purchase] = useState('img-no-buy img-no-buy-x');
     
     function tog_large(e) {
-        if(image_purchase == 'img-no-buy') {
+        if(image_purchase === 'img-no-buy') {
             console.log("xxxxxxxxx")
             setimage_purchase('img-buy');
             

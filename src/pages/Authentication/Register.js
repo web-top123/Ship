@@ -30,12 +30,12 @@ const Register = () => {
         enableReinitialize: true,
 
         initialValues: {
-            email: '',
+            name: '',
             username: '',
             password: '',
         },
         validationSchema: Yup.object({
-            email: Yup.string().required("Please Enter Your Email"),
+            name: Yup.string().required("Please Enter Your Full Name"),
             username: Yup.string().required("Please Enter Your Username"),
             password: Yup.string().required("Please Enter Your Password"),
         }),
@@ -52,7 +52,7 @@ const Register = () => {
     useEffect(() => {
         dispatch(apiError(""));
     }, [dispatch]);
-    document.title = "SignUp";
+    document.title = "Sign Up Ship";
     return (
         <React.Fragment>
             <ParticlesAuth>
@@ -67,7 +67,7 @@ const Register = () => {
                                             <img src={logoLight} alt="" height="20" />
                                         </Link>
                                     </div>
-                                    <p className="mt-3 fs-15 fw-medium">Ship management</p>
+                                    <p className="mt-3 fs-15 fw-medium">Ship Management</p>
                                 </div>
                             </Col>
                         </Row>
@@ -79,7 +79,6 @@ const Register = () => {
                                     <CardBody className="p-4">
                                         <div className="text-center mt-2">
                                             <h5 className="text-primary">Create New Account</h5>
-                                            {/* <p className="text-muted">Get your free velzon account now</p> */}
                                         </div>
                                         <div className="p-2 mt-4">
                                             <Form
@@ -100,50 +99,50 @@ const Register = () => {
                                                 ) : null}
 
                                                 <div className="mb-3">
-                                                    <Label htmlFor="useremail" className="form-label">Email <span className="text-danger">*</span></Label>
+                                                    <Label htmlFor="useremail" className="form-label">User ID <span className="text-danger">*</span></Label>
                                                     <div className="input-group">
                                                         <Input
-                                                            id="email"
-                                                            name="email"
+                                                            id="username"
+                                                            name="username"
                                                             className="form-control"
-                                                            placeholder="Enter email address"
-                                                            type="email"
+                                                            placeholder="Enter User ID"
+                                                            type="text"
                                                             onChange={validation.handleChange}
                                                             onBlur={validation.handleBlur}
-                                                            value={validation.values.email || ""}
+                                                            value={validation.values.username || ""}
                                                             invalid={
-                                                                validation.touched.email && validation.errors.email ? true : false
+                                                                validation.touched.username && validation.errors.username ? true : false
                                                             }
                                                             aria-describedby="button-addon2"
                                                         />
                                                         <button className="btn btn-success shadow-none" type="button" id="button-addon2"><i className=" ri-key-2-line label-icon align-middle fs-16 me-2"></i> Cert</button>
 
                                                     </div>
-                                                    {validation.touched.email && validation.errors.email ? (
-                                                        <FormFeedback type="invalid"><div>{validation.errors.email}</div></FormFeedback>
-                                                    ) : null}
-                                                    <div className="invalid-feedback">
-                                                        Please enter email
-                                                    </div>
-                                                </div>
-                                                <div className="mb-3">
-                                                    <Label htmlFor="username" className="form-label">Username <span className="text-danger">*</span></Label>
-                                                    <Input
-                                                        name="username"
-                                                        type="text"
-                                                        placeholder="Enter username"
-                                                        onChange={validation.handleChange}
-                                                        onBlur={validation.handleBlur}
-                                                        value={validation.values.username || ""}
-                                                        invalid={
-                                                            validation.touched.username && validation.errors.username ? true : false
-                                                        }
-                                                    />
                                                     {validation.touched.username && validation.errors.username ? (
                                                         <FormFeedback type="invalid"><div>{validation.errors.username}</div></FormFeedback>
                                                     ) : null}
                                                     <div className="invalid-feedback">
-                                                        Please enter username
+                                                        Please enter user ID
+                                                    </div>
+                                                </div>
+                                                <div className="mb-3">
+                                                    <Label htmlFor="name" className="form-label">Full Name <span className="text-danger">*</span></Label>
+                                                    <Input
+                                                        name="name"
+                                                        type="text"
+                                                        placeholder="Enter Full Name"
+                                                        onChange={validation.handleChange}
+                                                        onBlur={validation.handleBlur}
+                                                        value={validation.values.name || ""}
+                                                        invalid={
+                                                            validation.touched.name && validation.errors.name ? true : false
+                                                        }
+                                                    />
+                                                    {validation.touched.name && validation.errors.name ? (
+                                                        <FormFeedback type="invalid"><div>{validation.errors.name}</div></FormFeedback>
+                                                    ) : null}
+                                                    <div className="invalid-feedback">
+                                                        Please enter full name
                                                     </div>
                                                 </div>
                                                 <div className="mb-2">
@@ -151,24 +150,24 @@ const Register = () => {
 
                                                     <br></br>
                                                     <Row className="px-4">
-                                                        <Col lg={6}><Input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                                                            <Label className="form-check-label" for="flexRadioDefault1">Male</Label></Col>
-                                                        <Col lg={6}>  <Input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                                                            <Label className="form-check-label" for="flexRadioDefault1">Female</Label></Col>
+                                                        <Col lg={6}>
+                                                            <Input className="form-check-input" type="radio" name="gender" id="genderMale" defaultChecked/>
+                                                            <Label className="form-check-label" for="genderMale">Male</Label>
+                                                        </Col>
+                                                        <Col lg={6}>  
+                                                            <Input className="form-check-input" type="radio" name="gender" id="genderFemale" />
+                                                            <Label className="form-check-label" for="genderFemale">Female</Label>
+                                                        </Col>
                                                     </Row>
-
-
-                                                    
                                                 </div>
                                                 <br></br>
-                                                {/* <hr style={{ marginTop: "5px" }} ></hr> */}
                                                 <div className="mb-2">
                                                     <Label htmlFor="birthday" className="form-label">Birthday <span className="text-danger">*</span></Label>
                                                     <Flatpickr
                                                         className="form-control"
                                                         options={{
                                                             dateFormat: "Y-m-d",
-                                                            defaultDate: ["2022-01-20"]
+                                                            defaultDate: ["1990-01-01"]
                                                         }}
                                                     />
 

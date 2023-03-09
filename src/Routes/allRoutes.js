@@ -245,6 +245,10 @@ import Suggestions from "../pages/Admin/Suggestions/index";
 import SuggestionDetail from "../pages/Admin/Suggestions/SuggestionDetail";
 import AddSuggestion from "../pages/Admin/Suggestions/AddSuggestion";
 
+// Degree Section
+import Degrees from "../pages/Admin/Degrees/index";
+import DegreeDetail from "../pages/Admin/Degrees/DegreeDetail";
+
 // Article Section
 import Articles from "../pages/Admin/Articles/index";
 import ArticleDetail from "../pages/Admin/Articles/ArticleDetail";
@@ -285,11 +289,18 @@ import Avatars from "../pages/Admin/Avatars/index";
 import AvatarDetail from "../pages/Admin/Avatars/AvatarDetail";
 import AddAvatar from "../pages/Admin/Avatars/AddAvatar";
 
+// Avatar Section
+import Medias from "../pages/Admin/Medias/index";
+import MediaDetail from "../pages/Admin/Medias/MediaDetail";
+import AddMedia from "../pages/Admin/Medias/AddMedia";
+
+// Settings Section
+import AdminSettings from "../pages/Admin/Settings/index";
 
 // Question Section
-import Questiones from "../pages/Admin/Questions/index";
+import Questions from "../pages/Admin/Questions/index";
 import QuestionDetail from "../pages/Admin/Questions/QuestionDetail";
-import AddQuestion from "../pages/Admin/Questions/AddQuestions";
+import AddQuestion from "../pages/Admin/Questions/AddQuestion";
 
 // Answer Section
 import Answers from "../pages/Admin/Answers/index";
@@ -453,28 +464,7 @@ const authProtectedRoutes = [
   { path: "/pages-pricing", component: Pricing },
   { path: "/pages-sitemap", component: SiteMap },
   { path: "/pages-search-results", component: SearchResults },
-  {
-    path: "/",
-    exact: true,
-    component: () => <Redirect to="/pages-profile-settings" />,
-  },
-  { path: "/pages-mine", component: Mine },
-  { path: "/test-test-page-start", component: TestPageStart },
-  { path: "/pages-study-field", component: StudyField },
-  { path: "/pages-company-introduction", component: CompanyIntroduction },
-  { path: "/pages-software", component: Software },
-  { path: "/pages-question-service", component: QuestionService },
-  { path: "/pages-blog-service", component: BlogService },
-  { path: "/pages-blog-service/article-kind/:id", component: ArticleKind },
-  { path: "/pages-blog-service/article-man/:id", component: ArticleMan },
-  { path: "/pages-blog-service/detail/:id", component: BlogServiceDetail },
-
-  //view ship data 
-  { path: "/view-ship-data", component: ViewShipData},
-  { path: "/ship-details/:id", component: ShipDetails},
-  { path: "/new-data-vote/:id", component: NewDataVote},
-  { path: "/pages-study-detail", component: StudyDetail},
-
+  
   // Admin
   // Users
   { path: "/admin-users", component: Users },
@@ -506,6 +496,10 @@ const authProtectedRoutes = [
   { path: "/admin-suggestion-details/:id", component: SuggestionDetail },
   { path: "/admin-add-suggestion", component: AddSuggestion },
   { path: "/admin-add-suggestion/:id", component: AddSuggestion },
+
+    //Degree
+    { path: "/admin-degrees", component: Degrees },
+    { path: "/admin-degree-details/:id", component: DegreeDetail },
 
   // Articles
   { path: "/admin-articles", component: Articles },
@@ -556,9 +550,18 @@ const authProtectedRoutes = [
   { path: "/admin-add-avatar", component: AddAvatar },
   { path: "/admin-add-avatar/:id", component: AddAvatar },
 
+  // Media
+  { path: "/admin-medias", component: Medias },
+  { path: "/admin-media-details/:id", component: MediaDetail },
+  { path: "/admin-add-media", component: AddMedia },
+  { path: "/admin-add-media/:id", component: AddMedia },
 
-// Questiones
-{ path: "/admin-questiones", component: Questiones },
+  // Settings
+  { path: "/admin-settings", component: AdminSettings },
+
+
+// Questions
+{ path: "/admin-questions", component: Questions },
 { path: "/admin-question-details/:id", component: QuestionDetail },
 { path: "/admin-add-question", component: AddQuestion },
 { path: "/admin-add-question/:id", component: AddQuestion },
@@ -569,6 +572,11 @@ const authProtectedRoutes = [
   { path: "/admin-add-answer", component: AddAnswer },
   { path: "/admin-add-answer/:id", component: AddAnswer },
 
+  {
+    path: "/",
+    exact: true,
+    component: () => <Redirect to="/pages-home-page" />,
+  },
 ];
 
 const publicRoutes = [
@@ -578,6 +586,23 @@ const publicRoutes = [
   { path: "/login", component: Login },
   { path: "/forgot-password", component: ForgetPasswordPage },
   { path: "/register", component: Register },
+
+  { path: "/pages-mine", component: Mine },
+  { path: "/test-test-page-start", component: TestPageStart },
+  { path: "/pages-study-field", component: StudyField },
+  { path: "/pages-company-introduction", component: CompanyIntroduction },
+  { path: "/pages-software", component: Software },
+  { path: "/pages-question-service", component: QuestionService },
+  { path: "/pages-blog-service", component: BlogService },
+  { path: "/pages-blog-service/article-kind/:id", component: ArticleKind },
+  { path: "/pages-blog-service/article-man/:id", component: ArticleMan },
+  { path: "/pages-blog-service/detail/:id", component: BlogServiceDetail },
+
+  //view ship data 
+  { path: "/view-ship-data", component: ViewShipData},
+  { path: "/ship-details/:id", component: ShipDetails},
+  { path: "/new-data-vote/:id", component: NewDataVote},
+  { path: "/pages-study-detail", component: StudyDetail},
 
 
   //AuthenticationInner pages 

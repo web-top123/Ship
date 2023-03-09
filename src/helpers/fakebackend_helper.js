@@ -45,6 +45,7 @@ export const getFindBrowseHistoriesById = id => api.get(url.GET_FIND_BROWSER_HIS
 export const getFindDataPurchaseHistoyById = (id, selectedType) => api.create(url.GET_FIND_DATA_PURCHASE_HISTORY + '/' + id, selectedType);
 export const getBrowserHistoriesAll = ()=> api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
 export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST+'/'+id);
+export const addNewBrowserHistory = data => api.create(url.ADD_NEW_BROWSER_HISTORY, data);
 
 // Test page
 export const getGetAllQA = () => api.get(url.GET_ALL_QA);
@@ -300,6 +301,9 @@ export const getAllSoftwareByCategory = (category) => api.get(url.GET_ALL_SOFTWA
 
 export const getTopSoftwares = () => api.get(url.GET_ALL_TOP_SOFTWARES);
 
+
+export const getTopReaders = () => api.get(url.GET_ALL_TOP_READERS);
+
 // get Users
 export const getUsers = () => api.get(url.GET_USERS);
 export const getUser = (id) => api.get(url.GET_USER + '/' + id);
@@ -376,6 +380,14 @@ export const updateOneSuggestion = (id, customer) => api.update(url.UPDATE_SUGGE
 // delete SUGGESTION
 export const deleteSuggestion = id => api.delete(url.DELETE_SUGGESTION + '/' + id);
 
+
+//---------------Degree-----------//
+
+// get Degrees
+export const getDegrees = () => api.get(url.GET_DegreeS);
+
+export const getDegree = (id) => api.get(url.GET_Degree + '/' + id);
+
 // ----------- Article --------------
 
 // get Articles
@@ -446,6 +458,50 @@ export const downloadAvatar = (id) => {
   return str;
 }
 
+
+
+//-----------Setting-----------
+// get Settings
+export const getSettings = () => api.get(url.GET_SETTINGS);
+
+export const getSetting = (id) => api.get(url.GET_SETTING + '/' + id);
+
+export const getSettingByTitle = (title) => api.get(url.GET_SETTING_BY_TITLE + '/' + title);
+
+// add SETTING
+export const addNewSetting = customer => api.postFormData(url.ADD_NEW_SETTING, customer);
+
+// update SETTING
+export const updateOneSetting = (id, setting) => api.update(url.UPDATE_SETTING + '/' + id, setting);
+export const updateOneSettingByTitle = (title, setting) => api.update(url.UPDATE_SETTING_BY_TITLE + '/' + title, setting);
+
+// delete SETTING
+export const deleteSetting = id => api.delete(url.DELETE_SETTING + '/' + id);
+
+
+//-----------Media-----------
+// get Medias
+export const getMedias = () => api.get(url.GET_MEDIAS);
+
+export const getMedia = (id) => api.get(url.GET_MEDIA + '/' + id);
+
+// add MEDIA
+export const addNewMedia = customer => api.postFormData(url.ADD_NEW_MEDIA, customer);
+
+// update MEDIA
+export const updateOneMedia = (id, customer) => api.postFormData(url.UPDATE_MEDIA + '/' + id, customer);
+
+// delete MEDIA
+export const deleteMedia = id => api.delete(url.DELETE_MEDIA + '/' + id);
+
+// download MEDIA
+// export const downloadMedia = (id) => api.get(url.DOWNLOAD_MEDIA + '/' + id);
+export const downloadMedia = (id) => {
+  // http://localhost:8080/api/media/fileById/1
+  var str = config.API_URL + "api/media/fileById/" + id;
+  return str;
+}
+
 //-----------Data-----------
 // get Datas
 export const getDatas = () => api.get(url.GET_DATAS);
@@ -510,8 +566,8 @@ export const updateOneCampusCategory = (id, customer) => api.update(url.UPDATE_C
 export const deleteCampusCategory = id => api.delete(url.DELETE_CAMPUSCATEGORY + '/' + id);
 
 //--------Question--------
-// get Questiones
-export const getQuestiones = () => api.get(url.GET_QUESTIONES);
+// get Questions
+export const getQuestions = () => api.get(url.GET_QUESTIONS);
 export const getQuestion = (id) => api.get(url.GET_QUESTION + '/' + id);
 
 // add QUESTION
@@ -526,7 +582,7 @@ export const deleteQuestion = id => api.delete(url.DELETE_QUESTION + '/' + id);
 // ----------- Answer --------------
 
 // get Answers
-export const getAnswers = () => api.get(url.GET_ANSWERS);
+export const getAnswers = (id) => api.get(url.GET_ANSWERS + '/' + id);
 
 export const getAnswer = (id) => api.get(url.GET_ANSWER + '/' + id);
 

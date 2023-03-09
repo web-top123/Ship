@@ -18,23 +18,47 @@ import DeleteModal from "../../../Components/Common/DeleteModal";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import TableContainer from "../../../Components/Common/TableContainer";
 
-
 //redux
 import { Link } from "react-router-dom";
 
-import { getQuestiones, deleteQuestion } from "../../../helpers/fakebackend_helper";
+import { getQuestions, deleteQuestion } from "../../../helpers/fakebackend_helper";
 
-const Questiones = (props) => {
+const Questions = (props) => {
+  // const dispatch = useDispatch();
+
+  // const { questions } = useSelector((state) => ({
+  //   questions: state.Question.questionList,
+  // }));
+  // const [question, setQuestion] = useState(null);
+
   const [questionList, setQuestionList] = useState([]);
   useEffect(() => {
     getQuestionList();
-  }, []);
+  }, []); 
 
   const getQuestionList = () => {
-    getQuestiones().then(res => {
+    getQuestions().then(res => {
       setQuestionList(res);
     })
   }
+
+  // useEffect(() => {
+  //   if (questions && !questions.length) {
+  //     dispatch(onGetQuestions());
+  //   }
+  // }, [dispatch, questions]);
+
+  // useEffect(() => {
+  //   setQuestionList(questions);
+  // }, [questions]);
+
+  // useEffect(() => {
+  //   dispatch(onGetQuestions());
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (!isEmpty(questions)) setQuestionList(questions);
+  // }, [questions]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
@@ -42,13 +66,14 @@ const Questiones = (props) => {
 
   const onClickDelete = (question) => {
     setCurrentID(question.id);
+    // setQuestion(question);
     setDeleteModal(true);
   };
 
   const handleDeleteQuestion = () => {
     if (currentID) {
       deleteQuestion(currentID).then(res => {
-        if (res === 1) {
+        if (res == 1) {
           getQuestionList();
           setDeleteModal(false);
         } else {
@@ -66,14 +91,20 @@ const Questiones = (props) => {
           return <input type="checkbox" />;
         },
       },
+      
       {
-        Header: "Description",
-        accessor: "description",
+        Header: "degree",
+        accessor: "degree.name",
         filterable: false,
       },
       {
-        Header: "CampusCatetory",
-        accessor: "campusCategory.title",
+        Header: "level",
+        accessor: "level",
+        filterable: false,
+      },
+      {
+        Header: "description",
+        accessor: "description",
         filterable: false,
       },
       {
@@ -89,14 +120,15 @@ const Questiones = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
+                
                 <DropdownItem href={"admin-question-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
-                  View
+                  Create Answer
                 </DropdownItem>
 
                 <DropdownItem href={"admin-add-question/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
-                  Edit
+                  Edit Question
                 </DropdownItem>
 
                 <DropdownItem divider />
@@ -118,8 +150,7 @@ const Questiones = (props) => {
     ],
     []
   );
-  document.title = "Questiones";
-
+  document.title = "Questions";
   return (
     <div className="page-content">
       <DeleteModal
@@ -129,7 +160,7 @@ const Questiones = (props) => {
       />
 
       <Container fluid>
-        <BreadCrumb title="Questiones" pageTitle="Admin" />
+        <BreadCrumb title="Questions" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -146,18 +177,6 @@ const Questiones = (props) => {
                           <i className="ri-add-line align-bottom me-1"></i> Add
                           Question
                         </Link>
-                      </div>
-                    </div>
-                    <div className="col-sm">
-                      <div className="d-flex justify-content-sm-end">
-                        <div className="search-box ms-2">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search Questiones..."
-                          />
-                          <i className="ri-search-line search-icon"></i>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -184,8 +203,7 @@ const Questiones = (props) => {
                         ) : (
                           <div className="py-4 text-center">
                             <div>
-                              <lord-icon
-                                src="https://cdn.lordicon.com/msoeawqm.json"
+                              <lord-icon                              
                                 trigger="loop"
                                 colors="primary:#405189,secondary:#0ab39c"
                                 style={{ width: "72px", height: "72px" }}
@@ -210,4 +228,4 @@ const Questiones = (props) => {
   );
 };
 
-export default Questiones;
+export default Questions;

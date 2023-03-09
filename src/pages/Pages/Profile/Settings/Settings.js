@@ -10,12 +10,14 @@ import MyScore from './MyScore';
 import MyImage from './MyImage';
 import MyOpinion from './MyOpinion';
 import MyInformation from './MyInformation';
+import { useSelector, useDispatch } from "react-redux";
 //import images
 import progileBg from '../../../../assets/images/profile-bg.jpg';
 import avatar1 from '../../../../assets/images/users/avatar-1.jpg';
 
 const Settings = () => {
     const [activeTab, setActiveTab] = useState("1");
+    const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
     const tabChange = (tab) => {
         if (activeTab !== tab) setActiveTab(tab);
@@ -42,7 +44,7 @@ const Settings = () => {
 
                             <Col>
                                 <div className="p-2">
-                                    <h3 className="text-white mb-1">Anna Adame</h3>
+                                    <h3 className="text-white mb-1">{myInformationSelector.name}</h3>
                                 </div>
                             </Col>
 

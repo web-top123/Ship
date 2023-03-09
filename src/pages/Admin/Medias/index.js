@@ -22,60 +22,35 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getNotifications, deleteNotification } from "../../../helpers/fakebackend_helper";
+import { getMedias, deleteMedia, downloadMedia } from "../../../helpers/fakebackend_helper";
 
-const Notifications = (props) => {
-  // const dispatch = useDispatch();
-
-  // const { notifications } = useSelector((state) => ({
-  //   notifications: state.Notification.notificationList,
-  // }));
-  // const [notification, setNotification] = useState(null);
-
-  const [notificationList, setNotificationList] = useState([]);
+const Medias = (props) => {
+  const [mediaList, setMediaList] = useState([]);
   useEffect(() => {
-    getNotificationList();
+    getMediaList();
   }, []);
 
-  const getNotificationList = () => {
-    getNotifications().then(res => {
-      setNotificationList(res);
+  const getMediaList = () => {
+    getMedias().then(res => {
+      setMediaList(res);
     })
   }
-
-  // useEffect(() => {
-  //   if (notifications && !notifications.length) {
-  //     dispatch(onGetNotifications());
-  //   }
-  // }, [dispatch, notifications]);
-
-  // useEffect(() => {
-  //   setNotificationList(notifications);
-  // }, [notifications]);
-
-  // useEffect(() => {
-  //   dispatch(onGetNotifications());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!isEmpty(notifications)) setNotificationList(notifications);
-  // }, [notifications]);
 
   //delete order
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (notification) => {
-    setCurrentID(notification.id);
-    // setNotification(notification);
+  const onClickDelete = (media) => {
+    setCurrentID(media.id);
+    // setMedia(media);
     setDeleteModal(true);
   };
 
-  const handleDeleteNotification = () => {
+  const handleDeleteMedia = () => {
     if (currentID) {
-      deleteNotification(currentID).then(res => {
-        if (res == 1) {
-          getNotificationList();
+      deleteMedia(currentID).then(res => {
+        if (res === 1) {
+          getMediaList();
           setDeleteModal(false);
         } else {
           setDeleteModal(false);
@@ -88,13 +63,42 @@ const Notifications = (props) => {
     () => [
       {
         Header: "#",
-        Cell: () => {
+        Cell: (media) => {
           return <input type="checkbox" />;
         },
       },
       {
-        Header: "Date",
-        accessor: "date",
+        Header: "Media",
+        Cell: (media) => (
+          <>
+            <div className="d-flex align-items-center">
+              <div className="flex-shrink-0 me-3">
+                <div className="media-sm bg-light rounded p-1">
+                  <img
+                  src={downloadMedia(media.row.original.id)}
+                  // {media.row.file_url}
+                    // src={downloadMedia}
+                    alt=""
+                    className="img-fluid d-block"
+                    style={{width:'40px'}}
+                  />
+                </div>
+              </div>
+              <div className="flex-grow-1">
+                <h5 className="fs-14 mb-1">
+                  <Link
+                    to={"/admin-media-details/" + media.row.original.id}
+                    className="text-dark"
+                  >
+                    {" "}
+                    {media.row.original.name}
+                  </Link>
+                </h5>
+              </div>
+            </div>
+          </>
+        ),
+        accessor: "title",
         filterable: false,
       },
       {
@@ -102,11 +106,7 @@ const Notifications = (props) => {
         accessor: "description",
         filterable: false,
       },
-      {
-        Header: "Type",
-        accessor: "type",
-        filterable: false,
-      },
+
       {
         Header: "Action",
         Cell: (cellProps) => {
@@ -120,7 +120,12 @@ const Notifications = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-add-notification/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-media-details/" + cellProps.row.original.id}>
+                  <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
+                  View
+                </DropdownItem>
+
+                <DropdownItem href={"admin-add-media/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -129,8 +134,8 @@ const Notifications = (props) => {
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const notificationData = cellProps.row.original;
-                    onClickDelete(notificationData);
+                    const mediaData = cellProps.row.original;
+                    onClickDelete(mediaData);
                   }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -144,17 +149,17 @@ const Notifications = (props) => {
     ],
     []
   );
-  document.title = "Notifications";
+  document.title = "Medias";
   return (
     <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteNotification}
+        onDeleteClick={handleDeleteMedia}
         onCloseClick={() => setDeleteModal(false)}
       />
 
       <Container fluid>
-        <BreadCrumb title="Notifications" pageTitle="Admin" />
+        <BreadCrumb title="Medias" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -165,11 +170,11 @@ const Notifications = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-notification"
+                          to="/admin-add-media"
                           className="btn btn-success"
                         >
-                          <i className="ri-add-line align-bottom me-1"></i> 
-                          Add Notification
+                          <i className="ri-add-line align-bottom me-1"></i> Add
+                          Media
                         </Link>
                       </div>
                     </div>
@@ -179,7 +184,7 @@ const Notifications = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Notifications..."
+                            placeholder="Search Medias..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -195,12 +200,12 @@ const Notifications = (props) => {
                         id="table-product-list-all"
                         className="table-card gridjs-border-none pb-2"
                       >
-                        {notificationList && notificationList !== "" ? (
+                        {mediaList && mediaList !== "" ? (
                           <TableContainer
                             columns={columns}
-                            data={notificationList}
+                            data={mediaList}
                             isGlobalFilter={false}
-                            isAddNotificationList={false}
+                            isAddMediaList={false}
                             customPageSize={10}
                             divClass="table-responsive mb-1"
                             tableClass="mb-0 table-borderless"
@@ -235,4 +240,4 @@ const Notifications = (props) => {
   );
 };
 
-export default Notifications;
+export default Medias;
