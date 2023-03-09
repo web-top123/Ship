@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Card, Form, Label, CardBody, CardHeader, Col, Container, Row, Input, Modal, ModalHeader, Nav, NavItem, NavLink, TabContent, TabPane, Progress } from 'reactstrap';
+import { Button, Form, Label, Col, Container, Row, Input, TabContent, TabPane, Progress } from 'reactstrap';
 import "./test-page-custom.css";
 import { Link } from 'react-router-dom';
-
-
-import dummyUser from "../../../assets/images/users/user-dummy-img.jpg";
 
 
 // Import Images
@@ -12,69 +9,14 @@ import macImg from "../../../assets/images/mac-img1.png";
 
 
 import 'aos/dist/aos.css';
-//import Components
-import BreadCrumb from '../../../Components/Common/BreadCrumb';
 
 const TestPage = () => {
-    // Modal
-    const [modal_togFirst, setmodal_togFirst] = useState(false);
-    function tog_togFirst() {
-        setmodal_togFirst(!modal_togFirst);
-    }
-
-    const [modal_togSecond, setmodal_togSecond] = useState(false);
-    function tog_togSecond() {
-        setmodal_togSecond(!modal_togSecond);
-    }
-
-    // Border Top Nav
-    const [topBorderTab, settopBorderTab] = useState("1");
-    const topBordertoggle = (tab) => {
-        if (topBorderTab !== tab) {
-            settopBorderTab(tab);
-        }
-    };
-
-    // Border Top Nav Justified Tabs
-    const [topBorderjustifyTab, settopBorderjustifyTab] = useState("1");
-    const topBorderJustifytoggle = (tab) => {
-        if (topBorderjustifyTab !== tab) {
-            settopBorderjustifyTab(tab);
-        }
-    };
-
-    //form tags
-
-    const [selectedCountry, setselectedCountry] = useState(null);
-    const [selectedState, setselectedState] = useState(null);
-    const [modal, setModal] = useState(false);
-    const [deletemodal, setDeleteModal] = useState(false);
-
-    const toggledeletemodal = () => {
-        setDeleteModal(!deletemodal);
-    };
-
-    const togglemodal = () => {
-        setModal(!modal);
-    };
-
-    function handleSelectCountry(selectedCountry) {
-        setselectedCountry(selectedCountry);
-    }
-
-    function handleSelectState(selectedState) {
-        setselectedState(selectedState);
-    }
 
     //progress
 
     const [activeTab, setactiveTab] = useState(1);
-    const [activeArrowTab, setactiveArrowTab] = useState(4);
-    const [activeVerticalTab, setactiveVerticalTab] = useState(7);
     const [progressbarvalue, setprogressbarvalue] = useState(0);
     const [passedSteps, setPassedSteps] = useState([1]);
-    const [passedarrowSteps, setPassedarrowSteps] = useState([1]);
-    const [passedverticalSteps, setPassedverticalSteps] = useState([1]);
 
     function toggleTab(tab, value) {
         if (activeTab !== tab) {
