@@ -1,26 +1,36 @@
 import React, { useState, useEffect } from 'react'
-import { Col, Container, Row, Card, CardBody, TabContent, Nav, NavItem, NavLink, CardHeader, TabPane, Button } from "reactstrap";
+import { Col, Container, Row, Card, CardBody, TabContent, CardHeader, TabPane } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { columnsBlogData, BlogDataList } from './TestBlogData';
 import { useMemo } from "react";
-import TableContainer from "../../../Components/Common/TableContainer";
-import classnames from "classnames";
-import { useSelector } from 'react-redux';
-
-import avatar1 from "../../../assets/images/users/avatar-1.jpg";
-import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-import avatar3 from "../../../assets/images/users/avatar-3.jpg";
-import { size } from 'lodash';
-import { Link, BrowserRouter } from 'react-router-dom';
 import {BlogDetailData, columnsReplyMessageData} from './TestBlogDetail'
-
+import { getArticle, deleteArticle } from "../../../helpers/fakebackend_helper";
+import { Link, useParams  } from "react-router-dom";
 import ArticleSideBar from "./ArticleSideBar";
 
 const BlogServiceDetail = () => {
     document.title = "Blog Service";
     const columnsReplyMessage = useMemo(() => columnsReplyMessageData, []);
-
     const [BlogDetailDataFilter, setBlogDataList] = useState(BlogDetailData.user_response);
+
+    let { id } = useParams();
+    const [article, setArticleList] = useState({
+        name: "",
+        description: "",
+        contact_number: "",      
+        attach_url: "",
+        recommends: "",
+        source: "",
+        oppositions: "",
+        browingcount: "",
+    });
+    useEffect(() => {
+      if (id) {
+        getArticle(id).then(res => {
+            setArticleList(res);          
+        })
+      }
+    }, []);
+    console.log("ppppp",article);
 
     return (
         <React.Fragment>
@@ -49,18 +59,18 @@ const BlogServiceDetail = () => {
                                                 <img src = {BlogDetailData.user_img} style={{"width":"100%","borderRadius":"50%"}}/>    
                                             </div>
                                             <div>
-                                                <h5>{BlogDetailData.user_name}</h5>
-                                                <span>{BlogDetailData.date}</span>
+                                                <h5>{article.name}</h5>
+                                                <span>{article.description}</span>
                                             </div>
                                         </div>
                                         <div>
-                                            <i className="bx bx-like pe-1"></i><span className="pe-3">{BlogDetailData.thumb}</span>
-                                            <i className="bx bx-message pe-1"></i><span className="pe-3">{BlogDetailData.message}</span>
-                                            <i className="bx bx-message-dots pe-1"></i><span className="pe-3">{BlogDetailData.reply_message}</span>
+                                            <i className="bx bx-like pe-1"></i><span className="pe-3">{article.recommends}</span>
+                                            <i className="bx bx-message pe-1"></i><span className="pe-3">{article.oppositions}</span>
+                                            <i className="bx bx-message-dots pe-1"></i><span className="pe-3">{article.browingcount}</span>
                                         </div>
                                     </div>
-                                    <h4 className='mb-4'>{BlogDetailData.title}</h4>
-                                    {BlogDetailData.content}
+                                    {/* <h4 className='mb-4'>{article.name}</h4>
+                                    {article.content} */}
                                     <div className='pt-4'>
                                         <TabContent className="text-muted blog-detail-rtable-content">
                                             <TabPane>
@@ -68,7 +78,7 @@ const BlogServiceDetail = () => {
                                                     id="table-product-list-all"
                                                     className="table-card gridjs-border-none pb-2"
                                                 >
-                                                    <TableContainer
+                                                    {/* <TableContainer
                                                         columns={columnsReplyMessage}
                                                         data={BlogDetailDataFilter}
                                                         isGlobalFilter={false}
@@ -78,11 +88,10 @@ const BlogServiceDetail = () => {
                                                         divClass="table-responsive mb-1"
                                                         tableClass="mb-0 table-borderless"
                                                         theadClass="table-light text-muted"
-                                                    />
+                                                    /> */}
                                                 </div>
                                             </TabPane>
-
-                                    </TabContent>
+                                        </TabContent>
                                     </div>
                                 </CardBody>
                                  

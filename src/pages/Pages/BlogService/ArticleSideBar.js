@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Container, Row, Card, CardBody, TabContent, Nav, NavItem, NavLink, CardHeader, TabPane, Button, Modal, ModalHeader, Label, Input, Form } from "reactstrap";
-
 import { getArticleCategories, getArticleFindTopUser } from "../../../helpers/fakebackend_helper";
-
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import { Link } from 'react-router-dom';
 import "quill/dist/quill.snow.css";
 
 
 const ArticleSideBar = () => {
-
-
     document.title = "Blog Service";
-
     const [articleCategories, setArticleCategories] = useState([]);
     const [articleTopWriter, setArticleTopWriter] = useState([]);
-
-
 
     useEffect(() => {
         getArticleCategories().then(categories => {
@@ -46,11 +39,11 @@ const ArticleSideBar = () => {
         <React.Fragment>
             <Card>
                 <CardBody>
-                    <h4 className='mb-sm-0'>Realted Topics</h4>
+                    <h4 className='mb-sm-0'>Related Topics</h4>
                     <div className="realted-topic d-flex flex-wrap">
                         {articleCategories.map((articleCategory, key) => (
                             <React.Fragment key={articleCategory.id}>
-                                <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind/' + articleCategory.id}>{articleCategory.title}</Link>
+                                <Link className="rounded-pill btn btn-light tags me-4" to={'/pages-blog-service/article-kind/' + articleCategory.id}>{articleCategory.title}</Link>
                             </React.Fragment>
                         ))}
                     </div>
@@ -65,9 +58,9 @@ const ArticleSideBar = () => {
                                 <img style={{ "width": "32px", "height": "auto", "borderRadius": "50%" }} src={avatar1} />
                             </div>
                             <div>
-                                {articleTopWriter.map((findTopWirter, key) => (
-                                    <React.Fragment key={findTopWirter.id}>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/detail/' + findTopWirter.id}>{findTopWirter.userId}</Link>
+                                {articleTopWriter.map((findTopWriter, key) => (
+                                    <React.Fragment key={key}>
+                                        <Link className="rounded-pill btn btn-light tags me-4" to={'/pages-blog-service/detail/' + findTopWriter.id}>{findTopWriter.userId}</Link>
                                     </React.Fragment>
                                 ))}
                             </div>

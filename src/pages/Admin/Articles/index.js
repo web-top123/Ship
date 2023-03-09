@@ -20,6 +20,7 @@ const Articles = (props) => {
 
   const getArticleList = () => {
     getArticles().then(articles => {
+      console.log("article",articles);
       setArticleList(articles);
     })
   }

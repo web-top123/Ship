@@ -16,10 +16,9 @@ const columnsBlogData = [
                 </div>
                 <div className="pt-3 d-flex justify-content-between">
 
-                    <Link to="/pages-blog-service/detail">
+                    <Link to={"/pages-blog-service/detail/" + article.row.original.id}>
                         <div className="blog-content">
-                            <h3 className="blog-title">{article.row.original.name}</h3>
-                            <p className="blog-detail">{article.row.original.description}</p>
+                            <h3 className="blog-title" style={{width:800}}>{article.row.original.name}</h3>                            
                         </div>
                     </Link>
 

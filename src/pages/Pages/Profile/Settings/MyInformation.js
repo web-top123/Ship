@@ -39,21 +39,21 @@ const MyInformation = () => {
     const dispatch = useDispatch();
     const [myInformation, setMyInformation] = useState({ birthday: '', username: '', name: '', email: '' });
     const user = JSON.parse(localStorage.getItem('authUser'));
-    const myInformationDispatch = useSelector(state => state.Profile.myinformation)
+    const myInformationSelector = useSelector(state => state.Profile.myinformation)
     const profile = useSelector(state => state.Profile)
-    console.log("profile", profile);
     useEffect(() => {
+        console.log("profile", profile);
         // 
-        if (!myInformationDispatch) {
+        if (!myInformationSelector) {
             dispatch(getProfile(user))
         } else {
-            setMyInformation(myInformationDispatch);
+            setMyInformation(myInformationSelector);
             if (profile.update) {
                 toprightnotify_profile_success();
             }
             dispatch(resetProfileFlag());
         }
-    }, [myInformationDispatch]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [myInformationSelector]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const saveMyInformation = () => {
         dispatch(editProfile(myInformation));
