@@ -590,7 +590,7 @@ export const deleteQuestion = id => api.delete(url.DELETE_QUESTION + '/' + id);
 // ----------- Answer --------------
 
 // get Answers
-export const getAnswers = () => api.get(url.GET_ANSWERS);
+export const getAnswers = (id) => api.get(url.GET_ANSWERS + '/' + id);
 
 export const getAnswer = (id) => api.get(url.GET_ANSWER + '/' + id);
 

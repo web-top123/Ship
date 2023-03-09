@@ -60,7 +60,9 @@ const AddQuestion = (props) => {
     degreeId: "",
     description: "",
   });
-
+  useEffect(() => {
+    console.log("sss", degreeSelects);
+  },[degreeSelects])
   useEffect(() => {
     if (id) {
       getQuestion(id).then((response) => {
@@ -71,6 +73,7 @@ const AddQuestion = (props) => {
           setDegreeSelects(res.map(e => {
             return { value: e.id, label: e.name, max: e.maxdegree }
           }))
+          
           // console.log(response.degreeId)
           let obj = res.find(o => o.id === response.degreeId);
           let priD = { value: obj.id, label: obj.name, max: obj.maxdegree }
