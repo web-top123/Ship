@@ -349,6 +349,7 @@ function QuestionDetail(props) {
               })
               // }
             }}>Yes,delete it!!</button>
+            
             {/* <button type="button" className="btn w-sm btn-danger " id="delete-record">Yes, Delete It!</button> */}
           </div>
         </ModalBody>

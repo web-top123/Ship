@@ -179,18 +179,6 @@ const Questions = (props) => {
                         </Link>
                       </div>
                     </div>
-                    <div className="col-sm">
-                      <div className="d-flex justify-content-sm-end">
-                        <div className="search-box ms-2">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search Questions..."
-                          />
-                          <i className="ri-search-line search-icon"></i>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
