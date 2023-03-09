@@ -34,6 +34,7 @@ import TreeView, { flattenTree } from "react-accessible-treeview";
 import { IoMdArrowDropright } from "react-icons/io";
 import cx from "classnames";
 import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories, getTopSoftwares } from '../../../helpers/fakebackend_helper';
+import { downloadProgram } from "../../../helpers/fakebackend_helper";
 // import FontSize from "@ckeditor/ckeditor5-font/src/fontsize";
 
 const Software = () => {
@@ -43,9 +44,9 @@ const Software = () => {
       setTopsoftwareData(res);
     });
     if (selectedCategoryId == 1) {
-      getAllSoftware().then(sofwareList => {
-        setsoftwareData(sofwareList);
-        console.log(softwareList);
+      getAllSoftware().then(softwareList => {
+        setsoftwareData(softwareList);
+        console.log("AAAAAAd", softwareList);
       });
     } else {
       getAllSoftwareByCategory(selectedCategoryId).then(categoryData => {
@@ -62,8 +63,6 @@ const Software = () => {
     getCategoryList();
     fetchData();
   }, []);
-
-
 
   useEffect(() => {
     fetchData();
@@ -133,7 +132,8 @@ const Software = () => {
   const [description, setDescription] = useState("");
   const [recommends, setRecommends] = useState("");
   const [cost, setCost] = useState("");
-  const [file_url, setFile_url] = useState("");
+  const [purchases, setPurchases] = useState("");
+  const [imageId, setImageId] = useState("");
 
   //modal
   // Border Top Nav Justified Tabs
@@ -153,7 +153,8 @@ const Software = () => {
     setDescription(value.description);
     setRecommends(value.recommends);
     setCost(value.cost);
-    setFile_url(value.file_url);
+    setPurchases(value.purchases);
+    setImageId(value.id);
     setmodal_togFirst(!modal_togFirst);
 
   }
@@ -204,10 +205,13 @@ const Software = () => {
         <ModalBody className=" p-2">
           <CardBody>
             <Row className="d-flex ">
+              
               <div className="col-sm-5">
                 <div className="avatar-lg bg-light rounded p-1">
-                  <img src={file_url} alt="..." className="img-fluid d-block"></img>
-                </div></div>
+                  <img
+                    src={downloadProgram(imageId)} alt="..." className="img-fluid d-block"></img>
+                  {console.log("AAAAAAAA",imageId )}</div>
+              </div>
               <div className="col-sm-7">
                 <br />
                 <h5 className="fs-15">Name : {name}</h5>
@@ -224,7 +228,8 @@ const Software = () => {
               </div>
               <div className="col-sm-7">
                 <h5 className="fs-15">
-                  {description}     </h5>
+                  {description}
+                </h5>
               </div>
             </Row>
             <Row className="pt-3">
@@ -235,7 +240,8 @@ const Software = () => {
               </div>
               <div className="col-sm-7">
                 <h5 className="fs-15">
-                  {recommends}     </h5>
+                  {recommends}
+                </h5>
               </div>
             </Row>
             <Row className="pt-3">
@@ -246,7 +252,8 @@ const Software = () => {
               </div>
               <div className="col-sm-7">
                 <h5 className="fs-15">
-                  {cost}     </h5>
+                  {cost}
+                </h5>
               </div>
             </Row>
             <Row className="pt-4">
@@ -430,11 +437,11 @@ const Software = () => {
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
                               <div className="flex-shrink-0 me-3">
-                                <img src={softwareItem.file_url} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
+                                <img src={downloadProgram(softwareItem.id)} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
                               </div>
                               <div className="flex-grow-1">
                                 <h5 className="fs-14">{softwareItem.name}</h5>
-                                <h5 className="fs-14">{softwareItem.recommends}</h5>
+                                <h5 className="fs-14">{softwareItem.purchases}</h5>
                               </div>
                             </div>
                           </CardBody>
@@ -465,8 +472,7 @@ const Software = () => {
               {/* -----------------main table display------------------ */}
               <Row className="p-3">
                 {softwareData.map((software, key) => (
-                  <React.Fragment key={software.id}>
-                    <Col lg={4}>
+                    <Col lg={4}key={software.id}>
                       <Card className="product" onClick={() => tog_togFirst(software)}>
                         <Link to='#'
                           className="text-dark"
@@ -476,11 +482,11 @@ const Software = () => {
                               <div className="col-sm-6">
                                 <div className="avatar-lg bg-light rounded p-1">
                                   <img
-                                    src={software.file}
+                                    // src={software.file}
+                                    src={downloadProgram(software.id)}
                                     alt=""
-
                                     className="img-fluid d-block"
-                                  />{console.log("main table", software.file_url)}
+                                  />{console.log("VVVVVV", downloadProgram(software.id))}
                                 </div>
                               </div>
 
@@ -515,7 +521,7 @@ const Software = () => {
                                   <h5 className="fs-12 mb-0">
                                     <span className="product-line-price">
                                       {" "}
-                                      {software.recommends}<button><i className="bi bi-hand-thumbs-up">d</i></button>
+                                      {software.recommends}
                                     </span>
                                   </h5>
                                 </div>
@@ -525,7 +531,6 @@ const Software = () => {
                         </Link>
                       </Card>
                     </Col>
-                  </React.Fragment>
                 ))}
               </Row>
             </div>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useMemo } from "react";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import {
+  Button,
   Card,
   CardBody,
   Col,
   Container,
   CardHeader,
-  Nav,
-  NavItem,
+  Modal,
+  ModalHeader,
   NavLink,
   Row,
   TabContent,
@@ -50,6 +51,12 @@ const AddProgram = (props) => {
   const [selectedFiles, setselectedFiles] = useState([]);
   const [cateList, setCateList] = useState([]);
   const [programCate, setProgramCate] = useState([]);
+
+  // --------------- use modal ----------
+  const [modal_positionTop, setmodal_positionTop] = useState(false);
+  function tog_positionTop() {
+    setmodal_positionTop(!modal_positionTop);
+  }
 
   const [Program, setProgram] = useState({
     name: '',
@@ -151,6 +158,26 @@ const AddProgram = (props) => {
 
         <BreadCrumb title={id ? "Edit Program" : "Add Program"} pageTitle="Admin Program" />
 
+        <Modal id="topmodal" isOpen={modal_positionTop} backdrop="static" keyboard="false" toggle={() => { tog_positionTop(); }} >
+          <ModalHeader>
+            Modal Heading
+            <Button type="button" className="btn-close" onClick={() => { setmodal_positionTop(false); }} aria-label="Close"> </Button>
+          </ModalHeader>
+          <div className="modal-body text-center p-5">
+            <lord-icon src="https://cdn.lordicon.com/pithnlch.json"
+              trigger="loop" colors="primary:#121331,secondary:#08a88a" style={{ width: "120px", height: "120px" }}>
+            </lord-icon>
+            <div className="mt-4">
+              <h4 className="mb-3">Your event has been created.</h4>
+              <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
+              <div className="hstack gap-2 justify-content-center">
+                <Link to="#" className="btn btn-link link-success fw-medium shadow-none" onClick={() => { tog_positionTop(); }}><i className="ri-close-line me-1 align-middle"></i> Close</Link>
+                <Link to="/admin-programs" className="btn btn-success">Completed</Link>
+              </div>
+            </div>
+          </div>
+        </Modal>
+
         <Row>
           <Col lg={8}>
             <form>
@@ -233,8 +260,8 @@ const AddProgram = (props) => {
                           }}
                         />
                       </div>
-                      </Col>
-                          <Col lg={6}>
+                    </Col>
+                    <Col lg={6}>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -254,8 +281,8 @@ const AddProgram = (props) => {
                         />
                       </div>
                     </Col>
-                    </Row>
-                    <Row>
+                  </Row>
+                  <Row>
 
                     <Col lg={6}>
                       <div className="mb-3">
@@ -302,8 +329,8 @@ const AddProgram = (props) => {
                         />
                       </div>
                     </Col>
-                    </Row>
-                 
+                  </Row>
+
 
                   <Row>
                     <Col lg={6}>
@@ -378,7 +405,7 @@ const AddProgram = (props) => {
                   formData.append("recommends", Program.recommends);
                   formData.append("purchases", Program.purchases);
                   formData.append("file", Program.file_url);
-                  formData.append("image_url", Program.image_url);
+                  // formData.append("image_url", Program.image_url);
                   formData.append("cost", Program.cost);
                   console.log(formData, Program);
                   if (id) {
@@ -390,6 +417,7 @@ const AddProgram = (props) => {
                       console.log(res);
                     })
                   }
+                  tog_positionTop();
                 }}>
                   {id ? "Update Program" : "Add Program"}
                 </button>

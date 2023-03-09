@@ -97,7 +97,7 @@ const ProgramCategories = (props) => {
         Cell: (ProgramCategory) => (
           <>
             <div className="d-flex align-items-center">
-              <div className="flex-shrink-0 me-3">
+              {/* <div className="flex-shrink-0 me-3">
                 <div className="avatar-sm bg-light rounded p-1">
                   <img
                     src={ProgramCategory.row.original.image}
@@ -105,7 +105,7 @@ const ProgramCategories = (props) => {
                     className="img-fluid d-block"
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="flex-grow-1">
                 <h5 className="fs-14 mb-1">
                   <Link
@@ -130,7 +130,7 @@ const ProgramCategories = (props) => {
       },
       {
         Header: "ParentId",
-        accessor: "parendId",
+        accessor: "parentId",
         filterable: false,
       },
       {
