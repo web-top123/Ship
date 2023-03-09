@@ -38,13 +38,18 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewProgram, getProgram, updateOneProgram } from "../../../helpers/fakebackend_helper";
+import { addNewProgram, getProgram, updateOneProgram, getProgramCategories } from "../../../helpers/fakebackend_helper";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+
+import DropdownTreeSelect from 'react-dropdown-tree-select';
+import 'react-dropdown-tree-select/dist/styles.css';
 
 const AddProgram = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
+  const [cateList, setCateList] = useState([]);
+  const [programCate, setProgramCate] = useState([]);
 
   const [Program, setProgram] = useState({
     name: '',
@@ -54,7 +59,8 @@ const AddProgram = (props) => {
     date: '',
     recommends: '',
     purchases: '',
-    file_url: '',
+    file_url: null,
+    image_url: '',
     cost: '',
   });
 
@@ -65,6 +71,41 @@ const AddProgram = (props) => {
       })
     }
   }, []);
+
+  var cateTree = [];
+  useEffect(() => {
+    getProgramCategories().then(res => {
+      setProgramCate(res);
+      if (id) {
+        getProgram(id).then(e => {
+          setProgram(e);
+        })
+      }
+    })
+  }, []);
+
+  useEffect(() => {
+    cateTree = [];
+    refreshTree(cateTree, 0);
+    setCateList(cateTree);
+  }, [Program, programCate]);
+
+  const refreshTree = (obj, pid) => {
+    programCate.filter(e => e.parentId == pid).map(e => {
+      var ch = {};
+      ch = { label: e.title, value: e.id, expanded: true, checked: Program.programCategoryId == e.id, children: [] };
+      obj.push(ch);
+      refreshTree(ch.children, e.id);
+    })
+  }
+
+  // useEffect(() => {
+  //   if (id) {
+  //     getProgram(id).then(res => {
+  //       setProgram(res);
+  //     })
+  //   }
+  // }, []);
 
 
   function handleAcceptedFiles(files) {
@@ -90,6 +131,19 @@ const AddProgram = (props) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
+  const onChange = (currentNode, selectedNodes) => {
+    console.log('onChange::', currentNode, selectedNodes.title)
+    if (selectedNodes.length) {
+      setProgram({ ...Program, ...{ programCategoryId: selectedNodes[0]['value'] } })
+    }
+  }
+  const onAction = (node, action) => {
+    console.log('onAction::', action, node)
+  }
+  const onNodeToggle = currentNode => {
+    console.log('onNodeToggle::', currentNode)
+  }
+
   document.title = id ? "Edit Program" : "Add Program";
   return (
     <div className="page-content">
@@ -102,43 +156,23 @@ const AddProgram = (props) => {
             <form>
               <Card>
                 <CardBody>
-                  <div className="mb-3">
-                    <Label className="form-label" htmlFor="product-title-input">
-                      Name
-                    </Label>
-                    <Input
-                      type="text"
-                      className="form-control"
-                      id="product-title-input"
-                      placeholder="Enter name"
-                      value={Program.name}
-                      onChange={e => {
-                        setProgram({ ...Program, ...{ name: e.target.value } })
-                      }}
-                    />
-                  </div>
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
-                        <label
-                          className="form-label"
-                          htmlFor="manufacturer-brand-input"
-                        >
-                          Description
-                        </label>
+                        <Label className="form-label" htmlFor="product-title-input">
+                          Name
+                        </Label>
                         <input
                           type="text"
                           className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter description"
-                          value={Program.description}
+                          id="product-title-input"
+                          placeholder="Enter name"
+                          value={Program.name}
                           onChange={e => {
-                            setProgram({ ...Program, ...{ description: e.target.value } })
+                            setProgram({ ...Program, ...{ name: e.target.value } })
                           }}
                         />
                       </div>
-                    </Col>
-                    <Col lg={6}>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -146,8 +180,8 @@ const AddProgram = (props) => {
                         >
                           Requirement
                         </label>
-                        <input
-                          type="text"
+                        <textarea
+                          rows={2}
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter requirement"
@@ -158,8 +192,27 @@ const AddProgram = (props) => {
                         />
                       </div>
                     </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Description
+                        </label>
+                        <textarea
+                          rows={6}
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter description"
+                          value={Program.description}
+                          onChange={e => {
+                            setProgram({ ...Program, ...{ description: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
                   </Row>
-
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -180,8 +233,8 @@ const AddProgram = (props) => {
                           }}
                         />
                       </div>
-                    </Col>
-                    <Col lg={6}>
+                      </Col>
+                          <Col lg={6}>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -201,29 +254,9 @@ const AddProgram = (props) => {
                         />
                       </div>
                     </Col>
-                  </Row>
+                    </Row>
+                    <Row>
 
-                  <Row>
-                    <Col lg={6}>
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          htmlFor="manufacturer-brand-input"
-                        >
-                          File_url
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter file_url"
-                          value={Program.file_url}
-                          onChange={e => {
-                            setProgram({ ...Program, ...{ file_url: e.target.value } })
-                          }}
-                        />
-                      </div>
-                    </Col>
                     <Col lg={6}>
                       <div className="mb-3">
                         <label
@@ -240,29 +273,6 @@ const AddProgram = (props) => {
                           value={Program.cost}
                           onChange={e => {
                             setProgram({ ...Program, ...{ cost: e.target.value } })
-                          }}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                  <Col lg={6}>
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          htmlFor="manufacturer-brand-input"
-                        >
-                          ProgramCategoryId
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter programCategoryId"
-                          value={Program.programCategoryId}
-                          onChange={e => {
-                            setProgram({ ...Program, ...{ programCategoryId: e.target.value } })
                           }}
                         />
                       </div>
@@ -287,9 +297,24 @@ const AddProgram = (props) => {
                             altFormat: "F j, Y",
                             mode: "single",
                             dateFormat: "d.m.y",
-                            
+
                           }}
                         />
+                      </div>
+                    </Col>
+                    </Row>
+                 
+
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          ProgramCategoryId
+                        </label>
+                        <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
                       </div>
                     </Col>
                   </Row>
@@ -298,31 +323,70 @@ const AddProgram = (props) => {
 
               <Card>
                 <CardHeader>
-                  <h5 className="card-title mb-0">Product Gallery</h5>
+                  <h5 className="card-title mb-0">Program Image</h5>
                 </CardHeader>
                 <CardBody>
-                  <div className="mb-4">
-                    <h5 className="fs-14 mb-1">Product Image</h5>
-                    <p className="text-muted">Add Product main Image.</p>
-                    <input
-                      className="form-control"
-                      id="product-image-input"
-                      type="file"
-                      accept="image/png, image/gif, image/jpeg"
-                    />
-                  </div>
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-4">
+                        <h5 className="fs-14 mb-1">Program Image</h5>
+                        <p className="text-muted">Add Program main Image.</p>
+                        <input
+                          className="form-control"
+                          id="product-image-input"
+                          type="file"
+                          accept="image/png, image/gif, image/jpeg"
+                          onChange={e => {
+                            setProgram({ ...Program, ...{ file_url: e.target.files[0] } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      {/* <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          File
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter description"
+                          value={Program.image_url}
+                          onChange={e => {
+                            setProgram({ ...Program, ...{ image_url: e.target.value } })
+                          }}
+                        />
+                      </div> */}
+                    </Col>
+                  </Row>
                 </CardBody>
               </Card>
 
               <div className="text-end mb-3">
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {
                   e.preventDefault();
+                  const formData = new FormData();
+                  formData.append("name", Program.name);
+                  formData.append("description", Program.description);
+                  formData.append("requirement", Program.requirement);
+                  formData.append("programCategoryId", Program.programCategoryId);
+                  formData.append("date", Program.date);
+                  formData.append("recommends", Program.recommends);
+                  formData.append("purchases", Program.purchases);
+                  formData.append("file", Program.file_url);
+                  formData.append("image_url", Program.image_url);
+                  formData.append("cost", Program.cost);
+                  console.log(formData, Program);
                   if (id) {
-                    updateOneProgram(id, Program).then(res => {
+                    updateOneProgram(id, formData).then(res => {
                       console.log(res);
                     })
                   } else {
-                    addNewProgram(Program).then(res => {
+                    addNewProgram(formData).then(res => {
                       console.log(res);
                     })
                   }

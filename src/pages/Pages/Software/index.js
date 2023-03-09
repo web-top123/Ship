@@ -45,6 +45,7 @@ const Software = () => {
     if (selectedCategoryId == 1) {
       getAllSoftware().then(sofwareList => {
         setsoftwareData(sofwareList);
+        console.log(softwareList);
       });
     } else {
       getAllSoftwareByCategory(selectedCategoryId).then(categoryData => {
@@ -202,16 +203,16 @@ const Software = () => {
           <CardBody>
             <Row className="d-flex ">
               <div className="col-sm-5">
-              <div className="avatar-lg bg-light rounded p-1">
-                <img src={image_url}  alt="..." className="img-fluid d-block"></img>
-              </div></div>
+                <div className="avatar-lg bg-light rounded p-1">
+                  <img src={image_url} alt="..." className="img-fluid d-block"></img>
+                </div></div>
               <div className="col-sm-7">
                 <br />
                 <h5 className="fs-15">Name : {name}</h5>
                 <h5 className="fs-15">Date : {date}</h5>
                 <h5 className="fs-15">Requirement : {requirement}</h5>
               </div>
-              
+
             </Row>
             <Row className="pt-3">
               <div className="col-sm-5">
@@ -336,17 +337,17 @@ const Software = () => {
 
             <Row className='d-flex' >
               <div className="col-sm-4">
-              <Link to="/pages-software-detail"><Button color="primary" onClick={() => { tog_togSecond(false); }}  >
-                Buy
-              </Button></Link></div>
+                <Link to="/pages-software-detail"><Button color="primary" onClick={() => { tog_togSecond(false); }}  >
+                  Buy
+                </Button></Link></div>
               <div className="col-sm-4">
-              <Link to="/pages-profile-settings"><Button color="primary" onClick={() => { }}>
-                Charging score
-              </Button></Link></div>
+                <Link to="/pages-profile-settings"><Button color="primary" onClick={() => { }}>
+                  Charging score
+                </Button></Link></div>
               <div className="col-sm-4">
-              <Link to="/pages-profile-settings"><Button color="primary" onClick={() => { }} >
-                Download
-              </Button></Link></div>
+                <Link to="/pages-profile-settings"><Button color="primary" onClick={() => { }} >
+                  Download
+                </Button></Link></div>
 
             </Row><br /><br />
           </div>
@@ -386,7 +387,7 @@ const Software = () => {
                           style={{
                             marginLeft: 20 * (level - 1),
                             opacity: isDisabled ? 0.5 : 1,
-                          
+
                           }}
                         >
                           {isBranch && <ArrowIcon isOpen={isExpanded} />}
@@ -394,15 +395,15 @@ const Software = () => {
                             // tog_togFirst(element)
                           }}>
                             {element.name}
-                          
-                          <button style={{border:"none", backgroundColor:"lightblue", width:"40px", height:"19px", borderRadius:"8px"}} onClick={() => {
-                            console.log(originalCategoryList);
-                            let selectedCategory = originalCategoryList.find(category => {
-                              return category.title == element.name;
-                            })
-                            setSelectedCategoryId(selectedCategory.id);
-                          }} className="">  <i className="las la-angle-right fs-12" ></i>
-                          </button></span>
+
+                            <button style={{ border: "none", backgroundColor: "lightblue", width: "40px", height: "19px", borderRadius: "8px" }} onClick={() => {
+                              console.log(originalCategoryList);
+                              let selectedCategory = originalCategoryList.find(category => {
+                                return category.title == element.name;
+                              })
+                              setSelectedCategoryId(selectedCategory.id);
+                            }} className="">  <i className="las la-angle-right fs-12" ></i>
+                            </button></span>
                         </div>
                       );
                     }}
@@ -467,10 +468,11 @@ const Software = () => {
                               <div className="col-sm-6">
                                 <div className="avatar-lg bg-light rounded p-1">
                                   <img
-                                    src={software.image_url}
+                                    src={software.file}
                                     alt=""
+                                    
                                     className="img-fluid d-block"
-                                  />
+                                  />{console.log(software.file_url)}
                                 </div>
                               </div>
 
@@ -487,11 +489,11 @@ const Software = () => {
                               <div className="col-sm-6">
                                 <div className="d-flex align-items-center gap-2 text-muted">
                                   <div>Cost:</div>
-
                                   <h5 className="fs-12 mb-0">
                                     <span className="product-line-price">
                                       {" "}
                                       {software.cost}
+                                      
                                     </span>
                                   </h5>
                                 </div>
