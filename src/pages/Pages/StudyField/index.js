@@ -36,6 +36,7 @@ import cx from "classnames";
 //selection category
 import Select from "react-select";
 import { getAllStudyByCategory, getAllStudy, getCampusCategories,getTopReaders } from '../../../helpers/fakebackend_helper';
+import { preventDefault } from "@fullcalendar/react";
 const Study  = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const fetchData = async () => {
@@ -112,12 +113,12 @@ const Study  = () => {
     // setCategory(selectedSingle);
 
   }
-  const SingleOptions = [
-    { value: 'folder1', label: 'Choices 1' },
-    { value: 'folder2', label: 'Choices 2' },
-    { value: 'folder3', label: 'Choices 3' },
-    { value: 'folder4', label: 'Choices 4' }
-  ];
+  // const SingleOptions = [
+  //   { value: 'folder1', label: 'Choices 1' },
+  //   { value: 'folder2', label: 'Choices 2' },
+  //   { value: 'folder3', label: 'Choices 3' },
+  //   { value: 'folder4', label: 'Choices 4' }
+  // ];
 
   // Data
   const [productLists, setproductLists] = useState(sellersList);
@@ -270,11 +271,11 @@ const Study  = () => {
               <TabPane tabId="2" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100 Won</p>
+                    <span>current: </span><p>100 </p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p>100 Won</p>
+                    <span>pay: </span><p>{price}</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -301,7 +302,7 @@ const Study  = () => {
 
         <Row>
           <Col xl={3} lg={4}>
-            <CardHeader className="border-bottom" >
+            {/* <CardHeader className="border-bottom" >
               <Select
                 value={selectedSingle}
                 onChange={() => {
@@ -309,7 +310,7 @@ const Study  = () => {
                 }}
                 options={SingleOptions}
               />
-            </CardHeader>
+            </CardHeader> */}
             <Card>
               <div className="accordion accordion-flush ">
                 <div className="card-body border-bottom">
@@ -360,7 +361,7 @@ const Study  = () => {
                 </div>
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
-                    Top reader
+                    Top Article
                   </p>
 
                   <div className="p-3">{TopcampusData.map((campusItem, key) => (
@@ -371,9 +372,7 @@ const Study  = () => {
                         >
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
-                              <div className="flex-shrink-0 me-3">
-                                <img src={campusItem.image_url} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
-                              </div>
+                              
                               <div className="flex-grow-1">
                                 <h5 className="fs-14">{campusItem.name}</h5>
                                 <h5 className="fs-14">{campusItem.recommends}</h5>

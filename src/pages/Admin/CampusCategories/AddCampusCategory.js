@@ -154,8 +154,9 @@ const AddCampusCategory = (props) => {
                         >
                           Description
                         </label>
-                        <input
-                          type="text"
+                        <textarea
+                          
+                          style={{height:"100px"}}
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter description"
@@ -194,7 +195,7 @@ const AddCampusCategory = (props) => {
                 </CardBody>
               </Card>
 
-              <Card>
+              {/* <Card>
                 <CardHeader>
                   <h5 className="card-title mb-0">Product Gallery</h5>
                 </CardHeader>
@@ -210,7 +211,7 @@ const AddCampusCategory = (props) => {
                     />
                   </div>
                 </CardBody>
-              </Card>
+              </Card> */}
 
               <div className="text-end mb-3">
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {
