@@ -49,8 +49,8 @@ const Study = () => {
         setTopcampusData(res);
 
       });
-      getAllStudy().then(sofwareList => {
-        setstudyData(sofwareList);
+      getAllStudy().then(studyFieldList => {
+        setstudyData(studyFieldList);
       });
     } else {
       getAllStudyByCategory(selectedCategoryId).then(categoryData => {
@@ -276,7 +276,7 @@ const Study = () => {
               <TabPane tabId="1" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100</p>
+                    <span>current: </span><p>3000</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -284,14 +284,14 @@ const Study = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>real valance: </span><p>none</p>
+                    <span>real valance: </span><p>{3000-price}</p>
                   </div><br /><hr /><br />
                 </div>
               </TabPane>
               <TabPane tabId="2" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>100 </p>
+                    <span>current: </span><p>2000 </p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
@@ -299,7 +299,7 @@ const Study = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>free valance: </span><p>none</p>
+                    <span>free valance: </span><p>{2000-price}</p>
                   </div><br /><hr /><br />
                 </div>
               </TabPane>
@@ -307,7 +307,7 @@ const Study = () => {
 
             <div className='d-flex'>
               <div className="col-sm-4">
-            <Link to="/pages-study-detail"><Button color="primary" onClick={() => { 
+            <Link to={"/pages-study-detail/"+campusId}><Button color="primary" onClick={() => { 
                   console.log("campusId", campusId); 
                   addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId }) 
                 }} >

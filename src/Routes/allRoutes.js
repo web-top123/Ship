@@ -602,7 +602,7 @@ const publicRoutes = [
   { path: "/view-ship-data", component: ViewShipData},
   { path: "/ship-details/:id", component: ShipDetails},
   { path: "/new-data-vote/:id", component: NewDataVote},
-  { path: "/pages-study-detail", component: StudyDetail},
+  { path: "/pages-study-detail/:id", component: StudyDetail},
 
 
   //AuthenticationInner pages 
