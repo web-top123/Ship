@@ -10,6 +10,9 @@ import {
   NavItem,
   NavLink,
   Row,
+  Modal,
+  Button,
+  ModalHeader,
   TabContent,
   TabPane,
   Input,
@@ -59,6 +62,10 @@ const AddCampus = (props) => {
   const [selectedFiles, setselectedFiles] = useState([]);
   const [cateList, setCateList] = useState([]);
   const [campusCate, setCampusCate] = useState([]);
+  const [modalPositionTop, setmodalPositionTop] = useState(false);
+  function togPositionTop() {
+    setmodalPositionTop(!modalPositionTop);
+  }
 
   const [Campus, setCampus] = useState({
     name: '',
@@ -139,6 +146,25 @@ const AddCampus = (props) => {
 
         <BreadCrumb title={id ? "Edit Campus" : "Add Campus"} pageTitle="Admin Campus" />
 
+        <Modal id="topmodal" isOpen={modalPositionTop} backdrop="static" keyboard="false" toggle={() => { togPositionTop(); }} >
+          <ModalHeader>
+            Modal Heading
+            <Button type="button" className="btn-close" onClick={() => { setmodalPositionTop(false); }} aria-label="Close"> </Button>
+          </ModalHeader>
+          <div className="modal-body text-center p-5">
+            <lord-icon src="https://cdn.lordicon.com/pithnlch.json"
+              trigger="loop" colors="primary:#121331,secondary:#08a88a" style={{ width: "120px", height: "120px" }}>
+            </lord-icon>
+            <div className="mt-4">
+              <h4 className="mb-3">Your event has been created.</h4>
+              <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
+              <div className="hstack gap-2 justify-content-center">
+                <Link to="#" className="btn btn-link link-success fw-medium shadow-none" onClick={() => { togPositionTop(); }}><i className="ri-close-line me-1 align-middle"></i> Close</Link>
+                <Link to="/admin-campuses" className="btn btn-success">Completed</Link>
+              </div>
+            </div>
+          </div>
+        </Modal>
         <Row>
           <Col lg={8}>
             <form>
@@ -289,6 +315,7 @@ const AddCampus = (props) => {
                       console.log(res);
                     })
                   }
+                  togPositionTop();
                 }}>
                   {id ? "Update Campus" : "Add Campus"}
                 </button>
