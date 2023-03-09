@@ -32,6 +32,7 @@ import { Link } from "react-router-dom";
 //treeview
 import TreeView, { flattenTree } from "react-accessible-treeview";
 import { IoMdArrowDropright } from "react-icons/io";
+import { RiCheckboxBlankLine, RiCheckboxIndeterminateLine, RiCheckboxLine } from "react-icons/ri";
 import cx from "classnames";
 //selection category
 import Select from "react-select";
@@ -57,14 +58,14 @@ const Study  = () => {
   const [studyData, setstudyData] = useState([]);
   const [TopcampusData, setTopcampusData] = useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
-    useEffect(() => {
-      getCategoryList();
-      fetchData();
-    }, []);
+  useEffect(() => {
+    getCategoryList();
+    fetchData();
+  }, []);
 
-    useEffect(() => {
-      fetchData();
-    }, [selectedCategoryId])
+  useEffect(() => {
+    fetchData();
+  }, [selectedCategoryId])
   function getCategoryList() {
     getCampusCategories().then(categoryList => {
       let nodes = [];
@@ -151,7 +152,7 @@ const Study  = () => {
   const [modal_togSecond, setmodal_togSecond] = useState(false);
 
   function tog_togSecond() {
-   // setPrice(value.cost);
+    // setPrice(value.cost);
     setmodal_togSecond(!modal_togSecond);
   }
 
@@ -172,6 +173,19 @@ const Study  = () => {
 
     return <IoMdArrowDropright className={classes} />;
   };
+  const CheckBoxIcon = ({ variant, ...rest }) => {
+    switch (variant) {
+      case "all":
+        return <RiCheckboxLine {...rest} />;
+      case "none":
+        return <RiCheckboxBlankLine  {...rest} />;
+      case "some":
+        return <RiCheckboxIndeterminateLine {...rest} />;
+      default:
+        return null;
+    }
+  };
+
   const [expandedIds, setExpandedIds] = useState();
   return (
     <div className="page-content">
@@ -320,14 +334,21 @@ const Study  = () => {
                   <TreeView
                     data={data}
                     className="basic p-2"
-                    aria-label="Controlled expanded node tree"
+                    aria-label="Checkbox tree"
                     expandedIds={expandedIds}
+                    multiSelect
+                    propagateSelect
+                    propagateSelectUpwards
+                    togglableSelect
                     defaultExpandedIds={[1]}
                     nodeRenderer={({
                       element,
                       isBranch,
                       isExpanded,
                       isDisabled,
+                      isSelected,
+                      handleSelect,
+                      isHalfSelected,
                       getNodeProps,
                       level,
                       handleExpand,
@@ -341,19 +362,30 @@ const Study  = () => {
                           }}
                         >
                           {isBranch && <ArrowIcon isOpen={isExpanded} />}
+                          <CheckBoxIcon
+                            className="checkbox-icon"
+                            onClick={(e) => {
+                              console.log("AAAAAA", e);
+                              handleSelect(e);
+                              e.stopPropagation();
+                            }}
+                            variant={
+                              isHalfSelected ? "some" : isSelected ? "all" : "none"
+                            }
+                          />
                           <span className="name" onClick={() => {
                             // tog_togFirst(element)
-                            }}>
+                          }}>
                             {element.name}
                           </span>
-                          <button style={{border:"none", backgroundColor:"lightblue", width:"40px", height:"19px", borderRadius:"8px"}} onClick={() => {
+                          {/* <button style={{ border: "none", backgroundColor: "lightblue", width: "40px", height: "19px", borderRadius: "8px" }} onClick={() => {
                             console.log(originalCategoryList);
                             let selectedCategory = originalCategoryList.find(category => {
                               return category.title === element.name;
                             })
                             setSelectedCategoryId(selectedCategory.id);
                           }} className=""><i className="las la-angle-right fs-10" ></i>
-                          </button>
+                          </button> */}
                         </div>
                       );
                     }}
@@ -439,7 +471,7 @@ const Study  = () => {
   );
 };
 
-export default Study  ;
+export default Study;
 
 
 

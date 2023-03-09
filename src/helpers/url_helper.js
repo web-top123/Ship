@@ -255,7 +255,7 @@ export const DELETE_MEDIA = "/api/media/delete";
 export const DOWNLOAD_MEDIA ="/api/media/fileById";
 
 //QUESTION
-export const GET_QUESTIONS = "/api/questions/get_All";
+export const GET_QUESTIONS = "/api/questions/find_all";
 export const GET_QUESTION = "/api/questions/get_one";
 export const ADD_NEW_QUESTION = "/api/questions/create";
 export const UPDATE_QUESTION = "/api/questions/update";
