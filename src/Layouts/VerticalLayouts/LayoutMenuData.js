@@ -407,22 +407,22 @@ const Navdata = () => {
                     childItems: [
                         { id: 1, label: "List", link: "/admin-questions", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-question", parentId: "admin" },
-                        {
-                            id: "admin-answer",
-                            label: "answer",
-                            link: "/#",
-                            isChildItem: true,
-                            click: function (e) {
-                                e.preventDefault();
-                                setIsAnswer(!isAnswer);
-                            },
-                            parentId: "admin",
-                            stateVariables: isAnswer,
-                            childItems: [
-                                { id: 1, label: "List", link: "/admin-answers", parentId: "admin" },
-                                { id: 2, label: "Create", link: "/admin-add-answer", parentId: "admin" },
-                            ]
-                        },
+                        // {
+                        //     id: "admin-answer",
+                        //     label: "answer",
+                        //     link: "/#",
+                        //     isChildItem: true,
+                        //     click: function (e) {
+                        //         e.preventDefault();
+                        //         setIsAnswer(!isAnswer);
+                        //     },
+                        //     parentId: "admin",
+                        //     stateVariables: isAnswer,
+                        //     childItems: [
+                        //         { id: 1, label: "List", link: "/admin-answers", parentId: "admin" },
+                        //         { id: 2, label: "Create", link: "/admin-add-answer", parentId: "admin" },
+                        //     ]
+                        // },
                     ]
                 },
                 {
