@@ -196,7 +196,6 @@ const AddNotification = (props) => {
                 </CardBody>
               </Card>
 
-
               <div className="text-end mb-3">
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {
                   e.preventDefault();

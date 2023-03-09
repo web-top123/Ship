@@ -17,7 +17,6 @@ import DeleteModal from "../../../Components/Common/DeleteModal";
 
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import TableContainer from "../../../Components/Common/TableContainer";
-   
 
 //redux
 import { Link } from "react-router-dom";
@@ -95,7 +94,7 @@ const Questions = (props) => {
       
       {
         Header: "degree",
-        accessor: "degreeId",
+        accessor: "degree.name",
         filterable: false,
       },
       {

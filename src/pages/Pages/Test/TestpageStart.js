@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
-import { Button, Card, CardBody, CardHeader, Label, Col, Container, Row, Input, Modal, ModalHeader,  Nav, NavItem, NavLink, TabContent, TabPane, UncontrolledTooltip  } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Card, CardBody, CardHeader, Label, Col, Container, Row, Input, Modal, ModalHeader, Nav, NavItem, NavLink, TabContent, TabPane, UncontrolledTooltip } from 'reactstrap';
 import "./test-page-custom.css";
 
 import { Link } from 'react-router-dom';
 import classnames from "classnames";
 
+import { getDegrees, getDegree } from "../../../helpers/fakebackend_helper";
+
 
 
 const TestPage = () => {
+
+    // fetch degree data
+    const fetchData = async () => {
+        getDegrees().then(degreeList => {
+            setDegrees(degreeList);
+        });
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const [degree, setDegrees] = useState([]);
+
     // Modal
     const [modal_togFirst, setmodal_togFirst] = useState(false);
     function tog_togFirst() {
@@ -41,44 +57,16 @@ const TestPage = () => {
                                 <Row className="m-5">
                                     <Col lg={12}>
                                         <h2 className="select-title-customer m-5">Select Your Roll Below Items</h2>
+
                                         <div className="d-flex flex-wrap gap-2">
-                                            <div className="live-preview">
-                                                <div className="hstack gap-2 flex-wrap">
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption1"/>
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption1">Caption</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption2" />
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption2">Engineer manager</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption3"/>
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption3">Vice-caption</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption4" />
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption4">Bosun</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption5"/>
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption5">Vice-E.manager</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption6" />
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption6">Sailor</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption7"/>
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption7">Communicator</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption8" />
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption8">Bosun member</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption9" />
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption9">Engineer</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption10"/>
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption10">Electircian</Label>
-
-                                                    <Input type="radio" className="btn-check" name="optios" id="ption11" />
-                                                    <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="ption11">2nd Engineer</Label>
+                                            {degree.map((degree, key) => (
+                                                <div className="live-preview" key={degree.id}>
+                                                    <div className="hstack gap-2 flex-wrap">
+                                                        <Input type="radio" className="btn-check" name="optios" id={degree.name} />
+                                                        <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for={degree.name}>{degree.name}</Label>
+                                                    </div>
                                                 </div>
-                                            </div>
-
+                                            ))}
                                         </div>
                                     </Col>
                                 </Row>
@@ -86,14 +74,14 @@ const TestPage = () => {
                                     <Col lg={12}>
                                         <h2 className="select-title-customer m-5">Select Your Roll Degree</h2>
                                         <div className="d-flex flex-wrap gap-2">
-                                            <Input type="radio" className="btn-check" name="options" id="option1"/>
-                                            <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="option1" size='lg'> Engineer 1st </Label>
+                                            <Input type="radio" className="btn-check" name="options" id="option1" />
+                                            <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for="option1" size='lg'> Engineer 1st </Label>
 
-                                            <Input type="radio" className="btn-check" name="options" id="option2"/>
-                                            <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="option2" size='lg'> Engineer 2nd </Label>
+                                            <Input type="radio" className="btn-check" name="options" id="option2" />
+                                            <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for="option2" size='lg'> Engineer 2nd </Label>
 
-                                            <Input type="radio" className="btn-check" name="options" id="option3"/>
-                                            <Label className="btn btn-outline-secondary" style={{border: 'none', }} for="option3" size='lg'> Engineer 3rd </Label>
+                                            <Input type="radio" className="btn-check" name="options" id="option3" />
+                                            <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for="option3" size='lg'> Engineer 3rd </Label>
                                         </div>
                                     </Col>
                                 </Row>
@@ -128,7 +116,7 @@ const TestPage = () => {
                 </ModalHeader>
                 <div className="modal-body text-center">
                     <div className=" ">
-                        <h4  className="mb-4">You can purchase with real or free score</h4>
+                        <h4 className="mb-4">You can purchase with real or free score</h4>
                         <Nav tabs className="nav nav-tabs nav-border-top nav-border-top-primary mb-3">
                             <NavItem>
                                 <NavLink style={{ cursor: "pointer" }} className={classnames({ active: topBorderjustifyTab === "1", })} onClick={() => { topBorderJustifytoggle("1"); }} >
@@ -147,13 +135,13 @@ const TestPage = () => {
                                 <div className="d-block purchase-pro-setting mt-5">
                                     <div className="flex-grow-1 ms-2 purchase-border-bottom">
                                         <span>current: </span><p>100 Won</p>
-                                    </div><br/><hr/>
+                                    </div><br /><hr />
                                     <div className="flex-grow-1 ms-2 purchase-border-bottom">
                                         <span>pay: </span><p>100 Won</p>
-                                    </div><br/><hr/>
+                                    </div><br /><hr />
                                     <div className="flex-grow-1 ms-2 purchase-border-bottom">
                                         <span>real valance: </span><p>none</p>
-                                    </div><br/><hr/><br/>
+                                    </div><br /><hr /><br />
                                 </div>
                             </TabPane>
 
@@ -161,24 +149,24 @@ const TestPage = () => {
                                 <div className="d-block purchase-pro-setting mt-5">
                                     <div className="flex-grow-1 ms-2 purchase-border-bottom">
                                         <span>current: </span><p>100 Won</p>
-                                    </div><br/><hr/>
+                                    </div><br /><hr />
                                     <div className="flex-grow-1 ms-2 purchase-border-bottom">
                                         <span>pay: </span><p>100 Won</p>
-                                    </div><br/><hr/>
+                                    </div><br /><hr />
                                     <div className="flex-grow-1 ms-2 purchase-border-bottom">
                                         <span>free valance: </span><p>none</p>
-                                    </div><br/><hr/><br/>
+                                    </div><br /><hr /><br />
                                 </div>
                             </TabPane>
                         </TabContent>
                         <div className='purchase-button-group mb-5'>
-                            <Button color="primary" onClick={() => { tog_togSecond(); tog_togFirst(false); }} style={{float: "left"}}>
+                            <Button color="primary" onClick={() => { tog_togSecond(); tog_togFirst(false); }} style={{ float: "left" }}>
                                 buy
                             </Button>
-                            <Button color="primary" onClick={() => { }} style={{float: "right"}}>
+                            <Button color="primary" onClick={() => { }} style={{ float: "right" }}>
                                 charging score
                             </Button>
-                        </div><br/><br/>
+                        </div><br /><br />
                     </div>
                 </div>
             </Modal>

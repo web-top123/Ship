@@ -11,7 +11,7 @@ import {
 import Flatpickr from "react-flatpickr";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { addNewQuestion, getQuestion, updateOneQuestion } from "../../../helpers/fakebackend_helper";
-
+import { addNewAnswer, getAnswer, deleteAnswer, getAnswers } from "../../../helpers/fakebackend_helper";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -23,13 +23,6 @@ import { FadeRightExample } from "../../AdvanceUi/UiAnimation/UiAnimationCode";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
-const QuestionReview = (props) => {
-};
-
-const PricingWidgetList = (props) => {
-};
-
-
 function QuestionDetail(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
@@ -37,6 +30,7 @@ function QuestionDetail(props) {
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
   const [question, setQuestion] = useState({
+    id: '',
     degreeId: '',
     level: '',
     description: '',
@@ -44,21 +38,98 @@ function QuestionDetail(props) {
 
   const [modal_list, setmodal_list] = useState(false);
   function tog_list() {
-      setmodal_list(!modal_list);
+    setmodal_list(!modal_list);
   }
 
   const [modal_delete, setmodal_delete] = useState(false);
   function tog_delete() {
-      setmodal_delete(!modal_delete);
+    setmodal_delete(!modal_delete);
   }
+  // useEffect(() => {
+  //   // getAnswerList();
+
+  // }, []); 
+
+  // const getAnswerList = () => {
+
+
+  // }
+
+  //delete order
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(0);
+  const [currentID, setCurrentID] = useState(false);
+  const [answers, setAnswers] = useState([]);
+  const [newAnswer, setNewAnswer] = useState({
+    description: "",
+    result: "1",
+    questionId: ""
+  });
+
+  const onClickDelete = (answer) => {
+    setCurrentID(answer.id);
+    // setAnswer(answer);
+    setDeleteModal(true);
+  };
+
+  const handleDeleteAnswer = () => {
+    if (currentID) {
+      deleteAnswer(currentID).then(res => {
+        if (res == 1) {
+          getAnswerList();
+          setDeleteModal(false);
+        } else {
+          setDeleteModal(false);
+        }
+      })
+    }
+  };
+
+  // const columns = useMemo(
+  //   () => [      
+  //     {
+  //       Header: "Answer",
+  //       accessor: "answer",
+  //       filterable: false,
+  //     },
+  //     {
+  //       Header: "Action",
+  //       accessor: "action",
+  //       filterable: false,
+  //     },
+  //   ],
+  //   []
+  // );
 
   useEffect(() => {
+    setNewAnswer({ ...newAnswer, ...{ questionId: id } })
     if (id) {
       getQuestion(id).then(res => {
-        setQuestion(res);
+        setQuestion({
+          ...question,
+          ...{ id: res.id },
+          ...{ degreeId: res.degree.name },
+          ...{ level: res.level },
+          ...{ description: res.description },
+        });
+        console.log(res);
+        getAnswers(res.id).then(res => {
+          // setAnswerList(res);
+          setAnswers(res.answers);
+        })
       })
     }
   }, []);
+
+  useEffect(() => {
+    if (id) {
+      getAnswers(id).then(res => {
+        // setAnswerList(res);
+        setAnswers(res.answers);
+      })
+    }
+  }, [answers.length]);
+
   const toggleCustom = tab => {
     if (customActiveTab !== tab) {
       setcustomActiveTab(tab);
@@ -79,14 +150,14 @@ function QuestionDetail(props) {
                     <Col xl={8}>
                       <div className="mt-xl-0 mt-5">
                         <div className="d-flex">
-                          <h5 className="fs-14 mb-3">{question.degreeId} {question.level} Level</h5>
+                          <h4 className="card-title mb-0">{question.degreeId} {question.level} Level</h4>
                         </div>
 
                         <div className="table-responsive">
                           <table className="table mb-0">
                             <tbody>
                               <tr>
-                                <th scope="row"> description :</th>
+                                <th scope="row"> Question :</th>
                                 <td>{question.description}</td>
                                 <td>                            <Tooltip
                                   placement="top"
@@ -111,12 +182,6 @@ function QuestionDetail(props) {
                                     <i className="ri-pencil-fill align-bottom"></i>
                                   </a>
                                 </td>
-                                <td>
-                                  <div className="d-flex gap-1" >
-                                    <Button color="success" className="add-btn" onClick={() => tog_list()} id="create-btn"><i className="ri-add-line align-bottom me-1"></i> Add</Button>
-                                    <Button color="soft-danger"><i className="ri-delete-bin-2-line"></i></Button>
-                                  </div>
-                                </td>
                               </tr>
                             </tbody>
                           </table>
@@ -124,57 +189,69 @@ function QuestionDetail(props) {
                       </div>
                     </Col>
                   </Row>
-                  </CardBody>
-                  </Card>
-                  <Card>
-                    <CardBody>
+                </CardBody>
+              </Card>
+              <Card>
+                <CardBody>
                   <Row>
+                    <div className="d-flex gap-1" >
+                      <Button color="success" className="add-btn" onClick={() => tog_list()} id="create-btn"><i className="ri-add-line align-bottom me-1"></i> Add</Button>
+                      <Button color="soft-danger"><i className="ri-delete-bin-2-line"></i></Button>
+                    </div>
+                  </Row>
+                  <Row>
+
+
                     <div className="table-responsive table-card mt-3 mb-1">
                       <table className="table align-middle table-nowrap" id="customerTable">
                         <thead className="table-light">
                           <tr>
-                            <th scope="col" style={{ width: "50px" }}>
-                              <div className="form-check">
-                                <input className="form-check-input" type="checkbox" id="checkAll" value="option" />
-                              </div>
-                            </th>
-                            <th className="sort" data-sort="customer_name">Customer</th>
-                            <th className="sort" data-sort="email">Email</th>
-                            <th className="sort" data-sort="phone">Phone</th>
-                            <th className="sort" data-sort="date">Joining Date</th>
-                            <th className="sort" data-sort="status">Delivery Status</th>
-                            <th className="sort" data-sort="action">Action</th>
+                            <th className="sort" data-sort="phone">Answer</th>
+                            <th className="sort" data-sort="phone">Action</th>
+                            <th className="sort" data-sort="phone">Edit</th>
                           </tr>
                         </thead>
                         <tbody className="list form-check-all">
-                          <tr>
-                            <th scope="row">
-                              <div className="form-check">
-                                <input className="form-check-input" type="checkbox" name="checkAll" value="option1" />
-                              </div>
-                            </th>
-                            <td className="id" style={{ display: "none" }}><Link to="#" className="fw-medium link-primary">#VZ2101</Link></td>
-                            <td className="customer_name">Mary Cousar</td>
-                            <td className="email">marycousar@velzon.com</td>
-                            <td className="phone">580-464-4694</td>
-                            <td className="date">06 Apr, 2021</td>
-                            <td className="status"><span className="badge badge-soft-success text-uppercase">Active</span></td>
-                            <td>
-                              <div className="d-flex gap-2">
-                                <div className="edit">
-                                  <button className="btn btn-sm btn-success edit-item-btn"
-                                    data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
-                                </div>
-                                <div className="remove">
-                                  <button className="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Remove</button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
+                          {
+                            answers.map((answer) => {
+                              return (
+                                // <Record
+                                // // record={record}
+                                // // deleteRecord={() => deleteRecord(record._id)}
+                                // // key={record._id}
+                                // />
+                                <tr>
+                                  <td className="email">{answer.description}</td>
+                                  <td className="status">
+                                    {answer.result == 1 ? <span className="badge badge-soft-success text-uppercase">True</span> : <span className="badge badge-soft-danger text-uppercase">False</span>}
+                                  </td>
+                                  <td>
+                                    <div className="d-flex gap-2">
+                                      {/* <div className="edit">
+                                        <button className="btn btn-sm btn-success edit-item-btn"
+                                          data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
+                                      </div> */}
+                                      <div className="remove">
+                                        <button className="btn btn-sm btn-danger remove-item-btn"
+                                          onClick={() => { 
+                                            setDeleteId(answer.id);
+                                            tog_delete() }}
+                                        >
+                                          Remove</button>
+                                        {/* <Button color="success" className="add-btn" onClick={() => tog_delete()} id="create-btn"><i className="ri-add-line align-bottom me-1"></i> Add</Button> */}
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              );
+                            })
+                          }
+
+
                         </tbody>
                       </table>
                     </div>
-                    <div className="d-flex justify-content-end">
+                    {/* <div className="d-flex justify-content-end">
                       <div className="pagination-wrap hstack gap-2">
                         <Link className="page-item pagination-prev disabled" to="#">
                           Previous
@@ -184,7 +261,7 @@ function QuestionDetail(props) {
                           Next
                         </Link>
                       </div>
-                    </div>
+                    </div> */}
                   </Row>
                 </CardBody>
               </Card>
@@ -196,7 +273,7 @@ function QuestionDetail(props) {
       {/* Add Modal */}
       <Modal isOpen={modal_list} toggle={() => { tog_list(); }} centered >
         <div className="modal-header bg-light p-3">
-          Add Customer
+          {question.degreeId} {question.level} Level
           <Button type="button" onClick={() => { setmodal_list(false); }} className="btn-close" aria-label="Close" >
           </Button>
         </div>
@@ -208,51 +285,46 @@ function QuestionDetail(props) {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="customername-field" className="form-label">Customer Name</label>
-              <input type="text" id="customername-field" className="form-control" placeholder="Enter Name" required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="email-field" className="form-label">Email</label>
-              <input type="email" id="email-field" className="form-control" placeholder="Enter Email" required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="phone-field" className="form-label">Phone</label>
-              <input type="text" id="phone-field" className="form-control" placeholder="Enter Phone no." required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="date-field" className="form-label">Joining Date</label>
-              <Flatpickr
-                className="form-control"
-                options={{
-                  dateFormat: "d M, Y"
+              <label htmlFor="customername-field" className="form-label">Add Answer</label>
+              <textarea type="text" id="customername-field" className="form-control" placeholder="Enter Answer"
+                // value={answer.answer} 
+                onChange={e => {
+                  setNewAnswer({ ...newAnswer, ...{ description: e.target.value } })
                 }}
-                placeholder="Select Date"
-              />
+                required />
             </div>
-
             <div>
-              <label htmlFor="status-field" className="form-label">Status</label>
-              <select className="form-control" data-trigger name="status-field" id="status-field" >
-                <option value="">Status</option>
-                <option value="Active">Active</option>
-                <option value="Block">Block</option>
+              <label htmlFor="status-field" className="form-label">Action</label>
+              <select className="form-control" data-trigger name="status-field" id="status-field"
+                onChange={e => {
+                  setNewAnswer({ ...newAnswer, ...{ result: e.target.value } })
+                }} >
+                {/* <option value="">  </option> */}
+                <option value="1">True</option>
+                <option value="0">False</option>
               </select>
             </div>
           </ModalBody>
           <ModalFooter>
             <div className="hstack gap-2 justify-content-end">
               <button type="button" className="btn btn-light" onClick={() => setmodal_list(false)}>Close</button>
-              <button type="submit" className="btn btn-success" id="add-btn">Add Customer</button>
-              <button type="button" className="btn btn-success" id="edit-btn">Update</button>
+              <button type="submit" className="btn btn-success" id="add-btn" onClick={e => {
+                console.log(newAnswer);
+                e.preventDefault();
+                addNewAnswer(newAnswer).then(res => {
+                  getAnswers(id).then(res => {
+                    setAnswers(res.answers);
+                  })
+                  console.log("SS", res);
+                })
+                // }
+              }}>Add Answer</button>
             </div>
           </ModalFooter>
         </form>
       </Modal>
       {/* Remove Modal */}
-      <Modal isOpen={modal_delete} toggle={() => { tog_delete(); }} className="modal fade zoomIn" id="deleteRecordModal" centered >
+      <Modal isOpen={modal_delete} toggle={() => { tog_delete(); }} centered >
         <div className="modal-header">
           <Button type="button" onClick={() => setmodal_delete(false)} className="btn-close" aria-label="Close"> </Button>
         </div>
@@ -262,12 +334,22 @@ function QuestionDetail(props) {
               colors="primary:#ffbe0b,secondary:#f06548" style={{ width: "100px", height: "100px" }}></lord-icon>
             <div className="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
               <h4>Are you Sure ?</h4>
-              <p className="text-muted mx-4 mb-0">Are you Sure You want to Remove this Record ?</p>
+              <p className="text-muted mx-4 mb-0">Are you Sure You want to Remove this Answer ?</p>
             </div>
           </div>
           <div className="d-flex gap-2 justify-content-center mt-4 mb-2">
             <button type="button" className="btn w-sm btn-light" onClick={() => setmodal_delete(false)}>Close</button>
-            <button type="button" className="btn w-sm btn-danger " id="delete-record">Yes, Delete It!</button>
+            <button type="submit" className="btn btn-success" id="add-btn" onClick={e => {
+              setmodal_delete(false);
+              e.preventDefault();
+              deleteAnswer(deleteId).then(res => {
+                getAnswers(id).then(res => {
+                  setAnswers(res.answers);
+                })
+              })
+              // }
+            }}>Yes,delete it!!</button>
+            {/* <button type="button" className="btn w-sm btn-danger " id="delete-record">Yes, Delete It!</button> */}
           </div>
         </ModalBody>
       </Modal>

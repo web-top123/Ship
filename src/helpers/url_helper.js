@@ -11,8 +11,9 @@ export const GET_MY_INFORMATION = "/api/myInfo/get_one";
 export const PUT_SAVE_MY_INFORMATION = "/api/myInfo/update";
 export const GET_FIND_BROWSER_HISTORY = "/api/browseHistory/findBrowseHistoryById";
 export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/dataPurchaseHistory/finddataPurchaseHistoyById";
-export const GET_FIND_BROWSER_HISTORY_ALL = "api/browseHistory/get_All";
-export const GET_FIND_PASSED_TEST = "api/findPassedTestById";
+export const GET_FIND_BROWSER_HISTORY_ALL = "/api/browseHistory/get_All";
+export const GET_FIND_PASSED_TEST = "/api/findPassedTestById";
+export const ADD_NEW_BROWSER_HISTORY = "/api/browseHistory/create";
 
 // Test page
 
@@ -54,7 +55,7 @@ export const DELETE_EVENT = "/delete/event";
 //Chat
 export const GET_DIRECT_CONTACT = "/chat";
 export const GET_MESSAGES = "/messages";
-export const ADD_MESSAGE = "add/message";
+export const ADD_MESSAGE = "/add/message";
 export const GET_CHANNELS = "/channels";
 
 //project list
@@ -255,14 +256,14 @@ export const DELETE_MEDIA = "/api/media/delete";
 export const DOWNLOAD_MEDIA ="/api/media/fileById";
 
 //QUESTION
-export const GET_QUESTIONS = "/api/questions/get_All";
-export const GET_QUESTION = "/api/questions/get_one";
+export const GET_QUESTIONS = "/api/questions/find_all";
+export const GET_QUESTION = "/api/questions/findQuestionById";
 export const ADD_NEW_QUESTION = "/api/questions/create";
 export const UPDATE_QUESTION = "/api/questions/update";
 export const DELETE_QUESTION = "/api/questions/delete";
 
 // Answers
-export const GET_ANSWERS = "/api/answer/get_All";
+export const GET_ANSWERS = "/api/answer/findAnswersByQuestionId";
 export const GET_ANSWER = "/api/answer/get_one";
 export const ADD_NEW_ANSWER = "/api/answer/create";
 export const UPDATE_ANSWER = "/api/answer/update";

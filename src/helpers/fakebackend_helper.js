@@ -45,6 +45,7 @@ export const getFindBrowseHistoriesById = id => api.get(url.GET_FIND_BROWSER_HIS
 export const getFindDataPurchaseHistoyById = (id, selectedType) => api.create(url.GET_FIND_DATA_PURCHASE_HISTORY + '/' + id, selectedType);
 export const getBrowserHistoriesAll = ()=> api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
 export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST+'/'+id);
+export const addNewBrowserHistory = data => api.create(url.ADD_NEW_BROWSER_HISTORY, data);
 
 // Test page
 export const getGetAllQA = () => api.get(url.GET_ALL_QA);
@@ -581,7 +582,7 @@ export const deleteQuestion = id => api.delete(url.DELETE_QUESTION + '/' + id);
 // ----------- Answer --------------
 
 // get Answers
-export const getAnswers = () => api.get(url.GET_ANSWERS);
+export const getAnswers = (id) => api.get(url.GET_ANSWERS + '/' + id);
 
 export const getAnswer = (id) => api.get(url.GET_ANSWER + '/' + id);
 
