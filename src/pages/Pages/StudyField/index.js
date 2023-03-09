@@ -37,6 +37,7 @@ import { RiCheckboxBlankLine, RiCheckboxIndeterminateLine, RiCheckboxLine } from
 import cx from "classnames";
 //selection category
 import Select from "react-select";
+import "./studyfield.css"
 
 import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopReaders, addNewBrowserHistory } from '../../../helpers/fakebackend_helper';
 const Study = () => {
@@ -62,7 +63,21 @@ const Study = () => {
   const [studyData, setstudyData] = useState([]);
   const [TopcampusData, setTopcampusData] = useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
-  const [userId, setUserId] = useState([])
+  const [userId, setUserId] = useState([]);
+  const [selectedIds, setSelectedIds] = useState([]);
+
+  const getAndSetIds = () => {
+    setSelectedIds(
+      document
+        .querySelector("#txtIdsToSelect")
+        .value.split(",")
+        .map((x) => parseInt(x.trim()))
+    );
+  };
+  useEffect(() => {
+    console.log("AAAAAAA",selectedIds);
+  }, [selectedIds]);
+
   useEffect(() => {
     getCategoryList();
     fetchData();
@@ -347,10 +362,11 @@ const Study = () => {
                   </p>
                   <TreeView
                     data={data}
-                    className="basic p-2"
+                    className="checkbox p-2"
                     aria-label="Checkbox tree"
                     expandedIds={expandedIds}
                     multiSelect
+                    selectedIds={selectedIds}
                     propagateSelect
                     propagateSelectUpwards
                     togglableSelect
@@ -359,12 +375,12 @@ const Study = () => {
                       element,
                       isBranch,
                       isExpanded,
-                      isDisabled,
                       isSelected,
-                      handleSelect,
                       isHalfSelected,
+                      isDisabled,
                       getNodeProps,
                       level,
+                      handleSelect,
                       handleExpand,
                     }) => {
                       return (
@@ -379,7 +395,8 @@ const Study = () => {
                           <CheckBoxIcon
                             className="checkbox-icon"
                             onClick={(e) => {
-                              console.log("AAAAAA", e);
+
+                              console.log("AAAAAA", selectedIds);
                               handleSelect(e);
                               e.stopPropagation();
                             }}
