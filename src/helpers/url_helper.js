@@ -158,6 +158,7 @@ export const GET_PROGRAM = "/api/program/get_one";
 export const ADD_NEW_PROGRAM = "/api/program/create";
 export const UPDATE_PROGRAM = "/api/program/update";
 export const DELETE_PROGRAM = "/api/program/delete";
+export const DOWNLOAD_PROGRAM ="/api/program/fileById";
 
 // ProgramCategories
 export const GET_PROGRAMCATEGORIES = "/api/program/category/get_All";
