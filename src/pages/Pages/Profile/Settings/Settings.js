@@ -44,7 +44,7 @@ const Settings = () => {
 
                             <Col>
                                 <div className="p-2">
-                                    <h3 className="text-white mb-1">{myInformationSelector.name}</h3>
+                                    {/* <h3 className="text-white mb-1">{myInformationSelector.name}</h3> */}
                                 </div>
                             </Col>
 

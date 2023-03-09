@@ -7,6 +7,7 @@ import {
     loginSuccess
     // resetValue
 } from "../../store/actions";
+
 // import images
 import avatar1 from "../../assets/images/users/avatar-1.jpg";
 
@@ -34,6 +35,7 @@ const ProfileDropdown = () => {
     }, [myInformationSelector])
 
     // const userAuth = getAuthenticatedUser();
+    
     return (
         <React.Fragment>
             <Dropdown isOpen={isProfileDropdown} toggle={toggleProfileDropdown} className="ms-sm-3 header-item topbar-user">

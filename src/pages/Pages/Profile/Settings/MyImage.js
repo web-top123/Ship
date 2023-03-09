@@ -13,7 +13,7 @@ const Mine = () => {
     useEffect(() => {
         getAvatarList();
         console.log("myInformationSelector", myInformationSelector);
-        setUserID(myInformationSelector.id);
+        // setUserID(myInformationSelector.id);
         getPurchasedList(userID);
     }, [myInformationSelector]);
 
@@ -22,6 +22,9 @@ const Mine = () => {
             setAvatarList(res);
         })
     }
+    useEffect(() => {
+        console.log("AvatarList", purchasedList)
+    }, [purchasedList]);
 
     const getPurchasedList = (id) => {
         console.log(id)
@@ -30,18 +33,18 @@ const Mine = () => {
         })
     }
 
-    var idd;
-    function tog_large(e) {
+    var selectedImageListId;
+    function selectModalList(e) {
         document.querySelectorAll(".src-avatar img").forEach(img => {
             if (img.src !== e.currentTarget.src) {
                 img.classList.remove("img-buy")
             } else {
-                idd = parseInt(e.currentTarget.src.substr(42));
+                selectedImageListId = parseInt(e.currentTarget.src.substr(42));
                 img.classList.toggle("img-buy")
             }
         })
     }
-    function tog_purch(event) {
+    function purchaseModal(event) {
         document.querySelectorAll(".pch-avatar img").forEach(img => {
             if (img.src !== event.currentTarget.src) {
                 img.classList.remove("img-buy")
@@ -53,9 +56,9 @@ const Mine = () => {
 
     function addPurchasedAvatar() {
         console.log(purchasedList);
-        if (!purchasedList.filter(item => item === idd).length) {
-            setPurchasedList([...purchasedList, ...[idd]])
-            updateOneUser(userID, {purchasedAvatar: JSON.stringify(purchasedList)});
+        if (!purchasedList.filter(item => item === selectedImageListId).length) {
+            setPurchasedList([...purchasedList, ...[selectedImageListId]])
+            updateOneUser(userID, { purchasedAvatar: JSON.stringify(purchasedList) });
         }
     }
 
@@ -79,7 +82,7 @@ const Mine = () => {
                                                     <img className={"img-thumbnail rounded-circle avatar-xl "}
                                                         src={downloadAvatar(e.id)}
                                                         alt=""
-                                                        onClick={(e) => tog_large(e)}
+                                                        onClick={(e) => selectModalList(e)}
                                                         style={{ margin: '', width: 80, height: 80 }}
                                                     />
                                                 </Col>
@@ -115,7 +118,7 @@ const Mine = () => {
                                                     <img className={"img-thumbnail rounded-circle avatar-xl "}
                                                         src={downloadAvatar(e)}
                                                         alt=""
-                                                        onClick={(e) => tog_purch(e)}
+                                                        onClick={(e) => purchaseModal(e)}
                                                         style={{ margin: '', width: 80, height: 80 }}
                                                     />
                                                 </Col>
