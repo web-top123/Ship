@@ -33,7 +33,7 @@ import { Link } from "react-router-dom";
 import TreeView, { flattenTree } from "react-accessible-treeview";
 import { IoMdArrowDropright } from "react-icons/io";
 import cx from "classnames";
-import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories, getTopSoftwares } from '../../../helpers/fakebackend_helper';
+import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories, getTopSoftwares, addNewBrowserHistory } from '../../../helpers/fakebackend_helper';
 import { downloadProgram } from "../../../helpers/fakebackend_helper";
 // import FontSize from "@ckeditor/ckeditor5-font/src/fontsize";
 
@@ -145,25 +145,25 @@ const Software = () => {
   };
 
   //modal first
-  const [modal_togFirst, setmodal_togFirst] = useState(false);
-  function tog_togFirst(value) {
-    setName(value.name);
-    setDate(value.date);
-    setRequirement(value.requirement);
-    setDescription(value.description);
-    setRecommends(value.recommends);
-    setCost(value.cost);
-    setPurchases(value.purchases);
-    setImageId(value.id);
-    setmodal_togFirst(!modal_togFirst);
-
+  const [showProgramModal, setShowProgramModal] = useState(false);
+  function showProgram(selectedProgram) {
+    setName(selectedProgram.name);
+    setDate(selectedProgram.date);
+    setRequirement(selectedProgram.requirement);
+    setDescription(selectedProgram.description);
+    setRecommends(selectedProgram.recommends);
+    setCost(selectedProgram.cost);
+    setPurchases(selectedProgram.purchases);
+    setImageId(selectedProgram.id);
+    setShowProgramModal(!showProgramModal);
+    
   }
 
   //modal second
-  const [modal_togSecond, setmodal_togSecond] = useState(false);
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
-  function tog_togSecond() {
-    setmodal_togSecond(!modal_togSecond);
+  function purchaseProgram() {
+    setShowPurchaseModal(!showPurchaseModal);
   }
 
   //treeview
@@ -194,9 +194,9 @@ const Software = () => {
       {/* Top software modal */}
       {/* ---------------------------------- */}
       <Modal
-        isOpen={modal_togFirst}
+        isOpen={showProgramModal}
         toggle={() => {
-          tog_togFirst();
+          showProgram();
         }}
         id="firstmodal"
         centered
@@ -258,11 +258,11 @@ const Software = () => {
             </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="light" onClick={() => { tog_togSecond(); tog_togFirst(false); }} >Buy</Button>
+                <Button color="light" onClick={() => { setShowProgramModal(); purchaseProgram(false); }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
                 <Button color="primary" onClick={() => {
-                  setmodal_togFirst(false);
+                  setShowProgramModal(false);
                 }}>Close</Button>
               </div>
             </Row>
@@ -272,25 +272,13 @@ const Software = () => {
 
       {/* second Top software modal */}
       <Modal
-        isOpen={modal_togSecond}
+        isOpen={showPurchaseModal}
         toggle={() => {
-          tog_togSecond();
+          purchaseProgram();
         }}
         id="secondmodal"
         centered
       >
-        <ModalHeader className='purchase-setting-header'>
-          Purchase
-          <Button
-            type="button"
-            className="btn-close"
-            onClick={() => {
-              setmodal_togFirst(false);
-            }}
-          >
-
-          </Button>
-        </ModalHeader>
 
         <div className="modal-body text-center">
           <div className=" ">
@@ -314,15 +302,15 @@ const Software = () => {
               <TabPane tabId="1" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>5971.67 Won</p>
+                    <span>current: </span><p>5971.67</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p>300 Won</p>
+                    <span>pay: </span><p>{cost}</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>real valance: </span><p>none</p>
+                    <span>real valance: </span><p>{5971.67-cost}</p>
                   </div><br /><hr /><br />
                 </div>
               </TabPane>
@@ -330,15 +318,15 @@ const Software = () => {
               <TabPane tabId="2" id="nav-border-top-home">
                 <div className="d-block purchase-pro-setting mt-5">
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>current: </span><p>5971.67 Won</p>
+                    <span>current: </span><p>5971.67</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>pay: </span><p>700 Won</p>
+                    <span>pay: </span><p>{cost}</p>
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>free valance: </span><p>none</p>
+                    <span>free valance: </span><p>{5971.67-cost}</p>
                   </div><br /><hr /><br />
 
                 </div>
@@ -347,7 +335,7 @@ const Software = () => {
 
             <Row className='d-flex' >
               <div className="col-sm-4">
-                <Link to="/pages-software-detail"><Button color="primary" onClick={() => { tog_togSecond(false); }}  >
+                <Link to="/pages-software-buySoftware"><Button color="primary" onClick={() => { purchaseProgram(false); }}  >
                   Buy
                 </Button></Link></div>
               <div className="col-sm-4">
@@ -404,7 +392,7 @@ const Software = () => {
                         >
                           {isBranch && <ArrowIcon isOpen={isExpanded} />}
                           <span className="name" onClick={() => {
-                            // tog_togFirst(element)
+                            // showProgram(element)
                           }}>
                             {element.name}
 
@@ -430,7 +418,7 @@ const Software = () => {
 
                   <div className="p-3">{TopsoftwareData.map((softwareItem, key) => (
                     <React.Fragment key={softwareItem.id}>
-                      <Card className="product" onClick={() => tog_togFirst(softwareItem)}>
+                      <Card className="product" onClick={() => showProgram(softwareItem)}>
                         <Link to='#'
                           className="text-dark"
                         >
@@ -473,7 +461,7 @@ const Software = () => {
               <Row className="p-3">
                 {softwareData.map((software, key) => (
                     <Col lg={4}key={software.id}>
-                      <Card className="product" onClick={() => tog_togFirst(software)}>
+                      <Card className="product" onClick={() => showProgram(software)}>
                         <Link to='#'
                           className="text-dark"
                         >
