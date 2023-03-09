@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { Card, CardBody, Col, Container, CardHeader, Nav, NavItem, NavLink, Row, TabContent, TabPane, Input, Label } from "reactstrap";
+import { Card, CardBody, Col, Container, CardHeader, Button, Modal, ModalHeader, Row, TabContent, TabPane, Input, Label } from "reactstrap";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -30,6 +30,11 @@ const AddCampusCategory = (props) => {
   const [selectedFiles, setselectedFiles] = useState([]);
   const [cateList, setCateList] = useState([]);
   const [campusCate, setCampusCate] = useState([]);
+
+  const [modalPositionTop, setmodalPositionTop] = useState(false);
+  function togPositionTop() {
+    setmodalPositionTop(!modalPositionTop);
+  }
 
   const [CampusCategory, setCampusCategory] = useState({
     title: '',
@@ -124,6 +129,26 @@ const AddCampusCategory = (props) => {
       <Container fluid>
 
         <BreadCrumb title={id ? "Edit CampusCategory" : "Add CampusCategory"} pageTitle="Admin CampusCategory" />
+
+        <Modal id="topmodal" isOpen={modalPositionTop} backdrop="static" keyboard="false" toggle={() => { togPositionTop(); }} >
+          <ModalHeader>
+            Modal Heading
+            <Button type="button" className="btn-close" onClick={() => { setmodalPositionTop(false); }} aria-label="Close"> </Button>
+          </ModalHeader>
+          <div className="modal-body text-center p-5">
+            <lord-icon src="https://cdn.lordicon.com/pithnlch.json"
+              trigger="loop" colors="primary:#121331,secondary:#08a88a" style={{ width: "120px", height: "120px" }}>
+            </lord-icon>
+            <div className="mt-4">
+              <h4 className="mb-3">Your event has been created.</h4>
+              <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
+              <div className="hstack gap-2 justify-content-center">
+                <Link to="#" className="btn btn-link link-success fw-medium shadow-none" onClick={() => { togPositionTop(); }}><i className="ri-close-line me-1 align-middle"></i> Close</Link>
+                <Link to="/admin-campusCategories" className="btn btn-success">Completed</Link>
+              </div>
+            </div>
+          </div>
+        </Modal>
 
         <Row>
           <Col lg={8}>
@@ -225,6 +250,7 @@ const AddCampusCategory = (props) => {
                       console.log(res);
                     })
                   }
+                  togPositionTop();
                 }}>
                   {id ? "Update CampusCategory" : "Add CampusCategory"}
                 </button>

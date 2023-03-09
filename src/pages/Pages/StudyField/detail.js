@@ -45,12 +45,13 @@ const Software = () => {
 
                     <Row>
                         <div className="col-sm-11"></div>
-                        <div className="col-sm-1  p-4 pt-2"> <Button href="pages-study-field"
+                        <div className="col-sm-1  p-4 pt-2"> 
+                        <Link to="/pages-study-field"><Button 
                             type="button"
                             className="btn-close"
                             style={{ float: "right" }}
                         >
-                        </Button></div>
+                        </Button></Link></div>
                     </Row>
                     <div className="p-4">
                         <h1 className="text-center "><em> About ship Enginee</em></h1>

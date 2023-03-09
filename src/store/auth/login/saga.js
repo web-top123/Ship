@@ -41,7 +41,8 @@ function* loginUser({ payload: { user, history } }) {
       localStorage.setItem("authUser", JSON.stringify(response));
       yield put(loginSuccess(response));
     }
-    history.push("/pages-profile-settings");
+    history.push("/pages-home-page");
+    // history.push("/pages-profile-settings");
   } catch (error) {
     yield put(apiError(error));
   }

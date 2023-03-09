@@ -305,19 +305,22 @@ const Study = () => {
               </TabPane>
             </TabContent>
 
-            <div className='purchase-button-group mb-5'>
-              <Button color="primary" onClick={() => { 
+            <div className='d-flex'>
+              <div className="col-sm-4">
+            <Link to="/pages-study-detail"><Button color="primary" onClick={() => { 
                   console.log("campusId", campusId); 
                   addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId }) 
-                }} style={{ float: "left" }} href="pages-study-detail">
+                }} >
                 Buy
-              </Button>
-              <Button color="primary" href="pages-profile-settings">
+              </Button></Link></div>
+              <div className="col-sm-4">
+              <Link to="/pages-profile-settings"><Button color="primary">
                 Charge
-              </Button>
-              <Button color="primary" style={{ float: "right" }} onClick={() => {setShowPurchaseModal(false);}}>
+              </Button></Link></div>
+              <div className="col-sm-4">
+              <Button color="primary"  onClick={() => {setShowPurchaseModal(false);}}>
                 Close
-              </Button>
+              </Button></div>
             </div><br /><br />
           </div>
         </div>
@@ -454,6 +457,7 @@ const Study = () => {
                         <th scope="col">Cost</th>
                         <th scope="col">Browses</th>
                         <th scope="col">Recommends</th>
+                        <th scope="col">Unrecommends</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -465,7 +469,7 @@ const Study = () => {
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{study.browses}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
-
+                            <td style={{ border: "none" }}>{study.unrecommends}</td>
                           </tr>
                         </React.Fragment>
                       ))}
