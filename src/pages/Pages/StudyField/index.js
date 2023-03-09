@@ -457,6 +457,7 @@ const Study = () => {
                         <th scope="col">Cost</th>
                         <th scope="col">Browses</th>
                         <th scope="col">Recommends</th>
+                        <th scope="col">Unrecommends</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -468,7 +469,7 @@ const Study = () => {
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{study.browses}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
-
+                            <td style={{ border: "none" }}>{study.unrecommends}</td>
                           </tr>
                         </React.Fragment>
                       ))}
