@@ -1,47 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import { Col, Container, Row, Card, CardBody, TabContent, Nav, NavItem, NavLink, CardHeader, TabPane } from "reactstrap";
+import { Col, Container, Row, Card, CardBody, TabContent,CardHeader, TabPane } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { columnsBlogData, BlogDataList } from './TestBlogData';
 import { useMemo } from "react";
 import TableContainer from "../../../Components/Common/TableContainer";
-import classnames from "classnames";
-import { useSelector } from 'react-redux';
-
-import avatar1 from "../../../assets/images/users/avatar-1.jpg";
-import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-import avatar3 from "../../../assets/images/users/avatar-3.jpg";
-import { size } from 'lodash';
-import { Link } from 'react-router-dom';
 import ArticleSideBar from './ArticleSideBar';
+import { getArticleCategory,getArticleByCategoryId, getArticles, getArticle } from "../../../helpers/fakebackend_helper";
+import { Link, useParams  } from "react-router-dom";
 
 const ArticleKind = () => {
     document.title = "Blog Service";
     const columnsBlog = useMemo(() => columnsBlogData, []);
-
     const [BlogDataListFilter, setBlogDataList] = useState(BlogDataList);
-    const [BlogDataPublisedFilter, setBlogDataPublisedFilter] = useState([]);
-    const [BlogDataDraftFilter, setBlogDataDraftFilter] = useState([]);
-
-    const [activeTab, setActiveTab] = useState("1");
-
-    const toggleTab = (tab, type) => {
-        if (activeTab !== tab) {
-            setActiveTab(tab);
-            let filteredBlogs = BlogDataList;
-            if (type !== "trending") {
-                filteredBlogs.map((product) => console.log(product))
-                filteredBlogs = BlogDataList.filter((product) => product.type == type);
-            }
-            if (type == 'date') {setBlogDataPublisedFilter(filteredBlogs);setBlogDataList(filteredBlogs);}
-            if (type == 'trending') {setBlogDataList(filteredBlogs);}
-            if (type == 'draft') {setBlogDataDraftFilter(BlogDataDraftFilter);setBlogDataList(filteredBlogs);}
-            // setBlogDataList(filteredBlogs);
-        }
-    };
-
+    const [articleCategory, setArticleCategory] = useState({
+        title: "",
+        description: "",       
+    });
+    const [articles, setArticles] = useState([]);
+     
+    let { id } = useParams();
+   
     useEffect(() => {
-        setBlogDataList(BlogDataListFilter);
-    }, [BlogDataListFilter]);
+      if (id) {
+        getArticleCategory(id).then(category => {
+            console.log("Category:", category);
+            setArticleCategory(category);          
+        });
+
+        getArticleByCategoryId(id).then(categoryData => {
+            console.log("articleList: ", categoryData);
+            setArticles(categoryData.articles);
+        })
+      }
+    }, [id]);
 
     return (
         <React.Fragment>
@@ -52,7 +43,7 @@ const ArticleKind = () => {
                         <Col xl={9} lg={8}>
                             <Card>
                                 <CardHeader className='text-center'>
-                                    <h4>SoftWare</h4>
+                                    <h4>{articleCategory.title}</h4>
                                 </CardHeader>
                                 <CardBody className=''>
                                     <TabContent className="text-muted blog-table-content">
@@ -63,7 +54,7 @@ const ArticleKind = () => {
                                             >
                                                 <TableContainer
                                                     columns={columnsBlog}
-                                                    data={BlogDataListFilter}
+                                                    data={articles}
                                                     isGlobalFilter={false}
                                                     isGlobalSearch={true}
                                                     isAddUserList={false}

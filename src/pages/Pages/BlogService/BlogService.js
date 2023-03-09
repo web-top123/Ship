@@ -5,14 +5,8 @@ import { columnsBlogData, BlogDataList } from './TestBlogData';
 import { useMemo } from "react";
 import TableContainer from "../../../Components/Common/TableContainer";
 import classnames from "classnames";
-import { useSelector } from 'react-redux';
-
-import { getArticles, getArticle, getArticleCategories, getArticleFindTopUser} from "../../../helpers/fakebackend_helper";
-
+import { getArticles, getArticleCategories, getArticleFindTopUser} from "../../../helpers/fakebackend_helper";
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
-import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-import avatar3 from "../../../assets/images/users/avatar-3.jpg";
-import { size } from 'lodash';
 import { Link } from 'react-router-dom';
 import Select from "react-select";
 import { useQuill } from "react-quilljs";
@@ -20,22 +14,16 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "quill/dist/quill.snow.css";
 
-
 const BlogService = () => {
 
     const { quillRef } = useQuill();
-
     document.title = "Blog Service";
     const columnsBlog = useMemo(() => columnsBlogData, []);
-
     const [articles, setArticles] = useState([]);
     const [articleCategories, setArticleCategories] = useState([]);
     const [articleTopWriter, setArticleTopWriter] = useState([]);
-
-
     const [BlogDataPublisedFilter, setBlogDataPublisedFilter] = useState([]);
     const [BlogDataDraftFilter, setBlogDataDraftFilter] = useState([]);
-
     const [activeTab, setActiveTab] = useState("1");
 
     const toggleTab = (tab, type) => {
@@ -44,11 +32,11 @@ const BlogService = () => {
             let filteredBlogs = BlogDataList;
             if (type !== "trending") {
                 filteredBlogs.map((product) => console.log(product))
-                filteredBlogs = BlogDataList.filter((product) => product.type == type);
+                filteredBlogs = BlogDataList.filter((product) => product.type === type);
             }
-            if (type == 'date') { setBlogDataPublisedFilter(filteredBlogs); setArticles(filteredBlogs); }
-            if (type == 'trending') { setArticles(filteredBlogs); }
-            if (type == 'draft') { setBlogDataDraftFilter(BlogDataDraftFilter); setArticles(filteredBlogs); }
+            if (type === 'date') { setBlogDataPublisedFilter(filteredBlogs); setArticles(filteredBlogs); }
+            if (type === 'trending') { setArticles(filteredBlogs); }
+            if (type === 'draft') { setBlogDataDraftFilter(BlogDataDraftFilter); setArticles(filteredBlogs); }
             // setBlogDataList(filteredBlogs);
         }
     };
@@ -70,6 +58,7 @@ const BlogService = () => {
         getArticles().then(articles => {
             let today = new Date();
             for (const article of articles) {
+                console.log("yyyyy",article);
                 let createdDate = new Date(article.createdAt);
                 let difference = Math.abs(today - createdDate);
                 article.ago = getAgoString(difference);
@@ -197,11 +186,11 @@ const BlogService = () => {
                             <Row>
                             <Card>
                                 <CardBody>
-                                    <h4 className='mb-sm-0'>Realted Topics</h4>
+                                    <h4 className='mb-sm-0'>Related Topics</h4>
                                     <div className="realted-topic d-flex flex-wrap">
                                         {articleCategories.map((articleCategory, key) => (
                                             <React.Fragment key={key}>
-                                                <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/article-kind/' + articleCategory.id}>{articleCategory.title}</Link>
+                                                <Link className="rounded-pill btn btn-light tags me-4" to={'/pages-blog-service/article-kind/' + articleCategory.id}>{articleCategory.title}</Link>
                                             </React.Fragment>
                                         ))}
                                     </div>
@@ -220,7 +209,7 @@ const BlogService = () => {
                                             <div>
                                                 {articleTopWriter.map((findTopWirter, key) => (
                                                     <React.Fragment key={key}>
-                                                        <Link className="rounded-pill btn btn-light tags me-4" to={'pages-blog-service/detail/' + findTopWirter.id}>{findTopWirter.userId}</Link>
+                                                        <Link className="rounded-pill btn btn-light tags me-4" to={'/pages-blog-service/detail/' + findTopWirter.id}>{findTopWirter.userId}</Link>
                                                     </React.Fragment>
                                                 ))}
                                             </div>
@@ -263,6 +252,20 @@ const BlogService = () => {
                         >Sort</Label>
                         <Select name="sort" id="id-field-sort" options={sort}>
                         </Select>
+                         {/* <Select
+                          value={articleTitle}                          
+                          onChange={(e) => {
+                            setArticleTitle(e);               
+                            setArticle({
+                              ...article,
+                              ...{ articleCategoryId: articleTitle.value },
+                            });
+                            console.log("Set Article",article);
+                          }}
+                          options={articleCategories}
+                          name="choices-publish-visibility-input"
+                          classNamePrefix="select2-selection form-select"
+                        /> */}
                     </div>
                     <div className='mb-3'>
                         <Label

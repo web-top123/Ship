@@ -1,16 +1,36 @@
 import React, { useEffect, useState, useMemo } from "react";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { Card, CardBody, Col, Container, CardHeader, Nav, NavItem, NavLink, Row, TabContent, TabPane, Input, Label, } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  Col,
+  Container,
+  CardHeader,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
+  TabContent,
+  TabPane,
+  Input,
+  Label,
+} from "reactstrap";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import classnames from "classnames";
 import Dropzone from "react-dropzone";
-import MetaTags from 'react-meta-tags';
+import MetaTags from "react-meta-tags";
 
 // Import React FilePond
 import { registerPlugin } from "react-filepond";
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import Flatpickr from "react-flatpickr";
 import Select from "react-select";
 
@@ -19,10 +39,15 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewArticle, getArticle, updateOneArticle, getArticleCategories } from "../../../helpers/fakebackend_helper";
+import {
+  addNewArticle,
+  getArticle,
+  updateOneArticle,
+  getArticleCategories,
+} from "../../../helpers/fakebackend_helper";
 
-import DropdownTreeSelect from 'react-dropdown-tree-select'
-import 'react-dropdown-tree-select/dist/styles.css'
+import DropdownTreeSelect from "react-dropdown-tree-select";
+import "react-dropdown-tree-select/dist/styles.css";
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -31,42 +56,42 @@ const AddArticle = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
   const [articleCategories, setArticleCategories] = useState([]);
+  const [articleTitle, setArticleTitle] = useState({});
 
   const [article, setArticle] = useState({
-    name: '',
-    description: '',
-    contact_number: '',
-    articleCategoryId: '',
+    name: "",
+    description: "",
+    contact_number: "",
+    articleCategoryId: "",
     articleCategory: {
-      title: '',
+      title: "",
     },
-    attach_url: '',
-    recommends: '',
-    source: '',
-    oppositions: '',
-    browingcount: '',
+    attach_url: "",
+    recommends: "",
+    source: "",
+    oppositions: "",
+    browingcount: "",
   });
 
   useEffect(() => {
-    getArticleCategories().then(categories => {
+    getArticleCategories().then((categories) => {
       console.log(categories);
       for (const category of categories) {
         category.label = category.title;
         category.value = category.id;
       }
       setArticleCategories(categories);
-    })
+    });
   }, []);
 
   useEffect(() => {
     if (id) {
-      getArticle(id).then(res => {
+      getArticle(id).then((res) => {
         console.log("Article Data:", res);
         setArticle(res);
-      })
+      });
     }
   }, []);
-
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -96,8 +121,10 @@ const AddArticle = (props) => {
   return (
     <div className="page-content">
       <Container fluid>
-
-        <BreadCrumb title={id ? "Edit Article" : "Add Article"} pageTitle="Admin Article" />
+        <BreadCrumb
+          title={id ? "Edit Article" : "Add Article"}
+          pageTitle="Admin Article"
+        />
 
         <Row>
           <Col lg={8}>
@@ -114,8 +141,8 @@ const AddArticle = (props) => {
                       id="product-title-input"
                       placeholder="Enter name"
                       value={article.name}
-                      onChange={e => {
-                        setArticle({ ...article, ...{ name: e.target.value } })
+                      onChange={(e) => {
+                        setArticle({ ...article, ...{ name: e.target.value } });
                       }}
                     />
                   </div>
@@ -130,8 +157,11 @@ const AddArticle = (props) => {
                       id="product-title-input"
                       placeholder="Enter description"
                       value={article.description}
-                      onChange={e => {
-                        setArticle({ ...article, ...{ description: e.target.value } })
+                      onChange={(e) => {
+                        setArticle({
+                          ...article,
+                          ...{ description: e.target.value },
+                        });
                       }}
                     />
                   </div>
@@ -151,8 +181,11 @@ const AddArticle = (props) => {
                           id="manufacturer-brand-input"
                           placeholder="Enter contact_number"
                           value={article.contact_number}
-                          onChange={e => {
-                            setArticle({ ...article, ...{ contact_number: e.target.value } })
+                          onChange={(e) => {
+                            setArticle({
+                              ...article,
+                              ...{ contact_number: e.target.value },
+                            });
                           }}
                         />
                       </div>
@@ -170,8 +203,11 @@ const AddArticle = (props) => {
                           id="product-image-input"
                           type="file"
                           accept="image/png, image/gif, image/jpeg"
-                          onChange={e => {
-                            setArticle({ ...article, ...{ attach_url: e.target.files[0] } })
+                          onChange={(e) => {
+                            setArticle({
+                              ...article,
+                              ...{ attach_url: e.target.files[0] },
+                            });
                           }}
                         />
                       </div>
@@ -193,8 +229,11 @@ const AddArticle = (props) => {
                           id="manufacturer-brand-input"
                           placeholder="Enter source"
                           value={article.source}
-                          onChange={e => {
-                            setArticle({ ...article, ...{ source: e.target.value } })
+                          onChange={(e) => {
+                            setArticle({
+                              ...article,
+                              ...{ source: e.target.value },
+                            });
                           }}
                         />
                       </div>
@@ -213,8 +252,11 @@ const AddArticle = (props) => {
                           id="manufacturer-brand-input"
                           placeholder="Enter recommends"
                           value={article.recommends}
-                          onChange={e => {
-                            setArticle({ ...article, ...{ recommends: e.target.value } })
+                          onChange={(e) => {
+                            setArticle({
+                              ...article,
+                              ...{ recommends: e.target.value },
+                            });
                           }}
                         />
                       </div>
@@ -236,8 +278,11 @@ const AddArticle = (props) => {
                           id="manufacturer-brand-input"
                           placeholder="Enter oppositions"
                           value={article.oppositions}
-                          onChange={e => {
-                            setArticle({ ...article, ...{ oppositions: e.target.value } })
+                          onChange={(e) => {
+                            setArticle({
+                              ...article,
+                              ...{ oppositions: e.target.value },
+                            });
                           }}
                         />
                       </div>
@@ -256,8 +301,11 @@ const AddArticle = (props) => {
                           id="manufacturer-brand-input"
                           placeholder="Enter browingcount"
                           value={article.browingcount}
-                          onChange={e => {
-                            setArticle({ ...article, ...{ browingcount: e.target.value } })
+                          onChange={(e) => {
+                            setArticle({
+                              ...article,
+                              ...{ browingcount: e.target.value },
+                            });
                           }}
                         />
                       </div>
@@ -275,49 +323,66 @@ const AddArticle = (props) => {
                         </Label>
 
                         <Select
-                          value={{ label: article.articleCategory.title, value: article.articleCategoryId }}
+                          value={articleTitle}                          
                           onChange={(e) => {
-                            console.log("Set Article", e);
-                            setArticle({ ...article, ...{ articleCategoryId: e.value } })
+                            setArticleTitle(e);               
+                            setArticle({
+                              ...article,
+                              ...{ articleCategoryId: articleTitle.value },
+                            });
+                            console.log("Set Article",article);
                           }}
                           options={articleCategories}
                           name="choices-publish-visibility-input"
                           classNamePrefix="select2-selection form-select"
                         />
+                        {/* <Select
+                          value={homeImageMedia}
+                          onChange={(e) => {
+                            setHomeImageMedia(e);
+                          }}
+                          options={mediaSelects}
+                        /> */}
                       </div>
                     </Col>
                   </Row>
                 </CardBody>
               </Card>
               <div className="text-end mb-3">
-                <button type="submit" className="btn btn-success w-sm" onClick={e => {
-                  e.preventDefault();
-                  const formData = new FormData();
-                  formData.append("name", article.name);
-                  formData.append("description", article.description);
-                  formData.append("contact_number", article.contact_number);
-                  formData.append("articleCategoryId", article.articleCategoryId);
-                  formData.append("attach_url", article.attach_url);
-                  formData.append("recommends", article.recommends);
-                  formData.append("source", article.source);
-                  formData.append("oppositions", article.oppositions);
-                  formData.append("browingcount", article.browingcount);
-                  if (id) {
-                    updateOneArticle(id, article).then(res => {
-                      console.log(res);
-                    })
-                  } else {
-                    addNewArticle(article).then(res => {
-                      console.log(res);
-                    })
-                  }
-                }}>
+                <button
+                  type="submit"
+                  className="btn btn-success w-sm"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const formData = new FormData();
+                    formData.append("name", article.name);
+                    formData.append("description", article.description);
+                    formData.append("contact_number", article.contact_number);
+                    formData.append(
+                      "articleCategoryId",
+                      article.articleCategoryId
+                    );
+                    formData.append("attach_url", article.attach_url);
+                    formData.append("recommends", article.recommends);
+                    formData.append("source", article.source);
+                    formData.append("oppositions", article.oppositions);
+                    formData.append("browingcount", article.browingcount);
+                    if (id) {
+                      updateOneArticle(id, article).then((res) => {
+                        console.log(res);
+                      });
+                    } else {
+                      addNewArticle(article).then((res) => {
+                        console.log(res);
+                      });
+                    }
+                  }}
+                >
                   {id ? "Update Article" : "Add Article"}
                 </button>
               </div>
             </form>
           </Col>
-
         </Row>
       </Container>
     </div>

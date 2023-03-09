@@ -382,7 +382,7 @@ export const deleteSuggestion = id => api.delete(url.DELETE_SUGGESTION + '/' + i
 export const getArticles = () => api.get(url.GET_ARTICLES);
 export const getArticleFindTopUser = () => api.get(url.GET_ARTICLE_FIND_TOP_USER);
 export const getArticle = (id) => api.get(url.GET_ARTICLE + '/' + id);
-
+export const getArticleByCategoryId = (id) => api.get(url.GET_ARTICLEBYCATEGORYID + '/' + id);
 // add ARTICLE
 export const addNewArticle = customer => api.create(url.ADD_NEW_ARTICLE, customer);
 
