@@ -196,23 +196,6 @@ const AddNotification = (props) => {
                 </CardBody>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <h5 className="card-title mb-0">Product Gallery</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="mb-4">
-                    <h5 className="fs-14 mb-1">Product Image</h5>
-                    <p className="text-muted">Add Product main Image.</p>
-                    <input
-                      className="form-control"
-                      id="product-image-input"
-                      type="file"
-                      accept="image/png, image/gif, image/jpeg"
-                    />
-                  </div>
-                </CardBody>
-              </Card>
 
               <div className="text-end mb-3">
                 <button type="submit" className="btn btn-success w-sm" onClick={e => {

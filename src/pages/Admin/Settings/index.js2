@@ -44,17 +44,7 @@ const Medias = (props) => {
   const getMediaList = () => {
     getMedias().then(res => {
       console.log("Media list", res);
-      setMediaSelects(res.map(e => {
-        return { value: e.id, label: e.title }
-      }))
       setMediaList(res);
-    })
-
-    console.log(JSON.stringify([{ media: 12, title: "asdf", description: "desc" }]));
-
-    getSettingByTitle('homeImages').then(res => {
-      console.log("homeimages", JSON.parse(res.value));
-      setHomeImages(JSON.parse(res.value));
     })
   }
 
@@ -284,38 +274,23 @@ const Medias = (props) => {
                         </div>
 
                         {
-                          homeImages.map((e, key) => {
+                          mediaList.map((e, key) => {
                             return <Row key={key}>
                               <Col>
                                 <div className="d-flex">
 
                                   <img
-                                    src={downloadMedia(e.media)}
+                                    src={downloadMedia(e.id)}
                                     // {media.row.file_url}
                                     // src={downloadMedia}
                                     alt=""
                                     className="img-fluid d-block"
                                     style={{ width: '100px' }}
                                   />
-                                  <h3>
-                                    {e.title}
-                                  </h3>
-                                  <h5>
-                                    {e.description}
-                                  </h5>
-
-                                  <Button color="primary" className="btn-icon" onClick={() => {
-                                    console.log(e);
-                                    setHomeImages(homeImages.filter(item => item.media !== e.media))
-                                  }}>
-                                    <i className=" ri-close-circle-line" />
-                                  </Button>
                                 </div>
                               </Col>
                             </Row>
-                          }
-
-                          )
+                          })
                         }
                         <Row>
 
