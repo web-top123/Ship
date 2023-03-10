@@ -24,7 +24,6 @@ const BuySoftware = (props) => {
         cost: "",
         recommends: "",
         unrecommends: "",
-        file_url: ""
     });
     console.log("AAAAAAA", program);
 

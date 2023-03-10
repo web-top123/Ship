@@ -131,10 +131,11 @@ const Software = () => {
   const [requirement, setRequirement] = useState("");
   const [description, setDescription] = useState("");
   const [recommends, setRecommends] = useState("");
+  const [unrecommends, setUnRecommends] = useState("");
   const [cost, setCost] = useState("");
-  const [purchases, setPurchases] = useState("");
   const [imageId, setImageId] = useState("");
   const [programId, setProgramId] = useState("");
+  const [purchases, setPurchases] = useState("");
 
   //modal
   // Border Top Nav Justified Tabs
@@ -154,11 +155,11 @@ const Software = () => {
     setRequirement(selectedProgram.requirement);
     setDescription(selectedProgram.description);
     setRecommends(selectedProgram.recommends);
+    setUnRecommends(selectedProgram.unrecommends);
     setCost(selectedProgram.cost);
     setPurchases(selectedProgram.purchases);
     setImageId(selectedProgram.id);
     setShowProgramModal(!showProgramModal);
-
   }
 
   //modal second
@@ -436,7 +437,7 @@ const Software = () => {
                               </div>
                               <div className="flex-grow-1">
                                 <h5 className="fs-14">{softwareItem.name}</h5>
-                                <h5 className="fs-14">{softwareItem.purchases}</h5>
+                                <h5 className="fs-14">purchases:{softwareItem.purchases}</h5>
                               </div>
                             </div>
                           </CardBody>
@@ -508,15 +509,22 @@ const Software = () => {
                                 </h5>
                               </div>
                             </div>
-
                             <div className="col-sm-6">
                               <div className="d-flex align-items-center gap-2 text-muted">
-                                <div>Recommends:</div>
-
+                                <div>UpVote:</div>
                                 <h5 className="fs-12 mb-0">
                                   <span className="product-line-price">
                                     {" "}
                                     {software.recommends}
+                                  </span>
+                                </h5>
+                              </div>
+                              <div className="d-flex align-items-center gap-2 text-muted">
+                                <div>DownVote:</div>
+                                <h5 className="fs-12 mb-0">
+                                  <span className="product-line-price">
+                                    {" "}
+                                    {software.unrecommends}
                                   </span>
                                 </h5>
                               </div>
