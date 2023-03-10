@@ -29,6 +29,7 @@ const StudyDetail = (props) => {
    
     useEffect(() => {
         console.log("aaa", campus.recommends);
+        console.log("aaa", campus.unrecommends);
     }, [campus]);
 
     return (
@@ -69,7 +70,7 @@ const StudyDetail = (props) => {
                                                 <Button color="light" onClick={() => {
                                                     setCampusList({
                                                         ...campus, ...{recommends: campus.recommends+1}
-                                                    })
+                                                    });
                                                     upVote(id, campus);
                                                 }} >
                                                     Agree
@@ -77,7 +78,10 @@ const StudyDetail = (props) => {
                                             </div>
                                             <div className="col-sm-6 text-center">
                                                 <Button color="primary" onClick={() => {
-                                                    setCountDownvote(countDownvote-1);
+                                                    setCampusList({
+                                                        ...campus, ...{unrecommends:campus.unrecommends-1}
+                                                    });
+                                                    downVote(id, campus);
                                                 }}>
                                                     Disagree
                                                 </Button>
