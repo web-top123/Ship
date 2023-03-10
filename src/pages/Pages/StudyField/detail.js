@@ -69,15 +69,9 @@ const StudyDetail = (props) => {
                                             <div className="col-sm-6 text-center">
                                                 <Button color="light" onClick={() => {
                                                     setCampusList({
-<<<<<<< HEAD
                                                         ...campus, ...{recommends: campus.recommends + 1}
-                                                    })
-                                                    downVote(id, campus);
-=======
-                                                        ...campus, ...{recommends: campus.recommends+1}
                                                     });
                                                     upVote(id, campus);
->>>>>>> 31f0b96016cc28ea98cb0a1cb7222ea4b0b9ef9b
                                                 }} >
                                                     Agree
                                                 </Button>
@@ -85,13 +79,8 @@ const StudyDetail = (props) => {
                                             <div className="col-sm-6 text-center">
                                                 <Button color="primary" onClick={() => {
                                                     setCampusList({
-<<<<<<< HEAD
-                                                        ...campus, ...{unrecommends: campus.unrecommends - 1}
-                                                    })
-=======
-                                                        ...campus, ...{unrecommends:campus.unrecommends-1}
+                                                        ...campus, ...{unrecommends:campus.unrecommends - 1}
                                                     });
->>>>>>> 31f0b96016cc28ea98cb0a1cb7222ea4b0b9ef9b
                                                     downVote(id, campus);
                                                 }}>
                                                     Disagree

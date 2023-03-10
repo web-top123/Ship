@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 import { Link, useParams } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { getProgram, upVote, downVote, downloadProgram } from "../../../helpers/fakebackend_helper";
+import { getProgram, ProgramUpVote, ProgramDownVote, downloadProgram } from "../../../helpers/fakebackend_helper";
 
 const BuySoftware = (props) => {
     document.title = "Software Detail";
@@ -26,7 +26,7 @@ const BuySoftware = (props) => {
         unrecommends: "",
         file_url: ""
     });
-    console.log("AAAAAAA", program.file_url);
+    console.log("AAAAAAA", program);
 
     useEffect(() => {
         if (id) {
@@ -110,7 +110,7 @@ const BuySoftware = (props) => {
                                                     setProgramList({
                                                         ...program, ...{ recommends: program.recommends + 1 }
                                                     })
-                                                    downVote(id, program);
+                                                    ProgramUpVote(id, program);
                                                 }} >
                                                     Agree
                                                 </Button>
@@ -120,7 +120,7 @@ const BuySoftware = (props) => {
                                                     setProgramList({
                                                         ...program, ...{ unrecommends: program.unrecommends - 1 }
                                                     })
-                                                    downVote(id, program);
+                                                    ProgramDownVote(id, program);
                                                 }}>
                                                     Disagree
                                                 </Button>
