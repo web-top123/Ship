@@ -19,7 +19,8 @@ const profile = (state = initialState, action) => {
       state = { ...state, myinformation: action.payload, success: true};
       break;
     case PROFILE_UPDATE_SUCCESS:
-      state = {...state, myinformation: action.payload, update: true}
+      state = {...state, myinformation: action.payload, update: true};
+      break;
     case PROFILE_ERROR:
       state = { ...state, error: action.payload, success: false};
       break;

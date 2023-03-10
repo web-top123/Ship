@@ -43,8 +43,8 @@ export const getGetMyInformation = id => api.get(url.GET_MY_INFORMATION + '/' + 
 export const putSaveMyInformation = (id, data) => api.update(url.PUT_SAVE_MY_INFORMATION + '/' + id, data);
 export const getFindBrowseHistoriesById = id => api.get(url.GET_FIND_BROWSER_HISTORY + '/' + id);
 export const getFindDataPurchaseHistoyById = (id, selectedType) => api.create(url.GET_FIND_DATA_PURCHASE_HISTORY + '/' + id, selectedType);
-export const getBrowserHistoriesAll = ()=> api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
-export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST+'/'+id);
+export const getBrowserHistoriesAll = () => api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
+export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST + '/' + id);
 export const addNewBrowserHistory = data => api.create(url.ADD_NEW_BROWSER_HISTORY, data);
 
 // Test page
@@ -56,10 +56,10 @@ export const getGetAllShipData = () => api.get(url.GET_ALL_SHIP);
 export const getGetShipCategoryById = id => api.get(url.GET_SHIP_BY_CATEGORY + '/' + id);
 export const getGetShipDetail = id => api.get(url.GET_SHIP_DETAIL + '/' + id);
 
-
 /**
    * Returns the authenticated user
    */
+
 export const getAuthenticatedUser = () => {
   if (!localStorage.getItem("authUser")) return null;
   return JSON.parse(localStorage.getItem("authUser"));
@@ -475,10 +475,13 @@ export const downloadAvatar = (id) => {
   return str;
 }
 
-export const downloadCurrentAvatar = (currentAvatarId) => {
+export const downloadCurrentAvatar = (myInformationSelector) => {
   // http://localhost:8080/api/avatar/fileById/1
-  var str = config.API_URL + "api/avatar/fileById/" + currentAvatarId;
-  return str;
+  if(myInformationSelector) {
+    let str = config.API_URL + "api/avatar/fileById/" + myInformationSelector.currentAvatarId;
+    return str;
+  }
+  
 }
 
 

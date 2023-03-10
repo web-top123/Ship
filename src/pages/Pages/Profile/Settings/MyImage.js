@@ -3,67 +3,60 @@ import { CardHeader, TabPane, Row, Col, Card } from "reactstrap";
 import { getAvatars, downloadAvatar, getUser, updateOneUser } from '../../../../helpers/fakebackend_helper';
 import { useSelector, useDispatch } from "react-redux";
 import { getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
+import { updateAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
+import { profileUpdateSuccess } from '../../../../store/auth/profile/actions';
 
-const Mine = () => {
+
+function Mine() {
 
     const [avatarList, setAvatarList] = useState([]);
     const [purchasedList, setPurchasedList] = useState([]);
     const [userID, setUserID] = useState('');
     const [avatarID, setAvatarID] = useState('');
 
+    const myInformationSelector = useSelector(state => state.Profile.myinformation);
+
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        getAvatarList();
-        console.log("AAAAAAAAAAAAAAAA", getAuthenticatedUser());
-        setUserID(getAuthenticatedUser().id);
-    }, []);
+        if(myInformationSelector) {
+            getAvatarList();
+            console.log("myInformationSelector.id", myInformationSelector.currentAvatarId)
+            setUserID(myInformationSelector.id);
+        }        
+    }, [dispatch, myInformationSelector]);
 
     useEffect(() => {
         getPurchasedList(userID);
-        console.log("userID", userID);
         setAvatarID(userID);
-        // getApplyAvatarId(userID);
     }, [userID]);
 
     useEffect(() => {
-        console.log("purchasedList", purchasedList);
     }, [purchasedList]);
-
-    useEffect(() => {
-        // console.log("purchasedList", purchasedList)
-    }, [purchasedList]);
-
-    useEffect(() => {
-        updateOneUser(userID, { currentAvatarId: avatarID });
-    }, [avatarID])
 
     const getAvatarList = () => {
         getAvatars().then(res => {
             setAvatarList(res);
-        })
-    }
+        });
+    };
 
     const getPurchasedList = (id) => {
         getUser(id).then(res => {
             setPurchasedList(JSON.parse(res.purchasedAvatar));
-        })
-    }
-
-    // const getApplyAvatarId = () => {
-    //     setAvatarID(selectedPurchasedAvatarId);
-    // }
+        });
+    };
 
     var selectedImageListId;
 
     function selectAvatarList(e) {
         document.querySelectorAll(".src-avatar img").forEach(img => {
             if (img.src !== e.currentTarget.src) {
-                img.classList.remove("img-buy")
+                img.classList.remove("img-buy");
             } else {
                 selectedImageListId = parseInt(e.currentTarget.src.substr(42));
-                console.log("selectedImageListId", selectedImageListId)
-                img.classList.toggle("img-buy")
+                img.classList.toggle("img-buy");
             }
-        })
+        });
     }
 
     var selectedPurchasedAvatarId;
@@ -71,29 +64,34 @@ const Mine = () => {
     function purchaseAvatarList(event) {
         document.querySelectorAll(".pch-avatar img").forEach(img => {
             if (img.src !== event.currentTarget.src) {
-                img.classList.remove("img-buy")
+                img.classList.remove("img-buy");
             } else {
                 selectedPurchasedAvatarId = parseInt(event.currentTarget.src.substr(42));
-                console.log("selectedPurchasedAvatarId", selectedPurchasedAvatarId)
-                img.classList.toggle("img-buy")
+                img.classList.toggle("img-buy");
             }
-        })
+        });
     }
 
     function addPurchasedAvatar() {
-        console.log("addPurchasedAvatar", purchasedList);
         if (!purchasedList.filter(item => item === selectedImageListId).length) {
-            setPurchasedList([...purchasedList, ...[selectedImageListId]])
-            console.log("ididid", typeof (JSON.stringify(purchasedList)), userID);
+            setPurchasedList([...purchasedList, ...[selectedImageListId]]);
             updateOneUser(userID, { purchasedAvatar: JSON.stringify(purchasedList) });
-            console.log("")
         }
     }
 
     function applyAvatar() {
-        // getApplyAvatarId();
-        console.log("avatarID", avatarID);
         setAvatarID(selectedPurchasedAvatarId);
+        updateOneUser(userID, { currentAvatarId: avatarID });
+
+        const userInfo = JSON.parse(localStorage.getItem("authUser"));
+        const newUpdatedUserInfo = {
+            ...userInfo,
+            "currentAvatarId": avatarID,
+        };
+
+        // localStorage.setItem('authUser', JSON.stringify(newUpdatedUserInfo));
+        // console.log("myInformationSelector---------->",myInformationSelector);
+        dispatch(profileUpdateSuccess(newUpdatedUserInfo));
     }
 
     return (
@@ -108,21 +106,18 @@ const Mine = () => {
                         </div>
                         <div style={{ height: 300, overflowY: 'scroll' }}>
                             <div className="mt-4 md-0 px-5 my-img-select src-avatar">
-                                <div className='d-block justify-content-between pb-3' >
-                                    {
-                                        avatarList.map((e, key) => {
-                                            return <Row key={key} style={{ display: "inline" }}>
-                                                <Col style={{ display: "inline" }}>
-                                                    <img className={"img-thumbnail rounded-circle avatar-xl "}
-                                                        src={downloadAvatar(e.id)}
-                                                        alt=""
-                                                        onClick={(e) => selectAvatarList(e)}
-                                                        style={{ margin: '', width: 80, height: 80 }}
-                                                    />
-                                                </Col>
-                                            </Row>
-                                        })
-                                    }
+                                <div className='d-block justify-content-between pb-3'>
+                                    {avatarList.map((e, key) => {
+                                        return <Row key={key} style={{ display: "inline" }}>
+                                            <Col style={{ display: "inline" }}>
+                                                <img className={"img-thumbnail rounded-circle avatar-xl "}
+                                                    src={downloadAvatar(e.id)}
+                                                    alt=""
+                                                    onClick={(e) => selectAvatarList(e)}
+                                                    style={{ margin: '', width: 80, height: 80 }} />
+                                            </Col>
+                                        </Row>;
+                                    })}
                                 </div>
                             </div>
                         </div>
@@ -131,8 +126,8 @@ const Mine = () => {
                         <div className="text-end pt-5">
                             <button type="submit" className="btn btn-primary" onClick={e => {
                                 e.preventDefault();
-                                addPurchasedAvatar()
-                            }}>Purchase</button>
+                                addPurchasedAvatar();
+                            } }>Purchase</button>
                         </div>
                     </Col>
 
@@ -144,35 +139,31 @@ const Mine = () => {
                         </div>
                         <div style={{ height: 300, overflowY: 'scroll', }}>
                             <div className="mt-4 md-0 px-5 my-img-select pch-avatar">
-                                <div className='d-block justify-content-between pb-3' >
-                                    {
-                                        purchasedList.map((e, key) => {
-                                            return <Row key={key} style={{ display: "inline" }}>
-                                                <Col style={{ display: "inline" }}>
-                                                    <img className={"img-thumbnail rounded-circle avatar-xl "}
-                                                        src={downloadAvatar(e)}
-                                                        alt=""
-                                                        onClick={(e) => purchaseAvatarList(e)}
-                                                        style={{ margin: '', width: 80, height: 80 }}
-                                                    />
-                                                </Col>
-                                            </Row>
-                                        })
-                                    }
+                                <div className='d-block justify-content-between pb-3'>
+                                    {purchasedList.map((e, key) => {
+                                        return <Row key={key} style={{ display: "inline" }}>
+                                            <Col style={{ display: "inline" }}>
+                                                <img className={"img-thumbnail rounded-circle avatar-xl "}
+                                                    src={downloadAvatar(e)}
+                                                    alt=""
+                                                    onClick={(e) => purchaseAvatarList(e)}
+                                                    style={{ margin: '', width: 80, height: 80 }} />
+                                            </Col>
+                                        </Row>;
+                                    })}
                                 </div>
                             </div>
                         </div>
                         <div className="text-end pt-5">
                             <button type="submit" className="btn btn-primary" onClick={() => {
-                                // console.log("------------->selectedPurchasedAvatarId", selectedPurchasedAvatarId)
                                 applyAvatar();
-                            }}>Apply</button>
+                            } }>Apply</button>
                         </div>
                     </Col>
                 </Row>
             </TabPane>
-        </React.Fragment >
-    )
+        </React.Fragment>
+    );
 }
 
 export default Mine;

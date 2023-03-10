@@ -35,6 +35,7 @@ const TestPage = () => {
     const [passedSteps, setPassedSteps] = useState([1]);
 
     const [progressVal, setProgressVal] = useState(0);
+    const [scoreFlag, setScoreFlag] = useState(0);
 
     var progressVarStage = someQuestions.length;
     var maxInterVal = progressVarStage + 2;
@@ -45,12 +46,18 @@ const TestPage = () => {
 
     useEffect(() => {
         fetchData();
-        // setAnswers(someQuestions);
     }, []);
+
+    // useEffect(() => {
+    //     if(){
+            
+    //     }
+    // }, []);
 
     useEffect(() => {
         // console.log("hh", someQuestions, someQuestions[0])
         // setAnswers(someQuestions);
+        
     }, [someQuestions]);
 
     useEffect(() => {
@@ -70,7 +77,7 @@ const TestPage = () => {
     }
 
 
-    document.title = "Landing | Velzon - React Admin & Dashboard Template";
+    document.title = "Test Page";
     return (
         <React.Fragment>
 
@@ -120,12 +127,16 @@ const TestPage = () => {
                                                                             {
                                                                                 que.answers.map((ans, key_answer) => (
                                                                                     <div className="live-preview mt-2 mt-2" key={key_answer}>
-                                                                                        <Input type="checkbox" className="btn-check" id={"btn-check-outlined" + ans.id.toString()}
+                                                                                        <Input type="checkbox" className="btn-check" id={"btn-check-outlined" + ans.id}
 
                                                                                             onClick={() => {
                                                                                                 console.log("the result is ", ans.result);
+                                                                                                let isChecked = document.getElementById("btn-check-outlined" + ans.id).checked;
+                                                                                                if((ans.result!==true)&&isChecked)
+                                                                                                    console.log("ok");
+                                                                                                // SelectCount(count+1)
                                                                                             }} />
-                                                                                        <Label className="btn btn-customize shadow-none fs-17" for={"btn-check-outlined" + ans.id.toString()}>{(key_answer + 1) + ". " + ans.description}</Label>
+                                                                                        <Label className="btn btn-customize shadow-none fs-17" for={"btn-check-outlined" + ans.id}>{(key_answer + 1) + ". " + ans.description}</Label>
                                                                                     </div>
                                                                                 ))
                                                                             }
@@ -137,7 +148,7 @@ const TestPage = () => {
                                                         <div className="d-flex align-items-start gap-3 mt-4">
                                                             <button
                                                                 type="button"
-                                                                className="btn btn-outline-primary btn-label right ms-auto nexttab nexttab fs-20"
+                                                                className="btn btn-outline-primary btn-label right ps-4 ms-auto nexttab nexttab fs-20"
                                                                 onClick={() => {
 
                                                                     setProgressVal(progressVal + interVal);

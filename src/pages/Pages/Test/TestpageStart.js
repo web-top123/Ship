@@ -58,7 +58,7 @@ const TestPage = () => {
         }
     };
 
-    document.title = "Landing | Velzon - React Admin & Dashboard Template";
+    document.title = "Select Your Roll and Level";
     return (
         <React.Fragment>
 
@@ -125,7 +125,7 @@ const TestPage = () => {
                                     </Col>
                                 </Row>
                                 <div className='align-self-center purchase-button-group'>
-                                    <Button className="shadow-none me-4 fs-20" onClick={() => {
+                                    <Button className="shadow-none px-5 me-4 fs-20" onClick={() => {
                                         if (selectedLevel == 1) {
                                             window.location.href = '/test-test-page';
                                         }
