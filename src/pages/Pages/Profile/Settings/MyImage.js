@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { CardHeader, TabPane, Row, Col, Card } from "reactstrap";
 import { getAvatars, downloadAvatar, getUser, updateOneUser } from '../../../../helpers/fakebackend_helper';
 import { useSelector, useDispatch } from "react-redux";
+import { getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
 
 const Mine = () => {
 
@@ -9,30 +10,47 @@ const Mine = () => {
     const [purchasedList, setPurchasedList] = useState([]);
     const [userID, setUserID] = useState('');
     const [avatarID, setAvatarID] = useState('');
-    const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
     useEffect(() => {
         getAvatarList();
-        console.log("myInformationSelector", myInformationSelector);
-        setUserID(myInformationSelector.id);
+        console.log("AAAAAAAAAAAAAAAA", getAuthenticatedUser());
+        setUserID(getAuthenticatedUser().id);
+    }, []);
+
+    useEffect(() => {
         getPurchasedList(userID);
-    }, [myInformationSelector]);
+        console.log("userID", userID);
+        setAvatarID(userID);
+        // getApplyAvatarId(userID);
+    }, [userID]);
+
+    useEffect(() => {
+        console.log("purchasedList", purchasedList);
+    }, [purchasedList]);
+
+    useEffect(() => {
+        // console.log("purchasedList", purchasedList)
+    }, [purchasedList]);
+
+    useEffect(() => {
+        updateOneUser(userID, { currentAvatarId: avatarID });
+    }, [avatarID])
 
     const getAvatarList = () => {
         getAvatars().then(res => {
             setAvatarList(res);
         })
     }
-    useEffect(() => {
-        console.log("purchasedList", purchasedList)
-    }, [purchasedList]);
 
     const getPurchasedList = (id) => {
-        console.log("userId", id)
         getUser(id).then(res => {
             setPurchasedList(JSON.parse(res.purchasedAvatar));
         })
     }
+
+    // const getApplyAvatarId = () => {
+    //     setAvatarID(selectedPurchasedAvatarId);
+    // }
 
     var selectedImageListId;
 
@@ -66,10 +84,16 @@ const Mine = () => {
         console.log("addPurchasedAvatar", purchasedList);
         if (!purchasedList.filter(item => item === selectedImageListId).length) {
             setPurchasedList([...purchasedList, ...[selectedImageListId]])
-            console.log("ididid", typeof(JSON.stringify(purchasedList)), userID);
+            console.log("ididid", typeof (JSON.stringify(purchasedList)), userID);
             updateOneUser(userID, { purchasedAvatar: JSON.stringify(purchasedList) });
             console.log("")
         }
+    }
+
+    function applyAvatar() {
+        // getApplyAvatarId();
+        console.log("avatarID", avatarID);
+        setAvatarID(selectedPurchasedAvatarId);
     }
 
     return (
@@ -140,7 +164,8 @@ const Mine = () => {
                         </div>
                         <div className="text-end pt-5">
                             <button type="submit" className="btn btn-primary" onClick={() => {
-                                console.log("------------->selectedPurchasedAvatarId", selectedPurchasedAvatarId)
+                                // console.log("------------->selectedPurchasedAvatarId", selectedPurchasedAvatarId)
+                                applyAvatar();
                             }}>Apply</button>
                         </div>
                     </Col>

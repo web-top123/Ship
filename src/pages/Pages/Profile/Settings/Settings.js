@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 //import images
 import progileBg from '../../../../assets/images/profile-bg.jpg';
 import avatar1 from '../../../../assets/images/users/avatar-1.jpg';
+// import {downloadAvata}
 
 const Settings = () => {
     const [activeTab, setActiveTab] = useState("1");

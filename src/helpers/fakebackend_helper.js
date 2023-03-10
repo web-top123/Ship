@@ -312,7 +312,7 @@ export const getUser = (id) => api.get(url.GET_USER + '/' + id);
 export const addNewUser = customer => api.create(url.ADD_NEW_USER, customer);
 
 // update USER
-export const updateOneUser = (id) => api.update(url.UPDATE_USER + '/' + id);
+export const updateOneUser = (id, data) => api.update(url.UPDATE_USER + '/' + id, data);
 // export const updateOneUser = (id, customer) => api.update(url.UPDATE_USER + '/' + id, customer);
 
 
@@ -474,6 +474,12 @@ export const downloadAvatar = (id) => {
   return str;
 }
 
+export const downloadCurrentAvatar = (currentAvatarId) => {
+  // http://localhost:8080/api/avatar/fileById/1
+  var str = config.API_URL + "api/avatar/fileById/" + currentAvatarId;
+  return str;
+}
+
 
 
 //-----------Setting-----------
@@ -590,6 +596,7 @@ export const deleteCampusCategory = id => api.delete(url.DELETE_CAMPUSCATEGORY +
 //--------Question--------
 // get Questions
 export const getQuestions = () => api.get(url.GET_QUESTIONS);
+export const findSomeQuestions = () => api.get(url.GET_SOME_QUESTIONS);
 export const getQuestion = (id) => api.get(url.GET_QUESTION + '/' + id);
 
 // add QUESTION

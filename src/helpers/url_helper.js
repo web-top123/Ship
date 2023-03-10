@@ -263,6 +263,7 @@ export const DOWNLOAD_MEDIA ="/api/media/fileById";
 
 //QUESTION
 export const GET_QUESTIONS = "/api/questions/find_all";
+export const GET_SOME_QUESTIONS = "/api/questions/findSomeQuestions";
 export const GET_QUESTION = "/api/questions/findQuestionById";
 export const ADD_NEW_QUESTION = "/api/questions/create";
 export const UPDATE_QUESTION = "/api/questions/update";
