@@ -16,12 +16,6 @@ import {
   Label,
 } from "reactstrap";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import classnames from "classnames";
-import Dropzone from "react-dropzone";
-import MetaTags from "react-meta-tags";
-
 // Import React FilePond
 import { registerPlugin } from "react-filepond";
 import {
@@ -31,7 +25,6 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
-import Flatpickr from "react-flatpickr";
 import Select from "react-select";
 
 // Import FilePond styles
@@ -197,6 +190,7 @@ const AddArticle = (props) => {
                           id="product-image-input"
                           type="file"
                           accept="image/png, image/gif, image/jpeg"
+                          value={article.attach_url}
                           onChange={(e) => {
                             setArticle({
                               ...article,
