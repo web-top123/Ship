@@ -134,6 +134,7 @@ const Software = () => {
   const [cost, setCost] = useState("");
   const [purchases, setPurchases] = useState("");
   const [imageId, setImageId] = useState("");
+  const [programId, setProgramId] = useState("");
 
   //modal
   // Border Top Nav Justified Tabs
@@ -147,6 +148,7 @@ const Software = () => {
   //modal first
   const [showProgramModal, setShowProgramModal] = useState(false);
   function showProgram(selectedProgram) {
+    setProgramId(selectedProgram.id);
     setName(selectedProgram.name);
     setDate(selectedProgram.date);
     setRequirement(selectedProgram.requirement);
@@ -156,7 +158,7 @@ const Software = () => {
     setPurchases(selectedProgram.purchases);
     setImageId(selectedProgram.id);
     setShowProgramModal(!showProgramModal);
-    
+
   }
 
   //modal second
@@ -205,12 +207,13 @@ const Software = () => {
         <ModalBody className=" p-2">
           <CardBody>
             <Row className="d-flex ">
-              
+
               <div className="col-sm-5">
                 <div className="avatar-lg bg-light rounded p-1">
                   <img
-                    src={downloadProgram(imageId)} alt="..." className="img-fluid d-block"></img>
-                  {console.log("AAAAAAAA",imageId )}</div>
+                    src={downloadProgram(imageId)} alt="..." className="img-fluid d-block">
+                  </img>
+                </div>
               </div>
               <div className="col-sm-7">
                 <br />
@@ -310,7 +313,7 @@ const Software = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>real valance: </span><p>{5971.67-cost}</p>
+                    <span>real valance: </span><p>{5971.67 - cost}</p>
                   </div><br /><hr /><br />
                 </div>
               </TabPane>
@@ -326,7 +329,7 @@ const Software = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>free valance: </span><p>{5971.67-cost}</p>
+                    <span>free valance: </span><p>{5971.67 - cost}</p>
                   </div><br /><hr /><br />
 
                 </div>
@@ -335,7 +338,11 @@ const Software = () => {
 
             <Row className='d-flex' >
               <div className="col-sm-4">
-                <Link to="/pages-software-buySoftware"><Button color="primary" onClick={() => { purchaseProgram(false); }}  >
+                <Link to={"/pages-software-buySoftware/" + programId}><Button color="primary" onClick={() => {
+                  console.log("programId", programId);
+                  /** purchaseProgram(false); */
+                  addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, programId: programId })
+                }}  >
                   Buy
                 </Button></Link></div>
               <div className="col-sm-4">
@@ -460,65 +467,65 @@ const Software = () => {
               {/* -----------------main table display------------------ */}
               <Row className="p-3">
                 {softwareData.map((software, key) => (
-                    <Col lg={4}key={software.id}>
-                      <Card className="product" onClick={() => showProgram(software)}>
-                        <Link to='#'
-                          className="text-dark"
-                        >
-                          <CardBody>
-                            <Row className="gy-3">
-                              <div className="col-sm-6">
-                                <div className="avatar-lg bg-light rounded p-1">
-                                  <img
-                                    // src={software.file}
-                                    src={downloadProgram(software.id)}
-                                    alt=""
-                                    className="img-fluid d-block"
-                                  />{console.log("VVVVVV", downloadProgram(software.id))}
-                                </div>
+                  <Col lg={4} key={software.id}>
+                    <Card className="product" onClick={() => showProgram(software)}>
+                      <Link to='#'
+                        className="text-dark"
+                      >
+                        <CardBody>
+                          <Row className="gy-3">
+                            <div className="col-sm-6">
+                              <div className="avatar-lg bg-light rounded p-1">
+                                <img
+                                  // src={software.file}
+                                  src={downloadProgram(software.id)}
+                                  alt=""
+                                  className="img-fluid d-block"
+                                />{console.log("VVVVVV", downloadProgram(software.id))}
                               </div>
+                            </div>
 
-                              <div className="col-sm-6">
-                                <h5 className="pt-4 fs-20 text-truncate">
+                            <div className="col-sm-6">
+                              <h5 className="pt-4 fs-20 text-truncate">
 
-                                  {software.name}
+                                {software.name}
+                              </h5>
+                            </div>
+                          </Row>
+                        </CardBody>
+
+                        <div className="card-footer">
+                          <div className="row align-items-center gy-3">
+                            <div className="col-sm-6">
+                              <div className="d-flex align-items-center gap-2 text-muted">
+                                <div>Cost:</div>
+                                <h5 className="fs-12 mb-0">
+                                  <span className="product-line-price">
+                                    {" "}
+
+                                    {software.cost}
+                                  </span>
                                 </h5>
                               </div>
-                            </Row>
-                          </CardBody>
+                            </div>
 
-                          <div className="card-footer">
-                            <div className="row align-items-center gy-3">
-                              <div className="col-sm-6">
-                                <div className="d-flex align-items-center gap-2 text-muted">
-                                  <div>Cost:</div>
-                                  <h5 className="fs-12 mb-0">
-                                    <span className="product-line-price">
-                                      {" "}
+                            <div className="col-sm-6">
+                              <div className="d-flex align-items-center gap-2 text-muted">
+                                <div>Recommends:</div>
 
-                                      {software.cost}
-                                    </span>
-                                  </h5>
-                                </div>
-                              </div>
-
-                              <div className="col-sm-6">
-                                <div className="d-flex align-items-center gap-2 text-muted">
-                                  <div>Recommends:</div>
-
-                                  <h5 className="fs-12 mb-0">
-                                    <span className="product-line-price">
-                                      {" "}
-                                      {software.recommends}
-                                    </span>
-                                  </h5>
-                                </div>
+                                <h5 className="fs-12 mb-0">
+                                  <span className="product-line-price">
+                                    {" "}
+                                    {software.recommends}
+                                  </span>
+                                </h5>
                               </div>
                             </div>
                           </div>
-                        </Link>
-                      </Card>
-                    </Col>
+                        </div>
+                      </Link>
+                    </Card>
+                  </Col>
                 ))}
               </Row>
             </div>

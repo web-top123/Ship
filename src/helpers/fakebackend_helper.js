@@ -359,6 +359,12 @@ export const downloadProgram = (id) => {
   return str;
 }
 
+//ProgramUpvote
+export const ProgramUpVote = (id, customer) => api.update(url.PROGRAM_UP_VOTE + '/' + id, customer);
+
+//ProgramDownvote
+export const ProgramDownVote = (id, customer) => api.update(url.PROGRAM_DOWN_VOTE + '/' + id, customer);
+
 //-----------ProgramCategory-----------
 // get ProgramCategories
 export const getProgramCategories = () => api.get(url.GET_PROGRAMCATEGORIES);

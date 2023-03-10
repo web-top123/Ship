@@ -1,64 +1,139 @@
-import classnames from "classnames";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
     Container,
-    Nav,
-    NavItem,
-    NavLink,
-    TabContent,
-    TabPane,
-    Modal, ModalBody, ModalHeader,
     Row,
     Card,
     CardHeader,
-    Col,
-    Input,
     Button,
     CardBody,
-    Table,
-    Label,
+    Col,
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import { getProgram, upVote, downVote, downloadProgram } from "../../../helpers/fakebackend_helper";
 
-const BuySoftware = () => {
+const BuySoftware = (props) => {
+    document.title = "Software Detail";
+
+    let { id } = useParams();
+    const [program, setProgramList] = useState({
+        name: "",
+        requirement: "",
+        description: "",
+        cost: "",
+        recommends: "",
+        unrecommends: "",
+        file_url: ""
+    });
+    console.log("AAAAAAA", program.file_url);
+
+    useEffect(() => {
+        if (id) {
+            getProgram(id).then(res => {
+                setProgramList(res);
+            })
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log("aaa", program.recommends);
+        console.log("aaa", program.unrecommends);
+    }, [program]);
+
     return (
-        <div className="page-content">
-          <Container fluid>
-                <BreadCrumb title="Detail Data" pageTitle="Ecommerce" />
-                <div className="card pt-2 ">
+        <React.Fragment>
+            <div className="page-content">
+                <Container fluid>
+                    <BreadCrumb title="Study Detail" />
                     <Row>
-                        <div className="col-sm-11"></div>
-                        <div className="col-sm-1  p-4 pt-2"> 
-                        <Link to="/pages-study-field"><Button 
-                            type="button"
-                            className="btn-close"
-                            style={{ float: "right" }}
-                        >
-                        </Button></Link></div>
-                    </Row>
-                    <div className="p-4">
-                        <h1 className="text-center "><em> About ship Enginee</em></h1>                  
-                    </div>
-                    <div className="pt-0" style={{padding:"0 70px"}}>
-                        <h3 className="text-center">Ship's engineers are responsible for installing, operating, maintaining and repairing engines, machinery and other mechanical and electronic equipment aboard ships and offshore structures. They operate a ship's engine to control the speed of the vessel, according to orders from the ship's captain.</h3>
-                    </div>
-                    <div  style={{padding:"50px 20%"}}>
-                        <Row className="pt-4">
-                            <div className="col-sm-6 text-center">
-                                <Button color="light" onClick={() => { }} >Agree</Button>
-                            </div>
-                            <div className="col-sm-6 text-center">
-                                <Button color="primary" onClick={() => {
+                        <Col xl={12} lg={12}>
+                            <Card>
+                                <CardHeader>
+                                    <Row>
+                                        <Col lg={11}>
+                                            <h1 style={{ textAlign: "center" }}>{program.name}</h1>
+                                            {console.log("AAAAADD", program.name)}
+                                        </Col>
+                                        <Col lg={1}>
+                                            <Link to="/pages-software"><Button
+                                                type="button"
+                                                className="btn-close"
+                                                style={{ float: "right" }}
+                                            >
+                                            </Button></Link>
+                                        </Col>
+                                    </Row>
+                                </CardHeader>
+                                <CardBody className='px-5 py-5'>
+                                    <div className='d-flex justify-content-center'>
+                                        <div className="col-sm-3">
+                                            {/* <div className="avatar-lg bg-light rounded p-1"> */}
+                                            <div style={{ width: 1000 }}>
+                                                <img
+                                                    src={downloadProgram(program.id)} alt="..." className="img-fluid d-block">
+                                                </img>
+                                            </div>
+                                        </div>
+                                        <Col lg={6}>
+                                            <div className='d-flex mb-4'>
+                                                <div>
+                                                    <b>Description: </b>
+                                                </div>
+                                                <div>
+                                                    {program.description}
+                                                </div>
+                                            </div>
+                                            <div className='d-flex mb-4'>
+                                                <div>
+                                                    <b>Requirement: </b>
+                                                </div>
+                                                <div>
+                                                    {program.requirement}
+                                                </div>
+                                            </div>
+                                            <div className='d-flex mb-4'>
+                                                <div>
+                                                    <b>Cost: </b>
+                                                </div>
+                                                <div>
+                                                    {program.cost}
+                                                </div>
+                                            </div>
+                                        </Col>
+                                    </div>
 
-                                }}>Disagree</Button>
-                            </div>
-                        </Row>
-                    </div>
-                </div>
-            </Container>
-        </div>
+                                    <div style={{ padding: "50px 20%" }}>
+                                        <Row className="pt-4">
+                                            <div className="col-sm-6 text-center">
+                                                <Button color="light" onClick={() => {
+                                                    setProgramList({
+                                                        ...program, ...{ recommends: program.recommends + 1 }
+                                                    })
+                                                    downVote(id, program);
+                                                }} >
+                                                    Agree
+                                                </Button>
+                                            </div>
+                                            <div className="col-sm-6 text-center">
+                                                <Button color="primary" onClick={() => {
+                                                    setProgramList({
+                                                        ...program, ...{ unrecommends: program.unrecommends - 1 }
+                                                    })
+                                                    downVote(id, program);
+                                                }}>
+                                                    Disagree
+                                                </Button>
+                                            </div>
+                                        </Row>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+        </React.Fragment>
     );
 };
 
