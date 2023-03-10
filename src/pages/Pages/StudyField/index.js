@@ -38,18 +38,20 @@ import cx from "classnames";
 //selection category
 import Select from "react-select";
 import "./studyfield.css"
+import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 
-import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopReaders, addNewBrowserHistory } from '../../../helpers/fakebackend_helper';
+import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers } from '../../../helpers/fakebackend_helper';
 const Study = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
-  const fetchData = async () => {
-    if (selectedCategoryId === 1) {
-      getTopReaders().then(res => {
-        setTopcampusData(res);
+    const fetchData = async () => {
+      if (selectedCategoryId === 1) {
+        getTopCampus().then(res => {
+          setTopcampusData(res);
 
-      });
+        });
+        
       getAllStudy().then(studyFieldList => {
         setstudyData(studyFieldList);
       });
@@ -62,9 +64,11 @@ const Study = () => {
 
   const [studyData, setstudyData] = useState([]);
   const [TopcampusData, setTopcampusData] = useState([]);
+  const [TopUsersData, setTopUsersData]=useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
   const [userId, setUserId] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
+  
 
   const getAndSetIds = () => {
     setSelectedIds(
@@ -74,6 +78,13 @@ const Study = () => {
         .map((x) => parseInt(x.trim()))
     );
   };
+  
+  useEffect(()=>{
+    getTopUsers().then(res=>{
+      console.log("TopUsers", res);
+      setTopUsersData(res)
+    })
+  },[])
   useEffect(() => {
     console.log("AAAAAAA",selectedIds);
   }, [selectedIds]);
@@ -450,12 +461,23 @@ const Study = () => {
                 </div>
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
-                    Top Writer
+                    Top Reader
                   </p>
-
-                  <div className="p-3">{TopcampusData.map((campusItem, key) => (
-                    <React.Fragment key={campusItem.id}>
-                      <Card className="product" onClick={() => showCampus(campusItem)}>
+                  {/* <div className="d-flex me-2">
+                        <div className="me-2">
+                          <img
+                            style={{
+                              width: "50px",
+                              height: "auto",
+                              borderRadius: "50%",
+                            }} alt="Img"
+                            src={avatar1}
+                          />
+                        </div> */}
+                  <div className="p-3">{TopUsersData.map((UsersItem, key) => (
+                    UsersItem.map((userItem, key)=>(
+                    <React.Fragment key={key}>
+                      <Card className="product">
                         <Link to='#'
                           className="text-dark"
                         >
@@ -463,18 +485,21 @@ const Study = () => {
                             <div className="d-flex align-items-center text-muted  ">
                               
                               <div className="flex-grow-1">
-                                <h5 className="fs-14">{campusItem.name}</h5>
-                                <h5 className="fs-14">{campusItem.recommends}</h5>
+                                <h5 className="fs-14">{userItem.username}</h5>
+                                
                               </div>
                             </div>
                           </CardBody>
                         </Link>
                       </Card>
                     </React.Fragment>
-                  ))}
+                  ))
+                  
+                  ))};
+                  </div>
                   </div>
                 </div>
-              </div>
+              
             </Card>
           </Col>
           <div className="col-xl-9 col-lg-8">
