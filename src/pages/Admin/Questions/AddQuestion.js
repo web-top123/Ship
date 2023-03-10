@@ -267,8 +267,6 @@ const AddQuestion = (props) => {
                       }}
                     />
                   </div>
-
-
                 </CardBody>
               </Card>
 
