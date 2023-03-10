@@ -65,6 +65,7 @@ const AddProgram = (props) => {
     programCategoryId: '',
     date: '',
     recommends: '',
+    unrecommends:'', 
     purchases: '',
     file_url: null,
     image_url: '',
@@ -267,29 +268,6 @@ const AddProgram = (props) => {
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          Recommends
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter recommends"
-                          value={Program.recommends}
-                          onChange={e => {
-                            setProgram({ ...Program, ...{ recommends: e.target.value } })
-                          }}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-
-                    <Col lg={6}>
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          htmlFor="manufacturer-brand-input"
-                        >
                           Cost
                         </label>
                         <input
@@ -304,7 +282,52 @@ const AddProgram = (props) => {
                         />
                       </div>
                     </Col>
+                    
+                  </Row>
+                  <Row>
+                  <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          UpVote
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter upvode"
+                          value={Program.recommends}
+                          onChange={e => {
+                            setProgram({ ...Program, ...{ recommends: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
                     <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          DownVote
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter downvote"
+                          value={Program.unrecommends}
+                          onChange={e => {
+                            setProgram({ ...Program, ...{ unrecommends: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>        
+                  </Row>
+                  <Row>
+                  <Col lg={6}>
                       <div>
                         <label
                           htmlFor="datepicker-publish-input"
@@ -329,10 +352,6 @@ const AddProgram = (props) => {
                         />
                       </div>
                     </Col>
-                  </Row>
-
-
-                  <Row>
                     <Col lg={6}>
                       <div className="mb-3">
                         <label
@@ -403,6 +422,7 @@ const AddProgram = (props) => {
                   formData.append("programCategoryId", Program.programCategoryId);
                   formData.append("date", Program.date);
                   formData.append("recommends", Program.recommends);
+                  formData.append("unrecommends", Program.unrecommends);
                   formData.append("purchases", Program.purchases);
                   formData.append("file", Program.file_url);
                   // formData.append("image_url", Program.image_url);

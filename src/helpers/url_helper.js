@@ -159,6 +159,8 @@ export const ADD_NEW_PROGRAM = "/api/program/create";
 export const UPDATE_PROGRAM = "/api/program/update";
 export const DELETE_PROGRAM = "/api/program/delete";
 export const DOWNLOAD_PROGRAM ="/api/program/fileById";
+export const PROGRAM_UP_VOTE = "/api/program/programupvote";
+export const PROGRAM_DOWN_VOTE = "/api/program/programdownvote";
 
 // ProgramCategories
 export const GET_PROGRAMCATEGORIES = "/api/program/category/get_All";
@@ -261,6 +263,7 @@ export const DOWNLOAD_MEDIA ="/api/media/fileById";
 
 //QUESTION
 export const GET_QUESTIONS = "/api/questions/find_all";
+export const GET_SOME_QUESTIONS = "/api/questions/findSomeQuestions";
 export const GET_QUESTION = "/api/questions/findQuestionById";
 export const ADD_NEW_QUESTION = "/api/questions/create";
 export const UPDATE_QUESTION = "/api/questions/update";

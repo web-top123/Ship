@@ -69,7 +69,7 @@ const StudyDetail = (props) => {
                                             <div className="col-sm-6 text-center">
                                                 <Button disabled={disable} color="success" onClick={() => {
                                                     setCampusList({
-                                                        ...campus, ...{recommends: campus.recommends+1}
+                                                        ...campus, ...{recommends: campus.recommends + 1}
                                                     });
                                                     upVote(id, campus);
                                                     setDisable(false)
