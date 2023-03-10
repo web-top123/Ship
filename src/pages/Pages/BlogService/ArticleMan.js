@@ -32,9 +32,9 @@ const ArticleMan = () => {
                 filteredBlogs.map((product) => console.log(product))
                 filteredBlogs = BlogDataList.filter((product) => product.type == type);
             }
-            if (type == 'date') {setBlogDataPublisedFilter(filteredBlogs);setBlogDataList(filteredBlogs);}
-            if (type == 'trending') {setBlogDataList(filteredBlogs);}
-            if (type == 'draft') {setBlogDataDraftFilter(BlogDataDraftFilter);setBlogDataList(filteredBlogs);}
+            if (type === 'date') {setBlogDataPublisedFilter(filteredBlogs);setBlogDataList(filteredBlogs);}
+            if (type === 'trending') {setBlogDataList(filteredBlogs);}
+            if (type === 'draft') {setBlogDataDraftFilter(BlogDataDraftFilter);setBlogDataList(filteredBlogs);}
             // setBlogDataList(filteredBlogs);
         }
     };
@@ -52,7 +52,7 @@ const ArticleMan = () => {
                         <Col xl={9} lg={8}>
                             <Card>
                                 <CardHeader className='text-center d-flex justify-content-center align-items-center'>
-                                    <img src = {avatar1} style={{"width":"40px", "height":"auto", "border-radius": "50%"}} className="me-3"/><h4>JavinPaul<span>'s Article</span></h4>
+                                    <img src = {avatar1} style={{"width":"40px", "height":"auto", "border-radius": "50%"}} alt="" className="me-3"/><h4>JavinPaul<span>'s Article</span></h4>
                                 </CardHeader>
                                 <CardBody className=''>
                                     <TabContent className="text-muted blog-table-content">

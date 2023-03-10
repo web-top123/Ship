@@ -6,6 +6,7 @@ import {BlogDetailData, columnsReplyMessageData} from './TestBlogDetail'
 import { getArticle, deleteArticle } from "../../../helpers/fakebackend_helper";
 import { Link, useParams  } from "react-router-dom";
 import ArticleSideBar from "./ArticleSideBar";
+import TableContainer from "../../../Components/Common/TableContainer";
 
 const BlogServiceDetail = () => {
     document.title = "Blog Service";
@@ -78,7 +79,7 @@ const BlogServiceDetail = () => {
                                                     id="table-product-list-all"
                                                     className="table-card gridjs-border-none pb-2"
                                                 >
-                                                    {/* <TableContainer
+                                                    <TableContainer
                                                         columns={columnsReplyMessage}
                                                         data={BlogDetailDataFilter}
                                                         isGlobalFilter={false}
@@ -88,7 +89,7 @@ const BlogServiceDetail = () => {
                                                         divClass="table-responsive mb-1"
                                                         tableClass="mb-0 table-borderless"
                                                         theadClass="table-light text-muted"
-                                                    /> */}
+                                                    />
                                                 </div>
                                             </TabPane>
                                         </TabContent>

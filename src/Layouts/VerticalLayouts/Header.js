@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Dropdown, DropdownMenu, DropdownToggle, Form } from 'reactstrap';
 
 //import images
 import logoSm from "../../assets/images/logo-sm.png";
@@ -9,11 +8,6 @@ import logoDark from "../../assets/images/logo-dark.png";
 import logoLight from "../../assets/images/logo-light.png";
 
 //import Components
-import SearchOption from '../../Components/Common/SearchOption';
-import LanguageDropdown from '../../Components/Common/LanguageDropdown';
-import WebAppsDropdown from '../../Components/Common/WebAppsDropdown';
-import MyCartDropdown from '../../Components/Common/MyCartDropdown';
-import FullScreenDropdown from '../../Components/Common/FullScreenDropdown';
 import NotificationDropdown from '../../Components/Common/NotificationDropdown';
 import ProfileDropdown from '../../Components/Common/ProfileDropdown';
 import LightDark from '../../Components/Common/LightDark';
@@ -102,10 +96,8 @@ const Header = ({ onChangeLayoutMode, layoutModeType }) => {
                                     <span></span>
                                 </span>
                             </button>
-
-
                         </div>
-
+                        
                         {user != null ?
                             <div className="d-flex align-items-center">
 
