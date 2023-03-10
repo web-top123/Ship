@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { CardHeader, TabPane, Row, Col, Card } from "reactstrap";
 import { getAvatars, downloadAvatar, getUser, updateOneUser } from '../../../../helpers/fakebackend_helper';
 import { useSelector, useDispatch } from "react-redux";
+import { getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
 
 const Mine = () => {
 
