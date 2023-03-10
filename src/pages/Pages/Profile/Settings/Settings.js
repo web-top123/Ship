@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardBody, CardHeader, Col, Container, Form, Input, Label, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table } from 'reactstrap';
 import classnames from "classnames";
 import MetaTags from 'react-meta-tags';
@@ -14,11 +14,13 @@ import { useSelector, useDispatch } from "react-redux";
 //import images
 import progileBg from '../../../../assets/images/profile-bg.jpg';
 import avatar1 from '../../../../assets/images/users/avatar-1.jpg';
+// import {downloadAvata}
 
 const Settings = () => {
     const [activeTab, setActiveTab] = useState("1");
     const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
+    // console.log("myInformationSelector", myInformationSelector.id);
     const tabChange = (tab) => {
         if (activeTab !== tab) setActiveTab(tab);
     };
@@ -44,7 +46,7 @@ const Settings = () => {
 
                             <Col>
                                 <div className="p-2">
-                                    <h3 className="text-white mb-1">{myInformationSelector.name}</h3>
+                                    {/* <h3 className="text-white mb-1">{myInformationSelector.name}</h3> */}
                                 </div>
                             </Col>
 

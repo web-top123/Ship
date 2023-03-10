@@ -196,7 +196,6 @@ function QuestionDetail(props) {
                   <Row>
                     <div className="d-flex gap-1" >
                       <Button color="success" className="add-btn" onClick={() => tog_list()} id="create-btn"><i className="ri-add-line align-bottom me-1"></i> Add</Button>
-                      <Button color="soft-danger"><i className="ri-delete-bin-2-line"></i></Button>
                     </div>
                   </Row>
                   <Row>

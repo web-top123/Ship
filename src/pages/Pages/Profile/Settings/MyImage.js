@@ -2,20 +2,39 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { CardHeader, TabPane, Row, Col, Card } from "reactstrap";
 import { getAvatars, downloadAvatar, getUser, updateOneUser } from '../../../../helpers/fakebackend_helper';
 import { useSelector, useDispatch } from "react-redux";
+import { getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
 
 const Mine = () => {
 
     const [avatarList, setAvatarList] = useState([]);
     const [purchasedList, setPurchasedList] = useState([]);
     const [userID, setUserID] = useState('');
-    const myInformationSelector = useSelector(state => state.Profile.myinformation);
+    const [avatarID, setAvatarID] = useState('');
 
     useEffect(() => {
         getAvatarList();
-        console.log("myInformationSelector", myInformationSelector);
-        setUserID(myInformationSelector.id);
+        console.log("AAAAAAAAAAAAAAAA", getAuthenticatedUser());
+        setUserID(getAuthenticatedUser().id);
+    }, []);
+
+    useEffect(() => {
         getPurchasedList(userID);
-    }, [myInformationSelector]);
+        console.log("userID", userID);
+        setAvatarID(userID);
+        // getApplyAvatarId(userID);
+    }, [userID]);
+
+    useEffect(() => {
+        console.log("purchasedList", purchasedList);
+    }, [purchasedList]);
+
+    useEffect(() => {
+        // console.log("purchasedList", purchasedList)
+    }, [purchasedList]);
+
+    useEffect(() => {
+        updateOneUser(userID, { currentAvatarId: avatarID });
+    }, [avatarID])
 
     const getAvatarList = () => {
         getAvatars().then(res => {
@@ -24,39 +43,57 @@ const Mine = () => {
     }
 
     const getPurchasedList = (id) => {
-        console.log(id)
         getUser(id).then(res => {
             setPurchasedList(JSON.parse(res.purchasedAvatar));
         })
     }
 
-    var idd;
-    function tog_large(e) {
+    // const getApplyAvatarId = () => {
+    //     setAvatarID(selectedPurchasedAvatarId);
+    // }
+
+    var selectedImageListId;
+
+    function selectAvatarList(e) {
         document.querySelectorAll(".src-avatar img").forEach(img => {
             if (img.src !== e.currentTarget.src) {
                 img.classList.remove("img-buy")
             } else {
-                idd = parseInt(e.currentTarget.src.substr(42));
+                selectedImageListId = parseInt(e.currentTarget.src.substr(42));
+                console.log("selectedImageListId", selectedImageListId)
                 img.classList.toggle("img-buy")
             }
         })
     }
-    function tog_purch(event) {
+
+    var selectedPurchasedAvatarId;
+
+    function purchaseAvatarList(event) {
         document.querySelectorAll(".pch-avatar img").forEach(img => {
             if (img.src !== event.currentTarget.src) {
                 img.classList.remove("img-buy")
             } else {
+                selectedPurchasedAvatarId = parseInt(event.currentTarget.src.substr(42));
+                console.log("selectedPurchasedAvatarId", selectedPurchasedAvatarId)
                 img.classList.toggle("img-buy")
             }
         })
     }
 
     function addPurchasedAvatar() {
-        console.log(purchasedList);
-        if (!purchasedList.filter(item => item === idd).length) {
-            setPurchasedList([...purchasedList, ...[idd]])
-            updateOneUser(userID, {purchasedAvatar: JSON.stringify(purchasedList)});
+        console.log("addPurchasedAvatar", purchasedList);
+        if (!purchasedList.filter(item => item === selectedImageListId).length) {
+            setPurchasedList([...purchasedList, ...[selectedImageListId]])
+            console.log("ididid", typeof (JSON.stringify(purchasedList)), userID);
+            updateOneUser(userID, { purchasedAvatar: JSON.stringify(purchasedList) });
+            console.log("")
         }
+    }
+
+    function applyAvatar() {
+        // getApplyAvatarId();
+        console.log("avatarID", avatarID);
+        setAvatarID(selectedPurchasedAvatarId);
     }
 
     return (
@@ -79,7 +116,7 @@ const Mine = () => {
                                                     <img className={"img-thumbnail rounded-circle avatar-xl "}
                                                         src={downloadAvatar(e.id)}
                                                         alt=""
-                                                        onClick={(e) => tog_large(e)}
+                                                        onClick={(e) => selectAvatarList(e)}
                                                         style={{ margin: '', width: 80, height: 80 }}
                                                     />
                                                 </Col>
@@ -115,7 +152,7 @@ const Mine = () => {
                                                     <img className={"img-thumbnail rounded-circle avatar-xl "}
                                                         src={downloadAvatar(e)}
                                                         alt=""
-                                                        onClick={(e) => tog_purch(e)}
+                                                        onClick={(e) => purchaseAvatarList(e)}
                                                         style={{ margin: '', width: 80, height: 80 }}
                                                     />
                                                 </Col>
@@ -126,7 +163,10 @@ const Mine = () => {
                             </div>
                         </div>
                         <div className="text-end pt-5">
-                            <button type="submit" className="btn btn-primary">Apply</button>
+                            <button type="submit" className="btn btn-primary" onClick={() => {
+                                // console.log("------------->selectedPurchasedAvatarId", selectedPurchasedAvatarId)
+                                applyAvatar();
+                            }}>Apply</button>
                         </div>
                     </Col>
                 </Row>

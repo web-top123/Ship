@@ -312,7 +312,9 @@ export const getUser = (id) => api.get(url.GET_USER + '/' + id);
 export const addNewUser = customer => api.create(url.ADD_NEW_USER, customer);
 
 // update USER
-export const updateOneUser = (id, customer) => api.update(url.UPDATE_USER + '/' + id, customer);
+export const updateOneUser = (id, data) => api.update(url.UPDATE_USER + '/' + id, data);
+// export const updateOneUser = (id, customer) => api.update(url.UPDATE_USER + '/' + id, customer);
+
 
 // delete USER
 export const deleteUser = id => api.delete(url.DELETE_USER + '/' + id);
@@ -466,6 +468,12 @@ export const downloadAvatar = (id) => {
   return str;
 }
 
+export const downloadCurrentAvatar = (currentAvatarId) => {
+  // http://localhost:8080/api/avatar/fileById/1
+  var str = config.API_URL + "api/avatar/fileById/" + currentAvatarId;
+  return str;
+}
+
 
 
 //-----------Setting-----------
@@ -556,6 +564,12 @@ export const updateOneCampus = (id, customer) => api.update(url.UPDATE_CAMPUS + 
 
 // delete CAMPUS
 export const deleteCampus = id => api.delete(url.DELETE_CAMPUS + '/' + id);
+
+//upvote
+export const upVote = (id, customer) => api.update(url.UP_VOTE + '/' + id, customer);
+
+//downvote
+export const downVote = (id, customer) => api.update(url.DOWN_VOTE + '/' + id, customer);
 
 // ----------- CampusCategory --------------
 

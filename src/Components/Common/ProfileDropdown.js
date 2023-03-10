@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { downloadAvatar } from "../../helpers/fakebackend_helper";
 
 import {
     loginUser,
     loginSuccess
     // resetValue
 } from "../../store/actions";
+
 // import images
-import avatar1 from "../../assets/images/users/avatar-1.jpg";
 
 import { getAuthenticatedUser } from '../../helpers/fakebackend_helper';
 
@@ -21,26 +22,39 @@ const ProfileDropdown = () => {
         setIsProfileDropdown(!isProfileDropdown);
     };
 
-    const myInformationSelector = useSelector(state => state.Profile.myinformation);
+    // const myInformationSelector = useSelector(state => state.Profile.myinformation);
+
+    // useEffect(() => { 
+    //     console.log("Profiledropdown", getAuthenticatedUser().currentAvatarId)
+    //     if (myInformationSelector) {
+    //         setUsername(myInformationSelector.username);
+    //         setName(myInformationSelector.name);
+    //     } else {
+    //         setUsername('');
+    //         setName('');
+    //     }
+    // }, [myInformationSelector])
 
     useEffect(() => {
-        if (myInformationSelector) {
-            setUsername(myInformationSelector.username);
-            setName(myInformationSelector.name);
+        console.log("Profiledropdown", getAuthenticatedUser())
+        if (getAuthenticatedUser()) {
+            console.log("getAuthenticatedUser().username", getAuthenticatedUser().username)
+            setUsername(getAuthenticatedUser().username);
+            setName(getAuthenticatedUser().name);
         } else {
             setUsername('');
             setName('');
         }
-    }, [myInformationSelector])
+    }, [getAuthenticatedUser().id])
 
     // const userAuth = getAuthenticatedUser();
+
     return (
         <React.Fragment>
             <Dropdown isOpen={isProfileDropdown} toggle={toggleProfileDropdown} className="ms-sm-3 header-item topbar-user">
                 <DropdownToggle tag="button" type="button" className="btn shadow-none">
                     <span className="d-flex align-items-center">
-                        <img className="rounded-circle header-profile-user" src={avatar1}
-                            alt="Header Avatar" />
+                        <img className="rounded-circle header-profile-user" src={downloadAvatar(getAuthenticatedUser().currentAvatarId)} alt="Header Avatar" />
                         <span className="text-start ms-xl-2">
                             <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{name}</span>
                             {/* <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"></span> */}

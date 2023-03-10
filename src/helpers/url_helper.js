@@ -222,6 +222,9 @@ export const GET_CAMPUS = "/api/campus/get_one";
 export const ADD_NEW_CAMPUS = "/api/campus/create";
 export const UPDATE_CAMPUS = "/api/campus/update";
 export const DELETE_CAMPUS = "/api/campus/delete";
+export const UP_VOTE = "/api/campus/upvote";
+export const DOWN_VOTE = "/api/campus/downvote";
+
 
 // CampusCategories
 export const GET_CAMPUSCATEGORIES = "/api/campus/category/get_All";

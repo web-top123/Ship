@@ -14,6 +14,9 @@ import {
   TabPane,
   Input,
   Label,
+  Button,
+  Modal,
+  ModalHeader
 } from "reactstrap";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -56,13 +59,19 @@ const AddQuestion = (props) => {
   const [levelSelects, setLevelSelects] = useState([]);
   const [selectedLevel, setLevel] = useState({});
   const [question, setQuestion] = useState({
-    level:"",
+    level: "",
     degreeId: "",
     description: "",
   });
+
+  const [modal_positionTop, setmodal_positionTop] = useState(false);
+  function tog_positionTop() {
+    setmodal_positionTop(!modal_positionTop);
+  }
+
   useEffect(() => {
     console.log("sss", degreeSelects);
-  },[degreeSelects])
+  }, [degreeSelects])
   useEffect(() => {
     if (id) {
       getQuestion(id).then((response) => {
@@ -73,7 +82,7 @@ const AddQuestion = (props) => {
           setDegreeSelects(res.map(e => {
             return { value: e.id, label: e.name, max: e.maxdegree }
           }))
-          
+
           // console.log(response.degreeId)
           let obj = res.find(o => o.id === response.degreeId);
           let priD = { value: obj.id, label: obj.name, max: obj.maxdegree }
@@ -82,10 +91,10 @@ const AddQuestion = (props) => {
           var arr = [];
           var len = obj.maxdegree
           for (var i = 0; i < len; i++) {
-              arr.push({
-                  value: i + 1,
-                  label: (i + 1).toString(),
-              });
+            arr.push({
+              value: i + 1,
+              label: (i + 1).toString(),
+            });
           }
           setLevelSelects(arr)
           console.log(arr);
@@ -95,7 +104,7 @@ const AddQuestion = (props) => {
           setLevel(priL);
           // setLevel()
         })
-      });      
+      });
     }
     else {
       getDegrees().then(res => {
@@ -120,7 +129,7 @@ const AddQuestion = (props) => {
 
   function handleSelectSingle(selectedSingle) {
     setSelectedSingle(selectedSingle);
-}
+  }
 
   /**
    * Formats the size
@@ -144,6 +153,26 @@ const AddQuestion = (props) => {
           pageTitle="Admin Question"
         />
 
+        <Modal id="topmodal" isOpen={modal_positionTop} backdrop="static" keyboard="false" toggle={() => { tog_positionTop(); }} >
+          <ModalHeader>
+            Add Question
+            <Button type="button" className="btn-close" onClick={() => { setmodal_positionTop(false); }} aria-label="Close"> </Button>
+          </ModalHeader>
+          <div className="modal-body text-center p-5">
+            <lord-icon src="https://cdn.lordicon.com/pithnlch.json"
+              trigger="loop" colors="primary:#121331,secondary:#08a88a" style={{ width: "120px", height: "120px" }}>
+            </lord-icon>
+            <div className="mt-4">
+              <h4 className="mb-3">Add Question Successed.</h4>
+              <p className="text-muted mb-3"> Do you add more questions?</p>
+              <div className="hstack gap-2 justify-content-center">
+                <Link to="#" className="btn btn-link link-success fw-medium shadow-none" onClick={() => { tog_positionTop(); }}><i className="ri-close-line me-1 align-middle"></i> Yes</Link>
+                <Link to="/admin-questions" className="btn btn-success">No. That's all</Link>
+              </div>
+            </div>
+          </div>
+        </Modal>
+
         <Row>
           <Col lg={8}>
             <form>
@@ -152,7 +181,7 @@ const AddQuestion = (props) => {
 
                   <Row>
                     <Col lg={6}>
-                    <div className="mb-3">
+                      <div className="mb-3">
                         <label
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
@@ -167,10 +196,10 @@ const AddQuestion = (props) => {
                             var arr = [];
                             var len = e.max;
                             for (var i = 0; i < len; i++) {
-                                arr.push({
-                                    value: i + 1,
-                                    label: (i + 1).toString(),
-                                });
+                              arr.push({
+                                value: i + 1,
+                                label: (i + 1).toString(),
+                              });
                             }
                             setLevelSelects(arr)
                             setDegree(e);
@@ -181,7 +210,7 @@ const AddQuestion = (props) => {
                           }}
                           options={degreeSelects}
                         />
-                       </div>
+                      </div>
                     </Col>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -238,8 +267,6 @@ const AddQuestion = (props) => {
                       }}
                     />
                   </div>
-
-
                 </CardBody>
               </Card>
 
@@ -258,6 +285,7 @@ const AddQuestion = (props) => {
                         console.log(res);
                       });
                     }
+                    tog_positionTop();
                   }}
                 >
                   {id ? "Update" : "Add"}
