@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardBody, CardHeader, Col, Container, Form, Input, Label, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table } from 'reactstrap';
 import classnames from "classnames";
 import MetaTags from 'react-meta-tags';
@@ -19,6 +19,7 @@ const Settings = () => {
     const [activeTab, setActiveTab] = useState("1");
     const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
+    // console.log("myInformationSelector", myInformationSelector.id);
     const tabChange = (tab) => {
         if (activeTab !== tab) setActiveTab(tab);
     };

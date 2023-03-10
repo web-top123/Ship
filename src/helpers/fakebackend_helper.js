@@ -312,7 +312,9 @@ export const getUser = (id) => api.get(url.GET_USER + '/' + id);
 export const addNewUser = customer => api.create(url.ADD_NEW_USER, customer);
 
 // update USER
-export const updateOneUser = (id, customer) => api.update(url.UPDATE_USER + '/' + id, customer);
+export const updateOneUser = (id) => api.update(url.UPDATE_USER + '/' + id);
+// export const updateOneUser = (id, customer) => api.update(url.UPDATE_USER + '/' + id, customer);
+
 
 // delete USER
 export const deleteUser = id => api.delete(url.DELETE_USER + '/' + id);
