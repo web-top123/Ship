@@ -576,6 +576,7 @@ export const deleteCampusCategory = id => api.delete(url.DELETE_CAMPUSCATEGORY +
 //--------Question--------
 // get Questions
 export const getQuestions = () => api.get(url.GET_QUESTIONS);
+export const findSomeQuestions = () => api.get(url.GET_SOME_QUESTIONS);
 export const getQuestion = (id) => api.get(url.GET_QUESTION + '/' + id);
 
 // add QUESTION
