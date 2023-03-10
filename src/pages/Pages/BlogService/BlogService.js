@@ -94,7 +94,7 @@ const BlogService = () => {
     let hourDifference = Math.ceil(difference / (1000 * 60 * 60 * 24));
     let minDifference = Math.ceil(difference / (1000 * 60 * 60 * 24));
     if (dayDifference > 0) {
-      return dayDifference + (dayDifference == 1 ? " day ago" : " days ago");
+      return dayDifference + (dayDifference === 1 ? " day ago" : " days ago");
     }
     if (hourDifference > 0) {
       return hourDifference + " hours ago";
@@ -138,15 +138,6 @@ const BlogService = () => {
   function tog_large() {
     setmodal_large(!modal_large);
   }
-
-  const sort = [
-    {
-      options: [
-        { label: "Engineering", value: "Engineering" },
-        { label: "Math", value: "Math" },
-      ],
-    },
-  ];
   return (
     <React.Fragment>
       <div className="page-content">
@@ -169,7 +160,7 @@ const BlogService = () => {
                         onClick={() => {
                           toggleTab("1", "trending");
                         }}
-                        href="#"
+                        href="/pages-blog-service"
                       >
                         Trending{" "}
                         <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
@@ -186,7 +177,7 @@ const BlogService = () => {
                         onClick={() => {
                           toggleTab("2", "date");
                         }}
-                        href="/pages-blog-service"
+                        href="#"
                       >
                         Date{" "}
                         <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
@@ -279,23 +270,24 @@ const BlogService = () => {
                               width: "32px",
                               height: "auto",
                               borderRadius: "50%",
-                            }}
+                            }} alt="Img"
                             src={avatar1}
                           />
                         </div>
                         <div>
-                          {articleTopWriter.map((findTopWirter, key) => (
-                            <React.Fragment key={key}>
-                              <Link
-                                className="rounded-pill btn btn-light tags me-4"
-                                to={
-                                  "/pages-blog-service/detail/" +
-                                  findTopWirter.id
-                                }
-                              >
-                                {findTopWirter.userId}
-                              </Link>
-                            </React.Fragment>
+                          {articleTopWriter.map((findTopWirter) => ( 
+                            findTopWirter.map((oneWriter, key) => (
+                                <React.Fragment key={key}>                    
+                                <Link
+                                    className="rounded-pill btn btn-light tags me-4"
+                                    to={
+                                    "/pages-blog-service/detail/" + findTopWirter.id
+                                    }
+                                >
+                                    {oneWriter.username }
+                                </Link>
+                                </React.Fragment>
+                            ))                           
                           ))}
                         </div>
                       </div>

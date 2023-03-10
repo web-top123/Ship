@@ -58,7 +58,7 @@ const TestPage = () => {
         }
     };
 
-    document.title = "Landing | Velzon - React Admin & Dashboard Template";
+    document.title = "Select Your Roll and Level";
     return (
         <React.Fragment>
 
@@ -111,14 +111,9 @@ const TestPage = () => {
 
                                                             if (level.value == 1) {
                                                                 setTestStartBtn('Start now!');
-                                                                console.log("------------>", testStartBtn)
-
-
                                                             }
                                                             if (level.value > 1) {
                                                                 setTestStartBtn('Please Purchase!');
-                                                                console.log("------------>", testStartBtn)
-
                                                             }
                                                         }}
 
@@ -126,18 +121,13 @@ const TestPage = () => {
                                                     <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for={level.label} size='lg'> {level.label} </Label>
                                                 </div>
                                             ))}
-
-
                                         </div>
                                     </Col>
                                 </Row>
                                 <div className='align-self-center purchase-button-group'>
-                                    <Button className="shadow-none me-4 fs-20" onClick={() => {
-
-                                        
-                                            console.log("-------------+>", selectedLevel, testStartBtn);
+                                    <Button className="shadow-none px-5 me-4 fs-20" onClick={() => {
                                         if (selectedLevel == 1) {
-                                            window.location.href='/test-test-page';
+                                            window.location.href = '/test-test-page';
                                         }
                                         if (selectedLevel > 1) {
                                             tog_togFirst();

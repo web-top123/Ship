@@ -115,7 +115,7 @@ const AddQuestion = (props) => {
         setLevelSelects([])
       })
     }
-  }, []);
+  }, [id]);
 
   function handleAcceptedFiles(files) {
     files.map((file) =>

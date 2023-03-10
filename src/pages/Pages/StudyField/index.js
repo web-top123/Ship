@@ -172,7 +172,7 @@ const Study = () => {
   function showCampus(selectedCampus) {
     setCampuseId(selectedCampus.id);
     setTitle(selectedCampus.name);
-    setDescription(selectedCampus.description);
+    setDescription(selectedCampus.description.substring(0, 30)+"...");
     setPrice(selectedCampus.cost);
     setShowCampusModal(true);
   }
@@ -448,6 +448,32 @@ const Study = () => {
                   ))}
                   </div>
                 </div>
+                <div className="card-body border-bottom">
+                  <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
+                    Top Writer
+                  </p>
+
+                  <div className="p-3">{TopcampusData.map((campusItem, key) => (
+                    <React.Fragment key={campusItem.id}>
+                      <Card className="product" onClick={() => showCampus(campusItem)}>
+                        <Link to='#'
+                          className="text-dark"
+                        >
+                          <CardBody>
+                            <div className="d-flex align-items-center text-muted  ">
+                              
+                              <div className="flex-grow-1">
+                                <h5 className="fs-14">{campusItem.name}</h5>
+                                <h5 className="fs-14">{campusItem.recommends}</h5>
+                              </div>
+                            </div>
+                          </CardBody>
+                        </Link>
+                      </Card>
+                    </React.Fragment>
+                  ))}
+                  </div>
+                </div>
               </div>
             </Card>
           </Col>
@@ -482,7 +508,7 @@ const Study = () => {
                         <React.Fragment key={study.id}>
                           <tr >
                             <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
-                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description}</div></Link></td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 20)+"..."}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{study.browses}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
