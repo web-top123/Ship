@@ -17,8 +17,8 @@ const StudyDetail = (props) => {
         unrecommends: ""
     });
 
-    
-    { console.log("asdfa", campus) }
+    const [disable, setDisable] = useState(false);
+    { console.log("All CampusList", campus) }
     useEffect(() => {
         if (id) {
             getCampus(id).then(res => {
@@ -28,8 +28,8 @@ const StudyDetail = (props) => {
     }, []);
    
     useEffect(() => {
-        console.log("aaa", campus.recommends);
-        console.log("aaa", campus.unrecommends);
+        console.log("Recommends", campus.recommends);
+        console.log("Unrecommends", campus.unrecommends);
     }, [campus]);
 
     return (
@@ -67,23 +67,26 @@ const StudyDetail = (props) => {
                                     <div style={{ padding: "50px 20%" }}>
                                         <Row className="pt-4">
                                             <div className="col-sm-6 text-center">
-                                                <Button color="light" onClick={() => {
+                                                <Button disabled={disable} color="success" onClick={() => {
                                                     setCampusList({
                                                         ...campus, ...{recommends: campus.recommends+1}
                                                     });
                                                     upVote(id, campus);
+                                                    setDisable(false)
                                                 }} >
-                                                    Agree
+                                                    Upvote
                                                 </Button>
                                             </div>
                                             <div className="col-sm-6 text-center">
-                                                <Button color="primary" onClick={() => {
+                                                <Button  color="primary" onClick={() => {
                                                     setCampusList({
-                                                        ...campus, ...{unrecommends:campus.unrecommends-1}
+                                                        ...campus, ...{unrecommends:campus.unrecommends+1}
                                                     });
                                                     downVote(id, campus);
+                                                    
                                                 }}>
-                                                    Disagree
+                                                    DownVote
+                                                    
                                                 </Button>
                                             </div>
                                         </Row>
