@@ -557,6 +557,12 @@ export const updateOneCampus = (id, customer) => api.update(url.UPDATE_CAMPUS + 
 // delete CAMPUS
 export const deleteCampus = id => api.delete(url.DELETE_CAMPUS + '/' + id);
 
+//upvote
+export const upVote = customer => api.create(url.UP_VOTE, customer);
+
+//downvote
+export const downVote = customer => api.create(url.DOWN_VOTE, customer);
+
 // ----------- CampusCategory --------------
 
 // get CampusCategories
