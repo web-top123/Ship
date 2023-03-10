@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   Container,
@@ -32,13 +33,16 @@ import { Link } from "react-router-dom";
 //treeview
 import TreeView, { flattenTree } from "react-accessible-treeview";
 import { IoMdArrowDropright } from "react-icons/io";
+import { RiCheckboxBlankLine, RiCheckboxIndeterminateLine, RiCheckboxLine } from "react-icons/ri";
 import cx from "classnames";
 import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories, getTopSoftwares, addNewBrowserHistory } from '../../../helpers/fakebackend_helper';
 import { downloadProgram } from "../../../helpers/fakebackend_helper";
-// import FontSize from "@ckeditor/ckeditor5-font/src/fontsize";
+import "./softwarefield.css"
 
 const Software = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const myInformationSelector = useSelector(state => state.Profile.myinformation);
+
   const fetchData = async () => {
     getTopSoftwares().then(res => {
       setTopsoftwareData(res);
@@ -55,13 +59,25 @@ const Software = () => {
     }
   };
 
-
   const [softwareData, setsoftwareData] = useState([]);
   const [TopsoftwareData, setTopsoftwareData] = useState([]);
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [userId, setUserId] = useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
+
+  useEffect(() => {
+    console.log("AAAAAAA", selectedIds);
+  }, [selectedIds]);
+
   useEffect(() => {
     getCategoryList();
     fetchData();
+    if (myInformationSelector) {
+      setUserId(myInformationSelector.id);
+    } else {
+      console.log(myInformationSelector);
+      setUserId('');
+    }
   }, []);
 
   useEffect(() => {
@@ -103,7 +119,7 @@ const Software = () => {
         children: categoryNodes,
       };
 
-      setAllCategories(folder);
+      setCategory(folder);
     });
   }
 
@@ -111,16 +127,10 @@ const Software = () => {
   const [selectedSingle, setSelectedSingle] = useState(null);
   function handleSelectSingle(value) {
     if (selectedSingle != value) {
-      setAllCategories(value);
+      setCategory(value);
     }
     setSelectedSingle(value);
   }
-  const SingleOptions = [
-    { value: 'folder1', label: 'Choices 1' },
-    { value: 'folder2', label: 'Choices 2' },
-    { value: 'folder3', label: 'Choices 3' },
-    { value: 'folder4', label: 'Choices 4' }
-  ];
 
   // Data
   const [softwareList, setsoftwareList] = useState(sellersList);
@@ -131,9 +141,11 @@ const Software = () => {
   const [requirement, setRequirement] = useState("");
   const [description, setDescription] = useState("");
   const [recommends, setRecommends] = useState("");
+  const [unrecommends, setUnrecommends] = useState("");
   const [cost, setCost] = useState("");
-  const [purchases, setPurchases] = useState("");
   const [imageId, setImageId] = useState("");
+  const [programId, setProgramId] = useState("");
+  const [purchases, setPurchases] = useState("");
 
   //modal
   // Border Top Nav Justified Tabs
@@ -147,16 +159,17 @@ const Software = () => {
   //modal first
   const [showProgramModal, setShowProgramModal] = useState(false);
   function showProgram(selectedProgram) {
+    setProgramId(selectedProgram.id);
     setName(selectedProgram.name);
     setDate(selectedProgram.date);
     setRequirement(selectedProgram.requirement);
     setDescription(selectedProgram.description);
     setRecommends(selectedProgram.recommends);
+    setUnrecommends(selectedProgram.unrecommends);
     setCost(selectedProgram.cost);
     setPurchases(selectedProgram.purchases);
     setImageId(selectedProgram.id);
     setShowProgramModal(!showProgramModal);
-    
   }
 
   //modal second
@@ -169,8 +182,9 @@ const Software = () => {
   //treeview
 
   //data folder
-  const [allCategories, setAllCategories] = useState([]);
-  const data = flattenTree(allCategories);
+  const [category, setCategory] = useState([]);
+
+  const data = flattenTree(category);
   const ArrowIcon = ({ isOpen, className }) => {
     const baseClass = "arrow";
     const classes = cx(
@@ -182,12 +196,21 @@ const Software = () => {
 
     return <IoMdArrowDropright className={classes} />;
   };
+  const CheckBoxIcon = ({ variant, ...rest }) => {
+    switch (variant) {
+      case "all":
+        return <RiCheckboxLine {...rest} />;
+      case "none":
+        return <RiCheckboxBlankLine  {...rest} />;
+      case "some":
+        return <RiCheckboxIndeterminateLine {...rest} />;
+      default:
+        return null;
+    }
+  };
+
 
   const [expandedIds, setExpandedIds] = useState();
-
-  function selectCategory(selectedId) {
-    console.log("Selected Category ID:", selectedId);
-  }
 
   return (
     <div className="page-content">
@@ -205,12 +228,13 @@ const Software = () => {
         <ModalBody className=" p-2">
           <CardBody>
             <Row className="d-flex ">
-              
+
               <div className="col-sm-5">
                 <div className="avatar-lg bg-light rounded p-1">
                   <img
-                    src={downloadProgram(imageId)} alt="..." className="img-fluid d-block"></img>
-                  {console.log("AAAAAAAA",imageId )}</div>
+                    src={downloadProgram(imageId)} alt="..." className="img-fluid d-block">
+                  </img>
+                </div>
               </div>
               <div className="col-sm-7">
                 <br />
@@ -310,7 +334,7 @@ const Software = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>real valance: </span><p>{5971.67-cost}</p>
+                    <span>real valance: </span><p>{5971.67 - cost}</p>
                   </div><br /><hr /><br />
                 </div>
               </TabPane>
@@ -326,7 +350,7 @@ const Software = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>free valance: </span><p>{5971.67-cost}</p>
+                    <span>free valance: </span><p>{5971.67 - cost}</p>
                   </div><br /><hr /><br />
 
                 </div>
@@ -335,7 +359,11 @@ const Software = () => {
 
             <Row className='d-flex' >
               <div className="col-sm-4">
-                <Link to="/pages-software-buySoftware"><Button color="primary" onClick={() => { purchaseProgram(false); }}  >
+                <Link to={"/pages-software-buySoftware/" + programId}><Button color="primary" onClick={() => {
+                  console.log("programId", programId);
+                  /** purchaseProgram(false); */
+                  addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, programId: programId })
+                }}  >
                   Buy
                 </Button></Link></div>
               <div className="col-sm-4">
@@ -368,17 +396,25 @@ const Software = () => {
                   </p>
                   <TreeView
                     data={data}
-                    className="basic p-2"
-                    aria-label="Controlled expanded node tree"
+                    className="checkbox p-2"
+                    aria-label="Checkbox tree"
                     expandedIds={expandedIds}
+                    multiSelect
+                    selectedIds={selectedIds}
+                    propagateSelect
+                    propagateSelectUpwards
+                    togglableSelect
                     defaultExpandedIds={[1]}
                     nodeRenderer={({
                       element,
                       isBranch,
                       isExpanded,
+                      isSelected,
+                      isHalfSelected,
                       isDisabled,
                       getNodeProps,
                       level,
+                      handleSelect,
                       handleExpand,
                     }) => {
                       return (
@@ -387,23 +423,34 @@ const Software = () => {
                           style={{
                             marginLeft: 20 * (level - 1),
                             opacity: isDisabled ? 0.5 : 1,
-
                           }}
                         >
                           {isBranch && <ArrowIcon isOpen={isExpanded} />}
+                          <CheckBoxIcon
+                            className="checkbox-icon"
+                            onClick={(e) => {
+
+                              console.log("AAAAAA", selectedIds);
+                              handleSelect(e);
+                              e.stopPropagation();
+                            }}
+                            variant={
+                              isHalfSelected ? "some" : isSelected ? "all" : "none"
+                            }
+                          />
                           <span className="name" onClick={() => {
-                            // showProgram(element)
+                            // tog_togFirst(element)
                           }}>
                             {element.name}
-
-                            <button style={{ border: "none", backgroundColor: "lightblue", width: "40px", height: "19px", borderRadius: "8px" }} onClick={() => {
-                              console.log(originalCategoryList);
-                              let selectedCategory = originalCategoryList.find(category => {
-                                return category.title == element.name;
-                              })
-                              setSelectedCategoryId(selectedCategory.id);
-                            }} className="">  <i className="las la-angle-right fs-12" ></i>
-                            </button></span>
+                          </span>
+                          {/* <button style={{ border: "none", backgroundColor: "lightblue", width: "40px", height: "19px", borderRadius: "8px" }} onClick={() => {
+                            console.log(originalCategoryList);
+                            let selectedCategory = originalCategoryList.find(category => {
+                              return category.title === element.name;
+                            })
+                            setSelectedCategoryId(selectedCategory.id);
+                          }} className=""><i className="las la-angle-right fs-10" ></i>
+                          </button> */}
                         </div>
                       );
                     }}
@@ -429,7 +476,7 @@ const Software = () => {
                               </div>
                               <div className="flex-grow-1">
                                 <h5 className="fs-14">{softwareItem.name}</h5>
-                                <h5 className="fs-14">{softwareItem.purchases}</h5>
+                                <h5 className="fs-14">purchases:{softwareItem.purchases}</h5>
                               </div>
                             </div>
                           </CardBody>
@@ -460,65 +507,72 @@ const Software = () => {
               {/* -----------------main table display------------------ */}
               <Row className="p-3">
                 {softwareData.map((software, key) => (
-                    <Col lg={4}key={software.id}>
-                      <Card className="product" onClick={() => showProgram(software)}>
-                        <Link to='#'
-                          className="text-dark"
-                        >
-                          <CardBody>
-                            <Row className="gy-3">
-                              <div className="col-sm-6">
-                                <div className="avatar-lg bg-light rounded p-1">
-                                  <img
-                                    // src={software.file}
-                                    src={downloadProgram(software.id)}
-                                    alt=""
-                                    className="img-fluid d-block"
-                                  />{console.log("VVVVVV", downloadProgram(software.id))}
-                                </div>
+                  <Col lg={4} key={software.id}>
+                    <Card className="product" onClick={() => showProgram(software)}>
+                      <Link to='#'
+                        className="text-dark"
+                      >
+                        <CardBody>
+                          <Row className="gy-3">
+                            <div className="col-sm-6">
+                              <div className="avatar-lg bg-light rounded p-1">
+                                <img
+                                  // src={software.file}
+                                  src={downloadProgram(software.id)}
+                                  alt=""
+                                  className="img-fluid d-block"
+                                />{console.log("VVVVVV", downloadProgram(software.id))}
                               </div>
+                            </div>
 
-                              <div className="col-sm-6">
-                                <h5 className="pt-4 fs-20 text-truncate">
+                            <div className="col-sm-6">
+                              <h5 className="pt-4 fs-20 text-truncate">
 
-                                  {software.name}
+                                {software.name}
+                              </h5>
+                            </div>
+                          </Row>
+                        </CardBody>
+
+                        <div className="card-footer">
+                          <div className="row align-items-center gy-3">
+                            <div className="col-sm-6">
+                              <div className="d-flex align-items-center gap-2 text-muted">
+                                <div>Cost:</div>
+                                <h5 className="fs-12 mb-0">
+                                  <span className="product-line-price">
+                                    {" "}
+
+                                    {software.cost}
+                                  </span>
                                 </h5>
                               </div>
-                            </Row>
-                          </CardBody>
-
-                          <div className="card-footer">
-                            <div className="row align-items-center gy-3">
-                              <div className="col-sm-6">
-                                <div className="d-flex align-items-center gap-2 text-muted">
-                                  <div>Cost:</div>
-                                  <h5 className="fs-12 mb-0">
-                                    <span className="product-line-price">
-                                      {" "}
-
-                                      {software.cost}
-                                    </span>
-                                  </h5>
-                                </div>
+                            </div>
+                            <div className="col-sm-6">
+                              <div className="d-flex align-items-center gap-2 text-muted">
+                                <div>UpVote:</div>
+                                <h5 className="fs-12 mb-0">
+                                  <span className="product-line-price">
+                                    {" "}
+                                    {software.recommends}
+                                  </span>
+                                </h5>
                               </div>
-
-                              <div className="col-sm-6">
-                                <div className="d-flex align-items-center gap-2 text-muted">
-                                  <div>Recommends:</div>
-
-                                  <h5 className="fs-12 mb-0">
-                                    <span className="product-line-price">
-                                      {" "}
-                                      {software.recommends}
-                                    </span>
-                                  </h5>
-                                </div>
+                              <div className="d-flex align-items-center gap-2 text-muted">
+                                <div>DownVote:</div>
+                                <h5 className="fs-12 mb-0">
+                                  <span className="product-line-price">
+                                    {" "}
+                                    {software.unrecommends}
+                                  </span>
+                                </h5>
                               </div>
                             </div>
                           </div>
-                        </Link>
-                      </Card>
-                    </Col>
+                        </div>
+                      </Link>
+                    </Card>
+                  </Col>
                 ))}
               </Row>
             </div>

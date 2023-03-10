@@ -125,11 +125,11 @@ const Programs = (props) => {
         accessor: "purchases",
         filterable: false,
       },
-      {
-        Header: "Recommends",
-        accessor: "recommends",
-        filterable: false,
-      },
+      // {
+      //   Header: "Recommends",
+      //   accessor: "recommends",
+      //   filterable: false,
+      // },
       {
         Header: "Cost",
         accessor: "cost",

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { downloadCurrentAvatar } from "../../helpers/fakebackend_helper";
+
 
 import {
     loginUser,
@@ -9,7 +11,6 @@ import {
 } from "../../store/actions";
 
 // import images
-import avatar1 from "../../assets/images/users/avatar-1.jpg";
 
 import { getAuthenticatedUser } from '../../helpers/fakebackend_helper';
 
@@ -24,8 +25,9 @@ const ProfileDropdown = () => {
 
     const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
-    useEffect(() => {
+    useEffect(() => { 
         if (myInformationSelector) {
+            console.log("myInformationSelector.currentAvatarId", myInformationSelector.currentAvatarId);        
             setUsername(myInformationSelector.username);
             setName(myInformationSelector.name);
         } else {
@@ -34,15 +36,27 @@ const ProfileDropdown = () => {
         }
     }, [myInformationSelector])
 
-    // const userAuth = getAuthenticatedUser();
+    // useEffect(() => {
+    //     console.log("Profiledropdown", getAuthenticatedUser())
+    //     if (getAuthenticatedUser()) {
+    //         console.log("getAuthenticatedUser().username", getAuthenticatedUser().username)
+    //         setUsername(getAuthenticatedUser().username);
+    //         setName(getAuthenticatedUser().name);
+    //     } else {
+    //         setUsername('');
+    //         setName('');
+    //     }
+    // }, [getAuthenticatedUser().id])
+
     
+    // const userAuth = getAuthenticatedUser();
+
     return (
         <React.Fragment>
             <Dropdown isOpen={isProfileDropdown} toggle={toggleProfileDropdown} className="ms-sm-3 header-item topbar-user">
                 <DropdownToggle tag="button" type="button" className="btn shadow-none">
                     <span className="d-flex align-items-center">
-                        <img className="rounded-circle header-profile-user" src={avatar1}
-                            alt="Header Avatar" />
+                        <img className="rounded-circle header-profile-user" src={downloadCurrentAvatar(myInformationSelector)} alt="Header Avatar" />
                         <span className="text-start ms-xl-2">
                             <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{name}</span>
                             {/* <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"></span> */}

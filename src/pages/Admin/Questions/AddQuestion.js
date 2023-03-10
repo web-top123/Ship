@@ -115,7 +115,7 @@ const AddQuestion = (props) => {
         setLevelSelects([])
       })
     }
-  }, []);
+  }, [id]);
 
   function handleAcceptedFiles(files) {
     files.map((file) =>
@@ -267,8 +267,6 @@ const AddQuestion = (props) => {
                       }}
                     />
                   </div>
-
-
                 </CardBody>
               </Card>
 

@@ -7,10 +7,11 @@ const columnsBlogData = [
         Header: "Reply message",
         accessor: "content",
         filterable: false,
-        Cell: (article) => (<>
+        Cell: (article) => (
+        <>
             <div className="blog-content-wrapper">
                 <div>
-                    <Link to = {"/pages-blog-service/article-man"} style={{"display":"inline-block"}}><img className="author-img" src={article.row.original.userId} /></Link>
+                    <Link to = {"/pages-blog-service/article-man"} style={{"display":"inline-block"}}><img className="author-img" alt="Img" src={article.row.original.userId} /></Link>
                     <span className="author-name">{article.row.original.userId}</span>
                     <span className="publish-date ms-1">{article.row.original.ago}</span>
                 </div>
@@ -23,7 +24,7 @@ const columnsBlogData = [
                     </Link>
 
                     <div className="blog-detail-img-wrap">
-                        <img className="blog-detail-img" src={article.row.original.attach_url} />
+                        <img className="blog-detail-img" alt="" src={article.row.original.attach_url} />
                     </div>
 
                 </div>

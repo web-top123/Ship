@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardBody, CardHeader, Col, Container, Form, Input, Label, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table } from 'reactstrap';
 import classnames from "classnames";
 import MetaTags from 'react-meta-tags';
@@ -14,11 +14,33 @@ import { useSelector, useDispatch } from "react-redux";
 //import images
 import progileBg from '../../../../assets/images/profile-bg.jpg';
 import avatar1 from '../../../../assets/images/users/avatar-1.jpg';
+import { downloadCurrentAvatar } from '../../../../helpers/fakebackend_helper';
+
+import { getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
 
 const Settings = () => {
     const [activeTab, setActiveTab] = useState("1");
+    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
+    
     const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
+    useEffect(() => { 
+        if (myInformationSelector) {
+            setUsername(myInformationSelector.username);
+            setName(myInformationSelector.name);
+        } else {
+            setUsername('');
+            setName('');
+        }
+    }, [myInformationSelector])
+
+
+    useEffect(()=>{
+
+    }, [])
+
+    
     const tabChange = (tab) => {
         if (activeTab !== tab) setActiveTab(tab);
     };
@@ -37,14 +59,14 @@ const Settings = () => {
                         <Row className="g-4">
                             <div className="col-auto">
                                 <div className="avatar-lg">
-                                    <img src={avatar1} alt="user-img"
+                                    <img src={downloadCurrentAvatar(myInformationSelector)} alt="user-img"
                                         className="img-thumbnail rounded-circle" />
                                 </div>
                             </div>
 
                             <Col>
                                 <div className="p-2">
-                                    {/* <h3 className="text-white mb-1">{myInformationSelector.name}</h3> */}
+                                    <h3 className="text-white mb-1">{name}</h3>
                                 </div>
                             </Col>
 

@@ -214,7 +214,7 @@ const AddCampus = (props) => {
                           Cost
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter cost"
@@ -234,7 +234,7 @@ const AddCampus = (props) => {
                           Browses
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter browses"
@@ -257,7 +257,7 @@ const AddCampus = (props) => {
                           Recommends
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           id="manufacturer-brand-input"
                           placeholder="Enter recommends"

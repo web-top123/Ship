@@ -130,7 +130,8 @@ export const DELETE_CUSTOMER = "/delete/customer";
 export const GET_ALL_STUDY_WITH_CATEGORY = "/api/campus/findAllBy";
 export const GET_ALL_STUDY = "/api/campus/findAll";
 export const GET_ALL_STUDY_BY_CATEGORY = "/api/campus/findCampusCategoryById";
-export const GET_ALL_TOP_READERS = "/api/campus/getTopCampuses";
+export const GET_ALL_TOP_CAMPUS = "/api/campus/getTopCampuses";
+export const GET_ALL_TOP_USERS = "/api/campus/findTopUser";
 
 //softwarefield
 export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";
@@ -159,6 +160,8 @@ export const ADD_NEW_PROGRAM = "/api/program/create";
 export const UPDATE_PROGRAM = "/api/program/update";
 export const DELETE_PROGRAM = "/api/program/delete";
 export const DOWNLOAD_PROGRAM ="/api/program/fileById";
+export const PROGRAM_UP_VOTE = "/api/program/programupvote";
+export const PROGRAM_DOWN_VOTE = "/api/program/programdownvote";
 
 // ProgramCategories
 export const GET_PROGRAMCATEGORIES = "/api/program/category/get_All";
@@ -222,6 +225,9 @@ export const GET_CAMPUS = "/api/campus/get_one";
 export const ADD_NEW_CAMPUS = "/api/campus/create";
 export const UPDATE_CAMPUS = "/api/campus/update";
 export const DELETE_CAMPUS = "/api/campus/delete";
+export const UP_VOTE = "/api/campus/upvote";
+export const DOWN_VOTE = "/api/campus/downvote";
+
 
 // CampusCategories
 export const GET_CAMPUSCATEGORIES = "/api/campus/category/get_All";
@@ -258,6 +264,7 @@ export const DOWNLOAD_MEDIA ="/api/media/fileById";
 
 //QUESTION
 export const GET_QUESTIONS = "/api/questions/find_all";
+export const GET_SOME_QUESTIONS = "/api/questions/findSomeQuestions";
 export const GET_QUESTION = "/api/questions/findQuestionById";
 export const ADD_NEW_QUESTION = "/api/questions/create";
 export const UPDATE_QUESTION = "/api/questions/update";

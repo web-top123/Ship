@@ -593,7 +593,7 @@ const publicRoutes = [
   { path: "/pages-study-field", component: StudyField },
   { path: "/pages-company-introduction", component: CompanyIntroduction },
   { path: "/pages-software", component: Software },
-  { path: "/pages-software-buySoftware", component: BuySoftware },
+  { path: "/pages-software-buySoftware/:id", component: BuySoftware },
   { path: "/pages-question-service", component: QuestionService },
   { path: "/pages-blog-service", component: BlogService },
   { path: "/pages-blog-service/article-kind/:id", component: ArticleKind },
@@ -603,7 +603,7 @@ const publicRoutes = [
   //view ship data 
   { path: "/view-ship-data", component: ViewShipData},
   { path: "/ship-details/:id", component: ShipDetails},
-  { path: "/new-data-vote/:id", component: NewDataVote},
+  { path: "/new-data-vote", component: NewDataVote},
   { path: "/pages-study-detail/:id", component: StudyDetail},
 
 
