@@ -26,17 +26,10 @@ const StudyDetail = (props) => {
             })
         }
     }, []);
-    console.log("ppppp", campus);
-
-    // function Counter() {
-    //     const [countUpvote, setCountUpvote] = useState();
-    //     const [countDownvote, setCountDownvote] = useState();
-    // }
-    
-    // useEffect(() => {
-    //     setCountUpvote(() => campus.recommends + 1);
-    //     setCountDownvote(() => campus.recommends - 1);
-    // }, []);
+   
+    useEffect(() => {
+        console.log("aaa", campus.recommends);
+    }, [campus]);
 
     return (
         <React.Fragment>
@@ -73,12 +66,18 @@ const StudyDetail = (props) => {
                                     <div style={{ padding: "50px 20%" }}>
                                         <Row className="pt-4">
                                             <div className="col-sm-6 text-center">
-                                                <Button color="light" onClick={() => { }} >
+                                                <Button color="light" onClick={() => {
+                                                    setCampusList({
+                                                        ...campus, ...{recommends: campus.recommends+1}
+                                                    })
+                                                    upVote(id, campus);
+                                                }} >
                                                     Agree
                                                 </Button>
                                             </div>
                                             <div className="col-sm-6 text-center">
                                                 <Button color="primary" onClick={() => {
+                                                    setCountDownvote(countDownvote-1);
                                                 }}>
                                                     Disagree
                                                 </Button>
