@@ -48,13 +48,13 @@ const Study = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
-    const fetchData = async () => {
-      if (selectedCategoryId === 1) {
-        getTopCampus().then(res => {
-          setTopcampusData(res);
+  const fetchData = async () => {
+    if (selectedCategoryId === 1) {
+      getTopCampus().then(res => {
+        setTopcampusData(res);
 
-        });
-        
+      });
+
       getAllStudy().then(studyFieldList => {
         setstudyData(studyFieldList);
       });
@@ -65,13 +65,19 @@ const Study = () => {
     }
   };
 
+  const getStudyByCate = (id) => {
+    getAllStudyByCategory(id).then(categoryData => {
+      setstudyData(categoryData);
+    });
+  }
+
   const [studyData, setstudyData] = useState([]);
   const [TopcampusData, setTopcampusData] = useState([]);
-  const [TopUsersData, setTopUsersData]=useState([]);
+  const [TopUsersData, setTopUsersData] = useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
   const [userId, setUserId] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
-  
+
 
   const [checked, setChecked] = useState([]);
   const [expanded, setExpanded] = useState([]);
@@ -84,16 +90,13 @@ const Study = () => {
         .map((x) => parseInt(x.trim()))
     );
   };
-  
-  useEffect(()=>{
-    getTopUsers().then(res=>{
+
+  useEffect(() => {
+    getTopUsers().then(res => {
       console.log("TopUsers", res);
       setTopUsersData(res)
     })
-  },[])
-  useEffect(() => {
-    console.log("AAAAAAA", selectedIds);
-  }, [selectedIds]);
+  }, [])
 
   useEffect(() => {
     getCategoryList();
@@ -176,7 +179,7 @@ const Study = () => {
   function showCampus(selectedCampus) {
     setCampuseId(selectedCampus.id);
     setTitle(selectedCampus.name);
-    setDescription(selectedCampus.description.substring(0, 30)+"...");
+    setDescription(selectedCampus.description.substring(0, 30) + "...");
     setPrice(selectedCampus.cost);
     setShowCampusModal(true);
   }
@@ -368,9 +371,17 @@ const Study = () => {
                     nodes={category}
                     checked={checked}
                     expanded={expanded}
-                    onCheck={e => setChecked(e)}
+                    onCheck={e => {
+                      console.log(e);
+                      if (e.length) {
+                        getStudyByCate(e.join(','))
+                      }
+                      setChecked(e)
+                    }}
                     onExpand={e => setExpanded(e)}
                     iconsClass="fa5"
+                    showExpandAll={true}
+                    nativeCheckboxes={true}
                     icons={{
                       check: <span className="rct-icon rct-icon-check" />,
                       uncheck: <span className="rct-icon rct-icon-uncheck" />,
@@ -488,31 +499,31 @@ const Study = () => {
                           />
                         </div> */}
                   <div className="p-3">{TopUsersData.map((UsersItem, key) => (
-                    UsersItem.map((userItem, key)=>(
-                    <React.Fragment key={key}>
-                      <Card className="product">
-                        <Link to='#'
-                          className="text-dark"
-                        >
-                          <CardBody>
-                            <div className="d-flex align-items-center text-muted  ">
-                              
-                              <div className="flex-grow-1">
-                                <h5 className="fs-14">{userItem.username}</h5>
-                                
+                    UsersItem.map((userItem, key) => (
+                      <React.Fragment key={key}>
+                        <Card className="product">
+                          <Link to='#'
+                            className="text-dark"
+                          >
+                            <CardBody>
+                              <div className="d-flex align-items-center text-muted  ">
+
+                                <div className="flex-grow-1">
+                                  <h5 className="fs-14">{userItem.username}</h5>
+
+                                </div>
                               </div>
-                            </div>
-                          </CardBody>
-                        </Link>
-                      </Card>
-                    </React.Fragment>
-                  ))
-                  
+                            </CardBody>
+                          </Link>
+                        </Card>
+                      </React.Fragment>
+                    ))
+
                   ))};
                   </div>
-                  </div>
                 </div>
-              
+              </div>
+
             </Card>
           </Col>
           <div className="col-xl-9 col-lg-8">
@@ -543,10 +554,11 @@ const Study = () => {
                     </thead>
                     <tbody>
                       {studyData.map((study, key) => (
+
                         <React.Fragment key={study.id}>
                           <tr >
                             <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
-                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 20)+"..."}</div></Link></td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 20) + "..."}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{study.browses}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
