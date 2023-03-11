@@ -302,7 +302,8 @@ export const getAllSoftwareByCategory = (category) => api.get(url.GET_ALL_SOFTWA
 export const getTopSoftwares = () => api.get(url.GET_ALL_TOP_SOFTWARES);
 
 
-export const getTopReaders = () => api.get(url.GET_ALL_TOP_READERS);
+export const getTopCampus = () => api.get(url.GET_ALL_TOP_CAMPUS);
+export const getTopUsers = () => api.get(url.GET_ALL_TOP_USERS);
 
 // get Users
 export const getUsers = () => api.get(url.GET_USERS);

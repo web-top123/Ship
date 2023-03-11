@@ -32,24 +32,29 @@ import { Link } from "react-router-dom";
 
 //treeview
 import TreeView, { flattenTree } from "react-accessible-treeview";
+import CheckboxTree from 'react-checkbox-tree';
 import { IoMdArrowDropright } from "react-icons/io";
 import { RiCheckboxBlankLine, RiCheckboxIndeterminateLine, RiCheckboxLine } from "react-icons/ri";
 import cx from "classnames";
 //selection category
 import Select from "react-select";
 import "./studyfield.css"
+import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 
-import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopReaders, addNewBrowserHistory } from '../../../helpers/fakebackend_helper';
+import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers } from '../../../helpers/fakebackend_helper';
 const Study = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
-  const fetchData = async () => {
-    if (selectedCategoryId === 1) {
-      getTopReaders().then(res => {
-        setTopcampusData(res);
+    const fetchData = async () => {
+      if (selectedCategoryId === 1) {
+        getTopCampus().then(res => {
+          setTopcampusData(res);
 
-      });
+        });
+        
       getAllStudy().then(studyFieldList => {
         setstudyData(studyFieldList);
       });
@@ -62,9 +67,14 @@ const Study = () => {
 
   const [studyData, setstudyData] = useState([]);
   const [TopcampusData, setTopcampusData] = useState([]);
+  const [TopUsersData, setTopUsersData]=useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
   const [userId, setUserId] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
+  
+
+  const [checked, setChecked] = useState([]);
+  const [expanded, setExpanded] = useState([]);
 
   const getAndSetIds = () => {
     setSelectedIds(
@@ -74,8 +84,15 @@ const Study = () => {
         .map((x) => parseInt(x.trim()))
     );
   };
+  
+  useEffect(()=>{
+    getTopUsers().then(res=>{
+      console.log("TopUsers", res);
+      setTopUsersData(res)
+    })
+  },[])
   useEffect(() => {
-    console.log("AAAAAAA",selectedIds);
+    console.log("AAAAAAA", selectedIds);
   }, [selectedIds]);
 
   useEffect(() => {
@@ -105,6 +122,8 @@ const Study = () => {
           id: category.id,
           category_id: category.id,
           name: category.title,
+          value: category.id,
+          label: category.title,
           parent_id: ((category.parentId === 0) ? null : category.parentId),
           children: []
         };
@@ -122,30 +141,15 @@ const Study = () => {
       }
 
       let folder = {
-        name: "",
+        label: "",
+        value: 0,
         children: categoryNodes,
       };
 
-      setCategory(folder);
+      setCategory(categoryNodes);
+      console.log("CCCCCCCCCC", folder);
     });
   }
-  //selection category
-  const [selectedSingle, setSelectedSingle] = useState(null);
-  function handleSelectSingle(value) {
-    if (selectedSingle !== value) {
-      setCategory(value);
-    }
-    setSelectedSingle(value);
-
-    // setCategory(selectedSingle);
-
-  }
-  // const SingleOptions = [
-  //   { value: 'folder1', label: 'Choices 1' },
-  //   { value: 'folder2', label: 'Choices 2' },
-  //   { value: 'folder3', label: 'Choices 3' },
-  //   { value: 'folder4', label: 'Choices 4' }
-  // ];
 
   // Data
   const [productLists, setproductLists] = useState(sellersList);
@@ -299,7 +303,7 @@ const Study = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>real valance: </span><p>{3000-price}</p>
+                    <span>real valance: </span><p>{3000 - price}</p>
                   </div><br /><hr /><br />
                 </div>
               </TabPane>
@@ -314,7 +318,7 @@ const Study = () => {
                   </div><br /><hr />
 
                   <div className="flex-grow-1 ms-2 purchase-border-bottom">
-                    <span>free valance: </span><p>{2000-price}</p>
+                    <span>free valance: </span><p>{2000 - price}</p>
                   </div><br /><hr /><br />
                 </div>
               </TabPane>
@@ -322,20 +326,20 @@ const Study = () => {
 
             <div className='d-flex'>
               <div className="col-sm-4">
-            <Link to={"/pages-study-detail/"+campusId}><Button color="primary" onClick={() => { 
-                  console.log("campusId", campusId); 
-                  addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId }) 
+                <Link to={"/pages-study-detail/" + campusId}><Button color="primary" onClick={() => {
+                  console.log("campusId", campusId);
+                  addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId })
                 }} >
-                Buy
-              </Button></Link></div>
+                  Buy
+                </Button></Link></div>
               <div className="col-sm-4">
-              <Link to="/pages-profile-settings"><Button color="primary">
-                Charge
-              </Button></Link></div>
+                <Link to="/pages-profile-settings"><Button color="primary">
+                  Charge
+                </Button></Link></div>
               <div className="col-sm-4">
-              <Button color="primary"  onClick={() => {setShowPurchaseModal(false);}}>
-                Close
-              </Button></div>
+                <Button color="primary" onClick={() => { setShowPurchaseModal(false); }}>
+                  Close
+                </Button></div>
             </div><br /><br />
           </div>
         </div>
@@ -360,7 +364,28 @@ const Study = () => {
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Categories
                   </p>
-                  <TreeView
+                  <CheckboxTree
+                    nodes={category}
+                    checked={checked}
+                    expanded={expanded}
+                    onCheck={e => setChecked(e)}
+                    onExpand={e => setExpanded(e)}
+                    iconsClass="fa5"
+                    icons={{
+                      check: <span className="rct-icon rct-icon-check" />,
+                      uncheck: <span className="rct-icon rct-icon-uncheck" />,
+                      halfCheck: <span className="rct-icon rct-icon-half-check" />,
+                      expandClose: <span className="rct-icon rct-icon-expand-close" />,
+                      expandOpen: <span className="rct-icon rct-icon-expand-open" />,
+                      expandAll: <span className="rct-icon rct-icon-expand-all" />,
+                      collapseAll: <span className="rct-icon rct-icon-collapse-all" />,
+                      parentClose: <span className="rct-icon rct-icon-parent-close" />,
+                      parentOpen: <span className="rct-icon rct-icon-parent-open" />,
+                      leaf: <span className="rct-icon rct-icon-leaf" />,
+                    }}
+                  />
+
+                  {/* <TreeView
                     data={data}
                     className="checkbox p-2"
                     aria-label="Checkbox tree"
@@ -396,7 +421,14 @@ const Study = () => {
                             className="checkbox-icon"
                             onClick={(e) => {
 
-                              console.log("AAAAAA", selectedIds);
+                              console.log("AAAAAA", selectedIds, element,
+                                isBranch,
+                                isExpanded,
+                                isSelected,
+                                isHalfSelected,
+                                isDisabled);
+                                console.log("BBBBBBBBBBB",document
+                                .querySelectorAll(".tree-node--selected"));
                               handleSelect(e);
                               e.stopPropagation();
                             }}
@@ -409,18 +441,10 @@ const Study = () => {
                           }}>
                             {element.name}
                           </span>
-                          {/* <button style={{ border: "none", backgroundColor: "lightblue", width: "40px", height: "19px", borderRadius: "8px" }} onClick={() => {
-                            console.log(originalCategoryList);
-                            let selectedCategory = originalCategoryList.find(category => {
-                              return category.title === element.name;
-                            })
-                            setSelectedCategoryId(selectedCategory.id);
-                          }} className=""><i className="las la-angle-right fs-10" ></i>
-                          </button> */}
-                        </div>
-                      );
+                </div>
+                );
                     }}
-                  />
+                  /> */}
                 </div>
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
@@ -435,7 +459,7 @@ const Study = () => {
                         >
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
-                              
+
                               <div className="flex-grow-1">
                                 <h5 className="fs-14">{campusItem.name}</h5>
                                 <h5 className="fs-14">{campusItem.recommends}</h5>
@@ -450,12 +474,23 @@ const Study = () => {
                 </div>
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
-                    Top Writer
+                    Top Reader
                   </p>
-
-                  <div className="p-3">{TopcampusData.map((campusItem, key) => (
-                    <React.Fragment key={campusItem.id}>
-                      <Card className="product" onClick={() => showCampus(campusItem)}>
+                  {/* <div className="d-flex me-2">
+                        <div className="me-2">
+                          <img
+                            style={{
+                              width: "50px",
+                              height: "auto",
+                              borderRadius: "50%",
+                            }} alt="Img"
+                            src={avatar1}
+                          />
+                        </div> */}
+                  <div className="p-3">{TopUsersData.map((UsersItem, key) => (
+                    UsersItem.map((userItem, key)=>(
+                    <React.Fragment key={key}>
+                      <Card className="product">
                         <Link to='#'
                           className="text-dark"
                         >
@@ -463,18 +498,21 @@ const Study = () => {
                             <div className="d-flex align-items-center text-muted  ">
                               
                               <div className="flex-grow-1">
-                                <h5 className="fs-14">{campusItem.name}</h5>
-                                <h5 className="fs-14">{campusItem.recommends}</h5>
+                                <h5 className="fs-14">{userItem.username}</h5>
+                                
                               </div>
                             </div>
                           </CardBody>
                         </Link>
                       </Card>
                     </React.Fragment>
-                  ))}
+                  ))
+                  
+                  ))};
+                  </div>
                   </div>
                 </div>
-              </div>
+              
             </Card>
           </Col>
           <div className="col-xl-9 col-lg-8">
@@ -525,7 +563,7 @@ const Study = () => {
           </div>
         </Row>
       </Container>
-    </div>
+    </div >
   );
 };
 
