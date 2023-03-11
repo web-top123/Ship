@@ -53,33 +53,19 @@ const TestPage = () => {
     }, []);
 
     useEffect(() => {
-            // for (var j = 0; j < questionLength; j++) {
-            //     console.log("qulen", questionLength);
-            //     let answerLength = someQuestions[j].answers.length;
-            //     let trueAnsNum = 0;
-            //     for (var i = 0; i < answerLength; i++) {
-            //         if (someQuestions[j].answers[i].result === true) {
-            //             trueAnsNum++;
-            //         }
-            //     }
-            //     console.log(j, trueAnsNum, answerLength);
-            //     setTrueAnswers(...trueAnswers, ...[trueAnsNum]);
-            // }
-        someQuestions.map( (elements, key) => {
+        someQuestions.map((elements, key) => {
             let trueAnsNum = 0;
-            console.log(elements.answers);
-            elements.answers.map( (ele) => {
-                if( ele.result === true )
+            // console.log(elements.answers);
+            elements.answers.map((ele) => {
+                if (ele.result === true)
                     trueAnsNum++;
             })
-            console.log(trueAnsNum);
-            // setTrueAnswers(...trueAnswers, ...[trueAnsNum]);
+            // console.log(trueAnsNum);
+            // setTrueAnswers(trueAnswers, ...[trueAnsNum]);
             trueAnswers.push(trueAnsNum);
         })
-        console.log(trueAnswers);
-        // console.log("total answer length is ", trueAnswers);
 
-    }, [someQuestions]);
+    });
 
 
     useEffect(() => {
@@ -164,12 +150,6 @@ const TestPage = () => {
                                                                                                 if ((ans.result !== true) && !isChecked)
                                                                                                     setScoreFlag(scoreFlag + 1);
                                                                                                 console.log("result", scoreFlag);
-
-
-
-
-
-                                                                                                // SelectCount(count+1)
                                                                                             }} />
                                                                                         <Label className="btn btn-customize shadow-none fs-17" for={"btn-check-outlined" + ans.id}>{(key_answer + 1) + ". " + ans.description}</Label>
                                                                                     </div>
@@ -187,7 +167,7 @@ const TestPage = () => {
                                                                 onClick={() => {
 
                                                                     setProgressVal(progressVal + interVal);
-                                                                    if (scoreFlag == 1) {
+                                                                    if (scoreFlag == trueAnswers[key]) {
                                                                         setTotalScore(totalScore + 1);
                                                                         console.log("----------->okay!!!", totalScore);
                                                                     }
@@ -195,6 +175,8 @@ const TestPage = () => {
                                                                         console.log("----------->false!!!", totalScore);
 
                                                                     setScoreFlag(0);
+                                                                    // console.log("total answer length is ", trueAnswers[key]);
+
 
                                                                 }}
                                                             >
@@ -240,13 +222,8 @@ const TestPage = () => {
                             </Container>
                         </div>
                     </div>
-
                 </section>
-
             </div>
-
-
-
         </React.Fragment>
     );
 };
