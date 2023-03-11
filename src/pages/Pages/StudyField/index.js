@@ -292,7 +292,7 @@ const filteredData = studyData.filter((el) => {
             </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="light" onClick={() => { setShowCampusModal(false); purchaseCampus(); }} >Buy</Button>
+                <Button color="success" onClick={() => { setShowCampusModal(false); purchaseCampus(); }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
                 <Button color="primary" onClick={() => {
@@ -554,7 +554,7 @@ const filteredData = studyData.filter((el) => {
                       </React.Fragment>
                     ))
 
-                  ))};
+                  ))}
                   </div>
                 </div>
               </div>

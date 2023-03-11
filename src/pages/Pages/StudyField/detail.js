@@ -57,7 +57,7 @@ const StudyDetail = (props) => {
                                 </CardHeader>
                                 <CardBody className='px-5 py-5'>
                                     <div className='d-flex justify-content-between'>
-                                        <div className='d-flex mb-4'>
+                                        <div className='d-flex mb-4 fs-5'>
                                             <div>
                                                 <span>{campus.description}</span>
                                                 {/* {console.log("AAAAAAA", countUpvote)} */}
