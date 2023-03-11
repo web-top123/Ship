@@ -32,22 +32,25 @@ import { Link } from "react-router-dom";
 
 //treeview
 import TreeView, { flattenTree } from "react-accessible-treeview";
+import CheckboxTree from 'react-checkbox-tree';
+// import TextField from "@mui/material/TextField";
 import { IoMdArrowDropright } from "react-icons/io";
 import { RiCheckboxBlankLine, RiCheckboxIndeterminateLine, RiCheckboxLine } from "react-icons/ri";
 import cx from "classnames";
 import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories, getTopSoftwares, addNewBrowserHistory } from '../../../helpers/fakebackend_helper';
 import { downloadProgram } from "../../../helpers/fakebackend_helper";
 import "./softwarefield.css"
+// import { Search } from "gridjs/dist/src/view/plugin/search/search";
 
 const Software = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
   const fetchData = async () => {
-    getTopSoftwares().then(res => {
-      setTopsoftwareData(res);
-    });
-    if (selectedCategoryId == 1) {
+    if (selectedCategoryId === 1) {
+      getTopSoftwares().then(res => {
+        setTopsoftwareData(res);
+      });
       getAllSoftware().then(softwareList => {
         setsoftwareData(softwareList);
         console.log("AAAAAAd", softwareList);
@@ -59,15 +62,19 @@ const Software = () => {
     }
   };
 
+  const getSoftwareByCate = (id) => {
+    getAllSoftwareByCategory(id).then(categoryData => {
+      setsoftwareData(categoryData);
+    });
+  }
+
   const [softwareData, setsoftwareData] = useState([]);
   const [TopsoftwareData, setTopsoftwareData] = useState([]);
-  const [selectedIds, setSelectedIds] = useState([]);
   const [userId, setUserId] = useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
 
-  useEffect(() => {
-    console.log("AAAAAAA", selectedIds);
-  }, [selectedIds]);
+  const [checked, setChecked] = useState([]);
+  const [expanded, setExpanded] = useState([]);
 
   useEffect(() => {
     getCategoryList();
@@ -89,16 +96,17 @@ const Software = () => {
       let nodes = [];
       let categoryNodes = [];
       let lookupList = {};
-
       categoryList = categoryList.sort((a, b) => a.parentId - b.parentId);
-      setOriginalCategoryList(categoryList);
+      // setOriginalCategoryList(categoryList);
 
       for (const category of categoryList) {
         let item = {
           id: category.id,
           category_id: category.id,
           name: category.title,
-          parent_id: ((category.parentId == 0) ? null : category.parentId),
+          value: category.id,
+          label: category.title,
+          parent_id: ((category.parentId === 0) ? null : category.parentId),
           children: []
         };
         lookupList[item.id] = item;
@@ -115,11 +123,13 @@ const Software = () => {
       }
 
       let folder = {
-        name: "",
+        label: "",
+        value: 0,
         children: categoryNodes,
       };
 
-      setCategory(folder);
+      setCategory(categoryNodes);
+      console.log("CCCCCCCCCC", folder);
     });
   }
 
@@ -184,18 +194,23 @@ const Software = () => {
   //data folder
   const [category, setCategory] = useState([]);
 
-  const data = flattenTree(category);
-  const ArrowIcon = ({ isOpen, className }) => {
-    const baseClass = "arrow";
-    const classes = cx(
-      baseClass,
-      { [`${baseClass}--closed`]: !isOpen },
-      { [`${baseClass}--open`]: isOpen },
-      className
-    );
-
-    return <IoMdArrowDropright className={classes} />;
+  const [inputText, setInputText] = useState("");
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
   };
+  const filteredData = softwareData.filter((el) => {
+    //if no input the return the original
+    if (inputText === '') {
+      return el;
+    }
+    //return the item which contains the user input
+    else {
+      return el.name.toLowerCase().includes(inputText);
+    }
+  })
+
   const CheckBoxIcon = ({ variant, ...rest }) => {
     switch (variant) {
       case "all":
@@ -282,10 +297,10 @@ const Software = () => {
             </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="light" onClick={() => { setShowProgramModal(); purchaseProgram(false); }} >Buy</Button>
+                <Button color="success" onClick={() => { setShowProgramModal(); purchaseProgram(false); }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
-                <Button color="primary" onClick={() => {
+                <Button color="success" onClick={() => {
                   setShowProgramModal(false);
                 }}>Close</Button>
               </div>
@@ -394,65 +409,32 @@ const Software = () => {
                     <i className="bi bi-hand-thumbs-up"></i>
                     Categories
                   </p>
-                  <TreeView
-                    data={data}
-                    className="checkbox p-2"
-                    aria-label="Checkbox tree"
-                    expandedIds={expandedIds}
-                    multiSelect
-                    selectedIds={selectedIds}
-                    propagateSelect
-                    propagateSelectUpwards
-                    togglableSelect
-                    defaultExpandedIds={[1]}
-                    nodeRenderer={({
-                      element,
-                      isBranch,
-                      isExpanded,
-                      isSelected,
-                      isHalfSelected,
-                      isDisabled,
-                      getNodeProps,
-                      level,
-                      handleSelect,
-                      handleExpand,
-                    }) => {
-                      return (
-                        <div
-                          {...getNodeProps({ onClick: handleExpand })}
-                          style={{
-                            marginLeft: 20 * (level - 1),
-                            opacity: isDisabled ? 0.5 : 1,
-                          }}
-                        >
-                          {isBranch && <ArrowIcon isOpen={isExpanded} />}
-                          <CheckBoxIcon
-                            className="checkbox-icon"
-                            onClick={(e) => {
-
-                              console.log("AAAAAA", selectedIds);
-                              handleSelect(e);
-                              e.stopPropagation();
-                            }}
-                            variant={
-                              isHalfSelected ? "some" : isSelected ? "all" : "none"
-                            }
-                          />
-                          <span className="name" onClick={() => {
-                            // tog_togFirst(element)
-                          }}>
-                            {element.name}
-                          </span>
-                          {/* <button style={{ border: "none", backgroundColor: "lightblue", width: "40px", height: "19px", borderRadius: "8px" }} onClick={() => {
-                            console.log(originalCategoryList);
-                            let selectedCategory = originalCategoryList.find(category => {
-                              return category.title === element.name;
-                            })
-                            setSelectedCategoryId(selectedCategory.id);
-                          }} className=""><i className="las la-angle-right fs-10" ></i>
-                          </button> */}
-                        </div>
-                      );
+                  <CheckboxTree
+                    nodes={category}
+                    checked={checked}
+                    expanded={expanded}
+                    onCheck={e => {
+                      console.log(e);
+                      if (e.length) {
+                        getSoftwareByCate(e.join(','))
+                      }
+                      setChecked(e)
+                    }}
+                    onExpand={e => setExpanded(e)}
+                    iconsClass="fa5"
+                    showExpandAll={true}
+                    nativeCheckboxes={true}
+                    icons={{
+                      check: <span className="rct-icon rct-icon-check" />,
+                      uncheck: <span className="rct-icon rct-icon-uncheck" />,
+                      halfCheck: <span className="rct-icon rct-icon-half-check" />,
+                      expandClose: <span className="rct-icon rct-icon-expand-close" />,
+                      expandOpen: <span className="rct-icon rct-icon-expand-open" />,
+                      expandAll: <span className="rct-icon rct-icon-expand-all" />,
+                      collapseAll: <span className="rct-icon rct-icon-collapse-all" />,
+                      parentClose: <span className="rct-icon rct-icon-parent-close" />,
+                      parentOpen: <span className="rct-icon rct-icon-parent-open" />,
+                      leaf: <span className="rct-icon rct-icon-leaf" />,
                     }}
                   />
                 </div>
@@ -498,7 +480,15 @@ const Software = () => {
 
                   <div className="col-sm-6">
                     <div className="filter-choices-input">
-                      <Input placeholder={"Search..."} />
+                      {/* <Input placeholder={"Search..."} /> */}
+                      <Input
+                        id="outlined-basic"
+                        onChange={inputHandler}
+                        placeholder={"Search..."}
+                        variant="outlined"
+                        fullWidth
+                      // label="Search..."
+                      />
                     </div>
                   </div>
                 </Row>
@@ -506,7 +496,7 @@ const Software = () => {
 
               {/* -----------------main table display------------------ */}
               <Row className="p-3">
-                {softwareData.map((software, key) => (
+                {filteredData.map((software, key) => (
                   <Col lg={4} key={software.id}>
                     <Card className="product" onClick={() => showProgram(software)}>
                       <Link to='#'

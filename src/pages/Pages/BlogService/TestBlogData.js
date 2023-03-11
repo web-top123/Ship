@@ -2,17 +2,22 @@ import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 import { Link } from 'react-router-dom';
-const columnsBlogData = [
+import { getArticleCategory, getCategories } from "../../../helpers/fakebackend_helper";
+import { useState } from "react";
+import { queryAllByDisplayValue } from "@testing-library/react";
+
+
+const columnsBlogData = [    
     {
         Header: "Reply message",
         accessor: "content",
         filterable: false,
         Cell: (article) => (
-        <>
-            <div className="blog-content-wrapper">
+        <>        
+            <div className="blog-content-wrapper">            
                 <div>
-                    <Link to = {"/pages-blog-service/article-man"} style={{"display":"inline-block"}}><img className="author-img" alt="Img" src={article.row.original.userId} /></Link>
-                    <span className="author-name">{article.row.original.userId}</span>
+                    <Link to = {"/pages-blog-service/article-man" + article.row.original.id} style={{"display":"inline-block"}}><img className="author-img" alt="Img" src={article.row.original.userId} /></Link>
+                    <span className="author-name">{article.row.original.username}</span>
                     <span className="publish-date ms-1">{article.row.original.ago}</span>
                 </div>
                 <div className="pt-3 d-flex justify-content-between">
@@ -29,7 +34,8 @@ const columnsBlogData = [
 
                 </div>
                 <div>
-                    <Link to="/pages-blog-service/article-kind" className="rounded-pill btn btn-light tags me-4">{article.row.original.articleCategoryId}</Link>
+                    <Link to= {"/pages-blog-service/article-kind/" +
+                              article.row.original.articleCategoryId} className="rounded-pill btn btn-light tags me-4">{article.row.original.categoryTitle}</Link>
                     <i className="bx bx-like pe-1"></i><span className="pe-3">{article.row.original.recommends}</span>
                     <i className="bx bx-message pe-1"></i><span className="pe-3">{article.row.original.oppositions}</span>
                 </div>

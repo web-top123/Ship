@@ -17,6 +17,18 @@ const ArticleKind = () => {
         description: "",       
     });
     const [articles, setArticles] = useState([]);
+    const [article, setArticle] = useState({
+        name: "",
+        description: "",
+        contact_number: "",
+        articleCategoryId: "",
+        categoryTitle: "",
+        attach_url: "",
+        recommends: "",
+        source: "",
+        oppositions: "",
+        browingcount: "",
+      });
      
     let { id } = useParams();
    
@@ -27,12 +39,19 @@ const ArticleKind = () => {
             setArticleCategory(category);          
         });
 
-        getArticleByCategoryId(id).then(categoryData => {
-            console.log("articleList: ", categoryData);
+        getArticleByCategoryId(id).then(categoryData => {            
             setArticles(categoryData.articles);
-        })
+            console.log("articleList: ", categoryData.articles);
+        });
       }
     }, [id]);
+
+    useEffect(() => {
+        for (const article of articles) {
+          article.categoryTitle = articles[article.articleCategoryId-1].title;
+        }
+        console.log("xxx", articles);
+      }, [articles]);
 
     return (
         <React.Fragment>
