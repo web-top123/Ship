@@ -118,7 +118,7 @@ const Study = () => {
       let categoryNodes = [];
       let lookupList = {};
       categoryList = categoryList.sort((a, b) => a.parentId - b.parentId);
-      setOriginalCategoryList(categoryList);
+      // setOriginalCategoryList(categoryList);
 
       for (const category of categoryList) {
         let item = {
