@@ -22,10 +22,10 @@ const Settings = () => {
     const [activeTab, setActiveTab] = useState("1");
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
-    
+
     const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
-    useEffect(() => { 
+    useEffect(() => {
         if (myInformationSelector) {
             setUsername(myInformationSelector.username);
             setName(myInformationSelector.name);
@@ -36,11 +36,11 @@ const Settings = () => {
     }, [myInformationSelector])
 
 
-    useEffect(()=>{
+    useEffect(() => {
 
     }, [])
 
-    
+
     const tabChange = (tab) => {
         if (activeTab !== tab) setActiveTab(tab);
     };
@@ -59,7 +59,7 @@ const Settings = () => {
                         <Row className="g-4">
                             <div className="col-auto">
                                 <div className="avatar-lg">
-                                    <img src={downloadCurrentAvatar(myInformationSelector)} alt="user-img"
+                                    <img src={downloadCurrentAvatar(myInformationSelector)} alt="user-img" style={{ width: 80, height: 80 }}
                                         className="img-thumbnail rounded-circle" />
                                 </div>
                             </div>

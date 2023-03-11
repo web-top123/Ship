@@ -19,11 +19,11 @@ function Mine() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(myInformationSelector) {
+        if (myInformationSelector) {
             getAvatarList();
             console.log("myInformationSelector.id", myInformationSelector.currentAvatarId)
             setUserID(myInformationSelector.id);
-        }        
+        }
     }, [dispatch, myInformationSelector]);
 
     useEffect(() => {
@@ -32,6 +32,7 @@ function Mine() {
     }, [userID]);
 
     useEffect(() => {
+
     }, [purchasedList]);
 
     const getAvatarList = () => {
@@ -54,6 +55,7 @@ function Mine() {
                 img.classList.remove("img-buy");
             } else {
                 selectedImageListId = parseInt(e.currentTarget.src.substr(42));
+                console.log("selectedImageListId", selectedImageListId);
                 img.classList.toggle("img-buy");
             }
         });
@@ -67,13 +69,15 @@ function Mine() {
                 img.classList.remove("img-buy");
             } else {
                 selectedPurchasedAvatarId = parseInt(event.currentTarget.src.substr(42));
+                console.log("selectedPurchasedAvatarId", selectedPurchasedAvatarId)
                 img.classList.toggle("img-buy");
             }
         });
     }
 
     function addPurchasedAvatar() {
-        if (!purchasedList.filter(item => item === selectedImageListId).length) {
+        if ((!purchasedList.filter(item => item === selectedImageListId).length) && selectedImageListId !== null) {
+            console.log("--------->", ((!purchasedList.filter(item => item === selectedImageListId).length) && selectedImageListId !== null));
             setPurchasedList([...purchasedList, ...[selectedImageListId]]);
             updateOneUser(userID, { purchasedAvatar: JSON.stringify(purchasedList) });
         }
@@ -127,7 +131,7 @@ function Mine() {
                             <button type="submit" className="btn btn-primary" onClick={e => {
                                 e.preventDefault();
                                 addPurchasedAvatar();
-                            } }>Purchase</button>
+                            }}>Purchase</button>
                         </div>
                     </Col>
 
@@ -157,7 +161,7 @@ function Mine() {
                         <div className="text-end pt-5">
                             <button type="submit" className="btn btn-primary" onClick={() => {
                                 applyAvatar();
-                            } }>Apply</button>
+                            }}>Apply</button>
                         </div>
                     </Col>
                 </Row>
