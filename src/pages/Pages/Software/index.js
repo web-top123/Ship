@@ -32,12 +32,14 @@ import { Link } from "react-router-dom";
 
 //treeview
 import TreeView, { flattenTree } from "react-accessible-treeview";
+// import TextField from "@mui/material/TextField";
 import { IoMdArrowDropright } from "react-icons/io";
 import { RiCheckboxBlankLine, RiCheckboxIndeterminateLine, RiCheckboxLine } from "react-icons/ri";
 import cx from "classnames";
 import { getAllSoftwareByCategory, getAllSoftware, getProgramCategories, getTopSoftwares, addNewBrowserHistory } from '../../../helpers/fakebackend_helper';
 import { downloadProgram } from "../../../helpers/fakebackend_helper";
 import "./softwarefield.css"
+// import { Search } from "gridjs/dist/src/view/plugin/search/search";
 
 const Software = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
@@ -83,6 +85,26 @@ const Software = () => {
   useEffect(() => {
     fetchData();
   }, [selectedCategoryId])
+
+  const [inputText, setInputText] = useState("");
+
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
+
+  //create a new array by filtering the original array
+  const filteredData = softwareData.filter((el) => {
+    //if no input the return the original
+    if (inputText === '') {
+      return el;
+    }
+    //return the item which contains the user input
+    else {
+      return el.name.toLowerCase().includes(inputText)
+    }
+  })
 
   function getCategoryList() {
     getProgramCategories().then(categoryList => {
@@ -498,7 +520,15 @@ const Software = () => {
 
                   <div className="col-sm-6">
                     <div className="filter-choices-input">
-                      <Input placeholder={"Search..."} />
+                      {/* <Input placeholder={"Search..."} /> */}
+                      <Input
+                        id="outlined-basic"
+                        onChange={inputHandler}
+                        placeholder={"Search..."}
+                        variant="outlined"
+                        fullWidth
+                        // label="Search..."
+                      />
                     </div>
                   </div>
                 </Row>
@@ -506,7 +536,7 @@ const Software = () => {
 
               {/* -----------------main table display------------------ */}
               <Row className="p-3">
-                {softwareData.map((software, key) => (
+                {filteredData.map((software, key) => (
                   <Col lg={4} key={software.id}>
                     <Card className="product" onClick={() => showProgram(software)}>
                       <Link to='#'

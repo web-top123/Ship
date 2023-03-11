@@ -117,7 +117,7 @@ const BuySoftware = (props) => {
                                             <div className="col-sm-6 text-center">
                                                 <Button color="primary" onClick={() => {
                                                     setProgramList({
-                                                        ...program, ...{ unrecommends: program.unrecommends - 1 }
+                                                        ...program, ...{ unrecommends: program.unrecommends + 1 }
                                                     })
                                                     ProgramDownVote(id, program);
                                                 }}>
