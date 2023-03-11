@@ -45,16 +45,18 @@ import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 
 import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers } from '../../../helpers/fakebackend_helper';
 const Study = () => {
+  
+
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const myInformationSelector = useSelector(state => state.Profile.myinformation);
-
+  
   const fetchData = async () => {
     if (selectedCategoryId === 1) {
       getTopCampus().then(res => {
         setTopcampusData(res);
-
+        
       });
-
+      
       getAllStudy().then(studyFieldList => {
         setstudyData(studyFieldList);
       });
@@ -64,6 +66,22 @@ const Study = () => {
       });
     }
   };
+//   const [inputText, setInputText] = useState("");
+//   const filterData = studyData.filter((el) => {
+//     //if no input the return the original
+//     if (inputText === '') {
+//         return el;
+//     }
+//     //return the item which contains the user input
+//     else {
+//         return el.name.toLowerCase().includes(inputText)
+//     }
+// })
+//   let inputHandler = (e) => {
+//     //convert input text to lower case
+//     var lowerCase = e.target.value.toLowerCase();
+//     setInputText(lowerCase);
+//   };
 
   const getStudyByCate = (id) => {
     getAllStudyByCategory(id).then(categoryData => {
@@ -204,9 +222,26 @@ const Study = () => {
       { [`${baseClass}--open`]: isOpen },
       className
     );
-
+    
+    
     return <IoMdArrowDropright className={classes} />;
   };
+  const [inputText, setInputText] = useState("");
+let inputHandler = (e) => {
+  //convert input text to lower case
+  var lowerCase = e.target.value.toLowerCase();
+  setInputText(lowerCase);
+};
+const filteredData = studyData.filter((el) => {
+      //if no input the return the original
+      if (inputText === '') {
+          return el;
+      }
+      //return the item which contains the user input
+      else {
+          return el.name.toLowerCase().includes(inputText);
+      }
+  })
   const CheckBoxIcon = ({ variant, ...rest }) => {
     switch (variant) {
       case "all":
@@ -534,7 +569,13 @@ const Study = () => {
 
                   <div className="col-sm-6">
                     <div className="filter-choices-input">
-                      <Input placeholder={"Search..."} />
+                      <Input 
+                      id="outlined-basic"
+                      onChange={inputHandler}
+                      variant="outlined"
+                      fullWidth
+                      
+                      placeholder={"Search..."} />
                     </div>
                   </div>
                 </Row>
@@ -553,7 +594,7 @@ const Study = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {studyData.map((study, key) => (
+                      {filteredData.map((study, key) => (
 
                         <React.Fragment key={study.id}>
                           <tr >

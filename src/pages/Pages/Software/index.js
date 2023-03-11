@@ -88,12 +88,7 @@ const Software = () => {
 
   const [inputText, setInputText] = useState("");
 
-  let inputHandler = (e) => {
-    //convert input text to lower case
-    var lowerCase = e.target.value.toLowerCase();
-    setInputText(lowerCase);
-  };
-
+  
   //create a new array by filtering the original array
   const filteredData = softwareData.filter((el) => {
     //if no input the return the original
@@ -105,7 +100,12 @@ const Software = () => {
       return el.name.toLowerCase().includes(inputText)
     }
   })
-
+  
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
   function getCategoryList() {
     getProgramCategories().then(categoryList => {
       let nodes = [];
