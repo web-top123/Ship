@@ -39,7 +39,7 @@ const BuySoftware = (props) => {
         console.log("aaa", program.recommends);
         console.log("aaa", program.unrecommends);
     }, [program]);
-
+    const [disable, setDisable] = useState(false);
     return (
         <React.Fragment>
             <div className="page-content">
@@ -74,7 +74,7 @@ const BuySoftware = (props) => {
                                                 </img>
                                             </div>
                                         </div>
-                                        <Col lg={6}>
+                                        <Col lg={6}  className="fs-5">
                                             <div className='d-flex mb-4'>
                                                 <div>
                                                     <b>Description: </b>
@@ -105,21 +105,23 @@ const BuySoftware = (props) => {
                                     <div style={{ padding: "50px 20%" }}>
                                         <Row className="pt-4">
                                             <div className="col-sm-6 text-center">
-                                                <Button color="light" onClick={() => {
+                                                <Button disabled = {disable} color="success" onClick={() => {
                                                     setProgramList({
                                                         ...program, ...{ recommends: program.recommends + 1 }
                                                     })
                                                     ProgramUpVote(id, program);
+                                                    setDisable(true);
                                                 }} >
                                                     Agree
                                                 </Button>
                                             </div>
                                             <div className="col-sm-6 text-center">
-                                                <Button color="primary" onClick={() => {
+                                                <Button disabled = {disable} color="success" onClick={() => {
                                                     setProgramList({
                                                         ...program, ...{ unrecommends: program.unrecommends + 1 }
                                                     })
                                                     ProgramDownVote(id, program);
+                                                    setDisable(true);
                                                 }}>
                                                     Disagree
                                                 </Button>

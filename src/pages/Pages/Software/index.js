@@ -297,10 +297,10 @@ const Software = () => {
             </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="light" onClick={() => { setShowProgramModal(); purchaseProgram(false); }} >Buy</Button>
+                <Button color="success" onClick={() => { setShowProgramModal(); purchaseProgram(false); }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
-                <Button color="primary" onClick={() => {
+                <Button color="success" onClick={() => {
                   setShowProgramModal(false);
                 }}>Close</Button>
               </div>
