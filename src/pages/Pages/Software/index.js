@@ -454,7 +454,7 @@ const Software = () => {
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
                               <div className="flex-shrink-0 me-3">
-                                <img src={downloadProgram(softwareItem.id)} className="avatar-xxs rounded-circle shadow bg-light" alt="..."></img>
+                                <img src={downloadProgram(softwareItem.id)} className="avatar-sm rounded-circle shadow bg-light" alt="..."></img>
                               </div>
                               <div className="flex-grow-1">
                                 <h5 className="fs-14">{softwareItem.name}</h5>

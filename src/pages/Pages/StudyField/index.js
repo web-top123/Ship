@@ -111,7 +111,7 @@ const Study = () => {
 
   useEffect(() => {
     getTopUsers().then(res => {
-      console.log("TopUsers", res);
+      
       setTopUsersData(res)
     })
   }, [])
@@ -122,7 +122,7 @@ const Study = () => {
     if (myInformationSelector) {
       setUserId(myInformationSelector.id);
     } else {
-      console.log(myInformationSelector);
+      
       setUserId('');
     }
   }, [myInformationSelector]);
@@ -146,7 +146,7 @@ const Study = () => {
           value: category.id,
           label: category.title,
           parent_id: ((category.parentId === 0) ? null : category.parentId),
-          children: []
+          // children: []
         };
         lookupList[item.id] = item;
         nodes.push(item);
@@ -157,6 +157,9 @@ const Study = () => {
       for (let i = 0; i < nodes.length; i++) {
         let n = nodes[i];
         if (!(n.parent_id == null)) {
+          if(!lookupList[n.parent_id].children){
+            lookupList[n.parent_id].children = []
+          }
           lookupList[n.parent_id].children = lookupList[n.parent_id].children.concat([n]);
         }
       }
@@ -168,7 +171,7 @@ const Study = () => {
       };
 
       setCategory(categoryNodes);
-      console.log("CCCCCCCCCC", folder);
+      
     });
   }
 
@@ -365,7 +368,7 @@ const filteredData = studyData.filter((el) => {
             <div className='d-flex'>
               <div className="col-sm-4">
                 <Link to={"/pages-study-detail/" + campusId}><Button color="primary" onClick={() => {
-                  console.log("campusId", campusId);
+                  
                   addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId })
                 }} >
                   Buy
@@ -407,7 +410,7 @@ const filteredData = studyData.filter((el) => {
                     checked={checked}
                     expanded={expanded}
                     onCheck={e => {
-                      console.log(e);
+                      
                       if (e.length) {
                         getStudyByCate(e.join(','))
                       }
