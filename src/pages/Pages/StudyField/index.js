@@ -534,7 +534,7 @@ const filteredData = studyData.filter((el) => {
                           />
                         </div> */}
                   <div className="p-3">{TopUsersData.map((UsersItem, key) => (
-                    UsersItem.map((userItem, key) => (
+                    
                       <React.Fragment key={key}>
                         <Card className="product">
                           <Link to='#'
@@ -544,7 +544,7 @@ const filteredData = studyData.filter((el) => {
                               <div className="d-flex align-items-center text-muted  ">
 
                                 <div className="flex-grow-1">
-                                  <h5 className="fs-14">{userItem.username}</h5>
+                                  <h5 className="fs-14">{UsersItem.username}</h5>
 
                                 </div>
                               </div>
@@ -552,7 +552,7 @@ const filteredData = studyData.filter((el) => {
                           </Link>
                         </Card>
                       </React.Fragment>
-                    ))
+                    
 
                   ))}
                   </div>
