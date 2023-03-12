@@ -16,40 +16,57 @@ function Mine() {
 
     const dispatch = useDispatch();
 
+    var selectedImageListId;
+
+    var selectedPurchasedAvatarId;
+
+
     useEffect(() => {
         getAvatarList();
+    }, []);
+
+    useEffect(() => {
         if (myInformationSelector) {
+            console.log("myInformationSelector", myInformationSelector);
             setUserID(myInformationSelector.id);
+        }
+        else {
+            console.log("Please login first")
         }
     }, [myInformationSelector]);
 
-    useEffect(() => {
+    useEffect(() => {        
         getPurchasedList(userID);
     }, [userID]);
 
+    // realtime update purchase avatar list
     useEffect(() => {
         updateOneUser(userID, { purchasedAvatar: JSON.stringify(purchasedList) });
+    }, [purchasedList]);
+
+    useEffect(() => {
+        updateOneUser(userID, { currentAvatarId: avatarID });
         const userInfo = JSON.parse(localStorage.getItem("authUser"));
         const newUpdatedUserInfo = {
             ...userInfo,
             "currentAvatarId": avatarID,
         };
         dispatch(profileUpdateSuccess(newUpdatedUserInfo));
-    }, [purchasedList, userID, avatarID, dispatch]);
+    }, [avatarID, dispatch]);
 
     const getAvatarList = () => {
         getAvatars().then(res => {
+            console.log("getAvatars",res);
             setAvatarList(res);
         });
     };
 
-    const getPurchasedList = (id) => {
-        getUser(id).then(res => {
+    const getPurchasedList = (userID) => {
+        getUser(userID).then(res => {
+            console.log("res.purchasedAvatar", res.purchasedAvatar);
             setPurchasedList(JSON.parse(res.purchasedAvatar));
         });
     };
-
-    var selectedImageListId;
 
     function selectAvatarList(e) {
         document.querySelectorAll(".src-avatar img").forEach(img => {
@@ -62,9 +79,7 @@ function Mine() {
         });
     }
 
-    var selectedPurchasedAvatarId;
-
-    function purchaseAvatarList(event) {
+    function purchaseAvatarSelect(event) {
         document.querySelectorAll(".pch-avatar img").forEach(img => {
             if (img.src !== event.currentTarget.src) {
                 img.classList.remove("img-buy");
@@ -82,7 +97,7 @@ function Mine() {
     }
 
     function applyAvatar() {
-        setAvatarID(selectedPurchasedAvatarId);   
+        setAvatarID(selectedPurchasedAvatarId);
     }
 
     return (
@@ -113,7 +128,6 @@ function Mine() {
                             </div>
                         </div>
 
-
                         <div className="text-end pt-5">
                             <button type="submit" className="btn btn-primary" onClick={e => {
                                 e.preventDefault();
@@ -131,13 +145,13 @@ function Mine() {
                         <div style={{ height: 300, overflowY: 'scroll', }}>
                             <div className="mt-4 md-0 px-5 my-img-select pch-avatar">
                                 <div className='d-block justify-content-between pb-3'>
-                                    {purchasedList.map((e, key) => {
+                                    {purchasedList.map((e,key) => {
                                         return <Row key={key} style={{ display: "inline" }}>
                                             <Col style={{ display: "inline" }}>
                                                 <img className={"img-thumbnail rounded-circle avatar-xl "}
                                                     src={downloadAvatar(e)}
                                                     alt=""
-                                                    onClick={(e) => purchaseAvatarList(e)}
+                                                    onClick={(e) => purchaseAvatarSelect(e)}
                                                     style={{ margin: '', width: 80, height: 80 }} />
                                             </Col>
                                         </Row>;
@@ -148,7 +162,7 @@ function Mine() {
                         <div className="text-end pt-5">
                             <button type="submit" className="btn btn-primary" onClick={() => {
                                 applyAvatar();
-                                console.log("applyAvatar", applyAvatar())
+                                console.log("Applying avatar", avatarID)
                             }}>Apply</button>
                         </div>
                     </Col>
