@@ -509,7 +509,7 @@ const Study = () => {
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
                               <div className="flex-grow-1">
-                                <h5 className="fs-14">{campusItem.name}</h5>
+                                <h5 className="fs-20 text-success">{campusItem.name}</h5>
                                 <h5 className="fs-14">{campusItem.recommends}</h5>
                               </div>
                             </div>
@@ -545,8 +545,8 @@ const Study = () => {
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
 
-                              <div className="flex-grow-1">
-                                <h5 className="fs-14">{UsersItem.username}</h5>
+                              <div className="flex-grow-1 ">
+                                <h5 className=" fs-18 text-danger">{UsersItem.username}</h5>
 
                               </div>
                             </div>
