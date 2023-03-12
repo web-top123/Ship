@@ -45,16 +45,18 @@ import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 
 import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers } from '../../../helpers/fakebackend_helper';
 const Study = () => {
+  
+
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const myInformationSelector = useSelector(state => state.Profile.myinformation);
-
+  
   const fetchData = async () => {
     if (selectedCategoryId === 1) {
       getTopCampus().then(res => {
         setTopcampusData(res);
-
+        
       });
-
+      
       getAllStudy().then(studyFieldList => {
         setstudyData(studyFieldList);
       });
@@ -64,6 +66,22 @@ const Study = () => {
       });
     }
   };
+//   const [inputText, setInputText] = useState("");
+//   const filterData = studyData.filter((el) => {
+//     //if no input the return the original
+//     if (inputText === '') {
+//         return el;
+//     }
+//     //return the item which contains the user input
+//     else {
+//         return el.name.toLowerCase().includes(inputText)
+//     }
+// })
+//   let inputHandler = (e) => {
+//     //convert input text to lower case
+//     var lowerCase = e.target.value.toLowerCase();
+//     setInputText(lowerCase);
+//   };
 
   const getStudyByCate = (id) => {
     getAllStudyByCategory(id).then(categoryData => {
@@ -93,7 +111,7 @@ const Study = () => {
 
   useEffect(() => {
     getTopUsers().then(res => {
-      console.log("TopUsers", res);
+      
       setTopUsersData(res)
     })
   }, [])
@@ -104,7 +122,7 @@ const Study = () => {
     if (myInformationSelector) {
       setUserId(myInformationSelector.id);
     } else {
-      console.log(myInformationSelector);
+      
       setUserId('');
     }
   }, [myInformationSelector]);
@@ -128,7 +146,7 @@ const Study = () => {
           value: category.id,
           label: category.title,
           parent_id: ((category.parentId === 0) ? null : category.parentId),
-          children: []
+          // children: []
         };
         lookupList[item.id] = item;
         nodes.push(item);
@@ -139,6 +157,9 @@ const Study = () => {
       for (let i = 0; i < nodes.length; i++) {
         let n = nodes[i];
         if (!(n.parent_id == null)) {
+          if(!lookupList[n.parent_id].children){
+            lookupList[n.parent_id].children = []
+          }
           lookupList[n.parent_id].children = lookupList[n.parent_id].children.concat([n]);
         }
       }
@@ -150,7 +171,7 @@ const Study = () => {
       };
 
       setCategory(categoryNodes);
-      console.log("CCCCCCCCCC", folder);
+      
     });
   }
 
@@ -204,9 +225,26 @@ const Study = () => {
       { [`${baseClass}--open`]: isOpen },
       className
     );
-
+    
+    
     return <IoMdArrowDropright className={classes} />;
   };
+  const [inputText, setInputText] = useState("");
+let inputHandler = (e) => {
+  //convert input text to lower case
+  var lowerCase = e.target.value.toLowerCase();
+  setInputText(lowerCase);
+};
+const filteredData = studyData.filter((el) => {
+      //if no input the return the original
+      if (inputText === '') {
+          return el;
+      }
+      //return the item which contains the user input
+      else {
+          return el.name.toLowerCase().includes(inputText);
+      }
+  })
   const CheckBoxIcon = ({ variant, ...rest }) => {
     switch (variant) {
       case "all":
@@ -257,7 +295,7 @@ const Study = () => {
             </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="light" onClick={() => { setShowCampusModal(false); purchaseCampus(); }} >Buy</Button>
+                <Button color="success" onClick={() => { setShowCampusModal(false); purchaseCampus(); }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
                 <Button color="primary" onClick={() => {
@@ -330,7 +368,7 @@ const Study = () => {
             <div className='d-flex'>
               <div className="col-sm-4">
                 <Link to={"/pages-study-detail/" + campusId}><Button color="primary" onClick={() => {
-                  console.log("campusId", campusId);
+                  
                   addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId })
                 }} >
                   Buy
@@ -372,7 +410,7 @@ const Study = () => {
                     checked={checked}
                     expanded={expanded}
                     onCheck={e => {
-                      console.log(e);
+                      
                       if (e.length) {
                         getStudyByCate(e.join(','))
                       }
@@ -499,7 +537,7 @@ const Study = () => {
                           />
                         </div> */}
                   <div className="p-3">{TopUsersData.map((UsersItem, key) => (
-                    UsersItem.map((userItem, key) => (
+                    
                       <React.Fragment key={key}>
                         <Card className="product">
                           <Link to='#'
@@ -509,7 +547,7 @@ const Study = () => {
                               <div className="d-flex align-items-center text-muted  ">
 
                                 <div className="flex-grow-1">
-                                  <h5 className="fs-14">{userItem.username}</h5>
+                                  <h5 className="fs-14">{UsersItem.username}</h5>
 
                                 </div>
                               </div>
@@ -517,9 +555,9 @@ const Study = () => {
                           </Link>
                         </Card>
                       </React.Fragment>
-                    ))
+                    
 
-                  ))};
+                  ))}
                   </div>
                 </div>
               </div>
@@ -534,7 +572,13 @@ const Study = () => {
 
                   <div className="col-sm-6">
                     <div className="filter-choices-input">
-                      <Input placeholder={"Search..."} />
+                      <Input 
+                      id="outlined-basic"
+                      onChange={inputHandler}
+                      variant="outlined"
+                      fullWidth
+                      
+                      placeholder={"Search..."} />
                     </div>
                   </div>
                 </Row>
@@ -553,7 +597,7 @@ const Study = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {studyData.map((study, key) => (
+                      {filteredData.map((study, key) => (
 
                         <React.Fragment key={study.id}>
                           <tr >

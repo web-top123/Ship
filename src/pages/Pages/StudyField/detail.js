@@ -57,7 +57,7 @@ const StudyDetail = (props) => {
                                 </CardHeader>
                                 <CardBody className='px-5 py-5'>
                                     <div className='d-flex justify-content-between'>
-                                        <div className='d-flex mb-4'>
+                                        <div className='d-flex mb-4 fs-5'>
                                             <div>
                                                 <span>{campus.description}</span>
                                                 {/* {console.log("AAAAAAA", countUpvote)} */}
@@ -72,18 +72,18 @@ const StudyDetail = (props) => {
                                                         ...campus, ...{recommends: campus.recommends + 1}
                                                     });
                                                     upVote(id, campus);
-                                                    setDisable(false)
+                                                    setDisable(true)
                                                 }} >
                                                     Upvote
                                                 </Button>
                                             </div>
                                             <div className="col-sm-6 text-center">
-                                                <Button  color="primary" onClick={() => {
+                                                <Button disabled={disable} color="primary" onClick={() => {
                                                     setCampusList({
                                                         ...campus, ...{unrecommends:campus.unrecommends+1}
                                                     });
                                                     downVote(id, campus);
-                                                    
+                                                    setDisable(true)
                                                 }}>
                                                     DownVote
                                                     

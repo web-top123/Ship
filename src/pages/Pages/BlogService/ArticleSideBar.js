@@ -50,23 +50,41 @@ const ArticleSideBar = () => {
                 </CardBody>
             </Card>
             <Card  className='my-5 pb-4'>
-                <CardBody>
-                    <h4 className='mb-sm-0 pb-4'>Top Writers</h4>
+            <CardBody>
+                    <h4 className="mb-sm-0 pb-4">Top Writers</h4>
                     <div className="top-writers d-flex align-items-center pt-4">
-                        <div className='d-flex me-2'>
-                            <div className='me-2'>
-                                <img style={{ "width": "32px", "height": "auto", "borderRadius": "50%" }} src={avatar1} />
-                            </div>
-                            <div>
-                                {articleTopWriter.map((findTopWriter, key) => (
-                                    <React.Fragment key={key}>
-                                        <Link className="rounded-pill btn btn-light tags me-4" to={'/pages-blog-service/detail/' + findTopWriter.id}>{findTopWriter.userId}</Link>
-                                    </React.Fragment>
-                                ))}
-                            </div>
+                      <div className="d-flex me-2">
+                        <div className="me-2">
+                          <img
+                            style={{
+                              width: "32px",
+                              height: "auto",
+                              borderRadius: "50%",
+                            }} alt="Img"
+                            src={avatar1}
+                          />
                         </div>
+                        <div>
+                          {articleTopWriter.map((findTopWirter) => ( 
+                            findTopWirter.map((oneWriter, key) => (
+                                <React.Fragment key={key}>                    
+                                <Link
+                                    className="rounded-pill btn btn-light tags me-4"
+                                    to={
+                                        // "/pages-blog-service/detail/" + findTopWirter.id
+                                        "/pages-blog-service/article-man"
+                                    }
+                                    >
+                                        {console.log("oneWriter",oneWriter)}
+                                    {oneWriter.username }                            
+                                </Link>
+                                </React.Fragment>
+                            ))                           
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                </CardBody>
+                  </CardBody>
             </Card>
         </React.Fragment>
     );

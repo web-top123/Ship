@@ -28,9 +28,7 @@ import {
   getArticleCategories,
   getArticleFindTopUser,
 } from "../../../helpers/fakebackend_helper";
-import {
-    addNewArticle
-  } from "../../../helpers/fakebackend_helper";
+import { addNewArticle } from "../../../helpers/fakebackend_helper";
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import { Link } from "react-router-dom";
 import Select from "react-select";
@@ -51,14 +49,12 @@ const BlogService = () => {
   const [BlogDataDraftFilter, setBlogDataDraftFilter] = useState([]);
   const [activeTab, setActiveTab] = useState("1");
   const [articleCategory, setArticleCategory] = useState({});
+  const [oneCategory, setOneCategory] = useState({});
   const [article, setArticle] = useState({
     name: "",
     description: "",
     contact_number: "",
     articleCategoryId: "",
-    articleCategory: {
-      title: "",
-    },
     attach_url: "",
     recommends: "",
     source: "",
@@ -106,26 +102,32 @@ const BlogService = () => {
     getArticles().then((articles) => {
       let today = new Date();
       for (const article of articles) {
-        console.log("yyyyy", article);
         let createdDate = new Date(article.createdAt);
         let difference = Math.abs(today - createdDate);
         article.ago = getAgoString(difference);
       }
       setArticles(articles);
+      console.log("aaa", articles);
     });
+
     getArticleCategories().then((categories) => {
-      console.log("Article Categories:", categories);
       setArticleCategories(categories);
     });
+
     getArticleFindTopUser().then((topUser) => {
-      console.log("top user;", topUser);
       setArticleTopWriter(topUser);
     });
   }, []);
   ///////////
   useEffect(() => {
+    for (const article of articles) {
+      article.categoryTitle = articleCategories[article.articleCategoryId-1].title;
+    }
+    console.log("hhh", articles);
+  }, [articleCategories]);
+
+  useEffect(() => {
     getArticleCategories().then((categories) => {
-      console.log(categories);
       for (const category of categories) {
         category.label = category.title;
         category.value = category.id;
@@ -182,23 +184,6 @@ const BlogService = () => {
                         Date{" "}
                         <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
                           {BlogDataPublisedFilter.length}
-                        </span>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={classnames(
-                          { active: activeTab === "3" },
-                          "fw-semibold"
-                        )}
-                        onClick={() => {
-                          toggleTab("3", "draft");
-                        }}
-                        href="#"
-                      >
-                        Draft{" "}
-                        <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
-                          {BlogDataDraftFilter.length}
                         </span>
                       </NavLink>
                     </NavItem>
@@ -270,25 +255,28 @@ const BlogService = () => {
                               width: "32px",
                               height: "auto",
                               borderRadius: "50%",
-                            }} alt="Img"
+                            }}
+                            alt="Img"
                             src={avatar1}
                           />
                         </div>
                         <div>
-                          {articleTopWriter.map((findTopWirter) => ( 
+                          {articleTopWriter.map((findTopWirter) =>
                             findTopWirter.map((oneWriter, key) => (
-                                <React.Fragment key={key}>                    
+                              <React.Fragment key={key}>
                                 <Link
-                                    className="rounded-pill btn btn-light tags me-4"
-                                    to={
-                                    "/pages-blog-service/detail/" + findTopWirter.id
-                                    }
+                                  className="rounded-pill btn btn-light tags me-4"
+                                  to={
+                                    // "/pages-blog-service/detail/" + findTopWirter.id
+                                    "/pages-blog-service/article-man"
+                                  }
                                 >
-                                    {oneWriter.username }
+                                  {console.log("oneWriter", oneWriter)}
+                                  {oneWriter.username}
                                 </Link>
-                                </React.Fragment>
-                            ))                           
-                          ))}
+                              </React.Fragment>
+                            ))
+                          )}
                         </div>
                       </div>
                     </div>
@@ -460,9 +448,9 @@ const BlogService = () => {
                 formData.append("browingcount", article.browingcount);
 
                 addNewArticle(article).then((res) => {
-                    console.log(res);
-                  });
-                }}
+                  console.log(res);
+                });
+              }}
             >
               Add
             </Button>
@@ -495,7 +483,6 @@ const BlogService = () => {
                 >
                   {id ? "Update Article" : "Add Article"}
                 </button> */}
-
           </div>
         </div>
       </Modal>

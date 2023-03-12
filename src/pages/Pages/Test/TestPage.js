@@ -36,10 +36,14 @@ const TestPage = () => {
 
     const [progressVal, setProgressVal] = useState(0);
     const [scoreFlag, setScoreFlag] = useState(0);
+    const [totalScore, setTotalScore] = useState(0);
+    // const [trueAnswers, setTrueAnswers] = useState([0]);
 
-    var progressVarStage = someQuestions.length;
-    var maxInterVal = progressVarStage + 2;
-    var interVal = 100 / (progressVarStage - 1)
+    var trueAnswers = [];
+
+    var questionLength = someQuestions.length;
+    var maxInterVal = questionLength + 2;
+    var interVal = 100 / (questionLength - 1)
 
     // {console.log("-----------------------------++=>", interVal)}
 
@@ -48,17 +52,21 @@ const TestPage = () => {
         fetchData();
     }, []);
 
-    // useEffect(() => {
-    //     if(){
-            
-    //     }
-    // }, []);
-
     useEffect(() => {
-        // console.log("hh", someQuestions, someQuestions[0])
-        // setAnswers(someQuestions);
-        
-    }, [someQuestions]);
+        someQuestions.map((elements, key) => {
+            let trueAnsNum = 0;
+            // console.log(elements.answers);
+            elements.answers.map((ele) => {
+                if (ele.result === true)
+                    trueAnsNum++;
+            })
+            // console.log(trueAnsNum);
+            // setTrueAnswers(trueAnswers, ...[trueAnsNum]);
+            trueAnswers.push(trueAnsNum);
+        })
+
+    });
+
 
     useEffect(() => {
         toggleTab(activeTab + 1, progressVal);
@@ -106,13 +114,14 @@ const TestPage = () => {
                                                 {someQuestions.map((que, key) => (
                                                     <TabPane tabId={key + 2} key={key}>
                                                         <Row>
-                                                            <Col md={7} className='mt-5'>
+                                                            <Col md={7} className='mt-5' onClick={() => {
+                                                            }}>
                                                                 <div style={{ position: 'relative' }}>
                                                                     <img src={macImg} alt="Mac " className="img-fluid test-field-img" />
                                                                 </div>
                                                                 <div className='test-detail'>
                                                                     <div className='test-problem justify-content-center'>
-                                                                        <h1 className='mt-5'>{"Problem(" + (key + 1) + "/" + progressVarStage + ")"}</h1>
+                                                                        <h1 className='mt-5'>{"Problem(" + (key + 1) + "/" + questionLength + ")"}</h1>
                                                                     </div><hr />
                                                                     <div className='test-problem-detail'>
                                                                         <p>{que.description}</p>
@@ -130,11 +139,17 @@ const TestPage = () => {
                                                                                         <Input type="checkbox" className="btn-check" id={"btn-check-outlined" + ans.id}
 
                                                                                             onClick={() => {
-                                                                                                console.log("the result is ", ans.result);
+                                                                                                // console.log("the result is ", ans.result);
                                                                                                 let isChecked = document.getElementById("btn-check-outlined" + ans.id).checked;
-                                                                                                if((ans.result!==true)&&isChecked)
-                                                                                                    console.log("ok");
-                                                                                                // SelectCount(count+1)
+                                                                                                if ((ans.result === true) && isChecked)
+                                                                                                    setScoreFlag(scoreFlag + 1);
+                                                                                                if ((ans.result !== true) && isChecked)
+                                                                                                    setScoreFlag(scoreFlag - 1);
+                                                                                                if ((ans.result === true) && !isChecked)
+                                                                                                    setScoreFlag(scoreFlag - 1);
+                                                                                                if ((ans.result !== true) && !isChecked)
+                                                                                                    setScoreFlag(scoreFlag + 1);
+                                                                                                console.log("result", scoreFlag);
                                                                                             }} />
                                                                                         <Label className="btn btn-customize shadow-none fs-17" for={"btn-check-outlined" + ans.id}>{(key_answer + 1) + ". " + ans.description}</Label>
                                                                                     </div>
@@ -152,7 +167,16 @@ const TestPage = () => {
                                                                 onClick={() => {
 
                                                                     setProgressVal(progressVal + interVal);
-                                                                    // console.log("----------->", progressVal);
+                                                                    if (scoreFlag == trueAnswers[key]) {
+                                                                        setTotalScore(totalScore + 1);
+                                                                        console.log("----------->okay!!!", totalScore);
+                                                                    }
+                                                                    else
+                                                                        console.log("----------->false!!!", totalScore);
+
+                                                                    setScoreFlag(0);
+                                                                    // console.log("total answer length is ", trueAnswers[key]);
+
 
                                                                 }}
                                                             >
@@ -175,7 +199,7 @@ const TestPage = () => {
                                                             </div>
                                                             <h2>Congratulation!</h2>
                                                             <h3 className="text-muted pt-4">
-                                                                Your score is <span style={{ fontSize: "30px" }}>10.</span> That's wonderful!
+                                                                Your score is <span style={{ fontSize: "30px" }}>{totalScore / questionLength * 10}</span> That's wonderful!
                                                             </h3>
                                                         </div>
                                                     </div>
@@ -198,13 +222,8 @@ const TestPage = () => {
                             </Container>
                         </div>
                     </div>
-
                 </section>
-
             </div>
-
-
-
         </React.Fragment>
     );
 };
