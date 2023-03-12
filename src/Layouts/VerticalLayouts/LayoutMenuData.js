@@ -51,7 +51,10 @@ const Navdata = () => {
     const [isSetting, setIsSetting] = useState(false);
 
     const [isData, setIsData] = useState(false);
-    const [isDataCategory, setIsDataCategory] = useState(false);
+    const [isShipData, setIsShipData] = useState(false);
+    const [isLoadData, setIsLoadData] = useState(false);
+    const [isProductData, setIsProductData] = useState(false);
+    const [isGoodData, setIsGoodData] = useState(false);
 
     const [isCampus, setIsCampus] = useState(false);
     const [isCampusCategory, setIsCampusCategory] = useState(false);
@@ -280,7 +283,7 @@ const Navdata = () => {
                         { id: 1, label: "List", link: "/admin-medias", parentId: "admin" },
                         { id: 2, label: "Create", link: "/admin-add-media", parentId: "admin" },
                     ]
-                },                
+                },
                 {
                     id: "admin-article",
                     label: "Article",
@@ -341,26 +344,58 @@ const Navdata = () => {
                     parentId: "admin",
                     stateVariables: isData,
                     childItems: [
-                        { id: 1, label: "List", link: "/admin-datas", parentId: "admin" },
-                        { id: 2, label: "Create", link: "/admin-add-data", parentId: "admin" },
                         {
-                            id: "admin-dataCategory",
-                            label: "Category",
-                            link: "/#",
-                            isChildItem: true,
+                            id: "admin-shipData", label: "ShipData", link: "/#", isChildItem: true,
                             click: function (e) {
                                 e.preventDefault();
-                                setIsDataCategory(!isDataCategory);
+                                setIsShipData(!setIsShipData);
                             },
                             parentId: "admin",
-                            stateVariables: isDataCategory,
+                            stateVariables: isShipData,
                             childItems: [
-                                { id: 1, label: "List", link: "/admin-dataCategories", parentId: "admin" },
-                                { id: 2, label: "Create", link: "/admin-add-dataCategory", parentId: "admin" },
+                                { id: 1, label: "List", link: "/admin-shipDatas", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-shipData", parentId: "admin" },
                             ]
                         },
+                        { 
+                            id: "admin-loadData", label: "LoadData", link: "/#", isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsLoadData(!setIsLoadData);
+                            },
+                            parentId: "admin",
+                            stateVariables: isLoadData,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-loadDatas", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-loadData", parentId: "admin" },
+                            ] },
+                        { 
+                            id: "admin-productData", label: "ProductData", link: "/#", isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsProductData(!setIsProductData);
+                            },
+                            parentId: "admin",
+                            stateVariables: isProductData,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-productDatas", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-productData", parentId: "admin" },
+                            ] },
+                        { 
+                            id: "admin-goodData", label: "GoodData", link: "/#", isChildItem: true,
+                            click: function (e) {
+                                e.preventDefault();
+                                setIsGoodData(!setIsGoodData);
+                            },
+                            parentId: "admin",
+                            stateVariables: isGoodData,
+                            childItems: [
+                                { id: 1, label: "List", link: "/admin-goodDatas", parentId: "admin" },
+                                { id: 2, label: "Create", link: "/admin-add-goodData", parentId: "admin" },
+                            ] },
+                        { id: 5, label: "Traceview", link: "/admin-datas", parentId: "admin" },
                     ]
-                }, 
+                },
                 {
                     id: "admin-campus",
                     label: "Campus",
@@ -392,7 +427,7 @@ const Navdata = () => {
                             ]
                         },
                     ]
-                },   
+                },
                 {
                     id: "admin-question",
                     label: "Question",
@@ -435,7 +470,7 @@ const Navdata = () => {
                         setIsSetting(!isSetting);
                     },
                     parentId: "admin",
-                    stateVariables: isSetting,        
+                    stateVariables: isSetting,
                 }
             ]
         },
