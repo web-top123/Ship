@@ -2,20 +2,64 @@ import React, { useState, useEffect } from 'react'
 import { Col, Container, Row, Card, CardBody, Button, CardHeader, TabPane } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
-import { getCampus, upVote, downVote } from "../../../helpers/fakebackend_helper";
+import { getCampus, upVote, downVote, getUser, updateOneUser } from "../../../helpers/fakebackend_helper";
 import { Link, useParams } from "react-router-dom";
-import { diffDates } from '@fullcalendar/common';
+
+import { useSelector, useDispatch } from "react-redux";
+import { compareNumbers } from '@fullcalendar/react';
+
+// const dispatch = useDispatch();
 
 const StudyDetail = (props) => {
     document.title = "Study Field Detail";
 
+    const [userID, setUserID] = useState('');
+    const [userData, setUserData] = useState({});
+    const myInformationSelector = useSelector(state => state.Profile.myinformation);
+
+    useEffect(() => {
+        if (myInformationSelector) {
+            console.log("myInformationSelector", myInformationSelector);
+            setUserID(myInformationSelector.id);
+        }
+        else {
+            console.log("Please login first")
+        }
+    }, [myInformationSelector]);
+
+    useEffect(() => {
+        getUser(userID).then(res => {
+            console.log("getAvatars", res);
+            setUserData(res);
+        });
+        console.log("dasfasdfa", userID)
+    }, [userID]);
+
+    useEffect(() => {
+        let temp = [];
+        if (userData.votestate) temp = JSON.parse(userData.votestate);
+        if (temp.includes(id))
+            setDisable(true);
+        console.log("here", userData);
+        updateOneUser(userID, userData);
+        // const userinfo = localStorage.getItem("authUser");
+        // const NewUpdateUserInfo = {
+        //     ...userinfo,
+        //     "votestate":userData.votestate
+        // }
+        // dispatch(NewUpdateUserInfo);
+    }, [userData]);
+
     let { id } = useParams();
+
     const [campus, setCampusList] = useState({
         name: "",
         description: "",
         recommends: "",
         unrecommends: ""
     });
+
+
 
     const [disable, setDisable] = useState(false);
     { console.log("All CampusList", campus) }
@@ -25,8 +69,10 @@ const StudyDetail = (props) => {
                 setCampusList(res);
             })
         }
+        // if(JSON.parse(localStorage.getItem("UserData")).includes(id))
     }, []);
-   
+
+
     useEffect(() => {
         console.log("Recommends", campus.recommends);
         console.log("Unrecommends", campus.unrecommends);
@@ -69,24 +115,39 @@ const StudyDetail = (props) => {
                                             <div className="col-sm-6 text-center">
                                                 <Button disabled={disable} color="success" onClick={() => {
                                                     setCampusList({
-                                                        ...campus, ...{recommends: campus.recommends + 1}
+                                                        ...campus, ...{ recommends: campus.recommends + 1 }
                                                     });
                                                     upVote(id, campus);
-                                                    setDisable(true)
+                                                    let temp = [];
+                                                    if (userData.votestate) temp = JSON.parse(userData.votestate);
+                                                    temp.push(id);
+                                                    setUserData({
+                                                        ...userData, ... { votestate: JSON.stringify(temp) }
+                                                    });
+
+
+                                                    setDisable(true);
                                                 }} >
                                                     Upvote
                                                 </Button>
                                             </div>
                                             <div className="col-sm-6 text-center">
                                                 <Button disabled={disable} color="primary" onClick={() => {
+
                                                     setCampusList({
-                                                        ...campus, ...{unrecommends:campus.unrecommends+1}
+                                                        ...campus, ...{ unrecommends: campus.unrecommends + 1 }
                                                     });
                                                     downVote(id, campus);
+                                                    let temp = [];
+                                                    if (userData.votestate) temp = JSON.parse(userData.votestate);
+                                                    temp.push(id);
+                                                    setUserData({
+                                                        ...userData, ... { votestate: JSON.stringify(temp) }
+                                                    });
                                                     setDisable(true)
                                                 }}>
                                                     DownVote
-                                                    
+
                                                 </Button>
                                             </div>
                                         </Row>
