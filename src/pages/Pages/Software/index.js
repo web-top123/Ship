@@ -43,6 +43,7 @@ import "./softwarefield.css"
 // import { Search } from "gridjs/dist/src/view/plugin/search/search";
 
 const Software = () => {
+
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
@@ -82,10 +83,10 @@ const Software = () => {
     if (myInformationSelector) {
       setUserId(myInformationSelector.id);
     } else {
-      console.log(myInformationSelector);
+      console.log("myInformationSelector", myInformationSelector);
       setUserId('');
     }
-  }, []);
+  }, [myInformationSelector]);
 
   useEffect(() => {
     fetchData();
@@ -121,7 +122,6 @@ const Software = () => {
           lookupList[n.parent_id].children = lookupList[n.parent_id].children.concat([n]);
         }
       }
-
       let folder = {
         label: "",
         value: 0,
@@ -297,7 +297,7 @@ const Software = () => {
             </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="success" onClick={() => { setShowProgramModal(); purchaseProgram(false); }} >Buy</Button>
+                <Button color="success" onClick={() => { setShowProgramModal(); purchaseProgram(false); }} >Purchase</Button>
               </div>
               <div className="col-sm-6 text-center">
                 <Button color="success" onClick={() => {
@@ -374,19 +374,19 @@ const Software = () => {
 
             <Row className='d-flex' >
               <div className="col-sm-4">
-                <Link to={"/pages-software-buySoftware/" + programId}><Button color="primary" onClick={() => {
+                <Link to={"/pages-software-buySoftware/" + programId}><Button color="success" onClick={() => {
                   console.log("programId", programId);
                   /** purchaseProgram(false); */
                   addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, programId: programId })
                 }}  >
-                  Buy
+                  Purchase
                 </Button></Link></div>
               <div className="col-sm-4">
-                <Link to="/pages-profile-settings"><Button color="primary" onClick={() => { }}>
+                <Link to="/pages-profile-settings"><Button color="success" onClick={() => { }}>
                   Charging score
                 </Button></Link></div>
               <div className="col-sm-4">
-                <Link to="/pages-profile-settings"><Button color="primary" onClick={() => { }} >
+                <Link to="/pages-profile-settings"><Button color="success" onClick={() => { }} >
                   Download
                 </Button></Link></div>
 
