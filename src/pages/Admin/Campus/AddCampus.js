@@ -72,7 +72,7 @@ const AddCampus = (props) => {
     description: '',
     browses: '',
     cost: '',
-    recommends: '',
+   
     campusCategoryId: '',
   });
 
@@ -248,7 +248,7 @@ const AddCampus = (props) => {
                   </Row>
 
                   <Row>
-                    <Col lg={6}>
+                    {/* <Col lg={6}>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -267,7 +267,7 @@ const AddCampus = (props) => {
                           }}
                         />
                       </div>
-                    </Col>
+                    </Col> */}
                     <Col lg={6}>
 
                       <div className="mb-3">

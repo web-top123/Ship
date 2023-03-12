@@ -87,6 +87,11 @@ const Campuses = (props) => {
         filterable: false,
       },
       {
+        Header: "Unrecommends",
+        accessor: "unrecommends",
+        filterable: false,
+      },
+      {
         Header: "Cost",
         accessor: "cost",
         filterable: false,
