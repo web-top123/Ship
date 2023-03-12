@@ -1,6 +1,10 @@
 import classnames from "classnames";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import avatar1 from "../../../assets/images/users/avatar-1.jpg";
+import avatar2 from "../../../assets/images/users/avatar-2.jpg";
+import avatar3 from "../../../assets/images/users/avatar-3.jpg";
+
 
 import {
   Container,
@@ -25,7 +29,7 @@ import {
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 //data
 import { sellersList } from "../../../common/data/ecommerce";
-import { productsData } from "../../../common/data/ecommerce";
+
 
 //redux
 import { Link } from "react-router-dom";
@@ -41,7 +45,7 @@ import Select from "react-select";
 import "./studyfield.css"
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import avatar1 from "../../../assets/images/users/avatar-1.jpg";
+
 
 import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers } from '../../../helpers/fakebackend_helper';
 const Study = () => {
@@ -524,6 +528,8 @@ const Study = () => {
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Top Reader
                   </p>
+                  
+                  
                   {/* <div className="d-flex me-2">
                         <div className="me-2">
                           <img
@@ -542,14 +548,30 @@ const Study = () => {
                         <Link to='#'
                           className="text-dark"
                         >
+                        
+                      
                           <CardBody>
-                            <div className="d-flex align-items-center text-muted  ">
+                          <div className="d-flex">
+                          
+                          <div className="me-2 ">
+                            <img
+                            style={{
+                            width: "35px",
+                            height: "30px",
+                            borderRadius: "50%",
+                            marginBottom:"8px"
+                          }}
+                          alt="Img"
+                          src={avatar1}
+                          />
+                        </div>
+                            <div className="align-items-center text-muted  mt-1">
 
                               <div className="flex-grow-1 ">
-                                <h5 className=" fs-18 text-danger">{UsersItem.username}</h5>
+                                <h5 className=" fs-18 text-danger">{UsersItem.username} </h5>
 
                               </div>
-                            </div>
+                            </div></div>
                           </CardBody>
                         </Link>
                       </Card>
@@ -558,8 +580,9 @@ const Study = () => {
 
                   ))}
                   </div>
+                  </div>
                 </div>
-              </div>
+              
 
             </Card>
           </Col>
@@ -585,20 +608,20 @@ const Study = () => {
               <Row>
                 <div className="table-responsive mt-4 mt-xl-0  p-4 pt-1">
                   <Table className="table-hover  align-middle table-nowrap mb-0 ">
-                    <thead className="bg-light">
+                    <thead className="bg-warning">
                       <tr>
                         <th scope="col">Title</th>
                         <th scope="col">Description</th>
                         <th scope="col">Cost</th>
                         <th scope="col">Browses</th>
-                        <th scope="col">Recommends</th>
-                        <th scope="col">Unrecommends</th>
+                        <th scope="col">Upvote</th>
+                        <th scope="col">Downvote</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="bg-warning bg-opacity-25">
                       {filteredData.map((study, key) => (
 
-                        <React.Fragment key={study.id}>
+                        <React.Fragment key={study.id} >
                           <tr >
                             <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
                             <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 20) + "..."}</div></Link></td>
