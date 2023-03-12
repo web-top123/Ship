@@ -125,7 +125,7 @@ function CampusDetail(props) {
     description: '',
     browses: '',
     cost: '',
-    recommends: '',
+   
     campusCategoryId: '',
   });
   useEffect(() => {
@@ -339,6 +339,10 @@ function CampusDetail(props) {
                                   <tr>
                                     <th scope="row">Recommends</th>
                                     <td>{Campus.recommends}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Unrecommends</th>
+                                    <td>{Campus.unrecommends}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">CampusCategoryId</th>

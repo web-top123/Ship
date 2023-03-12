@@ -94,10 +94,10 @@ const StudyDetail = (props) => {
                                         <Col lg={1}>
                                             <Link to="/pages-study-field"><Button
                                                 type="button"
-                                                className="btn-close"
+                                                color="warning"
                                                 style={{ float: "right" }}
                                             >
-                                            </Button></Link>
+                                            Back</Button></Link>
                                         </Col>
                                     </Row>
                                 </CardHeader>
