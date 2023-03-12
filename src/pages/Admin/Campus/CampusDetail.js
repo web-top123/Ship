@@ -268,13 +268,13 @@ function CampusDetail(props) {
                                 Edit
                               </Link>
                             </Tooltip>
-                            <a
-                              href={"/admin-add-Campus/" + id}
+                           <Link
+                                to={"/admin-add-Campus/" + id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
                               <i className="ri-pencil-fill align-bottom"></i>
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>

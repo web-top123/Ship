@@ -114,14 +114,18 @@ const Campuses = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-campus-details/" + cellProps.row.original.id}>
+                <DropdownItem >
+                  <Link to={"/admin-campus-details/" + cellProps.row.original.id} >
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
+                  </Link>
                 </DropdownItem>
 
-                <DropdownItem href={"admin-add-campus/" + cellProps.row.original.id}>
+                <DropdownItem >
+                  <Link to={"/admin-add-campus/" + cellProps.row.original.id} >
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
+                  </Link>
                 </DropdownItem>
 
                 <DropdownItem divider />

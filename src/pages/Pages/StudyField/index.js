@@ -404,7 +404,7 @@ const Study = () => {
               />
             </CardHeader> */}
             <Card>
-              <div className="accordion accordion-flush ">
+              <div className="accordion accordion-flush bg-info bg-opacity-25">
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Categories
@@ -499,19 +499,19 @@ const Study = () => {
                     }}
                   /> */}
                 </div>
-                <div className="card-body border-bottom">
-                  <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
+                <div className="card-body border-bottom bg-info bg-opacity-25">
+                  <p className="text-primary text-uppercase fs-20 fw-medium mb-3 pt-3 border-bottom">
                     Top Article
                   </p>
 
                   <div className="p-3">{TopcampusData.map((campusItem, key) => (
                     <React.Fragment key={campusItem.id}>
-                      <Card className="product" >
+                      <Card className="product bg-info bg-opacity-60 rounded-pill text-center" >
                         <Link to='#'
                           className="text-dark"
                         >
                           <CardBody>
-                            <div className="d-flex align-items-center text-muted  ">
+                            <div className="d-flex align-items-center text-muted ">
                               <div className="flex-grow-1">
                                 <h5 className="fs-20 text-success">{campusItem.name}</h5>
                                 <h5 className="fs-14">{campusItem.recommends}</h5>
@@ -524,8 +524,8 @@ const Study = () => {
                   ))}
                   </div>
                 </div>
-                <div className="card-body border-bottom">
-                  <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
+                <div className="card-body border-bottom bg-info bg-opacity-25">
+                  <p className="text-primary text-uppercase fs-20 fw-medium mb-3 pt-3 border-bottom">
                     Top Reader
                   </p>
                   
@@ -544,7 +544,7 @@ const Study = () => {
                   <div className="p-3">{TopUsersData.map((UsersItem, key) => (
 
                     <React.Fragment key={key}>
-                      <Card className="product">
+                      <Card className="product bg-info bg-opacity-50 rounded-pill">
                         <Link to='#'
                           className="text-dark"
                         >
@@ -553,13 +553,13 @@ const Study = () => {
                           <CardBody>
                           <div className="d-flex">
                           
-                          <div className="me-2 ">
+                          <div className="me-4 ">
                             <img
                             style={{
                             width: "35px",
-                            height: "30px",
+                            height: "35px",
                             borderRadius: "50%",
-                            marginBottom:"8px"
+                           
                           }}
                           alt="Img"
                           src={avatar1}
