@@ -1,6 +1,10 @@
 import classnames from "classnames";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import avatar1 from "../../../assets/images/users/avatar-1.jpg";
+import avatar2 from "../../../assets/images/users/avatar-2.jpg";
+import avatar3 from "../../../assets/images/users/avatar-3.jpg";
+
 
 import {
   Container,
@@ -25,7 +29,7 @@ import {
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 //data
 import { sellersList } from "../../../common/data/ecommerce";
-import { productsData } from "../../../common/data/ecommerce";
+
 
 //redux
 import { Link } from "react-router-dom";
@@ -41,22 +45,22 @@ import Select from "react-select";
 import "./studyfield.css"
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import avatar1 from "../../../assets/images/users/avatar-1.jpg";
+
 
 import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers } from '../../../helpers/fakebackend_helper';
 const Study = () => {
-  
+
 
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const myInformationSelector = useSelector(state => state.Profile.myinformation);
-  
+
   const fetchData = async () => {
     if (selectedCategoryId === 1) {
       getTopCampus().then(res => {
         setTopcampusData(res);
-        
+
       });
-      
+
       getAllStudy().then(studyFieldList => {
         setstudyData(studyFieldList);
       });
@@ -66,22 +70,22 @@ const Study = () => {
       });
     }
   };
-//   const [inputText, setInputText] = useState("");
-//   const filterData = studyData.filter((el) => {
-//     //if no input the return the original
-//     if (inputText === '') {
-//         return el;
-//     }
-//     //return the item which contains the user input
-//     else {
-//         return el.name.toLowerCase().includes(inputText)
-//     }
-// })
-//   let inputHandler = (e) => {
-//     //convert input text to lower case
-//     var lowerCase = e.target.value.toLowerCase();
-//     setInputText(lowerCase);
-//   };
+  //   const [inputText, setInputText] = useState("");
+  //   const filterData = studyData.filter((el) => {
+  //     //if no input the return the original
+  //     if (inputText === '') {
+  //         return el;
+  //     }
+  //     //return the item which contains the user input
+  //     else {
+  //         return el.name.toLowerCase().includes(inputText)
+  //     }
+  // })
+  //   let inputHandler = (e) => {
+  //     //convert input text to lower case
+  //     var lowerCase = e.target.value.toLowerCase();
+  //     setInputText(lowerCase);
+  //   };
 
   const getStudyByCate = (id) => {
     getAllStudyByCategory(id).then(categoryData => {
@@ -111,7 +115,7 @@ const Study = () => {
 
   useEffect(() => {
     getTopUsers().then(res => {
-      
+
       setTopUsersData(res)
     })
   }, [])
@@ -122,7 +126,7 @@ const Study = () => {
     if (myInformationSelector) {
       setUserId(myInformationSelector.id);
     } else {
-      
+
       setUserId('');
     }
   }, [myInformationSelector]);
@@ -157,7 +161,7 @@ const Study = () => {
       for (let i = 0; i < nodes.length; i++) {
         let n = nodes[i];
         if (!(n.parent_id == null)) {
-          if(!lookupList[n.parent_id].children){
+          if (!lookupList[n.parent_id].children) {
             lookupList[n.parent_id].children = []
           }
           lookupList[n.parent_id].children = lookupList[n.parent_id].children.concat([n]);
@@ -171,7 +175,7 @@ const Study = () => {
       };
 
       setCategory(categoryNodes);
-      
+
     });
   }
 
@@ -225,25 +229,25 @@ const Study = () => {
       { [`${baseClass}--open`]: isOpen },
       className
     );
-    
-    
+
+
     return <IoMdArrowDropright className={classes} />;
   };
   const [inputText, setInputText] = useState("");
-let inputHandler = (e) => {
-  //convert input text to lower case
-  var lowerCase = e.target.value.toLowerCase();
-  setInputText(lowerCase);
-};
-const filteredData = studyData.filter((el) => {
-      //if no input the return the original
-      if (inputText === '') {
-          return el;
-      }
-      //return the item which contains the user input
-      else {
-          return el.name.toLowerCase().includes(inputText);
-      }
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
+  const filteredData = studyData.filter((el) => {
+    //if no input the return the original
+    if (inputText === '') {
+      return el;
+    }
+    //return the item which contains the user input
+    else {
+      return el.name.toLowerCase().includes(inputText);
+    }
   })
   const CheckBoxIcon = ({ variant, ...rest }) => {
     switch (variant) {
@@ -368,7 +372,7 @@ const filteredData = studyData.filter((el) => {
             <div className='d-flex'>
               <div className="col-sm-4">
                 <Link to={"/pages-study-detail/" + campusId}><Button color="primary" onClick={() => {
-                  
+
                   addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId })
                 }} >
                   Buy
@@ -400,7 +404,7 @@ const filteredData = studyData.filter((el) => {
               />
             </CardHeader> */}
             <Card>
-              <div className="accordion accordion-flush ">
+              <div className="accordion accordion-flush bg-info bg-opacity-25">
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Categories
@@ -410,7 +414,7 @@ const filteredData = studyData.filter((el) => {
                     checked={checked}
                     expanded={expanded}
                     onCheck={e => {
-                      
+
                       if (e.length) {
                         getStudyByCate(e.join(','))
                       }
@@ -495,22 +499,21 @@ const filteredData = studyData.filter((el) => {
                     }}
                   /> */}
                 </div>
-                <div className="card-body border-bottom">
-                  <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
+                <div className="card-body border-bottom bg-info bg-opacity-25">
+                  <p className="text-primary text-uppercase fs-20 fw-medium mb-3 pt-3 border-bottom">
                     Top Article
                   </p>
 
                   <div className="p-3">{TopcampusData.map((campusItem, key) => (
                     <React.Fragment key={campusItem.id}>
-                      <Card className="product" onClick={() => showCampus(campusItem)}>
+                      <Card className="product bg-info bg-opacity-60 rounded-pill text-center" >
                         <Link to='#'
                           className="text-dark"
                         >
                           <CardBody>
-                            <div className="d-flex align-items-center text-muted  ">
-
+                            <div className="d-flex align-items-center text-muted ">
                               <div className="flex-grow-1">
-                                <h5 className="fs-14">{campusItem.name}</h5>
+                                <h5 className="fs-20 text-success">{campusItem.name}</h5>
                                 <h5 className="fs-14">{campusItem.recommends}</h5>
                               </div>
                             </div>
@@ -521,10 +524,12 @@ const filteredData = studyData.filter((el) => {
                   ))}
                   </div>
                 </div>
-                <div className="card-body border-bottom">
-                  <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
+                <div className="card-body border-bottom bg-info bg-opacity-25">
+                  <p className="text-primary text-uppercase fs-20 fw-medium mb-3 pt-3 border-bottom">
                     Top Reader
                   </p>
+                  
+                  
                   {/* <div className="d-flex me-2">
                         <div className="me-2">
                           <img
@@ -537,30 +542,47 @@ const filteredData = studyData.filter((el) => {
                           />
                         </div> */}
                   <div className="p-3">{TopUsersData.map((UsersItem, key) => (
-                    
-                      <React.Fragment key={key}>
-                        <Card className="product">
-                          <Link to='#'
-                            className="text-dark"
-                          >
-                            <CardBody>
-                              <div className="d-flex align-items-center text-muted  ">
 
-                                <div className="flex-grow-1">
-                                  <h5 className="fs-14">{UsersItem.username}</h5>
+                    <React.Fragment key={key}>
+                      <Card className="product bg-info bg-opacity-50 rounded-pill">
+                        <Link to='#'
+                          className="text-dark"
+                        >
+                        
+                      
+                          <CardBody>
+                          <div className="d-flex">
+                          
+                          <div className="me-4 ">
+                            <img
+                            style={{
+                            width: "35px",
+                            height: "35px",
+                            borderRadius: "50%",
+                           
+                          }}
+                          alt="Img"
+                          src={avatar1}
+                          />
+                        </div>
+                            <div className="align-items-center text-muted  mt-1">
 
-                                </div>
+                              <div className="flex-grow-1 ">
+                                <h5 className=" fs-18 text-danger">{UsersItem.username} </h5>
+
                               </div>
-                            </CardBody>
-                          </Link>
-                        </Card>
-                      </React.Fragment>
-                    
+                            </div></div>
+                          </CardBody>
+                        </Link>
+                      </Card>
+                    </React.Fragment>
+
 
                   ))}
                   </div>
+                  </div>
                 </div>
-              </div>
+              
 
             </Card>
           </Col>
@@ -572,13 +594,13 @@ const filteredData = studyData.filter((el) => {
 
                   <div className="col-sm-6">
                     <div className="filter-choices-input">
-                      <Input 
-                      id="outlined-basic"
-                      onChange={inputHandler}
-                      variant="outlined"
-                      fullWidth
-                      
-                      placeholder={"Search..."} />
+                      <Input
+                        id="outlined-basic"
+                        onChange={inputHandler}
+                        variant="outlined"
+                        fullWidth
+
+                        placeholder={"Search..."} />
                     </div>
                   </div>
                 </Row>
@@ -586,20 +608,20 @@ const filteredData = studyData.filter((el) => {
               <Row>
                 <div className="table-responsive mt-4 mt-xl-0  p-4 pt-1">
                   <Table className="table-hover  align-middle table-nowrap mb-0 ">
-                    <thead className="bg-light">
+                    <thead className="bg-warning">
                       <tr>
                         <th scope="col">Title</th>
                         <th scope="col">Description</th>
                         <th scope="col">Cost</th>
                         <th scope="col">Browses</th>
-                        <th scope="col">Recommends</th>
-                        <th scope="col">Unrecommends</th>
+                        <th scope="col">Upvote</th>
+                        <th scope="col">Downvote</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="bg-warning bg-opacity-25">
                       {filteredData.map((study, key) => (
 
-                        <React.Fragment key={study.id}>
+                        <React.Fragment key={study.id} >
                           <tr >
                             <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
                             <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 20) + "..."}</div></Link></td>

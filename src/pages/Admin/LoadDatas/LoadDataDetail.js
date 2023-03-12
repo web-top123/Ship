@@ -22,7 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewCampus, getCampus, updateOneCampus } from "../../../helpers/fakebackend_helper";
+import { addNewAvatar, getAvatar, updateOneAvatar, downloadAvatar } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -42,7 +42,7 @@ import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
-const CampusReview = (props) => {
+const AvatarReview = (props) => {
 
   return (
     <React.Fragment>
@@ -114,25 +114,26 @@ const PricingWidgetList = (props) => {
   );
 };
 
-function CampusDetail(props) {
+function AvatarDetail(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
-  const [Campus, setCampus] = useState({
+  const [Avatar, setAvatar] = useState({
     name: '',
-    description: '',
-    browses: '',
+    file_url: '',
     cost: '',
-   
-    campusCategoryId: '',
+  });
+  const [AvatarSrc, setAvatarSrc] = useState({
   });
   useEffect(() => {
     if (id) {
-      getCampus(id).then(res => {
-        setCampus(res);
-      })
+      getAvatar(id).then(res => {
+        setAvatar(res);
+      });
+      setAvatarSrc(downloadAvatar(id));
+      console.log(downloadAvatar(id));
     }
   }, []);
   const toggleCustom = tab => {
@@ -140,12 +141,12 @@ function CampusDetail(props) {
       setcustomActiveTab(tab);
     }
   };
-  document.title = "Campus Details | Velzon - React Admin & Dashboard Template";
+  document.title = "Avatar Details | Velzon - React Admin & Dashboard Template";
   return (
     <div className="page-content">
       <Container fluid>
 
-        <BreadCrumb title="Campus Details" pageTitle="Ecommerce" />
+        <BreadCrumb title="Avatar Details" pageTitle="Ecommerce" />
 
         <Row>
           <Col lg={12}>
@@ -162,84 +163,20 @@ function CampusDetail(props) {
                         <div className="swiper-wrapper">
                           <SwiperSlide>
                             <img
-                              src={product8}
+                              src={AvatarSrc}
                               alt=""
                               className="img-fluid d-block"
                             />
                           </SwiperSlide>
                           <SwiperSlide>
                             <img
-                              src={product6}
-                              alt=""
-                              className="img-fluid d-block"
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide>
-                            <img
-                              src={product1}
-                              alt=""
-                              className="img-fluid d-block"
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide>
-                            <img
-                              src={product8}
+                              src={AvatarSrc}
                               alt=""
                               className="img-fluid d-block"
                             />
                           </SwiperSlide>
                         </div>
                       </Swiper>
-
-                      <div className="product-nav-slider mt-2">
-                        <Swiper
-                          onSwiper={setThumbsSwiper}
-                          slidesPerView={4}
-                          freeMode={true}
-                          watchSlidesProgress={true}
-                          spaceBetween={10}
-                          className="swiper product-nav-slider mt-2 overflow-hidden"
-                        >
-                          <div className="swiper-wrapper">
-                            <SwiperSlide className="rounded">
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product8}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product6}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product1}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                              <div className="nav-slide-item">
-                                <img
-                                  src={product8}
-                                  alt=""
-                                  className="img-fluid d-block rounded"
-                                />
-                              </div>
-                            </SwiperSlide>
-                          </div>
-                        </Swiper>
-                      </div>
                     </div>
                   </Col>
 
@@ -247,7 +184,7 @@ function CampusDetail(props) {
                     <div className="mt-xl-0 mt-5">
                       <div className="d-flex">
                         <div className="flex-grow-1">
-                          <h4>{Campus.name}</h4>
+                          <h4>{Avatar.name}</h4>
                         </div>
                         <div className="flex-shrink-0">
                           <div>
@@ -260,27 +197,64 @@ function CampusDetail(props) {
                               }}
                             >
                               <Link
-                                to={"/admin-add-Campus/" + id}
+                                to="/admin-add-Avatar"
                                 className="btn btn-success"
-
+                                
                               >
-                                <i className="ri-add-line align-bottom me-1"></i>
+                                <i className="ri-add-line align-bottom me-1"></i> 
                                 Edit
                               </Link>
                             </Tooltip>
-                           <Link
-                                to={"/admin-add-Campus/" + id}
+                            <a
+                              href={"/admin-add-Avatar/"+id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
                               <i className="ri-pencil-fill align-bottom"></i>
-                            </Link>
+                            </a>
                           </div>
                         </div>
                       </div>
 
+                      {/* <Row>
+                        <Col sm={6}>
+                          <div className="mt-3">
+                            <h5 className="fs-14">Features :</h5>
+                            <ul className="list-unstyled">
+                              <li className="py-1">
+                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
+                                Full Sleeve
+                              </li>
+                              <li className="py-1">
+                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
+                                Cotton
+                              </li>
+                              <li className="py-1">
+                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
+                                All Sizes available
+                              </li>
+                              <li className="py-1">
+                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
+                                4 Different Color
+                              </li>
+                            </ul>
+                          </div>
+                        </Col>
+                        <Col sm={6}>
+                          <div className="mt-3">
+                            <h5 className="fs-14">Services :</h5>
+                            <ul className="list-unstyled product-desc-list">
+                              <li className="py-1">10 Days Replacement</li>
+                              <li className="py-1">
+                                Cash on Delivery available
+                              </li>
+                            </ul>
+                          </div>
+                        </Col>
+                      </Row> */}
+
                       <div className="product-content mt-5">
-                        <h5 className="fs-14 mb-3">Campus Description :</h5>
+                        <h5 className="fs-14 mb-3">Avatar Description :</h5>
                         <Nav tabs className="nav-tabs-custom nav-success">
                           <NavItem>
                             <NavLink
@@ -326,32 +300,17 @@ function CampusDetail(props) {
                                     <th scope="row" style={{ width: "200px" }}>
                                       Name
                                     </th>
-                                    <td>{Campus.name}</td>
+                                    <td>{Avatar.name}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row" style={{ width: "200px" }}>Description</th>
-                                    <td>{Campus.description}</td>
+                                    <th scope="row">File_url</th>
+                                    <td>{Avatar.file_url}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row" >Cost</th>
-                                    <td>{Campus.cost}</td>
+                                    <th scope="row">Cost</th>
+                                    <td>{Avatar.cost}</td>
                                   </tr>
-                                  <tr>
-                                    <th scope="row">Recommends</th>
-                                    <td>{Campus.recommends}</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Unrecommends</th>
-                                    <td>{Campus.unrecommends}</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">CampusCategoryId</th>
-                                    <td>{Campus.campusCategoryId}</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Browses</th>
-                                    <td>{Campus.browses}</td>
-                                  </tr>
+                                  
                                 </tbody>
                               </table>
                             </div>
@@ -407,4 +366,4 @@ function CampusDetail(props) {
   );
 }
 
-export default CampusDetail;
+export default AvatarDetail;

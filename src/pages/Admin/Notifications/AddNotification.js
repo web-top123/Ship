@@ -34,6 +34,7 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const AddNotification = (props) => {
   let { id } = useParams();
+  console.log("notification_ids", useParams());
   const [selectedFiles, setselectedFiles] = useState([]);
 
   // --------------- use modal ----------

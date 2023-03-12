@@ -22,17 +22,17 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getCampuses, deleteCampus } from "../../../helpers/fakebackend_helper";
+import { getAvatars, deleteAvatar, downloadAvatar } from "../../../helpers/fakebackend_helper";
 
-const Campuses = (props) => {
-  const [campusList, setCampusList] = useState([]);
+const Avatars = (props) => {
+  const [avatarList, setAvatarList] = useState([]);
   useEffect(() => {
-    getCampusList();
+    getAvatarList();
   }, []);
 
-  const getCampusList = () => {
-    getCampuses().then(res => {
-      setCampusList(res);
+  const getAvatarList = () => {
+    getAvatars().then(res => {
+      setAvatarList(res);
     })
   }
 
@@ -40,16 +40,17 @@ const Campuses = (props) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (campus) => {
-    setCurrentID(campus.id);
+  const onClickDelete = (avatar) => {
+    setCurrentID(avatar.id);
+    // setAvatar(avatar);
     setDeleteModal(true);
   };
 
-  const handleDeleteCampus = () => {
+  const handleDeleteAvatar = () => {
     if (currentID) {
-      deleteCampus(currentID).then(res => {
+      deleteAvatar(currentID).then(res => {
         if (res === 1) {
-          getCampusList();
+          getAvatarList();
           setDeleteModal(false);
         } else {
           setDeleteModal(false);
@@ -62,33 +63,41 @@ const Campuses = (props) => {
     () => [
       {
         Header: "#",
-        Cell: () => {
+        Cell: (avatar) => {
           return <input type="checkbox" />;
         },
       },
       {
-        Header: "Name",
+        Header: "Avatar",
+        Cell: (avatar) => (
+          <>
+            <div className="d-flex align-items-center">
+              <div className="flex-shrink-0 me-3">
+                <div className="avatar-sm bg-light rounded p-1">
+                  <img
+                  src={downloadAvatar(avatar.row.original.id)}
+                  // {avatar.row.file_url}
+                    // src={downloadAvatar}
+                    alt=""
+                    className="img-fluid d-block"
+                  />
+                </div>
+              </div>
+              <div className="flex-grow-1">
+                <h5 className="fs-14 mb-1">
+                  <Link
+                    to={"/admin-avatar-details/" + avatar.row.original.id}
+                    className="text-dark"
+                  >
+                    {" "}
+                    {avatar.row.original.name}
+                  </Link>
+                </h5>
+              </div>
+            </div>
+          </>
+        ),
         accessor: "name",
-        filterable: false,
-      },
-      {
-        Header: "Description",
-        accessor: "description",
-        filterable: false,
-      },
-      {
-        Header: "Browses",
-        accessor: "browses",
-        filterable: false,
-      },
-      {
-        Header: "Recommends",
-        accessor: "recommends",
-        filterable: false,
-      },
-      {
-        Header: "Unrecommends",
-        accessor: "unrecommends",
         filterable: false,
       },
       {
@@ -96,11 +105,7 @@ const Campuses = (props) => {
         accessor: "cost",
         filterable: false,
       },
-      {
-        Header: "CampusCatetoryId",
-        accessor: "campusCategory.title",
-        filterable: false,
-      },
+
       {
         Header: "Action",
         Cell: (cellProps) => {
@@ -114,26 +119,22 @@ const Campuses = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem >
-                  <Link to={"/admin-campus-details/" + cellProps.row.original.id} >
+                <DropdownItem href={"admin-avatar-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
-                  </Link>
                 </DropdownItem>
 
-                <DropdownItem >
-                  <Link to={"/admin-add-campus/" + cellProps.row.original.id} >
+                <DropdownItem href={"admin-add-avatar/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
-                  </Link>
                 </DropdownItem>
 
                 <DropdownItem divider />
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const campusData = cellProps.row.original;
-                    onClickDelete(campusData);
+                    const avatarData = cellProps.row.original;
+                    onClickDelete(avatarData);
                   }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -147,17 +148,17 @@ const Campuses = (props) => {
     ],
     []
   );
-  document.title = "Campuses";
+  document.title = "Avatars";
   return (
     <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteCampus}
+        onDeleteClick={handleDeleteAvatar}
         onCloseClick={() => setDeleteModal(false)}
       />
 
       <Container fluid>
-        <BreadCrumb title="Campuses" pageTitle="Admin" />
+        <BreadCrumb title="Avatars" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -168,11 +169,11 @@ const Campuses = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-campus"
+                          to="/admin-add-avatar"
                           className="btn btn-success"
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Add
-                          Campus
+                          Avatar
                         </Link>
                       </div>
                     </div>
@@ -182,7 +183,7 @@ const Campuses = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Campuses..."
+                            placeholder="Search Avatars..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -198,12 +199,12 @@ const Campuses = (props) => {
                         id="table-product-list-all"
                         className="table-card gridjs-border-none pb-2"
                       >
-                        {campusList && campusList !== "" ? (
+                        {avatarList && avatarList !== "" ? (
                           <TableContainer
                             columns={columns}
-                            data={campusList}
+                            data={avatarList}
                             isGlobalFilter={false}
-                            isAddCampusList={false}
+                            isAddAvatarList={false}
                             customPageSize={10}
                             divClass="table-responsive mb-1"
                             tableClass="mb-0 table-borderless"
@@ -238,4 +239,4 @@ const Campuses = (props) => {
   );
 };
 
-export default Campuses;
+export default Avatars;

@@ -8,11 +8,11 @@ const Footer = () => {
                 <Container fluid>
                     <Row>
                         <Col sm={6}>
-                            <span>Depart: &nbsp; +192342342</span>
+                            <span>Depart: &nbsp; 00-000-0000</span>
                         </Col>
                         <Col sm={6}>
                             <div className="text-sm-end d-none d-sm-block">
-                                Address United State Pacific
+                                Address XXXX
                             </div>
                         </Col>
                     </Row>
