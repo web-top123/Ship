@@ -185,7 +185,7 @@ const EcommerceSellerDetail = () => {
                 <CardBody className="p-4">
                   <div>
                     <div className="flex-shrink-0 avatar-md mx-auto">
-                      <div className="avatar-title bg-light rounded">
+                      <div className="avatar-title bg-light rounded-1">
                         <img src={Img2} alt="" height="50" />
                       </div>
                     </div>
