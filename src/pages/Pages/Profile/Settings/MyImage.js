@@ -2,8 +2,6 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { CardHeader, TabPane, Row, Col, Card } from "reactstrap";
 import { getAvatars, downloadAvatar, getUser, updateOneUser } from '../../../../helpers/fakebackend_helper';
 import { useSelector, useDispatch } from "react-redux";
-import { getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
-import { updateAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
 import { profileUpdateSuccess } from '../../../../store/auth/profile/actions';
 
 
@@ -19,21 +17,25 @@ function Mine() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        getAvatarList();
         if (myInformationSelector) {
-            getAvatarList();
-            console.log("myInformationSelector.id", myInformationSelector.currentAvatarId)
             setUserID(myInformationSelector.id);
         }
-    }, [dispatch, myInformationSelector]);
+    }, [myInformationSelector]);
 
     useEffect(() => {
         getPurchasedList(userID);
-        setAvatarID(userID);
     }, [userID]);
 
     useEffect(() => {
-
-    }, [purchasedList]);
+        updateOneUser(userID, { purchasedAvatar: JSON.stringify(purchasedList) });
+        const userInfo = JSON.parse(localStorage.getItem("authUser"));
+        const newUpdatedUserInfo = {
+            ...userInfo,
+            "currentAvatarId": avatarID,
+        };
+        dispatch(profileUpdateSuccess(newUpdatedUserInfo));
+    }, [purchasedList, userID, avatarID, dispatch]);
 
     const getAvatarList = () => {
         getAvatars().then(res => {
@@ -55,7 +57,6 @@ function Mine() {
                 img.classList.remove("img-buy");
             } else {
                 selectedImageListId = parseInt(e.currentTarget.src.substr(42));
-                console.log("selectedImageListId", selectedImageListId);
                 img.classList.toggle("img-buy");
             }
         });
@@ -69,7 +70,6 @@ function Mine() {
                 img.classList.remove("img-buy");
             } else {
                 selectedPurchasedAvatarId = parseInt(event.currentTarget.src.substr(42));
-                console.log("selectedPurchasedAvatarId", selectedPurchasedAvatarId)
                 img.classList.toggle("img-buy");
             }
         });
@@ -77,25 +77,12 @@ function Mine() {
 
     function addPurchasedAvatar() {
         if ((!purchasedList.filter(item => item === selectedImageListId).length) && selectedImageListId !== null) {
-            console.log("--------->", ((!purchasedList.filter(item => item === selectedImageListId).length) && selectedImageListId !== null));
-            setPurchasedList([...purchasedList, ...[selectedImageListId]]);
-            updateOneUser(userID, { purchasedAvatar: JSON.stringify(purchasedList) });
+            setPurchasedList([...purchasedList, selectedImageListId]);
         }
     }
 
     function applyAvatar() {
-        setAvatarID(selectedPurchasedAvatarId);
-        updateOneUser(userID, { currentAvatarId: avatarID });
-
-        const userInfo = JSON.parse(localStorage.getItem("authUser"));
-        const newUpdatedUserInfo = {
-            ...userInfo,
-            "currentAvatarId": avatarID,
-        };
-
-        // localStorage.setItem('authUser', JSON.stringify(newUpdatedUserInfo));
-        // console.log("myInformationSelector---------->",myInformationSelector);
-        dispatch(profileUpdateSuccess(newUpdatedUserInfo));
+        setAvatarID(selectedPurchasedAvatarId);   
     }
 
     return (
@@ -111,8 +98,8 @@ function Mine() {
                         <div style={{ height: 300, overflowY: 'scroll' }}>
                             <div className="mt-4 md-0 px-5 my-img-select src-avatar">
                                 <div className='d-block justify-content-between pb-3'>
-                                    {avatarList.map((e, key) => {
-                                        return <Row key={key} style={{ display: "inline" }}>
+                                    {avatarList.map((e) => {
+                                        return <Row key={e.id} style={{ display: "inline" }}>
                                             <Col style={{ display: "inline" }}>
                                                 <img className={"img-thumbnail rounded-circle avatar-xl "}
                                                     src={downloadAvatar(e.id)}
@@ -161,6 +148,7 @@ function Mine() {
                         <div className="text-end pt-5">
                             <button type="submit" className="btn btn-primary" onClick={() => {
                                 applyAvatar();
+                                console.log("applyAvatar", applyAvatar())
                             }}>Apply</button>
                         </div>
                     </Col>
