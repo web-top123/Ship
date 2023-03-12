@@ -14,11 +14,14 @@ export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/dataPurchaseHistory/finddata
 export const GET_FIND_BROWSER_HISTORY_ALL = "/api/browseHistory/get_All";
 export const GET_FIND_PASSED_TEST = "/api/findPassedTestById";
 export const ADD_NEW_BROWSER_HISTORY = "/api/browseHistory/create";
+export const UPDATE_PASSEDTEST = "/api/passedTest/update/:id";
 
 // Test page
 
 export const GET_ALL_QA = "/api/questions/findAll";
 export const GET_FIND_QUESTION = "/api/questions/findQuestionById";
+export const ADD_NEW_PASSEDTEST = "/api/passedTest/create";
+
 
 // Ship Data page
 export const GET_ALL_SHIP = "/api/data/findAll";

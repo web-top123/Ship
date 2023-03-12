@@ -22,11 +22,12 @@ const TestPage = () => {
     };
     // var testStartBtn = 'You can gain best score!';
     const [testStartBtn, setTestStartBtn] = useState();
-    const [selectedLevel, setSelectedLevel] = useState('');
     const [degrees, setDegrees] = useState([]);
     const [degreeArrLevels, setDegreeArrLevels] = useState([]);
     const [degreeId, setDegreeId] = useState(0);
     const [level, setLevel] = useState(0);
+    
+    const [currentLevel, setCurrentLevel] = useState();
 
 
 
@@ -111,10 +112,9 @@ const TestPage = () => {
                                                 <div key={key}>
                                                     <Input type="radio" className="btn-check" name="options" id={levels.label}
                                                         onClick={(e) => {
-                                                            setSelectedLevel(levels.value);
-                                                            // level = degreeArrLevels[key].value;
-                                                            setLevel(degreeArrLevels[key].value);
-                                                            console.log('level value is', level);
+                                                            setLevel(levels.value);
+                                                            setCurrentLevel(levels.label);
+                                                            console.log('current level is ', currentLevel);
 
                                                             if (levels.value == 1) {
                                                                 setTestStartBtn('Start now!');
@@ -133,10 +133,10 @@ const TestPage = () => {
                                 </Row>
                                 <div className='align-self-center purchase-button-group'>
                                     <Button className="shadow-none px-5 me-4 fs-20" onClick={() => {
-                                        if (selectedLevel == 1) {
-                                            window.location.href = '/test-test-page/' + degreeId + "/" + level;
+                                        if (level == 1) {
+                                            window.location.href = '/test-test-page/' + currentLevel + "/" + degreeId + "/" + level;
                                         }
-                                        if (selectedLevel > 1) {
+                                        if (level > 1) {
                                             tog_togFirst();
                                         }
                                     }}>{testStartBtn}</Button>
@@ -236,7 +236,7 @@ const TestPage = () => {
                     <div className="mt-4 pt-3 pb-3">
                         <h4 className="mb-3">Do you purchase really?</h4>
                         <div className="hstack gap-2 justify-content-center">
-                            <NavLink href={'/test-test-page/' + degreeId + "/" + level} className=' d-inline'>
+                            <NavLink href={'/test-test-page/' + currentLevel + "/" + degreeId + "/" + level} className=' d-inline'>
                                 <Button color="primary" className="ms-3" onClick={() => tog_togSecond(false)}>Yes</Button>
                             </NavLink>
                             <Button color="primary" className="me-3" onClick={() => tog_togSecond(false)}>No</Button>
