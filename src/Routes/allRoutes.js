@@ -629,7 +629,7 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
-  { path: "/test-test-page", component: TestPage },
+  { path: "/test-test-page/:degreeId/:level", component: TestPage },
   { path: "/pages-home-page", component: HomePage },
 
 ];

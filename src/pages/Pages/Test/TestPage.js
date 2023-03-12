@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Label, Col, Container, Row, Input, TabContent, TabPane, Progress } from 'reactstrap';
 import "./test-page-custom.css";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 // Import Images
@@ -18,7 +18,7 @@ const TestPage = () => {
     // fetch question data
 
     const fetchData = async () => {
-        findSomeQuestions().then(someQue => {
+        findSomeQuestions(degreeId, level).then(someQue => {
             setSomeQuestions(someQue);
         });
     };
@@ -43,13 +43,18 @@ const TestPage = () => {
 
     var questionLength = someQuestions.length;
     var maxInterVal = questionLength + 2;
-    var interVal = 100 / (questionLength - 1)
+    var interVal = 100 / (questionLength - 1);
 
+    var   {  degreeId, level } = useParams();
+    
+    
     // {console.log("-----------------------------++=>", interVal)}
-
-
+    
+    
     useEffect(() => {
         fetchData();
+        console.log(degreeId, level);
+
     }, []);
 
     useEffect(() => {
@@ -94,7 +99,7 @@ const TestPage = () => {
                 <section className="section pb-0 hero-section" id="hero" style={{ height: '100vh' }}>
                     <div className="bg-overlay bg-overlay-pattern"></div>
                     <div className='container'>
-                        <div className="page-content pt-2">
+                        <div className="content pt-2">
                             <Container>
                                 <Row>
                                     <Col xl={12}>
