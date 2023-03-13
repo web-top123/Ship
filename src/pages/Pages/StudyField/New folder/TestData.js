@@ -113,12 +113,12 @@ const columnsTestData = [
         filterable: false,
     },
     {
-        Header: "Testing Counter",
+        Header: "Total",
         accessor: "testcounter",
         filterable: false,
     },
     {
-        Header: "Passed Counter",
+        Header: "Matched",
         accessor: "passedcounter",
         filterable: false,
     },
