@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Label, Col, Container, Row, Input, TabContent, TabPane, Progress } from 'reactstrap';
 import "./test-page-custom.css";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 // Import Images
 import macImg from "../../../assets/images/mac-img1.png";
 
-import { findSomeQuestions } from "../../../helpers/fakebackend_helper";
+import { findSomeQuestions, addNewPassedTest, updatePassedTest, getAuthenticatedUser } from "../../../helpers/fakebackend_helper";
 
 
 import 'aos/dist/aos.css';
@@ -18,7 +18,7 @@ const TestPage = () => {
     // fetch question data
 
     const fetchData = async () => {
-        findSomeQuestions().then(someQue => {
+        findSomeQuestions(degreeId, level).then(someQue => {
             setSomeQuestions(someQue);
         });
     };
@@ -32,6 +32,7 @@ const TestPage = () => {
     }]);
     // const [answers, setAnswers] = useState([{}]);
     const [progressbarvalue, setprogressbarvalue] = useState(0);
+    const [passedNum, setPassedNum] = useState({});
     const [passedSteps, setPassedSteps] = useState([1]);
 
     const [progressVal, setProgressVal] = useState(0);
@@ -39,17 +40,22 @@ const TestPage = () => {
     const [totalScore, setTotalScore] = useState(0);
     // const [trueAnswers, setTrueAnswers] = useState([0]);
 
+    var user = getAuthenticatedUser();
     var trueAnswers = [];
 
     var questionLength = someQuestions.length;
+    var passedStatus = "Unpassed";
     var maxInterVal = questionLength + 2;
-    var interVal = 100 / (questionLength - 1)
+    var interVal = 100 / (questionLength - 1);
 
-    // {console.log("-----------------------------++=>", interVal)}
+    var { degreeId, level, currentLevel } = useParams();
 
 
     useEffect(() => {
         fetchData();
+        // passedData();
+        console.log(degreeId, level);
+
     }, []);
 
     useEffect(() => {
@@ -94,13 +100,13 @@ const TestPage = () => {
                 <section className="section pb-0 hero-section" id="hero" style={{ height: '100vh' }}>
                     <div className="bg-overlay bg-overlay-pattern"></div>
                     <div className='container'>
-                        <div className="page-content pt-2">
+                        <div className="content pt-2">
                             <Container>
                                 <Row>
                                     <Col xl={12}>
                                         <Form action="#">
                                             <div className="text-center pt-3 pb-4 mb-1">
-                                                <h1 style={{ color: "#4b38b3" }}>Sailor 1st</h1>
+                                                <h1 style={{ color: "#4b38b3", fontSize: "70px" }}>{currentLevel}</h1>
                                             </div>
 
                                             <div className="progress-nav mb-4">
@@ -114,8 +120,7 @@ const TestPage = () => {
                                                 {someQuestions.map((que, key) => (
                                                     <TabPane tabId={key + 2} key={key}>
                                                         <Row>
-                                                            <Col md={7} className='mt-5' onClick={() => {
-                                                            }}>
+                                                            <Col md={7} className='mt-5'>
                                                                 <div style={{ position: 'relative' }}>
                                                                     <img src={macImg} alt="Mac " className="img-fluid test-field-img" />
                                                                 </div>
@@ -189,28 +194,37 @@ const TestPage = () => {
                                                 <TabPane tabId={maxInterVal}>
                                                     <div>
                                                         <div className="text-center" style={{ height: "425px" }}>
-                                                            <div className="mb-4">
-                                                                <lord-icon
-                                                                    src="https://cdn.lordicon.com/lupuorrc.json"
-                                                                    trigger="loop"
-                                                                    colors="primary:#0ab39c,secondary:#405189"
-                                                                    style={{ width: "200px", height: "200px" }}
-                                                                ></lord-icon>
+                                                            <div className="mb-4" style={{ fontSize: "160px" }}>
+                                                                {(totalScore / questionLength * 10).toFixed(1)}
                                                             </div>
-                                                            <h2>Congratulation!</h2>
+                                                            <h1>Examination is finished!</h1>
                                                             <h3 className="text-muted pt-4">
-                                                                Your score is <span style={{ fontSize: "30px" }}>{totalScore / questionLength * 10}</span> That's wonderful!
+                                                                Your score is <span style={{ fontSize: "30px" }}>{(totalScore / questionLength * 10).toFixed(1)} </span> It will be saved your History.
                                                             </h3>
                                                         </div>
                                                     </div>
                                                     <div className="d-flex gap-3 mt-4 float-end">
-                                                        <Link to="/">
+                                                        <Link to="/test-test-page-start">
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-outline-primary btn-label right ms-auto nexttab nexttab fs-20"
+                                                                onClick={() => {
+
+                                                                    if (totalScore > 6.5)
+                                                                        passedStatus = "Passed";
+                                                                    addNewPassedTest({
+                                                                        date: new Date(),
+                                                                        level: currentLevel,
+                                                                        total: questionLength,
+                                                                        matched: totalScore,
+                                                                        status: passedStatus,
+                                                                        userId: user.id
+                                                                    });
+                                                                    console.log("Success!", totalScore, passedStatus);
+                                                                }}
                                                             >
                                                                 <i className="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
-                                                                Finish The Examination
+                                                                Go to test start page
                                                             </button>
                                                         </Link>
                                                     </div>

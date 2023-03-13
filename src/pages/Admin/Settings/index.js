@@ -37,6 +37,13 @@ const Medias = (props) => {
   const [homeImageTitle, setHomeImageTitle] = useState("");
   const [homeImageDescription, setHomeImageDescription] = useState("");
 
+  const [dataImage, setDataImage] = useState({});
+  const [questionImage, setQuestionImage] = useState({});
+  const [softwareImage, setSoftwareImage] = useState({});
+  const [studyImage, setStudyImage] = useState({});
+  const [mypageImage, setMypageImage] = useState({});
+  const [testImage, setTestImage] = useState({});
+
   useEffect(() => {
     getMediaList();
   }, []);
@@ -48,136 +55,53 @@ const Medias = (props) => {
         return { value: e.id, label: e.title }
       }))
       setMediaList(res);
+
+      getSettingByTitle('homeImages').then(item => {
+        console.log("homeimages", JSON.parse(item.value));
+        setHomeImages(JSON.parse(item.value));
+      })
+
+      getSettingByTitle('dataImage').then(item => {
+        console.log("setDataImage", (item.value));
+        setDataImage({ label: "", value: item.value });
+      })
+
+      getSettingByTitle('softwareImage').then(item => {
+        console.log("setQuestionImage", (item.value));
+        setSoftwareImage({ label: "", value: item.value });
+      })
+
+      getSettingByTitle('questionImage').then(item => {
+        console.log("setQuestionImage", (item.value));
+        setQuestionImage({ label: "", value: item.value });
+      })
+
+      getSettingByTitle('studyImage').then(item => {
+        console.log("setStudyImage", (item.value));
+        setStudyImage({ label: "", value: item.value });
+      })
+
+      getSettingByTitle('mypageImage').then(item => {
+        console.log("setMypageImage", (item.value));
+        setMypageImage({ label: "", value: item.value });
+      })
+
+      getSettingByTitle('testImage').then(item => {
+        console.log("setTestImage", (item.value));
+        setTestImage({ label: "", value: item.value });
+      })
+
     })
 
-    console.log(JSON.stringify([{ media: 12, title: "asdf", description: "desc" }]));
 
-    getSettingByTitle('homeImages').then(res => {
-      console.log("homeimages", JSON.parse(res.value));
-      setHomeImages(JSON.parse(res.value));
-    })
+
+
   }
 
-  //delete order
-  const [deleteModal, setDeleteModal] = useState(false);
-  const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (media) => {
-    setCurrentID(media.id);
-    // setMedia(media);
-    setDeleteModal(true);
-  };
-
-  const handleDeleteMedia = () => {
-    if (currentID) {
-      deleteMedia(currentID).then(res => {
-        if (res === 1) {
-          getMediaList();
-          setDeleteModal(false);
-        } else {
-          setDeleteModal(false);
-        }
-      })
-    }
-  };
-
-  const columns = useMemo(
-    () => [
-      {
-        Header: "#",
-        Cell: (media) => {
-          return <input type="checkbox" />;
-        },
-      },
-      {
-        Header: "Setting",
-        Cell: (media) => (
-          <>
-            <div className="d-flex align-items-center">
-              <div className="flex-shrink-0 me-3">
-                <div className="media-sm bg-light rounded p-1">
-                  <img
-                    src={downloadMedia(media.row.original.id)}
-                    // {media.row.file_url}
-                    // src={downloadMedia}
-                    alt=""
-                    className="img-fluid d-block"
-                    style={{ width: '40px' }}
-                  />
-                </div>
-              </div>
-              <div className="flex-grow-1">
-                <h5 className="fs-14 mb-1">
-                  <Link
-                    to={"/admin-media-details/" + media.row.original.id}
-                    className="text-dark"
-                  >
-                    {" "}
-                    {media.row.original.name}
-                  </Link>
-                </h5>
-              </div>
-            </div>
-          </>
-        ),
-        accessor: "title",
-        filterable: false,
-      },
-      {
-        Header: "Description",
-        accessor: "description",
-        filterable: false,
-      },
-      {
-        Header: "Action",
-        Cell: (cellProps) => {
-          return (
-            <UncontrolledDropdown>
-              <DropdownToggle
-                href="#"
-                className="btn-soft-secondary btn-sm"
-                tag="button"
-              >
-                <i className="ri-more-fill" />
-              </DropdownToggle>
-              <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-media-details/" + cellProps.row.original.id}>
-                  <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
-                  View
-                </DropdownItem>
-
-                <DropdownItem href={"admin-add-media/" + cellProps.row.original.id}>
-                  <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
-                  Edit
-                </DropdownItem>
-
-                <DropdownItem divider />
-                <DropdownItem
-                  href="#"
-                  onClick={() => {
-                    const mediaData = cellProps.row.original;
-                    onClickDelete(mediaData);
-                  }}
-                >
-                  <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
-                  Delete
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          );
-        },
-      },
-    ],
-    []
-  );
   document.title = "Settings";
   return (
     <div className="page-content">
-      <DeleteModal
-        show={deleteModal}
-        onDeleteClick={handleDeleteMedia}
-        onCloseClick={() => setDeleteModal(false)}
-      />
 
       <Container fluid>
         <BreadCrumb title="Settings" pageTitle="Admin" />
@@ -196,6 +120,18 @@ const Medias = (props) => {
                           onClick={e => {
                             updateOneSettingByTitle('homeImages', { value: JSON.stringify(homeImages) }).then(res => {
 
+                            });
+                            updateOneSettingByTitle('dataImage', { value: dataImage.value }).then(res => {
+                            });
+                            updateOneSettingByTitle('questionImage', { value: questionImage.value }).then(res => {
+                            });
+                            updateOneSettingByTitle('softwareImage', { value: softwareImage.value }).then(res => {
+                            });
+                            updateOneSettingByTitle('studyImage', { value: studyImage.value }).then(res => {
+                            });
+                            updateOneSettingByTitle('mypageImage', { value: mypageImage.value }).then(res => {
+                            });
+                            updateOneSettingByTitle('testImage', { value: testImage.value }).then(res => {
                             });
                           }}
                         >
@@ -326,22 +262,195 @@ const Medias = (props) => {
                   <Row>
                     <div className="card">
                       <div className="card-header border-0">
-                        Ship Image
+                        Data Image
                       </div>
 
                       <div className="card-body">
-                        123
+                        <Row>
+                          <Col xl={3}>
+                            <Label htmlFor="choices-single-default" className="form-label text-muted">Image</Label>
+                            <Select
+                              value={dataImage}
+                              onChange={(e) => {
+                                setDataImage(e);
+                              }}
+                              options={mediaSelects}
+                            />
+                          </Col>
+                          <Col xl={3}>
+                            <img
+                              src={downloadMedia(dataImage.value)}
+                              // {media.row.file_url}
+                              // src={downloadMedia}
+                              alt=""
+                              className="img-fluid d-block"
+                              style={{ width: '100px' }}
+                            />
+                          </Col>
+                        </Row>
                       </div>
                     </div>
                   </Row>
                   <Row>
                     <div className="card">
                       <div className="card-header border-0">
-                        Data Image
+                        Question Image
                       </div>
 
                       <div className="card-body">
-                        123
+                        <Row>
+                          <Col xl={3}>
+                            <Label htmlFor="choices-single-default" className="form-label text-muted">Image</Label>
+                            <Select
+                              value={questionImage}
+                              onChange={(e) => {
+                                setQuestionImage(e);
+                              }}
+                              options={mediaSelects}
+                            />
+                          </Col>
+                          <Col xl={3}>
+                            <img
+                              src={downloadMedia(questionImage.value)}
+                              // {media.row.file_url}
+                              // src={downloadMedia}
+                              alt=""
+                              className="img-fluid d-block"
+                              style={{ width: '100px' }}
+                            />
+                          </Col>
+                        </Row>
+                      </div>
+                    </div>
+                  </Row>
+                  <Row>
+                    <div className="card">
+                      <div className="card-header border-0">
+                        Software Image
+                      </div>
+
+                      <div className="card-body">
+                        <Row>
+                          <Col xl={3}>
+                            <Label htmlFor="choices-single-default" className="form-label text-muted">Image</Label>
+                            <Select
+                              value={softwareImage}
+                              onChange={(e) => {
+                                setSoftwareImage(e);
+                              }}
+                              options={mediaSelects}
+                            />
+                          </Col>
+                          <Col xl={3}>
+                            <img
+                              src={downloadMedia(softwareImage.value)}
+                              // {media.row.file_url}
+                              // src={downloadMedia}
+                              alt=""
+                              className="img-fluid d-block"
+                              style={{ width: '100px' }}
+                            />
+                          </Col>
+                        </Row>
+                      </div>
+                    </div>
+                  </Row>
+                  <Row>
+                    <div className="card">
+                      <div className="card-header border-0">
+                        Study Image
+                      </div>
+
+                      <div className="card-body">
+                        <Row>
+                          <Col xl={3}>
+                            <Label htmlFor="choices-single-default" className="form-label text-muted">Image</Label>
+                            <Select
+                              value={studyImage}
+                              onChange={(e) => {
+                                setStudyImage(e);
+                              }}
+                              options={mediaSelects}
+                            />
+                          </Col>
+                          <Col xl={3}>
+                            <img
+                              src={downloadMedia(studyImage.value)}
+                              // {media.row.file_url}
+                              // src={downloadMedia}
+                              alt=""
+                              className="img-fluid d-block"
+                              style={{ width: '100px' }}
+                            />
+                          </Col>
+                        </Row>
+                      </div>
+                    </div>
+                  </Row>
+
+                  <Row>
+                    <div className="card">
+                      <div className="card-header border-0">
+                        Test Image
+                      </div>
+
+                      <div className="card-body">
+                        <Row>
+                          <Col xl={3}>
+                            <Label htmlFor="choices-single-default" className="form-label text-muted">Image</Label>
+                            <Select
+                              value={testImage}
+                              onChange={(e) => {
+                                setTestImage(e);
+                              }}
+                              options={mediaSelects}
+                            />
+                          </Col>
+                          <Col xl={3}>
+                            <img
+                              src={downloadMedia(testImage.value)}
+                              // {media.row.file_url}
+                              // src={downloadMedia}
+                              alt=""
+                              className="img-fluid d-block"
+                              style={{ width: '100px' }}
+                            />
+                          </Col>
+                        </Row>
+                      </div>
+                    </div>
+                  </Row>
+
+
+                  <Row>
+                    <div className="card">
+                      <div className="card-header border-0">
+                        My Page Image
+                      </div>
+
+                      <div className="card-body">
+                        <Row>
+                          <Col xl={3}>
+                            <Label htmlFor="choices-single-default" className="form-label text-muted">Image</Label>
+                            <Select
+                              value={mypageImage}
+                              onChange={(e) => {
+                                setMypageImage(e);
+                              }}
+                              options={mediaSelects}
+                            />
+                          </Col>
+                          <Col xl={3}>
+                            <img
+                              src={downloadMedia(mypageImage.value)}
+                              // {media.row.file_url}
+                              // src={downloadMedia}
+                              alt=""
+                              className="img-fluid d-block"
+                              style={{ width: '100px' }}
+                            />
+                          </Col>
+                        </Row>
                       </div>
                     </div>
                   </Row>

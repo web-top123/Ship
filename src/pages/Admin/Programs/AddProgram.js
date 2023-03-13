@@ -65,10 +65,10 @@ const AddProgram = (props) => {
     programCategoryId: '',
     date: '',
     recommends: '',
-    unrecommends:'', 
+    unrecommends: '',
     purchases: '',
+    image_url: null,
     file_url: null,
-    image_url: '',
     cost: '',
   });
 
@@ -81,6 +81,7 @@ const AddProgram = (props) => {
   }, []);
 
   var cateTree = [];
+
   useEffect(() => {
     getProgramCategories().then(res => {
       setProgramCate(res);
@@ -282,10 +283,10 @@ const AddProgram = (props) => {
                         />
                       </div>
                     </Col>
-                    
+
                   </Row>
                   <Row>
-                  <Col lg={6}>
+                    <Col lg={6}>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -324,10 +325,10 @@ const AddProgram = (props) => {
                           }}
                         />
                       </div>
-                    </Col>        
+                    </Col>
                   </Row>
                   <Row>
-                  <Col lg={6}>
+                    <Col lg={6}>
                       <div>
                         <label
                           htmlFor="datepicker-publish-input"
@@ -383,30 +384,25 @@ const AddProgram = (props) => {
                           type="file"
                           accept="image/png, image/gif, image/jpeg"
                           onChange={e => {
-                            setProgram({ ...Program, ...{ file_url: e.target.files[0] } })
+                            setProgram({ ...Program, ...{ image_url: e.target.files[0] } })
                           }}
                         />
                       </div>
                     </Col>
                     <Col lg={6}>
-                      {/* <div className="mb-3">
-                        <label
-                          className="form-label"
-                          htmlFor="manufacturer-brand-input"
-                        >
-                          File
-                        </label>
+                      <div className="mb-4">
+                        <h5 className="fs-14 mb-1">Program File</h5>
+                        <p className="text-muted">Add Program File.</p>
                         <input
-                          type="text"
                           className="form-control"
-                          id="manufacturer-brand-input"
-                          placeholder="Enter description"
-                          value={Program.image_url}
+                          id="product-file-input"
+                          type="file"
+                          accept="*"
                           onChange={e => {
-                            setProgram({ ...Program, ...{ image_url: e.target.value } })
+                            setSourceProgram({ ...Program, ...{ file_url: e.target.files[0] } })
                           }}
                         />
-                      </div> */}
+                      </div>
                     </Col>
                   </Row>
                 </CardBody>
@@ -425,7 +421,7 @@ const AddProgram = (props) => {
                   formData.append("unrecommends", Program.unrecommends);
                   formData.append("purchases", Program.purchases);
                   formData.append("file", Program.file_url);
-                  // formData.append("image_url", Program.image_url);
+                  formData.append("image", Program.image_url);
                   formData.append("cost", Program.cost);
                   console.log(formData, Program);
                   if (id) {

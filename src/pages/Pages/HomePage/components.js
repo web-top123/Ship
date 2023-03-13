@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useMemo } from "react";
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
 
@@ -19,11 +19,50 @@ import software from "./assets/software.png";
 import testfield from "./assets/testfield.png";
 import studyfield from "./assets/studyfield.png";
 
-
+import { downloadMedia, getSettingByTitle } from '../../../helpers/fakebackend_helper';
 
 
 
 const Features = () => {
+    const [dataImage, setDataImage] = useState({});
+    const [questionImage, setQuestionImage] = useState({});
+    const [softwareImage, setSoftwareImage] = useState({});
+    const [studyImage, setStudyImage] = useState({});
+    const [mypageImage, setMypageImage] = useState({});
+    const [testImage, setTestImage] = useState({});
+
+    useEffect(() => {
+        getSettingByTitle('dataImage').then(item => {
+            console.log("setDataImage", (item.value));
+            setDataImage({ label: "", value: item.value });
+        })
+
+        getSettingByTitle('softwareImage').then(item => {
+            console.log("setQuestionImage", (item.value));
+            setSoftwareImage({ label: "", value: item.value });
+        })
+
+        getSettingByTitle('questionImage').then(item => {
+            console.log("setQuestionImage", (item.value));
+            setQuestionImage({ label: "", value: item.value });
+        })
+
+        getSettingByTitle('studyImage').then(item => {
+            console.log("setStudyImage", (item.value));
+            setStudyImage({ label: "", value: item.value });
+        })
+
+        getSettingByTitle('mypageImage').then(item => {
+            console.log("setMypageImage", (item.value));
+            setMypageImage({ label: "", value: item.value });
+        })
+
+        getSettingByTitle('testImage').then(item => {
+            console.log("setTestImage", (item.value));
+            setTestImage({ label: "", value: item.value });
+        })
+    }, []);
+
     return (
         <React.Fragment>
 
@@ -31,11 +70,11 @@ const Features = () => {
             <section className="section" id="data_service">
                 <Container>
 
-                {/* <img src={dataservice}style={{width:"40px"}} className="m-3"></img> */}
+                    {/* <img src={dataservice}style={{width:"40px"}} className="m-3"></img> */}
                     <Row className="align-items-center  pt-lg-5 gy-4">
                         <Col lg={6} sm={7} className="col-10 mx-auto">
                             <div>
-                                <img src={img3} alt="" className="img-fluid" />
+                                <img src={downloadMedia(dataImage.value)} alt="" className="img-fluid" />
                             </div>
                         </Col>
                         <Col lg={6}>
@@ -83,8 +122,8 @@ const Features = () => {
                                         </div>
                                     </div>
                                     <div className="mt-4">
-                                    <Link to="/register" className="btn btn-primary">Learn More <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
-                                </div>
+                                        <Link to="/register" className="btn btn-primary">Learn More <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
+                                    </div>
                                 </div>
                             </div>
                         </Col>
@@ -185,7 +224,7 @@ const Features = () => {
 
                         <Col lg={6} sm={7} className="col-10 ms-auto order-1 order-lg-2">
                             <div>
-                                <img src={img2} alt="" className="img-fluid" />
+                                <img src={downloadMedia(questionImage.value)} alt="" className="img-fluid" />
                             </div>
                         </Col>
                     </Row>
@@ -200,7 +239,7 @@ const Features = () => {
                     <Row className="align-items-center pt-lg-5 gy-4">
                         <Col lg={6} sm={7} className="col-10 mx-auto">
                             <div>
-                                <img src={img3} alt="" className="img-fluid" />
+                                <img src={downloadMedia(softwareImage.value)} alt="" className="img-fluid" />
                             </div>
                         </Col>
                         <Col lg={6}>
@@ -248,8 +287,8 @@ const Features = () => {
                                         </div>
                                     </div>
                                     <div className="mt-4">
-                                    <Link to="/register" className="btn btn-primary">Learn More <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
-                                </div>
+                                        <Link to="/register" className="btn btn-primary">Learn More <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
+                                    </div>
                                 </div>
                             </div>
                         </Col>
@@ -350,7 +389,7 @@ const Features = () => {
 
                         <Col lg={6} sm={7} className="col-10 ms-auto order-1 order-lg-2">
                             <div>
-                                <img src={img2} alt="" className="img-fluid" />
+                                <img src={downloadMedia(studyImage.value)} alt="" className="img-fluid" />
                             </div>
                         </Col>
                     </Row>
@@ -365,7 +404,7 @@ const Features = () => {
                     <Row className="align-items-center pt-lg-5 gy-4">
                         <Col lg={6} sm={7} className="col-10 mx-auto">
                             <div>
-                                <img src={img3} alt="" className="img-fluid" />
+                                <img src={downloadMedia(testImage.value)} alt="" className="img-fluid" />
                             </div>
                         </Col>
                         <Col lg={6}>
@@ -413,8 +452,8 @@ const Features = () => {
                                         </div>
                                     </div>
                                     <div className="mt-4">
-                                    <Link to="/register" className="btn btn-primary">Learn More <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
-                                </div>
+                                        <Link to="/register" className="btn btn-primary">Learn More <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
+                                    </div>
                                 </div>
                             </div>
                         </Col>
@@ -515,7 +554,7 @@ const Features = () => {
 
                         <Col lg={6} sm={7} className="col-10 ms-auto order-1 order-lg-2">
                             <div>
-                                <img src={img2} alt="" className="img-fluid" />
+                                <img src={downloadMedia(mypageImage.value)} alt="" className="img-fluid" />
                             </div>
                         </Col>
                     </Row>
@@ -523,7 +562,7 @@ const Features = () => {
 
                 </Container>
             </section>
-          
+
 
 
         </React.Fragment>

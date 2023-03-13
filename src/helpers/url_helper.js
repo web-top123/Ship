@@ -14,11 +14,14 @@ export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/dataPurchaseHistory/finddata
 export const GET_FIND_BROWSER_HISTORY_ALL = "/api/browseHistory/get_All";
 export const GET_FIND_PASSED_TEST = "/api/findPassedTestById";
 export const ADD_NEW_BROWSER_HISTORY = "/api/browseHistory/create";
+export const UPDATE_PASSEDTEST = "/api/passedTest/update/:id";
 
 // Test page
 
 export const GET_ALL_QA = "/api/questions/findAll";
 export const GET_FIND_QUESTION = "/api/questions/findQuestionById";
+export const ADD_NEW_PASSEDTEST = "/api/passedTest/create";
+
 
 // Ship Data page
 export const GET_ALL_SHIP = "/api/data/findAll";
@@ -203,13 +206,37 @@ export const ADD_NEW_COMMENT = "/api/comment/create";
 export const UPDATE_COMMENT = "/api/comment/update";
 export const DELETE_COMMENT = "/api/comment/delete";
 
-// Datas
-export const GET_DATAS = "/api/data/get_All";
-export const GET_DATA = "/api/data/get_one";
-export const ADD_NEW_DATA = "/api/data/create";
-export const UPDATE_DATA = "/api/data/update";
-export const DELETE_DATA = "/api/data/delete";
-export const GET_ALL_TOP_DATA = "/api/data/getTopDatas";
+// Ship Datas
+export const GET_SHIP_DATAS = "/api/shipdata/get_All";
+export const GET_SHIP_DATA = "/api/shipdata/get_one";
+export const ADD_NEW_SHIP_DATA = "/api/shipdata/create";
+export const UPDATE_SHIP_DATA = "/api/shipdata/update";
+export const DELETE_SHIP_DATA = "/api/shipdata/delete";
+export const GET_ALL_TOP_SHIP_DATA = "/api/shipdata/getTopDatas";
+
+// Load Datas
+export const GET_LOAD_DATAS = "/api/loaddata/get_All";
+export const GET_LOAD_DATA = "/api/loaddata/get_one";
+export const ADD_NEW_LOAD_DATA = "/api/loaddata/create";
+export const UPDATE_LOAD_DATA = "/api/loaddata/update";
+export const DELETE_LOAD_DATA = "/api/loaddata/delete";
+export const GET_ALL_TOP_LOAD_DATA = "/api/loaddata/getTopDatas";
+
+// Product Datas
+export const GET_PRODUCT_DATAS = "/api/productdata/get_All";
+export const GET_PRODUCT_DATA = "/api/productdata/get_one";
+export const ADD_NEW_PRODUCT_DATA = "/api/productdata/create";
+export const UPDATE_PRODUCT_DATA = "/api/productdata/update";
+export const DELETE_PRODUCT_DATA = "/api/productdata/delete";
+export const GET_ALL_TOP_PRODUCT_DATA = "/api/productdata/getTopDatas";
+
+// Good Datas
+export const GET_GOOD_DATAS = "/api/gooddata/get_All";
+export const GET_GOOD_DATA = "/api/gooddata/get_one";
+export const ADD_NEW_GOOD_DATA = "/api/gooddata/create";
+export const UPDATE_GOOD_DATA = "/api/gooddata/update";
+export const DELETE_GOOD_DATA = "/api/gooddata/delete";
+export const GET_ALL_TOP_GOOD_DATA = "/api/gooddata/getTopDatas";
 
 // DataCategories
 export const GET_DATACATEGORIES = "/api/data/category/get_All";
@@ -276,3 +303,6 @@ export const GET_ANSWER = "/api/answer/get_one";
 export const ADD_NEW_ANSWER = "/api/answer/create";
 export const UPDATE_ANSWER = "/api/answer/update";
 export const DELETE_ANSWER = "/api/answer/delete";
+
+// DataPurchaseHistory
+export const ADD_NEW_DATA_PURCHASE_HISTORY = "/api/datapurchasehistory/create";

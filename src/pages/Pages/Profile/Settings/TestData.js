@@ -115,26 +115,23 @@ const columnsTestData = [
         filterable: false,
     },
     {
-        Header: "Sort",
-        accessor: "sort",
-        filterable: false,
-        Cell: (passed) => (<>
-            <div>{passed.row.original.campusCategory['title']}</div>
-        </>)
-    },
-    {
         Header: "Level",
         accessor: "level",
         filterable: false,
     },
     {
-        Header: "Testing Counter",
-        accessor: "testing_counter",
+        Header: "Total",
+        accessor: "total",
         filterable: false,
     },
     {
-        Header: "Passed Counter",
-        accessor: "passed_counter",
+        Header: "Matched",
+        accessor: "matched",
+        filterable: false,
+    },
+    {
+        Header: "Status",
+        accessor: "status",
         filterable: false,
     },
 ]

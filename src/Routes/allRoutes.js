@@ -215,9 +215,12 @@ import StudyField from "../pages/Pages/StudyField/index";
 import Software from "../pages/Pages/Software/index";
 import BuySoftware from "../pages/Pages/Software/buySoftware";
 import CompanyIntroduction from "../pages/Pages/CompanyIntroduction/index";
-import ViewShipData from "../pages/Pages/ViewShipData/ViewShipData";
-import ShipDetails from "../pages/Pages/ViewShipData/ShipDetails";
-import NewDataVote from "../pages/Pages/ViewShipData/NewDataVote";
+import ViewData from "../pages/Pages/ViewData/ViewData";
+import ShipDetails from "../pages/Pages/ViewData/DataDetails/ShipDetails";
+import LoadDetails from "../pages/Pages/ViewData/DataDetails/LoadDetails";
+import ProductDetails from "../pages/Pages/ViewData/DataDetails/ProductDetails";
+import GoodDetails from "../pages/Pages/ViewData/DataDetails/GoodDetails";
+import NewDataVote from "../pages/Pages/ViewData/NewDataVote/NewDataVote";
 
 
 // Admin Page
@@ -266,9 +269,9 @@ import CommentDetail from "../pages/Admin/Comments/CommentDetail";
 import AddComment from "../pages/Admin/Comments/AddComment";
 
 // Data Section
-import Datas from "../pages/Admin/Datas/index";
-import DataDetail from "../pages/Admin/Datas/DataDetail";
-import AddData from "../pages/Admin/Datas/AddData";
+// import Datas from "../pages/Admin/Datas/index";
+// import DataDetail from "../pages/Admin/Datas/DataDetail";
+// import AddData from "../pages/Admin/Datas/AddData";
 
 // DataCategory Section
 import DataCategories from "../pages/Admin/DataCategories/index";
@@ -521,10 +524,10 @@ const authProtectedRoutes = [
   { path: "/admin-add-comment/:id", component: AddComment },
 
   // Datas
-  { path: "/admin-datas", component: Datas },
-  { path: "/admin-data-details/:id", component: DataDetail },
-  { path: "/admin-add-data", component: AddData },
-  { path: "/admin-add-data/:id", component: AddData },
+  // { path: "/admin-datas", component: Datas },
+  // { path: "/admin-data-details/:id", component: DataDetail },
+  // { path: "/admin-add-data", component: AddData },
+  // { path: "/admin-add-data/:id", component: AddData },
 
   // DataCategory
   { path: "/admin-dataCategories", component: DataCategories },
@@ -601,9 +604,13 @@ const publicRoutes = [
   { path: "/pages-blog-service/detail/:id", component: BlogServiceDetail },
 
   //view ship data 
-  { path: "/view-ship-data", component: ViewShipData},
+  { path: "/view-data", component: ViewData},
   { path: "/ship-details/:id", component: ShipDetails},
+  { path: "/load-details/:id", component: LoadDetails},
+  { path: "/product-details/:id", component: ProductDetails},
+  { path: "/good-details/:id", component: GoodDetails},
   { path: "/new-data-vote", component: NewDataVote},
+  { path: "/new-data-vote/:id", component: NewDataVote},
   { path: "/pages-study-detail/:id", component: StudyDetail},
 
 
@@ -629,7 +636,7 @@ const publicRoutes = [
   { path: "/pages-maintenance", component: Maintenance },
   { path: "/pages-coming-soon", component: ComingSoon },
   { path: "/landing", component: Index },
-  { path: "/test-test-page", component: TestPage },
+  { path: "/test-test-page/:currentLevel/:degreeId/:level", component: TestPage },
   { path: "/pages-home-page", component: HomePage },
 
 ];

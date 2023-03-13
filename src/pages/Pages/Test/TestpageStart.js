@@ -11,6 +11,9 @@ import { getDegrees, getDegree } from "../../../helpers/fakebackend_helper";
 
 const TestPage = () => {
 
+    var degreeArr = [];
+    // var degreeId = 0;
+    // var level = 0;
     // fetch degree data
     const fetchData = async () => {
         getDegrees().then(degreeList => {
@@ -19,15 +22,18 @@ const TestPage = () => {
     };
     // var testStartBtn = 'You can gain best score!';
     const [testStartBtn, setTestStartBtn] = useState();
-    const [selectedLevel, setSelectedLevel] = useState('');
     const [degrees, setDegrees] = useState([]);
-    const [degreeLevels, setDegreeLevels] = useState([]);
+    const [degreeArrLevels, setDegreeArrLevels] = useState([]);
+    const [degreeId, setDegreeId] = useState(0);
+    const [level, setLevel] = useState(0);
+    
+    const [currentLevel, setCurrentLevel] = useState();
 
 
 
     useEffect(() => {
         fetchData();
-        setDegreeLevels([]);
+        setDegreeArrLevels([]);
     }, []);
     useEffect(() => {
         setTestStartBtn('You can gain best score!');
@@ -66,9 +72,9 @@ const TestPage = () => {
                 <section className="section pb-0 hero-section" id="hero">
                     <div className="bg-overlay bg-overlay-pattern"></div>
                     <div className='container'>
-                        <div className="page-content pt-2">
-                            <Container fluid>
-                                <Row className="m-5">
+                        <div className="select-level-content pt-2">
+                            <Container fluid >
+                                <Row className="select-level-group-btn">
                                     <Col lg={12}>
                                         <h2 className="select-title-customer m-5">Select Your Roll Below Items</h2>
 
@@ -78,17 +84,18 @@ const TestPage = () => {
                                                     <div className="hstack gap-2 flex-wrap">
                                                         <Input type="radio" className="btn-check" name="optios" id={degree.name}
                                                             onClick={(e) => {
-                                                                var levels = [];
+                                                                // degreeId = degrees[key].id;
+                                                                setDegreeId(degrees[key].id);
+                                                                console.log("Degree value", degreeId);
                                                                 var len = degree.maxdegree;
                                                                 for (var i = 0; i < len; i++) {
-                                                                    levels.push({
+                                                                    degreeArr.push({
                                                                         value: i + 1,
                                                                         label: degree.name + (i + 1).toString(),
                                                                     });
                                                                 }
-                                                                setDegreeLevels(levels);
-                                                                console.log("Degree list", levels);
-                                                                console.log("levels", degreeLevels);
+                                                                setDegreeArrLevels(degreeArr);
+                                                                // console.log("levels", degreeArrLevels);
                                                             }} />
                                                         <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for={degree.name}>{degree.name}</Label>
                                                     </div>
@@ -97,39 +104,39 @@ const TestPage = () => {
                                         </div>
                                     </Col>
                                 </Row>
-                                <Row className="m-5">
+                                <Row>
                                     <Col lg={12}>
                                         <h2 className="select-title-customer m-5">Select Your Roll Degree</h2>
                                         <div className="d-flex flex-wrap gap-2">
-                                            {degreeLevels.map((level, key) => (
+                                            {degreeArrLevels.map((levels, key) => (
                                                 <div key={key}>
-                                                    <Input type="radio" className="btn-check" name="options" id={level.label}
+                                                    <Input type="radio" className="btn-check" name="options" id={levels.label}
                                                         onClick={(e) => {
+                                                            setLevel(levels.value);
+                                                            setCurrentLevel(levels.label);
+                                                            console.log('current level is ', currentLevel);
 
-                                                            setSelectedLevel(level.value);
-                                                            console.log('level value is', selectedLevel);
-
-                                                            if (level.value == 1) {
+                                                            if (levels.value == 1) {
                                                                 setTestStartBtn('Start now!');
                                                             }
-                                                            if (level.value > 1) {
+                                                            if (levels.value > 1) {
                                                                 setTestStartBtn('Please Purchase!');
                                                             }
                                                         }}
 
                                                     />
-                                                    <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for={level.label} size='lg'> {level.label} </Label>
+                                                    <Label className="btn btn-outline-secondary" style={{ border: 'none', }} for={levels.label} size='lg'> {levels.label} </Label>
                                                 </div>
                                             ))}
                                         </div>
                                     </Col>
                                 </Row>
-                                <div className='align-self-center purchase-button-group'>
+                                <div className='align-self-center test-start-btn purchase-button-group'>
                                     <Button className="shadow-none px-5 me-4 fs-20" onClick={() => {
-                                        if (selectedLevel == 1) {
-                                            window.location.href = '/test-test-page';
+                                        if (level == 1) {
+                                            window.location.href = '/test-test-page/' + currentLevel + "/" + degreeId + "/" + level;
                                         }
-                                        if (selectedLevel > 1) {
+                                        if (level > 1) {
                                             tog_togFirst();
                                         }
                                     }}>{testStartBtn}</Button>
@@ -229,7 +236,7 @@ const TestPage = () => {
                     <div className="mt-4 pt-3 pb-3">
                         <h4 className="mb-3">Do you purchase really?</h4>
                         <div className="hstack gap-2 justify-content-center">
-                            <NavLink href="test-test-page" className=' d-inline'>
+                            <NavLink href={'/test-test-page/' + currentLevel + "/" + degreeId + "/" + level} className=' d-inline'>
                                 <Button color="primary" className="ms-3" onClick={() => tog_togSecond(false)}>Yes</Button>
                             </NavLink>
                             <Button color="primary" className="me-3" onClick={() => tog_togSecond(false)}>No</Button>
