@@ -19,14 +19,14 @@ import {
 //Simple bar
 import SimpleBar from "simplebar-react"; 
 
-import { addNewData, getData, updateOneData } from "../../../helpers/fakebackend_helper";
+import { addNewData, getGoodData, updateOneData } from "../../../../helpers/fakebackend_helper";
 
 
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import BreadCrumb from "../../../../Components/Common/BreadCrumb";
 
-import ship1 from "../../../assets/images/ship1.png";
-import ship2 from "../../../assets/images/ship2.png";
-import ship3 from "../../../assets/images/ship3.png";
+import ship1 from "../../../../assets/images/ship1.png";
+import ship2 from "../../../../assets/images/ship2.png";
+import ship3 from "../../../../assets/images/ship3.png";
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -115,7 +115,7 @@ const PricingWidgetList = (props) => {
   );
 };
 
-function ShipDetails(props) {
+function GoodDetails(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
 
@@ -166,7 +166,7 @@ function ShipDetails(props) {
   };
   useEffect(() => {
     if (id) {
-      getData(id).then(res => {
+      getGoodData(id).then(res => {
         setData(res);
       })
     }
@@ -346,13 +346,13 @@ function ShipDetails(props) {
 
                       
                       <div className="product-content mt-5">
-                        <h5 className="fs-14 mb-3">Details of Ship :</h5>                        
+                        <h5 className="fs-14 mb-3">Details of Good :</h5>                        
                         <div className="table-responsive">
                           <table className="table mb-0">
                             <tbody>
                               <tr>
                                 <th scope="row" style={{ width: "200px" }}>
-                                  Business of Ship
+                                  Business of Good
                                 </th>
                                 <td>{Data.owner}</td>
                               </tr>
@@ -381,13 +381,13 @@ function ShipDetails(props) {
                       </div>
 
                       <div className="product-content mt-5">
-                        <h5 className="fs-14 mb-3">Properities of Ship :</h5>                        
+                        <h5 className="fs-14 mb-3">Properities of Good :</h5>                        
                         <div className="table-responsive">
                           <table className="table mb-0">
                             <tbody>
                               <tr>
                                 <th scope="row" style={{ width: "200px" }}>
-                                  Kind of Ship
+                                  Kind of Good
                                 </th>
                                 <td>{Data.type}p</td>
                                 <th scope="row" style={{ width: "200px" }}>
@@ -439,7 +439,7 @@ function ShipDetails(props) {
                 <div className="modal-body text-center p-3">
                     <div className="mt-4 pt-3 pb-3">
                         <div className="hstack gap-2 justify-content-end">
-                            <NavLink href="/view-ship-data" className=' d-inline'>
+                            <NavLink href="/view-data" className=' d-inline'>
                                 <Button color="primary" className="ms-3">Go Back</Button>
                             </NavLink>
                         </div>
@@ -454,4 +454,4 @@ function ShipDetails(props) {
   );
 }
 
-export default ShipDetails;
+export default GoodDetails;
