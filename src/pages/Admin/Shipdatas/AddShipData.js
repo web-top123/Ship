@@ -18,7 +18,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewAvatar, getAvatar, updateOneAvatar } from "../../../helpers/fakebackend_helper";
+import { addNewShipData, getShipData, updateShipData } from "../../../helpers/fakebackend_helper";
 
 // Formik validation
 import * as Yup from "yup";
@@ -27,7 +27,7 @@ import { useFormik } from "formik";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const AddAvatar = (props) => {
+const AddShipData = (props) => {
 
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
@@ -42,7 +42,7 @@ const AddAvatar = (props) => {
     setmodal_center(!modal_center);
   }
 
-  const [Avatar, setAvatar] = useState({
+  const [ShipData, setShipData] = useState({
     name: '',
     file_url: null,
     cost: '',
@@ -51,18 +51,18 @@ const AddAvatar = (props) => {
 
   useEffect(() => {
     if (id) {
-      getAvatar(id).then(res => {
-        setAvatar(res);
+      getShipData(id).then(res => {
+        setShipData(res);
       })
     }
   }, []);
 
-  document.title = id ? "Edit Avatar" : "Add Avatar";
+  document.title = id ? "Edit ShipData" : "Add ShipData";
   return (
     <div className="page-content">
       <Container fluid>
 
-        <BreadCrumb title={id ? "Edit Avatar" : "Add Avatar"} pageTitle="Admin Avatar" />
+        <BreadCrumb title={id ? "Edit ShipData" : "Add ShipData"} pageTitle="Admin ShipData" />
 
         {/* Static Backdrop Modal */}
         <Modal
@@ -94,7 +94,7 @@ const AddAvatar = (props) => {
               <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
               <div className="hstack gap-2 justify-content-center">
                 <Link to="#" className="btn btn-link shadow-none link-success fw-medium" onClick={() => setmodal_backdrop(false)}><i className="ri-close-line me-1 align-middle"></i> Close</Link>
-                <Link to="/admin-avatars" className="btn btn-success" onClick={() => setmodal_backdrop(true)}>Completed</Link>
+                <Link to="/admin-shipDatas" className="btn btn-success" onClick={() => setmodal_backdrop(true)}>Completed</Link>
               </div>
             </div>
           </div>
@@ -152,9 +152,9 @@ const AddAvatar = (props) => {
                       id="validationDefaultUsername"
                       placeholder="Enter name"
                       required={true}
-                      value={Avatar.name}
+                      value={ShipData.name}
                       onChange={e => {
-                        setAvatar({ ...Avatar, ...{ name: e.target.value } })
+                        setShipData({ ...ShipData, ...{ name: e.target.value } })
                       }}
                     />
                   </div>
@@ -174,7 +174,7 @@ const AddAvatar = (props) => {
                           required={true}
                           accept="image/png, image/gif, image/jpeg, image/jpg, image/bmp"
                           onChange={e => {
-                            setAvatar({ ...Avatar, ...{ file_url: e.target.files[0] } })
+                            setShipData({ ...ShipData, ...{ file_url: e.target.files[0] } })
                           }}
                         />
                       </div>
@@ -193,9 +193,9 @@ const AddAvatar = (props) => {
                           id="manufacturer-brand-input"
                           placeholder="Enter cost"
                           required={true}
-                          value={Avatar.cost}
+                          value={ShipData.cost}
                           onChange={e => {
-                            setAvatar({ ...Avatar, ...{ cost: e.target.value } })
+                            setShipData({ ...ShipData, ...{ cost: e.target.value } })
                           }}
                         />
                       </div>
@@ -205,21 +205,21 @@ const AddAvatar = (props) => {
               </Card>
 
               <div className="text-end mb-3">
-                <button type="submit" id="add-avatar-button" className="btn btn-success w-sm" onClick={e => {
+                <button type="submit" id="add-shipData-button" className="btn btn-success w-sm" onClick={e => {
                   e.preventDefault();
                   const formData = new FormData();
-                  formData.append("cost", Avatar.cost);
-                  formData.append("name", Avatar.name);
-                  formData.append("file", Avatar.file_url);
-                  if ((Avatar.cost !== null) && (Avatar.name !== null) && (Avatar.file_url !== null)) {
+                  formData.append("cost", ShipData.cost);
+                  formData.append("name", ShipData.name);
+                  formData.append("file", ShipData.file_url);
+                  if ((ShipData.cost !== null) && (ShipData.name !== null) && (ShipData.file_url !== null)) {
                     console.log(e);
 
                     if (id) {
-                      updateOneAvatar(id, formData).then(res => {
+                      updateShipData(id, formData).then(res => {
                         console.log(res);
                       })
                     } else {
-                      addNewAvatar(formData).then(res => {
+                      addNewShipData(formData).then(res => {
                         console.log(res);
                       })
                     }
@@ -230,7 +230,7 @@ const AddAvatar = (props) => {
                   }
 
                 }}>
-                  {id ? "Update Avatar" : "Add Avatar"}
+                  {id ? "Update ShipData" : "Add ShipData"}
                 </button>
               </div>
             </form>
@@ -242,4 +242,4 @@ const AddAvatar = (props) => {
   );
 };
 
-export default AddAvatar;
+export default AddShipData;
