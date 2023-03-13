@@ -8,6 +8,7 @@ import {
     Button,
     CardBody,
     Col,
+    Alert
 } from "reactstrap";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,9 +62,10 @@ const BuySoftware = (props) => {
         description: "",
         cost: "",
         recommends: "",
-        unrecommends: "",
     });
     console.log("AAAAAAA", program);
+
+    const [enterSerialNumber, setEnterSerialNumber] = ('');
 
     useEffect(() => {
         if (id) {
@@ -75,9 +77,9 @@ const BuySoftware = (props) => {
 
     useEffect(() => {
         console.log("aaa", program.recommends);
-        console.log("aaa", program.unrecommends);
     }, [program]);
     const [disable, setDisable] = useState(false);
+    const [show, setShow] = useState(false);
     return (
         <React.Fragment>
             <div className="page-content">
@@ -88,26 +90,26 @@ const BuySoftware = (props) => {
                             <Card>
                                 <CardHeader>
                                     <Row>
-                                        <Col lg={11}>
-                                            <h1 style={{ textAlign: "center" }}>{program.name}</h1>
-                                            {console.log("AAAAADD", program.name)}
-                                        </Col>
                                         <Col lg={1}>
                                             <Link to="/pages-software">
                                                 <Button
                                                     type="button"
                                                     color="success"
-                                                    style={{ float: "left" }}
+                                                    style={{ width: "100px" }}
                                                 >
                                                     Back
                                                 </Button>
                                             </Link>
                                         </Col>
+                                        <Col lg={11}>
+                                            <h1 style={{ textAlign: "center" }}>{program.name}</h1>
+                                            {console.log("AAAAADD", program.name)}
+                                        </Col>
                                     </Row>
                                 </CardHeader>
                                 <CardBody className='px-5 py-5'>
                                     <div className='d-flex justify-content-center'>
-                                        <div className="col-sm-3">
+                                        <div className="col-sm-3 me-5">
                                             {/* <div className="avatar-lg bg-light rounded p-1"> */}
                                             <div style={{ width: 1000 }}>
                                                 <img
@@ -116,37 +118,49 @@ const BuySoftware = (props) => {
                                             </div>
                                         </div>
                                         <Col lg={6} className="fs-5">
-                                            <div className='d-flex mb-4'>
-                                                <div>
-                                                    <b>Description: </b>
-                                                </div>
-                                                <div>
-                                                    {program.description}
+                                            <div>
+                                                <label
+                                                    className="form-label"
+                                                    htmlFor="manufacturer-brand-input"
+                                                >
+                                                    Enter Serial Number
+                                                </label>
+                                                <div className="mb-3 d-flex" >
+                                                    <div className="me-3">
+                                                        <input
+                                                            style={{ width: "350px" }}
+                                                            type="text"
+                                                            className="form-control"
+                                                            id="manufacturer-brand-input"
+                                                            placeholder="Enter Serial Number"
+                                                            value={enterSerialNumber}
+                                                            onChange={e => {
+                                                                setEnterSerialNumber(e.target.value)
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    <div className="live-preview">
+                                                        <div id="liveAlertPlaceholder">
+                                                            <Button type="button" color="success" id="liveAlertBtn" onClick={() => setShow(true)}>Generator</Button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className='d-flex mb-4'>
-                                                <div>
-                                                    <b>Requirement: </b>
-                                                </div>
-                                                <div>
-                                                    {program.requirement}
-                                                </div>
-                                            </div>
-                                            <div className='d-flex mb-4'>
-                                                <div>
-                                                    <b>Cost: </b>
-                                                </div>
-                                                <div>
-                                                    {program.cost}
-                                                </div>
-                                            </div>
+                                            <Alert color="success" isOpen={show} toggle={() => setShow(false)}>
+                                                successfully generatoried!
+                                            </Alert>
                                         </Col>
                                     </div>
-
                                     <div style={{ padding: "50px 20%" }}>
                                         <Row className="pt-4">
                                             <div className="col-sm-6 text-center">
-                                                <Button disabled={disable} color="success" onClick={() => {
+                                                <Button style={{ width: "100px" }} color="success" onClick={() => {
+                                                }} >
+                                                    Download
+                                                </Button>
+                                            </div>
+                                            <div className="col-sm-6 text-center">
+                                                <Button disabled={disable} style={{ width: "100px" }} color="success" onClick={() => {
                                                     setProgramList({
                                                         ...program, ...{ recommends: program.recommends + 1 }
                                                     })
@@ -160,23 +174,6 @@ const BuySoftware = (props) => {
                                                     setDisable(true);
                                                 }} >
                                                     Agree
-                                                </Button>
-                                            </div>
-                                            <div className="col-sm-6 text-center">
-                                                <Button disabled={disable} color="success" onClick={() => {
-                                                    setProgramList({
-                                                        ...program, ...{ unrecommends: program.unrecommends + 1 }
-                                                    })
-                                                    ProgramDownVote(id, program);
-                                                    let temp = [];
-                                                    if (userData.votestate) temp = JSON.parse(userData.votestate);
-                                                    temp.push(id);
-                                                    setUserData({
-                                                        ...userData, ... { votestate: JSON.stringify(temp) }
-                                                    });
-                                                    setDisable(true);
-                                                }}>
-                                                    Disagree
                                                 </Button>
                                             </div>
                                         </Row>
