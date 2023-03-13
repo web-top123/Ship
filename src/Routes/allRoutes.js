@@ -523,12 +523,6 @@ const authProtectedRoutes = [
   { path: "/admin-add-comment", component: AddComment },
   { path: "/admin-add-comment/:id", component: AddComment },
 
-  // Datas
-  // { path: "/admin-datas", component: Datas },
-  // { path: "/admin-data-details/:id", component: DataDetail },
-  // { path: "/admin-add-data", component: AddData },
-  // { path: "/admin-add-data/:id", component: AddData },
-
   // DataCategory
   { path: "/admin-dataCategories", component: DataCategories },
   { path: "/admin-dataCategory-details/:id", component: DataCategoryDetail },
