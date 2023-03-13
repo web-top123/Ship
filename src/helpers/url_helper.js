@@ -135,6 +135,8 @@ export const GET_ALL_STUDY = "/api/campus/findAll";
 export const GET_ALL_STUDY_BY_CATEGORY = "/api/campus/findCampusCategoryById";
 export const GET_ALL_TOP_CAMPUS = "/api/campus/getTopCampuses";
 export const GET_ALL_TOP_USERS = "/api/campus/findTopUser";
+export const GET_BROWSES = "/api/campus/getAllCampusWithBrowses";
+
 
 //softwarefield
 export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";
@@ -306,3 +308,4 @@ export const DELETE_ANSWER = "/api/answer/delete";
 
 // DataPurchaseHistory
 export const ADD_NEW_DATA_PURCHASE_HISTORY = "/api/datapurchasehistory/create";
+export const GET_DATA_PURCHASE_HISTORY_ALL = "/api/dataPurchaseHistory/get_AllByVoterId";

@@ -1,7 +1,6 @@
 import classnames from "classnames";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 
 
 import {
@@ -45,7 +44,7 @@ import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 
 
 
-import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers,downloadAvatar } from '../../../helpers/fakebackend_helper';
+import { getAllStudyByCategory, getAuthenticatedUser, getAllStudy, getAllCampusWithBrowses, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers,downloadAvatar } from '../../../helpers/fakebackend_helper';
 const Study = () => {
 
 
@@ -94,6 +93,7 @@ const Study = () => {
   const [studyData, setstudyData] = useState([]);
   const [TopcampusData, setTopcampusData] = useState([]);
   const [TopUsersData, setTopUsersData] = useState([]);
+  const [browseCnt, setBrowseCnt] = useState([]);
   const [originalCategoryList, setOriginalCategoryList] = useState([]);
   const [userId, setUserId] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -117,17 +117,24 @@ const Study = () => {
       setTopUsersData(res)
     })
   }, [])
+  useEffect(() => {
+    getAllCampusWithBrowses().then(allCampusListWithBrowses => {
+      console.log("AAAAAAAA",allCampusListWithBrowses);
+
+      setBrowseCnt(allCampusListWithBrowses)
+    })
+  }, [])
   
   useEffect(() => {
     getCategoryList();
     fetchData();
-    if (myInformationSelector) {
-      setUserId(myInformationSelector.id);
+    if (getAuthenticatedUser()) {
+      setUserId(getAuthenticatedUser().id);
     } else {
-
       setUserId('');
     }
-  }, [myInformationSelector]);
+    console.log(getAuthenticatedUser().id)
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -237,7 +244,7 @@ const Study = () => {
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
-  const filteredData = studyData.filter((el) => {
+  const filteredData = browseCnt.filter((el) => {
     //if no input the return the original
     if (inputText === '') {
       return el;
@@ -371,7 +378,7 @@ const Study = () => {
               <div className="col-sm-4">
                 <Link to={"/pages-study-detail/" + campusId}><Button color="primary" onClick={() => {
 
-                  addNewBrowserHistory({ date: new Date(), count: 0, userId: 5, campusId: campusId })
+                  addNewBrowserHistory({ date: new Date(), userId: userId, campusId: campusId })
                 }} >
                   Buy
                 </Button></Link></div>
@@ -504,7 +511,7 @@ const Study = () => {
 
                   <div className="p-3">{TopcampusData.map((campusItem, key) => (
                     <React.Fragment key={key}>
-                      <Card className="product rounded-pill text-center" onClick={() => showCampus(campusItem)} >
+                      <Card className="product" onClick={() => showCampus(campusItem)} >
                         <Link to='#'
                           className="text-dark"
                         >
@@ -545,7 +552,7 @@ const Study = () => {
                   <div className="p-3">{TopUsersData.map((UsersItem, key) => (
 
                     <React.Fragment key={UsersItem.userId}>
-                      <Card className="product rounded-pill">
+                      <Card className="product">
                         <Link to='#'
                           className="text-dark"
                         >
@@ -642,10 +649,11 @@ const Study = () => {
                             <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
                             <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 40) + "..."}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
-                            <td style={{ border: "none" }}>{study.browses}</td>
+                            <td style={{ border: "none" }}>{study.browseCnt}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
                             <td style={{ border: "none" }}>{study.unrecommends}</td>
                           </tr>
+                          {/* browseCnt.map((cnt, key)=>(cnt.campusId==study.id && <React.Fragment key={cnt.campusId} ><tr><td>{cnt.browseCnt}</td></tr></React.Fragment>)) */}
                         </React.Fragment>
                       ))}
                     </tbody>
