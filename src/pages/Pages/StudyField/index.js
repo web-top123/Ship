@@ -404,7 +404,7 @@ const Study = () => {
               />
             </CardHeader> */}
             <Card>
-              <div className="accordion accordion-flush bg-info bg-opacity-25">
+              <div className="accordion accordion-flush ">
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Categories
@@ -499,21 +499,21 @@ const Study = () => {
                     }}
                   /> */}
                 </div>
-                <div className="card-body border-bottom bg-info bg-opacity-25">
-                  <p className="text-primary text-uppercase fs-20 fw-medium mb-3 pt-3 border-bottom">
+                <div className="card-body border-bottom">
+                  <p className="text-primary text-uppercase fs-15 fw-medium mb-3 pt-3 border-bottom">
                     Top Article
                   </p>
 
                   <div className="p-3">{TopcampusData.map((campusItem, key) => (
                     <React.Fragment key={campusItem.id}>
-                      <Card className="product bg-info bg-opacity-60 rounded-pill text-center" >
+                      <Card className="product rounded-pill text-center" >
                         <Link to='#'
                           className="text-dark"
                         >
                           <CardBody>
                             <div className="d-flex align-items-center ">
                               <div className="flex-grow-1">
-                                <div className="fs-20 text-success ">{campusItem.name}</div>
+                                <div className="fs-15 text-dark ">{campusItem.name}</div>
                                 <div>
                                   <span className="fs-14 me-2 text-primary"> <i className="ri-thumb-up-fill me-1"></i>{campusItem.recommends}</span>
                                   <span className="fs-14 text-dark"><i className="ri-thumb-down-fill me-1"></i> {campusItem.unrecommends}</span>
@@ -527,8 +527,8 @@ const Study = () => {
                   ))}
                   </div>
                 </div>
-                <div className="card-body border-bottom bg-info bg-opacity-25">
-                  <p className="text-primary text-uppercase fs-20 fw-medium mb-3 pt-3 border-bottom">
+                <div className="card-body border-bottom">
+                  <p className="text-primary text-uppercase fs-15 fw-medium mb-3 pt-3 border-bottom">
                     Top Reader
                   </p>
 
@@ -547,7 +547,7 @@ const Study = () => {
                   <div className="p-3">{TopUsersData.map((UsersItem, key) => (
 
                     <React.Fragment key={key}>
-                      <Card className="product bg-info bg-opacity-50 rounded-pill">
+                      <Card className="product rounded-pill">
                         <Link to='#'
                           className="text-dark"
                         >
@@ -571,7 +571,7 @@ const Study = () => {
                               <div className="align-items-center text-muted  mt-1">
 
                                 <div className="flex-grow-1 ">
-                                  <h5 className=" fs-18 text-danger">{UsersItem.username} </h5>
+                                  <h5 className=" fs-15 text-dark">{UsersItem.username} </h5>
 
                                 </div>
                               </div></div>
@@ -611,7 +611,7 @@ const Study = () => {
               <Row>
                 <div className="table-responsive mt-4 mt-xl-0  p-4 pt-1">
                   <Table className="table-hover  align-middle table-nowrap mb-0 ">
-                    <thead className="bg-success  bg-opacity-50">
+                    <thead>
                       <tr>
                         <th scope="col">Title</th>
                         <th scope="col">Description</th>
@@ -621,7 +621,7 @@ const Study = () => {
                         <th scope="col">Downvote</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-success bg-opacity-10">
+                    <tbody>
                       {filteredData.map((study, key) => (
 
                         <React.Fragment key={study.id} >

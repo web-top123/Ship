@@ -88,16 +88,16 @@ const StudyDetail = (props) => {
                             <Card>
                                 <CardHeader>
                                     <Row>
-                                        <Col lg={11}>
-                                            <h1 style={{ textAlign: "center" }}>{campus.name}</h1>
-                                        </Col>
                                         <Col lg={1}>
                                             <Link to="/pages-study-field"><Button
                                                 type="button"
                                                 color="warning"
-                                                style={{ float: "right" }}
+                                                style={{ float: "left" }}
                                             >
                                             Back</Button></Link>
+                                        </Col>
+                                        <Col lg={11}>
+                                            <h1 style={{ textAlign: "center" }}>{campus.name}</h1>
                                         </Col>
                                     </Row>
                                 </CardHeader>
