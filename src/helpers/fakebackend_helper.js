@@ -1,6 +1,7 @@
 import { APIClient } from "./api_helper";
 import * as url from "./url_helper";
 import config from "../config";
+import { data } from "dom7";
 
 const api = new APIClient();
 // Gets the logged in user data from local session
@@ -50,6 +51,8 @@ export const addNewBrowserHistory = data => api.create(url.ADD_NEW_BROWSER_HISTO
 // Test page
 export const getGetAllQA = () => api.get(url.GET_ALL_QA);
 export const getGetQuestionById = id => api.get(url.GET_FIND_QUESTION + '/' + id);
+export const addNewPassedTest = data => api.create(url.ADD_NEW_PASSEDTEST, data);
+export const updatePassedTest = (id, data) => api.update(url.UPDATE_NOTIFICATION + '/' + id, data);
 
 // Ship Data page
 export const getGetAllShipData = () => api.get(url.GET_ALL_SHIP);
@@ -599,7 +602,7 @@ export const deleteCampusCategory = id => api.delete(url.DELETE_CAMPUSCATEGORY +
 //--------Question--------
 // get Questions
 export const getQuestions = () => api.get(url.GET_QUESTIONS);
-export const findSomeQuestions = () => api.get(url.GET_SOME_QUESTIONS);
+export const findSomeQuestions = (degreeId, level) => api.get(url.GET_SOME_QUESTIONS + '/' + degreeId + '/' + level);
 export const getQuestion = (id) => api.get(url.GET_QUESTION + '/' + id);
 
 // add QUESTION
