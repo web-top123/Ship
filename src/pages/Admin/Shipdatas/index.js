@@ -21,7 +21,7 @@ import TableContainer from "../../../Components/Common/TableContainer";
 
 //redux
 import { Link } from "react-router-dom";
-import { getShipDatas, deleteShipData, downloadShipData } from "../../../helpers/fakebackend_helper";
+import { getShipDatas, deleteShipData, downloadShipImage } from "../../../helpers/fakebackend_helper";
 
 
 const ShipDatas = (props) => {
@@ -75,9 +75,9 @@ const ShipDatas = (props) => {
               <div className="flex-shrink-0 me-3">
                 <div className="shipData-sm bg-light rounded p-1">
                   <img
-                  src={downloadShipData(shipData.row.original.id)}
+                  src={downloadShipImage(shipData.row.original.id)}
                   // {shipData.row.file_url}
-                    // src={downloadShipData}
+                    // src={downloadShipImage}
                     alt=""
                     className="img-fluid d-block"
                   />

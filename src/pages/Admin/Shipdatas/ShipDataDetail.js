@@ -22,7 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewShipData, getShipData, updateOneShipData, downloadShipData } from "../../../helpers/fakebackend_helper";
+import { addNewShipData, getShipData, updateOneShipData, downloadShipImage } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -132,8 +132,8 @@ function ShipDataDetail(props) {
       getShipData(id).then(res => {
         setShipData(res);
       });
-      setShipDataSrc(downloadShipData(id));
-      console.log(downloadShipData(id));
+      setShipDataSrc(downloadShipImage(id));
+      console.log(downloadShipImage(id));
     }
   }, []);
   const toggleCustom = tab => {
