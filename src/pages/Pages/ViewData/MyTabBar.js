@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classnames from "classnames";
-import { Button, Label, Card, CardBody, Col, Input, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table, CardHeader } from "reactstrap";
+import { Button, Label, Card, CardBody, Col, Input, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table, CardHeader,  } from "reactstrap";
 import { FormGrid, Gutters, VerticalForm, HorizontalForm, HorizontalFormLabelSizing, ColumnSizing, AutoSizing, InlineForms, FloatingLabels } from '../../Forms/FormLayouts/FormlayoutsCode';
 import { BaseExample, CardTableExample, PaginationExample, SearchExample, SortingExample, LoadingStateExample, FixedHeaderExample, HiddenColumnsExample } from '../../Tables/GridTables/GridTablesData';
 
@@ -47,7 +47,7 @@ const MyTabBar = ({ cardHeaderTab, cardHeaderToggle }) => {
                     to="/new-data-vote"
                     className="btn btn-success"
                     >
-                        <i className="ri-add-line align-bottom me-1"></i> Add Product
+                        <i className="ri-add-line align-bottom me-1"></i> Add New Data
                     </Link>
                 </div>
             </div>

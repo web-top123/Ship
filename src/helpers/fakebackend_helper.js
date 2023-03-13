@@ -530,23 +530,85 @@ export const downloadMedia = (id) => {
   return str;
 }
 
-//-----------Data-----------
-// get Datas
-export const getDatas = () => api.get(url.GET_DATAS);
+//-----------ShipData-----------
+// get ShipDatas
+export const getShipDatas = () => api.get(url.GET_SHIP_DATAS);
 
-export const getData = (id) => api.get(url.GET_DATA + '/' + id);
+export const getShipData = (id) => api.get(url.GET_SHIP_DATA + '/' + id);
 
 // add DATA
-export const addNewData = customer => api.create(url.ADD_NEW_DATA, customer);
+export const addNewShipData = customer => api.postFormData(url.ADD_NEW_SHIP_DATA, customer);
 
 // update DATA
-export const updateOneData = (id, customer) => api.update(url.UPDATE_DATA + '/' + id, customer);
+export const updateShipData = (id, customer) => api.postFormData(url.UPDATE_SHIP_DATA + '/' + id, customer);
 
 // delete DATA
-export const deleteData = id => api.delete(url.DELETE_DATA + '/' + id);
+export const deleteShipData = id => api.delete(url.DELETE_SHIP_DATA + '/' + id);
 
 // get all top recommended data
-export const getTopDatas = () => api.get(url.GET_ALL_TOP_DATA);
+export const getTopShipDatas = () => api.get(url.GET_ALL_TOP_SHIP_DATA);
+
+// download MEDIA
+// export const downloadMedia = (id) => api.get(url.DOWNLOAD_MEDIA + '/' + id);
+export const downloadShipImage = (id) => {
+  // http://localhost:8080/api/media/fileById/1
+  var str = config.API_URL + "api/shipdata/fileById/" + id;
+  return str;
+}
+
+//-----------LoadData-----------
+// get LoadDatas
+export const getLoadDatas = () => api.get(url.GET_LOAD_DATAS);
+
+export const getLoadData = (id) => api.get(url.GET_LOAD_DATA + '/' + id);
+
+// add DATA
+export const addNewLoadData = customer => api.create(url.ADD_NEW_LOAD_DATA, customer);
+
+// update DATA
+export const updateLoadData = (id, customer) => api.update(url.UPDATE_LOAD_DATA + '/' + id, customer);
+
+// delete DATA
+export const deleteLoadData = id => api.delete(url.DELETE_LOAD_DATA + '/' + id);
+
+// get all top recommended data
+export const getTopLoadDatas = () => api.get(url.GET_ALL_TOP_LOAD_DATA);
+
+//-----------ProductData-----------
+// get ProductDatas
+export const getProductDatas = () => api.get(url.GET_PRODUCT_DATAS);
+
+export const getProductData = (id) => api.get(url.GET_PRODUCT_DATA + '/' + id);
+
+// add DATA
+export const addNewProductData = customer => api.create(url.ADD_NEW_PRODUCT_DATA, customer);
+
+// update DATA
+export const updateProductData = (id, customer) => api.update(url.UPDATE_PRODUCT_DATA + '/' + id, customer);
+
+// delete DATA
+export const deleteProductData = id => api.delete(url.DELETE_PRODUCT_DATA + '/' + id);
+
+// get all top recommended data
+export const getTopProductDatas = () => api.get(url.GET_ALL_TOP_PRODUCT_DATA);
+
+//-----------GoodData-----------
+// get GoodDatas
+export const getGoodDatas = () => api.get(url.GET_GOOD_DATAS);
+
+export const getGoodData = (id) => api.get(url.GET_GOOD_DATA + '/' + id);
+
+// add DATA
+export const addNewGoodData = customer => api.create(url.ADD_NEW_GOOD_DATA, customer);
+
+// update DATA
+export const updateGoodData = (id, customer) => api.update(url.UPDATE_GOOD_DATA + '/' + id, customer);
+
+// delete DATA
+export const deleteGoodData = id => api.delete(url.DELETE_GOOD_DATA + '/' + id);
+
+// get all top recommended data
+export const getTopGoodDatas = () => api.get(url.GET_ALL_TOP_GOOD_DATA);
 
 //-----------DataCategory-----------
 // get DataCategories
@@ -629,3 +691,6 @@ export const updateOneAnswer = (id, customer) => api.update(url.UPDATE_ANSWER + 
 
 // delete ANSWER
 export const deleteAnswer = id => api.delete(url.DELETE_ANSWER + '/' + id);
+
+// -----------
+export const addNewDataPurchaseHistory = data => api.create(url.ADD_NEW_DATA_PURCHASE_HISTORY, data);

@@ -1,26 +1,19 @@
 import React, { useState } from 'react'
 import MySidebar from './MySidebar'
 import MyTabBar from './MyTabBar'
-import MyBrowser from './MyBrowser'
-import MyPurchase from './MyPurchase'
+import MyTraceView from './DataTable/MyTraceView'
+import ShipData from './DataTable/ShipData'
+import LoadData from './DataTable/LoadData'
+import ProductData from './DataTable/ProductData'
+import GoodData from './DataTable/GoodData'
 import '../Test/test-page-custom.css'
-
-
-import { Col, Container, Row, Card, CardBody,TabContent, cardHeaderTab, cardHeaderToggle } from "reactstrap";
+import { Col, Container, Row, Card, CardBody,TabContent } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 
 const ViewData = () => {
     document.title = "My Profile";
 
-    const [verticalTab, setverticalTab] = useState("1");
-    const toggleVertical = (tab) => {
-        if (verticalTab !== tab) {
-            setverticalTab(tab);
-        }
-    };
-
-    
     // Card Header Tabs
     const [cardHeaderTab, setcardHeaderTab] = useState("1");
     const cardHeaderToggle = (tab) => {
@@ -35,7 +28,7 @@ const ViewData = () => {
                 <Container fluid>
                     <BreadCrumb title="View Data Field" />
                         <Row>
-                            <Col xl={9} lg={8}>
+                            <Col xl={12} lg={8}>
                                 <Card>
                                     <CardBody>
                                         <MyTabBar cardHeaderToggle={cardHeaderToggle} cardHeaderTab ={cardHeaderTab}/>
@@ -45,15 +38,18 @@ const ViewData = () => {
                                             id="v-pills-tabContent"
                                             style={{textAlign: "center"}}
                                         >
-                                            <MyBrowser />
-                                            <MyPurchase />
+                                            <ShipData />
+                                            <LoadData />
+                                            <ProductData />
+                                            <GoodData />
+                                            <MyTraceView />
                                         </TabContent>
                                     </CardBody>
                                 </Card>
                             </Col>
-                            <Col xl={3} lg={4}>
+                            {/* <Col xl={3} lg={4}>
                                 <MySidebar />
-                            </Col>
+                            </Col> */}
                         </Row>
                 </Container>
             </div>
