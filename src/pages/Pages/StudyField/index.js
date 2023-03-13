@@ -2,8 +2,6 @@ import classnames from "classnames";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
-import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 
 
 import {
@@ -41,13 +39,13 @@ import { IoMdArrowDropright } from "react-icons/io";
 import { RiCheckboxBlankLine, RiCheckboxIndeterminateLine, RiCheckboxLine } from "react-icons/ri";
 import cx from "classnames";
 //selection category
-import Select from "react-select";
+
 import "./studyfield.css"
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers } from '../../../helpers/fakebackend_helper';
+
+import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers,downloadAvatar } from '../../../helpers/fakebackend_helper';
 const Study = () => {
 
 
@@ -119,7 +117,7 @@ const Study = () => {
       setTopUsersData(res)
     })
   }, [])
-
+  
   useEffect(() => {
     getCategoryList();
     fetchData();
@@ -404,7 +402,7 @@ const Study = () => {
               />
             </CardHeader> */}
             <Card>
-              <div className="accordion accordion-flush bg-info bg-opacity-25">
+              <div className="accordion accordion-flush ">
                 <div className="card-body border-bottom">
                   <p className="text-muted text-uppercase fs-12 fw-medium mb-3 pt-3 border-bottom">
                     Categories
@@ -499,22 +497,25 @@ const Study = () => {
                     }}
                   /> */}
                 </div>
-                <div className="card-body border-bottom bg-info bg-opacity-25">
-                  <p className="text-primary text-uppercase fs-20 fw-medium mb-3 pt-3 border-bottom">
+                <div className="card-body border-bottom">
+                  <p className="text-primary text-uppercase fs-15 fw-medium mb-3 pt-3 border-bottom">
                     Top Article
                   </p>
 
                   <div className="p-3">{TopcampusData.map((campusItem, key) => (
-                    <React.Fragment key={campusItem.id}>
-                      <Card className="product bg-info bg-opacity-60 rounded-pill text-center" >
+                    <React.Fragment key={key}>
+                      <Card className="product rounded-pill text-center" onClick={() => showCampus(campusItem)} >
                         <Link to='#'
                           className="text-dark"
                         >
                           <CardBody>
-                            <div className="d-flex align-items-center text-muted ">
+                            <div className="d-flex align-items-center ">
                               <div className="flex-grow-1">
-                                <h5 className="fs-20 text-success">{campusItem.name}</h5>
-                                <h5 className="fs-14">{campusItem.recommends}</h5>
+                                <div className="fs-15 text-dark ">{campusItem.name}</div>
+                                <div>
+                                  <span className="fs-14 me-2 text-primary"> <i className="ri-thumb-up-fill me-1"></i>{campusItem.recommends}</span>
+                                  <span className="fs-14 text-dark"><i className="ri-thumb-down-fill me-1"></i> {campusItem.unrecommends}</span>
+                                </div>
                               </div>
                             </div>
                           </CardBody>
@@ -524,12 +525,12 @@ const Study = () => {
                   ))}
                   </div>
                 </div>
-                <div className="card-body border-bottom bg-info bg-opacity-25">
-                  <p className="text-primary text-uppercase fs-20 fw-medium mb-3 pt-3 border-bottom">
+                <div className="card-body border-bottom">
+                  <p className="text-primary text-uppercase fs-15 fw-medium mb-3 pt-3 border-bottom">
                     Top Reader
                   </p>
-                  
-                  
+
+
                   {/* <div className="d-flex me-2">
                         <div className="me-2">
                           <img
@@ -543,35 +544,50 @@ const Study = () => {
                         </div> */}
                   <div className="p-3">{TopUsersData.map((UsersItem, key) => (
 
-                    <React.Fragment key={key}>
-                      <Card className="product bg-info bg-opacity-50 rounded-pill">
+                    <React.Fragment key={UsersItem.userId}>
+                      <Card className="product rounded-pill">
                         <Link to='#'
                           className="text-dark"
                         >
-                        
-                      
-                          <CardBody>
-                          <div className="d-flex">
-                          
-                          <div className="me-4 ">
-                            <img
-                            style={{
-                            width: "35px",
-                            height: "35px",
-                            borderRadius: "50%",
-                           
-                          }}
-                          alt="Img"
-                          src={avatar1}
-                          />
-                        </div>
-                            <div className="align-items-center text-muted  mt-1">
 
-                              <div className="flex-grow-1 ">
-                                <h5 className=" fs-18 text-danger">{UsersItem.username} </h5>
 
+                          {/* <CardBody>
+                            <div className="d-flex">
+
+                              <div className="me-4 ">
+                                <img
+                                  style={{
+                                    width: "35px",
+                                    height: "35px",
+                                    borderRadius: "50%",
+
+                                  }}
+                                  alt="Img"
+                                  src={downloadAvatar(UsersItem.userId)}
+                                />
                               </div>
-                            </div></div>
+                              <div className="align-items-center text-muted  mt-1">
+
+                                <div className="flex-grow-1 ">
+                                  <h5 className=" fs-15 text-dark">{UsersItem.username} </h5>
+
+                                </div>
+                              </div></div>
+                          </CardBody> */}
+                          <CardBody>
+                            <div className="d-flex align-items-center text-muted  ">
+                              <div className="flex-shrink-0 me-3">
+                                <img 
+                                src={downloadAvatar(UsersItem.currentAvatarsId)} 
+                                className="avatar-sm rounded-circle shadow bg-light" 
+                                alt="...">
+                                </img>
+                              </div>
+                              <div className="flex-grow-1">
+                                <h5 className="fs-14">{UsersItem.username}</h5>
+                                
+                              </div>
+                            </div>
                           </CardBody>
                         </Link>
                       </Card>
@@ -580,9 +596,9 @@ const Study = () => {
 
                   ))}
                   </div>
-                  </div>
                 </div>
-              
+              </div>
+
 
             </Card>
           </Col>
@@ -608,7 +624,7 @@ const Study = () => {
               <Row>
                 <div className="table-responsive mt-4 mt-xl-0  p-4 pt-1">
                   <Table className="table-hover  align-middle table-nowrap mb-0 ">
-                    <thead className="bg-warning">
+                    <thead>
                       <tr>
                         <th scope="col">Title</th>
                         <th scope="col">Description</th>
@@ -618,13 +634,13 @@ const Study = () => {
                         <th scope="col">Downvote</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-warning bg-opacity-25">
+                    <tbody>
                       {filteredData.map((study, key) => (
 
                         <React.Fragment key={study.id} >
                           <tr >
                             <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
-                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 20) + "..."}</div></Link></td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 40) + "..."}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{study.browses}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
