@@ -184,3 +184,19 @@
     margin-top: 7vh;
     height: 82vh;
 }
+.select-level-content{    
+    min-height: calc(100vh - 160px);
+}
+.test-start-btn{     
+    position: absolute;
+    right: 0;
+    bottom: 10%;
+}
+.select-level-group-btn {
+    margin-top: 10%;
+}
+@media screen and (max-height: 800px) {
+    .select-level-group-btn {
+        margin-top: 4%;
+    }
+  }

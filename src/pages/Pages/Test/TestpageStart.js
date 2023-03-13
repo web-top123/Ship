@@ -72,9 +72,9 @@ const TestPage = () => {
                 <section className="section pb-0 hero-section" id="hero">
                     <div className="bg-overlay bg-overlay-pattern"></div>
                     <div className='container'>
-                        <div className="content pt-2">
-                            <Container fluid>
-                                <Row className="m-5">
+                        <div className="select-level-content pt-2">
+                            <Container fluid >
+                                <Row className="select-level-group-btn">
                                     <Col lg={12}>
                                         <h2 className="select-title-customer m-5">Select Your Roll Below Items</h2>
 
@@ -104,7 +104,7 @@ const TestPage = () => {
                                         </div>
                                     </Col>
                                 </Row>
-                                <Row className="m-5">
+                                <Row>
                                     <Col lg={12}>
                                         <h2 className="select-title-customer m-5">Select Your Roll Degree</h2>
                                         <div className="d-flex flex-wrap gap-2">
@@ -131,7 +131,7 @@ const TestPage = () => {
                                         </div>
                                     </Col>
                                 </Row>
-                                <div className='align-self-center purchase-button-group'>
+                                <div className='align-self-center test-start-btn purchase-button-group'>
                                     <Button className="shadow-none px-5 me-4 fs-20" onClick={() => {
                                         if (level == 1) {
                                             window.location.href = '/test-test-page/' + currentLevel + "/" + degreeId + "/" + level;

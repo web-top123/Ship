@@ -22,7 +22,7 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getCampuses, deleteCampus } from "../../../helpers/fakebackend_helper";
+import { getAllCampusWithBrowses, deleteCampus } from "../../../helpers/fakebackend_helper";
 
 const Campuses = (props) => {
   const [campusList, setCampusList] = useState([]);
@@ -31,7 +31,7 @@ const Campuses = (props) => {
   }, []);
 
   const getCampusList = () => {
-    getCampuses().then(res => {
+    getAllCampusWithBrowses().then(res => {
       setCampusList(res);
     })
   }
@@ -78,7 +78,7 @@ const Campuses = (props) => {
       },
       {
         Header: "Browses",
-        accessor: "browses",
+        accessor: "browseCnt",
         filterable: false,
       },
       {
