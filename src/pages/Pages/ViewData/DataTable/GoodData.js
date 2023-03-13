@@ -17,6 +17,7 @@ const GoodData = () => {
 
     useEffect(() => {
         var temp = dataList;
+        var length = dataList.length;
         temp.map((e, key) => {
             e.morebtn = (<div className="edit">
             <Button 
@@ -31,6 +32,7 @@ const GoodData = () => {
                 </svg>
             </Button>
             </div>);
+            e.id = length-key;
         });
         setDataList(temp);
     }, [dataList]);

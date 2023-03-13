@@ -20,7 +20,8 @@ const ShipData = () => {
     
     useEffect(() => {
         var temp = dataList;
-        temp.map((e) => {
+        var length = dataList.length;
+        temp.map((e, key) => {
             e.morebtn = (<p className="edit">
             <Button 
                 className="btn btn-soft-primary btn-sm edit-item-btn shadow-none" 
@@ -35,9 +36,9 @@ const ShipData = () => {
             </Button>
             </p>);
             e.image_url = downloadShipImage(e.id);
+            e.id = length-key;
         });
         setDataList(temp);
-        console.log(temp);
     }, [dataList]);
 
     const getDataList = () => {
