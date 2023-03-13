@@ -2,8 +2,6 @@ import classnames from "classnames";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
-import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 
 
 import {
@@ -47,7 +45,7 @@ import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 
 
 
-import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers } from '../../../helpers/fakebackend_helper';
+import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers,downloadAvatar } from '../../../helpers/fakebackend_helper';
 const Study = () => {
 
 
@@ -119,7 +117,7 @@ const Study = () => {
       setTopUsersData(res)
     })
   }, [])
-
+  
   useEffect(() => {
     getCategoryList();
     fetchData();
@@ -505,8 +503,8 @@ const Study = () => {
                   </p>
 
                   <div className="p-3">{TopcampusData.map((campusItem, key) => (
-                    <React.Fragment key={campusItem.id}>
-                      <Card className="product rounded-pill text-center" >
+                    <React.Fragment key={key}>
+                      <Card className="product rounded-pill text-center" onClick={() => showCampus(campusItem)} >
                         <Link to='#'
                           className="text-dark"
                         >
@@ -546,14 +544,14 @@ const Study = () => {
                         </div> */}
                   <div className="p-3">{TopUsersData.map((UsersItem, key) => (
 
-                    <React.Fragment key={key}>
+                    <React.Fragment key={UsersItem.userId}>
                       <Card className="product rounded-pill">
                         <Link to='#'
                           className="text-dark"
                         >
 
 
-                          <CardBody>
+                          {/* <CardBody>
                             <div className="d-flex">
 
                               <div className="me-4 ">
@@ -565,7 +563,7 @@ const Study = () => {
 
                                   }}
                                   alt="Img"
-                                  src={avatar1}
+                                  src={downloadAvatar(UsersItem.userId)}
                                 />
                               </div>
                               <div className="align-items-center text-muted  mt-1">
@@ -575,6 +573,21 @@ const Study = () => {
 
                                 </div>
                               </div></div>
+                          </CardBody> */}
+                          <CardBody>
+                            <div className="d-flex align-items-center text-muted  ">
+                              <div className="flex-shrink-0 me-3">
+                                <img 
+                                src={downloadAvatar(UsersItem.currentAvatarsId)} 
+                                className="avatar-sm rounded-circle shadow bg-light" 
+                                alt="...">
+                                </img>
+                              </div>
+                              <div className="flex-grow-1">
+                                <h5 className="fs-14">{UsersItem.username}</h5>
+                                
+                              </div>
+                            </div>
                           </CardBody>
                         </Link>
                       </Card>
