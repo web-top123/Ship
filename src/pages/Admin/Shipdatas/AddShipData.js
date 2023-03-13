@@ -32,22 +32,32 @@ const AddShipData = (props) => {
   let { id } = useParams();
   const [selectedFiles, setselectedFiles] = useState([]);
 
-  const [modal_backdrop, setmodal_backdrop] = useState(false);
-  function tog_backdrop() {
-    setmodal_backdrop(!modal_backdrop);
-  }
-
-  const [modal_center, setmodal_center] = useState(false);
-  function tog_center() {
-    setmodal_center(!modal_center);
-  }
-
   const [ShipData, setShipData] = useState({
-    name: '',
-    file_url: null,
-    cost: '',
+    name: '', image_url: null, plan_date: new Date(), port: '', type: '', price: '', owner: '', runner: '', total_weight: '', load_weight: '', weight: '', length: '', width: '', current_height: '', full_load: '', engine: '', built_date: new Date(), factory: '', location: '', status: '', voterId: '0',
 
   });
+
+  const type = [
+    {
+      options: [
+        { label: "Ship1", value: "Ship1" },
+        { label: "Ship2", value: "Ship2" },
+        { label: "Ship3", value: "Ship3" },
+        { label: "Ship4", value: "Ship4" },
+      ],
+    },
+  ];
+
+  const status = [
+    {
+      options: [
+        { label: "Status1", value: "Status1" },
+        { label: "Status2", value: "Status2" },
+        { label: "Status3", value: "Status3" },
+        { label: "Status4", value: "Status4" },
+      ],
+    },
+  ];
 
   useEffect(() => {
     if (id) {
@@ -64,100 +74,57 @@ const AddShipData = (props) => {
 
         <BreadCrumb title={id ? "Edit ShipData" : "Add ShipData"} pageTitle="Admin ShipData" />
 
-        {/* Static Backdrop Modal */}
-        <Modal
-          isOpen={modal_backdrop}
-          toggle={() => {
-            tog_backdrop();
-          }}
-          backdrop={'static'}
-          id="staticBackdrop"
-          centered
-        >
-          <ModalHeader>
-            Modal title
-            <Button type="button" className="btn-close"
-              onClick={() => {
-                setmodal_backdrop(false);
-              }} aria-label="Close"></Button>
-          </ModalHeader>
-          <div className="modal-body text-center p-5">
-            <lord-icon
-              src="https://cdn.lordicon.com/lupuorrc.json"
-              trigger="loop"
-              colors="primary:#121331,secondary:#08a88a"
-              style={{ width: "120px", height: "120px" }}>
-            </lord-icon>
-
-            <div className="mt-4">
-              <h4 className="mb-3">You've made it!</h4>
-              <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
-              <div className="hstack gap-2 justify-content-center">
-                <Link to="#" className="btn btn-link shadow-none link-success fw-medium" onClick={() => setmodal_backdrop(false)}><i className="ri-close-line me-1 align-middle"></i> Close</Link>
-                <Link to="/admin-shipDatas" className="btn btn-success" onClick={() => setmodal_backdrop(true)}>Completed</Link>
-              </div>
-            </div>
-          </div>
-        </Modal>
-
-        {/* Vertically Centered */}
-        <Modal
-          isOpen={modal_center}
-          toggle={() => {
-            tog_center();
-          }}
-          centered
-        >
-          <ModalHeader>
-            Center Modal
-            <Button
-              type="button"
-              onClick={() => {
-                setmodal_center(false);
-              }}
-              className="btn-close"
-              aria-label="Close"
-            >
-
-            </Button>
-          </ModalHeader>
-          <div className="modal-body text-center p-5">
-            <lord-icon src="https://cdn.lordicon.com/hrqwmuhr.json"
-              trigger="loop" colors="primary:#121331,secondary:#08a88a" style={{ width: "120px", height: "120px" }}>
-            </lord-icon>
-            <div className="mt-4">
-              <h4 className="mb-3">Oops something went wrong!</h4>
-              <p className="text-muted mb-4"> The transfer was not successfully received by us. the email of the recipient wasn't correct.</p>
-              <div className="hstack gap-2 justify-content-center">
-                <Button color="light" onClick={() => setmodal_center(false)}>Close</Button>
-                {/* <Link to="#" className="btn btn-danger">Try Again</Link> */}
-              </div>
-            </div>
-          </div>
-        </Modal>
-
         <Row>
           <Col lg={8}>
             <form>
               <Card>
                 <CardBody>
-
-                  <div className="mb-3">
-                    <Label className="form-label" htmlFor="validationDefaultUsername">
-                      Name
-                    </Label>
-                    <Input
-                      type="text"
-                      className="form-control"
-                      id="validationDefaultUsername"
-                      placeholder="Enter name"
-                      required={true}
-                      value={ShipData.name}
-                      onChange={e => {
-                        setShipData({ ...ShipData, ...{ name: e.target.value } })
-                      }}
-                    />
-                  </div>
+                  {/* name and plan_date */}
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <Label className="form-label" htmlFor="validationDefaultUsername">
+                          Name
+                        </Label>
+                        <Input
+                          type="text"
+                          className="form-control"
+                          id="validationDefaultUsername"
+                          placeholder="Enter name"
+                          required={true}
+                          value={ShipData.name}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ name: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          htmlFor="datepicker-publish-input"
+                          className="form-label"
+                        >
+                          Plan_date
+                        </label>
+                        <Flatpickr
+                          className="form-control"
+                          id="datepicker-publish-input"
+                          value={ShipData.plan_date}
+                          onChange={([date]) => {
+                            setShipData({ ...ShipData, ...{ plan_date: date } })
+                          }}
+                          options={{
+                            altInput: true,
+                            altFormat: "F j, Y",
+                            mode: "single",
+                            dateFormat: "d.m.y",
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* image_url and port */}
                   <Row>
                     <Col lg={6}>
                       <div className="mb-3">
@@ -165,7 +132,7 @@ const AddShipData = (props) => {
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          File_url
+                          Image_url
                         </label>
                         <input
                           className="form-control"
@@ -174,7 +141,7 @@ const AddShipData = (props) => {
                           required={true}
                           accept="image/png, image/gif, image/jpeg, image/jpg, image/bmp"
                           onChange={e => {
-                            setShipData({ ...ShipData, ...{ file_url: e.target.files[0] } })
+                            setShipData({ ...ShipData, ...{ image_url: e.target.files[0] } })
                           }}
                         />
                       </div>
@@ -185,17 +152,404 @@ const AddShipData = (props) => {
                           className="form-label"
                           htmlFor="manufacturer-brand-input"
                         >
-                          Cost
+                          Port
                         </label>
                         <input
                           type="text"
                           className="form-control"
                           id="manufacturer-brand-input"
-                          placeholder="Enter cost"
+                          placeholder="Enter port"
                           required={true}
-                          value={ShipData.cost}
+                          value={ShipData.port}
                           onChange={e => {
-                            setShipData({ ...ShipData, ...{ cost: e.target.value } })
+                            setShipData({ ...ShipData, ...{ port: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* type and price */}
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <Label
+                          htmlFor="choices-publish-visibility-input"
+                          className="form-label"
+                        >
+                          Select type
+                        </Label>
+
+                        <Select
+                          value={{ value: ShipData.type, label: ShipData.type }}
+                          onChange={(e) => {
+                            console.log(e);
+                            setShipData({ ...ShipData, ...{ type: e.value } })
+                          }}
+                          options={type}
+                          name="choices-publish-visibility-input"
+                          classNamePrefix="select2-selection form-select"
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Price
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter price"
+                          required={true}
+                          value={ShipData.price}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ price: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* owner and runner */}
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Owner
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter owner"
+                          required={true}
+                          value={ShipData.owner}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ owner: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Runner
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter runner"
+                          required={true}
+                          value={ShipData.runner}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ runner: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* total_weight and load_weight */}
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Total_weight
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter total_weight"
+                          required={true}
+                          value={ShipData.total_weight}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ total_weight: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Load_weight
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter load_weight"
+                          required={true}
+                          value={ShipData.load_weight}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ load_weight: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* weight and length */}
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Weight
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter weight"
+                          required={true}
+                          value={ShipData.weight}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ weight: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Lenght
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter length"
+                          required={true}
+                          value={ShipData.length}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ length: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* width and current_height */}
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Widht
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter width"
+                          required={true}
+                          value={ShipData.width}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ width: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Current_height
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter current_height"
+                          required={true}
+                          value={ShipData.current_height}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ current_height: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* full_load and engine */}
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Full_load
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter full_load"
+                          required={true}
+                          value={ShipData.full_load}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ full_load: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Engine
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter engine"
+                          required={true}
+                          value={ShipData.engine}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ engine: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* built_date and factory */}
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          htmlFor="datepicker-publish-input"
+                          className="form-label"
+                        >
+                          Built_date
+                        </label>
+                        <Flatpickr
+                          className="form-control"
+                          id="datepicker-publish-input"
+                          value={ShipData.built_date}
+                          onChange={([date]) => {
+                            setShipData({ ...ShipData, ...{ built_date: date } })
+                          }}
+                          options={{
+                            altInput: true,
+                            altFormat: "F j, Y",
+                            mode: "single",
+                            dateFormat: "d.m.y",
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Factory
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter factory"
+                          required={true}
+                          value={ShipData.factory}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ factory: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* location and status */}
+                  <Row>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          Location
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter location"
+                          required={true}
+                          value={ShipData.location}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ location: e.target.value } })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <Label
+                          htmlFor="choices-publish-visibility-input"
+                          className="form-label"
+                        >
+                          Select Status
+                        </Label>
+
+                        <Select
+                          value={{ value: ShipData.status, label: ShipData.status }}
+                          onChange={(e) => {
+                            console.log(e);
+                            setShipData({ ...ShipData, ...{ status: e.value } })
+                          }}
+                          options={status}
+                          name="choices-publish-visibility-input"
+                          classNamePrefix="select2-selection form-select"
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  {/* voterId */}
+                  <Row className="justify-content-center">
+                    <Col lg={6}>
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          VoterId
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="manufacturer-brand-input"
+                          placeholder="Enter voterId"
+                          required={true}
+                          value={ShipData.voterId}
+                          onChange={e => {
+                            setShipData({ ...ShipData, ...{ voterId: e.target.value } })
                           }}
                         />
                       </div>
@@ -223,11 +577,9 @@ const AddShipData = (props) => {
                         console.log(res);
                       })
                     }
-                    setmodal_backdrop(true)
+
                   }
-                  else {
-                    setmodal_center(true);
-                  }
+
 
                 }}>
                   {id ? "Update ShipData" : "Add ShipData"}

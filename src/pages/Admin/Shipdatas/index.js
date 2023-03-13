@@ -75,9 +75,7 @@ const ShipDatas = (props) => {
               <div className="flex-shrink-0 me-3">
                 <div className="shipData-sm bg-light rounded p-1">
                   <img
-                  src={downloadShipImage(shipData.row.original.id)}
-                  // {shipData.row.file_url}
-                    // src={downloadShipImage}
+                    src={downloadShipImage(shipData.row.original.id)}
                     alt=""
                     className="img-fluid d-block"
                   />
@@ -101,11 +99,100 @@ const ShipDatas = (props) => {
         filterable: false,
       },
       {
-        Header: "Cost",
-        accessor: "cost",
+        Header: "Plan_date",
+        accessor: "plan_date",
         filterable: false,
       },
-
+      {
+        Header: "Port",
+        accessor: "port",
+        filterable: false,
+      },
+      {
+        Header: "Type",
+        accessor: "type",
+        filterable: false,
+      },
+      {
+        Header: "Price",
+        accessor: "price",
+        filterable: false,
+      },
+      {
+        Header: "Owner",
+        accessor: "owner",
+        filterable: false,
+      },
+      {
+        Header: "Runner",
+        accessor: "runner",
+        filterable: false,
+      },
+      {
+        Header: "Total_weight",
+        accessor: "total_weight",
+        filterable: false,
+      },
+      {
+        Header: "Load_weight",
+        accessor: "load_weight",
+        filterable: false,
+      },
+      {
+        Header: "Weight",
+        accessor: "weight",
+        filterable: false,
+      },
+      {
+        Header: "Length",
+        accessor: "length",
+        filterable: false,
+      },
+      {
+        Header: "Width",
+        accessor: "width",
+        filterable: false,
+      },
+      {
+        Header: "Current_height",
+        accessor: "current_height",
+        filterable: false,
+      },
+      {
+        Header: "Full_load",
+        accessor: "full_load",
+        filterable: false,
+      },
+      {
+        Header: "Engine",
+        accessor: "engine",
+        filterable: false,
+      },
+      {
+        Header: "Built_date",
+        accessor: "built_date",
+        filterable: false,
+      },
+      {
+        Header: "Factory",
+        accessor: "factory",
+        filterable: false,
+      },
+      {
+        Header: "Location",
+        accessor: "location",
+        filterable: false,
+      },
+      {
+        Header: "Status",
+        accessor: "status",
+        filterable: false,
+      },
+      {
+        Header: "VoterId",
+        accessor: "voterId",
+        filterable: false,
+      },
       {
         Header: "Action",
         Cell: (cellProps) => {
