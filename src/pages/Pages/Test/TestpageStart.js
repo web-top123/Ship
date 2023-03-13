@@ -72,7 +72,7 @@ const TestPage = () => {
                 <section className="section pb-0 hero-section" id="hero">
                     <div className="bg-overlay bg-overlay-pattern"></div>
                     <div className='container'>
-                        <div className="page-content pt-2">
+                        <div className="content pt-2">
                             <Container fluid>
                                 <Row className="m-5">
                                     <Col lg={12}>

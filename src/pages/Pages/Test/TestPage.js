@@ -44,6 +44,7 @@ const TestPage = () => {
     var trueAnswers = [];
 
     var questionLength = someQuestions.length;
+    var passedStatus = "Unpassed";
     var maxInterVal = questionLength + 2;
     var interVal = 100 / (questionLength - 1);
 
@@ -193,34 +194,37 @@ const TestPage = () => {
                                                 <TabPane tabId={maxInterVal}>
                                                     <div>
                                                         <div className="text-center" style={{ height: "425px" }}>
-                                                            <div className="mb-4" style={{fontSize: "160px" }}>
-                                                                {totalScore / questionLength * 10}
+                                                            <div className="mb-4" style={{ fontSize: "160px" }}>
+                                                                {(totalScore / questionLength * 10).toFixed(1)}
                                                             </div>
                                                             <h1>Examination is finished!</h1>
                                                             <h3 className="text-muted pt-4">
-                                                                Your score is <span style={{ fontSize: "30px" }}>{totalScore / questionLength * 10}.</span> It will be saved your History.
+                                                                Your score is <span style={{ fontSize: "30px" }}>{(totalScore / questionLength * 10).toFixed(1)} </span> It will be saved your History.
                                                             </h3>
                                                         </div>
                                                     </div>
                                                     <div className="d-flex gap-3 mt-4 float-end">
-                                                        <Link to="/">
+                                                        <Link to="/test-test-page-start">
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-outline-primary btn-label right ms-auto nexttab nexttab fs-20"
                                                                 onClick={() => {
+
+                                                                    if (totalScore > 6.5)
+                                                                        passedStatus = "Passed";
                                                                     addNewPassedTest({
                                                                         date: new Date(),
                                                                         level: currentLevel,
-                                                                        testing_counter: 5,
-                                                                        passed_counter: 5,
-                                                                        userId: user.id,
-                                                                        campusCategoryId: 5
+                                                                        total: questionLength,
+                                                                        matched: totalScore,
+                                                                        status: passedStatus,
+                                                                        userId: user.id
                                                                     });
-                                                                    console.log("Success!", currentLevel);
+                                                                    console.log("Success!", totalScore, passedStatus);
                                                                 }}
                                                             >
                                                                 <i className="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
-                                                                Go to first page
+                                                                Go to test start page
                                                             </button>
                                                         </Link>
                                                     </div>

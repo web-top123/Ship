@@ -151,7 +151,6 @@ const Software = () => {
   const [requirement, setRequirement] = useState("");
   const [description, setDescription] = useState("");
   const [recommends, setRecommends] = useState("");
-  const [unrecommends, setUnrecommends] = useState("");
   const [cost, setCost] = useState("");
   const [imageId, setImageId] = useState("");
   const [programId, setProgramId] = useState("");
@@ -175,7 +174,6 @@ const Software = () => {
     setRequirement(selectedProgram.requirement);
     setDescription(selectedProgram.description);
     setRecommends(selectedProgram.recommends);
-    setUnrecommends(selectedProgram.unrecommends);
     setCost(selectedProgram.cost);
     setPurchases(selectedProgram.purchases);
     setImageId(selectedProgram.id);
@@ -274,7 +272,7 @@ const Software = () => {
             <Row className="pt-3">
               <div className="col-sm-5">
                 <h5 className="fs-15">
-                  Recommends :
+                  UpVote :
                 </h5>
               </div>
               <div className="col-sm-7">
@@ -373,7 +371,7 @@ const Software = () => {
             </TabContent>
 
             <Row className='d-flex' >
-              <div className="col-sm-4">
+              <div className="col-sm-6">
                 <Link to={"/pages-software-buySoftware/" + programId}><Button color="success" onClick={() => {
                   console.log("programId", programId);
                   /** purchaseProgram(false); */
@@ -381,14 +379,14 @@ const Software = () => {
                 }}  >
                   Purchase
                 </Button></Link></div>
-              <div className="col-sm-4">
+              <div className="col-sm-6">
                 <Link to="/pages-profile-settings"><Button color="success" onClick={() => { }}>
                   Charging score
                 </Button></Link></div>
-              <div className="col-sm-4">
+              {/* <div className="col-sm-4">
                 <Link to="/pages-profile-settings"><Button color="success" onClick={() => { }} >
                   Download
-                </Button></Link></div>
+                </Button></Link></div> */}
 
             </Row><br /><br />
           </div>
@@ -545,15 +543,6 @@ const Software = () => {
                                   <span className="product-line-price">
                                     {" "}
                                     {software.recommends}
-                                  </span>
-                                </h5>
-                              </div>
-                              <div className="d-flex align-items-center gap-2 text-muted">
-                                <div>DownVote:</div>
-                                <h5 className="fs-12 mb-0">
-                                  <span className="product-line-price">
-                                    {" "}
-                                    {software.unrecommends}
                                   </span>
                                 </h5>
                               </div>
