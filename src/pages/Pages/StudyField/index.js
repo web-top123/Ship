@@ -41,10 +41,10 @@ import { IoMdArrowDropright } from "react-icons/io";
 import { RiCheckboxBlankLine, RiCheckboxIndeterminateLine, RiCheckboxLine } from "react-icons/ri";
 import cx from "classnames";
 //selection category
-import Select from "react-select";
+
 import "./studyfield.css"
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 
 import { getAllStudyByCategory, getAllStudy, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers } from '../../../helpers/fakebackend_helper';
@@ -511,10 +511,13 @@ const Study = () => {
                           className="text-dark"
                         >
                           <CardBody>
-                            <div className="d-flex align-items-center text-muted ">
+                            <div className="d-flex align-items-center ">
                               <div className="flex-grow-1">
-                                <h5 className="fs-20 text-success">{campusItem.name}</h5>
-                                <h5 className="fs-14">{campusItem.recommends}</h5>
+                                <div className="fs-20 text-success ">{campusItem.name}</div>
+                                <div>
+                                  <span className="fs-14 me-2 text-primary"> <i className="ri-thumb-up-fill me-1"></i>{campusItem.recommends}</span>
+                                  <span className="fs-14 text-dark"><i className="ri-thumb-down-fill me-1"></i> {campusItem.unrecommends}</span>
+                                </div>
                               </div>
                             </div>
                           </CardBody>
@@ -528,8 +531,8 @@ const Study = () => {
                   <p className="text-primary text-uppercase fs-20 fw-medium mb-3 pt-3 border-bottom">
                     Top Reader
                   </p>
-                  
-                  
+
+
                   {/* <div className="d-flex me-2">
                         <div className="me-2">
                           <img
@@ -548,30 +551,30 @@ const Study = () => {
                         <Link to='#'
                           className="text-dark"
                         >
-                        
-                      
+
+
                           <CardBody>
-                          <div className="d-flex">
-                          
-                          <div className="me-4 ">
-                            <img
-                            style={{
-                            width: "35px",
-                            height: "35px",
-                            borderRadius: "50%",
-                           
-                          }}
-                          alt="Img"
-                          src={avatar1}
-                          />
-                        </div>
-                            <div className="align-items-center text-muted  mt-1">
+                            <div className="d-flex">
 
-                              <div className="flex-grow-1 ">
-                                <h5 className=" fs-18 text-danger">{UsersItem.username} </h5>
+                              <div className="me-4 ">
+                                <img
+                                  style={{
+                                    width: "35px",
+                                    height: "35px",
+                                    borderRadius: "50%",
 
+                                  }}
+                                  alt="Img"
+                                  src={avatar1}
+                                />
                               </div>
-                            </div></div>
+                              <div className="align-items-center text-muted  mt-1">
+
+                                <div className="flex-grow-1 ">
+                                  <h5 className=" fs-18 text-danger">{UsersItem.username} </h5>
+
+                                </div>
+                              </div></div>
                           </CardBody>
                         </Link>
                       </Card>
@@ -580,9 +583,9 @@ const Study = () => {
 
                   ))}
                   </div>
-                  </div>
                 </div>
-              
+              </div>
+
 
             </Card>
           </Col>
@@ -608,7 +611,7 @@ const Study = () => {
               <Row>
                 <div className="table-responsive mt-4 mt-xl-0  p-4 pt-1">
                   <Table className="table-hover  align-middle table-nowrap mb-0 ">
-                    <thead className="bg-warning">
+                    <thead className="bg-success  bg-opacity-50">
                       <tr>
                         <th scope="col">Title</th>
                         <th scope="col">Description</th>
@@ -618,13 +621,13 @@ const Study = () => {
                         <th scope="col">Downvote</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-warning bg-opacity-25">
+                    <tbody className="bg-success bg-opacity-10">
                       {filteredData.map((study, key) => (
 
                         <React.Fragment key={study.id} >
                           <tr >
                             <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
-                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 20) + "..."}</div></Link></td>
+                            <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 40) + "..."}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{study.browses}</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
