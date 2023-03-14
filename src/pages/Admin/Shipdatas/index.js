@@ -69,13 +69,13 @@ const ShipDatas = (props) => {
       },
       {
         Header: "ShipData",
-        Cell: (shipData) => (
+        Cell: (shipDataList) => (
           <>
             <div className="d-flex align-items-center">
               <div className="flex-shrink-0 me-3">
                 <div className="shipData-sm bg-light rounded p-1">
                   <img
-                    src={downloadShipImage(shipData.row.original.id)}
+                    src={downloadShipImage(shipDataList.row.original.id)}
                     alt=""
                     className="img-fluid d-block"
                   />
@@ -84,11 +84,11 @@ const ShipDatas = (props) => {
               <div className="flex-grow-1">
                 <h5 className="fs-14 mb-1">
                   <Link
-                    to={"/admin-shipData-details/" + shipData.row.original.id}
+                    to={"/admin-shipData-details/" + shipDataList.row.original.id}
                     className="text-dark"
                   >
                     {" "}
-                    {shipData.row.original.name}
+                    {shipDataList.row.original.name}
                   </Link>
                 </h5>
               </div>
@@ -195,7 +195,7 @@ const ShipDatas = (props) => {
       },
       {
         Header: "Action",
-        Cell: (cellProps) => {
+        Cell: (shipDataList) => {
           return (
             <UncontrolledDropdown>
               <DropdownToggle
@@ -206,12 +206,12 @@ const ShipDatas = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-shipData-details/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-shipData-details/" + shipDataList.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
                 </DropdownItem>
 
-                <DropdownItem href={"admin-add-shipData/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-add-shipData/" + shipDataList.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -220,7 +220,7 @@ const ShipDatas = (props) => {
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const shipDataData = cellProps.row.original;
+                    const shipDataData = shipDataList.row.original;
                     onClickDelete(shipDataData);
                   }}
                 >
