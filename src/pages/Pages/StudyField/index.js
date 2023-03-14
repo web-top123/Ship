@@ -70,8 +70,8 @@ const Study = () => {
 
       });
 
-      getAllCampusWithBrowses().then(studyFieldList => {
-        setstudyData(studyFieldList);
+      getAllStudy().then(res => {
+        setstudyData(res);
       });
     } else {
       getAllStudyByCategory(selectedCategoryId).then(categoryData => {
@@ -668,8 +668,8 @@ const Study = () => {
                             <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 40) + "..."}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
                             <td style={{ border: "none" }}>{
-                                // browseCnt.map((cnt, key) => (cnt.campusId == study.id && <React.Fragment key={cnt.campusId} ><tr><td>{cnt.browseCnt}</td></tr></React.Fragment>))
-                                study.cnts
+                                browseCnt.map((cnt, key) => (cnt.campusId == study.id && <React.Fragment key={cnt.campusId} ><tr><td>{cnt.browseCnt}</td></tr></React.Fragment>))
+                                
                             }</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
                             <td style={{ border: "none" }}>{study.unrecommends}</td>
