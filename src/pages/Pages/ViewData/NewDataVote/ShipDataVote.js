@@ -60,6 +60,24 @@ const ShipDataVote = (props) => {
     }
   }, []);
 
+  
+  const handleCreate = () => {
+
+    fetch('http://localhost:8080/api/purchaseHistory/create', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json ;charset=UTF-8'
+        },
+        body: JSON.stringify({
+            date: new Date(),
+            type: "data",
+            text: currentLevel,
+            price: 100,
+            userId: user.id
+        })
+    }).then(() => { tog_togSecond(false);})
+}
+
   // Modal
   const [modal_togFirst, setmodal_togFirst] = useState(false);
   function tog_togFirst() {
@@ -683,7 +701,7 @@ const ShipDataVote = (props) => {
             <h4 className="mb-3">Do you purchase really?</h4>
             <div className="hstack gap-2 justify-content-center">
               <NavLink href="view-data" className=' d-inline'>
-                <Button color="primary" className="ms-3" onClick={() => tog_togSecond(false)}>Yes</Button>
+                <Button color="primary" className="ms-3" onClick={() => handleCreate }>Yes</Button>
               </NavLink>
               <Button color="primary" className="me-3" onClick={() => tog_togSecond(false)}>No</Button>
             </div>
