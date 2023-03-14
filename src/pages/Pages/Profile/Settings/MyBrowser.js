@@ -20,7 +20,6 @@ const MyBrowser = () => {
             setdataList(res);
         })
     }, []);
-    console.log("dataList", dataList);
     return (
         <React.Fragment>
             <TabPane tabId="2" id="v-pills-browser">

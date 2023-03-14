@@ -43,7 +43,7 @@ export const postJwtRegister = (url, data) => {
 export const getGetMyInformation = id => api.get(url.GET_MY_INFORMATION + '/' + id);
 export const putSaveMyInformation = (id, data) => api.update(url.PUT_SAVE_MY_INFORMATION + '/' + id, data);
 export const getFindBrowseHistoriesById = id => api.get(url.GET_FIND_BROWSER_HISTORY + '/' + id);
-export const getFindDataPurchaseHistoyById = (id, selectedType) => api.create(url.GET_FIND_DATA_PURCHASE_HISTORY + '/' + id, selectedType);
+export const getFindPurchaseHistoyById = (id, selectedType) => api.create(url.GET_FIND_PURCHASE_HISTORY + '/' + id, selectedType);
 export const getBrowserHistoriesAll = () => api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
 export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST + '/' + id);
 export const addNewBrowserHistory = data => api.create(url.ADD_NEW_BROWSER_HISTORY, data);
@@ -491,6 +491,9 @@ export const downloadAvatar = (id) => {
 export const downloadCurrentAvatar = (myInformationSelector) => {
   // http://localhost:8080/api/avatar/fileById/1
   if(myInformationSelector) {
+    if (!myInformationSelector.currentAvatarId) {
+      myInformationSelector.currentAvatarId = 0;
+    }
     let str = config.API_URL + "api/avatar/fileById/" + myInformationSelector.currentAvatarId;
     return str;
   }  
