@@ -4,6 +4,7 @@ import classnames from "classnames";
 import { columnsShipData } from '../TestData'
 import TableContainer from "../../../../Components/Common/TableContainer";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, Route } from 'react-router-dom';
 
 import { addNewDataCategory, addNewDataPurchaseHistory, downloadShipImage, getAuthenticatedUser, getShipDatas } from "../../../../helpers/fakebackend_helper";
 
@@ -27,7 +28,12 @@ const ShipData = () => {
                 className="btn btn-soft-primary btn-sm edit-item-btn shadow-none" 
                 data-bs-toggle="modal" 
                 data-bs-target="#showModal"
-                onClick={() => { tog_togFirst(); setShipData({ ...shipData, ...{ categoryId: 1, userId: myInformationSelector.id, username: myInformationSelector.username, dataId: e.id, dataname: e.name, voterId: e.voterId } }); }}
+                onClick={() => { 
+                    let temp = { categoryId: 1, userId: myInformationSelector.id, username: myInformationSelector.username, dataId: e.id, dataname: e.name, voterId: e.voterId };
+                    setShipData(temp); 
+                    tog_togFirst(); 
+                    // goToDetail(temp);
+                }}
             >
                 <span className='pt-1'>more</span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevrons-right ">
@@ -41,9 +47,14 @@ const ShipData = () => {
         setDataList(temp);
     }, [dataList]);
 
+    const goToDetail = (object) => {
+        addNewDataPurchaseHistory(object);
+        // <Route path={"/ship-details/" + object.dataId} />
+    }
+
     const getDataList = () => {
         getShipDatas().then(data => {
-            setDataList(data.reverse());
+            setDataList(data);
         })
     }
     // Modal
@@ -145,7 +156,6 @@ const ShipData = () => {
                     tog_togFirst(false);
                     e.preventDefault();
                     console.log("clicked");
-                    addNewDataPurchaseHistory(shipData);
                 }} style={{ float: "left" }}>
                     pay
                 </Button>

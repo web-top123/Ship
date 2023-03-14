@@ -3,35 +3,39 @@ import { TabPane, Nav, NavItem, NavLink, Modal, ModalHeader, Button, TabContent 
 import classnames from "classnames";
 import { columnsGoodData } from '../TestData'
 import TableContainer from "../../../../Components/Common/TableContainer";
+import { useSelector, useDispatch } from "react-redux";
 
-import { getGoodDatas } from "../../../../helpers/fakebackend_helper";
+import { addNewDataCategory, addNewDataPurchaseHistory, downloadGoodImage, getAuthenticatedUser, getGoodDatas } from "../../../../helpers/fakebackend_helper";
 
 const GoodData = () => {
     const columns = useMemo(() => columnsGoodData, []);
 
     const [dataList, setDataList] = useState([]);
-    const [dataId, setDataId] = useState(1);
+    const [goodData, setGoodData] = useState({});
+    const myInformationSelector = useSelector(state => state.Profile.myinformation);
+
     useEffect(() => {
         getDataList();
     }, []);
-
+    
     useEffect(() => {
         var temp = dataList;
         var length = dataList.length;
         temp.map((e, key) => {
-            e.morebtn = (<div className="edit">
+            e.morebtn = (<p className="edit">
             <Button 
                 className="btn btn-soft-primary btn-sm edit-item-btn shadow-none" 
                 data-bs-toggle="modal" 
                 data-bs-target="#showModal"
-                onClick={() => { tog_togFirst(); setDataId(e.id); }}
+                onClick={() => { tog_togFirst(); setGoodData({ categoryId: 4, userId: myInformationSelector.id, username: myInformationSelector.username, dataId: e.id, dataname: e.name, voterId: e.voterId }); }}
             >
                 <span className='pt-1'>more</span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevrons-right ">
                     <g><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></g>
                 </svg>
             </Button>
-            </div>);
+            </p>);
+            e.image_url = downloadGoodImage(e.id);
             e.id = length-key;
         });
         setDataList(temp);
@@ -39,7 +43,7 @@ const GoodData = () => {
 
     const getDataList = () => {
         getGoodDatas().then(data => {
-            setDataList(data.reverse());
+            setDataList(data);
         })
     }
     // Modal
@@ -79,7 +83,7 @@ const GoodData = () => {
                 </div>
             </TabPane>
 
-            <Modal
+        <Modal
             isOpen={modal_togFirst}
             toggle={() => {
             tog_togFirst();
@@ -140,6 +144,8 @@ const GoodData = () => {
                     tog_togSecond();
                     tog_togFirst(false);
                     e.preventDefault();
+                    console.log("clicked");
+                    addNewDataPurchaseHistory(goodData);
                 }} style={{ float: "left" }}>
                     pay
                 </Button>
@@ -164,7 +170,7 @@ const GoodData = () => {
                 <h4 className="mb-3">Do you purchase really?</h4>
                 <div className="hstack gap-2 justify-content-center">
                 <NavLink href="view-data" className=' d-inline'>
-                    <Button color="primary" className="ms-3" href = {"/good-details/"+dataId}  onClick={() => tog_togSecond(false)}>Yes</Button>
+                    <Button color="primary" className="ms-3" href = {"/good-details/" + goodData.dataId}  onClick={() => tog_togSecond(false)}>Yes</Button>
                 </NavLink>
                 <Button color="primary" className="me-3" onClick={() => tog_togSecond(false)}>No</Button>
                 </div>
