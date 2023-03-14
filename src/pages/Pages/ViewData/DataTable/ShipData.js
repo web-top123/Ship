@@ -5,6 +5,7 @@ import { columnsShipData } from '../TestData'
 import TableContainer from "../../../../Components/Common/TableContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Route } from 'react-router-dom';
+import { useHistory  } from "react-router-dom";
 
 import { addNewDataCategory, addNewDataPurchaseHistory, downloadShipImage, getAuthenticatedUser, getShipDatas } from "../../../../helpers/fakebackend_helper";
 
@@ -14,6 +15,7 @@ const ShipData = () => {
     const [dataList, setDataList] = useState([]);
     const [shipData, setShipData] = useState({});
     const myInformationSelector = useSelector(state => state.Profile.myinformation);
+    const history = useHistory();
 
     useEffect(() => {
         getDataList();
@@ -28,11 +30,15 @@ const ShipData = () => {
                 className="btn btn-soft-primary btn-sm edit-item-btn shadow-none" 
                 data-bs-toggle="modal" 
                 data-bs-target="#showModal"
-                onClick={() => { 
-                    let temp = { categoryId: 1, userId: myInformationSelector.id, username: myInformationSelector.username, dataId: e.id, dataname: e.name, voterId: e.voterId };
-                    setShipData(temp); 
-                    tog_togFirst(); 
-                    // goToDetail(temp);
+                onClick={() => {
+                    if (!myInformationSelector) {
+                        history.push('/login');
+                    } else {
+                        let temp = { categoryId: 1, userId: myInformationSelector.id, username: myInformationSelector.username, dataId: e.id, dataname: e.name, voterId: e.voterId };
+                        setShipData(temp); 
+                        tog_togFirst(); 
+                        // goToDetail(temp);
+                    }
                 }}
             >
                 <span className='pt-1'>more</span>

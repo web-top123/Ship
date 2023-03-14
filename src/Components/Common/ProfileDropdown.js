@@ -27,7 +27,6 @@ const ProfileDropdown = () => {
 
     useEffect(() => { 
         if (myInformationSelector) {
-            console.log("myInformationSelector.currentAvatarId", myInformationSelector.currentAvatarId);        
             setUsername(myInformationSelector.username);
             setName(myInformationSelector.name);
         } else {

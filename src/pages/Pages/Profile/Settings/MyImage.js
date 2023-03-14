@@ -27,7 +27,6 @@ function Mine() {
 
     useEffect(() => {
         if (myInformationSelector) {
-            console.log("myInformationSelector", myInformationSelector);
             setUserID(myInformationSelector.id);
         }
         else {

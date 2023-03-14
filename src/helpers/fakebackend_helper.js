@@ -416,11 +416,15 @@ export const getDegree = (id) => api.get(url.GET_Degree + '/' + id);
 
 // get Articles
 export const getArticles = () => api.get(url.GET_ARTICLES);
+export const getTrendingArticles = () => api.get(url.GET_TRENDING_ARTICLES);
+export const getRecentArticles = () => api.get(url.GET_RECENT_ARTICLES);
 export const getArticleFindTopUser = () => api.get(url.GET_ARTICLE_FIND_TOP_USER);
 export const getArticle = (id) => api.get(url.GET_ARTICLE + '/' + id);
 export const getArticleByCategoryId = (id) => api.get(url.GET_ARTICLEBYCATEGORYID + '/' + id);
 // add ARTICLE
 export const addNewArticle = customer => api.create(url.ADD_NEW_ARTICLE, customer);
+export const getArticleByuserId = (id) => api.get(url.GET_ARTICLEBYUSERID + '/' + id);
+export const getOneArticlebyId = (id) => api.get(url.GET_ONEARTICLEBYID + '/' + id);
 
 // update ARTICLE
 export const updateOneArticle = (id, customer) => api.update(url.UPDATE_ARTICLE + '/' + id, customer);
@@ -478,8 +482,10 @@ export const deleteAvatar = id => api.delete(url.DELETE_AVATAR + '/' + id);
 // export const downloadAvatar = (id) => api.get(url.DOWNLOAD_AVATAR + '/' + id);
 export const downloadAvatar = (id) => {
   // http://localhost:8080/api/avatar/fileById/1
-  let str = config.API_URL + "api/avatar/fileById/" + id;
-  return str;
+  if (id !== null && id!== undefined) {
+    return config.API_URL + "api/avatar/fileById/" + id;
+  }
+  return "";
 }
 
 export const downloadCurrentAvatar = (myInformationSelector) => {
@@ -530,8 +536,10 @@ export const deleteMedia = id => api.delete(url.DELETE_MEDIA + '/' + id);
 // export const downloadMedia = (id) => api.get(url.DOWNLOAD_MEDIA + '/' + id);
 export const downloadMedia = (id) => {
   // http://localhost:8080/api/media/fileById/1
-  var str = config.API_URL + "api/media/fileById/" + id;
-  return str;
+  if (id !== null && id!== undefined) {
+    return config.API_URL + "api/media/fileById/" + id;
+  }
+  return "";
 }
 
 //-----------ShipData-----------
@@ -716,7 +724,6 @@ export const deleteAnswer = id => api.delete(url.DELETE_ANSWER + '/' + id);
 
 // -----------
 export const addNewDataPurchaseHistory = data => api.create(url.ADD_NEW_DATA_PURCHASE_HISTORY, data);
-
+export const getTraceViews = (id) => api.get(url.GET_DATA_PURCHASE_HISTORY_ALL + '/' + id);
 // -----------
 export const addNewTestPurchaseHistory = data => api.create(url.ADD_NEW_TEST_PURCHASE_HISTORY, data);
-export const getTraceViews = (id) => api.get(url.GET_DATA_PURCHASE_HISTORY_ALL + '/' + id);

@@ -54,7 +54,6 @@ const Software = () => {
       });
       getAllSoftware().then(softwareList => {
         setsoftwareData(softwareList);
-        console.log("AAAAAAd", softwareList);
       });
     } else {
       getAllSoftwareByCategory(selectedCategoryId).then(categoryData => {
@@ -83,7 +82,6 @@ const Software = () => {
     if (myInformationSelector) {
       setUserId(myInformationSelector.id);
     } else {
-      console.log("myInformationSelector", myInformationSelector);
       setUserId('');
     }
   }, [myInformationSelector]);
@@ -129,7 +127,6 @@ const Software = () => {
       };
 
       setCategory(categoryNodes);
-      console.log("CCCCCCCCCC", folder);
     });
   }
 
@@ -478,14 +475,11 @@ const Software = () => {
 
                   <div className="col-sm-6">
                     <div className="filter-choices-input">
-                      {/* <Input placeholder={"Search..."} /> */}
                       <Input
                         id="outlined-basic"
                         onChange={inputHandler}
                         placeholder={"Search..."}
                         variant="outlined"
-                        fullWidth
-                      // label="Search..."
                       />
                     </div>
                   </div>
@@ -509,7 +503,7 @@ const Software = () => {
                                   src={downloadProgram(software.id)}
                                   alt=""
                                   className="img-fluid d-block"
-                                />{console.log("VVVVVV", downloadProgram(software.id))}
+                                />
                               </div>
                             </div>
 

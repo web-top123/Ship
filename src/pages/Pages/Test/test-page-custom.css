@@ -199,4 +199,14 @@
     .select-level-group-btn {
         margin-top: 4%;
     }
+
+    .content{
+        margin-top: 2vh;
+    }
+    
+.custom-next-btn{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
   }

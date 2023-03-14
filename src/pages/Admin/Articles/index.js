@@ -23,7 +23,7 @@ const Articles = (props) => {
       console.log("article",articles);
       setArticleList(articles);
     })
-  }
+  };
 
   // useEffect(() => {
   //   if (articles && !articles.length) {

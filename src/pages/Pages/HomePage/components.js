@@ -24,12 +24,12 @@ import { downloadMedia, getSettingByTitle } from '../../../helpers/fakebackend_h
 
 
 const Features = () => {
-    const [dataImage, setDataImage] = useState({});
-    const [questionImage, setQuestionImage] = useState({});
-    const [softwareImage, setSoftwareImage] = useState({});
-    const [studyImage, setStudyImage] = useState({});
-    const [mypageImage, setMypageImage] = useState({});
-    const [testImage, setTestImage] = useState({});
+    const [dataImage, setDataImage] = useState({label: "", value: null});
+    const [questionImage, setQuestionImage] = useState({label: "", value: null});
+    const [softwareImage, setSoftwareImage] = useState({label: "", value: null});
+    const [studyImage, setStudyImage] = useState({label: "", value: null});
+    const [mypageImage, setMypageImage] = useState({label: "", value: null});
+    const [testImage, setTestImage] = useState({label: "", value: null});
 
     useEffect(() => {
         getSettingByTitle('dataImage').then(item => {

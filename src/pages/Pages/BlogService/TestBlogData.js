@@ -2,10 +2,7 @@ import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 import { Link } from 'react-router-dom';
-import { getArticleCategory, getCategories } from "../../../helpers/fakebackend_helper";
-import { useState } from "react";
-import { queryAllByDisplayValue } from "@testing-library/react";
-
+import { downloadAvatar } from "../../../helpers/fakebackend_helper";
 
 const columnsBlogData = [    
     {
@@ -16,25 +13,24 @@ const columnsBlogData = [
         <>        
             <div className="blog-content-wrapper">            
                 <div>
-                    <Link to = {"/pages-blog-service/article-man" + article.row.original.id} style={{"display":"inline-block"}}><img className="author-img" alt="Img" src={article.row.original.userId} /></Link>
-                    <span className="author-name">{article.row.original.username}</span>
+                    <Link to = {"/pages-blog-service/article-man/" + article.row.original.userId} style={{"display":"inline-block"}}><img className="author-img" alt="Img" src={downloadAvatar(article.row.original.currentAvatarId)}/></Link>
+                    <span className="author-name"><b>{article.row.original.username}</b></span>
                     <span className="publish-date ms-1">{article.row.original.ago}</span>
                 </div>
                 <div className="pt-3 d-flex justify-content-between">
-
                     <Link to={"/pages-blog-service/detail/" + article.row.original.id}>
-                        <div className="blog-content">
+                        <div className="blog-content mx-4">
                             <h3 className="blog-title" style={{width:800}}>{article.row.original.name}</h3>                            
                         </div>
                     </Link>
 
-                    <div className="blog-detail-img-wrap">
+                    {/* <div className="blog-detail-img-wrap">
                         <img className="blog-detail-img" alt="" src={article.row.original.attach_url} />
-                    </div>
+                    </div> */}
 
                 </div>
-                <div>
-                    <Link to= {"/pages-blog-service/article-kind/" +
+                <div className="mx-2">
+                    <Link to= {"/pages-blog-service/article-kind/" + 
                               article.row.original.articleCategoryId} className="rounded-pill btn btn-light tags me-4">{article.row.original.categoryTitle}</Link>
                     <i className="bx bx-like pe-1"></i><span className="pe-3">{article.row.original.recommends}</span>
                     <i className="bx bx-message pe-1"></i><span className="pe-3">{article.row.original.oppositions}</span>
