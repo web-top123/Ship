@@ -308,4 +308,7 @@ export const DELETE_ANSWER = "/api/answer/delete";
 
 // DataPurchaseHistory
 export const ADD_NEW_DATA_PURCHASE_HISTORY = "/api/datapurchasehistory/create";
+
+// DataPurchaseHistory
+export const ADD_NEW_TEST_PURCHASE_HISTORY = "/api/testPurchaseHistory/create";
 export const GET_DATA_PURCHASE_HISTORY_ALL = "/api/dataPurchaseHistory/get_AllByVoterId";
