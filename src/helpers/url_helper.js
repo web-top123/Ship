@@ -11,7 +11,6 @@ export const GET_MY_INFORMATION = "/api/myInfo/get_one";
 export const PUT_SAVE_MY_INFORMATION = "/api/myInfo/update";
 export const GET_FIND_BROWSER_HISTORY = "/api/browseHistory/findBrowseHistoryById";
 export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/dataPurchaseHistory/finddataPurchaseHistoyById";
-export const GET_FIND_TEST_PURCHASE_HISTORY = "/api/testPurchaseHistory/findtestPurchaseHistoyById";
 export const GET_FIND_BROWSER_HISTORY_ALL = "/api/browseHistory/get_All";
 export const GET_FIND_PASSED_TEST = "/api/findPassedTestById";
 export const ADD_NEW_BROWSER_HISTORY = "/api/browseHistory/create";

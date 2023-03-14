@@ -375,7 +375,7 @@ function UserDetail(props) {
                                   </tr>
                                   <tr>
                                     <th scope="row">Birthday</th>
-                                    <td>{user.birthday}</td>
+                                    {/* <td>{user.birthday}</td> */}
                                   </tr>
                                   <tr>
                                     <th scope="row">Balance</th>

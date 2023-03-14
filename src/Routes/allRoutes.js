@@ -303,6 +303,16 @@ import ProductDatas from "../pages/Admin/ProductDatas/index";
 import ProductDataDetail from "../pages/Admin/ProductDatas/ProductDataDetail";
 import AddProductData from "../pages/Admin/ProductDatas/AddProductData";
 
+// GoodData Section
+import GoodDatas from "../pages/Admin/GoodDatas/index";
+import GoodDataDetail from "../pages/Admin/GoodDatas/GoodDataDetail";
+import AddGoodData from "../pages/Admin/GoodDatas/AddGoodData";
+
+// LoadData Section
+import LoadDatas from "../pages/Admin/LoadDatas/index";
+import LoadDataDetail from "../pages/Admin/LoadDatas/LoadDataDetail";
+import AddLoadData from "../pages/Admin/LoadDatas/AddLoadData";
+
 // Media Section
 import Medias from "../pages/Admin/Medias/index";
 import MediaDetail from "../pages/Admin/Medias/MediaDetail";
@@ -569,6 +579,18 @@ const authProtectedRoutes = [
   { path: "/admin-productData-details/:id", component: ProductDataDetail },
   { path: "/admin-add-productData", component: AddProductData },
   { path: "/admin-add-productData/:id", component: AddProductData },
+
+   // GoodDatas
+   { path: "/admin-goodDatas", component: GoodDatas },
+   { path: "/admin-goodData-details/:id", component: GoodDataDetail },
+   { path: "/admin-add-goodData", component: AddGoodData },
+   { path: "/admin-add-goodData/:id", component: AddGoodData },
+
+   // LoadDatas
+   { path: "/admin-loadDatas", component: LoadDatas },
+   { path: "/admin-loadData-details/:id", component: LoadDataDetail },
+   { path: "/admin-add-loadData", component: AddLoadData },
+   { path: "/admin-add-loadData/:id", component: AddLoadData },
 
   // Media
   { path: "/admin-medias", component: Medias },
