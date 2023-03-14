@@ -10,7 +10,7 @@ import { useMemo } from "react";
 const MyPurchase = () => {
     const columnsPurchase = useMemo(() => columnsPurchaseData, []);
     const [dataList, setdataList] = useState([]);
-    const [selectedType, setSelectedType] = useState("engineer")
+    const [selectedType, setSelectedType] = useState("")
 
     useEffect(() => {
         var user = getAuthenticatedUser();
