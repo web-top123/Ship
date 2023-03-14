@@ -667,8 +667,9 @@ const Study = () => {
                             <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
                             <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 40) + "..."}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
-                            <td style={{ border: "none" }}>{
-                                browseCnt.map((cnt, key) => (cnt.campusId == study.id && <React.Fragment key={cnt.campusId} ><tr><td>{cnt.browseCnt}</td></tr></React.Fragment>))
+                            <td style={{ border: "none" }}>
+                              { browseCnt.map((cnt, key) => (cnt.campusId == study.id && 
+                              <React.Fragment key={cnt.campusId} >{cnt.browseCnt}</React.Fragment>))
                                 
                             }</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
