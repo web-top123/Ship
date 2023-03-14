@@ -44,6 +44,7 @@ export const getGetMyInformation = id => api.get(url.GET_MY_INFORMATION + '/' + 
 export const putSaveMyInformation = (id, data) => api.update(url.PUT_SAVE_MY_INFORMATION + '/' + id, data);
 export const getFindBrowseHistoriesById = id => api.get(url.GET_FIND_BROWSER_HISTORY + '/' + id);
 export const getFindDataPurchaseHistoyById = (id, selectedType) => api.create(url.GET_FIND_DATA_PURCHASE_HISTORY + '/' + id, selectedType);
+export const getFindTestPurchaseHistoyById = (id, selectedType) => api.create(url.GET_FIND_TEST_PURCHASE_HISTORY + '/' + id, selectedType);
 export const getBrowserHistoriesAll = () => api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
 export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST + '/' + id);
 export const addNewBrowserHistory = data => api.create(url.ADD_NEW_BROWSER_HISTORY, data);
@@ -694,3 +695,6 @@ export const deleteAnswer = id => api.delete(url.DELETE_ANSWER + '/' + id);
 
 // -----------
 export const addNewDataPurchaseHistory = data => api.create(url.ADD_NEW_DATA_PURCHASE_HISTORY, data);
+
+// -----------
+export const addNewTestPurchaseHistory = data => api.create(url.ADD_NEW_TEST_PURCHASE_HISTORY, data);
