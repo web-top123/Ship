@@ -698,3 +698,4 @@ export const deleteAnswer = id => api.delete(url.DELETE_ANSWER + '/' + id);
 
 // -----------
 export const addNewDataPurchaseHistory = data => api.create(url.ADD_NEW_DATA_PURCHASE_HISTORY, data);
+export const getTraceViews = (id) => api.get(url.GET_DATA_PURCHASE_HISTORY_ALL + '/' + id);
