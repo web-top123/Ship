@@ -262,7 +262,7 @@ const BlogService = () => {
                                 <img
                                   style={{
                                     width: "30px",
-                                    height: "auto",
+                                    height: "30px",
                                     borderRadius: "50%",
                                   }}
                                   alt="Img"

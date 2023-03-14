@@ -482,8 +482,10 @@ export const deleteAvatar = id => api.delete(url.DELETE_AVATAR + '/' + id);
 // export const downloadAvatar = (id) => api.get(url.DOWNLOAD_AVATAR + '/' + id);
 export const downloadAvatar = (id) => {
   // http://localhost:8080/api/avatar/fileById/1
-  let str = config.API_URL + "api/avatar/fileById/" + id;
-  return str;
+  if (id !== null && id!== undefined) {
+    return config.API_URL + "api/avatar/fileById/" + id;
+  }
+  return "";
 }
 
 export const downloadCurrentAvatar = (myInformationSelector) => {

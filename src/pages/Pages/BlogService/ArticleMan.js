@@ -89,7 +89,6 @@ const ArticleMan = () => {
   useEffect(() => {
     if (id) {
       getUser(id).then((oneUser) => {
-        console.log("oneuser:", oneUser);
         setOneUser(oneUser);
       });
 
@@ -101,7 +100,6 @@ const ArticleMan = () => {
           article.ago = getAgoString(difference);
         }
         setArticles(articleList);
-        console.log("newarticleList: ", articleList);
       });
     }
   }, [id]);
