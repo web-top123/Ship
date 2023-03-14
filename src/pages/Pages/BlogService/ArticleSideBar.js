@@ -34,11 +34,9 @@ const ArticleSideBar = () => {
 
   useEffect(() => {
     getArticleCategories().then((categories) => {
-      console.log("Article Categories:", categories);
       setArticleCategories(categories);
     });
     getArticleFindTopUser().then((topUser) => {
-      console.log("top user;", topUser);
       setArticleTopWriters(topUser);
     });
   }, []);
@@ -81,7 +79,7 @@ const ArticleSideBar = () => {
                                 <img
                                   style={{
                                     width: "30px",
-                                    height: "auto",
+                                    height: "30px",
                                     borderRadius: "50%",
                                   }}
                                   alt="Img"

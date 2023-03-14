@@ -416,6 +416,8 @@ export const getDegree = (id) => api.get(url.GET_Degree + '/' + id);
 
 // get Articles
 export const getArticles = () => api.get(url.GET_ARTICLES);
+export const getTrendingArticles = () => api.get(url.GET_TRENDING_ARTICLES);
+export const getRecentArticles = () => api.get(url.GET_RECENT_ARTICLES);
 export const getArticleFindTopUser = () => api.get(url.GET_ARTICLE_FIND_TOP_USER);
 export const getArticle = (id) => api.get(url.GET_ARTICLE + '/' + id);
 export const getArticleByCategoryId = (id) => api.get(url.GET_ARTICLEBYCATEGORYID + '/' + id);
@@ -480,8 +482,10 @@ export const deleteAvatar = id => api.delete(url.DELETE_AVATAR + '/' + id);
 // export const downloadAvatar = (id) => api.get(url.DOWNLOAD_AVATAR + '/' + id);
 export const downloadAvatar = (id) => {
   // http://localhost:8080/api/avatar/fileById/1
-  let str = config.API_URL + "api/avatar/fileById/" + id;
-  return str;
+  if (id !== null && id!== undefined) {
+    return config.API_URL + "api/avatar/fileById/" + id;
+  }
+  return "";
 }
 
 export const downloadCurrentAvatar = (myInformationSelector) => {

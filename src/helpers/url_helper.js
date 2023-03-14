@@ -188,6 +188,8 @@ export const GET_Degree = "/api/Degrees/get_one";
 
 // Articles
 export const GET_ARTICLES = "/api/article/get_All";
+export const GET_TRENDING_ARTICLES = "/api/article/get_trending_articles";
+export const GET_RECENT_ARTICLES = "/api/article/get_recent_articles";
 export const GET_ARTICLE = "/api/article/get_one";
 export const ADD_NEW_ARTICLE = "/api/article/create";
 export const UPDATE_ARTICLE = "/api/article/update";

@@ -31,7 +31,6 @@ const BlogServiceDetail = () => {
         })
       }
     }, [id]);
-    console.log("ppppp",article);
 
     return (
         <React.Fragment>
@@ -57,7 +56,7 @@ const BlogServiceDetail = () => {
                                     <div className='d-flex justify-content-between'>
                                         <div className='d-flex mb-4'>
                                             <div style={{"width":"48px"}} className="me-3">
-                                                <img src = {downloadAvatar(article.currentAvatarId)} style={{"width":"100%","borderRadius":"50%"}} alt=""/>    
+                                                <img src = {downloadAvatar(article.currentAvatarId)} style={{"width":"50px", "height": "50px", "borderRadius":"50%"}} alt=""/>    
                                             </div>
                                             <div>
                                                 <h5>{article.name}</h5>

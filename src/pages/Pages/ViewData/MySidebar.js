@@ -20,11 +20,9 @@ const MySidebar = () => {
 
     useEffect(() => {
         getArticleCategories().then(categories => {
-            console.log("Article Categories:", categories);
             setArticleCategories(categories);
         });
         getArticleFindTopUser().then(topUser => {
-            console.log("top user;", topUser);
             setArticleTopWriter(topUser);
         });
     }, []);
@@ -62,7 +60,7 @@ const MySidebar = () => {
                     <div className="top-writers d-flex align-items-center pt-4">
                         <div className='d-flex me-2'>
                             <div className='me-2'>
-                                <img style={{ "width": "32px", "height": "auto", "borderRadius": "50%" }} src={avatar1} />
+                                <img style={{ "width": "30px", "height": "30px", "borderRadius": "50%" }} src={avatar1} />
                             </div>
                             <div>
                                 {articleTopWriter.map((findTopWirter, key) => (
