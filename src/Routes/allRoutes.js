@@ -294,9 +294,9 @@ import AvatarDetail from "../pages/Admin/Avatars/AvatarDetail";
 import AddAvatar from "../pages/Admin/Avatars/AddAvatar";
 
 // ShipData Section
-import ShipDatas from "../pages/Admin/ShipDatas/index";
-import ShipDataDetail from "../pages/Admin/ShipDatas/ShipDataDetail";
-import AddShipData from "../pages/Admin/ShipDatas/AddShipData";
+import ShipDatas from "../pages/Admin/Shipdatas/index";
+import ShipDataDetail from "../pages/Admin/Shipdatas/ShipDataDetail";
+import AddShipData from "../pages/Admin/Shipdatas/AddShipData";
 
 // ProductData Section
 import ProductDatas from "../pages/Admin/ProductDatas/index";

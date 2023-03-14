@@ -64,14 +64,15 @@ const TestPage = () => {
 
     const handleCreate = () => {
 
-        fetch('http://localhost:8080/api/testPurchaseHistory/create', {
+        fetch('http://localhost:8080/api/purchaseHistory/create', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json ;charset=UTF-8'
             },
             body: JSON.stringify({
                 date: new Date(),
-                level: currentLevel,
+                type: "test",
+                text: currentLevel,
                 price: 100,
                 userId: user.id
             })
@@ -94,6 +95,10 @@ const TestPage = () => {
         setmodal_togThird(!modal_togThird);
     }
 
+    const [modal_togForth, setmodal_togForth] = useState(false);
+    function tog_togForth() {
+        setmodal_togForth(!modal_togForth);
+    }
 
     // Border Top Nav Justified Tabs
     const [topBorderjustifyTab, settopBorderjustifyTab] = useState("1");
@@ -172,6 +177,9 @@ const TestPage = () => {
                                 </Row>
                                 <div className='align-self-center test-start-btn purchase-button-group'>
                                     <Button className="shadow-none px-5 me-4 fs-20" onClick={() => {
+                                        if (level == 0){
+                                            tog_togForth();
+                                        }
                                         if (level == 1) {
                                             history.push('/test-test-page/' + currentLevel + "/" + degreeId + "/" + level);
                                         }
@@ -329,6 +337,25 @@ const TestPage = () => {
                                 <Button color="primary" className="ms-3" onClick={() => tog_togThird(false)}>Yes</Button>
                             </NavLink>
                             <Button color="primary" className="me-3" onClick={() => tog_togThird(false)}>No</Button>
+                        </div>
+                    </div>
+                </div>
+
+            </Modal>
+
+            <Modal
+                isOpen={modal_togForth}
+                toggle={() => {
+                    tog_togForth();
+                }}
+                id="forthmodal"
+                centered
+            >
+                <div className="modal-body text-center p-3">
+                    <div className="mt-4 pt-3 pb-3">
+                        <h4 className="mb-3 p-3">You should select degree and level.</h4>
+                        <div className="hstack gap-2 justify-content-center">
+                            <Button color="primary" className="me-3 px-4" onClick={() => tog_togForth(false)}>confirm</Button>
                         </div>
                     </div>
                 </div>

@@ -100,13 +100,13 @@ const TestPage = () => {
                 <section className="section pb-0 hero-section" id="hero" style={{ height: '100vh' }}>
                     <div className="bg-overlay bg-overlay-pattern"></div>
                     <div className='container'>
-                        <div className="content pt-2">
+                        <div className="content">
                             <Container>
                                 <Row>
                                     <Col xl={12}>
                                         <Form action="#">
                                             <div className="text-center pt-3 pb-4 mb-1">
-                                                <h1 style={{ color: "#4b38b3", fontSize: "70px" }}>{currentLevel}</h1>
+                                                <h1 style={{ color: "#4b38b3", fontSize: "4vw" }}>{currentLevel}</h1>
                                             </div>
 
                                             <div className="progress-nav mb-4">
@@ -165,7 +165,7 @@ const TestPage = () => {
                                                                 </div>
                                                             </Col>
                                                         </Row>
-                                                        <div className="d-flex align-items-start gap-3 mt-4">
+                                                        <div className="d-flex align-items-start gap-3 mt-4 custom-next-btn">
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-outline-primary btn-label right ps-4 ms-auto nexttab nexttab fs-20"
@@ -194,7 +194,7 @@ const TestPage = () => {
                                                 <TabPane tabId={maxInterVal}>
                                                     <div>
                                                         <div className="text-center" style={{ height: "425px" }}>
-                                                            <div className="mb-4" style={{ fontSize: "160px" }}>
+                                                            <div className="mb-4" style={{ fontSize: "10vw" }}>
                                                                 {(totalScore / questionLength * 10).toFixed(1)}
                                                             </div>
                                                             <h1>Examination is finished!</h1>

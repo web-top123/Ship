@@ -251,8 +251,18 @@ const columnsPurchaseData = [
         filterable: false,
     },
     {
+        Header: "Type",
+        accessor: "type",
+        filterable: false,
+    },
+    {
         Header: "Title",
         accessor: "title",
+        filterable: false,
+    },
+    {
+        Header: "Price",
+        accessor: "price",
         filterable: false,
     },
     {
@@ -260,14 +270,6 @@ const columnsPurchaseData = [
         accessor: "date",
         filterable: false,
     },
-    {
-        Header: "Purchase Score",
-        accessor: "score",
-        filterable: false,
-        Cell: (score) => (<>
-            <div>{score.row.original.data['datacol']}</div>
-        </>)
-    }
 ]
 const PurchaseDataList = [
     {
