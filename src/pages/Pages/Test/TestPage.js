@@ -210,7 +210,7 @@ const TestPage = () => {
                                                                 className="btn btn-outline-primary btn-label right ms-auto nexttab nexttab fs-20"
                                                                 onClick={() => {
 
-                                                                    if (totalScore > 6.5)
+                                                                    if ((totalScore / questionLength * 10) > 6.5)
                                                                         passedStatus = "Passed";
                                                                     addNewPassedTest({
                                                                         date: new Date(),

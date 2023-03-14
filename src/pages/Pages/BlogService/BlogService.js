@@ -18,15 +18,19 @@ import {
   Input,
   Form,
 } from "reactstrap";
+import { useHistory  } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { columnsBlogData, BlogDataList } from "./TestBlogData";
 import { useMemo } from "react";
 import TableContainer from "../../../Components/Common/TableContainer";
 import classnames from "classnames";
 import {
-  getArticles,
+  getTrendingArticles,
   getArticleCategories,
   getArticleFindTopUser,
+  downloadAvatar,
+  getRecentArticles,
 } from "../../../helpers/fakebackend_helper";
 import { addNewArticle } from "../../../helpers/fakebackend_helper";
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
@@ -44,13 +48,13 @@ const BlogService = () => {
   const [articles, setArticles] = useState([]);
   const [articleCategories, setArticleCategories] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
-  const [articleTopWriter, setArticleTopWriter] = useState([]);
+  const [articleTopwriters, setarticleTopwriters] = useState([]);
   const [BlogDataPublisedFilter, setBlogDataPublisedFilter] = useState([]);
   const [BlogDataDraftFilter, setBlogDataDraftFilter] = useState([]);
   const [activeTab, setActiveTab] = useState("1");
   const [articleCategory, setArticleCategory] = useState({});
-  const [oneCategory, setOneCategory] = useState({});
-  const [article, setArticle] = useState({
+  const [articleUser, setArticleUser] = useState([]);
+  const article = {
     name: "",
     description: "",
     contact_number: "",
@@ -60,28 +64,13 @@ const BlogService = () => {
     source: "",
     oppositions: "",
     browingcount: "",
-  });
+  };
+  const history = useHistory();
+  const myInformationSelector = useSelector(state => state.Profile.myinformation);
 
   const toggleTab = (tab, type) => {
     if (activeTab !== tab) {
       setActiveTab(tab);
-      let filteredBlogs = BlogDataList;
-      if (type !== "trending") {
-        filteredBlogs.map((product) => console.log(product));
-        filteredBlogs = BlogDataList.filter((product) => product.type === type);
-      }
-      if (type === "date") {
-        setBlogDataPublisedFilter(filteredBlogs);
-        setArticles(filteredBlogs);
-      }
-      if (type === "trending") {
-        setArticles(filteredBlogs);
-      }
-      if (type === "draft") {
-        setBlogDataDraftFilter(BlogDataDraftFilter);
-        setArticles(filteredBlogs);
-      }
-      // setBlogDataList(filteredBlogs);
     }
   };
 
@@ -99,32 +88,38 @@ const BlogService = () => {
   };
 
   useEffect(() => {
-    getArticles().then((articles) => {
-      let today = new Date();
-      for (const article of articles) {
-        let createdDate = new Date(article.createdAt);
-        let difference = Math.abs(today - createdDate);
-        article.ago = getAgoString(difference);
-      }
-      setArticles(articles);
-      console.log("aaa", articles);
-    });
+    getArticles();
 
-    getArticleCategories().then((categories) => {
-      setArticleCategories(categories);
-    });
-
-    getArticleFindTopUser().then((topUser) => {
-      setArticleTopWriter(topUser);
+    getArticleFindTopUser().then((topWriter) => {
+      setarticleTopwriters(topWriter);
     });
   }, []);
-  ///////////
+
   useEffect(() => {
-    for (const article of articles) {
-      article.categoryTitle = articleCategories[article.articleCategoryId-1].title;
+    getArticles();
+  }, [activeTab]);
+
+  const getArticles = () => {
+    if (activeTab == "1") { // Trending Tab Selected
+      getTrendingArticles().then((articles) => {
+        refreshArtcles(articles);
+      });
+    } else { // Date Tab Selected
+      getRecentArticles().then((articles) => {
+        refreshArtcles(articles);
+      });
     }
-    console.log("hhh", articles);
-  }, [articleCategories]);
+  }
+
+  const refreshArtcles = (articles) => {
+    let today = new Date();
+    for (const article of articles) {
+      let createdDate = new Date(article.createdAt);
+      let difference = Math.abs(today - createdDate);
+      article.ago = getAgoString(difference);
+    }
+    setArticles(articles);
+  }
 
   useEffect(() => {
     getArticleCategories().then((categories) => {
@@ -133,6 +128,7 @@ const BlogService = () => {
         category.value = category.id;
       }
       setCategoryList(categories);
+      console.log("categoryList", categories);
     });
   }, []);
 
@@ -155,43 +151,51 @@ const BlogService = () => {
                   >
                     <NavItem>
                       <NavLink
+                        role="button"
                         className={classnames(
                           { active: activeTab === "1" },
+                          activeTab == "2" ? "cursor-pointer" : "",
                           "fw-semibold"
                         )}
                         onClick={() => {
                           toggleTab("1", "trending");
                         }}
-                        href="/pages-blog-service"
                       >
-                        Trending{" "}
-                        <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
+                        Trending &nbsp;
+                        {/* <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
                           {articles.length}
-                        </span>
+                        </span> */}
                       </NavLink>
                     </NavItem>
                     <NavItem>
                       <NavLink
+                        role="button"
                         className={classnames(
                           { active: activeTab === "2" },
+                          activeTab == "1" ? "cursor-pointer" : "",
                           "fw-semibold"
                         )}
                         onClick={() => {
                           toggleTab("2", "date");
                         }}
-                        href="#"
                       >
-                        Date{" "}
-                        <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
-                          {BlogDataPublisedFilter.length}
-                        </span>
+                        Date &nbsp;
+                        {/* <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
+                          {articles.length}
+                        </span> */}
                       </NavLink>
                     </NavItem>
                   </Nav>
                   <Button
                     color="primary"
                     className="new-article-add-btn"
-                    onClick={() => tog_large(true)}
+                    onClick={() => {
+                      if (!myInformationSelector) {
+                        history.push('/login');
+                      } else {
+                        tog_large();
+                      }
+                    }}
                   >
                     New Article Add
                   </Button>
@@ -226,16 +230,16 @@ const BlogService = () => {
                   <CardBody>
                     <h4 className="mb-sm-0">Related Topics</h4>
                     <div className="realted-topic d-flex flex-wrap">
-                      {articleCategories.map((articleCategory, key) => (
+                      {categoryList.map((oneCategory, key) => (
                         <React.Fragment key={key}>
                           <Link
                             className="rounded-pill btn btn-light tags me-4"
                             to={
                               "/pages-blog-service/article-kind/" +
-                              articleCategory.id
+                              oneCategory.id
                             }
                           >
-                            {articleCategory.title}
+                            {oneCategory.title}
                           </Link>
                         </React.Fragment>
                       ))}
@@ -246,37 +250,38 @@ const BlogService = () => {
               <Row>
                 <Card className="my-5 pb-4">
                   <CardBody>
-                    <h4 className="mb-sm-0 pb-4">Top Writers</h4>
+                    <h4 className="mb-sm-0" style={{ display: "inline-block" }}>
+                      Top Writers
+                    </h4>
                     <div className="top-writers d-flex align-items-center pt-4">
                       <div className="d-flex me-2">
-                        <div className="me-2">
-                          <img
-                            style={{
-                              width: "32px",
-                              height: "auto",
-                              borderRadius: "50%",
-                            }}
-                            alt="Img"
-                            src={avatar1}
-                          />
-                        </div>
-                        <div>
-                          {articleTopWriter.map((findTopWirter) =>
-                            findTopWirter.map((oneWriter, key) => (
-                              <React.Fragment key={key}>
+                        <div className="pb-3">
+                          {articleTopwriters.map((oneWriter) => (
+                            <li key={oneWriter.id}>
+                              <React.Fragment>
+                                <img
+                                  style={{
+                                    width: "30px",
+                                    height: "30px",
+                                    borderRadius: "50%",
+                                  }}
+                                  alt="Img"
+                                  src={downloadAvatar(
+                                    oneWriter.currentAvatarId
+                                  )}
+                                />
                                 <Link
-                                  className="rounded-pill btn btn-light tags me-4"
+                                  className="rounded-pill btn btn-light tags me-4 mb-3"
                                   to={
-                                    // "/pages-blog-service/detail/" + findTopWirter.id
-                                    "/pages-blog-service/article-man"
+                                    "/pages-blog-service/article-man/" +
+                                    oneWriter.id
                                   }
                                 >
-                                  {console.log("oneWriter", oneWriter)}
                                   {oneWriter.username}
                                 </Link>
                               </React.Fragment>
-                            ))
-                          )}
+                            </li>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -314,14 +319,8 @@ const BlogService = () => {
             {/* <Select name="sort" id="id-field-sort" options={sort}>
                         </Select> */}
             <Select
-              value={articleCategory}
               onChange={(e) => {
-                setArticleCategory(e);
-                setArticle({
-                  ...article,
-                  ...{ articleCategoryId: e.id },
-                });
-                console.log("Add Article", articleCategories);
+                article.articleCategoryId = e.id;
               }}
               options={categoryList}
               name="choices-publish-visibility-input"
@@ -338,9 +337,8 @@ const BlogService = () => {
               className="form-control"
               placeholder="Enter Article Title"
               type="text"
-              value={article.name}
               onChange={(e) => {
-                setArticle({ ...article, ...{ name: e.target.value } });
+                article.name = e.target.value;
               }}
             />
           </div>
@@ -350,20 +348,9 @@ const BlogService = () => {
               <CKEditor
                 editor={ClassicEditor}
                 data=""
-                onReady={(editor) => {
-                  // You can store the "editor" and use when it is needed.
-                  console.log("Editor is ready to use!", editor);
-                }}
                 onChange={(event, editor) => {
                   const data = editor.getData();
-                  setArticle({ ...article, ...{ description: data } });
-                  console.log({ event, editor, data });
-                }}
-                onBlur={(event, editor) => {
-                  console.log("Blur.", editor);
-                }}
-                onFocus={(event, editor) => {
-                  console.log("Focus.", editor);
+                  article.description = data;
                 }}
               />
             </Form>
@@ -377,12 +364,8 @@ const BlogService = () => {
                 className="form-control"
                 placeholder="129122312"
                 type="text"
-                value={article.contact_number}
                 onChange={(e) => {
-                  setArticle({
-                    ...article,
-                    ...{ contact_number: e.target.value },
-                  });
+                  article.contact_number = e.target.value;
                 }}
               />
             </div>
@@ -393,12 +376,8 @@ const BlogService = () => {
                 id="product-image-input"
                 type="file"
                 accept="image/png, image/gif, image/jpeg"
-                value={article.attach_url}
                 onChange={(e) => {
-                  setArticle({
-                    ...article,
-                    ...{ attach_url: e.target.files[0] },
-                  });
+                  article.attach_url = e.target.files[0];
                 }}
               />
             </div>
@@ -411,12 +390,8 @@ const BlogService = () => {
               className="form-control"
               placeholder="Title Book"
               type="text"
-              value={article.source}
               onChange={(e) => {
-                setArticle({
-                  ...article,
-                  ...{ source: e.target.value },
-                });
+                article.source = e.target.value;
               }}
             />
           </div>
@@ -426,6 +401,7 @@ const BlogService = () => {
               data-bs-toggle="button"
               aria-pressed="false"
               className="me-2"
+              style={{}}
             >
               Grammar Checking
             </Button>
@@ -436,19 +412,9 @@ const BlogService = () => {
               aria-pressed="false"
               onClick={(e) => {
                 e.preventDefault();
-                const formData = new FormData();
-                formData.append("name", article.name);
-                formData.append("description", article.description);
-                formData.append("contact_number", article.contact_number);
-                formData.append("articleCategoryId", article.articleCategoryId);
-                formData.append("attach_url", article.attach_url);
-                formData.append("recommends", article.recommends);
-                formData.append("source", article.source);
-                formData.append("oppositions", article.oppositions);
-                formData.append("browingcount", article.browingcount);
-
+                article.userId = myInformationSelector.id;
                 addNewArticle(article).then((res) => {
-                  console.log(res);
+                  tog_large();
                 });
               }}
             >

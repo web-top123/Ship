@@ -188,12 +188,16 @@ export const GET_Degree = "/api/Degrees/get_one";
 
 // Articles
 export const GET_ARTICLES = "/api/article/get_All";
+export const GET_TRENDING_ARTICLES = "/api/article/get_trending_articles";
+export const GET_RECENT_ARTICLES = "/api/article/get_recent_articles";
 export const GET_ARTICLE = "/api/article/get_one";
 export const ADD_NEW_ARTICLE = "/api/article/create";
 export const UPDATE_ARTICLE = "/api/article/update";
 export const DELETE_ARTICLE = "/api/article/delete";
 export const GET_ARTICLE_FIND_TOP_USER = "/api/article/findTopUser";
 export const GET_ARTICLEBYCATEGORYID = "/api/article/findArticleCategoryById";
+export const GET_ARTICLEBYUSERID = "/api/article/get_one_by_userId";
+export const GET_ONEARTICLEBYID = "/api/article/get_one_by_Id";
 // ArticleCategory
 export const GET_ARTICLECATEGORIES = "/api/article/category/get_All";
 export const GET_ARTICLECATEGORY = "/api/article/category/get_one";

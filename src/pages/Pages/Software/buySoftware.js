@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory  } from "react-router-dom";
 
 import {
     Container,
@@ -21,23 +22,21 @@ const BuySoftware = (props) => {
     const [userID, setUserID] = useState('');
     const [userData, setUserData] = useState({});
     const myInformationSelector = useSelector(state => state.Profile.myinformation);
+    const history = useHistory();
 
     useEffect(() => {
         if (myInformationSelector) {
-            console.log("myInformationSelector", myInformationSelector);
             setUserID(myInformationSelector.id);
         }
         else {
-            console.log("Please login first")
+            history.push('/login');
         }
     }, [myInformationSelector]);
 
     useEffect(() => {
         getUser(userID).then(res => {
-            console.log("getAvatars", res);
             setUserData(res);
         });
-        console.log("dasfasdfa", userID)
     }, [userID]);
 
     useEffect(() => {
@@ -63,7 +62,6 @@ const BuySoftware = (props) => {
         cost: "",
         recommends: "",
     });
-    console.log("AAAAAAA", program);
 
     const [enterSerialNumber, setEnterSerialNumber] = ('');
 

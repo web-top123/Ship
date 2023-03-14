@@ -9,6 +9,7 @@ import GoodData from './DataTable/GoodData'
 import '../Test/test-page-custom.css'
 import { Col, Container, Row, Card, CardBody,TabContent } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import { getAuthenticatedUser } from '../../../helpers/fakebackend_helper'
 
 
 const ViewData = () => {
@@ -21,6 +22,7 @@ const ViewData = () => {
             setcardHeaderTab(tab);
         }
     };
+    const user = getAuthenticatedUser();
 
     return (
         <React.Fragment>
@@ -42,7 +44,7 @@ const ViewData = () => {
                                             <LoadData />
                                             <ProductData />
                                             <GoodData />
-                                            <MyTraceView />
+                                            {user && <MyTraceView />}
                                         </TabContent>
                                     </CardBody>
                                 </Card>

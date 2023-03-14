@@ -57,47 +57,34 @@ const Medias = (props) => {
       setMediaList(res);
 
       getSettingByTitle('homeImages').then(item => {
-        console.log("homeimages", JSON.parse(item.value));
         setHomeImages(JSON.parse(item.value));
       })
 
       getSettingByTitle('dataImage').then(item => {
-        console.log("setDataImage", (item.value));
         setDataImage({ label: "", value: item.value });
       })
 
       getSettingByTitle('softwareImage').then(item => {
-        console.log("setQuestionImage", (item.value));
         setSoftwareImage({ label: "", value: item.value });
       })
 
       getSettingByTitle('questionImage').then(item => {
-        console.log("setQuestionImage", (item.value));
         setQuestionImage({ label: "", value: item.value });
       })
 
       getSettingByTitle('studyImage').then(item => {
-        console.log("setStudyImage", (item.value));
         setStudyImage({ label: "", value: item.value });
       })
 
       getSettingByTitle('mypageImage').then(item => {
-        console.log("setMypageImage", (item.value));
         setMypageImage({ label: "", value: item.value });
       })
 
       getSettingByTitle('testImage').then(item => {
-        console.log("setTestImage", (item.value));
         setTestImage({ label: "", value: item.value });
       })
-
     })
-
-
-
-
   }
-
 
   document.title = "Settings";
   return (

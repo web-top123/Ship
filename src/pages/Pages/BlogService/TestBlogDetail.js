@@ -58,7 +58,7 @@ const columnsReplyMessageData = [
             <div className="blog-content-wrapper">
                 <div>
                     <img className="author-img" src={purchase.row.original.img} />
-                    <span style={{"font-size":"13px"}} className="author-name">{purchase.row.original.name}</span>
+                    <span style={{fontSize:"13px"}} className="author-name">{purchase.row.original.name}</span>
                     <div className="publish-date pt-2">{purchase.row.original.content}</div>
                 </div>
             </div>
