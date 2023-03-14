@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, CardBody, CardHeader, Label, Col, Container, Row, Input, Modal, ModalHeader, Nav, NavItem, NavLink, TabContent, TabPane, UncontrolledTooltip } from 'reactstrap';
 import "./test-page-custom.css";
+import { useHistory  } from "react-router-dom";
 
 import { Link } from 'react-router-dom';
 import classnames from "classnames";
@@ -22,6 +23,7 @@ const TestPage = () => {
         });
     };
 
+    const history = useHistory();
 
     // const [add, setAdd] = useState({});
     // var testStartBtn = 'You can gain best score!';
@@ -171,7 +173,7 @@ const TestPage = () => {
                                 <div className='align-self-center test-start-btn purchase-button-group'>
                                     <Button className="shadow-none px-5 me-4 fs-20" onClick={() => {
                                         if (level == 1) {
-                                            window.location.href = '/test-test-page/' + currentLevel + "/" + degreeId + "/" + level;
+                                            history.push('/test-test-page/' + currentLevel + "/" + degreeId + "/" + level);
                                         }
                                         if (level > 1) {
                                             if (user) {

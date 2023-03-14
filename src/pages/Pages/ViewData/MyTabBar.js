@@ -7,8 +7,10 @@ import { BaseExample, CardTableExample, PaginationExample, SearchExample, Sortin
 import Flatpickr from "react-flatpickr";
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAuthenticatedUser } from '../../../helpers/fakebackend_helper';
 
 const MyTabBar = ({ cardHeaderTab, cardHeaderToggle }) => {
+    const user = getAuthenticatedUser();
     // Vertical Nav Tabs
     return (
         <React.Fragment>
@@ -35,11 +37,13 @@ const MyTabBar = ({ cardHeaderTab, cardHeaderToggle }) => {
                                 Goods Data
                             </NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink style={{ cursor: "pointer" }} className={classnames({ active: cardHeaderTab === "5", })} onClick={() => { cardHeaderToggle("5"); }} >
-                                My Trace VIew
-                            </NavLink>
-                        </NavItem>
+                        {user &&
+                            <NavItem>
+                                <NavLink style={{ cursor: "pointer" }} className={classnames({ active: cardHeaderTab === "5", })} onClick={() => { cardHeaderToggle("5"); }} >
+                                    My Trace VIew
+                                </NavLink>
+                            </NavItem>
+                        }
                     </Nav>
                 </div>
                 <div className="col-sm-auto position-absolute" style={{right: "0"}}>

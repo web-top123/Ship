@@ -3,7 +3,7 @@ import { Col, Container, Row, Card, CardBody, TabContent, CardHeader, TabPane } 
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { useMemo } from "react";
 import {BlogDetailData, columnsReplyMessageData} from './TestBlogDetail'
-import { getArticle, deleteArticle } from "../../../helpers/fakebackend_helper";
+import { getOneArticlebyId, downloadAvatar } from "../../../helpers/fakebackend_helper";
 import { Link, useParams  } from "react-router-dom";
 import ArticleSideBar from "./ArticleSideBar";
 import TableContainer from "../../../Components/Common/TableContainer";
@@ -26,11 +26,11 @@ const BlogServiceDetail = () => {
     });
     useEffect(() => {
       if (id) {
-        getArticle(id).then(res => {
+        getOneArticlebyId(id).then(res => {
             setArticleList(res);          
         })
       }
-    }, []);
+    }, [id]);
     console.log("ppppp",article);
 
     return (
@@ -47,8 +47,8 @@ const BlogServiceDetail = () => {
                                             <Link className="btn btn-primary" data-bs-toggle="button" aria-pressed="false" to={"/pages-blog-service"}>Go listing</Link>
                                         </div>
                                         <div className='pe-5 d-flex align-items-center'>
-                                        <i className="las la-angle-left" style={{"font-size": "25px"}}></i> <Link className="btn btn-primary ms-1 me-5" data-bs-toggle="button" aria-pressed="false" to={"#"}>Advertise</Link>
-                                        <Link className="btn btn-primary ms-5 me-1" data-bs-toggle="button" aria-pressed="false" to={'#'}>Trending</Link><i className="las la-angle-right" style={{"font-size": "25px"}}></i>
+                                        <i className="las la-angle-left" style={{fontSize: "25px"}}></i> <Link className="btn btn-primary ms-1 me-5" data-bs-toggle="button" aria-pressed="false" to={"#"}>Advertise</Link>
+                                        <Link className="btn btn-primary ms-5 me-1" data-bs-toggle="button" aria-pressed="false" to={'#'}>Trending</Link><i className="las la-angle-right" style={{fontSize: "25px"}}></i>
                                         </div>
                                     </div>
                                     
@@ -57,7 +57,7 @@ const BlogServiceDetail = () => {
                                     <div className='d-flex justify-content-between'>
                                         <div className='d-flex mb-4'>
                                             <div style={{"width":"48px"}} className="me-3">
-                                                <img src = {BlogDetailData.user_img} style={{"width":"100%","borderRadius":"50%"}}/>    
+                                                <img src = {downloadAvatar(article.currentAvatarId)} style={{"width":"100%","borderRadius":"50%"}} alt=""/>    
                                             </div>
                                             <div>
                                                 <h5>{article.name}</h5>

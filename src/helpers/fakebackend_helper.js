@@ -421,6 +421,8 @@ export const getArticle = (id) => api.get(url.GET_ARTICLE + '/' + id);
 export const getArticleByCategoryId = (id) => api.get(url.GET_ARTICLEBYCATEGORYID + '/' + id);
 // add ARTICLE
 export const addNewArticle = customer => api.create(url.ADD_NEW_ARTICLE, customer);
+export const getArticleByuserId = (id) => api.get(url.GET_ARTICLEBYUSERID + '/' + id);
+export const getOneArticlebyId = (id) => api.get(url.GET_ONEARTICLEBYID + '/' + id);
 
 // update ARTICLE
 export const updateOneArticle = (id, customer) => api.update(url.UPDATE_ARTICLE + '/' + id, customer);
@@ -530,8 +532,10 @@ export const deleteMedia = id => api.delete(url.DELETE_MEDIA + '/' + id);
 // export const downloadMedia = (id) => api.get(url.DOWNLOAD_MEDIA + '/' + id);
 export const downloadMedia = (id) => {
   // http://localhost:8080/api/media/fileById/1
-  var str = config.API_URL + "api/media/fileById/" + id;
-  return str;
+  if (id !== null && id!== undefined) {
+    return config.API_URL + "api/media/fileById/" + id;
+  }
+  return "";
 }
 
 //-----------ShipData-----------

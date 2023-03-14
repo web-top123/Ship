@@ -27,6 +27,7 @@ import {
   getArticles,
   getArticleCategories,
   getArticleFindTopUser,
+  downloadAvatar,
 } from "../../../helpers/fakebackend_helper";
 import { addNewArticle } from "../../../helpers/fakebackend_helper";
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
@@ -44,12 +45,12 @@ const BlogService = () => {
   const [articles, setArticles] = useState([]);
   const [articleCategories, setArticleCategories] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
-  const [articleTopWriter, setArticleTopWriter] = useState([]);
+  const [articleTopwriters, setarticleTopwriters] = useState([]);
   const [BlogDataPublisedFilter, setBlogDataPublisedFilter] = useState([]);
   const [BlogDataDraftFilter, setBlogDataDraftFilter] = useState([]);
   const [activeTab, setActiveTab] = useState("1");
   const [articleCategory, setArticleCategory] = useState({});
-  const [oneCategory, setOneCategory] = useState({});
+  const [articleUser, setArticleUser] = useState([]);
   const [article, setArticle] = useState({
     name: "",
     description: "",
@@ -77,10 +78,6 @@ const BlogService = () => {
       if (type === "trending") {
         setArticles(filteredBlogs);
       }
-      if (type === "draft") {
-        setBlogDataDraftFilter(BlogDataDraftFilter);
-        setArticles(filteredBlogs);
-      }
       // setBlogDataList(filteredBlogs);
     }
   };
@@ -106,25 +103,15 @@ const BlogService = () => {
         let difference = Math.abs(today - createdDate);
         article.ago = getAgoString(difference);
       }
+      console.log("articles", articles);
       setArticles(articles);
-      console.log("aaa", articles);
     });
 
-    getArticleCategories().then((categories) => {
-      setArticleCategories(categories);
-    });
-
-    getArticleFindTopUser().then((topUser) => {
-      setArticleTopWriter(topUser);
+    getArticleFindTopUser().then((topWriter) => {
+      setarticleTopwriters(topWriter);
+      console.log("Top", topWriter);
     });
   }, []);
-  ///////////
-  useEffect(() => {
-    for (const article of articles) {
-      article.categoryTitle = articleCategories[article.articleCategoryId-1].title;
-    }
-    console.log("hhh", articles);
-  }, [articleCategories]);
 
   useEffect(() => {
     getArticleCategories().then((categories) => {
@@ -133,6 +120,7 @@ const BlogService = () => {
         category.value = category.id;
       }
       setCategoryList(categories);
+      console.log("categoryList", categories);
     });
   }, []);
 
@@ -165,9 +153,9 @@ const BlogService = () => {
                         href="/pages-blog-service"
                       >
                         Trending{" "}
-                        <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
+                        {/* <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
                           {articles.length}
-                        </span>
+                        </span> */}
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -182,9 +170,9 @@ const BlogService = () => {
                         href="#"
                       >
                         Date{" "}
-                        <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
+                        {/* <span className="badge badge-soft-danger align-middle rounded-pill ms-1">
                           {BlogDataPublisedFilter.length}
-                        </span>
+                        </span> */}
                       </NavLink>
                     </NavItem>
                   </Nav>
@@ -226,16 +214,16 @@ const BlogService = () => {
                   <CardBody>
                     <h4 className="mb-sm-0">Related Topics</h4>
                     <div className="realted-topic d-flex flex-wrap">
-                      {articleCategories.map((articleCategory, key) => (
+                      {categoryList.map((oneCategory, key) => (
                         <React.Fragment key={key}>
                           <Link
                             className="rounded-pill btn btn-light tags me-4"
                             to={
                               "/pages-blog-service/article-kind/" +
-                              articleCategory.id
+                              oneCategory.id
                             }
                           >
-                            {articleCategory.title}
+                            {oneCategory.title}
                           </Link>
                         </React.Fragment>
                       ))}
@@ -246,37 +234,38 @@ const BlogService = () => {
               <Row>
                 <Card className="my-5 pb-4">
                   <CardBody>
-                    <h4 className="mb-sm-0 pb-4">Top Writers</h4>
+                    <h4 className="mb-sm-0" style={{ display: "inline-block" }}>
+                      Top Writers
+                    </h4>
                     <div className="top-writers d-flex align-items-center pt-4">
                       <div className="d-flex me-2">
-                        <div className="me-2">
-                          <img
-                            style={{
-                              width: "32px",
-                              height: "auto",
-                              borderRadius: "50%",
-                            }}
-                            alt="Img"
-                            src={avatar1}
-                          />
-                        </div>
-                        <div>
-                          {articleTopWriter.map((findTopWirter) =>
-                            findTopWirter.map((oneWriter, key) => (
-                              <React.Fragment key={key}>
+                        <div className="pb-3">
+                          {articleTopwriters.map((oneWriter) => (
+                            <li key={oneWriter.id}>
+                              <React.Fragment>
+                                <img
+                                  style={{
+                                    width: "30px",
+                                    height: "auto",
+                                    borderRadius: "50%",
+                                  }}
+                                  alt="Img"
+                                  src={downloadAvatar(
+                                    oneWriter.currentAvatarId
+                                  )}
+                                />
                                 <Link
-                                  className="rounded-pill btn btn-light tags me-4"
+                                  className="rounded-pill btn btn-light tags me-4 mb-3"
                                   to={
-                                    // "/pages-blog-service/detail/" + findTopWirter.id
-                                    "/pages-blog-service/article-man"
+                                    "/pages-blog-service/article-man/" +
+                                    oneWriter.id
                                   }
                                 >
-                                  {console.log("oneWriter", oneWriter)}
                                   {oneWriter.username}
                                 </Link>
                               </React.Fragment>
-                            ))
-                          )}
+                            </li>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -426,6 +415,7 @@ const BlogService = () => {
               data-bs-toggle="button"
               aria-pressed="false"
               className="me-2"
+              style={{}}
             >
               Grammar Checking
             </Button>

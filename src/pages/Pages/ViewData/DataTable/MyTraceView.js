@@ -39,9 +39,11 @@ const TraceView = () => {
     }, [dataList]);
 
     const getDataList = () => {
-        getTraceViews(getAuthenticatedUser().id).then(data => {
-            setDataList(data);
-        })
+        if (getAuthenticatedUser()) {
+            getTraceViews(getAuthenticatedUser().id).then(data => {
+                setDataList(data);
+            });
+        }
     }
     // Modal
     const [modal_togFirst, setmodal_togFirst] = useState(false);
