@@ -298,6 +298,11 @@ import ShipDatas from "../pages/Admin/ShipDatas/index";
 import ShipDataDetail from "../pages/Admin/ShipDatas/ShipDataDetail";
 import AddShipData from "../pages/Admin/ShipDatas/AddShipData";
 
+// ProductData Section
+import ProductDatas from "../pages/Admin/ProductDatas/index";
+import ProductDataDetail from "../pages/Admin/ProductDatas/ProductDataDetail";
+import AddProductData from "../pages/Admin/ProductDatas/AddProductData";
+
 // Media Section
 import Medias from "../pages/Admin/Medias/index";
 import MediaDetail from "../pages/Admin/Medias/MediaDetail";
@@ -559,6 +564,12 @@ const authProtectedRoutes = [
   { path: "/admin-add-shipData", component: AddShipData },
   { path: "/admin-add-shipData/:id", component: AddShipData },
 
+  // ProductDatas
+  { path: "/admin-productDatas", component: ProductDatas },
+  { path: "/admin-productData-details/:id", component: ProductDataDetail },
+  { path: "/admin-add-productData", component: AddProductData },
+  { path: "/admin-add-productData/:id", component: AddProductData },
+
   // Media
   { path: "/admin-medias", component: Medias },
   { path: "/admin-media-details/:id", component: MediaDetail },
@@ -609,14 +620,14 @@ const publicRoutes = [
   { path: "/pages-blog-service/detail/:id", component: BlogServiceDetail },
 
   //view ship data 
-  { path: "/view-data", component: ViewData},
-  { path: "/ship-details/:id", component: ShipDetails},
-  { path: "/load-details/:id", component: LoadDetails},
-  { path: "/product-details/:id", component: ProductDetails},
-  { path: "/good-details/:id", component: GoodDetails},
-  { path: "/new-data-vote", component: NewDataVote},
-  { path: "/new-data-vote/:id", component: NewDataVote},
-  { path: "/pages-study-detail/:id", component: StudyDetail},
+  { path: "/view-data", component: ViewData },
+  { path: "/ship-details/:id", component: ShipDetails },
+  { path: "/load-details/:id", component: LoadDetails },
+  { path: "/product-details/:id", component: ProductDetails },
+  { path: "/good-details/:id", component: GoodDetails },
+  { path: "/new-data-vote", component: NewDataVote },
+  { path: "/new-data-vote/:id", component: NewDataVote },
+  { path: "/pages-study-detail/:id", component: StudyDetail },
 
 
   //AuthenticationInner pages 
