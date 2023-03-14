@@ -18,7 +18,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { addNewLoadData, getLoadData, updateOneLoadData } from "../../../helpers/fakebackend_helper";
+import { addNewLoadData, getLoadData, updateLoadData } from "../../../helpers/fakebackend_helper";
 
 // Formik validation
 import * as Yup from "yup";
@@ -211,7 +211,7 @@ const AddLoadData = (props) => {
                   e.preventDefault();
                   
                   if (id) {
-                    updateOneLoadData(id,LoadData).then(res => {
+                    updateLoadData(id,LoadData).then(res => {
                       console.log(res);
                     })
                   } else {

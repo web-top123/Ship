@@ -22,7 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewLoadData, getLoadData, updateOneLoadData, downloadLoadData } from "../../../helpers/fakebackend_helper";
+import { addNewLoadData, getLoadData, updateOneLoadData, downloadLoadImage } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -130,8 +130,8 @@ function LoadDataDetail(props) {
       getLoadData(id).then(res => {
         setLoadData(res);
       });
-      setLoadDataSrc(downloadLoadData(id));
-      console.log(downloadLoadData(id));
+      setLoadDataSrc(downloadLoadImage(id));
+      console.log(downloadLoadImage(id));
     }
   }, []);
   const toggleCustom = tab => {
@@ -277,7 +277,7 @@ function LoadDataDetail(props) {
                                     <td>{LoadData.to}</td>
                                   </tr><tr>
                                     <th scope="row">Plan_date</th>
-                                    <td>{LoadData.plan_date}</td>
+                                    {/* <td>{LoadData.plan_date}</td> */}
                                   </tr><tr>
                                     <th scope="row">Status</th>
                                     <td>{LoadData.status}</td>

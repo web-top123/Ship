@@ -22,7 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewGoodData, getGoodData, updateOneGoodData, downloadGoodData } from "../../../helpers/fakebackend_helper";
+import { addNewGoodData, getGoodData, updateOneGoodData, downloadGoodImage } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -130,8 +130,8 @@ function GoodDataDetail(props) {
       getGoodData(id).then(res => {
         setGoodData(res);
       });
-      setGoodDataSrc(downloadGoodData(id));
-      console.log(downloadGoodData(id));
+      setGoodDataSrc(downloadGoodImage(id));
+      console.log(downloadGoodImage(id));
     }
   }, []);
   const toggleCustom = tab => {
