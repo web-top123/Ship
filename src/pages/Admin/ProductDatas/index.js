@@ -22,7 +22,7 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getProductDatas, deleteProductData, downloadProductData } from "../../../helpers/fakebackend_helper";
+import { getProductDatas, deleteProductData, downloadProductImage } from "../../../helpers/fakebackend_helper";
 
 const ProductDatas = (props) => {
   const [productDataList, setProductDataList] = useState([]);
@@ -75,9 +75,9 @@ const ProductDatas = (props) => {
               <div className="flex-shrink-0 me-3">
                 <div className="productData-sm bg-light rounded p-1">
                   <img
-                  src={downloadProductData(productData.row.original.id)}
+                  src={downloadProductImage(productData.row.original.id)}
                   // {productData.row.file_url}
-                    // src={downloadProductData}
+                    // src={downloadProductImage}
                     alt=""
                     className="img-fluid d-block"
                   />
