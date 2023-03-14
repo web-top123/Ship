@@ -22,17 +22,17 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getAvatars, deleteAvatar, downloadAvatar } from "../../../helpers/fakebackend_helper";
+import { getGoodDatas, deleteGoodData, downloadGoodImage } from "../../../helpers/fakebackend_helper";
 
-const Avatars = (props) => {
-  const [avatarList, setAvatarList] = useState([]);
+const GoodDatas = (props) => {
+  const [goodDataList, setGoodDataList] = useState([]);
   useEffect(() => {
-    getAvatarList();
+    getGoodDataList();
   }, []);
 
-  const getAvatarList = () => {
-    getAvatars().then(res => {
-      setAvatarList(res);
+  const getGoodDataList = () => {
+    getGoodDatas().then(res => {
+      setGoodDataList(res);
     })
   }
 
@@ -40,17 +40,17 @@ const Avatars = (props) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (avatar) => {
-    setCurrentID(avatar.id);
-    // setAvatar(avatar);
+  const onClickDelete = (goodData) => {
+    setCurrentID(goodData.id);
+    // setGoodData(goodData);
     setDeleteModal(true);
   };
 
-  const handleDeleteAvatar = () => {
+  const handleDeleteGoodData = () => {
     if (currentID) {
-      deleteAvatar(currentID).then(res => {
+      deleteGoodData(currentID).then(res => {
         if (res === 1) {
-          getAvatarList();
+          getGoodDataList();
           setDeleteModal(false);
         } else {
           setDeleteModal(false);
@@ -63,21 +63,21 @@ const Avatars = (props) => {
     () => [
       {
         Header: "#",
-        Cell: (avatar) => {
+        Cell: (goodData) => {
           return <input type="checkbox" />;
         },
       },
       {
-        Header: "Avatar",
-        Cell: (avatar) => (
+        Header: "GoodData",
+        Cell: (goodData) => (
           <>
             <div className="d-flex align-items-center">
               <div className="flex-shrink-0 me-3">
-                <div className="avatar-sm bg-light rounded p-1">
+                <div className="goodData-sm bg-light rounded p-1">
                   <img
-                  src={downloadAvatar(avatar.row.original.id)}
-                  // {avatar.row.file_url}
-                    // src={downloadAvatar}
+                  src={downloadGoodImage(goodData.row.original.id)}
+                  // {goodData.row.file_url}
+                    // src={downloadGoodImage}
                     alt=""
                     className="img-fluid d-block"
                   />
@@ -86,11 +86,11 @@ const Avatars = (props) => {
               <div className="flex-grow-1">
                 <h5 className="fs-14 mb-1">
                   <Link
-                    to={"/admin-avatar-details/" + avatar.row.original.id}
+                    to={"/admin-goodData-details/" + goodData.row.original.id}
                     className="text-dark"
                   >
                     {" "}
-                    {avatar.row.original.name}
+                    {goodData.row.original.name}
                   </Link>
                 </h5>
               </div>
@@ -101,8 +101,23 @@ const Avatars = (props) => {
         filterable: false,
       },
       {
-        Header: "Cost",
-        accessor: "cost",
+        Header: "Amount",
+        accessor: "amount",
+        filterable: false,
+      },
+      {
+        Header: "Tech_prop",
+        accessor: "tech_prop",
+        filterable: false,
+      },
+      {
+        Header: "Usage",
+        accessor: "usage",
+        filterable: false,
+      },
+      {
+        Header: "VoterId",
+        accessor: "voterId",
         filterable: false,
       },
 
@@ -119,12 +134,12 @@ const Avatars = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-avatar-details/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-goodData-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
                 </DropdownItem>
 
-                <DropdownItem href={"admin-add-avatar/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-add-goodData/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -133,8 +148,8 @@ const Avatars = (props) => {
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const avatarData = cellProps.row.original;
-                    onClickDelete(avatarData);
+                    const goodDataData = cellProps.row.original;
+                    onClickDelete(goodDataData);
                   }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -148,17 +163,17 @@ const Avatars = (props) => {
     ],
     []
   );
-  document.title = "Avatars";
+  document.title = "GoodDatas";
   return (
     <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteAvatar}
+        onDeleteClick={handleDeleteGoodData}
         onCloseClick={() => setDeleteModal(false)}
       />
 
       <Container fluid>
-        <BreadCrumb title="Avatars" pageTitle="Admin" />
+        <BreadCrumb title="GoodDatas" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -169,11 +184,11 @@ const Avatars = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-avatar"
+                          to="/admin-add-goodData"
                           className="btn btn-success"
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Add
-                          Avatar
+                          GoodData
                         </Link>
                       </div>
                     </div>
@@ -183,7 +198,7 @@ const Avatars = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Avatars..."
+                            placeholder="Search GoodDatas..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -199,12 +214,12 @@ const Avatars = (props) => {
                         id="table-product-list-all"
                         className="table-card gridjs-border-none pb-2"
                       >
-                        {avatarList && avatarList !== "" ? (
+                        {goodDataList && goodDataList !== "" ? (
                           <TableContainer
                             columns={columns}
-                            data={avatarList}
+                            data={goodDataList}
                             isGlobalFilter={false}
-                            isAddAvatarList={false}
+                            isAddGoodDataList={false}
                             customPageSize={10}
                             divClass="table-responsive mb-1"
                             tableClass="mb-0 table-borderless"
@@ -239,4 +254,4 @@ const Avatars = (props) => {
   );
 };
 
-export default Avatars;
+export default GoodDatas;

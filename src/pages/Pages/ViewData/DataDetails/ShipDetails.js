@@ -116,8 +116,6 @@ const PricingWidgetList = (props) => {
 function ShipDetails(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
-
-
   
   const [customActiveTab, setcustomActiveTab] = useState("1"); 
 
@@ -278,12 +276,12 @@ function ShipDetails(props) {
 
                   <Col xl={8}>
                     <div className="mt-xl-0 mt-5">
-                      <div className="d-flex">
+                      {/* <div className="d-flex">
                         <div className="flex-grow-1">
                           <h4>Full Sleeve Sweatshirt for Men (Pink)</h4>
                         </div>
                         <div className="flex-shrink-0">
-                          {/* <div>
+                          <div>
                             <Tooltip
                               placement="top"
                               target="TooltipTop"
@@ -300,7 +298,7 @@ function ShipDetails(props) {
                             >
                               <i className="ri-pencil-fill align-bottom"></i>
                             </a>
-                          </div> */}
+                          </div>
                           <div>
                             <Tooltip
                               placement="top"
@@ -328,9 +326,9 @@ function ShipDetails(props) {
                             </a>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
 
-                      <div className="mt-4 text-muted">
+                      {/* <div className="mt-4 text-muted">
                         <h5 className="fs-14">Description :</h5>
                         <p>
                           Tommy Hilfiger men striped pink sweatshirt. Crafted
@@ -340,7 +338,7 @@ function ShipDetails(props) {
                           celebrating the essence of classic American cool
                           style, featuring preppy with a twist designs.
                         </p>
-                      </div>
+                      </div> */}
 
                       
                       <div className="product-content mt-5">
@@ -362,7 +360,7 @@ function ShipDetails(props) {
                                 <th scope="row">Location</th>
                                 <td>{Data.location}</td>
                               </tr>
-                              <tr>
+                              {/* <tr>
                                 <th scope="row">Call Sign</th>
                                 <td>{Data.licence}</td>
                               </tr>
@@ -372,7 +370,7 @@ function ShipDetails(props) {
                               </tr><tr>
                                 <th scope="row">Contacts</th>
                                 <td>jack +09443928234</td>
-                              </tr>
+                              </tr> */}
                             </tbody>
                           </table>
                         </div>
@@ -401,21 +399,21 @@ function ShipDetails(props) {
                               </tr>
                               <tr>
                                 <th scope="row">Load limit</th>
-                                <td>{Data.limit}t</td>
+                                <td>{Data.load_weight}t</td>
                                 <th scope="row">Manufacture Date</th>
-                                <td>{Data.created}</td>
+                                <td>{Data.built_date}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Load</th>
-                                <td>{Data.full_load}t</td>
+                                <td>{Data.load_weight}t</td>
                                 <th scope="row">Manufacture Factory</th>
                                 <td>{Data.factory}</td>
                               </tr>
                               <tr>
                                 <th scope="row">length</th>
                                 <td>{Data.length} m</td>
-                                <th scope="row">locatinn</th>
-                                <td>{Data.location}port</td>
+                                <th scope="row">location</th>
+                                <td>{Data.location}  port</td>
                               </tr><tr>
                                 <th scope="row">Width</th>
                                 <td>{Data.width} m</td>

@@ -304,7 +304,7 @@ const Study = () => {
             </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="success" onClick={() => { setShowCampusModal(false); purchaseCampus(); }} >Buy</Button>
+                <Button color="success" onClick={() => { setShowCampusModal(true); purchaseCampus(); }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
                 <Button color="primary" onClick={() => {

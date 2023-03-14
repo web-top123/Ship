@@ -146,7 +146,7 @@ const AddCampus = (props) => {
 
         <BreadCrumb title={id ? "Edit Campus" : "Add Campus"} pageTitle="Admin Campus" />
 
-        <Modal id="topmodal" isOpen={modalPositionTop} backdrop="static" keyboard="false" toggle={() => { togPositionTop(); }} >
+        <Modal id="topmodal" isOpen={modalPositionTop} backdrop="static" keyboard={false} toggle={() => { togPositionTop(); }} >
           <ModalHeader>
             Modal Heading
             <Button type="button" className="btn-close" onClick={() => { setmodalPositionTop(false); }} aria-label="Close"> </Button>

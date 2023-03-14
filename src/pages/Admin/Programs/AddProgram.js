@@ -160,7 +160,7 @@ const AddProgram = (props) => {
 
         <BreadCrumb title={id ? "Edit Program" : "Add Program"} pageTitle="Admin Program" />
 
-        <Modal id="topmodal" isOpen={modal_positionTop} backdrop="static" keyboard="false" toggle={() => { tog_positionTop(); }} >
+        <Modal id="topmodal" isOpen={modal_positionTop} backdrop="static" keyboard={false} toggle={() => { tog_positionTop(); }} >
           <ModalHeader>
             Modal Heading
             <Button type="button" className="btn-close" onClick={() => { setmodal_positionTop(false); }} aria-label="Close"> </Button>

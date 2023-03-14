@@ -24,13 +24,12 @@ import {
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { addNewShipData, getShipData, updateOneShipData, downloadShipImage } from "../../../helpers/fakebackend_helper";
 
-import product1 from "../../../assets/images/products/img-1.png";
-import product6 from "../../../assets/images/products/img-6.png";
-import product8 from "../../../assets/images/products/img-8.png";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import classnames from "classnames";
 import MetaTags from 'react-meta-tags';
+
+import product1 from "../../../assets/images/products/img-1.png";
+import product6 from "../../../assets/images/products/img-6.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -121,21 +120,22 @@ function ShipDataDetail(props) {
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
   const [ShipData, setShipData] = useState({
-    name: '',
-    file_url: '',
-    cost: '',
+    name: '', image_url: null, plan_date: new Date(), port: '', type: '', price: '', owner: '', runner: '', total_weight: '', load_weight: '', weight: '', length: '', width: '', current_height: '', full_load: '', engine: '', built_date: new Date(), factory: '', location: '', status: '', voterId: '0',
   });
-  const [ShipDataSrc, setShipDataSrc] = useState({
-  });
+
+  const [ShipDataSrc, setShipDataSrc] = useState({});
+
   useEffect(() => {
     if (id) {
       getShipData(id).then(res => {
+        console.log("shipData detail", res);
         setShipData(res);
       });
       setShipDataSrc(downloadShipImage(id));
-      console.log(downloadShipImage(id));
+      console.log("downloadShipImage", downloadShipImage(id));
     }
   }, []);
+
   const toggleCustom = tab => {
     if (customActiveTab !== tab) {
       setcustomActiveTab(tab);
@@ -163,20 +163,53 @@ function ShipDataDetail(props) {
                         <div className="swiper-wrapper">
                           <SwiperSlide>
                             <img
-                              src={ShipDataSrc}
+                              src={product6}
                               alt=""
                               className="img-fluid d-block"
                             />
                           </SwiperSlide>
                           <SwiperSlide>
                             <img
-                              src={ShipDataSrc}
+                              src={product1}
                               alt=""
                               className="img-fluid d-block"
                             />
                           </SwiperSlide>
                         </div>
                       </Swiper>
+
+                      <div className="product-nav-slider mt-2">
+                        <Swiper
+                          onSwiper={setThumbsSwiper}
+                          slidesPerView={2}
+                          freeMode={true}
+                          watchSlidesProgress={true}
+                          spaceBetween={10}
+                          className="swiper product-nav-slider mt-2 overflow-hidden"
+                        >
+                          <div className="swiper-wrapper">
+
+                            <SwiperSlide>
+                              <div className="nav-slide-item">
+                                <img
+                                  src={product6}
+                                  alt=""
+                                  className="img-fluid d-block rounded"
+                                />
+                              </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                              <div className="nav-slide-item">
+                                <img
+                                  src={product1}
+                                  alt=""
+                                  className="img-fluid d-block rounded"
+                                />
+                              </div>
+                            </SwiperSlide>
+                          </div>
+                        </Swiper>
+                      </div>
                     </div>
                   </Col>
 
@@ -199,14 +232,14 @@ function ShipDataDetail(props) {
                               <Link
                                 to="/admin-add-ShipData"
                                 className="btn btn-success"
-                                
+
                               >
-                                <i className="ri-add-line align-bottom me-1"></i> 
+                                <i className="ri-add-line align-bottom me-1"></i>
                                 Edit
                               </Link>
                             </Tooltip>
                             <a
-                              href={"/admin-add-ShipData/"+id}
+                              href={"/admin-add-ShipData/" + id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
@@ -216,42 +249,6 @@ function ShipDataDetail(props) {
                         </div>
                       </div>
 
-                      {/* <Row>
-                        <Col sm={6}>
-                          <div className="mt-3">
-                            <h5 className="fs-14">Features :</h5>
-                            <ul className="list-unstyled">
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                Full Sleeve
-                              </li>
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                Cotton
-                              </li>
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                All Sizes available
-                              </li>
-                              <li className="py-1">
-                                <i className="mdi mdi-circle-medium me-1 text-muted align-middle"></i>{" "}
-                                4 Different Color
-                              </li>
-                            </ul>
-                          </div>
-                        </Col>
-                        <Col sm={6}>
-                          <div className="mt-3">
-                            <h5 className="fs-14">Services :</h5>
-                            <ul className="list-unstyled product-desc-list">
-                              <li className="py-1">10 Days Replacement</li>
-                              <li className="py-1">
-                                Cash on Delivery available
-                              </li>
-                            </ul>
-                          </div>
-                        </Col>
-                      </Row> */}
 
                       <div className="product-content mt-5">
                         <h5 className="fs-14 mb-3">ShipData Description :</h5>
@@ -303,14 +300,87 @@ function ShipDataDetail(props) {
                                     <td>{ShipData.name}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">File_url</th>
-                                    <td>{ShipData.file_url}</td>
+                                    <th scope="row">Image_url</th>
+                                    <td>{ShipData.image_url}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">Cost</th>
-                                    <td>{ShipData.cost}</td>
+                                    <th scope="row">Plan_date</th>
+                                    {console.log("Plan_date", ShipData.plan_date)}
+                                    {/* <td>{ShipData.plan_date}</td> */}
                                   </tr>
-                                  
+                                  <tr>
+                                    <th scope="row">Port</th>
+                                    <td>{ShipData.port}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Type</th>
+                                    <td>{ShipData.type}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Price</th>
+                                    <td>{ShipData.price}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Owner</th>
+                                    <td>{ShipData.owner}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Runner</th>
+                                    <td>{ShipData.runner}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Total_weight</th>
+                                    <td>{ShipData.total_weight}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Load_weight</th>
+                                    <td>{ShipData.load_weight}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Weight</th>
+                                    <td>{ShipData.weight}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Length</th>
+                                    <td>{ShipData.length}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Width</th>
+                                    <td>{ShipData.width}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Current_height</th>
+                                    <td>{ShipData.current_height}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Full_load</th>
+                                    <td>{ShipData.full_load}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Engine</th>
+                                    <td>{ShipData.engine}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Built_date</th>
+                                    {/* <td>{ShipData.built_date}</td> */}
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Factory</th>
+                                    <td>{ShipData.factory}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Location</th>
+                                    <td>{ShipData.location}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Status</th>
+                                    <td>{ShipData.status}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">VoterId</th>
+                                    <td>{ShipData.voterId}</td>
+                                  </tr>
+
                                 </tbody>
                               </table>
                             </div>

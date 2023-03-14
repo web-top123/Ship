@@ -44,7 +44,6 @@ export const getGetMyInformation = id => api.get(url.GET_MY_INFORMATION + '/' + 
 export const putSaveMyInformation = (id, data) => api.update(url.PUT_SAVE_MY_INFORMATION + '/' + id, data);
 export const getFindBrowseHistoriesById = id => api.get(url.GET_FIND_BROWSER_HISTORY + '/' + id);
 export const getFindDataPurchaseHistoyById = (id, selectedType) => api.create(url.GET_FIND_DATA_PURCHASE_HISTORY + '/' + id, selectedType);
-export const getFindTestPurchaseHistoyById = (id, selectedType) => api.create(url.GET_FIND_TEST_PURCHASE_HISTORY + '/' + id, selectedType);
 export const getBrowserHistoriesAll = () => api.get(url.GET_FIND_BROWSER_HISTORY_ALL);
 export const getPassedTestsById = id => api.get(url.GET_FIND_PASSED_TEST + '/' + id);
 export const addNewBrowserHistory = data => api.create(url.ADD_NEW_BROWSER_HISTORY, data);
@@ -568,16 +567,22 @@ export const getLoadDatas = () => api.get(url.GET_LOAD_DATAS);
 export const getLoadData = (id) => api.get(url.GET_LOAD_DATA + '/' + id);
 
 // add DATA
-export const addNewLoadData = customer => api.create(url.ADD_NEW_LOAD_DATA, customer);
+export const addNewLoadData = customer => api.postFormData(url.ADD_NEW_LOAD_DATA, customer);
 
 // update DATA
-export const updateLoadData = (id, customer) => api.update(url.UPDATE_LOAD_DATA + '/' + id, customer);
+export const updateLoadData = (id, customer) => api.postFormData(url.UPDATE_LOAD_DATA + '/' + id, customer);
 
 // delete DATA
 export const deleteLoadData = id => api.delete(url.DELETE_LOAD_DATA + '/' + id);
 
 // get all top recommended data
 export const getTopLoadDatas = () => api.get(url.GET_ALL_TOP_LOAD_DATA);
+
+export const downloadLoadImage = (id) => {
+  // http://localhost:8080/api/media/fileById/1
+  var str = config.API_URL + "api/loaddata/fileById/" + id;
+  return str;
+}
 
 //-----------ProductData-----------
 // get ProductDatas
@@ -586,16 +591,22 @@ export const getProductDatas = () => api.get(url.GET_PRODUCT_DATAS);
 export const getProductData = (id) => api.get(url.GET_PRODUCT_DATA + '/' + id);
 
 // add DATA
-export const addNewProductData = customer => api.create(url.ADD_NEW_PRODUCT_DATA, customer);
+export const addNewProductData = customer => api.postFormData(url.ADD_NEW_PRODUCT_DATA, customer);
 
 // update DATA
-export const updateProductData = (id, customer) => api.update(url.UPDATE_PRODUCT_DATA + '/' + id, customer);
+export const updateProductData = (id, customer) => api.postFormData(url.UPDATE_PRODUCT_DATA + '/' + id, customer);
 
 // delete DATA
 export const deleteProductData = id => api.delete(url.DELETE_PRODUCT_DATA + '/' + id);
 
 // get all top recommended data
 export const getTopProductDatas = () => api.get(url.GET_ALL_TOP_PRODUCT_DATA);
+
+export const downloadProductImage = (id) => {
+  // http://localhost:8080/api/media/fileById/1
+  var str = config.API_URL + "api/productdata/fileById/" + id;
+  return str;
+}
 
 //-----------GoodData-----------
 // get GoodDatas
@@ -604,16 +615,22 @@ export const getGoodDatas = () => api.get(url.GET_GOOD_DATAS);
 export const getGoodData = (id) => api.get(url.GET_GOOD_DATA + '/' + id);
 
 // add DATA
-export const addNewGoodData = customer => api.create(url.ADD_NEW_GOOD_DATA, customer);
+export const addNewGoodData = customer => api.postFormData(url.ADD_NEW_GOOD_DATA, customer);
 
 // update DATA
-export const updateGoodData = (id, customer) => api.update(url.UPDATE_GOOD_DATA + '/' + id, customer);
+export const updateGoodData = (id, customer) => api.postFormData(url.UPDATE_GOOD_DATA + '/' + id, customer);
 
 // delete DATA
 export const deleteGoodData = id => api.delete(url.DELETE_GOOD_DATA + '/' + id);
 
 // get all top recommended data
 export const getTopGoodDatas = () => api.get(url.GET_ALL_TOP_GOOD_DATA);
+
+export const downloadGoodImage = (id) => {
+  // http://localhost:8080/api/media/fileById/1
+  var str = config.API_URL + "api/gooddata/fileById/" + id;
+  return str;
+}
 
 //-----------DataCategory-----------
 // get DataCategories
@@ -702,3 +719,4 @@ export const addNewDataPurchaseHistory = data => api.create(url.ADD_NEW_DATA_PUR
 export const getTraceViews = (id) => api.get(url.GET_DATA_PURCHASE_HISTORY_ALL + '/' + id);
 // -----------
 export const addNewTestPurchaseHistory = data => api.create(url.ADD_NEW_TEST_PURCHASE_HISTORY, data);
+export const getTraceViews = (id) => api.get(url.GET_DATA_PURCHASE_HISTORY_ALL + '/' + id);

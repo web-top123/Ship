@@ -22,7 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewAvatar, getAvatar, updateOneAvatar, downloadAvatar } from "../../../helpers/fakebackend_helper";
+import { addNewGoodData, getGoodData, updateOneGoodData, downloadGoodImage } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -42,7 +42,7 @@ import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
-const AvatarReview = (props) => {
+const GoodDataReview = (props) => {
 
   return (
     <React.Fragment>
@@ -68,7 +68,7 @@ const AvatarReview = (props) => {
                       <img
                         src={subItem.img}
                         alt=""
-                        className="avatar-sm rounded object-cover"
+                        className="goodData-sm rounded object-cover"
                       />
                     </Link>
                   </React.Fragment>
@@ -98,8 +98,8 @@ const PricingWidgetList = (props) => {
       <Col lg={3} sm={6}>
         <div className="p-2 border border-dashed rounded">
           <div className="d-flex align-items-center">
-            <div className="avatar-sm me-2">
-              <div className="avatar-title rounded bg-transparent text-success fs-24">
+            <div className="goodData-sm me-2">
+              <div className="goodData-title rounded bg-transparent text-success fs-24">
                 <i className={props.pricingDetails.icon}></i>
               </div>
             </div>
@@ -114,26 +114,24 @@ const PricingWidgetList = (props) => {
   );
 };
 
-function AvatarDetail(props) {
+function GoodDataDetail(props) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   let { id } = useParams();
-  const [Avatar, setAvatar] = useState({
-    name: '',
-    file_url: '',
-    cost: '',
+  const [GoodData, setGoodData] = useState({
+    ame: '', usage: '', voterId: '', image_url: null, amount: '',tech_prop:'',
   });
-  const [AvatarSrc, setAvatarSrc] = useState({
+  const [GoodDataSrc, setGoodDataSrc] = useState({
   });
   useEffect(() => {
     if (id) {
-      getAvatar(id).then(res => {
-        setAvatar(res);
+      getGoodData(id).then(res => {
+        setGoodData(res);
       });
-      setAvatarSrc(downloadAvatar(id));
-      console.log(downloadAvatar(id));
+      setGoodDataSrc(downloadGoodImage(id));
+      console.log(downloadGoodImage(id));
     }
   }, []);
   const toggleCustom = tab => {
@@ -141,12 +139,12 @@ function AvatarDetail(props) {
       setcustomActiveTab(tab);
     }
   };
-  document.title = "Avatar Details | Velzon - React Admin & Dashboard Template";
+  document.title = "GoodData Details | Velzon - React Admin & Dashboard Template";
   return (
     <div className="page-content">
       <Container fluid>
 
-        <BreadCrumb title="Avatar Details" pageTitle="Ecommerce" />
+        <BreadCrumb title="GoodData Details" pageTitle="Ecommerce" />
 
         <Row>
           <Col lg={12}>
@@ -163,14 +161,14 @@ function AvatarDetail(props) {
                         <div className="swiper-wrapper">
                           <SwiperSlide>
                             <img
-                              src={AvatarSrc}
+                              src={GoodDataSrc}
                               alt=""
                               className="img-fluid d-block"
                             />
                           </SwiperSlide>
                           <SwiperSlide>
                             <img
-                              src={AvatarSrc}
+                              src={GoodDataSrc}
                               alt=""
                               className="img-fluid d-block"
                             />
@@ -184,7 +182,7 @@ function AvatarDetail(props) {
                     <div className="mt-xl-0 mt-5">
                       <div className="d-flex">
                         <div className="flex-grow-1">
-                          <h4>{Avatar.name}</h4>
+                          <h4>{GoodData.name}</h4>
                         </div>
                         <div className="flex-shrink-0">
                           <div>
@@ -197,7 +195,7 @@ function AvatarDetail(props) {
                               }}
                             >
                               <Link
-                                to="/admin-add-Avatar"
+                                to="/admin-add-GoodData"
                                 className="btn btn-success"
                                 
                               >
@@ -206,7 +204,7 @@ function AvatarDetail(props) {
                               </Link>
                             </Tooltip>
                             <a
-                              href={"/admin-add-Avatar/"+id}
+                              href={"/admin-add-GoodData/"+id}
                               id="TooltipTop"
                               className="btn btn-light"
                             >
@@ -254,7 +252,7 @@ function AvatarDetail(props) {
                       </Row> */}
 
                       <div className="product-content mt-5">
-                        <h5 className="fs-14 mb-3">Avatar Description :</h5>
+                        <h5 className="fs-14 mb-3">GoodData Description :</h5>
                         <Nav tabs className="nav-tabs-custom nav-success">
                           <NavItem>
                             <NavLink
@@ -300,15 +298,27 @@ function AvatarDetail(props) {
                                     <th scope="row" style={{ width: "200px" }}>
                                       Name
                                     </th>
-                                    <td>{Avatar.name}</td>
+                                    <td>{GoodData.name}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">File_url</th>
-                                    <td>{Avatar.file_url}</td>
+                                    <th scope="row">Image_url</th>
+                                    <td>{GoodData.image_url}</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">Cost</th>
-                                    <td>{Avatar.cost}</td>
+                                    <th scope="row">amount</th>
+                                    <td>{GoodData.amount}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Tech_prop</th>
+                                    <td>{GoodData.tech_prop}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Usage</th>
+                                    <td>{GoodData.usage}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">VoterId</th>
+                                    <td>{GoodData.voterId}</td>
                                   </tr>
                                   
                                 </tbody>
@@ -366,4 +376,4 @@ function AvatarDetail(props) {
   );
 }
 
-export default AvatarDetail;
+export default GoodDataDetail;

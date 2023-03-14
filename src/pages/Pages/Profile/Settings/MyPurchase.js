@@ -34,7 +34,7 @@ const MyPurchase = () => {
                             <option value="Software">Software</option>
                             <option value="Data">Data</option>
                             <option value="Avatar">Avatar</option>
-                            <option value="Avatar">Campus</option>
+                            <option value="Campus">Campus</option>
 
                         </select>
                     </div>

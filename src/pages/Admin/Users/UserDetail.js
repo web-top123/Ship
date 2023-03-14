@@ -371,11 +371,11 @@ function UserDetail(props) {
                                   </tr>
                                   <tr>
                                     <th scope="row">Gender</th>
-                                    <td>{user.gender === 'male' ? 'Male' : 'Female'}</td>
+                                    <td>{user.gender === 'female' ? 'Female' : 'Male'}</td>
                                   </tr>
                                   <tr>
                                     <th scope="row">Birthday</th>
-                                    <td>{user.birthday}</td>
+                                    {/* <td>{user.birthday}</td> */}
                                   </tr>
                                   <tr>
                                     <th scope="row">Balance</th>

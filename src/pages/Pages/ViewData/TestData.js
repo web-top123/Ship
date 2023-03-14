@@ -62,7 +62,7 @@ const columnsShipData = [
     },
     {
         Header: "Photo",
-        accessor: "file_url",
+        accessor: "image_url",
         filterable: false,
         Cell: (params) => (<div className="d-flex align-items-center"><div className="media-sm bg-light rounded p-1">
             <img src={params.row.original.image_url} alt=" " width="80px"/>
@@ -89,7 +89,7 @@ const columnsShipData = [
         accessor: "limit",
         filterable: false,
         Cell: (params) => (<>
-            <p>{params.row.original.limit}</p>
+            <p>{params.row.original.full_load}</p>
         </>)
     },
     {
@@ -98,6 +98,82 @@ const columnsShipData = [
         filterable: false,
         Cell: (params) => (<>
             <p>{params.row.original.type}</p>
+        </>)
+    },
+    // {
+    //     Header: "Visit",
+    //     accessor: "visit",
+    //     filterable: false,
+    //     Cell: (params) => (<>
+    //         <p>{params.row.original.visit}</p>
+    //     </>)
+    // },
+    {
+        Header: "",
+        accessor: "action",
+        filterable: false,
+        Cell: (params) => (<>
+            {params.row.original.morebtn}
+        </>)
+    },
+]
+
+//load data
+const columnsLoadData = [
+    {
+        Header: "ID",
+        accessor: "id",
+        filterable: false,
+        Cell: (params) => (<>
+            <p>{params.row.original.id}</p>
+        </>)
+    },
+    {
+        Header: "Name",
+        accessor: "name",
+        filterable: false,
+        Cell: (params) => (<>
+            <p>{params.row.original.name}</p>
+        </>)
+    },
+    {
+        Header: "Amount",
+        accessor: "amount",
+        filterable: false,
+        Cell: (params) => (<>
+            <p>{params.row.original.amount}</p>
+        </>)
+    },
+    {
+        Header: "From",
+        accessor: "from",
+        filterable: false,
+        Cell: (params) => (<>
+            <p>{params.row.original.from}</p>
+        </>)
+    },
+    {
+        Header: "To",
+        accessor: "to",
+        filterable: false,
+        Cell: (params) => (<>
+            <p>{params.row.original.to}</p>
+        </>)
+    },
+    {
+        Header: "Date",
+        accessor: "date",
+        filterable: false,
+        Cell: (params) => (<>
+            <p>{params.row.original.plan_date}</p>
+        </>)
+    },
+    {
+        Header: "Status",
+        accessor: "status",
+        filterable: false,
+        Cell: (params) => (<>
+            <p>{params.row.original.status}</p>
         </>)
     },
     {
@@ -118,89 +194,13 @@ const columnsShipData = [
     },
 ]
 
-//load data
-const columnsLoadData = [
-    {
-        Header: "ID",
-        accessor: "id",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.id}</div>
-        </>)
-    },
-    {
-        Header: "Name",
-        accessor: "name",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.name}</div>
-        </>)
-    },
-    {
-        Header: "Amount",
-        accessor: "amount",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.amount}</div>
-        </>)
-    },
-    {
-        Header: "From",
-        accessor: "from",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.from}</div>
-        </>)
-    },
-    {
-        Header: "To",
-        accessor: "to",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.to}</div>
-        </>)
-    },
-    {
-        Header: "Date",
-        accessor: "date",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.date}</div>
-        </>)
-    },
-    {
-        Header: "Status",
-        accessor: "status",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.status}</div>
-        </>)
-    },
-    {
-        Header: "Visit",
-        accessor: "visit",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.visit}</div>
-        </>)
-    },
-    {
-        Header: "",
-        accessor: "action",
-        filterable: false,
-        Cell: (params) => (<>
-            {params.row.original.morebtn}
-        </>)
-    },
-]
-
 const columnsProductData = [
     {
         Header: "ID",
         accessor: "id",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.id}</div>
+            <p>{params.row.original.id}</p>
         </>)
     },
     {
@@ -208,23 +208,23 @@ const columnsProductData = [
         accessor: "name",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.name}</div>
+            <p>{params.row.original.name}</p>
         </>)
     },
     {
         Header: "Photo",
-        accessor: "file_url",
+        accessor: "image_url",
         filterable: false,
-        Cell: (params) => (<div className="img-item">
-            <img src={params.row.original.file_url} alt=" " width="100px"/>
-        </div>)
+        Cell: (params) => (<div className="d-flex align-items-center"><div className="media-sm bg-light rounded p-1">
+            <img src={params.row.original.image_url} alt=" " width="100px"/>
+        </div></div>)
     },
     {
         Header: "A/Unit",
         accessor: "unit",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.unit}</div>
+            <p>{params.row.original.amount}</p>
         </>)
     },
     {
@@ -232,7 +232,7 @@ const columnsProductData = [
         accessor: "price",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.price}</div>
+            <p>{params.row.original.price}</p>
         </>)
     },
     {
@@ -240,17 +240,17 @@ const columnsProductData = [
         accessor: "licence",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.licence}</div>
+            <p>{params.row.original.number}</p>
         </>)
     },
-    {
-        Header: "Visit",
-        accessor: "visit",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.visit}</div>
-        </>)
-    },
+    // {
+    //     Header: "Visit",
+    //     accessor: "visit",
+    //     filterable: false,
+    //     Cell: (params) => (<>
+    //         <p>{params.row.original.visit}</p>
+    //     </>)
+    // },
     {
         Header: "",
         accessor: "action",
@@ -267,7 +267,7 @@ const columnsGoodData = [
         accessor: "id",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.id}</div>
+            <p>{params.row.original.id}</p>
         </>)
     },
     {
@@ -275,23 +275,23 @@ const columnsGoodData = [
         accessor: "name",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.name}</div>
+            <p>{params.row.original.name}</p>
         </>)
     },
     {
         Header: "Photo",
-        accessor: "file_url",
+        accessor: "image_url",
         filterable: false,
-        Cell: (params) => (<div className="img-item">
-            <img src={params.row.original.file_url} alt=" " width="100px"/>
-        </div>)
+        Cell: (params) => (<div className="d-flex align-items-center"><div className="media-sm bg-light rounded p-1">
+            <img src={params.row.original.image_url} alt=" " width="100px"/>
+        </div></div>)
     },
     {
         Header: "A/Unit",
         accessor: "unit",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.unit}</div>
+            <p>{params.row.original.unit}</p>
         </>)
     },
     {
@@ -299,7 +299,7 @@ const columnsGoodData = [
         accessor: "price",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.price}</div>
+            <p>{params.row.original.price}</p>
         </>)
     },
     {
@@ -307,17 +307,17 @@ const columnsGoodData = [
         accessor: "licence",
         filterable: false,
         Cell: (params) => (<>
-            <div>{params.row.original.licence}</div>
+            <p>{params.row.original.licence}</p>
         </>)
     },
-    {
-        Header: "Visit",
-        accessor: "visit",
-        filterable: false,
-        Cell: (params) => (<>
-            <div>{params.row.original.visit}</div>
-        </>)
-    },
+    // {
+    //     Header: "Visit",
+    //     accessor: "visit",
+    //     filterable: false,
+    //     Cell: (params) => (<>
+    //         <p>{params.row.original.visit}</p>
+    //     </>)
+    // },
     {
         Header: "",
         accessor: "action",
