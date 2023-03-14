@@ -226,6 +226,18 @@ const AddCampus = (props) => {
                       </div>
                     </Col>
                     <Col lg={6}>
+
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          htmlFor="manufacturer-brand-input"
+                        >
+                          CampusCategoryId
+                        </label>
+                        <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
+                      </div>
+                    </Col>
+                    {/* <Col lg={6}>
                       <div className="mb-3">
                         <label
                           className="form-label"
@@ -244,10 +256,10 @@ const AddCampus = (props) => {
                           }}
                         />
                       </div>
-                    </Col>
+                    </Col> */}
                   </Row>
 
-                  <Row>
+                  {/* <Row> */}
                     {/* <Col lg={6}>
                       <div className="mb-3">
                         <label
@@ -268,7 +280,7 @@ const AddCampus = (props) => {
                         />
                       </div>
                     </Col> */}
-                    <Col lg={6}>
+                    {/* <Col lg={6}>
 
                       <div className="mb-3">
                         <label
@@ -280,7 +292,7 @@ const AddCampus = (props) => {
                         <DropdownTreeSelect data={cateList} onChange={onChange} onAction={onAction} onNodeToggle={onNodeToggle} mode="radioSelect" />
                       </div>
                     </Col>
-                  </Row>
+                  </Row> */}
 
                 </CardBody>
               </Card>

@@ -136,6 +136,8 @@ export const GET_ALL_STUDY = "/api/campus/findAll";
 export const GET_ALL_STUDY_BY_CATEGORY = "/api/campus/findCampusCategoryById";
 export const GET_ALL_TOP_CAMPUS = "/api/campus/getTopCampuses";
 export const GET_ALL_TOP_USERS = "/api/campus/findTopUser";
+export const GET_BROWSES = "/api/campus/getAllCampusWithBrowses";
+
 
 //softwarefield
 export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";

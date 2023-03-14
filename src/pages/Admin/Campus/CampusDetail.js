@@ -22,7 +22,7 @@ import {
   useParams
 } from "react-router-dom";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { addNewCampus, getCampus, updateOneCampus } from "../../../helpers/fakebackend_helper";
+import { addNewCampus, getAllCampusWithBrowses, updateOneCampus } from "../../../helpers/fakebackend_helper";
 
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
@@ -130,7 +130,7 @@ function CampusDetail(props) {
   });
   useEffect(() => {
     if (id) {
-      getCampus(id).then(res => {
+      getAllCampusWithBrowses(id).then(res => {
         setCampus(res);
       })
     }
@@ -350,7 +350,7 @@ function CampusDetail(props) {
                                   </tr>
                                   <tr>
                                     <th scope="row">Browses</th>
-                                    <td>{Campus.browses}</td>
+                                    <td>{Campus.browseCnt}</td>
                                   </tr>
                                 </tbody>
                               </table>

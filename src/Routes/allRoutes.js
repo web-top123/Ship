@@ -293,7 +293,12 @@ import Avatars from "../pages/Admin/Avatars/index";
 import AvatarDetail from "../pages/Admin/Avatars/AvatarDetail";
 import AddAvatar from "../pages/Admin/Avatars/AddAvatar";
 
-// Avatar Section
+// ShipData Section
+import ShipDatas from "../pages/Admin/ShipDatas/index";
+import ShipDataDetail from "../pages/Admin/ShipDatas/ShipDataDetail";
+import AddShipData from "../pages/Admin/ShipDatas/AddShipData";
+
+// Media Section
 import Medias from "../pages/Admin/Medias/index";
 import MediaDetail from "../pages/Admin/Medias/MediaDetail";
 import AddMedia from "../pages/Admin/Medias/AddMedia";
@@ -523,12 +528,6 @@ const authProtectedRoutes = [
   { path: "/admin-add-comment", component: AddComment },
   { path: "/admin-add-comment/:id", component: AddComment },
 
-  // Datas
-  // { path: "/admin-datas", component: Datas },
-  // { path: "/admin-data-details/:id", component: DataDetail },
-  // { path: "/admin-add-data", component: AddData },
-  // { path: "/admin-add-data/:id", component: AddData },
-
   // DataCategory
   { path: "/admin-dataCategories", component: DataCategories },
   { path: "/admin-dataCategory-details/:id", component: DataCategoryDetail },
@@ -549,10 +548,16 @@ const authProtectedRoutes = [
 
 
   // Avatars
-  { path: "/admin-avatars", component: Avatars },
+  { path: "/admin-avatars", component: ShipDatas },
   { path: "/admin-avatar-details/:id", component: AvatarDetail },
   { path: "/admin-add-avatar", component: AddAvatar },
   { path: "/admin-add-avatar/:id", component: AddAvatar },
+
+  // ShipDatas
+  { path: "/admin-shipDatas", component: ShipDatas },
+  { path: "/admin-shipData-details/:id", component: ShipDataDetail },
+  { path: "/admin-add-shipData", component: AddShipData },
+  { path: "/admin-add-shipData/:id", component: AddShipData },
 
   // Media
   { path: "/admin-medias", component: Medias },
