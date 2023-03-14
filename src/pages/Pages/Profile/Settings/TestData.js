@@ -3,29 +3,18 @@ const columnsData = [
         Header: "ID",
         accessor: "id",
         filterable: false,
-        Cell: (cell) => (<>
-            <div></div>
-         </>)
     },
     {
-        Header: "Sort",
-        accessor: "sort",
+        Header: "Category",
+        accessor: "category",
         filterable: false,
         Cell: (history) => (<>
            <div>{history.row.original.campus.campusCategory['title']}</div>
         </>)
     },
     {
-        Header: "Level",
-        accessor: "level",
-        filterable: false,
-        Cell: (history) => (<>
-            <div>{history.row.original.campus['level']}</div>
-         </>)
-    },
-    {
         Header: "Title",
-        accessor: "title",
+        accessor: "name",
         filterable: false,
         Cell: (history) => (<>
             <div>{history.row.original.campus['name']}</div>
@@ -33,7 +22,7 @@ const columnsData = [
     },
     {
         Header: "View Date",
-        accessor: "date",
+        accessor: "createdAt",
         filterable: false,
     },
     {
