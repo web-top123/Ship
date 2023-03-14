@@ -3,7 +3,7 @@ import { Col, Container, Row, Card, CardBody, TabContent, CardHeader, TabPane } 
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { useMemo } from "react";
 import {BlogDetailData, columnsReplyMessageData} from './TestBlogDetail'
-import { getOneArticlebyId, downloadAvatar } from "../../../helpers/fakebackend_helper";
+import { getArticle, downloadAvatar } from "../../../helpers/fakebackend_helper";
 import { Link, useParams  } from "react-router-dom";
 import ArticleSideBar from "./ArticleSideBar";
 import TableContainer from "../../../Components/Common/TableContainer";
@@ -26,7 +26,7 @@ const BlogServiceDetail = () => {
     });
     useEffect(() => {
       if (id) {
-        getOneArticlebyId(id).then(res => {
+        getArticle(id).then(res => {
             setArticleList(res);          
         })
       }
