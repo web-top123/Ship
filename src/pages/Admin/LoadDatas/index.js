@@ -22,7 +22,7 @@ import TableContainer from "../../../Components/Common/TableContainer";
 //redux
 import { Link } from "react-router-dom";
 
-import { getLoadDatas, deleteLoadData, downloadLoadData } from "../../../helpers/fakebackend_helper";
+import { getLoadDatas, deleteLoadData, downloadLoadImage } from "../../../helpers/fakebackend_helper";
 
 const LoadDatas = (props) => {
   const [loadDataList, setLoadDataList] = useState([]);
@@ -75,9 +75,9 @@ const LoadDatas = (props) => {
               <div className="flex-shrink-0 me-3">
                 <div className="loadData-sm bg-light rounded p-1">
                   <img
-                  src={downloadLoadData(loadData.row.original.id)}
+                  src={downloadLoadImage(loadData.row.original.id)}
                   // {loadData.row.file_url}
-                    // src={downloadLoadData}
+                    // src={downloadLoadImage}
                     alt=""
                     className="img-fluid d-block"
                   />
