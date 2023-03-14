@@ -44,7 +44,18 @@ import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 
 
 
-import { getAllStudyByCategory, getAuthenticatedUser, getAllStudy, getAllCampusWithBrowses, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers,downloadAvatar } from '../../../helpers/fakebackend_helper';
+import {
+  getAllStudyByCategory,
+  getAuthenticatedUser,
+  getAllStudy,
+  getAllCampusWithBrowses,
+  getCampusCategories,
+  getTopCampus,
+  addNewBrowserHistory,
+  getTopUsers,
+  downloadAvatar
+} 
+from '../../../helpers/fakebackend_helper';
 const Study = () => {
 
 
@@ -58,7 +69,7 @@ const Study = () => {
 
       });
 
-      getAllStudy().then(studyFieldList => {
+      getAllCampusWithBrowses().then(studyFieldList => {
         setstudyData(studyFieldList);
       });
     } else {
@@ -84,6 +95,7 @@ const Study = () => {
   //     setInputText(lowerCase);
   //   };
 
+
   const getStudyByCate = (id) => {
     getAllStudyByCategory(id).then(categoryData => {
       setstudyData(categoryData);
@@ -91,6 +103,7 @@ const Study = () => {
   }
 
   const [studyData, setstudyData] = useState([]);
+  const [selectedStyData, setSelectedStyData] = useState("");
   const [TopcampusData, setTopcampusData] = useState([]);
   const [TopUsersData, setTopUsersData] = useState([]);
   const [browseCnt, setBrowseCnt] = useState([]);
@@ -119,12 +132,12 @@ const Study = () => {
   }, [])
   useEffect(() => {
     getAllCampusWithBrowses().then(allCampusListWithBrowses => {
-      console.log("AAAAAAAA",allCampusListWithBrowses);
+      console.log("AAAAAAAA", allCampusListWithBrowses);
 
       setBrowseCnt(allCampusListWithBrowses)
     })
   }, [])
-  
+
   useEffect(() => {
     getCategoryList();
     fetchData();
@@ -244,7 +257,7 @@ const Study = () => {
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
-  const filteredData = browseCnt.filter((el) => {
+  const filteredData = studyData.filter((el) => {
     //if no input the return the original
     if (inputText === '') {
       return el;
@@ -584,15 +597,15 @@ const Study = () => {
                           <CardBody>
                             <div className="d-flex align-items-center text-muted  ">
                               <div className="flex-shrink-0 me-3">
-                                <img 
-                                src={downloadAvatar(UsersItem.currentAvatarsId)} 
-                                className="avatar-sm rounded-circle shadow bg-light" 
-                                alt="...">
+                                <img
+                                  src={downloadAvatar(UsersItem.currentAvatarsId)}
+                                  className="avatar-sm rounded-circle shadow bg-light"
+                                  alt="...">
                                 </img>
                               </div>
                               <div className="flex-grow-1">
                                 <h5 className="fs-14">{UsersItem.username}</h5>
-                                
+
                               </div>
                             </div>
                           </CardBody>
@@ -645,11 +658,17 @@ const Study = () => {
                       {filteredData.map((study, key) => (
 
                         <React.Fragment key={study.id} >
-                          <tr >
+                          <tr onClick={() => {
+                            setSelectedStyData(study.name);
+                            console.log(selectedStyData);
+                          }}>
                             <td className="text-truncate" style={{ "border": "none", "width": "25%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.name}</div></Link></td>
                             <td className="text-truncate" style={{ "border": "none", "width": "45%" }} onClick={() => showCampus(study)}><Link to="#"><div>{study.description.substring(0, 40) + "..."}</div></Link></td>
                             <td style={{ border: "none" }}>{study.cost}</td>
-                            <td style={{ border: "none" }}>{study.browseCnt}</td>
+                            <td style={{ border: "none" }}>{
+                                // browseCnt.map((cnt, key) => (cnt.campusId == study.id && <React.Fragment key={cnt.campusId} ><tr><td>{cnt.browseCnt}</td></tr></React.Fragment>))
+                                study.cnts
+                            }</td>
                             <td style={{ border: "none" }}>{study.recommends}</td>
                             <td style={{ border: "none" }}>{study.unrecommends}</td>
                           </tr>
