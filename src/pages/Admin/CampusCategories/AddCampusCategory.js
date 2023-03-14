@@ -130,7 +130,7 @@ const AddCampusCategory = (props) => {
 
         <BreadCrumb title={id ? "Edit CampusCategory" : "Add CampusCategory"} pageTitle="Admin CampusCategory" />
 
-        <Modal id="topmodal" isOpen={modalPositionTop} backdrop="static" keyboard="false" toggle={() => { togPositionTop(); }} >
+        <Modal id="topmodal" isOpen={modalPositionTop} backdrop="static" keyboard={false} toggle={() => { togPositionTop(); }} >
           <ModalHeader>
             Modal Heading
             <Button type="button" className="btn-close" onClick={() => { setmodalPositionTop(false); }} aria-label="Close"> </Button>

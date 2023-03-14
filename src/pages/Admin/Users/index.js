@@ -141,10 +141,10 @@ const Users = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-user-details/" + cellProps.row.original.id}>
+                {/* <DropdownItem href={"admin-user-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
-                </DropdownItem>
+                </DropdownItem> */}
 
                 <DropdownItem href={"admin-add-user/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}

@@ -96,7 +96,7 @@ const AddProgramCategory = (props) => {
 
         <BreadCrumb title={id ? "Edit ProgramCategory" : "Add ProgramCategory"} pageTitle="Admin ProgramCategory" />
 
-        <Modal id="topmodal" isOpen={modal_positionTop} backdrop="static" keyboard="false" toggle={() => { tog_positionTop(); }} >
+        <Modal id="topmodal" isOpen={modal_positionTop} backdrop="static" keyboard={false} toggle={() => { tog_positionTop(); }} >
           <ModalHeader>
             Modal Heading
             <Button type="button" className="btn-close" onClick={() => { setmodal_positionTop(false); }} aria-label="Close"> </Button>
