@@ -3,91 +3,49 @@ import Home from './home';
 
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { Card, CardBody, Col, Container, Row, } from 'reactstrap';
+import introData from './introData';
 const CompanyIntroduction = () => {
     document.title = "Landing | Velzon - React Admin & Dashboard Template";
-    return (    
-        <div className="page-content">                                                                    
-        <React.Fragment>
-            <Container fluid>
-        <BreadCrumb title="Introduction" pageTitle="Ecommerce" />
-           
-                <Row>
-                    <Home></Home>
-                  
-                    
-                </Row>
-               
-               <Row>
+    return (
+        <div className="page-content">
+            <React.Fragment>
+                <Container fluid>
+                    <BreadCrumb title="Introduction" pageTitle="Ecommerce" />
+                    <Row>
+                        <Home />
+                    </Row>
+                    {introData.map(item => (<Row key={item.name}>
                         <Col lg={12}>
                             <Card>
-                            
-
                                 <CardBody>
+                                    <div style={{ padding: '20px' }}>
+                                        <Row>
+                                            <Col xxl={9} className="card ribbon-box shadow-none mb-lg-0">
+                                                <CardBody>
+                                                    <div className="ribbon ribbon-primary ribbon-shape">{item.name}</div>
+                                                    <div className="ribbon-content text-muted mt-4">
+                                                        <p className="mb-0">Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas
+                                                            mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio.</p>
+                                                    </div>
+                                                </CardBody>
 
-                                    <div className="live-preview">
-                                        <Row className="g-3">
-                                            <p className="text-muted">Use <code>ribbon-shape</code> class to show ribbon shaped ribbon.</p>
-                                            <Col xxl={6}>
-                                                <div className="card ribbon-box border shadow-none mb-lg-0">
-                                                    <CardBody>
-                                                        <div className="ribbon ribbon-primary ribbon-shape">Primary</div>
-                                                        <h5 className="fs-14 text-end">Ribbon Shape</h5>
-                                                        <div className="ribbon-content text-muted mt-4">
-                                                            <p className="mb-0">Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas
-                                                                mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio.</p>
-                                                        </div>
-                                                    </CardBody>
-                                                </div>
+                                            </Col>
+                                            <Col xxl={3} className="card ribbon-box shadow-none mb-lg-0">
+                                                <CardBody>
+                                                    <div  >
+                                                        <video className="mb-0" controls></video>
+                                                    </div>
+                                                </CardBody>
                                             </Col>
 
-                                            <Col xxl={6}>
-                                                <div className="card ribbon-box border shadow-none mb-lg-0">
-                                                    <CardBody>
-                                                        <div className="ribbon ribbon-success ribbon-shape">Success</div>
-                                                        <h5 className="fs-14 text-end">Ribbon Shape</h5>
-                                                        <div className="ribbon-content text-muted mt-4">
-                                                            <p className="mb-0">Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas
-                                                                mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio.</p>
-                                                        </div>
-                                                    </CardBody>
-                                                </div>
-                                            </Col>
-
-                                            <Col xxl={6}>
-                                                <div className="card ribbon-box border shadow-none mb-lg-0">
-                                                    <CardBody>
-                                                        <div className="ribbon ribbon-primary ribbon-shape">Primary</div>
-                                                        <h5 className="fs-14 text-end">Ribbon Shape</h5>
-                                                        <div className="ribbon-content text-muted mt-4">
-                                                            <p className="mb-0">Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas
-                                                                mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio.</p>
-                                                        </div>
-                                                    </CardBody>
-                                                </div>
-                                            </Col>
-
-                                            <Col xxl={6}>
-                                                <div className="card ribbon-box border shadow-none mb-lg-0">
-                                                    <CardBody>
-                                                        <div className="ribbon ribbon-success ribbon-shape">Success</div>
-                                                        <h5 className="fs-14 text-end">Ribbon Shape</h5>
-                                                        <div className="ribbon-content text-muted mt-4">
-                                                            <p className="mb-0">Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas
-                                                                mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio.</p>
-                                                        </div>
-                                                    </CardBody>
-                                                </div>
-                                            </Col>
                                         </Row>
                                     </div>
-                                  
                                 </CardBody>
                             </Card>
                         </Col>
-                    </Row>
-           
-          </Container>
-        </React.Fragment>
+                    </Row>))};
+                </Container>
+            </React.Fragment>
         </div>
     );
 };
