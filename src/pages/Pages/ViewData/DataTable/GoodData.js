@@ -6,6 +6,7 @@ import TableContainer from "../../../../Components/Common/TableContainer";
 import { useSelector, useDispatch } from "react-redux";
 
 import { addNewDataCategory, addNewDataPurchaseHistory, downloadGoodImage, getAuthenticatedUser, getGoodDatas } from "../../../../helpers/fakebackend_helper";
+import { useHistory } from 'react-router-dom';
 
 const GoodData = () => {
     const columns = useMemo(() => columnsGoodData, []);
@@ -13,7 +14,7 @@ const GoodData = () => {
     const [dataList, setDataList] = useState([]);
     const [goodData, setGoodData] = useState({});
     const myInformationSelector = useSelector(state => state.Profile.myinformation);
-
+    const history = useHistory();
     useEffect(() => {
         getDataList();
     }, []);
@@ -27,7 +28,14 @@ const GoodData = () => {
                 className="btn btn-soft-primary btn-sm edit-item-btn shadow-none" 
                 data-bs-toggle="modal" 
                 data-bs-target="#showModal"
-                onClick={() => { tog_togFirst(); setGoodData({ categoryId: 4, userId: myInformationSelector.id, username: myInformationSelector.username, dataId: e.id, dataname: e.name, voterId: e.voterId }); }}
+                onClick={() => { 
+                    if (!myInformationSelector) {
+                        history.push('/login');
+                    } else {
+                        tog_togFirst(); 
+                        setGoodData({ categoryId: 4, userId: myInformationSelector.id, username: myInformationSelector.username, dataId: e.id, dataname: e.name, voterId: e.voterId });
+                    }
+                 }}
             >
                 <span className='pt-1'>more</span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevrons-right ">
