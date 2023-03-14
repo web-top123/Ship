@@ -37,7 +37,7 @@ const MyInformation = () => {
     // }
     const toprightnotify_profile_success = () => toast("Updated Successfully", { position: "top-right", hideProgressBar: true, className: 'bg-success text-white' });
     const dispatch = useDispatch();
-    const [myInformation, setMyInformation] = useState({ birthday: '', username: '', name: '', email: '' });
+    const [myInformation, setMyInformation] = useState({ birthday: '', username: '', name: '', email: '', gender: '' });
     const user = JSON.parse(localStorage.getItem('authUser'));
     const myInformationSelector = useSelector(state => state.Profile.myinformation)
     const profile = useSelector(state => state.Profile)
@@ -77,7 +77,7 @@ const MyInformation = () => {
                             </Label>
                             <Input type="text" className="form-control" id="identifierInput"
 
-                                placeholder="Enter your identifier" value={myInformation.username} onChange={e => { setMyInformation({ ...myInformation, ...{ username: e.target.value } }) }} />
+                                placeholder="Enter your identifier" value={myInformation.username || ''} onChange={e => { setMyInformation({ ...myInformation, ...{ username: e.target.value } }) }} />
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -86,7 +86,7 @@ const MyInformation = () => {
                                 Name
                             </Label>
                             <Input type="text" className="form-control" id="nameInput"
-                                placeholder="Enter your name" value={myInformation.name} onChange={e => { setMyInformation({ ...myInformation, ...{ name: e.target.value } }) }} />
+                                placeholder="Enter your name" value={myInformation.name || ''} onChange={e => { setMyInformation({ ...myInformation, ...{ name: e.target.value } }) }} />
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -94,13 +94,13 @@ const MyInformation = () => {
                             <Label htmlFor="emailInput" className="form-label">Email
                                 Address</Label>
                             <Input type="email" className="form-control" id="emailInput"
-                                placeholder="Enter your email" value={myInformation.email} onChange={e => { setMyInformation({ ...myInformation, ...{ email: e.target.value } }) }} />
+                                placeholder="Enter your email" value={myInformation.email || ''} onChange={e => { setMyInformation({ ...myInformation, ...{ email: e.target.value } }) }} />
                         </div>
                     </Col>
                     <Col lg={6}>
                         <div className="mb-3">
                             <Label htmlFor="skillsInput" className="form-label">Man/Woman</Label>
-                            <select id="genderslection" className="form-select mb-3" value={myInformation.gender} onChange={e => { setMyInformation({ ...myInformation, ...{ gender: e.target.value } }) }} >
+                            <select id="genderslection" className="form-select mb-3" value={myInformation.gender || 'male'} onChange={e => { setMyInformation({ ...myInformation, ...{ gender: e.target.value } }) }} >
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
@@ -116,7 +116,7 @@ const MyInformation = () => {
                                 options={{
                                     dateFormat: "d M, Y"
                                 }}
-                                value={new Date(myInformation.birthday)}
+                                value={new Date(myInformation.birthday || '1990-01-01')}
                                 onChange={e => { setMyInformation({ ...myInformation, ...{ birthday: e[0] } }) }}
                             />
                         </div>

@@ -3,7 +3,7 @@ import { TabPane, Table } from "reactstrap";
 import { Link } from 'react-router-dom';
 import { columnsPurchaseData, PurchaseDataList } from './TestData'
 import TableContainer from "../../../../Components/Common/TableContainer";
-import { getFindDataPurchaseHistoyById, getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
+import { getFindPurchaseHistoyById, getAuthenticatedUser } from '../../../../helpers/fakebackend_helper';
 
 import { useMemo } from "react";
 
@@ -14,7 +14,8 @@ const MyPurchase = () => {
 
     useEffect(() => {
         var user = getAuthenticatedUser();
-        getFindDataPurchaseHistoyById(user.id, { type: selectedType }).then(res => {
+        console.log("Purchase History Called");
+        getFindPurchaseHistoyById(user.id, { type: selectedType }).then(res => {
             console.log("purchase", res)
             setdataList(res);
         })

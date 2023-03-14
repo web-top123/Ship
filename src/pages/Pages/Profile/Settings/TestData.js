@@ -257,7 +257,7 @@ const columnsPurchaseData = [
     },
     {
         Header: "Title",
-        accessor: "title",
+        accessor: "text",
         filterable: false,
     },
     {
@@ -267,7 +267,7 @@ const columnsPurchaseData = [
     },
     {
         Header: "Date",
-        accessor: "date",
+        accessor: "createdAt",
         filterable: false,
     },
 ]
