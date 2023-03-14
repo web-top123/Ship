@@ -8,9 +8,6 @@ import LoadDataVote from './LoadDataVote'
 import ProductDataVote from './ProductDataVote'
 import GoodDataVote from './GoodDataVote'
 
-import classnames from "classnames";
-import { Link, useParams } from "react-router-dom";
-
 // Import React FilePond
 import { registerPlugin } from "react-filepond";
 import Flatpickr from "react-flatpickr";
@@ -25,40 +22,8 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const NewDataVote = (props) => {
-
-  let { id } = useParams();
+  
   const [category, setCategory] = useState({ label: "About Ship", value: "about_ship" });
-
-  const [shipData, setShipData] = useState({
-    name: '',
-    image_url: '',
-    plan_date: '',
-    type:'',
-    port: '',
-    price: '',
-    owner: '',
-    runner: '',
-    total_weight: '',
-    load_weight: '',
-    weight: '',
-    current_height: '',
-    width: '',
-    length: '',
-    full_load: '',
-    engine: '',
-    built_date: '',
-    factory: '',
-    location: '',
-    status: '',
-  });
-
-  useEffect(() => {
-    if (id) {
-      getShipData(id).then(res => {
-        setShipData(res);
-      })
-    }
-  }, []);
 
   // Modal
   const [modal_togFirst, setmodal_togFirst] = useState(false);

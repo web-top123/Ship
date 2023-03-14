@@ -11,6 +11,7 @@ export const GET_MY_INFORMATION = "/api/myInfo/get_one";
 export const PUT_SAVE_MY_INFORMATION = "/api/myInfo/update";
 export const GET_FIND_BROWSER_HISTORY = "/api/browseHistory/findBrowseHistoryById";
 export const GET_FIND_DATA_PURCHASE_HISTORY = "/api/dataPurchaseHistory/finddataPurchaseHistoyById";
+export const GET_FIND_TEST_PURCHASE_HISTORY = "/api/testPurchaseHistory/findtestPurchaseHistoyById";
 export const GET_FIND_BROWSER_HISTORY_ALL = "/api/browseHistory/get_All";
 export const GET_FIND_PASSED_TEST = "/api/findPassedTestById";
 export const ADD_NEW_BROWSER_HISTORY = "/api/browseHistory/create";
@@ -135,6 +136,8 @@ export const GET_ALL_STUDY = "/api/campus/findAll";
 export const GET_ALL_STUDY_BY_CATEGORY = "/api/campus/findCampusCategoryById";
 export const GET_ALL_TOP_CAMPUS = "/api/campus/getTopCampuses";
 export const GET_ALL_TOP_USERS = "/api/campus/findTopUser";
+export const GET_BROWSES = "/api/campus/getAllCampusWithBrowses";
+
 
 //softwarefield
 export const GET_ALL_SOFTWARE_WITH_CATEGORY = "/api/program/findAllBy";
@@ -306,3 +309,6 @@ export const DELETE_ANSWER = "/api/answer/delete";
 
 // DataPurchaseHistory
 export const ADD_NEW_DATA_PURCHASE_HISTORY = "/api/datapurchasehistory/create";
+
+// DataPurchaseHistory
+export const ADD_NEW_TEST_PURCHASE_HISTORY = "/api/testPurchaseHistory/create";

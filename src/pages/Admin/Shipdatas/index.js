@@ -21,18 +21,18 @@ import TableContainer from "../../../Components/Common/TableContainer";
 
 //redux
 import { Link } from "react-router-dom";
+import { getShipDatas, deleteShipData, downloadShipImage } from "../../../helpers/fakebackend_helper";
 
-import { getAvatars, deleteAvatar, downloadAvatar } from "../../../helpers/fakebackend_helper";
 
-const Avatars = (props) => {
-  const [avatarList, setAvatarList] = useState([]);
+const ShipDatas = (props) => {
+  const [shipDataList, setShipDataList] = useState([]);
   useEffect(() => {
-    getAvatarList();
+    getShipDataList();
   }, []);
 
-  const getAvatarList = () => {
-    getAvatars().then(res => {
-      setAvatarList(res);
+  const getShipDataList = () => {
+    getShipDatas().then(res => {
+      setShipDataList(res);
     })
   }
 
@@ -40,17 +40,17 @@ const Avatars = (props) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentID, setCurrentID] = useState(false);
 
-  const onClickDelete = (avatar) => {
-    setCurrentID(avatar.id);
-    // setAvatar(avatar);
+  const onClickDelete = (shipData) => {
+    setCurrentID(shipData.id);
+    // setShipData(shipData);
     setDeleteModal(true);
   };
 
-  const handleDeleteAvatar = () => {
+  const handleDeleteShipData = () => {
     if (currentID) {
-      deleteAvatar(currentID).then(res => {
+      deleteShipData(currentID).then(res => {
         if (res === 1) {
-          getAvatarList();
+          getShipDataList();
           setDeleteModal(false);
         } else {
           setDeleteModal(false);
@@ -63,21 +63,19 @@ const Avatars = (props) => {
     () => [
       {
         Header: "#",
-        Cell: (avatar) => {
+        Cell: (shipData) => {
           return <input type="checkbox" />;
         },
       },
       {
-        Header: "Avatar",
-        Cell: (avatar) => (
+        Header: "ShipData",
+        Cell: (shipData) => (
           <>
             <div className="d-flex align-items-center">
               <div className="flex-shrink-0 me-3">
-                <div className="avatar-sm bg-light rounded p-1">
+                <div className="shipData-sm bg-light rounded p-1">
                   <img
-                  src={downloadAvatar(avatar.row.original.id)}
-                  // {avatar.row.file_url}
-                    // src={downloadAvatar}
+                    src={downloadShipImage(shipData.row.original.id)}
                     alt=""
                     className="img-fluid d-block"
                   />
@@ -86,11 +84,11 @@ const Avatars = (props) => {
               <div className="flex-grow-1">
                 <h5 className="fs-14 mb-1">
                   <Link
-                    to={"/admin-avatar-details/" + avatar.row.original.id}
+                    to={"/admin-shipData-details/" + shipData.row.original.id}
                     className="text-dark"
                   >
                     {" "}
-                    {avatar.row.original.name}
+                    {shipData.row.original.name}
                   </Link>
                 </h5>
               </div>
@@ -101,11 +99,100 @@ const Avatars = (props) => {
         filterable: false,
       },
       {
-        Header: "Cost",
-        accessor: "cost",
+        Header: "Plan_date",
+        accessor: "plan_date",
         filterable: false,
       },
-
+      {
+        Header: "Port",
+        accessor: "port",
+        filterable: false,
+      },
+      {
+        Header: "Type",
+        accessor: "type",
+        filterable: false,
+      },
+      {
+        Header: "Price",
+        accessor: "price",
+        filterable: false,
+      },
+      {
+        Header: "Owner",
+        accessor: "owner",
+        filterable: false,
+      },
+      {
+        Header: "Runner",
+        accessor: "runner",
+        filterable: false,
+      },
+      {
+        Header: "Total_weight",
+        accessor: "total_weight",
+        filterable: false,
+      },
+      {
+        Header: "Load_weight",
+        accessor: "load_weight",
+        filterable: false,
+      },
+      {
+        Header: "Weight",
+        accessor: "weight",
+        filterable: false,
+      },
+      {
+        Header: "Length",
+        accessor: "length",
+        filterable: false,
+      },
+      {
+        Header: "Width",
+        accessor: "width",
+        filterable: false,
+      },
+      {
+        Header: "Current_height",
+        accessor: "current_height",
+        filterable: false,
+      },
+      {
+        Header: "Full_load",
+        accessor: "full_load",
+        filterable: false,
+      },
+      {
+        Header: "Engine",
+        accessor: "engine",
+        filterable: false,
+      },
+      {
+        Header: "Built_date",
+        accessor: "built_date",
+        filterable: false,
+      },
+      {
+        Header: "Factory",
+        accessor: "factory",
+        filterable: false,
+      },
+      {
+        Header: "Location",
+        accessor: "location",
+        filterable: false,
+      },
+      {
+        Header: "Status",
+        accessor: "status",
+        filterable: false,
+      },
+      {
+        Header: "VoterId",
+        accessor: "voterId",
+        filterable: false,
+      },
       {
         Header: "Action",
         Cell: (cellProps) => {
@@ -119,12 +206,12 @@ const Avatars = (props) => {
                 <i className="ri-more-fill" />
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-end">
-                <DropdownItem href={"admin-avatar-details/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-shipData-details/" + cellProps.row.original.id}>
                   <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                   View
                 </DropdownItem>
 
-                <DropdownItem href={"admin-add-avatar/" + cellProps.row.original.id}>
+                <DropdownItem href={"admin-add-shipData/" + cellProps.row.original.id}>
                   <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                   Edit
                 </DropdownItem>
@@ -133,8 +220,8 @@ const Avatars = (props) => {
                 <DropdownItem
                   href="#"
                   onClick={() => {
-                    const avatarData = cellProps.row.original;
-                    onClickDelete(avatarData);
+                    const shipDataData = cellProps.row.original;
+                    onClickDelete(shipDataData);
                   }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -148,17 +235,17 @@ const Avatars = (props) => {
     ],
     []
   );
-  document.title = "Avatars";
+  document.title = "ShipDatas";
   return (
     <div className="page-content">
       <DeleteModal
         show={deleteModal}
-        onDeleteClick={handleDeleteAvatar}
+        onDeleteClick={handleDeleteShipData}
         onCloseClick={() => setDeleteModal(false)}
       />
 
       <Container fluid>
-        <BreadCrumb title="Avatars" pageTitle="Admin" />
+        <BreadCrumb title="ShipDatas" pageTitle="Admin" />
 
         <Row>
           <div className="col-xl-12 col-lg-12">
@@ -169,11 +256,11 @@ const Avatars = (props) => {
                     <div className="col-sm-auto">
                       <div>
                         <Link
-                          to="/admin-add-avatar"
+                          to="/admin-add-shipData"
                           className="btn btn-success"
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Add
-                          Avatar
+                          ShipData
                         </Link>
                       </div>
                     </div>
@@ -183,7 +270,7 @@ const Avatars = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search Avatars..."
+                            placeholder="Search ShipDatas..."
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -199,12 +286,12 @@ const Avatars = (props) => {
                         id="table-product-list-all"
                         className="table-card gridjs-border-none pb-2"
                       >
-                        {avatarList && avatarList !== "" ? (
+                        {shipDataList && shipDataList !== "" ? (
                           <TableContainer
                             columns={columns}
-                            data={avatarList}
+                            data={shipDataList}
                             isGlobalFilter={false}
-                            isAddAvatarList={false}
+                            isAddShipDataList={false}
                             customPageSize={10}
                             divClass="table-responsive mb-1"
                             tableClass="mb-0 table-borderless"
@@ -239,4 +326,4 @@ const Avatars = (props) => {
   );
 };
 
-export default Avatars;
+export default ShipDatas;

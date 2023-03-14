@@ -14,7 +14,6 @@ const MyPurchase = () => {
 
     useEffect(() => {
         var user = getAuthenticatedUser();
-
         getFindDataPurchaseHistoyById(user.id, { type: selectedType }).then(res => {
             console.log("purchase", res)
             setdataList(res);
@@ -34,8 +33,9 @@ const MyPurchase = () => {
                             <option value="Test">Test</option>
                             <option value="Software">Software</option>
                             <option value="Data">Data</option>
-
                             <option value="Avatar">Avatar</option>
+                            <option value="Campus">Campus</option>
+
                         </select>
                     </div>
                 </div>

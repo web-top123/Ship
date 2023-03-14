@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import BreadCrumb from "../../../../Components/Common/BreadCrumb";
 import { Card, CardBody, Col, Container, CardHeader, Nav, NavItem, NavLink, Row, TabContent, TabPane, Input, Label, Button, Modal, ModalHeader } from "reactstrap";
 
-import { addNewGoodData, getGoodData, updateOneData, updateGoodData } from "../../../../helpers/fakebackend_helper";
+import { addNewGoodData, getGoodData, updateOneData, updateGoodData, getAuthenticatedUser } from "../../../../helpers/fakebackend_helper";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -29,28 +29,7 @@ const GoodDataVote = (props) => {
   let { id } = useParams();
   const [category, setCategory] = useState({ label: "About Good", value: "about_good" });
 
-  const [goodData, setGoodData] = useState({
-    name: '',
-    image_url: '',
-    plan_date: '',
-    type:'',
-    port: '',
-    price: '',
-    owner: '',
-    runner: '',
-    total_weight: '',
-    load_weight: '',
-    weight: '',
-    current_height: '',
-    width: '',
-    length: '',
-    full_load: '',
-    engine: '',
-    built_date: '',
-    factory: '',
-    location: '',
-    status: '',
-  });
+  const [goodData, setGoodData] = useState({});
 
   useEffect(() => {
     if (id) {
@@ -190,19 +169,19 @@ const GoodDataVote = (props) => {
           <div className="mb-3">
             <Row>
               <Col sm={4}>
-                <Label className="form-label" htmlFor="good-owner-input">
-                  7. Good owner
+                <Label className="form-label" htmlFor="good-tech_prop-input">
+                  7. Good tech_prop
                 </Label>
               </Col>
               <Col sm={8}>
                 <Input
                   type="text"
                   className="form-control"
-                  id="Good-owner-input"
+                  id="Good-tech_prop-input"
                   placeholder="Enter product title"
-                  value={goodData.owner}
+                  value={goodData.tech_prop}
                   onChange={e => {
-                    setGoodData({ ...goodData, ...{ owner: e.target.value } })
+                    setGoodData({ ...goodData, ...{ tech_prop: e.target.value } })
                   }}
                 />
               </Col>
@@ -276,7 +255,7 @@ const GoodDataVote = (props) => {
           <div className="mb-3">
             <Row>
               <Col sm={4}>
-                <Label className="form-label" htmlFor="good-runner-input">
+                <Label className="form-label" htmlFor="good-usage-input">
                   8. Good Runner
                 </Label>
               </Col>
@@ -284,11 +263,11 @@ const GoodDataVote = (props) => {
                 <Input
                   type="text"
                   className="form-control"
-                  id="good-runner-input"
+                  id="good-usage-input"
                   placeholder="Enter plan port"
-                  value={goodData.runner}
+                  value={goodData.usage}
                   onChange={e => {
-                    setGoodData({ ...goodData, ...{ runner: e.target.value } })
+                    setGoodData({ ...goodData, ...{ usage: e.target.value } })
                   }}
                 />
               </Col>
@@ -645,12 +624,34 @@ const GoodDataVote = (props) => {
                 tog_togSecond();
                 tog_togFirst(false);
                 e.preventDefault();
+                const formData = new FormData();
+                formData.append("name", goodData.name);
+                formData.append("plan_date", goodData.plan_date);
+                formData.append("type", goodData.type);
+                formData.append("port", goodData.port);
+                formData.append("price", goodData.price);
+                formData.append("tech_prop", goodData.tech_prop);
+                formData.append("usage", goodData.usage);
+                formData.append("total_weight", goodData.total_weight);
+                formData.append("load_weight", goodData.load_weight);
+                formData.append("weight", goodData.weight);
+                formData.append("current_height", goodData.current_height);
+                formData.append("width", goodData.width);
+                formData.append("length", goodData.length);
+                formData.append("full_load", goodData.full_load);
+                formData.append("engine", goodData.engine);
+                formData.append("built_date", goodData.built_date);
+                formData.append("factory", goodData.enginfactorye);
+                formData.append("location", goodData.location);
+                formData.append("status", goodData.status);
+                formData.append("file", goodData.image_url);
+                formData.append("voterId", getAuthenticatedUser().id);
                 if (id) {
-                  updateGoodData(id, goodData, category.value).then(res => {
+                  updateGoodData(id, formData).then(res => {
                     console.log(res);
                   })
                 } else {
-                  addNewGoodData(goodData, category.value).then(res => {
+                  addNewGoodData(formData).then(res => {
                     console.log(res);
                   })
                 }
