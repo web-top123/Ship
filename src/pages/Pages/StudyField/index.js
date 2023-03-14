@@ -42,7 +42,7 @@ import cx from "classnames";
 import "./studyfield.css"
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 
-
+import { useHistory  } from "react-router-dom";
 
 import { getAllStudyByCategory, getAuthenticatedUser, getAllStudy, getAllCampusWithBrowses, getCampusCategories, getTopCampus, addNewBrowserHistory, getTopUsers,downloadAvatar } from '../../../helpers/fakebackend_helper';
 const Study = () => {
@@ -50,6 +50,7 @@ const Study = () => {
 
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const myInformationSelector = useSelector(state => state.Profile.myinformation);
+  const history = useHistory();
 
   const fetchData = async () => {
     if (selectedCategoryId === 1) {
@@ -119,8 +120,6 @@ const Study = () => {
   }, [])
   useEffect(() => {
     getAllCampusWithBrowses().then(allCampusListWithBrowses => {
-      console.log("AAAAAAAA",allCampusListWithBrowses);
-
       setBrowseCnt(allCampusListWithBrowses)
     })
   }, [])
@@ -133,7 +132,6 @@ const Study = () => {
     } else {
       setUserId('');
     }
-    console.log(getAuthenticatedUser().id)
   }, []);
 
   useEffect(() => {
@@ -304,7 +302,13 @@ const Study = () => {
             </Row>
             <Row className="pt-4">
               <div className="col-sm-6 text-center">
-                <Button color="success" onClick={() => { setShowCampusModal(true); purchaseCampus(); }} >Buy</Button>
+                <Button color="success" onClick={() => { 
+                  if (!myInformationSelector) {
+                    history.push('/login');
+                  } else {
+                    setShowCampusModal(true); purchaseCampus(); 
+                  }
+                }} >Buy</Button>
               </div>
               <div className="col-sm-6 text-center">
                 <Button color="primary" onClick={() => {

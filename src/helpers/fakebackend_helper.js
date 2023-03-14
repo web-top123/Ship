@@ -416,6 +416,8 @@ export const getDegree = (id) => api.get(url.GET_Degree + '/' + id);
 
 // get Articles
 export const getArticles = () => api.get(url.GET_ARTICLES);
+export const getTrendingArticles = () => api.get(url.GET_TRENDING_ARTICLES);
+export const getRecentArticles = () => api.get(url.GET_RECENT_ARTICLES);
 export const getArticleFindTopUser = () => api.get(url.GET_ARTICLE_FIND_TOP_USER);
 export const getArticle = (id) => api.get(url.GET_ARTICLE + '/' + id);
 export const getArticleByCategoryId = (id) => api.get(url.GET_ARTICLEBYCATEGORYID + '/' + id);
