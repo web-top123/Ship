@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import BreadCrumb from "../../../../Components/Common/BreadCrumb";
 import { Card, CardBody, Col, Container, CardHeader, Nav, NavItem, NavLink, Row, TabContent, TabPane, Input, Label, Button, Modal, ModalHeader } from "reactstrap";
 
-import { addNewProductData, getProductData, updateOneData, updateProductData } from "../../../../helpers/fakebackend_helper";
+import { addNewProductData, getAuthenticatedUser, getProductData, updateOneData, updateProductData } from "../../../../helpers/fakebackend_helper";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -36,8 +36,8 @@ const ProductDataVote = (props) => {
     type:'',
     port: '',
     price: '',
-    owner: '',
-    runner: '',
+    amount: '',
+    number: '',
     total_weight: '',
     load_weight: '',
     weight: '',
@@ -191,7 +191,7 @@ const ProductDataVote = (props) => {
             <Row>
               <Col sm={4}>
                 <Label className="form-label" htmlFor="product-owner-input">
-                  7. Product owner
+                  7. Amount
                 </Label>
               </Col>
               <Col sm={8}>
@@ -202,7 +202,7 @@ const ProductDataVote = (props) => {
                   placeholder="Enter product title"
                   value={productData.owner}
                   onChange={e => {
-                    setProductData({ ...productData, ...{ owner: e.target.value } })
+                    setProductData({ ...productData, ...{ amount: e.target.value } })
                   }}
                 />
               </Col>
@@ -277,7 +277,7 @@ const ProductDataVote = (props) => {
             <Row>
               <Col sm={4}>
                 <Label className="form-label" htmlFor="product-runner-input">
-                  8. Product Runner
+                  8. Number
                 </Label>
               </Col>
               <Col sm={8}>
@@ -288,7 +288,7 @@ const ProductDataVote = (props) => {
                   placeholder="Enter plan port"
                   value={productData.runner}
                   onChange={e => {
-                    setProductData({ ...productData, ...{ runner: e.target.value } })
+                    setProductData({ ...productData, ...{ number: e.target.value } })
                   }}
                 />
               </Col>
@@ -645,12 +645,34 @@ const ProductDataVote = (props) => {
                 tog_togSecond();
                 tog_togFirst(false);
                 e.preventDefault();
+                const formData = new FormData();
+                formData.append("name", productData.name);
+                formData.append("plan_date", productData.plan_date);
+                formData.append("type", productData.type);
+                formData.append("port", productData.port);
+                formData.append("price", productData.price);
+                formData.append("amount", productData.amount);
+                formData.append("number", productData.number);
+                formData.append("total_weight", productData.total_weight);
+                formData.append("load_weight", productData.load_weight);
+                formData.append("weight", productData.weight);
+                formData.append("current_height", productData.current_height);
+                formData.append("width", productData.width);
+                formData.append("length", productData.length);
+                formData.append("full_load", productData.full_load);
+                formData.append("engine", productData.engine);
+                formData.append("built_date", productData.built_date);
+                formData.append("factory", productData.enginfactorye);
+                formData.append("location", productData.location);
+                formData.append("status", productData.status);
+                formData.append("file", productData.image_url);
+                formData.append("voterId", getAuthenticatedUser().id);
                 if (id) {
-                  updateProductData(id, productData, category.value).then(res => {
+                  updateProductData(id, formData).then(res => {
                     console.log(res);
                   })
                 } else {
-                  addNewProductData(productData, category.value).then(res => {
+                  addNewProductData(formData).then(res => {
                     console.log(res);
                   })
                 }

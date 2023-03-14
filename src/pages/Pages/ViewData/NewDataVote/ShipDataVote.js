@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import BreadCrumb from "../../../../Components/Common/BreadCrumb";
 import { Card, CardBody, Col, Container, CardHeader, Nav, NavItem, NavLink, Row, TabContent, TabPane, Input, Label, Button, Modal, ModalHeader } from "reactstrap";
 
-import { addNewShipData, getShipData, updateOneData, updateShipData } from "../../../../helpers/fakebackend_helper";
+import { addNewShipData, getAuthenticatedUser, getShipData, updateOneData, updateShipData } from "../../../../helpers/fakebackend_helper";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -650,6 +650,7 @@ const ShipDataVote = (props) => {
                 formData.append("location", shipData.location);
                 formData.append("status", shipData.status);
                 formData.append("file", shipData.image_url);
+                formData.append("voterId", getAuthenticatedUser().id);
                 if (id) {
                   updateShipData(id, formData).then(res => {
                     console.log(res);

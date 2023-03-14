@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import BreadCrumb from "../../../../Components/Common/BreadCrumb";
 import { Card, CardBody, Col, Container, CardHeader, Nav, NavItem, NavLink, Row, TabContent, TabPane, Input, Label, Button, Modal, ModalHeader } from "reactstrap";
 
-import { addNewLoadData, getLoadData, updateOneData, updateLoadData } from "../../../../helpers/fakebackend_helper";
+import { addNewLoadData, getLoadData, updateOneData, updateLoadData, getAuthenticatedUser } from "../../../../helpers/fakebackend_helper";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -31,13 +31,13 @@ const LoadDataVote = (props) => {
 
   const [loadData, setLoadData] = useState({
     name: '',
-    image_url: '',
+    image_url: null,
     plan_date: '',
     type:'',
     port: '',
     price: '',
-    owner: '',
-    runner: '',
+    from: '',
+    to: '',
     total_weight: '',
     load_weight: '',
     weight: '',
@@ -190,19 +190,19 @@ const LoadDataVote = (props) => {
           <div className="mb-3">
             <Row>
               <Col sm={4}>
-                <Label className="form-label" htmlFor="load-owner-input">
-                  7. Load owner
+                <Label className="form-label" htmlFor="load-from-input">
+                  7. Load from
                 </Label>
               </Col>
               <Col sm={8}>
                 <Input
                   type="text"
                   className="form-control"
-                  id="Load-owner-input"
+                  id="Load-from-input"
                   placeholder="Enter product title"
-                  value={loadData.owner}
+                  value={loadData.from}
                   onChange={e => {
-                    setLoadData({ ...loadData, ...{ owner: e.target.value } })
+                    setLoadData({ ...loadData, ...{ from: e.target.value } })
                   }}
                 />
               </Col>
@@ -276,7 +276,7 @@ const LoadDataVote = (props) => {
           <div className="mb-3">
             <Row>
               <Col sm={4}>
-                <Label className="form-label" htmlFor="load-runner-input">
+                <Label className="form-label" htmlFor="load-to-input">
                   8. Load Runner
                 </Label>
               </Col>
@@ -284,11 +284,11 @@ const LoadDataVote = (props) => {
                 <Input
                   type="text"
                   className="form-control"
-                  id="load-runner-input"
+                  id="load-to-input"
                   placeholder="Enter plan port"
-                  value={loadData.runner}
+                  value={loadData.to}
                   onChange={e => {
-                    setLoadData({ ...loadData, ...{ runner: e.target.value } })
+                    setLoadData({ ...loadData, ...{ to: e.target.value } })
                   }}
                 />
               </Col>
@@ -645,12 +645,34 @@ const LoadDataVote = (props) => {
                 tog_togSecond();
                 tog_togFirst(false);
                 e.preventDefault();
+                const formData = new FormData();
+                formData.append("name", loadData.name);
+                formData.append("plan_date", loadData.plan_date);
+                formData.append("type", loadData.type);
+                formData.append("port", loadData.port);
+                formData.append("price", loadData.price);
+                formData.append("from", loadData.from);
+                formData.append("to", loadData.to);
+                formData.append("total_weight", loadData.total_weight);
+                formData.append("load_weight", loadData.load_weight);
+                formData.append("weight", loadData.weight);
+                formData.append("current_height", loadData.current_height);
+                formData.append("width", loadData.width);
+                formData.append("length", loadData.length);
+                formData.append("full_load", loadData.full_load);
+                formData.append("engine", loadData.engine);
+                formData.append("built_date", loadData.built_date);
+                formData.append("factory", loadData.enginfactorye);
+                formData.append("location", loadData.location);
+                formData.append("status", loadData.status);
+                formData.append("file", loadData.image_url);
+                formData.append("voterId", getAuthenticatedUser().id);
                 if (id) {
-                  updateLoadData(id, loadData, category.value).then(res => {
+                  updateLoadData(id, formData).then(res => {
                     console.log(res);
                   })
                 } else {
-                  addNewLoadData(loadData, category.value).then(res => {
+                  addNewLoadData(formData).then(res => {
                     console.log(res);
                   })
                 }

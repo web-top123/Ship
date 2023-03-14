@@ -548,13 +548,13 @@ const authProtectedRoutes = [
 
 
   // Avatars
-  { path: "/admin-avatars", component: ShipDatas },
+  { path: "/admin-avatars", component: Avatars },
   { path: "/admin-avatar-details/:id", component: AvatarDetail },
   { path: "/admin-add-avatar", component: AddAvatar },
   { path: "/admin-add-avatar/:id", component: AddAvatar },
 
   // ShipDatas
-  { path: "/admin-shipDatas", component: Avatars },
+  { path: "/admin-shipDatas", component: ShipDatas },
   { path: "/admin-shipData-details/:id", component: ShipDataDetail },
   { path: "/admin-add-shipData", component: AddShipData },
   { path: "/admin-add-shipData/:id", component: AddShipData },
